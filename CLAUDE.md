@@ -29,8 +29,8 @@ Rogaland Brann og Redning IKS (RogBR) med tre lokasjoner:
 - Student arbeider i 110 Sør-Vest
 
 ## Teori
-- **Primær:** Stokastisk lagerstyring (Silver, Pyke & Peterson; Zipkin; Axsäter)
-- **Støtte:** Køteori M/M/c (Gross & Harris)
+- **Primær:** METRIC (Sherbrooke 1968; Axsäter kap. 10.2) — multi-echelon recoverable item control
+- **Støtte:** Stokastisk lagerstyring (Silver, Pyke & Peterson; Zipkin; Axsäter), Køteori M/D/∞ (Littles lov)
 - **Rammeverk:** Risk-pooling, Theory of Constraints
 
 ## Nøkkeltall fra 2024-rapporten (Tom Meyer)
@@ -88,6 +88,17 @@ LOG650 LOGISTIKK OG KI/
 - Jupyter notebooks for analyse
 - APA 7th referansestil (norsk)
 - Rapport i Word (.docx) basert på NTNU-mal eller LOG650-mal
+
+## Primær modell — METRIC
+RogBR er et **lukket system med fast populasjon** (recoverable items), ikke et klassisk lagerproblem. Draktene sirkulerer mellom tilstandene: tilgjengelig → til vask → tilbake. Bestilling skjer kun ved avskrivning eller nye brukere.
+
+**METRIC** (Multi-Echelon Technique for Recoverable Item Control, Sherbrooke 1968) er identifisert som primær modell:
+- Sentrallager (Stangeland/vaskeri) løses eksakt med Poisson-kø
+- Forsinkelse W₀ beregnes med Littles lov (M/D/∞)
+- Hver stasjon løses separat med effektiv ledetid L̃ᵢ = Lᵢ + W₀
+- Sᵢ (order-up-to nivå per stasjon) er beslutningsvariabelen
+
+**Kjent begrensning:** METRIC antar uavhengige forsinkelser — common cause stockout adresseres i diskusjonskapittel + valideres med Monte Carlo simulering.
 
 ## Viktige retningslinjer
 - Rapport 80-100 sider (ekskl. vedlegg)

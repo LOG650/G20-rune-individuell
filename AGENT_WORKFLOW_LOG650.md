@@ -36,17 +36,19 @@ Alle agenter kjøres sekvensielt. Ingen agent hopper over sin fase. Resultater f
 
 ### LOG650 Kompendium (pensumsstruktur)
 De fem kjernekonspetene i faget som ALL analyse og modellering må forankres i:
-1. **Område** — Lagerstyring under usikker etterspørsel (stokastisk inventory management)
+1. **Område** — Lagerstyring under usikker etterspørsel (stokastisk inventory management) — lukket system med fast populasjon (recoverable items)
 2. **Problemstilling** — Dimensjonering av røykdykkerbekledning med servicegradkrav
-3. **Modell** — Parametere, beslutningsvariabler, målsetting, føringer (avklares fase 3)
+3. **Modell** — METRIC (Sherbrooke 1968; Axsäter kap. 10.2) — multi-echelon recoverable item control
 4. **Prosess** — Datainnsamling → Sjekk antagelser → Løsning → Sjekk løsning → Anvendelse
-5. **Metode** — (Q,R)-logikk, Monte Carlo simulering, evt. køteori
+5. **Metode** — METRIC-dekomponering (sentrallager → stasjoner), Poisson-etterspørsel, Monte Carlo simulering for validering
 
 ### Kjente metodekandidater fra kompendiet
-- Stokastisk lagerstyring: (Q,R)-modeller, sikkerhetslagerstyring
-- Kø-/kapasitetsmodellering: vaskekapasitet som flaskehals
-- Simulering: Monte Carlo / diskret hendelsessimulering
-- Servicegrad: cycle service level vs. fill rate
+- **Primær:** METRIC (multi-echelon recoverable item control) — Axsäter kap. 10.2, Sherbrooke (1968)
+- **Etterspørselsmodell:** Poisson (lav frekvens, hendelsesdrevet) — evt. compound Poisson (Axsäter kap. 5.1.1)
+- **Køteori:** M/D/∞ for sentrallager-forsinkelse (Littles lov), vaskekapasitet som flaskehals
+- **Validering:** Monte Carlo simulering for å kvantifisere METRIC-approksimasjonsfeil
+- **Servicegrad:** cycle service level vs. fill rate (Type II) — avklares med RogBR
+- (Q,R)-modeller er underordnet — bestillingslogikken er atypisk (kun ved avskrivning/nye brukere)
 
 ---
 
@@ -265,7 +267,7 @@ FAGLIG DEKNING
 □ Pool-konkurranse mellom stasjoner er adressert
 □ Service level krav er presisert (CSL vs FR avklares)
 □ Beslutningsvariabler er beskrevet konseptuelt
-□ Modellkandidater fra pensum er identifisert (ikke valgt ennå)
+□ Primærmodell METRIC er identifisert og begrunnet (Axsäter kap. 10.2, Sherbrooke 1968)
 □ Dataplan er etablert (BRIS, telleliste, intervjuer)
 
 KILDEBRUK
