@@ -1,0 +1,33 @@
+# === Sensitive data - ROGBR and BRIS ===
+# Never commit raw data from brannvesenet
+**/rogbr*
+**/ROGBR*
+**/bris*
+**/BRIS*
+**/*brannvesen*
+**/*fullrapport*
+
+# Raw data files (large/sensitive)
+004 data/*.xlsx
+004 data/*.csv
+004 data/*.json
+004 data/**/*.xlsx
+004 data/**/*.csv
+004 data/**/*.json
+
+# === General ===
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office temp files
+~$*
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/

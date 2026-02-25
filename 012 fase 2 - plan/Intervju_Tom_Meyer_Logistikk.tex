@@ -1,0 +1,498 @@
+\documentclass[12pt, a4paper, norsk]{article}
+\usepackage[utf-8]{inputenc}
+\usepackage[margin=2cm]{geometry}
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{\textbf{Intervjuguide: Logistikk-parametere for RQ1-3}}
+\rfoot{\thepage}
+\lfoot{LOG650 -- Rune Grødem}
+\cfoot{}
+
+\title{\textbf{Strukturert Intervjuguide}\\
+\large Logistikk- og vaskelinjedata}
+\author{Rune Grødem (G20)\\
+LOG650: Optimal dimensjonering av røykdykkerbekledning}
+\date{Februar 2026}
+
+\begin{document}
+
+\maketitle
+
+\noindent
+\textbf{Informant:} Tom Meyer (Logistikkansvarlig, RogBR) \\
+\textbf{Dato:} \underline{\hspace{4cm}} \quad \textbf{Tid:} \underline{\hspace{2cm}} -- \underline{\hspace{2cm}} \\
+\textbf{Sted:} \underline{\hspace{10cm}} \\
+\textbf{Varighet estimert:} 30 minutter
+
+\vspace{1cm}
+
+\noindent
+\textbf{Formål:} Innhente konkrete kvantitative parametere for modellering av etterspørsel (RQ1), vaskekapasitet (RQ2), og lagerpolicy-optimering (RQ3). Fokus på data, ikke opplevelser.
+
+\newpage
+
+\section*{SEKSJON 1: STASJON- OG VASKELINJESTRUKTUR}
+\label{sec:vaskelinjer}
+
+\subsection*{1.1 Stasjonsoversikt}
+
+\noindent
+Fyll inn tabellen nedenfor for alle stasjoner som håndterer røykdykkerbekledning:
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|p{3cm}|p{1.8cm}|p{1.5cm}|p{2cm}|p{2.5cm}|}
+\hline
+\textbf{Stasjon} & \textbf{Type} & \textbf{Vaskelinje?} & \textbf{Kapasitet} & \textbf{Åpningstider} \\
+\hline
+Stangeland & Fulltid & $\square$ Ja $\square$ Nei & \underline{\hspace{1.5cm}} sett/t & \underline{\hspace{1.8cm}} \\
+\hline
+Schankeholen & Fulltid & $\square$ Ja $\square$ Nei & \underline{\hspace{1.5cm}} sett/t & \underline{\hspace{1.8cm}} \\
+\hline
+Innsatskonteiner & Mobil & $\square$ Ja $\square$ Nei & N/A & N/A \\
+\hline
+Annet/Deltid & \underline{\hspace{1.3cm}} & $\square$ Ja $\square$ Nei & \underline{\hspace{1.5cm}} sett/t & \underline{\hspace{1.8cm}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\subsection*{1.2 Stasjoner UTEN egen vaskelinje}
+
+\noindent
+\textit{(Hvis aktuelt: Fyll inn for hver stasjon uten vaskelinje)}
+
+\vspace{0.3cm}
+
+\noindent
+Stasjon: \underline{\hspace{4cm}}
+
+\begin{itemize}
+\item[\textbf{Q:}] Hvor vaskes bekledningen fysisk? 
+  \newline\underline{\hspace{12cm}}
+
+\item[\textbf{Q:}] Transporttid? \underline{\hspace{2cm}} min hver vei
+
+\item[\textbf{Q:}] Rutine for transport: Daglig kjøring? Når? Hvor ofte?
+  \newline\underline{\hspace{12cm}}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\subsection*{1.3 Vaskelinjekapasitet (for hver linje som eksisterer)}
+
+\noindent
+\textit{Vaskelinje lokasjon:} \underline{\hspace{7cm}}
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Verdi} \\
+\hline
+Antall maskiner/vasketromler & \underline{\hspace{6cm}} \\
+\hline
+Vasketid per sett (gjennomsnitt) & \underline{\hspace{6cm}} min \\
+\hline
+Tørketid per sett & \underline{\hspace{6cm}} min \\
+\hline
+Pakking/håndtering per sett & \underline{\hspace{6cm}} min \\
+\hline
+\textbf{TOTAL servicetid} (fra skittent til klart) & \underline{\hspace{6cm}} min \\
+\hline
+Kan vasking og tørk kjøres parallelt? & $\square$ Ja $\square$ Nei \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\noindent
+\textit{Merknad:} Hvis parallelt: Total tid = max(vask, tørk) + pakking. Hvis sekvensielt: Total = vask + tørk + pakking.
+
+\vspace{0.5cm}
+
+\subsection*{1.4 Driftshindringer}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Typisk downtime (vedlikehold, feil, manglende personale)? 
+  \newline\underline{\hspace{8cm}} \% av tiden
+
+\item[\textbf{Q:}] Påvirker personalfravær vaskekapasiteten? 
+  \newline $\square$ Ja $\square$ Nei \quad Hvis ja, hvor mye? \underline{\hspace{4cm}}
+
+\item[\textbf{Q:}] Når er maksimal kapasitet mulig? 
+  \newline\underline{\hspace{12cm}}
+\end{itemize}
+
+\newpage
+
+\section*{SEKSJON 2: LAGER OG TILDELINGSLOGIKK}
+
+\subsection*{2.1 Nåværende lagerpolicy}
+
+\noindent
+\textit{For hver stasjon: Hvor mange sett tilhører hver kategori?}
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{STANGELAND:}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Kategori} & \textbf{Antall sett} \\
+\hline
+Personlig tildelt (individual) & \underline{\hspace{3cm}} \\
+\hline
+Pool (delt blandt flere) & \underline{\hspace{3cm}} \\
+\hline
+Innsatskonteiner-lager & \underline{\hspace{3cm}} \\
+\hline
+\textbf{TOTAL Stangeland} & \underline{\hspace{3cm}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{SCHANKEHOLEN:}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Kategori} & \textbf{Antall sett} \\
+\hline
+Personlig tildelt (individual) & \underline{\hspace{3cm}} \\
+\hline
+Pool (delt blandt flere) & \underline{\hspace{3cm}} \\
+\hline
+\textbf{TOTAL Schankeholen} & \underline{\hspace{3cm}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{ANDRE LOKASJONER/INNSATSKONTEINER:}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Lokasjon/Kategori} & \textbf{Antall sett} \\
+\hline
+\underline{\hspace{5cm}} & \underline{\hspace{2cm}} \\
+\hline
+\underline{\hspace{5cm}} & \underline{\hspace{2cm}} \\
+\hline
+\textbf{TOTAL ALLE STASJONER} & \underline{\hspace{2cm}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\subsection*{2.2 Resupply-mekanisme}
+
+\noindent
+Hvori går det hvis en røykdykker mangler bekledning og må ut om kort tid?
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Hva er prosedyren?
+  \newline $\square$ Venter på vasket bekledning (eget sett)
+  \newline $\square$ Bruker pool-sett fra samme stasjon
+  \newline $\square$ Reiser til annen stasjon for å hente
+  \newline $\square$ Annet: \underline{\hspace{8cm}}
+
+\item[\textbf{Q:}] Lead-time fra «skal ut om 10 minutter» til «har bekledning»?\newline
+  \underline{\hspace{6cm}} minutter (typisk)
+
+\item[\textbf{Q:}] Hva hvis det ikke finnes ledig bekledning noe sted?
+  \newline\underline{\hspace{12cm}}
+\end{itemize}
+
+\vspace{0.5cm}
+
+\subsection*{2.3 Transport mellom stasjoner}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Finnes det rutine for resupply/transport av bekledning mellom Stangeland og Schankeholen?
+  \newline $\square$ Ja $\square$ Nei
+  \newline Beskrivelse: \underline{\hspace{10cm}}
+
+\item[\textbf{Q:}] Hvor ofte skjer dette per uke/måned?
+  \newline\underline{\hspace{8cm}}
+
+\item[\textbf{Q:}] Transporttid mellom stasjonene?
+  \newline\underline{\hspace{6cm}} minutter hver vei
+\end{itemize}
+
+\newpage
+
+\section*{SEKSJON 3: ETTESPØRSELSDATA OG OPPDRAG-MØNSTER}
+
+\subsection*{3.1 Røykdykkeroppdrag-frekvens}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Fra 2024-år: Totalt antall røykdykkeroppdrag i Rogaland Brann og Redning?
+  \newline\underline{\hspace{6cm}} oppdrag (eller beste estimate: \underline{\hspace{2cm}})
+
+\item[\textbf{Q:}] Gjennomsnittlig oppdrag per dag (2024)?
+  \newline\underline{\hspace{6cm}} oppdrag/dag
+
+\item[\textbf{Q:}] Peak-dag du husker: Hvor mange røykdykkeroppdrag på samme dag?
+  \newline\underline{\hspace{6cm}} oppdrag (når?: \underline{\hspace{3cm}})
+\end{itemize}
+
+\subsection*{3.2 Simultanitet}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Hva er MAKSIMALT antall røykdykkere som har vært ute samtidig fra RogBR?
+  \newline\underline{\hspace{6cm}} røykdykkere
+
+\item[\textbf{Q:}] Hvor ofte skjer dette?
+  \newline $\square$ Ukentlig \quad $\square$ Månedlig \quad $\square$ Sjeldnere (\underline{\hspace{3cm}} ganger/år)
+
+\item[\textbf{Q:}] Hvordan håndteres peak-situasjoner logistikk-messig?
+  \newline\underline{\hspace{12cm}}
+\end{itemize}
+
+\subsection*{3.3 Varighet av oppdrag}
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Verdi} \\
+\hline
+Gjennomsnittlig røykdykkeroppdrag-varighet & \underline{\hspace{5cm}} min \\
+\hline
+Korteste typisk oppdrag & \underline{\hspace{5cm}} min \\
+\hline
+Lengste oppdrag du husker & \underline{\hspace{5cm}} min \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{3.4 Utskiftningsrate}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Bekledningsutskiftningsrate: Du nevnte 17,5\% (ca. 75 sett/år). Er dette stabilt?
+  \newline $\square$ Ja, stabilt \quad $\square$ Nei, varierer. Trend: \underline{\hspace{6cm}}
+
+\item[\textbf{Q:}] Hva driver utskiftning? (prioriter)
+  \newline $\square$ Slitasje fra bruk
+  \newline $\square$ Misvekst / størrelsesproblemer
+  \newline $\square$ Aldring / hygienestandard
+  \newline $\square$ Annet: \underline{\hspace{8cm}}
+
+\item[\textbf{Q:}] Sesonvariasjon i utskiftning?
+  \newline $\square$ Ja, høyere på: \underline{\hspace{6cm}}
+  \newline $\square$ Nei, jevn hele året
+\end{itemize}
+
+\newpage
+
+\section*{SEKSJON 4: KOSTNADER}
+
+\subsection*{4.1 Bekledning}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Pris per komplett sett (jakke + bukse + underutstyr)?
+  \newline\underline{\hspace{6cm}} NOK
+
+\item[\textbf{Q:}] Estimert levetid før obligatorisk utskifting?
+  \newline\underline{\hspace{6cm}} år
+
+\item[\textbf{Q:}] Årlig bekledningskostnad (428 personer $\times$ 17,5\% utskiftningsrate)?
+  \newline\underline{\hspace{6cm}} NOK/år
+\end{itemize}
+
+\subsection*{4.2 Vaskekostnad}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Kostnad per vask (energi, vann, kjemikalier, personaltime)?
+  \newline\underline{\hspace{6cm}} NOK/sett
+
+\item[\textbf{Q:}] Eller: Årlig driftskostnad for vaskelinja(ene) totalt?
+  \newline\underline{\hspace{6cm}} NOK/år (fordelt på: \underline{\hspace{3cm}} sett/år = \underline{\hspace{2cm}} kr/sett)
+
+\item[\textbf{Q:}] Basekostnad for maskin-vedlikehold?
+  \newline\underline{\hspace{6cm}} NOK/år
+\end{itemize}
+
+\subsection*{4.3 Lagringskostnad}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Kostnad per sett per år for lagring (lager-plass, humiditet, sikkerhet)?
+  \newline\underline{\hspace{6cm}} NOK/(sett·år)
+
+\item[\textbf{Q:}] Eller som prosent av kjøp-pris?
+  \newline\underline{\hspace{2cm}} \% av \underline{\hspace{3cm}} NOK = \underline{\hspace{2cm}} NOK/sett/år
+\end{itemize}
+
+\subsection*{4.4 Mangelkostnad (shortage)}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Hvis røykdykker IKKE har bekledning når trengs — estimert konsekvens:
+  \newline $\square$ Utsatt responstid (\underline{\hspace{3cm}} min forsinkelse)
+  \newline $\square$ Bruker suboptimal utstyr
+  \newline $\square$ Operativ risiko
+  \newline $\square$ Økt slitasje på alternative sett
+  \newline $\square$ Annet: \underline{\hspace{6cm}}
+
+\item[\textbf{Q:}] Kan du estimate en «kostnad» per mangel-episode?
+  \newline\underline{\hspace{6cm}} NOK (eller: «ikke prissatt, kun operativ risiko»)
+
+\item[\textbf{Q:}] Hvor mange mangel-episoder per år skjer (estimate)?
+  \newline\underline{\hspace{6cm}} episoder/år
+\end{itemize}
+
+\newpage
+
+\section*{SEKSJON 5: STRATEGISKE RAMMEVERK OG MÅL}
+
+\subsection*{5.1 Service-level mål}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Hva er det ønskede service-level? (dvs. «røykdykker skal ha bekledning tilgjengelig når trengt»)
+  \newline\underline{\hspace{6cm}} \% av tilfellene
+
+\item[\textbf{Q:}] Eller som mangelrate:
+  \newline Akseptabelt at røykdykker MANGLER bekledning: \underline{\hspace{4cm}} \% av tilfellene
+
+\item[\textbf{Q:}] Hvor må man «prioritere» hvis ressurser er begrenset?
+  \newline\underline{\hspace{12cm}}
+\end{itemize}
+
+\subsection*{5.2 Begrensninger (constraints)}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] Maksimalt akseptabelt antall sett å holde på lager?
+  \newline\underline{\hspace{6cm}} sett
+
+\item[\textbf{Q:}] Minimalt akseptabelt antall sett (absolut minimum)?
+  \newline\underline{\hspace{6cm}} sett
+
+\item[\textbf{Q:}] Lagerplass-begrensning på Stangeland?
+  \newline\underline{\hspace{6cm}} sett plass tilgjengelig
+
+\item[\textbf{Q:}] Lagerplass-begrensning på Schankeholen?
+  \newline\underline{\hspace{6cm}} sett plass tilgjengelig
+\end{itemize}
+
+\subsection*{5.3 Innovative løsninger}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item[\textbf{Q:}] RFID-system for tracking av bekledning — aktuelt?
+  \newline $\square$ Ja, interessant \quad $\square$ Nei \quad $\square$ Usikker
+
+\item[\textbf{Q:}] Hvis ja: Estimert kostnadsbudsjett?
+  \newline\underline{\hspace{6cm}} NOK
+
+\item[\textbf{Q:}] Digitale løsninger (app, SAP-integrasjon for lagerstyring)?
+  \newline\underline{\hspace{12cm}}
+
+\item[\textbf{Q:}] Ønsker RogBR å delta i modell-testing?
+  \newline $\square$ Ja \quad $\square$ Ja, men begrenset \quad $\square$ Nei
+\end{itemize}
+
+\vspace{1cm}
+
+\noindent
+\hrulefill
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Notater og tilleggskommentarer:}
+
+\vspace{3cm}
+
+\underline{\hspace{16cm}}
+
+\vspace{3cm}
+
+\underline{\hspace{16cm}}
+
+\vspace{3cm}
+
+\underline{\hspace{16cm}}
+
+\newpage
+
+\appendix
+
+\section*{Vedlegg A: Modellkontekst (for informanten)}
+
+\noindent
+\textit{For referanse — hvorfor vi behøver disse dataene:}
+
+\vspace{0.5cm}
+
+\noindent
+Dataene brukes til å parametrisere følgende modeller:
+
+\begin{itemize}
+\item[\textbf{RQ1:}] Etterspørselmodellering: 
+  Empirisk fordeling av røykdykkeroppdrag (Poisson-prosess) fra BRIS-data, parametrisert med $\lambda$ (rate) per sted/tid.
+
+\item[\textbf{RQ2:}] Vaskekapasitet: 
+  M/M/c kømodell hvor $\mu$ (servicerate) = $1 / (\text{servicetid})$, $c$ = antall maskiner.
+  
+\item[\textbf{RQ3:}] Lagerpolicy-optimering: 
+  Silver-Pyke modell for optimal lagerdimensjonering gitt etterspørsel ($\lambda$), vaskekapasitet ($\mu$), og kostnader.
+  
+\item[\textbf{RQ4-5:}] Scenarios: 
+  RFID-effekt på lead-time, generalisering til andre brannvesen.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\noindent
+Derfor: \textit{Konkrete tall} (vasketime, lagerbegrensninger, kostnader) er viktigere enn subjektive vurderinger.
+
+\end{document}
