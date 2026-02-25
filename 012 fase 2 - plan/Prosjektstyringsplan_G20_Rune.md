@@ -8,7 +8,7 @@
 | **Utarbeidet av** | Rune Grødem |
 | **Autorisert av** | Emneansvarlig, LOG650 |
 | **Dato** | 2026-02-25 |
-| **Versjon** | 0.6 – utkast |
+| **Versjon** | 0.7 – utkast |
 
 ---
 
@@ -183,9 +183,10 @@ Selve intervjuene gjennomføres i fase 3 (uke 11–12). Planlagte informanter:
 | Informant | Rolle | Bidrag til prosjektet | Prioritet |
 |---|---|---|---|
 | Tom Meyer | Logistikkansvarlig, RogBR | Vaskekapasitet, beholdning per stasjon, kostnader, utskiftningsrate, ledetider | 1 — kritisk |
-| Innsatsleder S01 | Kasernert stasjon (Stangeland/Schankeholen) | Pool-struktur, prioriteringsregler ved konkurrerende behov, mangeltilfeller observert operativt | 2 — kritisk |
+| Petter (etternavn ukjent) | Operativt ansvarlig klær/vask | Daglig styring av bekledning og vaskelinjer i praksis — identifisert av Tom Meyer 24.02 | 2 — kritisk |
+| Bent (etternavn ukjent) | Operativt ansvarlig klær/vask | Daglig styring av bekledning og vaskelinjer i praksis — identifisert av Tom Meyer 24.02 | 2 — kritisk |
+| Innsatsleder S01 | Kasernert stasjon (Stangeland/Schankeholen) | Pool-struktur, prioriteringsregler ved konkurrerende behov, mangeltilfeller observert operativt | 3 — viktig |
 | Innkjøpsansvarlig | RogBR | Innkjøpspris, leveringstid fra leverandør, innkjøpsprosess ved avskrivning | 3 — viktig |
-| Operativ ansvarlig klær/vask | RogBR | Vaskelinjeprosedyrer, downtime, sesongvariasjon, prioritering ved full kapasitet | 3 — viktig |
 | 2–3 brannmenn (kasernert) | Operativt nivå | Validering: stemmer formell policy med faktisk praksis? Gap mellom teori og operativ hverdag | 4 — nyttig |
 
 **Intervjuguide for Tom Meyer:** ferdigstilt, se `012 fase 2 - plan/Intervju_Tom_Meyer_Logistikk.tex`
@@ -369,4 +370,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-02-25 | Versjon 0.6 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-02-25 | Versjon 0.7 | Neste gjennomgang: ved Gantt-godkjenning*
