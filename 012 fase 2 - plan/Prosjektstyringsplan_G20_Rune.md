@@ -7,8 +7,8 @@
 | **Gruppe** | G20 – Rune Individuell |
 | **Utarbeidet av** | Rune Grødem |
 | **Autorisert av** | Emneansvarlig, LOG650 |
-| **Dato** | 2026-02-18 |
-| **Versjon** | 0.3 – utkast |
+| **Dato** | 2026-02-25 |
+| **Versjon** | 0.4 – utkast |
 
 ---
 
@@ -190,7 +190,7 @@ Løsningen består av:
 
 | ID | Leveranse | Frist | Status |
 |---|---|---|---|
-| L1 | Avklart problemstilling + mål + avgrensninger (oppdatert fra proposal) | 28. feb | 🔄 Pågår |
+| L1 | Avklart problemstilling + mål + avgrensninger (oppdatert fra proposal) | 28. feb | ✅ Fullført |
 | L2 | Modellkandidat-liste fra pensum + beslutning om modelltilnærming → METRIC identifisert (Axsäter kap. 10.2, Sherbrooke 1968) | 28. feb | ✅ Fullført |
 | L3 | Litteratursøk — **planlegging** (søkeord, databaser, avgrensning) | 5. mars | ⬜ |
 | L4 | Case-kartlegging — **planlegging** (kontaktpersoner, intervjuguide, tilgang BRIS) | 5. mars | ⬜ |
@@ -349,4 +349,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-02-18 | Versjon 0.3 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-02-25 | Versjon 0.4 | Neste gjennomgang: ved Gantt-godkjenning*

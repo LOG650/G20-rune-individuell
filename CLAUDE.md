@@ -8,7 +8,7 @@
 - **Frist endelig rapport:** 31. mai 2026
 
 ## Problemstilling
-**Hvordan kan røykdykkerbekledning i norske brannvesen dimensjoneres optimalt når samspillet mellom usikker etterspørsel, vaskekapasitet som flaskehals, og valg av lagerpolicy er kritisk for operativ tilgjengelighet?**
+**Hvordan kan lagerstyring av røykdykkerbekledning ved Rogaland Brann og Redning IKS analyseres og dimensjoneres under usikker, hendelsesdrevet etterspørsel for å oppnå definert servicegrad til lavest mulig kapitalbinding?**
 
 ## Forskningsspørsmål
 - **RQ1 (kjerne):** Etterspørselsmodellering basert på BRIS-data
