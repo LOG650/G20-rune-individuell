@@ -8,7 +8,7 @@
 | **Utarbeidet av** | Rune Grødem |
 | **Autorisert av** | Emneansvarlig, LOG650 |
 | **Dato** | 2026-02-25 |
-| **Versjon** | 0.7 – utkast |
+| **Versjon** | 0.8 – utkast |
 
 ---
 
@@ -182,12 +182,12 @@ Selve intervjuene gjennomføres i fase 3 (uke 11–12). Planlagte informanter:
 
 | Informant | Rolle | Bidrag til prosjektet | Prioritet |
 |---|---|---|---|
-| Tom Meyer | Logistikkansvarlig, RogBR | Vaskekapasitet, beholdning per stasjon, kostnader, utskiftningsrate, ledetider | 1 — kritisk |
-| Petter (etternavn ukjent) | Operativt ansvarlig klær/vask | Daglig styring av bekledning og vaskelinjer i praksis — identifisert av Tom Meyer 24.02 | 2 — kritisk |
-| Bent (etternavn ukjent) | Operativt ansvarlig klær/vask | Daglig styring av bekledning og vaskelinjer i praksis — identifisert av Tom Meyer 24.02 | 2 — kritisk |
-| Innsatsleder S01 | Kasernert stasjon (Stangeland/Schankeholen) | Pool-struktur, prioriteringsregler ved konkurrerende behov, mangeltilfeller observert operativt | 3 — viktig |
-| Innkjøpsansvarlig | RogBR | Innkjøpspris, leveringstid fra leverandør, innkjøpsprosess ved avskrivning | 3 — viktig |
-| 2–3 brannmenn (kasernert) | Operativt nivå | Validering: stemmer formell policy med faktisk praksis? Gap mellom teori og operativ hverdag | 4 — nyttig |
+| Tom Meyer | Logistikkansvarlig, RogBR | Overordnet dataoversikt, kostnader, utskiftningsrate, ledetider | 1 — kritisk |
+| Petter Nielsen | Ansvarlig for røykdykkere, RogBR | Pool-struktur, prioriteringsregler ved konkurrerende behov, operativ praksis | 2 — kritisk |
+| Bent Høgemark | Innkjøpsansvarlig, RogBR | Innkjøpspris, leveringstid fra leverandør, bestillingsprosess ved avskrivning | 2 — kritisk |
+| Geir Nilsen | Ansvarlig inventar/bygg, RogBR | Lagerplass per stasjon, inventarkontroll, beholdningsoversikt | 3 — viktig |
+| Innsatsleder S01 | Kasernert stasjon | Mangeltilfeller observert operativt, valideringsintervju | 3 — viktig |
+| 2–3 brannmenn (kasernert) | Operativt nivå | Validering: stemmer formell policy med faktisk praksis? | 4 — nyttig |
 
 **Intervjuguide for Tom Meyer:** ferdigstilt, se `012 fase 2 - plan/Intervju_Tom_Meyer_Logistikk.tex`
 
@@ -370,4 +370,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-02-25 | Versjon 0.7 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-02-25 | Versjon 0.8 | Neste gjennomgang: ved Gantt-godkjenning*

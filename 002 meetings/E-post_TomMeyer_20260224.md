@@ -48,14 +48,15 @@ Tom ønsker å snakke om det. Gjennomgang med leverandør planlagt mars/april 20
 
 ## Nye kontakter identifisert
 
-Tom Meyer sender spørsmålene videre til:
+Tom Meyer videresender 24.02.2026 kl. 14:41 til:
 
-| Navn | Rolle | Hva de bidrar med |
-|---|---|---|
-| **Petter** | Operativt ansvarlig (navn ukjent) | Daglig styring av bekledning og vaskelinjer i praksis |
-| **Bent** | Operativt ansvarlig (navn ukjent) | Daglig styring av bekledning og vaskelinjer i praksis |
+| Navn | E-post | Rolle | Hva de bidrar med |
+|---|---|---|---|
+| **Petter Nielsen** | Petter.Nielsen@rogbr.no | Ansvarlig for røykdykkere | Pool-struktur, prioriteringsregler, operativ praksis |
+| **Bent Høgemark** | Bent.Hogemark@rogbr.no | Innkjøpsansvarlig | Innkjøpspris, leveringstid, bestillingsprosess ved avskrivning |
+| **Geir Nilsen** | Geir.Nilsen@rogbr.no | Ansvarlig inventar/bygg | Lagerplass, inventarkontroll, beholdningsoversikt |
 
-> **Neste steg:** Ta kontakt med Petter og Bent i fase 3 (uke 11–12). Legg til i intervjuplan som Prioritet 2 (erstatter/supplerer S01-rollen for pool-struktur).
+> **Neste steg:** Avvent svar fra Petter, Bent og Geir. Følg opp med direkte kontakt i fase 3 (uke 11–12).
 
 ---
 
