@@ -8,7 +8,7 @@
 | **Utarbeidet av** | Rune Grødem |
 | **Autorisert av** | Emneansvarlig, LOG650 |
 | **Dato** | 2026-02-25 |
-| **Versjon** | 0.5 – utkast |
+| **Versjon** | 0.6 – utkast |
 
 ---
 
@@ -176,7 +176,27 @@ Løsningen består av:
 - **Implementasjon og analyse i Python**, inkludert validering, sensitivitetsanalyse og dokumentasjon av usikkerhet
 - **Rapport** (hovedleveranse) med kode tilgjengelig på GitHub som vedlegg
 
-### 3.5 Arbeidsnedbrytningsstruktur (WBS)
+### 3.5 Case-kartleggingsplan (L4)
+
+Selve intervjuene gjennomføres i fase 3 (uke 11–12). Planlagte informanter:
+
+| Informant | Rolle | Bidrag til prosjektet | Prioritet |
+|---|---|---|---|
+| Tom Meyer | Logistikkansvarlig, RogBR | Vaskekapasitet, beholdning per stasjon, kostnader, utskiftningsrate, ledetider | 1 — kritisk |
+| Innsatsleder S01 | Kasernert stasjon (Stangeland/Schankeholen) | Pool-struktur, prioriteringsregler ved konkurrerende behov, mangeltilfeller observert operativt | 2 — kritisk |
+| Innkjøpsansvarlig | RogBR | Innkjøpspris, leveringstid fra leverandør, innkjøpsprosess ved avskrivning | 3 — viktig |
+| Operativ ansvarlig klær/vask | RogBR | Vaskelinjeprosedyrer, downtime, sesongvariasjon, prioritering ved full kapasitet | 3 — viktig |
+| 2–3 brannmenn (kasernert) | Operativt nivå | Validering: stemmer formell policy med faktisk praksis? Gap mellom teori og operativ hverdag | 4 — nyttig |
+
+**Intervjuguide for Tom Meyer:** ferdigstilt, se `012 fase 2 - plan/Intervju_Tom_Meyer_Logistikk.tex`
+
+**BRIS-datatilgang:** bekreftet — rådata tilgjengelig i `004 data/` (8 098 hendelser, 2021–2025)
+
+**Øvrige informanter:** kortere semi-strukturert samtale (~15 min), fokus på å verifisere eller korrigere antakelser fra Tom Meyer-intervjuet og Thomas-rapporten.
+
+---
+
+### 3.6 Arbeidsnedbrytningsstruktur (WBS)
 
 **Fase 1 — Initiering (fullført)**
 
@@ -193,7 +213,7 @@ Løsningen består av:
 | L1 | Avklart problemstilling + mål + avgrensninger (oppdatert fra proposal) | 28. feb | ✅ Fullført |
 | L2 | Modellkandidat-liste fra pensum + beslutning om modelltilnærming → METRIC identifisert (Axsäter kap. 10.2, Sherbrooke 1968) | 28. feb | ✅ Fullført |
 | L3 | Litteratursøk — **planlegging** (søkeord, databaser, avgrensning) | 5. mars | ✅ Fullført |
-| L4 | Case-kartlegging — **planlegging** (kontaktpersoner, intervjuguide, tilgang BRIS) | 5. mars | ⬜ |
+| L4 | Case-kartlegging — **planlegging** (kontaktpersoner, intervjuguide, tilgang BRIS) | 5. mars | ✅ Fullført |
 | L5 | Dataplan — datakilder, variabler, kvalitet, rådatahåndtering | 5. mars | ⬜ |
 | L6 | Godkjent prosjektplan (dette dokumentet) | **9. mars** | 🔄 Pågår |
 | L7 | MS Project Gantt-diagram med referanseplan (baseline) | **9. mars** | ⬜ |
@@ -349,4 +369,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-02-25 | Versjon 0.5 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-02-25 | Versjon 0.6 | Neste gjennomgang: ved Gantt-godkjenning*
