@@ -41,7 +41,9 @@ Rogaland Brann og Redning IKS (RogBR) må sikre høy tilgjengelighet på kritisk
 
 Hvordan kan lagerstyring av røykdykkerbekledning ved Rogaland Brann og Redning IKS analyseres og dimensjoneres under usikker, hendelsesdrevet etterspørsel for å oppnå definert servicegrad til lavest mulig kapitalbinding?
 
-Organisasjonen har flere kasernerte stasjoner (Stangeland, Schankeholen, Varmen, Kvernavik) med egne klespooler, samt deltidsstasjoner som i varierende grad benytter disse poolene. Dette skaper konkurrerende etterspørsel som øker kompleksiteten i dimensjoneringen. Prosjektet plasseres innenfor området **lagerstyring under usikker etterspørsel (stokastisk inventory management)**, i tråd med kompendiets struktur: område → problemstilling → modell → metode.
+Organisasjonen har flere kasernerte stasjoner (Stangeland, Schankeholen, Varmen, Kvernavik) med egne klespooler, samt deltidsstasjoner som i varierende grad benytter disse poolene. Dette skaper konkurrerende etterspørsel som øker kompleksiteten i dimensjoneringen.
+
+Systemet er et **lukket system med fast populasjon** (recoverable items): draktene sirkulerer mellom tilstandene *tilgjengelig på stasjon*, *til vask / i ledetid* og *avskrevet/ødelagt*. Bestilling skjer kun ved avskrivning eller nye brukere — ikke ved ordinært forbruk. Dette gjør problemet strukturelt beslektet med militære reservedelsmodeller (Sherbrooke, 1968) snarere enn klassisk lagerstyring. Prosjektet plasseres innenfor området **lagerstyring under usikker etterspørsel (stokastisk inventory management)**, i tråd med kompendiets struktur: område → problemstilling → modell → metode.
 
 ### 1.3 Mål
 
@@ -137,7 +139,7 @@ Prosjektet skal:
 
 1. Dokumentere dagens prosessflyt og lagerpolicy (personlig/pool/hybrid) for røykdykkerbekledning i RogBR, inkludert relevante prioriteringsregler ved konkurrerende behov.
 2. Etablere og beskrive datagrunnlaget (kilder, periode, variabler, datakvalitet, behandling av rådata), der bedriftsdata prioriteres.
-3. Avklare og begrunne modellvalg fra pensum/kompendiet, og beskrive modellens parametere, beslutningsvariabler, målsetting og begrensninger.
+3. Avklare og begrunne modellvalg fra pensum/kompendiet — METRIC (Sherbrooke 1968; Axsäter kap. 10.2) er identifisert som primærmodell — og beskrive modellens parametere, beslutningsvariabler, målsetting og begrensninger.
 4. Implementere modellen i kode (Python) og utføre analyse med dokumentert validering og robusthetssjekk.
 5. Skrive rapport fortløpende med tydelig skille mellom modell/metode og resultater/diskusjon, med korrekt og konsistent kildebruk (APA 7th norsk).
 
@@ -166,10 +168,11 @@ Løsningen består av:
 
 - **Casebeskrivelse** av RogBR (kontekst, prosessflyt, nøkkeltall og utfordring)
 - **Datamodell og datagrunnlag** (BRIS-data 2021–2025, telleliste/beholdning, vaskekapasitet/ledetider og intervjudata for nettverk/pool-struktur)
-- **Modellkandidater fra pensum** — avklares i fase 2:
-  - Stokastisk lagerstyring: sikkerhetslager/service-level-styrt dimensjonering, (Q,R)-logikk eller tilsvarende policy-sammenligning
-  - Kø-/kapasitetsmodellering av vask som flaskehals
-  - Simulering (Monte Carlo / diskret hendelse) for å beregne service-level og trade-off under realistisk variasjon
+- **Primær modell — METRIC** (Multi-Echelon Technique for Recoverable Item Control, Sherbrooke 1968; Axsäter kap. 10.2):
+  - Sentrallager (Stangeland/vaskeri) løses eksakt med Poisson-kø; forsinkelse W₀ beregnes med Littles lov (M/D/∞)
+  - Hver stasjon løses separat med effektiv ledetid L̃ᵢ = Lᵢ + W₀ og Poisson-etterspørsel λᵢ
+  - Beslutningsvariabel: Sᵢ (order-up-to nivå per stasjon) som gir ønsket servicegrad
+  - Validering gjennom Monte Carlo simulering for å kvantifisere approksimasjonsfeil
 - **Implementasjon og analyse i Python**, inkludert validering, sensitivitetsanalyse og dokumentasjon av usikkerhet
 - **Rapport** (hovedleveranse) med kode tilgjengelig på GitHub som vedlegg
 
@@ -188,7 +191,7 @@ Løsningen består av:
 | ID | Leveranse | Frist | Status |
 |---|---|---|---|
 | L1 | Avklart problemstilling + mål + avgrensninger (oppdatert fra proposal) | 28. feb | 🔄 Pågår |
-| L2 | Modellkandidat-liste fra pensum + beslutning om modelltilnærming | 28. feb | ⬜ |
+| L2 | Modellkandidat-liste fra pensum + beslutning om modelltilnærming → METRIC identifisert (Axsäter kap. 10.2, Sherbrooke 1968) | 28. feb | ✅ Fullført |
 | L3 | Litteratursøk — **planlegging** (søkeord, databaser, avgrensning) | 5. mars | ⬜ |
 | L4 | Case-kartlegging — **planlegging** (kontaktpersoner, intervjuguide, tilgang BRIS) | 5. mars | ⬜ |
 | L5 | Dataplan — datakilder, variabler, kvalitet, rådatahåndtering | 5. mars | ⬜ |
@@ -204,7 +207,7 @@ Løsningen består av:
 | L8 | Introduksjon og problemstilling — rapportutkast v1 | Uke 12 | ⬜ |
 | L9 | Datainnsamling + case-kartlegging — intervjuer (S01, logistikk), BRIS-eksport, prosessdokumentasjon | Uke 12 | ⬜ |
 | L10 | Analyse av etterspørsel — distribusjon, sesongmønster, stasjonsnettverk | Uke 13 | ⬜ |
-| L11 | Valg av modelltilnærming — begrunnet beslutning fra pensum | Uke 13 | ⬜ |
+| L11 | Valg av modelltilnærming — METRIC valgt, formell begrunnelse og detaljering i rapport | Uke 13 | 🔄 Pågår |
 | L12 | Litteratursøk gjennomføring + teorikapittel — stokastisk lagerstyring, evt. køteori | Uke 14 | ⬜ |
 | L13 | Implementering i Python (KI-støttet) — modell og simulering | Uke 15 | ⬜ |
 | L14 | Validering og sensitivitetsanalyse | Uke 16 | ⬜ |
@@ -268,6 +271,7 @@ Risikoregisteret gjennomgås ukentlig i forbindelse med statusnotatet. Risikoer 
 | R4 | Endringer i organisasjonsstruktur eller stasjonsoppsett under prosjektet | Lav | Middels | Avklare planlagte endringer tidlig; avgrense modellen mot disse | Spesifisere kartleggingstidspunkt som «snapshot» |
 | R5 | Tidskollisjon med vaktarbeid på 110 Sør-Vest | Høy | Middels | Planlegge skriveøkter rundt vaktplan; bygge buffer inn i Gantt | Komprimere sensitivitetsanalysen; prioritere kjernemodell |
 | R6 | Prokrastinering — skippertak mot innleveringsfrist | Middels | Høy | Ukentlige statusnotater og LLI-logg; tidlige delleveranser med egne frister | Akseptere enklere analyse fremfor å kompromittere rapportkvalitet |
+| R7 | METRIC-approksimasjonsfeil — modellen antar uavhengige forsinkelser ved sentrallager, men common cause stockout (alle drakter til vask samtidig) rammer alle stasjoner samtidig | Middels | Middels | Kvantifisere feilen gjennom Monte Carlo simulering; sammenligne analytisk vs. simulert servicegrad | Dokumentere avviket som kjent begrensning i diskusjonskapittelet; vurdere VARI-METRIC som alternativ |
 
 ### 5.3 Ressursindikator (LLI)
 
