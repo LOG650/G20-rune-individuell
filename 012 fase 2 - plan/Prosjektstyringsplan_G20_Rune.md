@@ -195,7 +195,7 @@ Selve intervjuene gjennomføres i fase 3 (uke 11–12). Planlagte informanter:
 
 **BRIS-datatilgang:** bekreftet — rådata tilgjengelig i `004 data/` (8 098 hendelser, 2021–2025)
 
-**Øvrige informanter:** kortere semi-strukturert samtale (~15 min), fokus på å verifisere eller korrigere antakelser fra Tom Meyer-intervjuet og Thomas-rapporten.
+**Øvrige informanter:** kortere semi-strukturert samtale (~15 min), fokus på å verifisere eller korrigere antakelser fra Tom Meyer-intervjuet og Tom Meyers 2024-rapport (*Vernebekledning 2024.docx*).
 
 ---
 
