@@ -279,7 +279,7 @@ Alle rådata lagres uendret i `004 data/`. All behandling skjer på kopier med d
 | ID | Milepæl | Frist | Godkjenningskrav | Status |
 |---|---|---|---|---|
 | M1 | Godkjent proposal | 23. feb 2026 | C-nivå | ✅ Fullført |
-| M2 | Rapportskjelett påbegynt + innledning v1 *(litteratursøk planlagt, ikke gjennomført)* | Innen 9. mars | C-nivå | ⬜ |
+| M2 | Rapportskjelett påbegynt + innledning v1 *(litteratursøk planlagt, ikke gjennomført)* | Innen 9. mars | C-nivå | ✅ Fullført — `014 fase 4 - report/Rapport_LOG650_G20_Rune_v0.1.md` |
 | M3 | Godkjent prosjektplan + Gantt med referanseplan | **9. mars 2026** | C-nivå | 🔄 Pågår |
 | M4 | Godkjent hovedutkast + peer review gjennomført | Slutten av april 2026 | C-nivå | ⬜ |
 | M5 | Ferdigstilt rapport innlevert + muntlig eksamen | Rapport: 31. mai / Muntlig: tidlig juni 2026 | **B-krav** | ⬜ |
@@ -398,4 +398,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-02-26 | Versjon 0.9 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-02-27 | Versjon 0.9 | Neste gjennomgang: ved Gantt-godkjenning*
