@@ -8,7 +8,7 @@
 | **Utarbeidet av** | Rune Grødem |
 | **Autorisert av** | Emneansvarlig, LOG650 |
 | **Dato** | 2026-02-25 |
-| **Versjon** | 0.8 – utkast |
+| **Versjon** | 0.9 – utkast |
 
 ---
 
@@ -79,6 +79,8 @@ Litteratursøk og rapportskriving startes tidlig og videreføres iterativt gjenn
 Rogaland Brann og Redning IKS (RogBR) disponerer per i dag om lag 428 sett røykdykkerbekledning, med en anslått enhetskostnad på ca. 18 000 kroner per sett. Dette tilsvarer en samlet kapitalbinding på om lag **7,7 millioner kroner**. Dimensjoneringen av beholdningen er i stor grad basert på historisk praksis, lokale vurderinger og erfaringsbaserte tommelfingerregler.
 
 Bekledningen er kritisk for operativ beredskap. For lav beholdning kan medføre redusert tilgjengelighet ved samtidige hendelser eller ved kapasitetsbegrensninger i vask. For høy beholdning medfører unødvendig kapitalbinding og økte lagerkostnader. Det foreligger derfor et tydelig behov for et mer strukturert, kvantitativt beslutningsgrunnlag.
+
+Et vesentlig rettslig rammeverk styrker behovet ytterligere: den nye brann- og redningsvesenforskriften (FOR-2022-01-18-65) fjernet detaljerte krav til verneutstyr fra forskriften og overførte disse til arbeidsmiljøloven. Dette innebærer at RogBR selv, gjennom sin **ROS- og beredskapsanalyse**, er forpliktet til å dokumentere dimensjonerende hendelser og tilhørende utstyrsbehov. Prosjektet bidrar direkte til å oppfylle denne forpliktelsen ved å etablere et etterprøvbart beslutningsgrunnlag.
 
 ### 2.2 Vurderte alternativer
 
@@ -167,7 +169,7 @@ Prosjektet gjennomføres i LOG650 — Logistikk og kunstig intelligens. KI benyt
 Løsningen består av:
 
 - **Casebeskrivelse** av RogBR (kontekst, prosessflyt, nøkkeltall og utfordring)
-- **Datamodell og datagrunnlag** (BRIS-data 2021–2025, telleliste/beholdning, vaskekapasitet/ledetider og intervjudata for nettverk/pool-struktur)
+- **Datamodell og datagrunnlag** (BRIS-data 2021–2025, ROS/beredskapsanalyse for dimensjonerende hendelser, telleliste/beholdning, vaskekapasitet/ledetider og intervjudata for nettverk/pool-struktur)
 - **Primær modell — METRIC** (Multi-Echelon Technique for Recoverable Item Control, Sherbrooke 1968; Axsäter kap. 10.2):
   - Sentrallager (Stangeland/vaskeri) løses eksakt med Poisson-kø; forsinkelse W₀ beregnes med Littles lov (M/D/∞)
   - Hver stasjon løses separat med effektiv ledetid L̃ᵢ = Lᵢ + W₀ og Poisson-etterspørsel λᵢ
@@ -215,7 +217,7 @@ Selve intervjuene gjennomføres i fase 3 (uke 11–12). Planlagte informanter:
 | L2 | Modellkandidat-liste fra pensum + beslutning om modelltilnærming → METRIC identifisert (Axsäter kap. 10.2, Sherbrooke 1968) | 28. feb | ✅ Fullført |
 | L3 | Litteratursøk — **planlegging** (søkeord, databaser, avgrensning) | 5. mars | ✅ Fullført |
 | L4 | Case-kartlegging — **planlegging** (kontaktpersoner, intervjuguide, tilgang BRIS) | 5. mars | ✅ Fullført |
-| L5 | Dataplan — datakilder, variabler, kvalitet, rådatahåndtering | 5. mars | ⬜ |
+| L5 | Dataplan — datakilder, variabler, kvalitet, rådatahåndtering | 5. mars | ✅ Fullført |
 | L6 | Godkjent prosjektplan (dette dokumentet) | **9. mars** | 🔄 Pågår |
 | L7 | MS Project Gantt-diagram med referanseplan (baseline) | **9. mars** | ⬜ |
 
@@ -241,6 +243,32 @@ Selve intervjuene gjennomføres i fase 3 (uke 11–12). Planlagte informanter:
 |---|---|---|---|
 | L17 | Ferdigstilt rapport (inkl. kode på GitHub) | 31. mai 2026 | ⬜ |
 | L18 | Muntlig eksamen | Tidlig juni 2026 | ⬜ |
+
+---
+
+### 3.7 Dataplan (L5)
+
+Alle rådata lagres uendret i `004 data/`. All behandling skjer på kopier med dokumenterte transformasjoner i Python-kode. Rådata er gitignored og deles ikke via GitHub.
+
+| Datakilde | Innhold | Tilgjengelighet | Primært bruk |
+|---|---|---|---|
+| **BRIS-data 2021–2025** | 8 098 hendelser, inkl. røykdykkerinnsats (kol. 56), dato/tid, stasjon, varighet, ressurser | ✅ Tilgjengelig (`004 data/`) | RQ1: etterspørselsmodellering — λ per stasjon, sesongmønster |
+| **ROS- og beredskapsanalyse, RogBR** | Dimensjonerende hendelser organisasjonen skal være forberedt på (krav fra arbeidsmiljøloven siden 2022-forskriften) | Anskaffes i fase 3 (Geir Nilsen / Tom Meyer) | Normativ validering: dekker modellen dimensjonerende scenario? Sammenligning mot historisk BRIS-etterspørsel |
+| **Telleliste/beholdning per stasjon** | Ca. 428 sett, stasjonskartlegging | ⚠️ Finnes, men upålitelig i praksis (Tom Meyer, 24.02) — verifiseres via Geir Nilsen eller manuell opptelling | Startparameter for modell, validering av nåsituasjon |
+| **Vaskekapasitet og ledetider** | 4 sett/vaskerunde; turnaround ca. 1 døgn (vask + tørkerom); CO₂-vask-avtale | ✅ Delvis bekreftet (Tom Meyer, 24.02) — utdypes med Petter Nielsen | RQ2: W₀ i METRIC-modellen |
+| **RFID-vaskedata** | Historisk per plagg: dato, stasjon, plagg-ID, vaskesyklus | ❓ Uavklart — Petter Nielsen og Bent Høgemark svarer ut | RQ4: effekt av forbedret informasjon på dimensjonering |
+| **Kostnads- og innkjøpsdata** | Pris per sett (18 000 kr), leveringstid, holdingkostnad (25%), slitasje/levetid | Delvis kjent — Bent Høgemark bekrefter | Forretningscase og optimeringsmålfunksjon |
+| **Intervjudata** | Pool-struktur, prioriteringsregler, mangeltilfeller, gap teori/praksis | Samles i fase 3 (se seksjon 3.5) | RQ2-RQ3, casebeskrivelse |
+
+**Datakvalitetsvurdering og fallback:**
+- Dersom RFID-data ikke er tilgjengelig: etterspørselsparametere estimeres utelukkende fra BRIS + intervjuer. Dokumenteres som begrensning.
+- Dersom telleliste er for upresis: gjennomfør manuell spot-check på Stangeland og Schankeholen. Avvik dokumenteres.
+- Dersom ROS/beredskapsanalyse ikke kan deles: bruk DSBs veiledning til dimensjonerende hendelser som proxy. Dokumenteres.
+
+**Rådatahåndtering:**
+- Rådata lagres i `004 data/` — aldri modifisert direkte
+- Alle transformasjoner dokumenteres i Jupyter notebooks med revisjonsspor
+- Konfidensielle dokumenter fra RogBR er gitignored (PDF, DOCX, XLSX i `004 data/`)
 
 ---
 
@@ -370,4 +398,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-02-25 | Versjon 0.8 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-02-26 | Versjon 0.9 | Neste gjennomgang: ved Gantt-godkjenning*

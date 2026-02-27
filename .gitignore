@@ -11,9 +11,13 @@
 004 data/*.xlsx
 004 data/*.csv
 004 data/*.json
+004 data/*.pdf
+004 data/*.docx
 004 data/**/*.xlsx
 004 data/**/*.csv
 004 data/**/*.json
+004 data/**/*.pdf
+004 data/**/*.docx
 
 # === General ===
 # OS files
