@@ -12,7 +12,7 @@
   <CalendarUID>1</CalendarUID>
   <NewTaskStartDate>0</NewTaskStartDate>
   <ScheduleFromStart>1</ScheduleFromStart>
-  <CurrentDate>2026-02-19T08:00:00</CurrentDate>
+  <CurrentDate>2026-02-28T08:00:00</CurrentDate>
   <Calendars>
     <Calendar>
       <UID>1</UID>
@@ -22,6 +22,10 @@
     </Calendar>
   </Calendars>
   <Tasks>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- PROSJEKTSUMMARY                                -->
+    <!-- ═══════════════════════════════════════════════ -->
     <Task>
       <UID>1</UID>
       <ID>1</ID>
@@ -29,7 +33,8 @@
       <OutlineLevel>0</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>1</Summary>
-      <PercentComplete>0</PercentComplete>
+      <Manual>0</Manual>
+      <PercentComplete>25</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -38,6 +43,10 @@
       <Duration>PT0H0M0S</Duration>
       <Notes/>
     </Task>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- FASE 1 — INITIERING (100% fullfort)            -->
+    <!-- ═══════════════════════════════════════════════ -->
     <Task>
       <UID>2</UID>
       <ID>2</ID>
@@ -45,7 +54,10 @@
       <OutlineLevel>1</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>1</Summary>
+      <Manual>0</Manual>
       <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-01-12T08:00:00</ActualStart>
+      <ActualFinish>2026-02-23T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -54,6 +66,7 @@
       <Duration>PT0H0M0S</Duration>
       <Notes/>
     </Task>
+
     <Task>
       <UID>3</UID>
       <ID>3</ID>
@@ -61,7 +74,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-01-12T08:00:00</ActualStart>
+      <ActualFinish>2026-01-16T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -70,6 +86,7 @@
       <Duration>PT40H0M0S</Duration>
       <Notes>L1-forberedelse</Notes>
     </Task>
+
     <Task>
       <UID>4</UID>
       <ID>4</ID>
@@ -77,7 +94,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-01-19T08:00:00</ActualStart>
+      <ActualFinish>2026-01-23T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -90,6 +110,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>5</UID>
       <ID>5</ID>
@@ -97,7 +118,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-01-26T08:00:00</ActualStart>
+      <ActualFinish>2026-01-28T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -110,6 +134,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- Planlagt 3 dager innsats; faktisk fullfort 23.02 etter venting pa tilbakemelding -->
     <Task>
       <UID>6</UID>
       <ID>6</ID>
@@ -117,7 +143,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-01-29T08:00:00</ActualStart>
+      <ActualFinish>2026-02-23T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -130,6 +159,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- M1: pinnet til 23.02 med MustFinishOn-betingelse -->
     <Task>
       <UID>7</UID>
       <ID>7</ID>
@@ -137,19 +168,27 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>1</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>100</PercentComplete>
-      <ConstraintType>0</ConstraintType>
+      <ActualStart>2026-02-23T08:00:00</ActualStart>
+      <ActualFinish>2026-02-23T08:00:00</ActualFinish>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-02-23T08:00:00</ConstraintDate>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
       <Rollup>0</Rollup>
       <CalendarUID>-1</CalendarUID>
       <Duration>PT0H0M0S</Duration>
-      <Notes>Frist: 23. feb 2026. Krav: C-niva</Notes>
+      <Notes>Frist: 23. feb 2026. Krav: C-niva. Fullfort.</Notes>
       <PredecessorLink>
         <PredecessorUID>6</PredecessorUID>
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- FASE 2 — PLANLEGGING (frist 9. mars 2026)      -->
+    <!-- ═══════════════════════════════════════════════ -->
     <Task>
       <UID>8</UID>
       <ID>8</ID>
@@ -157,7 +196,9 @@
       <OutlineLevel>1</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>1</Summary>
-      <PercentComplete>0</PercentComplete>
+      <Manual>0</Manual>
+      <PercentComplete>85</PercentComplete>
+      <ActualStart>2026-02-23T08:00:00</ActualStart>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -170,6 +211,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- L1: Fullfort 25.02 -->
     <Task>
       <UID>9</UID>
       <ID>9</ID>
@@ -177,7 +220,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
-      <PercentComplete>0</PercentComplete>
+      <Manual>0</Manual>
+      <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-02-23T08:00:00</ActualStart>
+      <ActualFinish>2026-02-25T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -190,6 +236,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- L2: Fullfort 27.02 -->
     <Task>
       <UID>10</UID>
       <ID>10</ID>
@@ -197,19 +245,24 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
-      <PercentComplete>0</PercentComplete>
+      <Manual>0</Manual>
+      <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-02-23T08:00:00</ActualStart>
+      <ActualFinish>2026-02-27T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
       <Rollup>0</Rollup>
       <CalendarUID>-1</CalendarUID>
       <Duration>PT32H0M0S</Duration>
-      <Notes>L2 — (Q,R), koteori, Monte Carlo</Notes>
+      <Notes>L2 — (Q,R), koteori, Monte Carlo. METRIC identifisert som primaermodell.</Notes>
       <PredecessorLink>
         <PredecessorUID>9</PredecessorUID>
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- L3: Fullfort 25.02 -->
     <Task>
       <UID>11</UID>
       <ID>11</ID>
@@ -217,7 +270,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
-      <PercentComplete>0</PercentComplete>
+      <Manual>0</Manual>
+      <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-02-23T08:00:00</ActualStart>
+      <ActualFinish>2026-02-25T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -230,6 +286,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- L4: Fullfort 25.02 -->
     <Task>
       <UID>12</UID>
       <ID>12</ID>
@@ -237,7 +295,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
-      <PercentComplete>0</PercentComplete>
+      <Manual>0</Manual>
+      <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-02-23T08:00:00</ActualStart>
+      <ActualFinish>2026-02-25T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -250,6 +311,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- L5: Fullfort 27.02 -->
     <Task>
       <UID>13</UID>
       <ID>13</ID>
@@ -257,7 +320,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
-      <PercentComplete>0</PercentComplete>
+      <Manual>0</Manual>
+      <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-02-25T08:00:00</ActualStart>
+      <ActualFinish>2026-02-27T17:00:00</ActualFinish>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -270,6 +336,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- L6: Paagaar (80%) — startet 24.02 -->
     <Task>
       <UID>14</UID>
       <ID>14</ID>
@@ -277,7 +345,9 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
-      <PercentComplete>0</PercentComplete>
+      <Manual>0</Manual>
+      <PercentComplete>80</PercentComplete>
+      <ActualStart>2026-02-24T08:00:00</ActualStart>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
@@ -290,6 +360,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- L7: Ikke startet — StartNoEarlierThan 02.03 -->
     <Task>
       <UID>15</UID>
       <ID>15</ID>
@@ -297,8 +369,10 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
-      <ConstraintType>0</ConstraintType>
+      <ConstraintType>4</ConstraintType>
+      <ConstraintDate>2026-03-02T08:00:00</ConstraintDate>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
       <Rollup>0</Rollup>
@@ -310,6 +384,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- M2: pinnet til 27.02 med MustFinishOn-betingelse -->
     <Task>
       <UID>16</UID>
       <ID>16</ID>
@@ -317,23 +393,25 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>1</Milestone>
       <Summary>0</Summary>
-      <PercentComplete>0</PercentComplete>
-      <ConstraintType>0</ConstraintType>
+      <Manual>0</Manual>
+      <PercentComplete>100</PercentComplete>
+      <ActualStart>2026-02-27T08:00:00</ActualStart>
+      <ActualFinish>2026-02-27T08:00:00</ActualFinish>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-02-27T08:00:00</ConstraintDate>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
       <Rollup>0</Rollup>
       <CalendarUID>-1</CalendarUID>
       <Duration>PT0H0M0S</Duration>
-      <Notes>Innen 9. mars. Krav: C-niva</Notes>
+      <Notes>Innen 9. mars. Krav: C-niva. Fullfort 2026-02-27.</Notes>
       <PredecessorLink>
         <PredecessorUID>14</PredecessorUID>
         <Type>1</Type>
       </PredecessorLink>
-      <PredecessorLink>
-        <PredecessorUID>15</PredecessorUID>
-        <Type>1</Type>
-      </PredecessorLink>
     </Task>
+
+    <!-- M3: FinishNoLaterThan 09.03 + Deadline-markering -->
     <Task>
       <UID>17</UID>
       <ID>17</ID>
@@ -341,8 +419,11 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>1</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
-      <ConstraintType>0</ConstraintType>
+      <ConstraintType>7</ConstraintType>
+      <ConstraintDate>2026-03-09T17:00:00</ConstraintDate>
+      <Deadline>2026-03-09T17:00:00</Deadline>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
       <Rollup>0</Rollup>
@@ -350,10 +431,18 @@
       <Duration>PT0H0M0S</Duration>
       <Notes>HARD FRIST: 9. mars 2026. Krav: C-niva</Notes>
       <PredecessorLink>
+        <PredecessorUID>15</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
+      <PredecessorLink>
         <PredecessorUID>16</PredecessorUID>
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- FASE 3 — GJENNOMFORING (9. mars – april 2026)  -->
+    <!-- ═══════════════════════════════════════════════ -->
     <Task>
       <UID>18</UID>
       <ID>18</ID>
@@ -361,6 +450,7 @@
       <OutlineLevel>1</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>1</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -374,6 +464,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>19</UID>
       <ID>19</ID>
@@ -381,6 +472,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -394,6 +486,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>20</UID>
       <ID>20</ID>
@@ -401,6 +494,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -414,6 +508,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>21</UID>
       <ID>21</ID>
@@ -421,6 +516,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -434,6 +530,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>22</UID>
       <ID>22</ID>
@@ -441,6 +538,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -448,12 +546,13 @@
       <Rollup>0</Rollup>
       <CalendarUID>-1</CalendarUID>
       <Duration>PT32H0M0S</Duration>
-      <Notes>Begrunnet fra pensum</Notes>
+      <Notes>Begrunnet fra pensum — METRIC (Sherbrooke 1968, Axsaeter kap. 10.2)</Notes>
       <PredecessorLink>
         <PredecessorUID>21</PredecessorUID>
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>23</UID>
       <ID>23</ID>
@@ -461,6 +560,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -474,6 +574,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>24</UID>
       <ID>24</ID>
@@ -481,6 +582,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -494,6 +596,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>25</UID>
       <ID>25</ID>
@@ -501,6 +604,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -514,6 +618,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>26</UID>
       <ID>26</ID>
@@ -521,6 +626,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -538,6 +644,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>27</UID>
       <ID>27</ID>
@@ -545,6 +652,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -566,6 +674,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>28</UID>
       <ID>28</ID>
@@ -573,6 +682,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -586,6 +696,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>29</UID>
       <ID>29</ID>
@@ -593,6 +704,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -606,6 +718,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- M4: FinishNoLaterThan 30.04 + Deadline-markering -->
     <Task>
       <UID>30</UID>
       <ID>30</ID>
@@ -613,8 +727,11 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>1</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
-      <ConstraintType>0</ConstraintType>
+      <ConstraintType>7</ConstraintType>
+      <ConstraintDate>2026-04-30T17:00:00</ConstraintDate>
+      <Deadline>2026-04-30T17:00:00</Deadline>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
       <Rollup>0</Rollup>
@@ -626,6 +743,10 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- FASE 4 — AVSLUTNING (mai–juni 2026)            -->
+    <!-- ═══════════════════════════════════════════════ -->
     <Task>
       <UID>31</UID>
       <ID>31</ID>
@@ -633,6 +754,7 @@
       <OutlineLevel>1</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>1</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -646,6 +768,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>32</UID>
       <ID>32</ID>
@@ -653,6 +776,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -666,6 +790,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>33</UID>
       <ID>33</ID>
@@ -673,6 +798,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -686,6 +812,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>34</UID>
       <ID>34</ID>
@@ -693,6 +820,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -706,6 +834,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>35</UID>
       <ID>35</ID>
@@ -713,6 +842,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -730,6 +860,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>36</UID>
       <ID>36</ID>
@@ -737,6 +868,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -750,6 +882,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- L17: HARD FRIST 31.05 -->
     <Task>
       <UID>37</UID>
       <ID>37</ID>
@@ -757,8 +891,11 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>1</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
-      <ConstraintType>0</ConstraintType>
+      <ConstraintType>7</ConstraintType>
+      <ConstraintDate>2026-05-31T17:00:00</ConstraintDate>
+      <Deadline>2026-05-31T17:00:00</Deadline>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
       <Rollup>0</Rollup>
@@ -774,6 +911,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
     <Task>
       <UID>38</UID>
       <ID>38</ID>
@@ -781,6 +919,7 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -794,6 +933,8 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
+    <!-- M5: HARD FRIST 05.06 -->
     <Task>
       <UID>39</UID>
       <ID>39</ID>
@@ -801,8 +942,11 @@
       <OutlineLevel>2</OutlineLevel>
       <Milestone>1</Milestone>
       <Summary>0</Summary>
+      <Manual>0</Manual>
       <PercentComplete>0</PercentComplete>
-      <ConstraintType>0</ConstraintType>
+      <ConstraintType>7</ConstraintType>
+      <ConstraintDate>2026-06-05T17:00:00</ConstraintDate>
+      <Deadline>2026-06-05T17:00:00</Deadline>
       <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar>
       <Rollup>0</Rollup>
@@ -814,6 +958,7 @@
         <Type>1</Type>
       </PredecessorLink>
     </Task>
+
   </Tasks>
   <Resources>
     <Resource>
@@ -824,173 +969,33 @@
     </Resource>
   </Resources>
   <Assignments>
-    <Assignment>
-      <UID>1</UID>
-      <TaskUID>3</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>2</UID>
-      <TaskUID>4</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>3</UID>
-      <TaskUID>5</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>4</UID>
-      <TaskUID>6</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>5</UID>
-      <TaskUID>9</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>6</UID>
-      <TaskUID>10</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>7</UID>
-      <TaskUID>11</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>8</UID>
-      <TaskUID>12</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>9</UID>
-      <TaskUID>13</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>10</UID>
-      <TaskUID>14</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>11</UID>
-      <TaskUID>15</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>12</UID>
-      <TaskUID>19</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>13</UID>
-      <TaskUID>20</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>14</UID>
-      <TaskUID>21</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>15</UID>
-      <TaskUID>22</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>16</UID>
-      <TaskUID>23</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>17</UID>
-      <TaskUID>24</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>18</UID>
-      <TaskUID>25</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>19</UID>
-      <TaskUID>26</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>20</UID>
-      <TaskUID>27</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>21</UID>
-      <TaskUID>28</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>22</UID>
-      <TaskUID>29</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>23</UID>
-      <TaskUID>32</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>24</UID>
-      <TaskUID>33</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>25</UID>
-      <TaskUID>34</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>26</UID>
-      <TaskUID>35</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>27</UID>
-      <TaskUID>36</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
-    <Assignment>
-      <UID>28</UID>
-      <TaskUID>38</TaskUID>
-      <ResourceUID>1</ResourceUID>
-      <Units>1</Units>
-    </Assignment>
+    <Assignment><UID>1</UID><TaskUID>3</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>2</UID><TaskUID>4</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>3</UID><TaskUID>5</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>4</UID><TaskUID>6</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>5</UID><TaskUID>9</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>6</UID><TaskUID>10</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>7</UID><TaskUID>11</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>8</UID><TaskUID>12</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>9</UID><TaskUID>13</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>10</UID><TaskUID>14</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>11</UID><TaskUID>15</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>12</UID><TaskUID>19</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>13</UID><TaskUID>20</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>14</UID><TaskUID>21</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>15</UID><TaskUID>22</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>16</UID><TaskUID>23</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>17</UID><TaskUID>24</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>18</UID><TaskUID>25</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>19</UID><TaskUID>26</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>20</UID><TaskUID>27</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>21</UID><TaskUID>28</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>22</UID><TaskUID>29</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>23</UID><TaskUID>32</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>24</UID><TaskUID>33</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>25</UID><TaskUID>34</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>26</UID><TaskUID>35</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>27</UID><TaskUID>36</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
+    <Assignment><UID>28</UID><TaskUID>38</TaskUID><ResourceUID>1</ResourceUID><Units>1</Units></Assignment>
   </Assignments>
 </Project>
