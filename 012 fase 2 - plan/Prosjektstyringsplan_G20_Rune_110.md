@@ -49,7 +49,7 @@ En viktig sekkundærdimensjon i prosjektet er en **kritisk gjennomgang av eksist
 
 Prosjektmålet er å analysere bemanningssituasjonen ved norske 110-sentraler gjennom en køteoretisk modell basert på empiriske hendelsesdata, og å vurdere om en kvantitativ dimensjoneringsmodell for 110-operatorer kan etableres på samme faglige grunnlag som dimensjoneringsforskriften gir for brannstasjoner.
 
-I dag finnes det ingen nasjonal, kvantitativ standard for bemanningsdimensjonering av 110-sentraler. Dimensjoneringsforskriften (FOR-2023-01-06-23) gir ferdige, etterprøvbare bemanningskrav for kasernert og deltidsbrannvesen basert på innbyggertall og responstid — en ferdig «ferdigtygget» analyse som gir liten rom for strategisk tilpasning. Tilsvarende standard mangler helt for 110-operatorer: bemanningsnivået fastsettes gjennom lokale ROS- og beredskapsanalyser som i prinsippet kan formes til å begrunne den bemanningen man ønsker, uten at dette kan etterprøves kvantitativt.
+I dag finnes det ingen nasjonal, kvantitativ standard for bemanningsdimensjonering av 110-sentraler. Dimensjoneringsforskriften (FOR-2023-01-06-23) gir ferdige, etterprøvbare bemanningskrav for kasernert og deltidsbrannvesen basert på innbyggertall og responstid — en ferdig «ferdigtygget» analyse som gir liten rom for strategisk tilpasning. Tilsvarende standard mangler helt for 110-operatorer: bemanningsnivået fastsettes gjennom lokale ROS- og beredskapsanalyser som er kvalitative og vanskelige å etterprøve eller sammenligne kvantitativt på tvers av sentraler.
 
 Prosjektet har således en dobbel ambisjon:
 1. **Casestudie (110 Sør-Vest):** Dokumentere i hvilken grad faktisk bemanning samsvarer med kapasitetsbehovet beregnet fra historiske data og Erlang-C-modellen
@@ -82,7 +82,7 @@ Litteratursøk og rapportskriving startes tidlig og videreføres iterativt gjenn
 
 Norske 110-sentraler er kritisk beredskapsinfrastruktur. Alle 18 norske sentraler er det primære kontaktpunktet for brann- og redningsnødmeldinger. Bemanningsdimensjonering er lovpålagt (Brann- og redningsvesenforskriften), men uten kvantitative nasjonale standarder er det opp til hver sentral å fastsette bemanning gjennom ROS-analyser av varierende kvalitet og metodisk robusthet.
 
-Det finnes en tydelig kontrast til hvordan brannstasjonsbemanning dimensjoneres: dimensjoneringsforskriften (FOR-2023-01-06-23) gir ferdige, etterprøvbare krav til kasernert og deltidsbrannvesen basert på innbyggertall og responstid. Dette gir liten rom for strategisk tilpasning — bemanningsnivået er kvantitativt forankret. En tilsvarende kvantitativ standard mangler helt for 110-operatorer.
+Det finnes en tydelig kontrast til hvordan brannstasjonsbemanning dimensjoneres: dimensjoneringsforskriften (FOR-2023-01-06-23) gir ferdige, etterprøvbare krav til kasernert og deltidsbrannvesen basert på innbyggertall og responstid. Bemanningsnivået er kvantitativt forankret og kan etterprøves. En tilsvarende kvantitativ standard mangler helt for 110-operatorer.
 
 Konsekvensene av feil dimensjonering er asymmetriske:
 - **Underbemanning:** Forsinkede svar på nødanrop, økt kø, redusert operativ kapasitet ved samtidige hendelser — med potensielt livstruende konsekvenser
@@ -123,7 +123,7 @@ Erlang-C (M/M/c) velges som utgangspunkt fordi modellen er veletablert for kapas
 - Overgang fra erfaringsbasert til analytisk beslutningsstøtte i beredskapsplanlegging
 - Bedre forståelse av hvilke strukturelle prediktorer (innbyggertall, areal, hendelsesvolum) som forklarer bemanningsvariasjon
 - Grunnlag for en nasjonal, etterprøvbar dimensjoneringsstandard for 110-operatorer — analogt med dimensjoneringsforskriften for brannvesenet
-- Redusert rom for strategisk tilpasning av ROS/beredskapsanalyser: et kvantitativt referansepunkt gjør det vanskeligere å forme analysene til ønsket konklusjon
+- Et objektivt, kvantitativt referansepunkt som kan supplere og sammenlignes med eksisterende ROS/beredskapsanalyser — og bidra til bedre etterprøvbarhet i dimensjoneringsvedtak
 
 ### 2.5 Kostnader
 
@@ -448,4 +448,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-03-07 | Versjon 1.1 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-03-07 | Versjon 1.2 | Neste gjennomgang: ved Gantt-godkjenning*
