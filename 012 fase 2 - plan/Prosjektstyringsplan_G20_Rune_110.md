@@ -80,7 +80,7 @@ Litteratursøk og rapportskriving startes tidlig og videreføres iterativt gjenn
 
 ### 2.1 Bakgrunn
 
-Norske 110-sentraler er kritisk beredskapsinfrastruktur. Alle 18 norske sentraler er det primære kontaktpunktet for brann- og redningsnødmeldinger. Bemanningsdimensjonering er lovpålagt (Brann- og redningsvesenforskriften), men uten kvantitative nasjonale standarder er det opp til hver sentral å fastsette bemanning gjennom ROS-analyser av varierende kvalitet og metodisk robusthet.
+Norske 110-sentraler er kritisk beredskapsinfrastruktur. Alle 12 norske 110-sentraler (Finnmark, Troms, Nordland, Trøndelag, Møre og Romsdal, Vest, Sør-Vest, Agder, Sør-Øst, Oslo, Øst og Innlandet) er det primære kontaktpunktet for brann- og redningsnødmeldinger. Bemanningsdimensjonering er lovpålagt (Brann- og redningsvesenforskriften), men uten kvantitative nasjonale standarder er det opp til hver sentral å fastsette bemanning gjennom ROS-analyser av varierende kvalitet og metodisk robusthet.
 
 Det finnes en tydelig kontrast til hvordan brannstasjonsbemanning dimensjoneres: dimensjoneringsforskriften (FOR-2023-01-06-23) gir ferdige, etterprøvbare krav til kasernert og deltidsbrannvesen basert på innbyggertall og responstid. Bemanningsnivået er kvantitativt forankret og kan etterprøves. En tilsvarende kvantitativ standard mangler helt for 110-operatorer.
 
@@ -464,4 +464,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-03-07 | Versjon 1.3 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-03-07 | Versjon 1.4 | Neste gjennomgang: ved Gantt-godkjenning*
