@@ -39,7 +39,7 @@ Forfatteren har operativ erfaring fra 110 Sør-Vest og tilgang til hendelsesdata
 
 I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller?
 
-Operativ belastning ved en 110-sentral kjennetegnes av stokastisk ankomst av hendelser med ulik håndteringstid og ressursbehov. En sentral modellantagelse er at vakthavende leder (VL) normalt ikke besvarer nødanrop, noe som innebærer at effektiv operatørkapasitet er `c_effektiv = c_total − 1`. 110 Sør-Vest opererer med normalbesetning på 4 operatører (+ VL) på dagskift, og kan gå ned til 3 (+ VL) på nattskift og i helger. Effektiv kapasitet er dermed `c_effektiv = 3` (dag) og `c_effektiv = 2` (natt/helg).
+Operativ belastning ved en 110-sentral kjennetegnes av stokastisk ankomst av hendelser med ulik håndteringstid og ressursbehov. En sentral modellantagelse er at Vaktleder (VL) normalt ikke besvarer nødanrop, noe som innebærer at effektiv operatørkapasitet er `c_effektiv = c_total − 1`. 110 Sør-Vest opererer med normalbesetning på 3 operatører + Vaktleder (totalt 4) på dagskift, og kan gå ned til 2 operatører + Vaktleder (totalt 3) på nattskift og i helger. Effektiv kapasitet er dermed `c_effektiv = 3` (dag) og `c_effektiv = 2` (natt/helg).
 
 Prosjektet benytter primærcase **110 Sør-Vest** og benchmarker mot alle norske 110-sentraler via DSBs årsrapporter.
 
@@ -180,7 +180,7 @@ Følgende operative særtrekk ved 110-sentraler skiller dem fra et standard M/M/
 
 | Særtrekk | Beskrivelse | Modellimplikasjon |
 |---|---|---|
-| **VL-rollen** | Vakthavende leder besvarer normalt ikke nødanrop | `c_effektiv = c_total − 1` — eksplisitt korreksjon i modellen |
+| **VL-rollen** | Vaktleder besvarer normalt ikke nødanrop | `c_effektiv = c_total − 1` — eksplisitt korreksjon i modellen |
 | **Aktivt hendelsebilde** | Pågående hendelser binder operatørkapasitet utover samtaletid | Økt effektiv håndteringstid; Erlang-C-forutsetning utfordres |
 | **Ring-flom (call surge)** | Én hendelse utløser mange samtidige anrop | Brudd på Poisson-uavhengighet; behandles som sensitivitetscase |
 | **Overløp til Agder** | 10. kø-anrop viderekoblet | De facto servicegrense — proxy for definert servicegrad |
