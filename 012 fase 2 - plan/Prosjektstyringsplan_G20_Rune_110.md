@@ -43,6 +43,8 @@ Operativ belastning ved en 110-sentral kjennetegnes av stokastisk ankomst av hen
 
 Prosjektet benytter primærcase **110 Sør-Vest** og benchmarker mot alle norske 110-sentraler via DSBs årsrapporter.
 
+En viktig sekkundærdimensjon i prosjektet er en **kritisk gjennomgang av eksisterende ROS- og beredskapsanalyse** for 110 Sør-Vest. Dagens bemanningsnivå er formelt forankret i denne analysen. Prosjektet vil vurdere om analysen gir tilstrekkelig grunnlag for å begrunne faktisk bemanning, om dimensjonerende hendelser samsvarer med planlagt kapasitet, og om forutsetninger om systemer og rutiner er reelt til stede. Funn fra ROS-gjennomgangen sammenlignes eksplisitt med den kvantitative Erlang-C-vurderingen.
+
 ### 1.3 Mål
 
 Prosjektmålet er å analysere bemanningssituasjonen ved norske 110-sentraler gjennom en køteoretisk modell basert på empiriske hendelsesdata, slik at det kan dokumenteres i hvilken grad faktisk bemanning er tilstrekkelig til å håndtere observert belastning med akseptabel servicegrad — og om en generaliserbar dimensjoneringsmodell kan utarbeides på tvers av sentraler.
@@ -78,7 +80,7 @@ Konsekvensene av feil dimensjonering er asymmetriske:
 - **Underbemanning:** Forsinkede svar på nødanrop, økt kø, redusert operativ kapasitet ved samtidige hendelser — med potensielt livstruende konsekvenser
 - **Overbemanning:** Unødvendige personalkostnader for kommunene som drifter sentralene
 
-Et kvantitativt beslutningsgrunnlag basert på faktiske belastningsdata kan gi et mer etterprøvbart fundament for dimensjoneringsvedtak enn dagens erfaringsbaserte praksis.
+Et kvantitativt beslutningsgrunnlag basert på faktiske belastningsdata kan gi et mer etterprøvbart fundament for dimensjoneringsvedtak enn dagens erfaringsbaserte praksis. Det er grunn til å spørre om eksisterende ROS- og beredskapsanalyser faktisk begrunner valgt bemanning på en metodisk tilstrekkelig måte — herunder om dimensjonerende hendelser samsvarer med faktisk observert belastning, og om forutsetninger som legges til grunn for kapasitetsvurderingen er reelt oppfylt. En slik svakhet i eksisterende grunnlag forsterker behovet for en empirisk, kvantitativ tilnærming.
 
 ### 2.2 Vurderte alternativer
 
@@ -134,6 +136,7 @@ Prosjektet skal:
 3. Avklare og begrunne modellvalg fra pensum — Erlang-C (M/M/c) er identifisert som primærmodell — og beskrive modellens parametere, beslutningsvariabler, målsetting og forutsetninger.
 4. Implementere modellen i Python og utføre analyse med dokumentert validering og sensitivitetssjekk.
 5. Skrive rapport fortløpende med tydelig skille mellom modell/metode og resultater/diskusjon, med korrekt kildebruk (APA 7th norsk).
+6. Gjennomføre en kritisk analyse av eksisterende ROS- og beredskapsanalyse for 110 Sør-Vest: vurdere kvaliteten på dimensjoneringsgrunnlaget, samsvaret mellom antatte dimensjonerende hendelser og faktisk belastning, og i hvilken grad forutsetninger om systemer og rutiner er oppfylt i praksis.
 
 ### 3.2 Avgrensninger
 
@@ -169,6 +172,11 @@ Løsningen består av:
   - Antall servere (c) med VL-korreksjon (`c_effektiv = c_total − 1`)
   - Beregnet servicegrad sammenlignet mot de facto grenser (10. anrop → Agder, 60 sek uten svar)
   - Anbefalt bemanning per skiftperiode for definert servicegrad
+- **ROS- og beredskapsanalyse-gjennomgang** — kritisk vurdering av eksisterende dimensjoneringsgrunnlag ved 110 Sør-Vest:
+  - Identifikasjon av dimensjonerende hendelser som analyäsen legger til grunn
+  - Vurdering av om disse samsvarer med faktisk observert hendelsesbelastning fra LEO/BRIS
+  - Gjennomgang av forutsetninger om systemer og rutiner — er disse reelt operasjonalisert?
+  - Konklusjon om analysens evne til å begrunne valgt bemanningsnivå
 - **Benchmarking** mot alle norske 110-sentraler via DSB-årsrapporter
 - **Generaliseringsanalyse** — om hendelsesvolum, innbyggertall og areal kan predikere bemanningsbehov
 - **Implementasjon og analyse i Python** med validering og sensitivitetsanalyse
@@ -215,6 +223,7 @@ Følgende operative særtrekk ved 110-sentraler skiller dem fra et standard M/M/
 |---|---|---|---|
 | L7 | Rapportskjelett + introduksjon og problemstilling v1 | Uke 12 | Ikke startet |
 | L8 | Datainnhenting + EDA — LEO/BRIS, belastningsmonstre per skift, hendelsestypefordeling | Uke 12–13 | Ikke startet |
+| L8b | ROS- og beredskapsanalyse-gjennomgang — dokumentanalyse av dimensjoneringsgrunnlag, sammenligning med LEO/BRIS-data, vurdering av forutsetninger | Uke 12–13 | Ikke startet |
 | L9 | Parameterestimering — ankomstrate (λ) og håndteringstid (μ) per skiftperiode og hendelseskategori | Uke 13 | Ikke startet |
 | L10 | Erlang-C modellering — bemanningsanbefaling per skiftperiode med VL-korreksjon | Uke 14 | Ikke startet |
 | L11 | Validering og sensitivitetsanalyse — Poisson-test, robusthet ved parameterendringer | Uke 14–15 | Ikke startet |
@@ -243,6 +252,7 @@ Alle rådata lagres uendret i `004 data/`. All behandling skjer på kopier med d
 | **LEO-data fra høst 2024 (alle sentraler)** | Sammenlignbare hendelsesdata — felles LEO-format | Avklares | Benchmarking og generaliseringsanalyse |
 | **DSB årsrapporter 2025** | Bemanning per vakttype, antall operatørplasser, totalt anropsvolum | Offentlig | Benchmarking: modellanbefaling vs. faktisk bemanning |
 | **SSB befolkningsdata** | Innbyggertall per sentrals dekningsområde | Offentlig | Predikatoranalyse |
+| **ROS- og beredskapsanalyse (110 Sør-Vest)** | Dimensjonerende hendelser, forutsetninger om systemer/rutiner, bemanningsbegrunnelse | Tilgjengelig — forfatteren har tilgang til dokumentene | Kritisk dokumentanalyse: sammenligning med empirisk belastning og kvalitetsvurdering av dimensjoneringsgrunnlag |
 | **Strukturerte intervjuer — operativt personell** | Håndteringstid per hendelseskategori, VL-praksis, operative særtrekk | Planlegges uke 12–13 | Parametervalidering; dokumentasjon av særtrekk |
 | **Forfatterens egne erfaringer (110 Sør-Vest)** | Operativ praksis, VL-rolle, ring-flom, aktivt hendelsebilde | Tilgjengelig — dokumenteres eksplisitt | Kontekstualisering; validering av modellantagelser |
 
@@ -347,6 +357,7 @@ Risikoregisteret gjennomgås ukentlig i forbindelse med statusnotatet. Rune Grø
 | R6 | Tilgang til tvers-sentraldata (LEO post-2024) avklares ikke | Middels | Middels | Avklar datatilgang tidlig i fase 3 (uke 12) | Fall tilbake på DSB-årsrapporter; omfang reduseres og dokumenteres |
 | R7 | Tidskollisjon med vaktarbeid ved 110 Sør-Vest | Høy | Middels | Planlegg skriveokter rundt vaktplan; buffer i Gantt | Komprimere generaliseringsanalysen; prioritere kjernemodell |
 | R8 | Prokrastinering — skippertak mot innleveringsfrist | Middels | Høy | Ukentlige statusnotater og LLI-logg; tidlige interne delleveransfrister | Akseptere enklere analyse fremfor å kompromittere rapportkvalitet |
+| R9 | Sensitive funn fra ROS-gjennomgang — konklusjoner om svak analysekvalitet kan oppfattes som kritikk av kollegaer eller organisasjon | Middels | Middels | Formuler funn som metodisk vurdering, ikke personkritikk; forankre i faglige standarder | Begrens deling av utkast med berørte parter under arbeidet; anonymiser der relevant |
 
 ### 5.3 Ressursindikator (LLI)
 
@@ -427,4 +438,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-03-07 | Versjon 0.9 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-03-07 | Versjon 1.0 | Neste gjennomgang: ved Gantt-godkjenning*
