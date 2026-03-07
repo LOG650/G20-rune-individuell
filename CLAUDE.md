@@ -1,108 +1,114 @@
-# LOG650 - Forskningsprosjekt: Logistikk og KI
+# LOG650 – G20 Rune Grødem – Prosjektinstruksjoner for Claude
 
 ## Prosjektinfo
-- **Student:** Rune Grødem (G20)
-- **Emne:** LOG650, Høgskolen i Molde
+- **Student:** Rune Grødem, G20 Individuell
+- **Emne:** LOG650 Logistikk og kunstig intelligens, Høgskolen i Molde, Vår 2026
 - **Arbeidsform:** Individuelt
-- **Frist fase 3 (hovedutkast):** 1. mai 2026
+- **Fase nå:** Fase 2 – Planlegging (frist 15. mars 2026)
+- **Frist hoved-utkast:** Slutten av april 2026
 - **Frist endelig rapport:** 31. mai 2026
+- **Muntlig eksamen:** Tidlig juni 2026
+- **Karakterkrav:** C-nivå på arbeidskrav, B-krav på rapport + muntlig
 
 ## Problemstilling
-**Hvordan kan lagerstyring av røykdykkerbekledning ved Rogaland Brann og Redning IKS analyseres og dimensjoneres under usikker, hendelsesdrevet etterspørsel for å oppnå definert servicegrad til lavest mulig kapitalbinding?**
+**I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet
+beregnet fra historiske hendelsesdata og køteoretiske modeller?**
 
-## Forskningsspørsmål
-- **RQ1 (kjerne):** Etterspørselsmodellering basert på BRIS-data
-- **RQ2 (kjerne):** Vaskekapasitet som flaskehals (køteori)
-- **RQ3 (kjerne):** Lagerpolicy-sammenligning (personlig vs. pool vs. hybrid)
-- **RQ4 (sekundær):** RFID-effekt på dimensjonering
-- **RQ5 (sekundær):** Generalisering til andre brannvesen
+## Dobbel ambisjon
+1. **Casestudie (110 Sør-Vest):** Dokumentere om faktisk bemanning samsvarer med
+   kapasitetsbehovet beregnet fra historiske LEO/BRIS-data og Erlang-C-modellen
+2. **Generaliseringsambisjon:** Undersøke om strukturelle prediktorer (hendelsesvolum,
+   innbyggertall, areal) kan danne grunnlag for en nasjonal, etterprøvbar
+   dimensjoneringsmodell for 110-operatører — analogt med dimensjoneringsforskriften
+   for brannvesenet
 
-## Case
-Rogaland Brann og Redning IKS (RogBR) med tre lokasjoner:
-- Stangeland (hovedstasjon, vaskelinje, sentrallager)
-- Schankeholen (vaskelinje, klespool)
-- Innsatskonteiner (mobil beredskap)
+## Bakgrunn og motivasjon
+Dimensjoneringsforskriften (FOR-2023-01-06-23) gir kvantitativ, etterprøvbar standard
+for brannstasjoner basert på innbyggertall og responstid. **Ingen tilsvarende nasjonal
+standard finnes for 110-operatører.** Bemanningsnivået fastsettes gjennom lokale
+ROS- og beredskapsanalyser som er kvalitative og vanskelige å etterprøve kvantitativt
+på tvers av sentraler. Prosjektets ambisjon er å bygge et kvantitativt referansepunkt
+for 110-operatører analogt med dimensjoneringsforskriftens rolle for brannvesenet.
 
-## Kontaktpersoner RogBR
-- Brannsjef Razums Viggen
-- Logistikkansvarlig Tom Meyer
-- Student arbeider i 110 Sør-Vest
+## Primærcase: 110 Sør-Vest
+- **Skift:** Dag 07:00–19:00, Natt 19:00–07:00
+- **Bemanning dag:** 3 operatører + Vaktleder (VL) = totalt 4. c_effektiv = 3
+- **Bemanning natt/helg:** 2 operatører + Vaktleder = totalt 3. c_effektiv = 2
+- **VL-antagelse:** Vaktleder besvarer normalt IKKE nødanrop → c_effektiv = c_total − 1
+- **De facto servicegrense:** 10. anrop i kø → overføres til Agder; ubesvart etter 60 sek = brudd
+- **Data tilgjengelig:** LEO/BRIS tilbake til 2020; felles LEO for alle sentraler fra høst 2024
+- **ROS/beredskapsanalyse:** Tilgjengelig — forfatterens tilgang til dokumenter for 110 Sør-Vest
 
-## Teori
-- **Primær:** METRIC (Sherbrooke 1968; Axsäter kap. 10.2) — multi-echelon recoverable item control
-- **Støtte:** Stokastisk lagerstyring (Silver, Pyke & Peterson; Zipkin; Axsäter), Køteori M/D/∞ (Littles lov)
-- **Rammeverk:** Risk-pooling, Theory of Constraints
+## Primærmodell: Erlang-C (M/M/c)
+- **λ (ankomstrate):** Estimert per skiftperiode fra LEO/BRIS-data
+- **μ⁻¹ (håndteringstid):** Estimert per hendelseskategori
+- **c (servere):** Med VL-korreksjon (c_effektiv = c_total − 1)
+- **Service level:** P(W > t) sammenlignet mot de facto grenser (10. anrop/60 sek)
+- Tre analytiske dimensjoner: telefonhenvendelser (λ/Erlang-C), oppdrag (operativ aktivitet),
+  samtidige aktive hendelser (kapasitetsbinding)
 
-## Nøkkeltall fra 2024-rapporten (Tom Meyer)
-- 428 sett brannbekledning totalt (hel+deltid)
-- Pool Stangeland: 65 sett, Pool Schankeholen: 49 sett
-- Pris per sett: ca. 18 000 kr
-- Utskiftningsrate: 17,5% (ca. 75 sett/år)
-- Dimensjonering Stangeland: 22 sett (3 branner × 6 røykdykkere + 4 tillegg)
-- Dimensjonering Schankeholen: 6 sett (2 branner × 6 røykdykkere, men bare 6 pga overlap)
-- Innsatskonteiner: 6 røykdykkere (2 biler × 3 RD)
+## Operative særtrekk (må hensyntas i modellen)
+- **VL-rollen:** c_effektiv = c_total − 1
+- **Aktivt hendelsebilde:** Pågående hendelser binder kapasitet utover samtaletid
+- **Ring-flom (call surge):** Brudd på Poisson-uavhengighet — behandles som sensitivitetscase
+- **Overløp til Agder:** 10. kø-anrop viderekoblet — de facto servicegrense
+- **60-sekunders-regel:** Ubesvart anrop etter 60 sek = kapasitetsbrudd
 
-## Datagrunnlag
+## 12 norske 110-sentraler
+Finnmark, Troms, Nordland, Trøndelag, Møre og Romsdal, Vest, Sør-Vest, Agder,
+Sør-Øst, Oslo, Øst og Innlandet.
 
-### BRIS-data (Datagrunnlag/20260210_203820_fullrapport_brannvesen.xlsx)
-- **Omfang:** 8 098 hendelser, 580 kolonner
-- **Nøkkelkolonner for analyse:**
-  - Kol 0: Oppdrag ID
-  - Kol 3: Oppdragstype (Brann, Ulykke, etc.)
-  - Kol 4: Overordnet oppdragstype
-  - Kol 9: Kommunenavn
-  - Kol 14: Ansvarlig brannvesen
-  - Kol 25: Time på døgnet
-  - Kol 26: Dato anrop
-  - Kol 28-33: Ukedag, ukenr, måned, år
-  - Kol 36: Antall ressurser på oppdragsstedet
-  - Kol 46: Utrykningstid
-  - Kol 47: Responstid
-  - Kol 49: Innsatsvarighet
-  - **Kol 56: Innvendig røykdykkerinnsats (JA/NEI) - NØKKELKOLONNE for RQ1**
-  - Kol 57: Kjemikaliedykkerinnsats
-  - Kol 120: Type brann
+## Datakilder
+| Kilde | Status |
+|---|---|
+| LEO/BRIS 110 Sør-Vest 2020–2025 | TILGJENGELIG |
+| ROS- og beredskapsanalyse 110 Sør-Vest | TILGJENGELIG |
+| DSB årsrapporter (alle sentraler) | OFFENTLIG |
+| SSB befolkningsdata | OFFENTLIG |
+| LEO-data tvers-sentraler (post-2024) | AVKLARES uke 12 |
 
-## Mappestruktur
+## WBS — Fase 3 leveranser
 ```
-LOG650 LOGISTIKK OG KI/
-├── CLAUDE.md                    # Denne filen
-├── 01_proposal/                 # Fase 1: Godkjent proposal
-├── 02_prosjektplan/             # Fase 2: Kravspesifikasjon, WBS, Gantt
-├── 03_rapport/                  # Fase 3+4: Selve forskningsrapporten
-├── Datagrunnlag/                # Rådatasett (BRIS-uttrekk)
-├── analyse/
-│   ├── notebooks/               # Jupyter notebooks for EDA og analyse
-│   └── scripts/                 # Python-scripts for modellering
-├── figurer/                     # Genererte figurer og visualiseringer
-├── litteratur/                  # Kildenotater og referanser
-├── peer_review/                 # Peer-review dokumenter
-├── LOG650_Prosjektproposal_FINAL.docx
-├── Vernebekledning 2024.docx    # Tom Meyers 2024-rapport
-├── Oppdrag logistikk.docx       # Originaloppdraget fra avdelingsleder
-└── [diverse maler og PDF-er]
+L7  Rapportskjelett + intro v1                    (Uke 12)
+L8  EDA — LEO/BRIS, belastningsmonstre per skift  (Uke 12–13)
+L8b ROS/beredskapsanalyse-gjennomgang             (Uke 12–13)
+L9  Parameterestimering (λ og μ per skiftperiode)   (Uke 13)
+L10 Erlang-C modellering med VL-korreksjon        (Uke 14)
+L11 Validering og sensitivitetsanalyse            (Uke 14–15)
+L12 Teorikapittel                                 (Uke 14–15)
+L13 Benchmarking (alle 12 sentraler via DSB)      (Uke 15)
+L14 Generaliseringsanalyse                        (Uke 15–16)
+L15 Resultater og diskusjon                       (Uke 16)
+L16 Hoved-utkast + peer review                   (Slutten av april)
 ```
 
-## Teknisk stack
-- Python (pandas, numpy, scipy, statsmodels, scikit-learn)
-- Jupyter notebooks for analyse
-- APA 7th referansestil (norsk)
-- Rapport i Word (.docx) basert på NTNU-mal eller LOG650-mal
+## Viktige filer
+| Fil | Beskrivelse |
+|---|---|
+| `011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md` | Godkjent proposal |
+| `012 fase 2 - plan/Prosjektstyringsplan_G20_Rune_110.md` | Plan v1.4, 467 linjer |
+| `012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.xlsx` | 28 oppgaver, MS Project import |
+| `012 fase 2 - plan/Litteraturliste_LOG650_G20_Rune.xlsx` | 26 kilder, verifisert og fargekodet |
+| `004 data/` | Rådata (gitignored) — LEO/BRIS legges her i fase 3 |
+| `OLD_forkastet/` | Gammelt prosjekt (røykdykkerbekledning/METRIC) — ikke bruk |
 
-## Primær modell — METRIC
-RogBR er et **lukket system med fast populasjon** (recoverable items), ikke et klassisk lagerproblem. Draktene sirkulerer mellom tilstandene: tilgjengelig → til vask → tilbake. Bestilling skjer kun ved avskrivning eller nye brukere.
+## Tekniske retningslinjer
+- **Filskriving i `012 fase 2 - plan/`:** Edit/Write-tool feiler med EEXIST —
+  bruk Python-skript i `C:\Users\runeg\AppData\Local\Temp\` og kjør med `py "C:/path/script.py"`
+- **Encoding:** Alltid `encoding='utf-8'` i Python-filoperasjoner
+- **Bash Unicode:** Unngå heredoc med Unicode — bruk .py-skriptfiler
+- **Python-stack:** pandas, numpy, scipy, matplotlib, seaborn, openpyxl
+- **Versjonskontroll:** Git (GitHub: LOG650/G20-rune-individuell)
+- **Referansestil:** APA 7th norsk (se `000 templates/Referansestiler/`)
+- **Rådata:** Lagres i `004 data/` — aldri modifisert direkte; all behandling i Jupyter notebooks
 
-**METRIC** (Multi-Echelon Technique for Recoverable Item Control, Sherbrooke 1968) er identifisert som primær modell:
-- Sentrallager (Stangeland/vaskeri) løses eksakt med Poisson-kø
-- Forsinkelse W₀ beregnes med Littles lov (M/D/∞)
-- Hver stasjon løses separat med effektiv ledetid L̃ᵢ = Lᵢ + W₀
-- Sᵢ (order-up-to nivå per stasjon) er beslutningsvariabelen
+## Risikofaktorer å huske
+- **R2/R3:** Poisson-antagelse må testes eksplisitt på LEO/BRIS-data
+- **R6:** Tvers-sentraldata (LEO post-2024) — avklar tilgang tidlig i fase 3
+- **R7:** Tidskollisjon med vaktarbeid ved 110 Sør-Vest — buffer i Gantt
+- **R9:** ROS-gjennomgang må formuleres som metodisk vurdering, ikke personkritikk
 
-**Kjent begrensning:** METRIC antar uavhengige forsinkelser — common cause stockout adresseres i diskusjonskapittel + valideres med Monte Carlo simulering.
-
-## Viktige retningslinjer
-- Rapport 80-100 sider (ekskl. vedlegg)
-- 60% tid på RQ1-RQ3, 20% på RQ4-RQ5, 20% validering/skriving
-- KI brukes som analyseverktøy, ikke som forskningsbidrag
-- Service-level constraint: SL ≥ 99%
-- Modellen skal være parametriserbar for andre brannvesen
+## Framing-retningslinje (VIKTIG)
+ROS/beredskapsanalyser er **kvalitative og vanskelige å etterprøve kvantitativt** på
+tvers av sentraler — IKKE at de er strategisk manipulert eller bestillingsverk.
+Prosjektet *supplerer og sammenligner* med eksisterende analyser, det *angriper* dem ikke.
