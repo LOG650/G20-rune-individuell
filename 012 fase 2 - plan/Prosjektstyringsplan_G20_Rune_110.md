@@ -8,7 +8,7 @@
 | **Utarbeidet av** | Rune Grødem |
 | **Autorisert av** | Emneansvarlig, LOG650 |
 | **Dato** | 2026-03-07 |
-| **Versjon** | 0.9 – utkast |
+| **Versjon** | 1.3 |
 
 ---
 
