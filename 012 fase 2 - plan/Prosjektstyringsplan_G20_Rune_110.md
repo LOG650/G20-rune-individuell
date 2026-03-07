@@ -125,6 +125,10 @@ Erlang-C (M/M/c) velges som utgangspunkt fordi modellen er veletablert for kapas
 - Grunnlag for en nasjonal, etterprøvbar dimensjoneringsstandard for 110-operatorer — analogt med dimensjoneringsforskriften for brannvesenet
 - Et objektivt, kvantitativt referansepunkt som kan supplere og sammenlignes med eksisterende ROS/beredskapsanalyser — og bidra til bedre etterprøvbarhet i dimensjoneringsvedtak
 
+**Beredskapsperspektiv**
+
+Et viktig premiss for tolkning av resultatene er at 110-sentraler er beredskapssystemer, ikke rene effektivitetssystemer. Lav kapasitetsutnyttelse i enkeltperioder er ikke nødvendigvis et tegn på overbemanning — i beredskapssystemer kan en viss uutnyttet kapasitet være nødvendig for å håndtere sjeldne, kritiske hendelser og samtidige belastningstopper. Dette perspektivet vil være sentralt i diskusjonskapittelet og påvirker hvordan modellresultatene oversættes til bemanningsanbefalinger.
+
 ### 2.5 Kostnader
 
 For 110-sentralene påløper ingen direkte kostnader utover begrenset tidsbruk til intervjuer. Prosjektet gjennomføres som en del av LOG650 ved Høgskolen i Molde.
@@ -203,6 +207,18 @@ Følgende operative særtrekk ved 110-sentraler skiller dem fra et standard M/M/
 | **Ring-flom (call surge)** | Én hendelse utløser mange samtidige anrop | Brudd på Poisson-uavhengighet; behandles som sensitivitetscase |
 | **Overløp til Agder** | 10. kø-anrop viderekoblet | De facto servicegrense — proxy for definert servicegrad |
 | **60-sekunders-regel** | Ubesvarte anrop etter 60 sek = kapasitetsbrudd | Proxy for maksimal akseptabel ventetid W |
+
+**Analytiske dimensjoner av operativ belastning**
+
+Operativ belastning ved en 110-sentral kan ikke reduseres til én enkelt variabel. Prosjektet analyserer belastning langs tre komplementære dimensjoner:
+
+| Analysekomponent | Primærvariabel | Funksjon i analysen |
+|---|---|---|
+| **Kømodell** | Innkommende telefonhenvendelser (λ) | Erlang-C-input; estimerer nødvendig operatørkapasitet |
+| **Operativ belastningsanalyse** | Antall oppdrag/hendelser | Forstå faktisk operativ aktivitet og ressursdisponering |
+| **Kapasitetsbinding** | Samtidige aktive hendelser | Forklare operatørbinding utover samtaletid |
+
+Primæranalysen bruker telefonhenvendelser som Erlang-C-input (λ). De to øvrige dimensjonene benyttes til å kontekstualisere resultater og belyse avvik mellom telefonbelastning og faktisk operatørbinding — særlig relevant for å forstå effekten av aktivt hendelsebilde (jf. tabell over).
 
 ### 3.6 Arbeidsnedbrytningsstruktur (WBS)
 
@@ -448,4 +464,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-03-07 | Versjon 1.2 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-03-07 | Versjon 1.3 | Neste gjennomgang: ved Gantt-godkjenning*
