@@ -199,14 +199,14 @@
 
     <Task>
       <UID>15</UID><ID>15</ID>
-      <Name>L8 — Datainnhenting + EDA: LEO/BRIS, belastningsmonstre per skift, hendelsestypefordeling</Name>
+      <Name>L8 – Datainnhenting: LEO/BRIS-data 2020–2025, DSB-årsrapporter, SSB-befolkningsdata; datavalidering og rådatastruktur</Name>
       <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
       <Manual>0</Manual><PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
-      <Duration>PT80H0M0S</Duration>
-      <Notes>Uke 12-13. Kritisk sti. Poisson-test, ankomstrate per skift, haandteringstid.</Notes>
-      <Start>2026-03-16T08:00:00</Start><Finish>2026-03-29T17:00:00</Finish>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>Uke 12. Datainnhenting og validering av rådata.</Notes>
+      <Start>2026-03-16T08:00:00</Start><Finish>2026-03-22T17:00:00</Finish>
       <PredecessorLink><PredecessorUID>12</PredecessorUID><Type>1</Type></PredecessorLink>
     </Task>
 
@@ -238,6 +238,18 @@
     </Task>
 
     <Task>
+      <UID>33</UID><ID>33</ID>
+      <Name>L8c – Eksplorativ dataanalyse (EDA): belastningsmonstre per skift og time, hendelsestypefordeling, Poisson-test på ankomstprosess</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT80H0M0S</Duration>
+      <Notes>Uke 12-13. Kritisk sti. EDA, Poisson-test, toppbelastning, samtidige hendelser.</Notes>
+      <Start>2026-03-16T08:00:00</Start><Finish>2026-03-29T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>15</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+    <Task>
       <UID>18</UID><ID>18</ID>
       <Name>L9 — Parameterestimering: ankomstrate (lambda) og haandteringstid (mu) per skiftperiode</Name>
       <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
@@ -245,9 +257,9 @@
       <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
       <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
       <Duration>PT40H0M0S</Duration>
-      <Notes>Uke 13. Avhenger av L8. Python: scipy, pandas.</Notes>
-      <Start>2026-03-23T08:00:00</Start><Finish>2026-03-29T17:00:00</Finish>
-      <PredecessorLink><PredecessorUID>15</PredecessorUID><Type>1</Type></PredecessorLink>
+      <Notes>Uke 13. Avhenger av L8c (EDA). Python: scipy, pandas.</Notes>
+      <Start>2026-03-30T08:00:00</Start><Finish>2026-04-05T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>33</PredecessorUID><Type>1</Type></PredecessorLink>
     </Task>
 
     <Task>
@@ -279,7 +291,7 @@
 
     <Task>
       <UID>21</UID><ID>21</ID>
-      <Name>L11 — Validering og sensitivitetsanalyse: Poisson-test, robusthet ved parameterendringer</Name>
+      <Name>L11 – Modellvalidering: kontrollere at Erlang-C-resultatene gjenspeiler målt belastning; sammenligning modell vs. observert kø/ventetid</Name>
       <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
       <Manual>0</Manual><PercentComplete>0</PercentComplete>
       <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
@@ -290,6 +302,18 @@
       <PredecessorLink><PredecessorUID>20</PredecessorUID><Type>1</Type></PredecessorLink>
     </Task>
 
+    <Task>
+      <UID>34</UID><ID>34</ID>
+      <Name>L11b – Sensitivitetsanalyse: effekt av endringer i ankomstrate, håndteringstid, bemanning og servicekrav; ring-flom som ekstremscenario</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>Uke 15. Ring-flom som ekstremscenario. Avhenger av L11.</Notes>
+      <Start>2026-04-13T08:00:00</Start><Finish>2026-04-19T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>21</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
     <Task>
       <UID>22</UID><ID>22</ID>
       <Name>L12 — Teorikapittel: koeteori, Erlang-C, kapasitetsstyring i beredskapsoperative systemer</Name>
@@ -314,7 +338,7 @@
       <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
       <Duration>PT0H0M0S</Duration>
       <Notes>Frist: 10. april 2026. Intern milepael.</Notes>
-      <PredecessorLink><PredecessorUID>21</PredecessorUID><Type>1</Type></PredecessorLink>
+      <PredecessorLink><PredecessorUID>34</PredecessorUID><Type>1</Type></PredecessorLink>
     </Task>
 
     <Task>
@@ -326,8 +350,8 @@
       <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
       <Duration>PT40H0M0S</Duration>
       <Notes>Uke 15. DSB-aarsrapporter. Standardisert mot per-innbygger og per-hendelse.</Notes>
-      <Start>2026-04-06T08:00:00</Start><Finish>2026-04-12T17:00:00</Finish>
-      <PredecessorLink><PredecessorUID>21</PredecessorUID><Type>1</Type></PredecessorLink>
+      <Start>2026-04-20T08:00:00</Start><Finish>2026-04-26T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>34</PredecessorUID><Type>1</Type></PredecessorLink>
     </Task>
 
     <Task>

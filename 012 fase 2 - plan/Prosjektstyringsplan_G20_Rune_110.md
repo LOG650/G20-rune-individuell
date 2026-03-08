@@ -248,11 +248,13 @@ Primæranalysen bruker telefonhenvendelser som Erlang-C-input (λ). De to øvrig
 | ID | Leveranse | Frist | Status |
 |---|---|---|---|
 | L7 | Rapportskjelett + introduksjon og problemstilling v1 | Uke 12 | Ikke startet |
-| L8 | Datainnhenting + EDA — LEO/BRIS, belastningsmonstre per skift, hendelsestypefordeling | Uke 12–13 | Ikke startet |
+| L8 | Datainnhenting — LEO/BRIS-data 2020–2025, DSB-årsrapporter, SSB-befolkningsdata; datavalidering og rådatastruktur | Uke 12 | Ikke startet |
 | L8b | ROS- og beredskapsanalyse-gjennomgang — dokumentanalyse av dimensjoneringsgrunnlag, sammenligning med LEO/BRIS-data, vurdering av forutsetninger | Uke 12–13 | Ikke startet |
+| L8c | Eksplorativ dataanalyse (EDA) — belastningsmonstre per skift og time, hendelsestypefordeling, telefonvolum, samtidige hendelser, toppbelastning; Poisson-test på ankomstprosess | Uke 12–13 | Ikke startet |
 | L9 | Parameterestimering — ankomstrate (λ) og håndteringstid (μ) per skiftperiode og hendelseskategori | Uke 13 | Ikke startet |
 | L10 | Erlang-C modellering — bemanningsanbefaling per skiftperiode med VL-korreksjon | Uke 14 | Ikke startet |
-| L11 | Validering og sensitivitetsanalyse — Poisson-test, robusthet ved parameterendringer | Uke 14–15 | Ikke startet |
+| L11 | Modellvalidering — kontrollere at Erlang-C-resultatene gjenspeiler målt belastning; sammenligning modell vs. observert kø/ventetid | Uke 14–15 | Ikke startet |
+| L11b | Sensitivitetsanalyse — effekt av endringer i ankomstrate, håndteringstid, bemanning og servicekrav; ring-flom som ekstremscenario | Uke 15 | Ikke startet |
 | L12 | Teorikapittel — køteori, Erlang-C, kapasitetsstyring i beredskapsoperative systemer | Uke 14–15 | Ikke startet |
 | L13 | Benchmarking — sammenligning modellanbefaling vs. faktisk bemanning, alle norske 110-sentraler | Uke 15 | Ikke startet |
 | L14 | Generaliseringsanalyse — prediksjon av bemanningsbehov fra strukturelle variabler (innb., areal, volum) | Uke 15–16 | Ikke startet |
@@ -319,9 +321,9 @@ L0 (Proposal) → [M1 godkjent]
               L5 (Plan) + L6 (Gantt) → [M2 godkjent]
                       |
               L7 (Rapportskjelett) ————————→ L12 (Teorikapittel)
-              L8 (EDA) → L9 (Param.) → L10 (Erlang-C modell)
-                                                  |
-                                       L11 (Validering) → L13 (Benchmarking)
+              L8 (Data) → L8c (EDA) → L9 (Param.) → L10 (Erlang-C modell)
+                                                             |
+                                    L11 (Validering) → L11b (Sensitivitet) → L13 (Benchmarking)
                                                                 |
                                                     L14 (Generaliseringsanalyse)
                                                                 |
@@ -330,7 +332,7 @@ L0 (Proposal) → [M1 godkjent]
                                                              L17 [M7] + L18
 ```
 
-**Kritisk sti:** L8 → L9 → L10 → L11 → L13 → L14 → L15 → L16 → L17
+**Kritisk sti:** L8 → L8c → L9 → L10 → L11 → L11b → L13 → L14 → L15 → L16 → L17
 
 ### 4.3 Gantt-plan (oversikt)
 
@@ -340,10 +342,12 @@ L0 (Proposal) → [M1 godkjent]
 | **L6 Gantt (MS Project)** | ███ | | | | | | | |
 | **[M2] Plan godkjent** | (M) | | | | | | | |
 | **L7 Rapportskjelett + intro v1** | | ███ | | | | | | |
-| **L8 Datainnhenting + EDA** | | ███ | ███ | | | | | |
+| **L8 Datainnhenting** | | ███ | | | | | | |
+| **L8c Eksplorativ dataanalyse (EDA)** | | ███ | ███ | | | | | |
 | **L9 Parameterestimering** | | | ███ | | | | | |
 | **L10 Erlang-C modellering** | | | | ███ | | | | |
-| **L11 Validering og sensitivitet** | | | | ███ | ███ | | | |
+| **L11 Modellvalidering** | | | | ███ | ███ | | | |
+| **L11b Sensitivitetsanalyse** | | | | | ███ | | | |
 | **L12 Teorikapittel** | | | | ███ | ███ | | | |
 | **L13 Benchmarking** | | | | | ███ | | | |
 | **L14 Generaliseringsanalyse** | | | | | ███ | | | |
@@ -359,7 +363,7 @@ L0 (Proposal) → [M1 godkjent]
 
 ### 4.4 Kritisk linje
 
-Kritisk sti: **Datainnhenting/EDA (L8) → Parameterestimering (L9) → Erlang-C modell (L10) → Validering (L11) → Benchmarking (L13) → Resultater (L15) → Sluttrapport (L17)**
+Kritisk sti: **Datainnhenting (L8) → EDA (L8c) → Parameterestimering (L9) → Erlang-C modell (L10) → Modellvalidering (L11) → Sensitivitetsanalyse (L11b) → Benchmarking (L13) → Resultater (L15) → Sluttrapport (L17)**
 
 Forsinkelse i L8 forplanter seg direkte til alle nedstrømsaktiviteter. Tiltak: prioriter datagjennomgang som første aktivitet i fase 3, senest uke 12.
 
@@ -464,4 +468,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-03-07 | Versjon 1.4 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-03-07 | Versjon 1.5 | Neste gjennomgang: ved Gantt-godkjenning*
