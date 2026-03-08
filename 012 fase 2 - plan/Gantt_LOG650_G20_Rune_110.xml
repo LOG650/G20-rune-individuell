@@ -1,0 +1,442 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Project xmlns="http://schemas.microsoft.com/project">
+  <SaveVersion>14</SaveVersion>
+  <Name>LOG650 G20 Rune 110-sentraler</Name>
+  <StartDate>2026-01-12T08:00:00</StartDate>
+  <FinishDate>2026-06-05T17:00:00</FinishDate>
+  <DefaultStartTime>08:00:00</DefaultStartTime>
+  <DefaultFinishTime>17:00:00</DefaultFinishTime>
+  <MinutesPerDay>480</MinutesPerDay>
+  <MinutesPerWeek>2400</MinutesPerWeek>
+  <DaysPerMonth>20</DaysPerMonth>
+  <CalendarUID>1</CalendarUID>
+  <NewTaskStartDate>0</NewTaskStartDate>
+  <ScheduleFromStart>1</ScheduleFromStart>
+  <CurrentDate>2026-03-08T08:00:00</CurrentDate>
+  <Calendars>
+    <Calendar>
+      <UID>1</UID>
+      <Name>Standard</Name>
+      <IsBaseCalendar>1</IsBaseCalendar>
+      <IsBaselineCalendar>0</IsBaselineCalendar>
+    </Calendar>
+  </Calendars>
+  <Tasks>
+
+    <!-- ROOT -->
+    <Task>
+      <UID>1</UID><ID>1</ID>
+      <Name>LOG650 G20 Rune — 110-sentraler: kapasitetsstyring og bemanningsdimensjonering</Name>
+      <OutlineLevel>0</OutlineLevel><Milestone>0</Milestone><Summary>1</Summary>
+      <Manual>0</Manual><PercentComplete>20</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration><Notes/>
+      <Start>2026-01-12T08:00:00</Start><Finish>2026-06-05T17:00:00</Finish>
+    </Task>
+
+    <!-- FASE 1 -->
+    <Task>
+      <UID>2</UID><ID>2</ID>
+      <Name>FASE 1 — Initiering</Name>
+      <OutlineLevel>1</OutlineLevel><Milestone>0</Milestone><Summary>1</Summary>
+      <Manual>0</Manual><PercentComplete>100</PercentComplete>
+      <ActualStart>2026-01-12T08:00:00</ActualStart>
+      <ActualFinish>2026-03-07T17:00:00</ActualFinish>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration><Notes/>
+    </Task>
+
+    <Task>
+      <UID>3</UID><ID>3</ID>
+      <Name>L0 — Proposal: problemstilling, metode, datagrunnlag, WBS</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>100</PercentComplete>
+      <ActualStart>2026-01-12T08:00:00</ActualStart>
+      <ActualFinish>2026-03-07T17:00:00</ActualFinish>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT80H0M0S</Duration>
+      <Notes>Innlevert 7. mars 2026. Avventer formell godkjenning.</Notes>
+    </Task>
+
+    <Task>
+      <UID>4</UID><ID>4</ID>
+      <Name>M1 — Godkjent proposal</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>1</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-03-15T08:00:00</ConstraintDate>
+      <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration>
+      <Notes>Frist: 15. mars 2026. Krav: C-niva.</Notes>
+      <PredecessorLink><PredecessorUID>3</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <!-- FASE 2 -->
+    <Task>
+      <UID>5</UID><ID>5</ID>
+      <Name>FASE 2 — Planlegging</Name>
+      <OutlineLevel>1</OutlineLevel><Milestone>0</Milestone><Summary>1</Summary>
+      <Manual>0</Manual><PercentComplete>80</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration><Notes/>
+      <PredecessorLink><PredecessorUID>3</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>6</UID><ID>6</ID>
+      <Name>L1 — Avklart problemstilling, mal og avgrensninger</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>100</PercentComplete>
+      <ActualStart>2026-03-07T08:00:00</ActualStart>
+      <ActualFinish>2026-03-07T17:00:00</ActualFinish>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT8H0M0S</Duration><Notes>Fullfort 7. mars 2026.</Notes>
+    </Task>
+
+    <Task>
+      <UID>7</UID><ID>7</ID>
+      <Name>L2 — Modellvalg: Erlang-C (M/M/c) identifisert og begrunnet</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>100</PercentComplete>
+      <ActualStart>2026-03-07T08:00:00</ActualStart>
+      <ActualFinish>2026-03-07T17:00:00</ActualFinish>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT8H0M0S</Duration><Notes>Fullfort 7. mars 2026.</Notes>
+    </Task>
+
+    <Task>
+      <UID>8</UID><ID>8</ID>
+      <Name>L3 — Litteratursok: planlegging (sokestrategi, databaser, avgrensning)</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>70</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT24H0M0S</Duration><Notes>Litteraturliste Excel opprettet 8. mars 2026.</Notes>
+      <Start>2026-03-07T08:00:00</Start><Finish>2026-03-10T17:00:00</Finish>
+    </Task>
+
+    <Task>
+      <UID>9</UID><ID>9</ID>
+      <Name>L4 — Dataplan: datakilder, variabler, kvalitet, tilgangsstatus</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>70</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT24H0M0S</Duration><Notes>Dataplan inkludert i prosjektstyringsplan seksjon 3.7.</Notes>
+      <Start>2026-03-07T08:00:00</Start><Finish>2026-03-10T17:00:00</Finish>
+    </Task>
+
+    <Task>
+      <UID>10</UID><ID>10</ID>
+      <Name>L5 — Godkjent prosjektstyringsplan (dette dokumentet)</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>90</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>Plan v1.4 — 467 linjer. Inkluderer WBS, risiko, dataplan, Gantt-oversikt.</Notes>
+      <Start>2026-03-07T08:00:00</Start><Finish>2026-03-14T17:00:00</Finish>
+    </Task>
+
+    <Task>
+      <UID>11</UID><ID>11</ID>
+      <Name>L6 — MS Project Gantt-diagram med referanseplan (baseline)</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>50</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>XML-fil generert 8. mars 2026. Importer i MS Project og sett baseline.</Notes>
+      <Start>2026-03-12T08:00:00</Start><Finish>2026-03-14T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>10</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>12</UID><ID>12</ID>
+      <Name>M2 — Godkjent prosjektplan + Gantt med referanseplan</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>1</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-03-15T08:00:00</ConstraintDate>
+      <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration>
+      <Notes>Frist: 15. mars 2026. Krav: C-niva.</Notes>
+      <PredecessorLink><PredecessorUID>11</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <!-- FASE 3 -->
+    <Task>
+      <UID>13</UID><ID>13</ID>
+      <Name>FASE 3 — Gjennomforing</Name>
+      <OutlineLevel>1</OutlineLevel><Milestone>0</Milestone><Summary>1</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration><Notes/>
+      <PredecessorLink><PredecessorUID>12</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>14</UID><ID>14</ID>
+      <Name>L7 — Rapportskjelett + introduksjon og problemstilling v1</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>Uke 12 (16.-22. mars). Mal fra HiMolde.</Notes>
+      <Start>2026-03-16T08:00:00</Start><Finish>2026-03-22T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>12</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>15</UID><ID>15</ID>
+      <Name>L8 — Datainnhenting + EDA: LEO/BRIS, belastningsmonstre per skift, hendelsestypefordeling</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT80H0M0S</Duration>
+      <Notes>Uke 12-13. Kritisk sti. Poisson-test, ankomstrate per skift, haandteringstid.</Notes>
+      <Start>2026-03-16T08:00:00</Start><Finish>2026-03-29T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>12</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>16</UID><ID>16</ID>
+      <Name>L8b — ROS/beredskapsanalyse-gjennomgang: dokumentanalyse av dimensjoneringsgrunnlag</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT80H0M0S</Duration>
+      <Notes>Uke 12-13. Kritisk gjennomgang: dimensjonerende hendelser, forutsetninger, sammenligning med LEO/BRIS.</Notes>
+      <Start>2026-03-16T08:00:00</Start><Finish>2026-03-29T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>12</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>17</UID><ID>17</ID>
+      <Name>M3 — Rapportskjelett + intro v1 klar</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>1</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-03-22T08:00:00</ConstraintDate>
+      <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration>
+      <Notes>Frist: 22. mars 2026. Intern milepael.</Notes>
+      <PredecessorLink><PredecessorUID>14</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>18</UID><ID>18</ID>
+      <Name>L9 — Parameterestimering: ankomstrate (lambda) og haandteringstid (mu) per skiftperiode</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>Uke 13. Avhenger av L8. Python: scipy, pandas.</Notes>
+      <Start>2026-03-23T08:00:00</Start><Finish>2026-03-29T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>15</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>19</UID><ID>19</ID>
+      <Name>M4 — Data innhentet, validert og EDA ferdig</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>1</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-03-29T08:00:00</ConstraintDate>
+      <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration>
+      <Notes>Frist: 29. mars 2026. Intern milepael.</Notes>
+      <PredecessorLink><PredecessorUID>18</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>20</UID><ID>20</ID>
+      <Name>L10 — Erlang-C modellering: bemanningsanbefaling per skiftperiode med VL-korreksjon</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>Uke 14. c_effektiv = c_total - 1. Python-implementasjon.</Notes>
+      <Start>2026-03-30T08:00:00</Start><Finish>2026-04-05T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>18</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>21</UID><ID>21</ID>
+      <Name>L11 — Validering og sensitivitetsanalyse: Poisson-test, robusthet ved parameterendringer</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT80H0M0S</Duration>
+      <Notes>Uke 14-15. Poisson goodness-of-fit, ring-flom som sensitivitetscase.</Notes>
+      <Start>2026-03-30T08:00:00</Start><Finish>2026-04-12T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>20</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>22</UID><ID>22</ID>
+      <Name>L12 — Teorikapittel: koeteori, Erlang-C, kapasitetsstyring i beredskapsoperative systemer</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT80H0M0S</Duration>
+      <Notes>Uke 14-15. Kan parallellkjores med L11. APA 7th norsk.</Notes>
+      <Start>2026-03-30T08:00:00</Start><Finish>2026-04-12T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>12</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>23</UID><ID>23</ID>
+      <Name>M5 — Erlang-C modell implementert og validert</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>1</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-04-10T08:00:00</ConstraintDate>
+      <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration>
+      <Notes>Frist: 10. april 2026. Intern milepael.</Notes>
+      <PredecessorLink><PredecessorUID>21</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>24</UID><ID>24</ID>
+      <Name>L13 — Benchmarking: modellanbefaling vs. faktisk bemanning, alle 12 norske 110-sentraler</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>Uke 15. DSB-aarsrapporter. Standardisert mot per-innbygger og per-hendelse.</Notes>
+      <Start>2026-04-06T08:00:00</Start><Finish>2026-04-12T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>21</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>25</UID><ID>25</ID>
+      <Name>L14 — Generaliseringsanalyse: hendelsesvolum, innbyggertall og areal som prediktorer</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT80H0M0S</Duration>
+      <Notes>Uke 15-16. Nasjonal dimensjoneringsmodell-ambisjon. Omfang tilpasses tilgjengelige data.</Notes>
+      <Start>2026-04-06T08:00:00</Start><Finish>2026-04-19T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>24</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>26</UID><ID>26</ID>
+      <Name>L15 — Resultater og diskusjon: rapportutkast inkl. operative saertrekk og modellbegrensninger</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>Uke 16. Beredskapsperspektiv: lav utnyttelse ≠ overbemanning.</Notes>
+      <Start>2026-04-13T08:00:00</Start><Finish>2026-04-19T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>25</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>27</UID><ID>27</ID>
+      <Name>L16 — Godkjent hoved-utkast + peer review (skriftlig tilbakemelding til annen gruppe)</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT80H0M0S</Duration>
+      <Notes>Uke 17-18 (20. april - 3. mai). Obligatorisk del av arbeidskrav M6.</Notes>
+      <Start>2026-04-20T08:00:00</Start><Finish>2026-05-03T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>26</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>28</UID><ID>28</ID>
+      <Name>M6 — Godkjent hoved-utkast + peer review gjennomfart</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>1</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-04-30T08:00:00</ConstraintDate>
+      <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration>
+      <Notes>Frist: slutten av april 2026. Krav: C-niva.</Notes>
+      <PredecessorLink><PredecessorUID>27</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <!-- FASE 4 -->
+    <Task>
+      <UID>29</UID><ID>29</ID>
+      <Name>FASE 4 — Avslutning</Name>
+      <OutlineLevel>1</OutlineLevel><Milestone>0</Milestone><Summary>1</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration><Notes/>
+      <PredecessorLink><PredecessorUID>28</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>30</UID><ID>30</ID>
+      <Name>L17 — Ferdigstilt rapport inkl. kode pa GitHub</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>0</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>0</ConstraintType><IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT160H0M0S</Duration>
+      <Notes>Uke 19-22 (4. - 31. mai). Sluttlakkering, vedlegg, kode-repo.</Notes>
+      <Start>2026-05-04T08:00:00</Start><Finish>2026-05-31T17:00:00</Finish>
+      <PredecessorLink><PredecessorUID>28</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>31</UID><ID>31</ID>
+      <Name>M7 — Ferdigstilt rapport innlevert</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>1</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-05-31T08:00:00</ConstraintDate>
+      <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration>
+      <Notes>Frist: 31. mai 2026. Krav: B-niva. Rapport + kode pa GitHub.</Notes>
+      <PredecessorLink><PredecessorUID>30</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+    <Task>
+      <UID>32</UID><ID>32</ID>
+      <Name>L18 — Muntlig eksamen</Name>
+      <OutlineLevel>2</OutlineLevel><Milestone>1</Milestone><Summary>0</Summary>
+      <Manual>0</Manual><PercentComplete>0</PercentComplete>
+      <ConstraintType>3</ConstraintType>
+      <ConstraintDate>2026-06-05T08:00:00</ConstraintDate>
+      <IgnoreResourceCalendar>0</IgnoreResourceCalendar>
+      <HideBar>0</HideBar><Rollup>0</Rollup><CalendarUID>-1</CalendarUID>
+      <Duration>PT0H0M0S</Duration>
+      <Notes>Tidlig juni 2026. Krav: B-niva.</Notes>
+      <PredecessorLink><PredecessorUID>31</PredecessorUID><Type>1</Type></PredecessorLink>
+    </Task>
+
+  </Tasks>
+  <Resources/>
+  <Assignments/>
+</Project>
