@@ -328,12 +328,6 @@ Innbyggertall per sentrals dekningsområde benyttes i generaliseringsanalysen (R
 
 Internt planleggingsdokument — tilgjengelig via forfatterens operative tilknytning til 110 Sør-Vest. Benyttes til kritisk dokumentanalyse (RQ4).
 
-### 5.4 KI-verktøy og Python-implementasjon
-
-Erlang-C-modellen er implementert i Python ved bruk av bibliotekene `scipy`, `numpy`, `pandas`, `matplotlib` og `seaborn`. Kildekode og Jupyter notebooks er versjonskontrollert på GitHub (se Vedlegg A).
-
-Generative KI-verktøy (Claude Sonnet 4.6, GitHub Copilot) er benyttet som støtteverktøy for koding, litteratursøk og rapportskriving. All bruk er dokumentert med dato, kontekst og hva som ble produsert (se Vedlegg D — Dokumentasjon av KI-bruk). Alle analytiske beslutninger, tolkninger og konklusjoner er forfatterens egne.
-
 ### 5.3 Empirisk validering av modellforutsetninger
 
 Før Erlang-C-modellen kan tas i bruk, valideres nøkkelforutsetningene empirisk mot dataene:
@@ -344,6 +338,13 @@ Før Erlang-C-modellen kan tas i bruk, valideres nøkkelforutsetningene empirisk
 | Stasjonær ankomstrate | Segmentér data per tidsperiode (skift/time/ukedag) | Periode-spesifikke λ-estimater |
 | Eksponentielle servicetider | Histogram og K-S-test av håndteringstider per kategori | Diskuteres i avsnitt 7.2 |
 | Uavhengige ankomster | Identifisér call surge-hendelser; ACF-analyse | Diskuteres i avsnitt 8 |
+
+
+### 5.4 KI-verktøy og Python-implementasjon
+
+Erlang-C-modellen er implementert i Python ved bruk av bibliotekene `scipy`, `numpy`, `pandas`, `matplotlib` og `seaborn`. Kildekode og Jupyter notebooks er versjonskontrollert på GitHub (se Vedlegg A).
+
+Generative KI-verktøy (Claude Sonnet 4.6, GitHub Copilot) er benyttet som støtteverktøy for koding, litteratursøk og rapportskriving. All bruk er dokumentert med dato, kontekst og hva som ble produsert (se Vedlegg D — Dokumentasjon av KI-bruk). Alle analytiske beslutninger, tolkninger og konklusjoner er forfatterens egne.
 
 ---
 
