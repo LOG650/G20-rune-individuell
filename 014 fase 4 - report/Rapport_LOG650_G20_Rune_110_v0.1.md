@@ -647,7 +647,17 @@ Jagerman, D. L. (1974). Some properties of the Erlang loss function. *The Bell S
 
 ### Vedlegg D — Dokumentasjon av KI-bruk
 
-> *[Jf. LOG650-krav om transparens i KI-bruk. Alle brukstilfeller av Claude og GitHub Copilot med dato, kontekst og hva som ble produsert.]*
+Fullstendig brukslogg, rapporttekst og administrativ erklæring finnes i det løpende dokumentet:
+
+**`KI_erklæring_LOG650_G20_Rune.md`** (prosjektrot)
+
+Dokumentet inneholder:
+- Del 1: «Bruk av kunstig intelligens» — rapporttekst (kopieres til rapport ved levering)
+- Del 2: Løpende brukslogg med dato, verktøy, formål og hva som ble tatt inn
+- Del 3: Administrativ erklæring (signeres ved innlevering)
+- Del 4: Personvern og konfidensialitet
+
+Det offisielle HiMolde-skjemaet «Erklæring om bruk av kunstig intelligens» (Word) leveres som separat administrativt vedlegg ved innlevering av sluttrapport.
 
 ### Vedlegg E — Sensitivitetsanalyse (utvidet)
 
