@@ -7,6 +7,14 @@
 **/*brannvesen*
 **/*fullrapport*
 
+# === 003 references — interne/sensitive dokumenter ===
+# Beredskapsanalyser og ROS-analyser er interne dokumenter
+# og skal ikke publiseres på GitHub
+003 references/Beredskapsanalyse*.pdf
+003 references/Risiko-og-sarbarhetsanalyse*.pdf
+003 references/*ROS*.pdf
+003 references/*beredskap*.pdf
+
 # Raw data files (large/sensitive)
 004 data/*.xlsx
 004 data/*.csv
