@@ -65,7 +65,7 @@ Sør-Øst, Oslo, Øst og Innlandet.
 | ROS- og beredskapsanalyse 110 Sør-Vest | TILGJENGELIG |
 | DSB årsrapporter (alle sentraler) | OFFENTLIG |
 | SSB befolkningsdata | OFFENTLIG |
-| LEO-data tvers-sentraler (post-2024) | AVKLARES uke 12 |
+| LEO-data tvers-sentraler (post-2024) | TILGJENGELIG |
 
 ## WBS — Fase 3 leveranser
 ```
@@ -104,7 +104,7 @@ L16 Hoved-utkast + peer review                   (Slutten av april)
 
 ## Risikofaktorer å huske
 - **R2/R3:** Poisson-antagelse må testes eksplisitt på LEO/BRIS-data
-- **R6:** Tvers-sentraldata (LEO post-2024) — avklar tilgang tidlig i fase 3
+- **R6:** ~~Tvers-sentraldata (LEO post-2024) — avklar tilgang~~ LUKKET: tilgang bekreftet 10. mars 2026
 - **R7:** Tidskollisjon med vaktarbeid ved 110 Sør-Vest — buffer i Gantt
 - **R9:** ROS-gjennomgang må formuleres som metodisk vurdering, ikke personkritikk
 

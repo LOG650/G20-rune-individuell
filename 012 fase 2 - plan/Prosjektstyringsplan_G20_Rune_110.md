@@ -7,8 +7,8 @@
 | **Gruppe** | G20 – Rune Individuell |
 | **Utarbeidet av** | Rune Grødem |
 | **Autorisert av** | Emneansvarlig, LOG650 |
-| **Dato** | 2026-03-07 |
-| **Versjon** | 1.3 |
+| **Dato** | 2026-03-11 |
+| **Versjon** | 1.7 |
 
 ---
 
@@ -103,7 +103,7 @@ Erlang-C (M/M/c) velges som utgangspunkt fordi modellen er veletablert for kapas
 ### 2.3 Forutsetninger
 
 - LEO/BRIS-data fra 110 Sør-Vest er tilgjengelige for perioden 2020–2025
-- Data fra høsten 2024 er sammenlignbare på tvers av sentraler (felles LEO)
+- Data fra høsten 2024 er sammenlignbare på tvers av sentraler (felles LEO) — tilgang til LEO-data alle sentraler bekreftet 10. mars 2026
 - DSBs årsrapporter for 2025 inneholder tilstrekkelig informasjon om bemanning og anropsvolum
 - SSB-befolkningsdata er offentlig tilgjengelig per dekningsområde
 - Ekstraordinaere hendelser holdes utenfor modellens primære gyldighetsområde
@@ -236,10 +236,10 @@ Primæranalysen bruker telefonhenvendelser som Erlang-C-input (λ). De to øvrig
 |---|---|---|---|
 | L1 | Avklart problemstilling + mål + avgrensninger | 7. mars | Fullført |
 | L2 | Modellvalg — Erlang-C (M/M/c) identifisert og begrunnet | 7. mars | Fullført |
-| L3 | Litterätursøk — planlegging (søkeord, databaser, avgrensning) | 10. mars | På gang |
-| L4 | Dataplan — datakilder, variabler, kvalitet, tilgangsstatus | 10. mars | På gang |
-| L5 | Godkjent prosjektstyringsplan (dette dokumentet) | **15. mars** | På gang |
-| L6 | MS Project Gantt-diagram med referanseplan (baseline) | **15. mars** | Ikke startet |
+| L3 | Litterätursøk — planlegging (søkeord, databaser, avgrensning) | 10. mars | Fullført |
+| L4 | Dataplan — datakilder, variabler, kvalitet, tilgangsstatus | 10. mars | Fullført |
+| L5 | Godkjent prosjektstyringsplan (dette dokumentet) | **15. mars** | Innlevert 11. mars — avventer godkjenning |
+| L6 | MS Project Gantt-diagram med referanseplan (baseline) | **15. mars** | Fullført |
 
 **Fase 3 — Gjennomføring (17. mars – slutten av april 2026)**
 
@@ -277,7 +277,7 @@ Alle rådata lagres uendret i `004 data/`. All behandling skjer på kopier med d
 | Datakilde | Innhold | Tilgjengelighet | Primært bruk |
 |---|---|---|---|
 | **LEO/BRIS-data 2020–2025 (110 Sør-Vest)** | Hendelsestidsstempler, oppdragstype, varighet, ressursutsendelse | Tilgjengelig | EDA: ankomstrater, skiftbelastning, hendelsestypefordeling; parameterestimering |
-| **LEO-data fra høst 2024 (alle sentraler)** | Sammenlignbare hendelsesdata — felles LEO-format | Avklares | Benchmarking og generaliseringsanalyse |
+| **LEO-data fra høst 2024 (alle sentraler)** | Sammenlignbare hendelsesdata — felles LEO-format | Tilgjengelig | Benchmarking og generaliseringsanalyse |
 | **DSB årsrapporter 2025** | Bemanning per vakttype, antall operatørplasser, totalt anropsvolum | Offentlig | Benchmarking: modellanbefaling vs. faktisk bemanning |
 | **SSB befolkningsdata** | Innbyggertall per sentrals dekningsområde | Offentlig | Predikatoranalyse |
 | **ROS- og beredskapsanalyse (110 Sør-Vest)** | Dimensjonerende hendelser, forutsetninger om systemer/rutiner, bemanningsbegrunnelse | Tilgjengelig — forfatteren har tilgang til dokumentene | Kritisk dokumentanalyse: sammenligning med empirisk belastning og kvalitetsvurdering av dimensjoneringsgrunnlag |
@@ -295,6 +295,50 @@ Alle rådata lagres uendret i `004 data/`. All behandling skjer på kopier med d
 
 ---
 
+### 3.8 Litteratursøksplan (L3)
+
+Litteratursøket dekker tre tematiske kluster som til sammen danner det faglige grunnlaget for prosjektet: (1) køteori og kapasitetsmodellering, (2) nødmeldetjenester og operativ beredskapsstruktur, og (3) dimensjonerings- og bemanningsstandarder i offentlig sektor.
+
+**Databaser og kilder**
+
+| Database / kilde | Type | Bruksområde |
+|---|---|---|
+| Google Scholar | Akademisk | Bred søkning — køteori, Erlang-C, call center, PSAP |
+| Scopus / Web of Science (via ORIA HiMolde) | Akademisk, fagfellevurdert | Primærlitteratur — køteori og kapasitetsstyring |
+| ORIA (Nasjonalt bibliotekssøk) | Akademisk + offentlig | Norsk- og engelskspråklig litteratur, bøker |
+| DSB.no | Offisielle rapporter | Årsrapporter, dimensjoneringsforskrift, veiledere |
+| Lovdata | Regelverk | FOR-2023-01-06-23 (dimensjoneringsforskriften), brannvernloven |
+| SSB.no | Statistikk | Befolkningsdata per dekningsområde |
+
+**Søkeord per tematisk kluster**
+
+*Kluster 1 — Køteori og kapasitetsmodellering:*
+`"Erlang C"`, `"Erlang-C"`, `"M/M/c queue"`, `"multi-server queue"`, `"call center staffing"`, `"telephone call center capacity"`, `"workforce management"`, `"service level"`, `"queuing theory" AND "emergency"`
+
+*Kluster 2 — Nødmeldetjenester og PSAP:*
+`"emergency dispatch"`, `"PSAP"`, `"public safety answering point"`, `"fire dispatch"`, `"emergency call center"`, `"nødsentral"`, `"110-sentral"`, `"brann og redning"`
+
+*Kluster 3 — Dimensjonering og bemanningsstandard:*
+`"staffing model"`, `"capacity planning"`, `"emergency services staffing"`, `"dimensjonering"`, `"bemanning beredskap"`, `"bemanningsnorm"`
+
+**Inklusjonskriterier**
+- Fagfellevurderte artikler om køteori, Erlang-C og kapasitetsanalyse i flerserver-systemer
+- Offentlige rapporter og veiledere fra DSB, Statsforvalteren og tilsvarende myndigheter
+- Norsk regelverk med direkte relevans for 110-sentraler og brannvesen
+- Periode: primært 2000–2026; eldre kilder aksepteres ved metodisk eller historisk relevans (f.eks. Erlang 1917, Gans et al. 2003)
+- Språk: norsk og engelsk
+
+**Eksklusjonskriterier**
+- Rene matematiske avledninger uten anvendelseskontekst
+- Studier på ikke-analoge køsystemer (produksjon, transport) uten overføringsverdi til flerserver-nødmeldingssystemer
+- Grålitteratur uten klar faglig forankring
+
+**Håndtering av funn**
+
+Alle identifiserte og inkluderte kilder registreres løpende i `012 fase 2 - plan/Litteraturliste_LOG650_G20_Rune.xlsx` med felt for kilde-ID, forfatter, år, tittel, database, inklusjonstatus og kommentar. Referanser formateres etter APA 7th norsk.
+
+---
+
 ## 4. Fremdrift
 
 ### 4.1 Milepæler
@@ -302,9 +346,9 @@ Alle rådata lagres uendret i `004 data/`. All behandling skjer på kopier med d
 | ID | Milepæl | Frist | Godkjenningskrav | Status |
 |---|---|---|---|---|
 | M1 | Godkjent proposal | 15. mars 2026 | C-nivå | Innlevert 7. mars — avventer godkjenning |
-| M2 | Godkjent prosjektplan + Gantt med referanseplan | **15. mars 2026** | C-nivå | På gang |
-| M3 | Rapportskjelett + introduksjon v1 klar | 22. mars 2026 | Intern | Ikke startet |
-| M4 | Data innhentet, validert og EDA ferdig | 29. mars 2026 | Intern | Ikke startet |
+| M2 | Godkjent prosjektplan + Gantt med referanseplan | **15. mars 2026** | C-nivå | Innlevert 11. mars — avventer godkjenning |
+| M3 | Rapportskjelett + introduksjon v1 klar | 22. mars 2026 | Intern | Påbegynt |
+| M4 | Data innhentet, validert og EDA ferdig | 29. mars 2026 | Intern | Påbegynt |
 | M5 | Erlang-C modell implementert og validert | 10. april 2026 | Intern | Ikke startet |
 | M6 | Godkjent hoved-utkast + peer review gjennomført | Slutten av april 2026 | C-nivå | Ikke startet |
 | M7 | Ferdigstilt rapport innlevert + muntlig eksamen | Rapport: 31. mai / Muntlig: tidlig juni 2026 | **B-krav** | Ikke startet |
@@ -384,7 +428,7 @@ Risikoregisteret gjennomgås ukentlig i forbindelse med statusnotatet. Rune Grø
 | R3 | Ring-flom (call surge) forstyrrer Poisson-antagelse | Middels | Middels | Identifiser og analyser call-surge-hendelser separat i EDA | Filtrer fra primæranalyse; behandle som eget underkapittel |
 | R4 | VL-antagelse holder ikke i praksis | Middels | Lav | Valider via intervjuer med operativt personell | Variabel VL-korreksjonsfaktor; sensitivitetsanalyse på c_effektiv |
 | R5 | Benchmarking vanskelig pga. heterogen bemanning og hendelsesvolum | Høy | Middels | Standardiser mot per-innbygger- og per-hendelse-nøkkeltall | Begrens til sammenlignbare størrelsesklasser |
-| R6 | Tilgang til tvers-sentraldata (LEO post-2024) avklares ikke | Middels | Middels | Avklar datatilgang tidlig i fase 3 (uke 12) | Fall tilbake på DSB-årsrapporter; omfang reduseres og dokumenteres |
+| R6 | ~~Tilgang til tvers-sentraldata (LEO post-2024) avklares ikke~~ — **LUKKET 10. mars 2026: tilgang bekreftet** | — | — | — | — |
 | R7 | Tidskollisjon med vaktarbeid ved 110 Sør-Vest | Høy | Middels | Planlegg skriveokter rundt vaktplan; buffer i Gantt | Komprimere generaliseringsanalysen; prioritere kjernemodell |
 | R8 | Prokrastinering — skippertak mot innleveringsfrist | Middels | Høy | Ukentlige statusnotater og LLI-logg; tidlige interne delleveransfrister | Akseptere enklere analyse fremfor å kompromittere rapportkvalitet |
 | R9 | Sensitive funn fra ROS-gjennomgang — konklusjoner om svak analysekvalitet kan oppfattes som kritikk av kollegaer eller organisasjon | Middels | Middels | Formuler funn som metodisk vurdering, ikke personkritikk; forankre i faglige standarder | Begrens deling av utkast med berørte parter under arbeidet; anonymiser der relevant |
@@ -468,4 +512,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-03-07 | Versjon 1.5 | Neste gjennomgang: ved Gantt-godkjenning*
+*Sist oppdatert: 2026-03-11 | Versjon 1.7 | Neste gjennomgang: ved M2-godkjenning*

@@ -114,7 +114,7 @@ Alle vesentlige faglige beslutninger — problemstilling, modellvalg, analytisk 
 **Dato:** [SIGNERES VED INNLEVERING]
 **Underskrift:** ___________________________
 
-> *Det offisielle signerte skjemaet «Erklæring om bruk av kunstig intelligens» (Word-dokument fra HiMolde) leveres som separat administrativt vedlegg ved innlevering av sluttrapport.*
+> *Det offisielle skjemaet ligger i `000 templates/declaration-of-use-of-artificial-intelligence_-final.docx`. Fylles ut og signeres, og leveres som separat administrativt vedlegg ved innlevering av sluttrapport.*
 
 ---
 
