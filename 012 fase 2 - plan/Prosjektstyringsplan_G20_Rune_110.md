@@ -8,7 +8,7 @@
 | **Utarbeidet av** | Rune Grødem |
 | **Autorisert av** | Emneansvarlig, LOG650 |
 | **Dato** | 2026-03-11 |
-| **Versjon** | 1.7 |
+| **Versjon** | 1.8 |
 
 ---
 
@@ -172,7 +172,7 @@ Prosjektet gjennomføres i LOG650 — Logistikk og kunstig intelligens. KI benyt
 | **Claude (Anthropic)** | Litterätursøk, strukturering av analyse, skrivestotte, kodereview — all bruk dokumenteres i eget vedlegg |
 | **GitHub Copilot / Claude Code** | Støtte ved Python-implementasjon — all generert kode valideres manuelt og dokumenteres |
 
-Erlang-C er en analytisk formel, ikke en ML-modell. KI i dette prosjektet handler primært om bruk av KI-verktøy som støtte i en kvantitativ analyseprosess — i tråd med emnets tilnærming til KI som beslutningsstøtteverkøy.
+Erlang-C er en analytisk formel, ikke en ML-modell. KI i dette prosjektet handler primært om bruk av KI-verktøy som støtte i en kvantitativ analyseprosess — i tråd med emnets tilnærming til KI som beslutningsstøtteverkøy. Alle faglige vurderinger, tolkninger og konklusjoner gjøres av forfatter.
 
 ### 3.4 Løsning og leveranser
 
@@ -184,7 +184,7 @@ Løsningen består av:
   - Ankomstrate (λ) estimert per skiftperiode fra LEO/BRIS-data
   - Gjennomsnittlig håndteringstid (μ⁻¹) estimert per hendelseskategori
   - Antall servere (c) med VL-korreksjon (`c_effektiv = c_total − 1`)
-  - Beregnet servicegrad sammenlignet mot de facto grenser (10. anrop → Agder, 60 sek uten svar)
+  - Beregnet servicegrad — definert som P(W ≤ t), der W er ventetid og t er definert responstidskrav — sammenlignet mot de facto grenser (10. anrop → Agder, 60 sek uten svar)
   - Anbefalt bemanning per skiftperiode for definert servicegrad
 - **ROS- og beredskapsanalyse-gjennomgang** — kritisk vurdering av eksisterende dimensjoneringsgrunnlag ved 110 Sør-Vest:
   - Identifikasjon av dimensjonerende hendelser som analyäsen legger til grunn
@@ -226,7 +226,7 @@ Primæranalysen bruker telefonhenvendelser som Erlang-C-input (λ). De to øvrig
 
 | ID | Leveranse | Frist | Status |
 |---|---|---|---|
-| L0 | Godkjent proposal | 7. mars 2026 | Innlevert — avventer formell godkjenning |
+| L0 | Proposal levert | 7. mars 2026 | Fullført |
 
 **Fase 2 — Planlegging (frist 15. mars 2026)**
 
@@ -378,6 +378,8 @@ L0 (Proposal) → [M1 godkjent]
 
 **Kritisk sti:** L8 → L8c → L9 → L10 → L11 → L11b → L13 → L14 → L15 → L16 → L17
 
+**L12 (Teorikapittel)** utvikles parallelt med analysearbeidet og ligger ikke på kritisk sti. Teorikapittelet kan skrives uavhengig av dataresultater og pågår fra uke 14.
+
 ### 4.3 Gantt-plan (oversikt)
 
 | Aktivitet | Uke 11 (7–15.3) | Uke 12 (16–22.3) | Uke 13 (23–29.3) | Uke 14 (30.3–5.4) | Uke 15 (6–12.4) | Uke 16 (13–19.4) | Uke 17–18 (20.4–3.5) | Uke 19–22 (4–31.5) |
@@ -512,4 +514,4 @@ Mot slutten av fase 3 gjennomføres gjensidig **skriftlig** fagfellevurdering me
 
 ---
 
-*Sist oppdatert: 2026-03-11 | Versjon 1.7 | Neste gjennomgang: ved M2-godkjenning*
+*Sist oppdatert: 2026-03-11 | Versjon 1.8 | Neste gjennomgang: ved M2-godkjenning*
