@@ -12,6 +12,10 @@
 
 ---
 
+> **Bruk av kunstig intelligens:** KI-verktøy er benyttet i utarbeidelsen av dette dokumentet i tråd med HiMolde sine retningslinjer for bruk av KI på hjemmeeksamen. Fullstendig brukslogg og erklæring finnes i [`KI_erklæring_LOG650_G20_Rune.md`](../KI_erklæring_LOG650_G20_Rune.md) (Vedlegg). Se også §3.3 for oversikt over planlagt KI-bruk i prosjektgjennomføringen.
+
+---
+
 ## Innhold
 
 1. [Sammendrag](#1-sammendrag)

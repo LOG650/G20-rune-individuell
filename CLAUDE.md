@@ -4,7 +4,7 @@
 - **Student:** Rune Grødem, G20 Individuell
 - **Emne:** LOG650 Logistikk og kunstig intelligens, Høgskolen i Molde, Vår 2026
 - **Arbeidsform:** Individuelt
-- **Fase nå:** Fase 2 – Planlegging (frist 15. mars 2026)
+- **Fase nå:** Fase 3 – Gjennomføring (starter uke 12, 17. mars 2026)
 - **Frist hoved-utkast:** Slutten av april 2026
 - **Frist endelig rapport:** 31. mai 2026
 - **Muntlig eksamen:** Tidlig juni 2026
@@ -86,14 +86,20 @@ L16 Hoved-utkast + peer review                   (Slutten av april)
 | Fil | Beskrivelse |
 |---|---|
 | `011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md` | Godkjent proposal |
-| `012 fase 2 - plan/Prosjektstyringsplan_G20_Rune_110.md` | Plan v1.4, 467 linjer |
-| `012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.xlsx` | 28 oppgaver, MS Project import |
+| `011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md` | Godkjent proposal v3 |
+| `012 fase 2 - plan/Prosjektstyringsplan_G20_Rune_110.md` | Plan v1.8, innlevert 11. mars |
+| `012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.mpp` | Gantt med baseline (MS Project) |
+| `012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.xml` | Gantt XML-eksport (AI-lesbar) |
 | `012 fase 2 - plan/Litteraturliste_LOG650_G20_Rune.xlsx` | 26 kilder, verifisert og fargekodet |
+| `014 fase 4 - report/Rapport_LOG650_G20_Rune_110_v0.1.md` | Rapportskjelett v0.1 (markdown) |
+| `KI_erklæring_LOG650_G20_Rune.md` | Løpende KI-brukslogg og erklæring |
 | `004 data/` | Rådata (gitignored) — LEO/BRIS legges her i fase 3 |
 | `OLD_forkastet/` | Gammelt prosjekt (røykdykkerbekledning/METRIC) — ikke bruk |
 
 ## Tekniske retningslinjer
-- **Filskriving i `012 fase 2 - plan/`:** Edit/Write-tool feiler med EEXIST —
+- **Rapport skrives i Markdown, IKKE Word** — foreleseren var eksplisitt på dette (9. mars 2026).
+  Én fil per kapittel, lenket inn i hoved-`rapport.md`. Se `014 fase 4 - report/`.
+- **Filskriving:** Edit/Write-tool kan feile med EEXIST på noen mapper —
   bruk Python-skript i `C:\Users\runeg\AppData\Local\Temp\` og kjør med `py "C:/path/script.py"`
 - **Encoding:** Alltid `encoding='utf-8'` i Python-filoperasjoner
 - **Bash Unicode:** Unngå heredoc med Unicode — bruk .py-skriptfiler
@@ -101,6 +107,7 @@ L16 Hoved-utkast + peer review                   (Slutten av april)
 - **Versjonskontroll:** Git (GitHub: LOG650/G20-rune-individuell)
 - **Referansestil:** APA 7th norsk (se `000 templates/Referansestiler/`)
 - **Rådata:** Lagres i `004 data/` — aldri modifisert direkte; all behandling i Jupyter notebooks
+- **KI-brukslogg:** Oppdater `KI_erklæring_LOG650_G20_Rune.md` etter hver session
 
 ## Risikofaktorer å huske
 - **R2/R3:** Poisson-antagelse må testes eksplisitt på LEO/BRIS-data
