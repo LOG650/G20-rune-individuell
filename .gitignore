@@ -1,43 +1,28 @@
-# === Sensitive data - ROGBR and BRIS ===
-# Never commit raw data from brannvesenet
-**/rogbr*
-**/ROGBR*
-**/bris*
-**/BRIS*
-**/*brannvesen*
-**/*fullrapport*
+# ============================================================
+# 004 data — gitignored i sin helhet, unntatt README
+# ============================================================
+004 data/*
+!004 data/README.md
 
-# === 003 references — interne/sensitive dokumenter ===
-# Beredskapsanalyser og ROS-analyser er interne dokumenter
-# og skal ikke publiseres på GitHub
-003 references/Beredskapsanalyse*.pdf
-003 references/Risiko-og-sarbarhetsanalyse*.pdf
-003 references/*ROS*.pdf
-003 references/*beredskap*.pdf
+# ============================================================
+# OLD_forkastet — forkastet prosjekt, data skal ikke pushes
+# ============================================================
+OLD_forkastet/004 data/
 
-# Raw data files (large/sensitive)
-004 data/*.xlsx
-004 data/*.csv
-004 data/*.json
-004 data/*.pdf
-004 data/*.docx
-004 data/**/*.xlsx
-004 data/**/*.csv
-004 data/**/*.json
-004 data/**/*.pdf
-004 data/**/*.docx
-
-# === General ===
-# OS files
+# ============================================================
+# Generelle OS- og editor-filer
+# ============================================================
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Office temp files
+# Office temp-filer
 ~$*
 *.tmp
 
+# ============================================================
 # Python
+# ============================================================
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
