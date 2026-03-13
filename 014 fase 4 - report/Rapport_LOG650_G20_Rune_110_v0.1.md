@@ -559,6 +559,8 @@ Kildekode er tilgjengelig på GitHub: [LENKE]
 **RQ5 — Generaliserbarhet:**
 > *[Kan modellen anbefales som nasjonal dimensjoneringsstandard? Hvilke forutsetninger må oppfylles?]*
 
+> *[NOTE TIL FORFATTER — fange opp ved skriving: Diskutér asymmetrien mellom å produsere et kvantitativt grunnlag og å få det implementert. Analogien til dimensjoneringsforskriften er sentral her: for brannvesen sier forskriften at dersom innbyggertallet er under en terskel, skal det være deltid med vakt. Selv om en beredskapsanalyse peker på behov for kasernert styrke, er dette svært vanskelig å få gjennomslag for hos kommunene — kostnadene er store og forskriften gir rom for å si nei. Tilsvarende dynamikk gjelder for 110: en Erlang-C-modell som viser at c* > c_faktisk (dvs. underbemanning) er et faglig solid funn, men kommunene som finansierer sentralene kan avvise det med henvisning til egen ROS-analyse eller budsjettrammer. En nasjonal standard som likestiller den kvantitative dimensjoneringsmodellen med dimensjoneringsforskriftens rolle for brannvesen, ville endre denne maktsituasjonen — men å anbefale en slik standard overfor DSB er en politisk, ikke bare faglig, handling. Diskutér om prosjektets funn bidrar til å bygge en slik evidensbase, og hva som eventuelt gjenstår for at den skal kunne brukes normativt.]*
+
 ### 8.2 Metodediskusjon
 
 #### 8.2.1 Erlang-C — forutsetninger og brudd
@@ -580,6 +582,8 @@ Kildekode er tilgjengelig på GitHub: [LENKE]
 ### 8.4 Implikasjoner for praksis
 
 > *[Hva bør 110 Sør-Vest, DSB og norske 110-sentraler gjøre basert på disse funnene? Er empirisk kvantitativ dimensjonering bedre enn ROS-basert praksis?]*
+
+> *[NOTE TIL FORFATTER — fange opp ved skriving: Diskutér gapet mellom å produsere kvantitativ kunnskap og å omsette den til endring. Pek på følgende spenning: En modell som viser underbemanning (c* > c_faktisk) stiller krav om økte kostnader overfor kommunene — det er en hard selgeroppgave. Modellen er ikke nøytral: den kan brukes til å argumentere for mer bemanning, men den kan like gjerne brukes av kommuner til å begrunne kutt dersom modellen viser c* < c_faktisk. Strukturen minner om utfordringen brannvesenet møter med dimensjoneringsforskriften: forskriften setter en terskel (innbyggertall → bemanningstype), og selv om en faglig analyse viser at kasernert styrke er nødvendig, er det ekstremt vanskelig å gjennomføre fordi deltid med vakt er forskriftens standard og kostnadene ved avvik er enorme. For 110-sentraler mangler en tilsvarende regulatorisk standard helt — noe som paradoksalt gir kommunene mer handlingsrom til å ignorere faglige anbefalinger. Drøft hvilken posisjon DSB bør ha i dette: bør en kvantitativ dimensjoneringsmodell som denne forankres som nasjonalt normativt instrument på linje med dimensjoneringsforskriften? Hva er forutsetningene? Hva er risikoen?]*
 
 ---
 
