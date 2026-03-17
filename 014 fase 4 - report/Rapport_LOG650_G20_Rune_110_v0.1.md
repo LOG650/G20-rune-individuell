@@ -253,6 +253,12 @@ Basert på operativ arbeidsmetodikk ved 110 Sør-Vest skilles mellom fire hendel
 
 > *[Typologien valideres mot data i avsnitt 5.2 — beskriv eventuelt justeringer her.]*
 
+**Note — servicetesting og sentral-spesifikk organisering:**
+
+Innledende kontakt med Midt-Norge 110 (15. mars 2026) avdekker at sentrale har tre dedikerte servicemedarbeidere som håndterer ABA-servicetesting. Disse registreres ikke i LEO og fremkommer dermed ikke i BRIS-eksporten. I normalperioder (hverdager) belaster dermed T2-servicetesting ikke 110-operatørenes kapasitet ved denne sentralen. I helger, ved sykdom og overbelastning overtas funksjonen av ordinære 110-operatører.
+
+Dette innebærer at «Service»-kategorien i BRIS-data ikke er direkte sammenlignbar på tvers av sentraler uten kjennskap til lokal organisering. Organiseringen ved 110 Sør-Vest, og øvrige sentraler, verifiseres gjennom planlagte intervjuer (avsnitt 5.2.3). Se møtenotat: `002 meetings/04 20260315 Midt-Norge 110 - telefonsamtale.md`
+
 #### 4.2.3 Operative særtrekk og kapasitetsgrenser
 
 | Særtrekk | Beskrivelse | Implikasjon for analyse |
@@ -304,7 +310,20 @@ Nøkkelvariabler benyttet i analysen:
 
 **Datakvalitetsvurdering:**
 
-> *[SKRIVES ETTER EDA — manglende verdier, feilkoding, dekningsgrad per periode. Dokumentér transformasjoner her.]*
+Uttrekket dekker perioden 01.01.2025–31.12.2025 med 61 964 hendelsesrader og 44 kolonner. Datofeltet (`Dato anrop`) er fullstendig for hele perioden og er hovedgrunnlaget for λ-estimering.
+
+Følgende strukturelle begrensninger er identifisert og må hensyntas i analysen:
+
+| Felt | Dekningsgrad | Konsekvens |
+|---|---|---|
+| `Operatør-ID` | 0 % (100 % null) | Kan ikke spores i BRIS-eksport — se note nedenfor |
+| `Innsatsvarighet` | 9 % (5 771 rader) | Kun tilgjengelig for hendelser med utrykking (T2/T3) |
+| `Alarmbehandlingstid` | 12 % (7 478 rader) | Kun tilgjengelig for utrykningshendelser |
+| `Ressurs tildelt` / `Siste ressurs ledig` | ~12 % | Grunnlag for μ-estimering for T3 |
+
+**Note — Operatør-ID:** Operatørdata registreres ikke i BRIS på en måte som kan eksporteres. Dette er en strukturell begrensning i systemet, bekreftet av DSB ved direkte henvendelse (mars 2026). Konsekvensen er at serverutnyttelsesgraden (ρ) ikke kan observeres direkte, men estimeres indirekte via λ og μ, og valideres mot observert overløp til nabosentralen (Agder).
+
+**Note — Håndteringstid for T1-anrop:** De 54 526 hendelsene klassifisert som «110-oppdrag uten involvering av brannvesen» (88 % av alle rader) har ingen tidsmåling for selve samtalehåndteringen i BRIS. Disse representerer rent telefonbaserte oppdrag (T1/T4) der ingen ressurs utkalles. Gjennomsnittlig samtaletid for T1 kan følgelig ikke estimeres fra datakilden alene, og hentes fra strukturerte intervjuer med operativt personell (avsnitt 5.2.3).
 
 #### 5.2.2 DSB årsrapporter 2025
 
@@ -314,11 +333,23 @@ Nøkkelvariabler benyttet i analysen:
 
 #### 5.2.3 Strukturerte intervjuer
 
-**Formål:** Estimere og validere håndteringstid per hendelseskategori; validere VL-forutsetningen
-**Utvalg:** [ANTALL] intervjuobjekter ved 110 Sør-Vest — [ROLLE/FUNKSJON]
+**Formål:** Estimere og validere håndteringstid per hendelseskategori; validere VL-forutsetningen; kartlegge sentral-spesifikk organisering av servicetesting
+**Utvalg:** [ANTALL] intervjuobjekter — primært 110 Sør-Vest, supplert med øvrige sentraler
 **Gjennomføring:** [DATO/PERIODE], strukturert intervjuguide (se Vedlegg X)
 
 > *[Oppgi: Varighet, format (telefon/oppmøte/Teams), transkripsjonsmetode, anonymisering.]*
+
+**Gjennomførte kontakter (foreløpig):**
+
+| Dato | Sentral | Form | Tema | Notat |
+|---|---|---|---|---|
+| 15.03.2026 | Midt-Norge 110 | Telefon (uformell) | Bemanning, servicetesting-organisering | `002 meetings/04 20260315...` |
+
+**Nøkkeltema som må verifiseres per sentral:**
+- Bekrefter VL-rollen slik den er antatt (VL besvarer normalt ikke nødanrop)?
+- Håndteres servicetesting av dedikerte medarbeidere eller av 110-operatørene?
+- Estimert gjennomsnittlig samtaletid for T1-anrop (uten utrykking)?
+- Finnes interne data for ventetid / antall viderekoblede anrop til nabosentral?
 
 #### 5.2.4 SSB befolkningsdata
 
