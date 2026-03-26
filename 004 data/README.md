@@ -8,23 +8,46 @@
 
 ## Innhold
 
-### Kildeanalyser og interne dokumenter
+### Kildeanalyser og interne dokumenter (110 Sør-Vest — primærcase)
 
 | Fil | Kilde | Innhold | Sensitivitet |
 |---|---|---|---|
-| `Beredskapsanalyse-110-Vest-30-04-2022.pdf` | 110 Vest | Beredskapsanalyse inkl. dimensjoneringsgrunnlag | Intern |
-| `Beredskapsanalyse-Bergen-brannvesen-2023.pdf` | Bergen brannvesen | Beredskapsanalyse | Intern |
-| `Risiko-og-sarbarhetsanalyse-110-Vest.pdf` | 110 Vest | ROS-analyse med kapasitetsvurderinger | Intern |
-| `Risiko-og-sarbarhetsanalyse-Bergen-brannvesen-2023-.pdf` | Bergen brannvesen | ROS-analyse | Intern |
+| `Beredskapsanalyse_110 Sør-Vest_J03.pdf` | 110 Sør-Vest | Beredskapsanalyse inkl. dimensjoneringsgrunnlag — **primærdokument for RQ4** | Intern |
+| `Overordnet risiko- og sårbarhetsanalyse 110 Sør-Vest_J05.pdf` | 110 Sør-Vest | Overordnet ROS-analyse — **primærdokument for RQ4** | Intern |
+| `Veiledning til forskrift.pdf` | DSB / Justisdept. | Veiledning til brann- og redningsvesenforskriften — regulatorisk kontekst | Offentlig |
 
-### Rådata (legges her i fase 3)
+### Kildeanalyser — sammenligningsgrunnlag
 
-| Forventet fil | Kilde | Innhold |
+| Fil | Kilde | Innhold | Sensitivitet |
+|---|---|---|---|
+| `Beredskapsanalyse-110-Vest-30-04-2022.pdf` | 110 Vest | Beredskapsanalyse — sammenligningsgrunnlag | Intern |
+| `Risiko-og-sarbarhetsanalyse-110-Vest.pdf` | 110 Vest | ROS-analyse — sammenligningsgrunnlag | Intern |
+
+### Rådata — BRIS hendelsesdata
+
+| Fil | Kilde | Innhold |
 |---|---|---|
-| `LEO_BRIS_110SV_2020_2025.csv` (eller tilsvarende) | 110 Sør-Vest / LEO | Hendelsestidsstempler, oppdragstype, varighet — primærdatagrunnlag |
-| `LEO_alle_sentraler_2024_2025.csv` (eller tilsvarende) | LEO (alle sentraler) | Sammenlignbare hendelsesdata for benchmarking |
-| `DSB_arsrapport_2025_bemanning.xlsx` (eller tilsvarende) | DSB | Bemanning og anropsvolum per sentral |
-| `SSB_befolkning_dekningsomrade.csv` (eller tilsvarende) | SSB | Innbyggertall per dekningsområde |
+| `110 Sør Vest 2025.csv` | 110 Sør-Vest / LEO | Hendelsesdata 2025 — **primærdatagrunnlag for EDA og modellering** |
+| `fullrapport2025.csv` | DSB / LEO (alle sentraler) | Hendelsesdata 2025, alle 12 sentraler — benchmarking |
+| `Fullrapport2024_110-sentral.csv` | DSB / LEO (alle sentraler) | Hendelsesdata 2024, alle sentraler |
+| `Fullrapport2023_110-sentral.csv` | DSB / BRIS (alle sentraler) | Hendelsesdata 2023, alle sentraler |
+| `fullrapport2018.csv` | DSB / BRIS (alle sentraler) | Hendelsesdata 2018 — referanseår |
+
+### Rådata — DSB bemanningsdata (MOB)
+
+| Fil | Innhold |
+|---|---|
+| `20260315_174514_MOB_2025_110-sentral.xlsx` | Bemanning + anropstall alle sentraler 2025 |
+| `20260315_174523_MOB_2024_110-sentral.xlsx` | Bemanning + anropstall alle sentraler 2024 |
+| `20260315_174530_MOB_2023_110-sentral.xlsx` | Bemanning + anropstall alle sentraler 2023 |
+| `20260315_174537_MOB_2022_110-sentral.xlsx` | Bemanning + anropstall alle sentraler 2022 |
+
+### Mangler fortsatt
+
+| Data | Kilde | Prioritet |
+|---|---|---|
+| BRIS 110 Sør-Vest 2020–2024 (dedikert uttrekk) | DSB — tilgjengelig, ikke hentet | Lav (nasjonal 2022–2024 dekker delvis) |
+| SSB befolkningsdata per dekningsområde | SSB Statistikkbanken | Middels — trengs til RQ5 (uke 15) |
 
 ---
 

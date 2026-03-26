@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # LOG650 – G20 Rune Grødem – Prosjektinstruksjoner for Claude
 
 ## Prosjektinfo
@@ -85,7 +89,6 @@ L16 Hoved-utkast + peer review                   (Slutten av april)
 ## Viktige filer
 | Fil | Beskrivelse |
 |---|---|
-| `011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md` | Godkjent proposal |
 | `011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md` | Godkjent proposal v3 |
 | `012 fase 2 - plan/Prosjektstyringsplan_G20_Rune_110.md` | Plan v1.8, innlevert 11. mars |
 | `012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.mpp` | Gantt med baseline (MS Project) |
@@ -96,9 +99,52 @@ L16 Hoved-utkast + peer review                   (Slutten av april)
 | `004 data/` | Rådata (gitignored) — LEO/BRIS legges her i fase 3 |
 | `OLD_forkastet/` | Gammelt prosjekt (røykdykkerbekledning/METRIC) — ikke bruk |
 
+## Analyse — skript og notebooks
+
+### Eksisterende skript
+| Fil | Beskrivelse | Kjør med |
+|---|---|---|
+| `analyse/scripts/benchmark_trend_analyse.py` | Trendanalyse og benchmarking alle 12 110-sentraler 2022–2025. Laster MOB-filer + BRIS fullrapport, produserer 3 figurer i `figurer/` og `analyse/benchmark_tabell.csv` | `py "G20-rune-individuell/analyse/scripts/benchmark_trend_analyse.py"` |
+
+### Datafilnavn i `004 data/` (eksisterende nedlastede filer)
+```
+# DSB MOB-filer (bemanningsdata alle sentraler)
+20260315_174537_MOB_2022_110-sentral.xlsx
+20260315_174530_MOB_2023_110-sentral.xlsx
+20260315_174523_MOB_2024_110-sentral.xlsx
+20260315_174514_MOB_2025_110-sentral.xlsx
+
+# BRIS fullrapport (hendelsesdata 2025, alle sentraler)
+20260315_174350_fullrapport.csv   — UTF-8 med BOM (encoding="utf-8-sig")
+                                    Separator: auto (sep=None, engine="python")
+                                    Hopp over 2 rader (skiprows=2), rad 1 er header
+
+# Interndokumenter (110 Vest / Bergen brannvesen)
+Beredskapsanalyse-110-Vest-30-04-2022.pdf
+Beredskapsanalyse-Bergen-brannvesen-2023.pdf
+Risiko-og-sarbarhetsanalyse-110-Vest.pdf
+Risiko-og-sarbarhetsanalyse-Bergen-brannvesen-2023-.pdf
+```
+
+### Kjente BRIS-datastruktur (2025 fullrapport)
+- **Nøkkelkolonner:** `Dato anrop` (format `%d.%m.%Y`), `Time på døgnet`, `110-sentral`, `Oppdrag ID`, `Kilde` (verdier: `Alarm` / `Samtale`)
+- **110 Sør-Vest 2025:** 61 964 hendelsesrader, 44 kolonner
+- **Kritiske datakvalitetsgrenser:**
+  - `Operatør-ID`: 0 % dekning (100 % null) — systemstrukturell begrensning bekreftet av DSB
+  - `Innsatsvarighet`: ~9 % dekning (kun utrykningshendelser T2/T3)
+  - `Alarmbehandlingstid`: ~12 % dekning
+  - T1-anrop (88 % av volum, "110-oppdrag uten involvering av brannvesen"): ingen tidsregistrering i BRIS — håndteringstid hentes fra intervjuer
+
+### Sentralnavn-normalisering
+Sentralnavn i BRIS/MOB kan ha encoding-feil (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`). Bruk `SENTRALER_NORM`-ordboken i `benchmark_trend_analyse.py` som referanse ved ny kode.
+
+### Notebooks
+`analyse/notebooks/` er tom — EDA-notebooks skal opprettes her i fase 3.
+
 ## Tekniske retningslinjer
 - **Rapport skrives i Markdown, IKKE Word** — foreleseren var eksplisitt på dette (9. mars 2026).
   Én fil per kapittel, lenket inn i hoved-`rapport.md`. Se `014 fase 4 - report/`.
+- **`005 report/`** — mappe for ferdig rapport-output (f.eks. eksporterte tabeller og figurer til rapport). Ikke forveksle med `014 fase 4 - report/` som er selve rapportskriptet.
 - **Filskriving:** Edit/Write-tool kan feile med EEXIST på noen mapper —
   bruk Python-skript i `C:\Users\runeg\AppData\Local\Temp\` og kjør med `py "C:/path/script.py"`
 - **Encoding:** Alltid `encoding='utf-8'` i Python-filoperasjoner

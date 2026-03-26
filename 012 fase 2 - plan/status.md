@@ -43,7 +43,7 @@
 |---|---|---|---|
 | L7 | Rapportskjelett + introduksjon og problemstilling v1 | Uke 12 | FULLFORT (v0.2, 09.03) |
 | L8 | Datainnhenting — LEO/BRIS, DSB-årsrapporter, SSB | Uke 12 | Påbegynt (20%) — BRIS 110 SV 2025 + nasjonal BRIS 2025 + MOB 2018/2023/2024/2025 inne |
-| L8b | ROS/beredskapsanalyse-gjennomgang — dokumentanalyse | Uke 12–13 | Påbegynt — Beredskapsanalyse + ROS 110 SV i 004 data/ |
+| L8b | ROS/beredskapsanalyse-gjennomgang — dokumentanalyse | Uke 12–13 | DATA INNE — `Beredskapsanalyse_110 Sør-Vest_J03.pdf` + `Overordnet risiko- og sårbarhetsanalyse 110 Sør-Vest_J05.pdf` + `Veiledning til forskrift.pdf` i 004 data/ |
 | L8c | Eksplorativ dataanalyse (EDA) | Uke 12–13 | Ikke startet |
 | L9 | Parameterestimering — λ og μ per skiftperiode | Uke 13 | Ikke startet |
 | L10 | Erlang-C modellering med VL-korreksjon | Uke 14 | Ikke startet |
@@ -90,7 +90,7 @@
 | BRIS fullrapport nasjonal 2018 | INN — 004 data/ (referanseår) |
 | MOB-årsrapporter DSB 2022–2025 | INN — 004 data/ (bemanning + anropstall alle sentraler) |
 | LEO/BRIS 110 Sør-Vest 2020–2024 | Tilgjengelig hos DSB — ikke hentet ennå |
-| ROS/beredskapsanalyse 110 Sør-Vest | Tilgjengelig |
+| ROS/beredskapsanalyse 110 Sør-Vest | INN — `Beredskapsanalyse_110 Sør-Vest_J03.pdf` + `Overordnet risiko- og sårbarhetsanalyse 110 Sør-Vest_J05.pdf` |
 | SSB befolkningsdata | Offentlig — ikke lastet ned ennå |
 | Strukturerte intervjuer | Påbegynt — uformell telefonsamtale Midt-Norge 110 (15. mars) |
 | Operatørdata fra BRIS (anonymisert) | IKKE MULIG — strukturell begrensning i BRIS, bekreftet |
