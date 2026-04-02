@@ -53,7 +53,7 @@ Skillet mellom synlig oppdragsvolum og faktisk anropsvolum viser at kapasitetsan
 Prosedyren definerer tre operative funksjoner som roterer dynamisk mellom operatørene:
 
 - **Rød funksjon:** Operatøren som besvarer nødtelefonen, oppretter hendelse i LEO og gjennomfører intervju med innringer. Binder én operatør fullt ut i den aktive samtalefasen.
-- **Gul funksjon:** Den nærmeste ledige operatøren overtar koordinering: utalarmerer ressurser, håndterer samband, loggfører skadestedsfaktorer og følger opp hendelsen til den er lukket. Én gul operatør kan håndtere flere gule hendelser parallelt i oppfølgingsfasen.
+- **Gul funksjon:** Aktiveres samtidig med RØD — GUL-operatøren går umiddelbart i medlytt når RØD besvarer anropet, for å bygge situasjonsforståelse og avhjelpe med lokalisering. Etter den innledende medlyttfasen utalarmerer GUL ressurser, håndterer samband og gir tidskritisk informasjon til mannskap underveis, delvis fortsatt på medlytt. GUL forblir bundet frem til vindusmelding mottas om at første ressurs er fremme, pluss kvittering og loggføring (anslagsvis 3 minutter). Først etter dette er GUL delvis frigjort og kan håndtere flere gule hendelser parallelt i en mer sporadisk oppfølgingsfase.
 - **Grønn funksjon:** Ledig — klar for neste nødanrop. Prosedyren definerer eksplisitt som målsetning at *«én operatør til enhver tid er ledig og kan ta nødtelefoner»*.
 - **Vaktleder (VL):** Overordnet funksjon — oversikt, prioritering, pressehåndtering og innkalling. Prosedyren slår fast at *«vaktleder skal som et utgangspunkt ikke besvare nødanrop»*.
 
