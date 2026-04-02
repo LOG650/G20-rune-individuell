@@ -39,24 +39,69 @@ for 110-operatører analogt med dimensjoneringsforskriftens rolle for brannvesen
 - **Bemanning dag:** 3 operatører + Vaktleder (VL) = totalt 4. c_effektiv = 3
 - **Bemanning natt/helg:** 2 operatører + Vaktleder = totalt 3. c_effektiv = 2
 - **VL-antagelse:** Vaktleder besvarer normalt IKKE nødanrop → c_effektiv = c_total − 1
-- **De facto servicegrense:** 10. anrop i kø → overføres til Agder; ubesvart etter 60 sek = brudd
+- **De facto servicegrense:** 10. anrop i kø → overføres til Agder; ubesvart etter 30 sek = automatisk overføring til Agder
 - **Data tilgjengelig:** LEO/BRIS tilbake til 2020; felles LEO for alle sentraler fra høst 2024
 - **ROS/beredskapsanalyse:** Tilgjengelig — forfatterens tilgang til dokumenter for 110 Sør-Vest
 
-## Primærmodell: Erlang-C (M/M/c)
-- **λ (ankomstrate):** Estimert per skiftperiode fra LEO/BRIS-data
-- **μ⁻¹ (håndteringstid):** Estimert per hendelseskategori
-- **c (servere):** Med VL-korreksjon (c_effektiv = c_total − 1)
-- **Service level:** P(W > t) sammenlignet mot de facto grenser (10. anrop/60 sek)
-- Tre analytiske dimensjoner: telefonhenvendelser (λ/Erlang-C), oppdrag (operativ aktivitet),
-  samtidige aktive hendelser (kapasitetsbinding)
+## Modellutvikling — tre faser
+1. **Erlang-C (M/M/c)** — Grunnlinje. Ga ρ < 6 % for alle skifttyper. Formelt korrekt
+   men metodisk utilstrekkelig: fanger ikke makkerpar-drift eller kapasitetsbinding.
+2. **Simultanitetsanalyse** — Lav konfliktrate, makkerpar-logikk ikke fanget.
+3. **Prosedyrbasert ankomstkonfliktmodell** (PRIMÆRMODELL) — Måler kapasitetstilstand
+   ved hvert beredskapsanrops ankomsttidspunkt.
+
+## Primærmodell: Prosedyrbasert ankomstkonfliktmodell
+For hvert beredskapsanrop klassifiseres kapasitetsnivå basert på antall aktive
+hendelser (n_aktive) ved ankomsttidspunktet. En hendelse er «aktiv» fra ankomst
+til estimert bindingstid er utløpt (RØD-fase + GUL-fase).
+
+### Tre operative nivåer
+| Nivå | Tilstand | c_eff = 2 (natt/helg) | c_eff = 3 (dag) | Operativ konsekvens |
+|---|---|---|---|---|
+| **Normal** | Makkerpar mulig | n_aktive = 0 | n_aktive ≤ 1 | Full prosedyre, kvalitetssikret håndtering |
+| **Degradert** | Solo-håndtering | n_aktive = 1 | n_aktive = 2 | Operatør klarer det, men uten makker. Økt kognitiv belastning, økt feilrisiko |
+| **Svikt** | Ingen ledig operatør | n_aktive ≥ 2 | n_aktive ≥ 3 | VL må overta eller overløp til Agder |
+
+### Operativ virkelighet: degradert drift er normaltilstand under press
+Makkerpar er **prosedyrekrav** (driftsstandard), men i praksis opererer operatører
+**ofte solo** fordi alternativet er å la innringer vente. Operatørene strekker seg
+kontinuerlig for å hjelpe flest mulig. Kvaliteten går ned, men det blir som oftest
+godt nok. Modellen kvantifiserer denne daglige tilpasningen — den gjør synlig noe
+alle i bransjen vet, men ingen måler systematisk.
+
+### Modellen som dimensjoneringsverktøy
+Modellens praktiske verdi er at den kan brukes som kvantitativt input til
+dimensjoneringsbeslutninger:
+- **Input:** Hendelsesdata (BRIS/LEO) + ROS-parametre (bindingstider, skiftordning)
+- **Output:** For et gitt bemanningsnivå c → andel anrop i Normal / Degradert / Svikt
+- **Dimensjoneringsspørsmål:** «Hvor mange operatører trengs for at
+  ≥ X % av beredskapsanropene håndteres med makkerpar (Normal)?»
+- **Alternativt:** «Med hvilken bemanning holdes solo-andelen (Degradert) under Y %?»
+
+Dette gir en kvantitativ, etterprøvbar standard som kan sammenlignes på tvers av
+alle 12 sentraler — og som kan supplere kvalitative ROS-analyser med tallbaserte
+referansepunkter.
+
+### Erlang-C beholdes som grunnlinje
+Erlang-C (M/M/c) presenteres som Fase 1 / sammenligningsgrunnlag. Den viser
+hvorfor klassisk køteori er utilstrekkelig for 110-konteksten (ρ < 6 % ≠ tilstrekkelig
+kapasitet), og danner det metodiske argumentet for primærmodellen.
 
 ## Operative særtrekk (må hensyntas i modellen)
 - **VL-rollen:** c_effektiv = c_total − 1
+- **Makkerpar-prosedyre vs. solo-drift:** Prosedyren krever to operatører per hendelse
+  (makkerpar), men i praksis håndteres mange hendelser solo. Solo-drift er den daglige
+  tilpasningen — kvaliteten synker men resultatet er «godt nok». Modellen kvantifiserer
+  hvor ofte dette skjer.
 - **Aktivt hendelsebilde:** Pågående hendelser binder kapasitet utover samtaletid
-- **Ring-flom (call surge):** Brudd på Poisson-uavhengighet — behandles som sensitivitetscase
-- **Overløp til Agder:** 10. kø-anrop viderekoblet — de facto servicegrense
-- **60-sekunders-regel:** Ubesvart anrop etter 60 sek = kapasitetsbrudd
+  (RØD-fase + GUL-fase). En operatør som håndterer en aktiv hendelse er ikke
+  tilgjengelig for neste anrop selv om telefonsamtalen er avsluttet.
+- **Ring-flom (call surge):** Brudd på Poisson-uavhengighet — behandles som
+  sensitivitetscase. Jf. Gustavsson (2018) burst-modell.
+- **Overløp til Agder:** 10. kø-anrop viderekoblet — de facto servicegrense.
+  Tap av regionalkunnskap ved overløp — jf. Dwars (2013) og Gustavsson (2018).
+- **30-sekunders-regel:** Ubesvart anrop etter 30 sek = automatisk overføring til Agder
+  (bekreftet via beredskapsanalyse s. 25)
 
 ## 12 norske 110-sentraler
 Finnmark, Troms, Nordland, Trøndelag, Møre og Romsdal, Vest, Sør-Vest, Agder,

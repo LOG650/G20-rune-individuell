@@ -18,9 +18,9 @@
 
 Norske 110-sentraler er kritisk beredskapsinfrastruktur som mottar nødmeldinger og koordinerer brann- og redningsinnsats. Bemanningsnivået fastsettes lokalt gjennom risiko- og beredskapsanalyser (ROS), men det finnes ingen nasjonal, kvantitativ standard for hvordan operativ belastning oversettes til konkret bemanning.
 
-Denne rapporten analyserer i hvilken grad faktisk bemanning ved norske 110-sentraler samsvarer med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller. Erlang-C-modellen (M/M/c) benyttes som primærmodell, kalibrert mot LEO/BRIS-data fra 110 Sør-Vest for perioden [PERIODE]. Resultater benchmarkes mot alle norske 110-sentraler via DSBs årsrapporter.
+Denne rapporten analyserer i hvilken grad faktisk bemanning ved norske 110-sentraler samsvarer med kapasitetsbehovet beregnet fra historiske hendelsesdata og kapasitetsmodeller. En innledende Erlang-C-analyse (M/M/c) viste svært lav systemutnyttelse (ρ < 6 %) for alle skifttyper — et resultat som er formelt korrekt, men metodisk utilstrekkelig fordi modellen ikke fanger at sentralens operative prosedyre (makkerpar-drift) krever to operatører per hendelse. Primærmodellen er derfor en **prosedyrbasert ankomstkonfliktmodell** som måler sannsynligheten for at et beredskapsanrop ankommer i en tilstand der makkerpar-driftsstandarden ikke kan opprettholdes. Modellen er kalibrert mot LEO/BRIS-data fra 110 Sør-Vest (2025, 7 438 beredskapsanrop). Resultater benchmarkes mot alle norske 110-sentraler via DSBs årsrapporter.
 
-**Nøkkelord:** 110-sentral, bemanningsdimensjonering, Erlang-C, M/M/c, køteori, kapasitetsanalyse, LEO, beredskap
+**Nøkkelord:** 110-sentral, bemanningsdimensjonering, prosedyrbasert kapasitetsmodell, ankomstkonflikt, makkerpar, Erlang-C, køteori, kapasitetsanalyse, LEO, beredskap
 
 ---
 
@@ -68,7 +68,7 @@ Problemstillingen adresseres gjennom følgende forskningsspørsmål:
 
 - **RQ1:** Hva er ankomstraten (λ) til 110 Sør-Vest per skiftperiode, og hvilke belastningsmønstre fremgår av historiske LEO/BRIS-data?
 - **RQ2:** Hva er gjennomsnittlig håndteringstid (μ⁻¹) per hendelseskategori, og i hvilken grad binder aktivt hendelsebilde operatørkapasitet utover samtaletid?
-- **RQ3:** Hvilken bemanningsanbefaling gir Erlang-C-modellen per skiftperiode ved definert servicegrad, og hvordan samsvarer dette med faktisk bemanning?
+- **RQ3:** I hvilken andel av beredskapsanropene ankommer anropet i en tilstand der sentralens operative driftsstandard (makkerpar) ikke kan opprettholdes — og hva er det strukturelle kapasitetsgapet mellom hverdag og helg?
 - **RQ4:** I hvilken grad gir eksisterende ROS- og beredskapsanalyse for 110 Sør-Vest et tilstrekkelig metodisk grunnlag for å begrunne faktisk bemanning?
 - **RQ5:** Kan strukturelle prediktorer (hendelsesvolum, innbyggertall, areal) danne grunnlag for en generaliserbar dimensjoneringsmodell på tvers av norske 110-sentraler?
 
@@ -199,7 +199,7 @@ P(W > T_max) ≤ 1 − SL_target
 
 der T_max er maksimal akseptabel ventetid og SL_target er ønsket servicegrad.
 
-> *[For 110 Sør-Vest: T_max ≈ 60 sek (lovkrav / 60-sekunders-regel), SL_target = [AVKLARES] — mulig 95% eller høyere.]*
+> *[For 110 Sør-Vest: T_max = 30 sek (automatisk overføring til Agder ved ubesvart anrop — bekreftet beredskapsanalyse J03 s. 25), SL_target = [AVKLARES] — mulig 95% eller høyere.]*
 
 ### 3.3 Kapasitetsstyring i beredskapsoperative systemer
 
@@ -264,7 +264,7 @@ Dette innebærer at «Service»-kategorien i BRIS-data ikke er direkte sammenlig
 | Særtrekk | Beskrivelse | Implikasjon for analyse |
 |---|---|---|
 | Overløp til Agder | 10. kø-anrop viderekoblet automatisk | De facto servicegrense — proxy for definert servicegrad |
-| 60-sekunders-regel | Ubesvarte anrop etter 60 sek = kapasitetsbrudd | Proxy for T_max i Erlang-C |
+| 30-sekunders-terskel | Ubesvarte anrop etter 30 sek → automatisk overføring til Agder (bekreftet beredskapsanalyse J03 s. 25). Ingen nasjonal svartidsfrist i forskriften. Merk: § 21 krever utalarmering innen 90 sek (dispatchkrav, ikke svartidskrav). | Operativ grense — brukes som terskel i Erlang-C sensitivitetsanalyse |
 | Aktivt hendelsebilde | Pågående hendelser binder operatørkapasitet utover samtaletid | Økt effektiv håndteringstid; Erlang-C-forutsetning utfordres |
 | Ring-flom (call surge) | Én hendelse utløser mange samtidige anrop | Brudd på Poisson-uavhengighet |
 
@@ -286,9 +286,9 @@ Tre komplementære analysekomponenter benyttes:
 
 | Analysekomponent | Primærvariabel | Funksjon |
 |---|---|---|
-| Kømodell (Erlang-C) | Innkommende telefonhenvendelser (λ) | Beregne nødvendig operatørkapasitet |
-| Operativ belastningsanalyse | Antall oppdrag/hendelser | Kartlegge faktisk operativ aktivitet |
-| Kapasitetsbinding | Samtidige aktive hendelser | Forstå operatørbinding utover samtaletid |
+| **Prosedyrbasert ankomstkonfliktmodell** (primær) | Antall aktive hendelser ved hvert anrops ankomsttidspunkt | Måle andel beredskapsanrop der makkerpar-driftsstandarden ikke kan opprettholdes |
+| Erlang-C (M/M/c) (grunnlinje) | λ, μ, c_eff | Tradisjonell køteoretisk grunnlinje — viser begrensningene ved klassisk modell |
+| Operativ belastningsanalyse | Antall oppdrag/hendelser | Kartlegge belastningsmønstre per skifttype |
 
 ### 5.2 Data
 
@@ -381,72 +381,36 @@ Generative KI-verktøy (Claude Sonnet 4.6, GitHub Copilot) er benyttet som støt
 
 ## 6. Modell
 
-> *[2–3 sider. Presentér den matematiske modellen. Én-til-én sammenheng med problemstillingen. Presist — bruk symboler gjennomgående. Jf. forelesning: «modellen er det viktigste kapittelet — det er her du skaper noe nytt».]*
+> **Kapittelet er ferdigskrevet i `kap6_modell.md`** — se den filen for fullstendig innhold.
+> Kortversjon av modellstrukturen er gjengitt nedenfor for oversiktens skyld.
 
-### 6.1 Modellbeskrivelse
+### Modellutvikling — tre faser
 
-110 Sør-Vest modelleres som et M/M/c-køsystem med følgende parametere:
+Prosjektet gjennomgikk en metodisk utvikling fra Erlang-C til prosedyrbasert modell:
 
-**Parametre (input — gitt fra data):**
-
-| Symbol | Beskrivelse | Kilde |
+| Fase | Modell | Konklusjon |
 |---|---|---|
-| λ | Ankomstrate innkommende henvendelser [anrop/time] | LEO/BRIS-data |
-| μ | Servicerate per operatør [anrop/time] = 1/E[håndteringstid] | LEO/BRIS + intervjuer |
-| c_effektiv | Antall effektive servere = c_total − 1 | Bemanningsdata + VL-validering |
-| T_max | Maksimal akseptabel ventetid [sek] | 60 sek (operativ grense) |
-| SL_target | Ønsket servicegrad: P(W ≤ T_max) ≥ SL_target | [AVKLARES — foreslår 95%] |
+| 1 | Erlang-C (M/M/c) | ρ < 6 % — formelt korrekt, metodisk utilstrekkelig |
+| 2 | Simultanitetsanalyse | Lav konfliktrate — makkerpar-logikk ikke fanget |
+| **3** | **Prosedyrbasert ankomstkonfliktmodell** | **Primærmodell — strukturelt helg/hverdag-gap** |
 
-**Variabel (beslutning):**
+### Primærmodell: Prosedyrbasert ankomstkonfliktmodell
 
-| Symbol | Beskrivelse |
-|---|---|
-| c* | Anbefalt antall effektive operatører per skiftperiode |
+For hvert beredskapsanrop i klassifiseres kapasitetsnivå basert på antall aktive hendelser n_aktive ved ankomsttidspunktet t_i:
 
-**Målfunksjon:**
-
-Finn laveste c* slik at:
-
-```
-P(W > T_max) ≤ 1 − SL_target
-```
-
-Tilsvarende: finn c* = min{c : C(c, A) · exp(−(c·μ − λ)·T_max) ≤ 1 − SL_target}
-
-der A = λ/μ er total tilbudt trafikk og C(c, A) er Erlang-C-formelen (avsnitt 3.2.2).
-
-**Krav (constraints):**
-
-- ρ = λ/(c·μ) < 1 (stabilitetskrav — systemet kan ikke motta mer enn det leverer)
-- c_total ≥ 2 (lovpålagt minimum: to personer i vaktrommet, inkl. VL); tilsvarende c_effektiv ≥ 1 etter VL-korreksjonen
-
-### 6.2 VL-korreksjon
-
-Modellen opererer eksplisitt med `c_effektiv = c_total − 1` som default, basert på at VL normalt ikke besvarer nødanrop. Sensitivitetsanalyse (avsnitt 7.4) evaluerer modellens robusthet dersom VL-antagelsen ikke holder i praksis.
-
-### 6.3 Periode-segmentert analyse
-
-110 Sør-Vest opererer med to operative skift: dag (07:00–19:00) og natt (19:00–07:00). Ankomstraten λ varierer imidlertid innen og mellom skiftene. EDA (avsnitt 7.1) vil avgjøre om to perioder er tilstrekkelig for analysen, eller om finer segmentering (f.eks. dag/kveld/natt) gir bedre modellpresisjon.
-
-| Periode | Tentativt tidsrom | Tilsvarende skift |
+| Nivå | c_eff = 2 | c_eff = 3 |
 |---|---|---|
-| Dag | 07:00–19:00 | Dagskift |
-| Natt | 19:00–07:00 | Nattskift |
-| *[Evt. underperioder]* | *[Fastsettes etter EDA]* | — |
+| **Normal** — makkerpar mulig | n_aktive = 0 | n_aktive = 0 |
+| **Brudd** — ingen ledig makker | n_aktive ≥ 1 | n_aktive ≥ 1 |
+| **Svikt** — VL/Agder må overta | n_aktive ≥ 2 | n_aktive ≥ 3 |
 
-> *[Endelig segmentering fastsettes etter EDA — belastningsmønstre per time og ukedag avgjør granulariteten.]*
+En hendelse er «aktiv» fra ankomsttidspunktet til estimert bindingstid er utløpt (RØD-fase + GUL-fase). Bindingstider er estimert via ekspertintervju og sensitivitetstestet (se `kap6_modell.md` avsnitt 6.3.4).
 
-### 6.4 Implementasjon
+### Erlang-C beholdes som grunnlinje
 
-Modellen er implementert i Python. Erlang-C beregnes via:
+Erlang-C (M/M/c) presenteres som Fase 1 / sammenligningsgrunnlag i avsnitt 7.1. Den viser hvorfor klassisk køteori er utilstrekkelig for 110-konteksten, og danner det metodiske argumentet for primærmodellen.
 
-```python
-# scipy.special.factorial for stabilt beregning av store fakulteter
-# Iterativ løsning for c* gitt SL_target og T_max
-# Se Vedlegg X — Python-kode og Jupyter notebook
-```
-
-Kildekode er tilgjengelig på GitHub: [LENKE]
+> *Se `kap6_modell.md` for: fullstendig matematisk formulering, bindingstidstabell, pseudokode og implementasjonsdetaljer.*
 
 ---
 
@@ -500,26 +464,22 @@ Kildekode er tilgjengelig på GitHub: [LENKE]
 
 > *[Analyse av simultane aktive hendelser. Figur: distribusjon av antall simultane T3-hendelser. Implikasjon for effektiv håndteringstid.]*
 
-### 7.3 RQ3 — Erlang-C-dimensjonering
+### 7.3 RQ3 — Prosedyrbasert kapasitetsanalyse
 
-> *[Kjerneresultat.]*
+> *Ferdigskrevet i `kap7_analyse_resultater.md` avsnitt 7.4–7.6. Nøkkelresultater:*
 
-#### 7.3.1 Bemanningsanbefaling per skiftperiode
+**Tabell: Kapasitetsnivå ved ankomst — basis (ABA=10 min, Tyngre=15 min)**
 
-| Periode | λ | μ | A | c_faktisk | c* (SL=[X]%) | Kapasitetsgap |
-|---|---|---|---|---|---|---|
-| Dag | | | | 3 | [VERDI] | [+/−] |
-| Kveld | | | | [VERDI] | [VERDI] | [+/−] |
-| Natt | | | | 2 | [VERDI] | [+/−] |
+| Skifttype | Anrop | Normal | Brudd på AML | Svikt | c_eff |
+|---|---|---|---|---|---|
+| Dag / Hverdag | 3 382 | 79,4 % | 20,2 % | 0,4 % | 3 |
+| Dag / Helg | 1 236 | 78,5 % | 17,1 % | **4,5 %** | 2 |
+| Natt / Hverdag | 1 934 | 86,5 % | 12,6 % | 1,0 % | 2 |
+| Natt / Helg | 886 | 80,8 % | 14,6 % | **4,6 %** | 2 |
 
-> *[Figur: Erlang-C servicegrad som funksjon av c for hver periode. Marker faktisk c og c*.]*
+**Strukturelt funn:** Helg dagskift har 12,7× høyere sviktrate enn hverdag dagskift (4,5 % mot 0,4 %), til tross for tilnærmet likt beredskapsvolum. Funnet er robust på tvers av alle tre bindingstidsscenarier.
 
-#### 7.3.2 Beregnet servicegrad ved faktisk bemanning
-
-| Periode | c_faktisk | P(W ≤ 60 sek) | E[W_q] [sek] | Vurdering |
-|---|---|---|---|---|
-| Dag | 3 | [VERDI]% | [VERDI] | [Over/Under SL-grense] |
-| Natt | 2 | [VERDI]% | [VERDI] | [Over/Under SL-grense] |
+> *Erlang-C-grunnlinjen (Fase 1) finnes i `kap7_analyse_resultater.md` Tabell 7.1.*
 
 ### 7.4 Sensitivitetsanalyse
 
@@ -581,8 +541,8 @@ Kildekode er tilgjengelig på GitHub: [LENKE]
 **RQ2 — Håndteringstid og aktivt hendelsebilde:**
 > *[Diskutér i hvilken grad aktivt hendelsebilde utfordrer M/M/c-forutsetningene.]*
 
-**RQ3 — Erlang-C-dimensjonering:**
-> *[Er 110 Sør-Vest dimensjonert tilstrekkelig? Diskutér kapasitetsgap opp mot beredskapsperspektivet — lav utnyttelse er ikke nødvendigvis sløsing.]*
+**RQ3 — Prosedyrbasert kapasitetsanalyse:**
+> *[Diskutér sviktrate-gapet helg/hverdag. Erlang-C sa «alt er bra» (ρ < 6 %) — prosedyrmodellen avdekker et strukturelt problem. Diskutér hvorfor de to modellene gir så ulike svar, og hva det betyr for dimensjoneringslogikken. Lav utnyttelse er ikke nødvendigvis sløsing i beredskapssystemer.]*
 
 **RQ4 — ROS-gjennomgang:**
 > *[Metodisk vurdering av eksisterende dimensjoneringsgrunnlag. Bidrar den kvantitative analysen med noe ROS-analysen mangler?]*
@@ -594,9 +554,9 @@ Kildekode er tilgjengelig på GitHub: [LENKE]
 
 ### 8.2 Metodediskusjon
 
-#### 8.2.1 Erlang-C — forutsetninger og brudd
+#### 8.2.1 Modellbegrensninger — Erlang-C og prosedyrbasert modell
 
-> *[Kritisk gjennomgang: Poisson-ankomster (ring-flom), eksponentielle servicetider (heterogen T1–T4), stasjonær rate (daglig/ukentlig variasjon), uavhengige ankomster. Hva betyr bruddene for resultatenes pålitelighet?]*
+> *[Erlang-C: Poisson-forutsetning (ring-flom), eksponentielle servicetider, stasjonær rate — diskutert som Fase 1-grunnlinje. Prosedyrbasert modell: bindingstidsestimater er kvalitative (intervjubaserte) og usikre — sensitivitetsanalysen viser robusthet, men begrensningen bør diskuteres. ABA solo vs. makkerpar (kap 6.3) — konservativ antakelse. Hva betyr disse begrensningene for konklusjonenes pålitelighet?]*
 
 #### 8.2.2 Datakvalitet og målefeil
 
@@ -632,7 +592,7 @@ Kildekode er tilgjengelig på GitHub: [LENKE]
 |---|---|
 | RQ1 — Belastningsmønstre | [OPPSUMMERING] |
 | RQ2 — Håndteringstid | [OPPSUMMERING] |
-| RQ3 — Erlang-C-dimensjonering | [OPPSUMMERING] |
+| RQ3 — Prosedyrbasert kapasitetsanalyse | Helg dagskift: sviktrate 4,5 % (12,7× hverdag). Funnet robust på tvers av alle bindingstidsscenarier. |
 | RQ4 — ROS-gjennomgang | [OPPSUMMERING] |
 | RQ5 — Generaliserbarhet | [OPPSUMMERING] |
 
@@ -668,9 +628,9 @@ Jagerman, D. L. (1974). Some properties of the Erlang loss function. *The Bell S
 
 ## 11. Vedlegg
 
-### Vedlegg A — Python-implementasjon av Erlang-C
+### Vedlegg A — Python-implementasjon
 
-> *[Link til GitHub-repo eller innsatt kode. Beskriv notebook-struktur.]*
+> *[Link til GitHub-repo. To hoveddeler: (1) Erlang-C grunnlinje (scipy), (2) prosedyrbasert ankomstkonfliktmodell med heap-algoritme (`analyse/scripts/kapasitet_figurer.py`). Beskriv notebook-struktur.]*
 
 ### Vedlegg B — Intervjuguide
 

@@ -1,0 +1,5 @@
+Fase,n,Gjennomsnitt,Median,P10,P25,P75,P90,P95
+ROD (anrop til varslet),7454,3.3,1.2,0.7,1.0,1.9,4.5,8.8
+GUL (varslet til fremme),5809,10.2,8.2,4.3,6.0,11.5,16.8,22.3
+Total (anrop til fremme),5777,13.0,10.0,5.6,7.3,13.9,21.5,30.3
+Full syklus (anrop til ledig),7118,41.5,29.0,7.8,16.3,54.3,95.3,123.4
