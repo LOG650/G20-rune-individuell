@@ -154,13 +154,23 @@ Den kritiske asymmetrien mellom c_eff = 2 og c_eff = 3 er at med c_eff = 2 er de
 
 En vesentlig utvidelse av modellen er inkludering av **skjulte/sammenstilte anrop** -- anrop som automatisk knyttes til eksisterende oppdrag i LEO/BRIS og ikke registreres som egne saker (se avsnitt 7.2).
 
-Disse anropene identifiseres gjennom gap i sekvensnummereringen i 110_ID-feltet. For eksempel: dersom oppdrag B06-250101-4 og B06-250101-6 er synlige, er B06-250101-5 et sammenstilt anrop som ble absorbert inn i et eksisterende oppdrag.
+#### Identifisering
 
-Selv om sammenstilte anrop typisk er korte (estimert ~1 minutt -- operatoren kjenner allerede hendelsen, avklarer kort, informerer at ressurs er pa vei og legger pa), binder de en operator som ellers ville vaert ledig. I perioder med hoyt press kan det vaere nettopp dette korte anropet som vipper kapasiteten fra handterbart til svikt.
+Disse anropene identifiseres gjennom gap i sekvensnummereringen i 110_ID-feltet. Hvert synlige oppdrag har et daglig sekvensnummer (f.eks. B06-250101-4, B06-250101-6). Manglende sekvensnumre (i dette tilfellet -5) representerer anrop som ble sammenstilt med et eksisterende oppdrag.
+
+Et viktig forbehold: sekvensgapet forteller at et anrop ble sammenstilt, men ikke *hvilket* oppdrag det ble knyttet til. Dersom de synlige oppdragene er -23, -26 og -29, kan de manglende numrene (-24, -25, -27, -28) i prinsippet alle tilhore oppdrag -23, eller de kan vaere fordelt pa ulike aktive oppdrag. For kapasitetsmodellen har dette imidlertid ingen betydning: det avgjorende er at en operator var opptatt med et anrop pa det aktuelle tidspunktet, uavhengig av hvilket oppdrag anropet ble registrert under.
+
+#### Bindingstid
+
+Sammenstilte anrop er typisk korte. Operatoren kjenner allerede hendelsen, og samtalen bestar normalt av en kort avklaring, bekreftelse pa at ressurs er pa vei, og sa legger innringer pa. Bindingstiden er i modellen satt til **1 minutt** som et kvalitativt estimat. Faktisk varighet kan variere: noen anrop kan vaere kortere (20-30 sekunder ved ren bekreftelse), andre noe lenger dersom innringer er stresset eller situasjonen har utviklet seg. Estimatet pa 1 minutt anses som rimelig konservativt for gjennomsnittet av slike anrop.
+
+Selv om bindingstiden er kort, er den operative konsekvensen reell: operatoren er utilgjengelig for neste hendelse i det kritiske vinduet. I perioder med hoyt press kan det vaere nettopp dette korte anropet som vipper kapasiteten fra handterbart til svikt.
+
+#### Modellparametere
 
 I modellen behandles sammenstilte anrop som egne belastningsenheter med:
 - **Tidspunkt:** Interpolert fra naermeste synlige oppdrags ankomsttidspunkt
-- **Bindingstid:** 1 minutt (kort avklaring og informasjon)
+- **Bindingstid:** 1 minutt (kvalitativt estimat, se over)
 
 For 2025 er det identifisert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305x). Disse legges til de 7 555 kategori D-hendelsene, slik at modellen totalt analyserer 26 456 belastningsenheter.
 
