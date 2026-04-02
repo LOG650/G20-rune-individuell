@@ -44,7 +44,9 @@ Dette er kritisk for å forstå modellen:
 
 **Vaktleder (VL)-antagelsen:** VL besvarer normalt IKKE nødanrop. VL har en separat funksjon: overordnet situasjonsoversikt, prioritering av oppdrag, pressehåndtering, innkalling av ekstra ressurser og administrativt ansvar. Dette er nedfelt i sentralens interne prosedyre (se avsnitt 4). Derfor: c_effektiv = c_total − 1.
 
-**De facto servicegrense:** Det 10. anropet i kø viderekoblet automatisk til nabosentral Agder. Ubesvart anrop etter 60 sekunder = registrert kapasitetsbrudd i henhold til brann- og redningsvesenforskriften § 21.
+**De facto servicegrense:** Det 10. anropet i kø viderekoblet automatisk til nabosentral Agder. Ubesvart anrop etter 60 sekunder = registrert kapasitetsbrudd (intern operativ terskel — ikke en eksplisitt svartidsfrist i forskriften).
+
+> **Merk — 60 sek vs 90 sek:** Brann- og redningsvesenforskriften § 21 stiller krav om at lokalt brannvesen skal være *utalarmert* innen 90 sekunder fra anrop mottas. Dette er et **dispatch-krav** (tid fra mottak til utalarmering), ikke et svartidskrav for selve anropet. Det finnes ingen nasjonal, eksplisitt tidsfrist i forskriften for når et 110-anrop skal besvares. 60 sek er en intern operativ terskel knyttet til overflyt-logikken til Agder.
 
 ---
 
