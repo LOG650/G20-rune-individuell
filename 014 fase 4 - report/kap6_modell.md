@@ -107,101 +107,116 @@ Primærmodellen tar utgangspunkt i prosedyrens kapasitetslogikk og stiller et pr
 
 Dette er en **prosedyrkonformitetsmetrikk** — ikke et ventetidsmål. Kapasitetsproblemet ved 110-sentraler er i de fleste tilfeller ikke at anrop venter i kø, men at de ankommer når operatørene allerede er bundet i aktive hendelser slik at makkerpar-prinsippet brytes.
 
-### 6.4.2 Definisjoner
+### 6.4.2 Operativ tilpasningslogikk
 
-**Aktiv hendelse:** En hendelse er aktiv fra ankomsttidspunktet til estimert bindingstid er utløpt. Bindingstid er den perioden en operatør er bundet til hendelsen — det vil si samtaletid (RØD-fase) pluss koordineringstid etter samtalen (GUL-fase: utalarmering, samband, logging).
+Modellen bygger pa en sentral observasjon om hvordan operatorene faktisk tilpasser seg ved samtidskonflikter: **makkerparet splittes**. Nar et nytt anrop ankommer og begge operatorene allerede er bundet i en aktiv hendelse, bryter de makkerparet og fordeler seg slik at hver operator handterer sin hendelse solo. Denne tilpasningen er ikke et sammenbrudd -- det er den operative virkeligheten som gjor at tjenesten opprettholdes under press.
 
-**n_aktive:** Antall aktive hendelser på tidspunktet et nytt beredskapsanrop ankommer.
+Modellen speiler dette ved at hver aktiv hendelse binder 1 operator (den operative virkeligheten, ikke prosedyrekravet om 2). Antall ledige operatorer ved et gitt tidspunkt er:
 
-**Kapasitetsnivå:** Basert på n_aktive og c_eff klassifiseres hvert anrop til ett av tre nivåer:
+$$\text{ledige}(t_i) = c_{\text{eff}} - n_{\text{aktive}}(t_i)$$
 
-**Tabell 6.2: Kapasitetsnivåer definert av arbeidsmetodikken**
+der $n_{\text{aktive}}$ er antall hendelser med uutlopt bindingstid som fortsatt er aktive.
 
-| Nivå | Definisjon | Terskel c_eff = 2 | Terskel c_eff = 3 |
+### 6.4.3 Kapasitetsnivaer
+
+Basert pa antall ledige operatorer klassifiseres hvert innkommende anrop til ett av tre nivaer:
+
+**Tabell 6.2: Kapasitetsnivaer -- operativ tilpasningsmodell**
+
+| Niva | Definisjon | Betingelse | Operativ konsekvens |
 |---|---|---|---|
-| **Normal** | Makkerpar mulig — én RØD og én GUL tilgjengelig, én GRØNN ledig | n_aktive = 0 | n_aktive = 0 |
-| **Brudd på driftsstandard** | Nytt anrop uten ledig, dedikert GUL-makker. Operatørene jobber «etter beste evne». | n_aktive ≥ 1 | n_aktive ≥ 1 |
-| **Svikt** | VL må bryte vaktlederfunksjon *eller* anrop overføres til Agder | n_aktive ≥ 2 | n_aktive ≥ 3 |
+| **Normal** | Makkerpar mulig for neste hendelse | ledige >= 2 | Full prosedyre, kvalitetssikret handtering |
+| **Brudd pa driftsstandard** | Kun 1 ledig -- solo-handtering | ledige = 1 | Operatoren klarer det, men uten makker. Okt kognitiv belastning, okt feilrisiko |
+| **Svikt** | Ingen ledig operator | ledige = 0 | VL ma overta eller overlop til Agder |
 
-*Svikt er et deltilfelle av brudd på driftsstandard: enhver svikt er også brudd. For c_eff = 2 med n_aktive = 1: begge operatørene er bundet (RØD + GUL på H1) — ingen kan ta H2 uten å bryte sin pågående rolle. For c_eff = 3 med n_aktive = 1: GRØNN-operatøren kan besvare anropet, men vedkommende har ingen dedikert GUL-makker — makkerpar-kravet er brutt.*
+For a illustrere hva dette innebarer i praksis:
 
-Den kritiske asymmetrien mellom c_eff = 2 og c_eff = 3 er at ved c_eff = 3 med n_aktive = 1 er det fremdeles noen som *kan* svare (GRØNN), men ingen som kan fungere som dedikert makker. Svikt inntreffer ikke, men brudd på driftsstandard er et faktum. Ved c_eff = 2 med n_aktive = 1 er svikt umiddelbart nær — enhver ny hendelse overbelaster systemet.
+**Med c_eff = 2 (natt/helg):**
 
-### 6.4.3 Matematisk formulering
+| Situasjon | Hva skjer operativt | Kapasitetsniva |
+|---|---|---|
+| 0 aktive hendelser, nytt anrop | Makkerpar handterer sammen (ROD + GUL fra forste sekund) | Normal |
+| 1 aktiv hendelse, nytt anrop | Makkerparet splitter -- hver tar sin hendelse solo | Brudd pa driftsstandard |
+| 2 aktive hendelser, nytt anrop | Begge operatorer allerede opptatt solo -- ingen kan ta anropet | Svikt |
 
-La {t_i, d_i} for i = 1, …, N betegne N beredskapsanrop med ankomsttidspunkt t_i og tilhørende bindingstid d_i.
+**Med c_eff = 3 (dag hverdag):**
 
-For hvert anrop i beregnes:
+| Situasjon | Hva skjer operativt | Kapasitetsniva |
+|---|---|---|
+| 0 aktive, nytt anrop | Makkerpar + 1 gronn ledig | Normal |
+| 1 aktiv, nytt anrop | Gronn tar den alene (solo) | Brudd pa driftsstandard |
+| 2 aktive, nytt anrop | Makkerparet pa H1 splitter -- alle 3 jobber solo | Brudd pa driftsstandard |
+| 3 aktive, nytt anrop | Ingen ledig | Svikt |
+
+Den kritiske asymmetrien mellom c_eff = 2 og c_eff = 3 er at med c_eff = 2 er det kun ett steg fra normal drift til svikt: allerede ved andre samtidige hendelse er begge operatorene opptatt. Med c_eff = 3 finnes en buffersone der operatorene kan jobbe solo for svikt inntreffer.
+
+### 6.4.4 Sammenstilte tilleggsanrop som belastningsenhet
+
+En vesentlig utvidelse av modellen er inkludering av **skjulte/sammenstilte anrop** -- anrop som automatisk knyttes til eksisterende oppdrag i LEO/BRIS og ikke registreres som egne saker (se avsnitt 7.2).
+
+Disse anropene identifiseres gjennom gap i sekvensnummereringen i 110_ID-feltet. For eksempel: dersom oppdrag B06-250101-4 og B06-250101-6 er synlige, er B06-250101-5 et sammenstilt anrop som ble absorbert inn i et eksisterende oppdrag.
+
+Selv om sammenstilte anrop typisk er korte (estimert ~1 minutt -- operatoren kjenner allerede hendelsen, avklarer kort, informerer at ressurs er pa vei og legger pa), binder de en operator som ellers ville vaert ledig. I perioder med hoyt press kan det vaere nettopp dette korte anropet som vipper kapasiteten fra handterbart til svikt.
+
+I modellen behandles sammenstilte anrop som egne belastningsenheter med:
+- **Tidspunkt:** Interpolert fra naermeste synlige oppdrags ankomsttidspunkt
+- **Bindingstid:** 1 minutt (kort avklaring og informasjon)
+
+For 2025 er det identifisert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305x). Disse legges til de 7 555 kategori D-hendelsene, slik at modellen totalt analyserer 26 456 belastningsenheter.
+
+### 6.4.5 Matematisk formulering
+
+La $\{t_i, d_i\}$ for $i = 1, \ldots, N$ betegne N belastningsenheter (beredskapsoppdrag + sammenstilte anrop) med ankomsttidspunkt $t_i$ og bindingstid $d_i$.
+
+For hvert anrop $i$ beregnes:
 
 $$n_{\text{aktive}}(t_i) = \left|\{j < i : t_j + d_j > t_i\}\right|$$
 
-det vil si antall tidligere anrop hvis bindingstid ennå ikke er utløpt ved t_i.
+det vil si antall tidligere belastningsenheter hvis bindingstid enna ikke er utlopt ved $t_i$.
 
-Kapasitetsnivå for anrop i:
+Kapasitetsniva for anrop $i$:
 
-$$\text{Nivå}(i) = \begin{cases}
-\text{Normal} & \text{hvis } n_{\text{aktive}}(t_i) = 0 \\
-\text{Svikt} & \text{hvis } n_{\text{aktive}}(t_i) \geq c_{\text{eff}} \\
-\text{Brudd} & \text{ellers}
+$$\text{Niva}(i) = \begin{cases}
+\text{Normal} & \text{hvis } c_{\text{eff}} - n_{\text{aktive}}(t_i) \geq 2 \\
+\text{Svikt} & \text{hvis } c_{\text{eff}} - n_{\text{aktive}}(t_i) \leq 0 \\
+\text{Brudd} & \text{ellers (ledige} = 1\text{)}
 \end{cases}$$
 
-Agregerte metrikker for skifttype s:
+Bindingstid $d_i$ settes ulikt for de to typene belastningsenheter:
+- **Kategori D:** $d_i$ = (Forste ressurs fremme -- Dato/tid anrop) + 3 min kvittering. Median 13,0 min.
+- **Sammenstilt anrop:** $d_i$ = 1 min (kort avklaring).
 
-$$\text{Sviktrate}(s) = \frac{|\{i \in s : \text{Nivå}(i) = \text{Svikt}\}|}{|s|}$$
+### 6.4.6 Bindingstid-proxy for kategori D
 
-$$\text{Bruddsrate}(s) = \frac{|\{i \in s : \text{Nivå}(i) \in \{\text{Brudd}, \text{Svikt}\}\}|}{|s|}$$
+Bindingstid-proxyen fanger den mest operative og dimensjoneringsrelevante fasen av hendelseshandteringen:
 
-### 6.4.4 Bindingstidsestimater og proxy-valg
+- **Akuttfasen er den mest tidskritiske:** Bade ROD og GUL bindes fra forste sekund. GUL gar umiddelbart i medlytt nar ROD besvarer anropet, for a bygge situasjonsforstaelse og avhjelpe med lokalisering. Deretter utalarmerer GUL ressurser, handterer samband og gir tidskritisk informasjon til mannskap underveis.
+- **GUL forblir bundet til vindusmelding:** GUL-operatoren er bundet frem til vindusmelding mottas om at forste ressurs er fremme pa stedet. Etter kvittering og loggforing (anslagsvis 3 minutter) er GUL delvis frigjort.
+- **Etter fremme stabiliseres driften:** Mange hendelser gar over i en mer stabil driftsfase med sporadisk belastning pa operatoren.
 
-Bindingstid d_i estimeres fra BRIS-data som tidsintervallet fra anropets ankomsttidspunkt til første ressurs er fremme, pluss 3 minutter for kvittering av vindusmelding og loggføring:
+Av 7 555 kategori D-hendelser har 5 777 (76,5 %) registrert tidspunkt for forste ressurs fremme. De resterende tildeles median bindingstid. Observert fordeling: median 13,0 min, P90 21,6 min.
 
-> d_i = (Første ressurs fremme − Dato/tid anrop) + 3 min
+### 6.4.7 Hva modellen maler -- og hva den ikke maler
 
-Denne proxyen er valgt fordi den fanger den mest operative og dimensjoneringsrelevante fasen av hendelseshåndteringen:
-
-- **Akuttfasen er den mest tidskritiske:** Det er i perioden fra anrop til ressurs er fremme at informasjonsbehovet er størst og RØD/GUL-koordineringen er mest aktiv.
-- **Etter fremme stabiliseres driften:** Når første ressurs er på plass går mange hendelser over i en mer stabil driftsfase med sporadisk belastning på operatøren.
-- **Kvitteringsvinduet (3 min) er dokumentert:** GUL-operatøren mottar vindusmelding som må kvitteres og logges etter at ressurs er fremme.
-
-Proxyen fanger dermed ikke hele oppdragets livsløp, men den mest kritiske delen. Av 7 555 beredskapsoppdrag (kategori D) har 5 777 (76,5 %) registrert tidspunkt for første ressurs fremme. De resterende tildeles median bindingstid (se avsnitt 7.3).
-
-Observert fordeling: median 13,0 min, P90 21,6 min. RØD-fasen (anrop → ressurs varslet) har median 1,2 min, GUL-fasen (varslet → fremme) har median 8,2 min.
-
-### 6.4.5 To driftsmoduser
-
-Modellen analyseres under to forutsetninger om operatørbinding per hendelse:
-
-- **Prosedyre (2 operatører per hendelse):** Makkerpar iht. driftsstandard. Ledige = c_eff − 2 × n_aktive.
-- **Beste evne (1 operatør per hendelse):** Solo-drift, slik det faktisk gjøres under press. Ledige = c_eff − 1 × n_aktive.
-
-Klassifisering for begge:
-- Normal: ledige ≥ 2 (makkerpar mulig for neste)
-- Degradert: ledige = 1 (kun solo)
-- Svikt: ledige ≤ 0 (VL/Agder)
-
-Kontrasten mellom de to modusene kvantifiserer den daglige tilpasningen operatørene gjør for å holde tjenesten gående (se avsnitt 7.4).
-
-### 6.4.6 Hva modellen måler — og hva den ikke måler
-
-Modellen måler **P(brudd på driftsstandard ved ankomst)**: sannsynligheten for at et beredskapsanrop ankommer i en tilstand der makkerpar-driftsstandarden ikke kan opprettholdes.
+Modellen maler **P(brudd pa driftsstandard ved ankomst)**: sannsynligheten for at et anrop ankommer i en tilstand der makkerpar-driftsstandarden ikke kan opprettholdes.
 
 Dette er ikke det samme som:
-- P(ingen svarer) — noen svarer i nesten alle tilfeller
-- P(W > t) i Erlang-C-forstand — tradisjonell ventetid i kø
-- P(kapasitetskollaps) — systemet kollapser sjelden totalt
+- P(ingen svarer) -- noen svarer i nesten alle tilfeller
+- P(W > t) i Erlang-C-forstand -- tradisjonell ventetid i ko
+- P(kapasitetskollaps) -- systemet kollapser sjelden totalt
 
-Det er en **operasjonell prosedyrmetrikk** som speiler 110-operatørenes erfarte kapasitetsproblem: ikke at anrop forblir ubesvarte, men at de besvares under betingelser der den operative standarden for korrekt og trygg hendelseshåndtering ikke er oppfylt.
+Det er en **operasjonell prosedyrmetrikk** som speiler 110-operatorenes erfarte kapasitetsproblem: ikke at anrop forblir ubesvarte, men at de besvares under betingelser der den operative standarden for korrekt og trygg hendelseshandtering ikke er oppfylt.
 
-### 6.4.7 Modellens konservatisme
+### 6.4.8 Modellens konservatisme
 
-Modellen gir sannsynligvis et **konservativt anslag** på faktisk operativ belastning, av fire grunner:
+Selv med inkludering av sammenstilte anrop gir modellen sannsynligvis et **konservativt anslag** pa faktisk operativ belastning:
 
-1. **Kun kategori D kvantifiseres.** Hendelser i kategori B og C binder også operatørkapasitet, men er ikke inkludert som egne belastningsenheter.
-2. **Sammenstilte tilleggsanrop er ikke modellert.** Når flere innringere melder om samme hendelse, registreres bare det opprinnelige oppdraget. Tilleggsanropene opptar en operatør som ellers ville vært ledig.
-3. **Imputering med median.** De 23,5 % av kategori D-hendelsene som mangler tidspunkt for første ressurs fremme er tildelt median bindingstid — dette kan undervurdere de tyngre hendelsene.
-4. **Kun akuttfasen er modellert.** Bindingstiden er begrenset til akuttfasen (anrop → fremme + 3 min). Mange hendelser binder operatørkapasitet i lengre tid gjennom oppfølging, samband og loggføring.
+1. **Kategori B og C er ikke inkludert.** Reelle hendelser uten utrykning og tidskritiske avklaringer (ABA) binder ogsa operatorkapasitet, men er ikke modellert som egne belastningsenheter.
+2. **Imputering med median.** De 23,5 % av kategori D-hendelsene som mangler tidspunkt for forste ressurs fremme er tildelt median bindingstid -- dette kan undervurdere de tyngre hendelsene.
+3. **Kun akuttfasen er modellert.** Mange hendelser binder operatorkapasitet lenger gjennom oppfolging, samband og loggforing.
+4. **Sammenstilte anrop antas 1 minutt.** Faktisk varighet kan variere; noen kan vare lenger dersom innringer trenger mer avklaring.
 
-Begrensningene i datagrunnlaget trekker i hovedsak i én retning: mot undervurdering av faktisk operativ belastning. Modellen bør derfor tolkes som et minimumsanslag: de faktiske kapasitetsutfordringene er sannsynligvis større enn det tallene alene viser, og særlig større i perioder med hendelser som genererer flere sammenstilte anrop.
+Begrensningene trekker i hovedsak i en retning: mot undervurdering. Resultatene bor leses som et minimumsanslag pa brudd- og sviktrisiko, ikke som et maksimumsanslag.
 
 ---
 

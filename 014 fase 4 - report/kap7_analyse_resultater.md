@@ -139,84 +139,76 @@ Dag- og nattskift viser tilnærmet lik bindingstid (median 9,6 vs 10,4 min før 
 
 ---
 
-## 7.5 Kapasitetsanalyse: to driftsmoduser
+## 7.5 Kapasitetsanalyse: korrigert modell med skjulte anrop
 
 ### Metode
 
-For hvert beredskapsanrop (kategori D) beregnes antall samtidige aktive hendelser ved ankomsttidspunktet. En hendelse er «aktiv» i perioden fra anrop til bindingstiden er utløpt (faktisk observert tid fra BRIS + 3 min kvittering). Kapasitetsnivå klassifiseres basert på antall ledige operatører.
+For hvert innkommende anrop (beredskapsoppdrag kategori D + sammenstilte tilleggsanrop) beregnes antall samtidige aktive hendelser ved ankomsttidspunktet. En hendelse er "aktiv" i perioden fra anrop til bindingstiden er utlopt. Kapasitetsniva klassifiseres basert pa antall ledige operatorer (se avsnitt 6.4.3).
 
-Den sentrale analysen differensierer mellom to driftsmoduser som eksisterer parallelt i praksis:
+Modellen speiler den operative virkeligheten: operatorene tilpasser seg alltid ved a splitte makkerparet nar det trengs. Hver aktiv hendelse binder 1 operator. Antall ledige = c_eff minus n_aktive.
 
-- **Prosedyre (2 operatører per hendelse):** Makkerpar iht. driftsstandarden — én RØD og én GUL bundet per aktiv hendelse. Ledige operatører = c_eff − 2 × n_aktive.
-- **Beste evne (1 operatør per hendelse):** Solo-drift — operatøren håndterer alt alene. Ledige operatører = c_eff − 1 × n_aktive.
+Analysen gjennomfores i to varianter for a vise effekten av skjult anropsvolum:
+- **Kun kategori D:** 7 555 beredskapsoppdrag med ressursvarsling (bindingstid: median 13,0 min)
+- **Kategori D + skjulte anrop:** 7 555 + 18 901 = 26 456 belastningsenheter (skjulte anrop: 1 min bindingstid)
 
-Kapasitetsnivå for begge moduser:
-- **Normal:** ≥ 2 ledige operatører (makkerpar mulig for neste hendelse)
-- **Degradert:** 1 ledig operatør (kun solo mulig)
-- **Svikt:** 0 ledige (VL må overta eller overløp til Agder)
+### Hovedresultater
 
-### Resultater
+**Tabell 7.4: Kapasitetsniva -- kun kategori D vs. med skjulte anrop**
 
-**Tabell 7.4: Kapasitetsnivå — prosedyre vs. beste evne (n = 7 555 beredskapsoppdrag, kategori D)**
-
-| | **Prosedyre (2 op/hendelse)** | | | **Beste evne (1 op/hendelse)** | | |
+| | **Kun kategori D** (n = 7 555) | | | **Med skjulte anrop** (n = 26 456) | | |
 |---|---|---|---|---|---|---|
-| Skifttype | Normal | Degradert | Svikt | Normal | Degradert | Svikt |
-| **Dag hverdag (c=3)** | 74,6 % | 21,2 % | 4,2 % | 95,8 % | 3,3 % | 0,9 % |
-| **Natt/helg (c=2)** | 77,7 % | 0,0 % | 22,3 % | 77,7 % | 17,5 % | 4,7 % |
-| **Alle** | 76,3 % | 9,6 % | 14,1 % | 85,9 % | 11,1 % | 3,0 % |
+| Skifttype | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
+| **Dag hverdag (c=3)** | 86,9 % | 9,0 % | 4,2 % | 77,9 % | 12,0 % | 10,1 % |
+| **Natt/helg (c=2)** | 62,8 % | 24,5 % | 12,7 % | 48,1 % | 28,4 % | 23,5 % |
+| **Alle** | 73,8 % | 17,4 % | 8,8 % | 65,3 % | 19,0 % | 15,8 % |
 
-![Figur 7.2: Prosedyre vs beste evne](../analyse/figurer/kapasitet_prosedyre_vs_beste_evne.png)
-*Figur 7.2: Kapasitetsnivå ved ankomst under prosedyre (2 op, øvre rad) og beste evne (1 op, nedre rad). Forskjellen mellom øvre og nedre rad er den tilpasningen operatørene gjør daglig for å holde tjenesten gående.*
+![Figur 7.2: Effekt av skjulte anrop](../analyse/figurer/kapasitet_v4_med_skjulte.png)
+*Figur 7.2: Kapasitetsniva med og uten skjulte/sammenstilte anrop. Heltrukne soylene viser kun kategori D; halvgjennomsiktige soyler viser effekten av a inkludere 18 901 sammenstilte anrop. Effekten er storst pa natt/helg der Normal faller fra 62,8 % til 48,1 %.*
 
-Tre observasjoner:
+### Effekten av skjulte anrop
 
-**1. Natt/helg med prosedyre er binært.** Med c_eff = 2 og 2 operatører per hendelse finnes ingen degradert mellomsone — man går direkte fra Normal (77,7 %) til Svikt (22,3 %). Enten er begge operatørene ledige, eller ingen er det. Dette betyr at **hvert 4,5. beredskapsoppdrag på natt/helg medfører svikt** under prosedyrekrav.
+De sammenstilte tilleggsanropene forsterker kapasitetspresset betydelig:
 
-**2. Solo-drift absorberer kapasitetspresset.** Forskjellen mellom prosedyre (14,1 % svikt) og beste evne (3,0 % svikt) viser at operatørene daglig absorberer ~11 prosentpoeng kapasitetspress gjennom solo-håndtering. Dette er den «usynlige tilpasningen» alle i bransjen kjenner, men som ingen måler systematisk.
+- **Normal faller med 8,5 prosentpoeng totalt** (73,8 % til 65,3 %)
+- **Svikt nesten dobles** (8,8 % til 15,8 %)
+- **Natt/helg rammes hardest:** Normal faller under halvparten (48,1 %), og nesten hvert 4. anrop medforer svikt (23,5 %)
 
-**3. Dag hverdag er komfortabel under solo-drift.** Med c_eff = 3 og 1 operatør per hendelse er 95,8 % Normal. Bemanningen er tilstrekkelig for solo-drift på dagtid — men utilstrekkelig for prosedyrekonform drift (kun 74,6 % Normal).
+Dette bekrefter at de skjulte anropene -- til tross for kort varighet (~1 min) -- er det som vipper kapasiteten i perioder der presset allerede er hoyt. En operator som tar et sammenstilt anrop er utilgjengelig for neste hendelse i akkurat det kritiske vinduet.
 
-De rapporterte andelene for normal, degradert og svikt beskriver et nedre estimat for kapasitetskonflikt i sentralen, fordi de kun reflekterer kategori D-hendelser. Reell konfliktfrekvens kan være høyere når kategori B, kategori C og sammenstilte tilleggsanrop (avsnitt 7.2) tas med. Begrensningene i datagrunnlaget trekker i hovedsak i én retning: mot undervurdering. Resultatene bør derfor leses som et minimumsanslag på brudd- og sviktrisiko, ikke som et maksimumsanslag.
+De rapporterte andelene for normal, brudd og svikt beskriver et nedre estimat for kapasitetskonflikt i sentralen, fordi kategori B og C ikke er inkludert. Reell konfliktfrekvens kan vaere hoyere. Begrensningene i datagrunnlaget trekker i hovedsak i en retning: mot undervurdering. Resultatene bor leses som et minimumsanslag pa brudd- og sviktrisiko, ikke som et maksimumsanslag.
 
-![Figur 7.3: Kapasitet per time — to modeller](../analyse/figurer/kapasitet_per_time_to_modeller.png)
-*Figur 7.3: Kapasitetsnivå per time på døgnet under begge driftsmoduser. Øverst: prosedyre, nederst: beste evne. Skiftvekslingen kl. 19 (c=3 → c=2) er tydelig synlig som økt degradert/svikt-andel.*
+### Kapasitetsniva per time
 
-![Figur 7.4: Gapet mellom prosedyre og virkelighet](../analyse/figurer/kapasitet_gap_prosedyre_virkelighet.png)
-*Figur 7.4: Forskjellen i ikke-normal drift mellom prosedyrekrav og beste-evne-drift per time. De lilla stolpene kvantifiserer hvor mye operatørene «strekker seg» gjennom solo-håndtering. Gapet er størst kl. 15–17 (dagskift) og kl. 19–21 (etter skiftveksling).*
+![Figur 7.3: Kapasitet per time](../analyse/figurer/kapasitet_v4_per_time.png)
+*Figur 7.3: Kapasitetsniva per time pa dognet (kategori D + skjulte anrop). Nattetimene (c=2) har gjennomgaende hoy svikt-andel (20-34 %). Skiftvekslingen kl. 19 (c=3 til c=2) er tydelig synlig. Dagskiftet (kl. 07-18) har markant bedre kapasitetsbilde takket vaere c=3.*
+
+Tre tidsperioder skiller seg ut:
+- **Kl. 03-04:** Over 30 % svikt -- lavt volum, men nar det treffer med c=2 er det svarbart
+- **Kl. 19-20:** Skiftveksling fra c=3 til c=2 mens volumet fortsatt er hoyt -- 25 % svikt
+- **Kl. 09-10:** Dagtidstoppen med ca. 1 900 hendelser/time -- selv med c=3 er 10-11 % svikt
 
 ---
 
-## 7.6 Scenarioanalyse: effekt av +1 operatør per skift
+## 7.6 Scenarioanalyse: effekt av +1 operator per skift
 
-Scenarioet med én ekstra operatør per skift skal ikke forstås som en prognose, men som en strukturtest av robusthet. Hensikten er å undersøke hvilken effekt en ekstra bufferressurs har på sannsynligheten for at første aktive hendelse umiddelbart bringer skiftet over i brudd på driftsstandard eller svikt. Scenarioet øker c_eff fra 3 → 4 på dag hverdag og fra 2 → 3 på natt/helg.
+Scenarioet med en ekstra operator per skift er en strukturtest av robusthet: hvilken effekt har en ekstra bufferressurs pa sannsynligheten for brudd og svikt? Scenarioet oker c_eff fra 3 til 4 pa dag hverdag og fra 2 til 3 pa natt/helg.
 
-**Tabell 7.5: Effekt av +1 operatør — prosedyre (2 op/hendelse)**
+**Tabell 7.5: Effekt av +1 operator (kategori D + skjulte anrop)**
 
-| Skifttype | | Dagens bemanning | | +1 operatør | | |
+| Skifttype | | Dagens bemanning | | +1 operator | | |
 |---|---|---|---|---|---|---|
-| | Normal | Deg. | Svikt | Normal | Deg. | Svikt |
-| **Dag hverdag** (3→4) | 74,6 % | 21,2 % | 4,2 % | **95,8 %** | **0,0 %** | 4,2 % |
-| **Natt/helg** (2→3) | 77,7 % | 0,0 % | 22,3 % | 77,7 % | **17,5 %** | **4,7 %** |
-
-**Tabell 7.5b: Effekt av +1 operatør — beste evne (1 op/hendelse)**
-
-| Skifttype | | Dagens bemanning | | +1 operatør | | |
-|---|---|---|---|---|---|---|
-| | Normal | Deg. | Svikt | Normal | Deg. | Svikt |
-| **Dag hverdag** (3→4) | 95,8 % | 3,3 % | 0,9 % | **99,1 %** | 0,6 % | 0,3 % |
-| **Natt/helg** (2→3) | 77,7 % | 17,5 % | 4,7 % | **95,3 %** | **2,7 %** | **2,0 %** |
-
-![Figur 7.5: Effekt av +1 operatør](../analyse/figurer/scenario_pluss1_operator.png)
-*Figur 7.5: Sammenligning av dagens bemanning (solid) og +1 operatør (halv-gjennomsiktig, sort kant) under begge driftsmoduser. Effekten er størst på natt/helg.*
+| | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
+| **Dag hverdag** (3 til 4) | 77,9 % | 12,0 % | 10,1 % | **89,9 %** | **4,8 %** | **5,3 %** |
+| **Natt/helg** (2 til 3) | 48,1 % | 28,4 % | 23,5 % | **76,5 %** | **11,5 %** | **12,0 %** |
+| **Alle** | 65,3 % | 19,0 % | 15,8 % | **84,2 %** | **7,6 %** | **8,2 %** |
 
 Tre funn:
 
-**1. Natt/helg under prosedyre: det binære problemet forsvinner.** Med c_eff = 2 er det ingen degradert mellomsone (0 % → 22,3 % svikt). Med c_eff = 3 oppstår en degradert buffer (17,5 %), og svikt faller dramatisk fra 22,3 % til 4,7 % — en reduksjon på 79 %.
+**1. Natt/helg: fra under halvparten til tre fjerdedeler Normal.** Med +1 operator oker Normal fra 48,1 % til 76,5 % (+28,4 pp). Svikt halveres fra 23,5 % til 12,0 %. Den ekstra operatoren gir den buffersonen som c=2 mangler -- operatorene kan jobbe solo for det gar til svikt.
 
-**2. Dag hverdag under prosedyre: degradert elimineres.** Med c_eff = 4 og 2 operatører per hendelse er det alltid nok til makkerpar (Normal 74,6 % → 95,8 %). Degradert (solo-drift iht. prosedyre) faller fra 21,2 % til 0 %.
+**2. Dag hverdag: solid forbedring.** Normal oker fra 77,9 % til 89,9 %. Svikt halveres fra 10,1 % til 5,3 %. Med c=4 kan to samtidige hendelser handteres med makkerpar pa den forste og solo pa den andre for svikt inntreffer.
 
-**3. Natt/helg under beste evne: nær full dekning.** Normal øker fra 77,7 % til 95,3 % — tilnærmet likt dagens dag-hverdag-nivå. Svikt halveres fra 4,7 % til 2,0 %.
+**3. Selv med +1 er sviktraten ikke null.** 8,2 % samlet svikt viser at kapasitetsproblemer ikke elimineres med en ekstra operator -- de reduseres vesentlig. Dette skyldes perioder med tre eller flere samtidige hendelser, forsterket av skjulte anrop.
 
 ---
 
@@ -244,16 +236,16 @@ Den tradisjonelle køteoretiske modellen gir svært lav systemutnyttelse (ρ < 1
 **Funn 2: Faktisk bindingstid er lengre enn samtaletid — og databasert.**
 Bindingstiden (anrop → første ressurs fremme + 3 min kvittering) har median 13,0 minutter basert på 7 555 beredskapsoppdrag. Nesten halvparten (45,7 %) av oppdragene binder operatørene i 10–13 minutter, mens 12,2 % tar over 20 minutter. RØD-fasen (median 1,2 min) er kort; det er GUL-fasen (median 8,2 min) som dominerer kapasitetsbindingen.
 
-**Funn 3: Gapet mellom prosedyre og virkelighet kvantifiserer den daglige tilpasningen.**
-Under prosedyrekrav (2 operatører per hendelse) er 14,1 % av alle beredskapsanrop i svikt. Under beste-evne-drift (1 operatør) er svikt 3,0 %. Differansen — 11 prosentpoeng — er den «usynlige tilpasningen» der operatørene absorberer kapasitetspress gjennom solo-håndtering. På natt/helg med c_eff = 2 er prosedyresituasjonen binær: 77,7 % Normal, 22,3 % direkte Svikt, uten mellomsone. Disse tallene er et minimumsanslag: kategori B- og C-hendelser samt sammenstilte tilleggsanrop er ikke inkludert som egne belastningsenheter.
+**Funn 3: Skjulte anrop er det som knekker kapasiteten.**
+Med den korrigerte modellen (operativ tilpasning + skjulte anrop) er 15,8 % av alle anrop i svikt og 19,0 % i brudd på driftsstandard. Uten de skjulte anropene er svikt 8,8 % — differansen på 7 prosentpoeng viser at de sammenstilte tilleggsanropene, til tross for kort varighet (~1 min), er det som vipper kapasiteten i perioder der presset allerede er høyt. På natt/helg (c=2) er under halvparten av anropene i normal drift (48,1 %), og nesten hvert 4. anrop medfører svikt (23,5 %). Disse tallene er fortsatt et minimumsanslag fordi kategori B og C ikke er inkludert.
 
 **Funn 4: +1 operatør per skift har størst effekt på natt/helg.**
-Én ekstra operatør (c_eff 2→3 natt/helg, 3→4 dag) reduserer svikt under prosedyre fra 22,3 % til 4,7 % på natt/helg og eliminerer degradert drift helt på dag hverdag. Under beste evne bringes natt/helg til 95,3 % Normal — tilnærmet likt dagens dag-hverdag-nivå. Analysen indikerer at bemanningsstrukturen er en mer direkte driver for observerte kapasitetsforskjeller enn samlet synlig oppdragsvolum alene.
+Én ekstra operatør (c_eff 2→3 natt/helg, 3→4 dag) øker Normal fra 48,1 % til 76,5 % på natt/helg (+28,4 pp) og reduserer svikt fra 23,5 % til 12,0 %. På dag hverdag øker Normal fra 77,9 % til 89,9 %. Den ekstra operatøren gir den buffersonen som c=2 mangler — operatørene kan jobbe solo før det går til svikt. Analysen indikerer at bemanningsstrukturen er en mer direkte driver for observerte kapasitetsforskjeller enn samlet synlig oppdragsvolum alene.
 
 Funnene har direkte parallell til dimensjoneringslogikken i brannstasjonsforskriften: S1-stasjoner dimensjoneres med to kjøretøy ikke fordi begge alltid er i bruk, men fordi konsekvensen av utilstrekkelig kapasitet ved simultane hendelser er uakseptabel. Det samme prinsippet — dimensjonering for beredskapstopper, ikke for gjennomsnittsbelastning — bør ligge til grunn for 110-operatørkapasitet.
 
 ---
 
-*Skript for analyser og figurer: `analyse/scripts/konflikt_beredskap_v3.py`, `analyse/scripts/scenario_pluss1.py`, `analyse/scripts/bindingstid_analyse.py`*
+*Skript for analyser og figurer: `analyse/scripts/konflikt_v4_korrigert.py`, `analyse/scripts/scenario_pluss1.py`, `analyse/scripts/bindingstid_analyse.py`*
 *Data: `004 data/110 SØR VEST TESTDATASETT.xlsx` (BRIS 2025, 61 964 synlige oppdrag, 7 555 beredskapsoppdrag kategori D)*
 *Prosedyreferanse: Rogaland brann og redning IKS (2024). Prosedyre arbeidsmetodikk, utalarmering og loggføring, versjon 4, 16.12.2024.*
