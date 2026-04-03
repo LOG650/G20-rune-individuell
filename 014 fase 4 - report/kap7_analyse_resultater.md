@@ -119,7 +119,7 @@ Bindingstiden kan belyses gjennom to tidspunkter i BRIS-data. Tid fra anrop til 
 Både RØD og GUL er dermed bundet i hele perioden fra anrop til første ressurs er fremme. Bindingstiden på median 13,0 minutter representerer perioden der to operatører er opptatt med én hendelse. Etter at innringer legger på kan RØD frigjøres før GUL, men det eksakte tidspunktet varierer og er ikke registrert i BRIS.
 
 ![Figur 7.1a: Bindingstid per fase](../analyse/figurer/bindingstid_histogram.png)
-*Figur 7.1a: Fordeling av bindingstid per fase (RØD, GUL, Total) for beredskapsoppdrag med utrykningsressurser.*
+*Figur 7.1a: Tidsintervaller i beredskapsoppdrag. Venstre: tid til utalarmering (median 1,2 min). Midten: utrykningstid (median 8,2 min). Høyre: total bindingstid (median 10,0 min, uten kvittering). Merk: RØD og GUL er bundet parallelt gjennom hele forløpet.*
 
 **Tabell 7.3b: Bindingstid-fordeling (per 1000 beredskapsoppdrag)**
 
