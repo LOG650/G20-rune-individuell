@@ -108,7 +108,15 @@ De tre minuttene reflekterer vindusmelding som må kvitteres og logges av GUL-op
 | P90 | 21,6 |
 | P95 | 29,2 |
 
-Bindingstiden er delt opp i to faser. RØD-fasen (anrop → ressurs varslet) har median 1,2 minutter — dette er den akutte samtale- og varslingsfasen. GUL-fasen (ressurs varslet → første ressurs fremme) har median 8,2 minutter — dette er oppfølgingsperioden der operatøren koordinerer, logger og gir tidskritisk informasjon til mannskap underveis. GUL-fasen utgjør dermed hoveddelen av kapasitetsbindingen.
+Bindingstiden kan belyses gjennom to tidspunkter i BRIS-data. Tid fra anrop til ressurs varslet (median 1,2 minutter) måler hvor raskt GUL-operatøren får utalarmert ressurser — men dette er ikke det samme som at RØD-operatøren er frigjort. Både RØD og GUL er bundet parallelt gjennom hele akuttfasen:
+
+- **0 – ~1 min:** RØD i samtale med innringer, GUL i medlytt og lokalisering
+- **~1 – ~2 min:** GUL utalarmerer ressurser (ressurs varslet), RØD fortsetter samtalen
+- **~2 – ~10 min:** RØD kan fortsatt være i telefon med innringer, GUL koordinerer samband og gir tidskritisk informasjon til mannskap underveis
+- **~10 min:** Første ressurs fremme → vindusmelding
+- **+3 min:** Kvittering og loggføring → GUL delvis frigjort
+
+Både RØD og GUL er dermed bundet i hele perioden fra anrop til første ressurs er fremme. Bindingstiden på median 13,0 minutter representerer perioden der to operatører er opptatt med én hendelse. Etter at innringer legger på kan RØD frigjøres før GUL, men det eksakte tidspunktet varierer og er ikke registrert i BRIS.
 
 ![Figur 7.1a: Bindingstid per fase](../analyse/figurer/bindingstid_histogram.png)
 *Figur 7.1a: Fordeling av bindingstid per fase (RØD, GUL, Total) for beredskapsoppdrag med utrykningsressurser.*
@@ -234,7 +242,7 @@ Analysen dokumenterer fire hovedfunn:
 Den tradisjonelle køteoretiske modellen gir svært lav systemutnyttelse (ρ < 10 %) og P(W > 30s) < 0,5 % for alle skifttyper. Modellen behandler operatører som uavhengige servere, fanger ikke kapasitetstapet ved makkerpar-kravet, og baserer seg på en ankomstrate fra synlige oppdrag som undervurderer faktisk innkommende volum med anslagsvis 23 %.
 
 **Funn 2: Faktisk bindingstid er lengre enn samtaletid — og databasert.**
-Bindingstiden (anrop → første ressurs fremme + 3 min kvittering) har median 13,0 minutter basert på 7 555 beredskapsoppdrag. Nesten halvparten (45,7 %) av oppdragene binder operatørene i 10–13 minutter, mens 12,2 % tar over 20 minutter. RØD-fasen (median 1,2 min) er kort; det er GUL-fasen (median 8,2 min) som dominerer kapasitetsbindingen.
+Bindingstiden (anrop → første ressurs fremme + 3 min kvittering) har median 13,0 minutter basert på 7 555 beredskapsoppdrag. Nesten halvparten (45,7 %) av oppdragene binder operatørene i 10–13 minutter, mens 12,2 % tar over 20 minutter. Tiden til utalarmering (median 1,2 min) viser at GUL handler raskt, men både RØD og GUL er bundet parallelt gjennom hele akuttfasen.
 
 **Funn 3: Skjulte anrop er det som knekker kapasiteten.**
 Med den korrigerte modellen (operativ tilpasning + skjulte anrop) er 15,8 % av alle anrop i svikt og 19,0 % i brudd på driftsstandard. Uten de skjulte anropene er svikt 8,8 % — differansen på 7 prosentpoeng viser at de sammenstilte tilleggsanropene, til tross for kort varighet (~1 min), er det som vipper kapasiteten i perioder der presset allerede er høyt. På natt/helg (c=2) er under halvparten av anropene i normal drift (48,1 %), og nesten hvert 4. anrop medfører svikt (23,5 %). Disse tallene er fortsatt et minimumsanslag fordi kategori B og C ikke er inkludert.

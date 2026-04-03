@@ -137,7 +137,9 @@ print(f"Kombinert datasett: {len(combined)} ({len(bered)} kat.D + {len(hidden_df
 print()
 
 # === 5. ANKOMSTKONFLIKTMODELL - KORRIGERT LOGIKK ===
-# Operativ virkelighet: hver aktiv hendelse binder 1 operator
+# Operativ virkelighet: en hendelse binder normalt 2 operatorer (ROD+GUL),
+# men ved samtidskonflikter splittes makkerparet. Modellen teller antall
+# aktive hendelser mot c_eff for a avgjore kapasitetsniva for neste anrop.
 # Normal: ledige >= 2 (makkerpar mulig for neste)
 # Brudd:  ledige = 1  (solo)
 # Svikt:  ledige = 0  (ingen ledig)

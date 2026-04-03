@@ -111,7 +111,7 @@ Dette er en **prosedyrkonformitetsmetrikk** — ikke et ventetidsmål. Kapasitet
 
 Modellen bygger pa en sentral observasjon om hvordan operatorene faktisk tilpasser seg ved samtidskonflikter: **makkerparet splittes**. Nar et nytt anrop ankommer og begge operatorene allerede er bundet i en aktiv hendelse, bryter de makkerparet og fordeler seg slik at hver operator handterer sin hendelse solo. Denne tilpasningen er ikke et sammenbrudd -- det er den operative virkeligheten som gjor at tjenesten opprettholdes under press.
 
-Modellen speiler dette ved at hver aktiv hendelse binder 1 operator (den operative virkeligheten, ikke prosedyrekravet om 2). Antall ledige operatorer ved et gitt tidspunkt er:
+I den operative virkeligheten binder en aktiv hendelse normalt 2 operatorer (ROD + GUL), men ved samtidskonflikter splittes makkerparet slik at operatorene fordeler seg. Modellen teller derfor antall aktive hendelser mot tilgjengelig kapasitet for a avgjore om neste hendelse kan handteres med makkerpar (den operative virkeligheten, ikke prosedyrekravet om 2). Antall ledige operatorer ved et gitt tidspunkt er:
 
 $$\text{ledige}(t_i) = c_{\text{eff}} - n_{\text{aktive}}(t_i)$$
 
@@ -204,7 +204,7 @@ Bindingstid-proxyen fanger den mest operative og dimensjoneringsrelevante fasen 
 - **GUL forblir bundet til vindusmelding:** GUL-operatoren er bundet frem til vindusmelding mottas om at forste ressurs er fremme pa stedet. Etter kvittering og loggforing (anslagsvis 3 minutter) er GUL delvis frigjort.
 - **Etter fremme stabiliseres driften:** Mange hendelser gar over i en mer stabil driftsfase med sporadisk belastning pa operatoren.
 
-Av 7 555 kategori D-hendelser har 5 777 (76,5 %) registrert tidspunkt for forste ressurs fremme. De resterende tildeles median bindingstid. Observert fordeling: median 13,0 min, P90 21,6 min.
+Av 7 555 kategori D-hendelser har 5 777 (76,5 %) registrert tidspunkt for forste ressurs fremme. De resterende tildeles median bindingstid. Observert fordeling: median 13,0 min, P90 21,6 min. Merk at bindingstiden representerer perioden der bade ROD og GUL er bundet parallelt -- ikke bare en av dem.
 
 ### 6.4.7 Hva modellen maler -- og hva den ikke maler
 
