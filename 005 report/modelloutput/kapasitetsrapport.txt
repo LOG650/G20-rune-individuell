@@ -1,0 +1,46 @@
+KAPASITETSANALYSE - Sør-Vest 110
+Generert: 2026-04-03 06:43
+======================================================================
+
+Datagrunnlag:
+  Kategori D (beredskapsoppdrag):    7555
+  Skjulte/sammenstilte anrop:       18901
+  Totalt analyserte belastninger:    26456
+  Korreksjonsfaktor:               3.502x
+
+Bindingstid kategori D (inkl kvittering):
+     P10:    9.1 min
+     P25:   11.1 min
+  Median:   13.0 min
+     P75:   15.4 min
+     P90:   21.6 min
+     P95:   29.2 min
+  Skjulte anrop bindingstid: 1.0 min
+
+DAGENS BEMANNING (dag c=3, natt/helg c=2):
+--------------------------------------------------
+                    Alle: Normal= 65.3%  Brudd= 19.0%  Svikt= 15.8%  (n=26456)
+       Dag hverdag (c=3): Normal= 77.9%  Brudd= 12.0%  Svikt= 10.1%  (n=15225)
+         Natt/helg (c=2): Normal= 48.1%  Brudd= 28.4%  Svikt= 23.5%  (n=11231)
+
+DIMENSJONERINGSKURVE (c_dag = c_natt):
+----------------------------------------------------------------------
+ c_eff |   Normal    Brudd    Svikt |  Norm_dag  Svikt_dag |  Norm_natt  Svikt_natt
+----------------------------------------------------------------------
+     2 |    48.3%    29.0%    22.7% |     48.5%      22.1% |      48.1%       23.5%
+     3 |    77.3%    11.8%    10.9% |     77.9%      10.1% |      76.5%       12.0%
+     4 |    89.1%     4.8%     6.1% |     89.9%       5.3% |      88.0%        7.3%
+     5 |    93.9%     2.1%     4.0% |     94.7%       3.2% |      92.7%        5.0%
+     6 |    96.0%     1.2%     2.8% |     96.8%       2.2% |      95.0%        3.6%
+
+REALISTISKE BEMANNINGSSCENARIOER:
+----------------------------------------------------------------------
+          Dagens (3/2): Normal= 65.3%  Svikt= 15.8%  (natt: Normal= 48.1% Svikt= 23.5%)
+         +1 alle (4/3): Normal= 84.2%  Svikt=  8.2%  (natt: Normal= 76.5% Svikt= 12.0%)
+         +2 alle (5/4): Normal= 91.8%  Svikt=  5.0%  (natt: Normal= 88.0% Svikt=  7.3%)
+         +1 natt (3/3): Normal= 77.3%  Svikt= 10.9%  (natt: Normal= 76.5% Svikt= 12.0%)
+          +1 dag (4/2): Normal= 72.1%  Svikt= 13.0%  (natt: Normal= 48.1% Svikt= 23.5%)
+
+MERK: Akseptabelt serviceniva er en politisk/ledelsesmessig beslutning.
+Modellen leverer det kvantitative grunnlaget for a ta et informert valg.
+Resultatene er et minimumsanslag - faktisk belastning er sannsynligvis hoyere.
