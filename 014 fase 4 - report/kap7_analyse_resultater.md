@@ -73,6 +73,8 @@ Med utgangspunkt i prosedyrens rolledefinisjon etableres tre kapasitetsnivåer, 
 
 *Ledige operatører = c_eff − n_aktive. Modellen speiler den operative virkeligheten: ved samtidskonflikter splittes makkerparet slik at operatørene fordeler seg. Med c_eff = 3 og 1 aktiv hendelse er det fortsatt 2 ledige (Normal) — den tredje operatøren kan ta neste hendelse med makkerpar. Brudd oppstår først når det kun er 1 ledig, og svikt når ingen er ledig.*
 
+Tabellen bygger på en operativ tilpasningslogikk der makkerpar ikke nødvendigvis forblir fast låst til én hendelse gjennom hele akuttfasen. Ved c_eff = 3 og én aktiv hendelse er det fortsatt to tilgjengelige operatører, slik at neste hendelse i praksis kan tas med et nytt makkerpar. Brudd oppstår først når den neste hendelsen må håndteres med kun én ledig operatør, og svikt når ingen er ledige.
+
 Den kritiske asymmetrien mellom c_eff = 2 og c_eff = 3 er at med c_eff = 2 er det kun étt steg fra normal drift til svikt: allerede ved andre samtidige hendelse er begge operatørene opptatt. Med c_eff = 3 finnes en buffersone der operatørene kan jobbe solo før svikt inntreffer.
 
 ---
@@ -155,9 +157,15 @@ For hvert innkommende anrop (beredskapsoppdrag kategori D + sammenstilte tillegg
 
 Modellen speiler den operative virkeligheten: operatørene tilpasser seg alltid ved å splitte makkerparet når det trengs. Antall ledige = c_eff minus n_aktive.
 
+De skjulte anropene kan ikke observeres direkte som egne oppdrag i BRIS/LEO. I modellen er de derfor plassert i tid ved å interpolere fra nærmeste synlige oppdrags ankomsttidspunkt. Dersom oppdrag B06-250101-4 og B06-250101-6 er synlige, legges det manglende sekvensnummeret (-5) inn med tidspunkt fra det foregående synlige oppdraget. Analysen fanger dermed den strukturelle effekten av at slike anrop beslaglegger kapasitet i perioder med eksisterende belastning, selv om det eksakte tidspunktet for hvert enkelt skjult anrop er et estimat.
+
 Analysen gjennomføres i to varianter for å vise effekten av skjult anropsvolum:
 - **Kun kategori D:** 7 555 beredskapsoppdrag med ressursvarsling (bindingstid: median 13,0 min)
-- **Kategori D + skjulte anrop:** 7 555 + 18 901 = 26 456 belastningsenheter (skjulte anrop: 1 min bindingstid)
+- **Kategori D + skjulte anrop:** 7 555 + 18 901 = 26 456 belastningsenheter (der en belastningsenhet er et anrop eller hendelsesforløp som binder operatørkapasitet og derfor inngår i konfliktanalysen) (skjulte anrop: 1 min bindingstid)
+
+### Antakelse om bindingstid for sammenstilte anrop
+
+De sammenstilte tilleggsanropene er i modellen tildelt 1 minutts bindingstid. Dette er en forenklet og konservativ antakelse, valgt for å representere at slike anrop ofte er korte — operatøren kjenner allerede hendelsen, avklarer kort, informerer at ressurs er på vei og legger på — men likevel beslaglegger en operatør i et kritisk tidsvindu. Antakelsen må ikke forstås som en presis måling av faktisk samtaletid, men som en operativ proxy for kortvarig kapasitetsbinding. Dersom reell gjennomsnittlig bindingstid er høyere, vil modellen undervurdere effekten av skjulte anrop. Sensitiviteten for denne antakelsen er et område for videre analyse.
 
 ### Hovedresultater
 
@@ -171,7 +179,7 @@ Analysen gjennomføres i to varianter for å vise effekten av skjult anropsvolum
 | **Alle** | 73,8 % | 17,4 % | 8,8 % | 65,3 % | 19,0 % | 15,8 % |
 
 ![Figur 7.2: Effekt av skjulte anrop](../analyse/figurer/kapasitet_v4_med_skjulte.png)
-*Figur 7.2: Kapasitetsniva med og uten skjulte/sammenstilte anrop. Heltrukne soylene viser kun kategori D; halvgjennomsiktige soyler viser effekten av a inkludere 18 901 sammenstilte anrop. Effekten er storst pa natt/helg der Normal faller fra 62,8 % til 48,1 %.*
+*Figur 7.2: Kapasitetsnivå med og uten skjulte/sammenstilte anrop. Heltrukne søyler viser kun kategori D; halvgjennomsiktige søyler viser effekten av å inkludere 18 901 sammenstilte anrop. Effekten er størst på natt/helg der Normal faller fra 62,8 % til 48,1 %.*
 
 ### Effekten av skjulte anrop
 
@@ -179,7 +187,7 @@ De sammenstilte tilleggsanropene forsterker kapasitetspresset betydelig:
 
 - **Normal faller med 8,5 prosentpoeng totalt** (73,8 % til 65,3 %)
 - **Svikt nesten dobles** (8,8 % til 15,8 %)
-- **Natt/helg rammes hardest:** Normal faller under halvparten (48,1 %), og nesten hvert 4. anrop medforer svikt (23,5 %)
+- **Natt/helg rammes hardest:** Normal faller under halvparten (48,1 %), og nesten hvert 4. anrop medfører svikt (23,5 %)
 
 Dette bekrefter at de skjulte anropene — til tross for kort varighet (~1 min) — er det som vipper kapasiteten i perioder der presset allerede er høyt. En operatør som tar et sammenstilt anrop er utilgjengelig for neste hendelse i akkurat det kritiske vinduet.
 
@@ -188,12 +196,12 @@ De rapporterte andelene for normal, brudd og svikt beskriver et nedre estimat fo
 ### Kapasitetsnivå per time
 
 ![Figur 7.3: Kapasitet per time](../analyse/figurer/kapasitet_v4_per_time.png)
-*Figur 7.3: Kapasitetsnivå per time pa dognet (kategori D + skjulte anrop). Nattetimene (c=2) har gjennomgaende hoy svikt-andel (20-34 %). Skiftvekslingen kl. 19 (c=3 til c=2) er tydelig synlig. Dagskiftet (kl. 07-18) har markant bedre kapasitetsbilde takket vaere c=3.*
+*Figur 7.3: Kapasitetsnivå per time på døgnet (kategori D + skjulte anrop). Nattetimene (c=2) har gjennomgående høy svikt-andel (20-34 %). Skiftvekslingen kl. 19 (c=3 til c=2) er tydelig synlig. Dagskiftet (kl. 07-18) har markant bedre kapasitetsbilde takket være c=3.*
 
 Tre tidsperioder skiller seg ut:
-- **Kl. 03-04:** Øver 30 % svikt — lavt volum, men når det treffer med c=2 er det sårbart
+- **Kl. 03-04:** Over 30 % svikt — lavt volum, men når det treffer med c=2 er det sårbart
 - **Kl. 19-20:** Skiftveksling fra c=3 til c=2 mens volumet fortsatt er høyt — 25 % svikt
-- **Kl. 09-10:** Dagtidstoppen med ca. 1 900 hendelser/år per time — selv med c=3 er 10–11 % svikt
+- **Kl. 09-10:** Dagtidstoppen med ca. 1 900 hendelser per time — selv med c=3 er 10–11 % svikt
 
 ---
 
@@ -203,7 +211,7 @@ Scenarioet med én ekstra operatør per skift er en strukturtest av robusthet: h
 
 **Tabell 7.5: Effekt av +1 operatør (kategori D + skjulte anrop)**
 
-| Skifttype | | Dagens bemanning | | +1 operator | | |
+| Skifttype | | Dagens bemanning | | +1 operatør | | |
 |---|---|---|---|---|---|---|
 | | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
 | **Dag hverdag** (3 til 4) | 77,9 % | 12,0 % | 10,1 % | **89,9 %** | **4,8 %** | **5,3 %** |
@@ -220,6 +228,26 @@ Tre funn:
 **2. Dag hverdag: solid forbedring.** Normal øker fra 77,9 % til 89,9 %. Svikt halveres fra 10,1 % til 5,3 %. Med c=4 kan to samtidige hendelser håndteres med makkerpar på den første og solo på den andre før svikt inntreffer.
 
 **3. Selv med +1 er sviktraten ikke null.** 8,2 % samlet svikt viser at kapasitetsproblemer ikke elimineres med én ekstra operatør — de reduseres vesentlig. Dette skyldes perioder med tre eller flere samtidige hendelser, forsterket av skjulte anrop.
+
+Scenarioanalysen viser den strukturelle effekten av økt bufferkapasitet, men sier ikke alene hvordan en eventuell bemanningsøkning bør organiseres i praksis. Det er for eksempel ikke gitt at alle timer trenger samme økning, eller at effekten er lik med ulik kompetansesammensetning. Resultatene bør derfor forstås som et analytisk beslutningsgrunnlag, ikke som en ferdig ressurs- eller turnusløsning.
+
+---
+
+### Oppsummering av modellantakelser
+
+**Tabell 7.6: Modellantakelser og parametere**
+
+| Parameter | Verdi | Kilde |
+|---|---|---|
+| Bindingstid kategori D | Observert fra BRIS + 3 min kvittering | Median 13,0 min |
+| Bindingstid skjulte anrop | 1 min (kvalitativt estimat) | Operativ vurdering |
+| Kapasitetsnivå: Normal | ledige ≥ 2 | Makkerpar mulig |
+| Kapasitetsnivå: Brudd | ledige = 1 | Solo-håndtering |
+| Kapasitetsnivå: Svikt | ledige ≤ 0 | VL/Agder |
+| c_eff dag hverdag | 3 (4 tot. − 1 VL) | Prosedyre |
+| c_eff natt/helg | 2 (3 tot. − 1 VL) | Prosedyre |
+| Skjulte anrop identifisert via | Sekvensgap i 110_ID | 18 901 stk |
+| Imputering manglende fremme-tid | Median bindingstid | 23,5 % av kat. D |
 
 ---
 
@@ -247,7 +275,7 @@ Den tradisjonelle køteoretiske modellen gir svært lav systemutnyttelse (ρ < 1
 **Funn 2: Faktisk bindingstid er lengre enn samtaletid — og databasert.**
 Bindingstiden (anrop → første ressurs fremme + 3 min kvittering) har median 13,0 minutter basert på 7 555 beredskapsoppdrag. Nesten halvparten (45,7 %) av oppdragene binder operatørene i 10–13 minutter, mens 12,2 % tar over 20 minutter. Tiden til utalarmering (median 1,2 min) viser at GUL handler raskt, men både RØD og GUL er bundet parallelt gjennom hele akuttfasen.
 
-**Funn 3: Skjulte anrop er det som knekker kapasiteten.**
+**Funn 3: Skjulte anrop forsterker kapasitetsproblemet vesentlig.**
 Med den korrigerte modellen (operativ tilpasning + skjulte anrop) er 15,8 % av alle anrop i svikt og 19,0 % i brudd på driftsstandard. Uten de skjulte anropene er svikt 8,8 % — differansen på 7 prosentpoeng viser at de sammenstilte tilleggsanropene, til tross for kort varighet (~1 min), er det som vipper kapasiteten i perioder der presset allerede er høyt. På natt/helg (c=2) er under halvparten av anropene i normal drift (48,1 %), og nesten hvert 4. anrop medfører svikt (23,5 %). Disse tallene er fortsatt et minimumsanslag fordi kategori B og C ikke er inkludert.
 
 **Funn 4: +1 operatør per skift har størst effekt på natt/helg.**

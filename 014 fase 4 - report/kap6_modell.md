@@ -144,8 +144,8 @@ For a illustrere hva dette innebarer i praksis:
 | Situasjon | Hva skjer operativt | Kapasitetsniva |
 |---|---|---|
 | 0 aktive, nytt anrop | Makkerpar + 1 gronn ledig | Normal |
-| 1 aktiv, nytt anrop | Gronn tar den alene (solo) | Brudd pa driftsstandard |
-| 2 aktive, nytt anrop | Makkerparet pa H1 splitter -- alle 3 jobber solo | Brudd pa driftsstandard |
+| 1 aktiv, nytt anrop | 2 ledige -- makkerpar mulig for neste hendelse | Normal |
+| 2 aktive, nytt anrop | Kun 1 ledig -- solo-handtering | Brudd pa driftsstandard |
 | 3 aktive, nytt anrop | Ingen ledig | Svikt |
 
 Den kritiske asymmetrien mellom c_eff = 2 og c_eff = 3 er at med c_eff = 2 er det kun ett steg fra normal drift til svikt: allerede ved andre samtidige hendelse er begge operatorene opptatt. Med c_eff = 3 finnes en buffersone der operatorene kan jobbe solo for svikt inntreffer.
@@ -245,10 +245,11 @@ def ankomstkonflikt(anrop, bindingstid_func, c_eff):
         while aktive and aktive[0] <= anrop_i.tidspunkt:
             heapq.heappop(aktive)
         n_aktive = len(aktive)
+        ledige = c_eff - n_aktive
         # Klassifiser
-        if n_aktive == 0:
+        if ledige >= 2:
             nivaa = "Normal"
-        elif n_aktive >= c_eff:
+        elif ledige <= 0:
             nivaa = "Svikt"
         else:
             nivaa = "Brudd"
