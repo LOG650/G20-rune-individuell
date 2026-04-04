@@ -225,6 +225,7 @@ Selv med inkludering av sammenstilte anrop gir modellen sannsynligvis et **konse
 2. **Imputering med median.** De 23,5 % av kategori D-hendelsene som mangler tidspunkt for forste ressurs fremme er tildelt median bindingstid -- dette kan undervurdere de tyngre hendelsene.
 3. **Kun akuttfasen er modellert.** Mange hendelser binder operatorkapasitet lenger gjennom oppfolging, samband og loggforing.
 4. **Sammenstilte anrop antas 1 minutt.** Faktisk varighet kan variere; noen kan vare lenger dersom innringer trenger mer avklaring.
+5. **Feilkategoriserte tilleggsanrop.** Under hoyt press hender det at anrop som operativt tilhorer en pagaende hendelse lukkes som egne saker med ikke-beredskapsrelevant hendelsestype (service, feilringing, lost av 110) i stedet for a bli sammenstilt med det aktive oppdraget. Estimatet pa 18 901 sammenstilte anrop er derfor sannsynligvis et underestimat.
 
 Begrensningene trekker i hovedsak i en retning: mot undervurdering. Resultatene bor leses som et minimumsanslag pa brudd- og sviktrisiko, ikke som et maksimumsanslag.
 
