@@ -4,7 +4,7 @@ Denne casebeskrivelsen presenterer konteksten for kapasitetsanalysen: de norske 
 
 ## 4.1 Norske 110-sentraler — oversikt
 
-Norge har tolv 110-sentraler som mottar nødmeldinger og koordinerer brann- og redningsinnsats døgnet rundt. Sentralene dekker definerte geografiske områder og betjener til sammen hele landets befolkning. Fra høsten 2024 benytter alle sentralene det felles oppdragshåndteringssystemet LEO, noe som for første gang muliggjør sammenlignbare hendelsesdata på tvers av sentraler.
+Norge har tolv 110-sentraler som mottar nødmeldinger og koordinerer brann- og redningsinnsats døgnet rundt. Sentralene dekker definerte geografiske områder og betjener til sammen hele landets befolkning. Fra høsten 2024 benytter alle sentralene det felles oppdragshåndteringssystemet LEO, noe som for første gang muliggjør sammenlignbare hendelsesdata på tvers av sentraler. Selv om felles oppdragshåndteringssystem gir bedre sammenlignbarhet enn tidligere, innebærer ikke dette at alle belastningsmål er direkte sammenlignbare mellom sentraler. Særlig gjelder dette hvordan flere anrop til samme hendelse registreres og sammenstilles.
 
 **Tabell 4.1: Norske 110-sentraler**
 
@@ -27,20 +27,22 @@ Bemanningsdimensjonering av 110-operatører reguleres av brann- og redningsvesen
 
 ## 4.2 110 Sør-Vest — primærcase
 
-110 Sør-Vest dekker Rogaland fylke og betjener en befolkning på om lag 490 000 innbyggere fordelt på 23 kommuner. Sentralen er organisert under Rogaland brann og redning IKS og koordinerer brann- og redningsinnsats for både heltids- og deltidsbrannvesen i dekningsområdet. Sentralen er lokalisert i Stavanger.
+110 Sør-Vest dekker 29 kommuner i Rogaland og tilgrensende områder i Vestland og Agder, og betjente per 1. januar 2026 et samlet befolkningsgrunnlag på 555 758 innbyggere (SSB, 2026). Sentralen er organisert under Rogaland brann og redning IKS og koordinerer brann- og redningsinnsats for både heltids- og deltidsbrannvesen i dekningsområdet. Sentralen er lokalisert i Stavanger.
 
 ### 4.2.1 Skiftstruktur og bemanning
 
-Sentralen opererer med tolv-timers skift med følgende bemanningsstruktur:
+Sentralen opererer med tolv-timers skift og er organisert i seks vaktlag à fire personer (inkludert vaktleder). Planlagt normalbemanning er dermed fire operatører på alle skift. Sentralen benytter årsturnus der alle vakter planlegges for hele året. Hvert vaktlag har overskuddstimer som må plasseres ut i turnusen for å fylle årsverket. I praksis fører dette til at dagtidsvakter på hverdag kan bemannes med fem eller seks personer. Natt- og helgeskift er i turnusplanen bemannet med fire personer, men siden minimumsbemanningen er tre, blir sykdom, avspasering og annet ikke-planlagt fravær ikke erstattet. Resultatet er at natt og helg ofte bemannes med tre — minimumsbemanningen.
 
-**Tabell 4.2: Bemanningsstruktur 110 Sør-Vest**
+**Tabell 4.2: Minimumsbemanning 110 Sør-Vest**
 
-| Skifttype | Periode | Total bemanning | Operatører | VL | c_eff |
+| Skifttype | Periode | Min. bemanning | Operatører | VL | c_eff |
 |---|---|---|---|---|---|
 | Dag hverdag | 07:00–19:00 man–fre | 4 | 3 | 1 | 3 |
 | Dag helg | 07:00–19:00 lør–søn | 3 | 2 | 1 | 2 |
 | Natt hverdag | 19:00–07:00 man–fre | 3 | 2 | 1 | 2 |
 | Natt helg | 19:00–07:00 lør–søn | 3 | 2 | 1 | 2 |
+
+Kapasitetsanalysen i denne rapporten bygger gjennomgående på minimumsbemanningen, ikke planlagt normalbemanning. Begrunnelsen er todelt: for det første er minimumsbemanning det nivået som i praksis hyppig forekommer, særlig på natt og helg. For det andre er dette nivået det som ROS- og beredskapsanalysen for 110 Sør-Vest vurderer som tilstrekkelig bemanning. Analysen tester dermed om det bemanningsnivået som anses som akseptabelt faktisk samsvarer med den operative belastningen.
 
 Vaktleder (VL) besvarer som hovedregel ikke nødanrop direkte, men ivaretar oversikt, prioritering, pressehåndtering og innkalling av ekstra ressurser. Effektiv operatørkapasitet er derfor c_eff = c_total − 1 for alle skifttyper. Denne forutsetningen er bekreftet gjennom prosedyredokumentasjon og operative intervjuer.
 
@@ -54,7 +56,7 @@ Den operative arbeidsmetodikken ved 110 Sør-Vest er formalisert i prosedyre for
 
 **Grønn funksjon** betyr ledig — klar for neste nødanrop. Prosedyren definerer eksplisitt som målsetning at «én operatør til enhver tid er ledig og kan ta nødtelefoner».
 
-Den normale driftsformen er et **makkerpar**: én rød og én gul operatør samarbeider om én hendelse, mens øvrige operatører er grønne. Prosedyren understreker at «tiden to operatører er involvert i samme hendelse gjøres så kort som mulig, for å raskt frigjøre kapasitet til neste hendelse». To operatører er dermed bundet fra første sekund av et nødanrop.
+Den normale driftsformen er et **makkerpar**: én rød og én gul operatør samarbeider om én hendelse, mens øvrige operatører er grønne. Prosedyren understreker at «tiden to operatører er involvert i samme hendelse gjøres så kort som mulig, for å raskt frigjøre kapasitet til neste hendelse». Makkerpar-prinsippet innebærer dermed at to operatører normalt aktiveres fra starten av et nødanrop og forblir bundet gjennom akuttfasen av hendelsen.
 
 ### 4.2.3 Operative særtrekk og kapasitetsgrenser
 
@@ -70,7 +72,7 @@ Flere forhold ved driften har direkte betydning for kapasitetsanalysen:
 
 ### 4.2.4 Bemanningsreduksjon på helg
 
-Et sentralt strukturelt trekk ved bemanningsordningen er at dagskiftet på helg har redusert bemanning (c_eff = 2) sammenlignet med hverdager (c_eff = 3). Bemanningsreduksjonen er historisk begrunnet i lavere samlet telefonvolum på helg — drevet av færre servicehenvendelser og administrative anrop. Beredskapsrelevant hendelsesvolum er imidlertid tilnærmet likt mellom hverdag og helg, noe som innebærer at bemanningsreduksjonen rammer beredskapsdimensjoneringen uten at den operative belastningen reduseres tilsvarende.
+Et sentralt strukturelt trekk ved bemanningsordningen er at dagskiftet på helg har redusert bemanning (c_eff = 2) sammenlignet med hverdager (c_eff = 3). Bemanningsreduksjonen synes historisk å være begrunnet i lavere samlet telefonvolum på helg, særlig færre service- og administrative henvendelser. Et sentralt spørsmål i denne rapporten er om denne reduksjonen også samsvarer med den beredskapsrelevante belastningen.
 
 ## 4.3 Hendelsesvolum og belastningsmønster
 
@@ -78,10 +80,10 @@ For 2025 registrerte 110 Sør-Vest 61 964 synlige oppdrag i BRIS/LEO. Av disse e
 
 <div align="center">
   <img src="../analyse/figurer/bindingstid_per_time.png" alt="Figur 4.1 Bindingstid og volum per time" width="80%">
-  <p align="center"><small><i>Figur 4.1 Bindingstid og anropsvolum fordelt på time. Dagskiftet (07–19) har markant høyere volum, men bindingstiden per hendelse er tilnærmet lik mellom dag og natt.</i></small></p>
+  <p align="center"><small><i>Figur 4.1: Døgnprofil for anropsvolum og bindingstid per time ved 110 Sør-Vest (2025).</i></small></p>
 </div>
 
-Belastningsmønsteret viser en tydelig døgnprofil med topp mellom kl. 09 og 14, gradvis nedgang mot kvelden, og lavest volum mellom kl. 02 og 05. Volumforskjellen mellom dag og natt er betydelig for totalvolumet, men for beredskapsrelevante hendelser (kategori D) er forskjellen mer moderat — noe som er sentralt for dimensjoneringslogikken.
+Belastningsmønsteret viser en tydelig døgnprofil med høyest samlet volum på dagtid og lavest volum nattestid. Figuren illustrerer døgnprofilen i anropsvolumet og viser samtidig at bindingstiden per beredskapsoppdrag varierer mindre over døgnet enn totalvolumet. Hvordan dette volumet fordeler seg mellom ulike hendelsestyper og hvorvidt det representerer beredskapsdimensjonerende belastning, analyseres i kapittel 7.
 
 ## 4.4 Konsekvenser av utilstrekkelig kapasitet
 
@@ -95,14 +97,14 @@ Når operatørkapasiteten er utilstrekkelig for å opprettholde makkerpar-drift,
 
 **Overløp til annen sentral.** Dersom ingen operatør er tilgjengelig, overføres anropet til Agder 110 etter 30 sekunder. Agder mangler lokalkunnskap om hendelsesstedet, noe som kan påvirke kvaliteten på koordineringen.
 
-Disse konsekvensene er ikke hypotetiske — de er den daglige operative virkeligheten som operatørene tilpasser seg gjennom solo-drift. Kapasitetsmodellen i denne rapporten kvantifiserer hvor ofte denne tilpasningen er nødvendig.
+Disse konsekvensene er ikke bare teoretiske. De representerer operative forhold som håndteres gjennom daglige tilpasninger i sentralen, blant annet ved solo-drift når makkerpar ikke kan opprettholdes. Kapasitetsmodellen i denne rapporten søker å kvantifisere hvor ofte slike tilpasninger er nødvendige.
 
 ## 4.5 ROS- og beredskapsanalysegrunnlag
 
-Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i sentralens risiko- og beredskapsanalyse (ROS) og tilhørende beredskapsanalyse. Disse dokumentene vurderer kvalitativt hvilke risikoer sentralen er eksponert for og hvilken bemanning som anses nødvendig. En nærmere gjennomgang av disse analysenes metodiske grunnlag opp mot kvantitative funn i denne rapporten inngår i diskusjonen (kapittel 8).
+Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i sentralens risiko- og beredskapsanalyse (ROS) og tilhørende beredskapsanalyse. Disse dokumentene vurderer kvalitativt hvilke risikoer sentralen er eksponert for og hvilken bemanning som anses nødvendig. 110 Sør-Vest brukes i denne rapporten som primærcase for å utvikle og teste en kvantitativ analysemodell som prinsipielt kan anvendes på andre 110-sentraler. En nærmere gjennomgang av disse analysenes metodiske grunnlag opp mot kvantitative funn i denne rapporten inngår i diskusjonen (kapittel 8).
 
 Det er viktig å understreke at ROS-analysene er kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler. Prosjektets ambisjon er å supplere — ikke erstatte — disse analysene med et kvantitativt referansepunkt for operatørbemanning.
 
 ---
 
-*Kap 4 — Versjon 1.0 | Sist oppdatert: 2026-04-03*
+*Kap 4 — Versjon 1.1 | Sist oppdatert: 2026-04-04*
