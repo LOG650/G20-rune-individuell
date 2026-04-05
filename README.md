@@ -12,20 +12,22 @@
 
 Prosjektet har en **dobbel ambisjon:**
 
-1. **Casestudie (110 Sør-Vest):** Dokumentere i hvilken grad faktisk bemanning samsvarer med kapasitetsbehovet beregnet fra historiske LEO/BRIS-data og en Erlang-C kømodell
+1. **Casestudie (110 Sør-Vest):** Dokumentere i hvilken grad faktisk bemanning samsvarer med kapasitetsbehovet beregnet fra historiske LEO/BRIS-data og en prosedyrbasert kapasitetsmodell
 2. **Generaliseringsambisjon:** Undersøke om strukturelle prediktorer (hendelsesvolum, innbyggertall, areal) kan danne grunnlag for en nasjonal, etterprøvbar dimensjoneringsmodell for 110-operatører — analogt med dimensjoneringsforskriften (FOR-2023-01-06-23) for brannvesenet
 
 ---
 
-## Primærmodell
+## Modell
 
-**Erlang-C (M/M/c)** — fler-server kømodell kalibrert mot historiske hendelsesdata fra LEO/BRIS.
+**Primærmodell: Prosedyrbasert ankomstkonfliktmodell** — måler sannsynligheten for at et beredskapsanrop ankommer i en tilstand der makkerpar-driftsstandarden ikke kan opprettholdes.
 
-Nøkkelantagelse: Vaktleder (VL) besvarer normalt ikke nødanrop, noe som gir effektiv operatørkapasitet `c_effektiv = c_total − 1`.
+**Grunnlinje: Erlang-C (M/M/c)** — tradisjonell køteoretisk referansemodell som viser begrensningene ved klassisk tilnærming i 110-kontekst.
 
-| Skift | Bemanning | c_effektiv |
+Nøkkelantagelse: Vaktleder (VL) besvarer normalt ikke nødanrop, noe som gir effektiv operatørkapasitet `c_eff = c_total − 1`.
+
+| Skifttype | Min. bemanning | c_eff |
 |---|---|---|
-| Dag (07:00–19:00) | 3 operatører + VL | 3 |
+| Dag hverdag (07:00–19:00) | 3 operatører + VL | 3 |
 | Natt/helg (19:00–07:00) | 2 operatører + VL | 2 |
 
 ---
@@ -34,12 +36,24 @@ Nøkkelantagelse: Vaktleder (VL) besvarer normalt ikke nødanrop, noe som gir ef
 
 | Fase | Beskrivelse | Frist | Status |
 |---|---|---|---|
-| **Fase 1** | Proposal | 15. mars 2026 | Innlevert 7. mars — avventer godkjenning |
-| **Fase 2** | Prosjektstyringsplan + Gantt | 15. mars 2026 | Innlevert 11. mars — avventer godkjenning |
-| **Fase 3** | Gjennomføring (EDA, modell, rapport) | Slutten av april 2026 | Starter uke 12 |
-| **Fase 4** | Sluttrapport + muntlig eksamen | 31. mai / tidlig juni 2026 | Ikke startet |
+| **Fase 1** | Proposal | 15. mars 2026 | Godkjent |
+| **Fase 2** | Prosjektstyringsplan + Gantt | 15. mars 2026 | Godkjent |
+| **Fase 3** | Gjennomføring (EDA, modell, rapport) | Slutten av april 2026 | Pågår |
+| **Fase 4** | Sluttrapport + muntlig eksamen | 31. mai / tidlig juni 2026 | Pågår |
 
 **Karakterkrav:** C-nivå på arbeidskrav (fase 1–3), B-krav på sluttrapport + muntlig eksamen.
+
+---
+
+## Rapportkapitler
+
+| Kapittel | Fil | Status |
+|---|---|---|
+| 4. Casebeskrivelse | [kap4_casebeskrivelse.md](014%20fase%204%20-%20report/kap4_casebeskrivelse.md) | v1.1 |
+| 5. Metode og data | [kap5_metode_data.md](014%20fase%204%20-%20report/kap5_metode_data.md) | v2.0 |
+| 6. Modell | [kap6_modell.md](014%20fase%204%20-%20report/kap6_modell.md) | v2.0 |
+| 7. Analyse og resultater | [kap7_analyse_resultater.md](014%20fase%204%20-%20report/kap7_analyse_resultater.md) | v1.0 |
+| Rapportskjelett | [Rapport_LOG650_G20_Rune_110_v0.1.md](014%20fase%204%20-%20report/Rapport_LOG650_G20_Rune_110_v0.1.md) | Pågår |
 
 ---
 
@@ -47,12 +61,8 @@ Nøkkelantagelse: Vaktleder (VL) besvarer normalt ikke nødanrop, noe som gir ef
 
 | Dokument | Fil |
 |---|---|
-| Prosjektstyringsplan v1.8 | [012 fase 2 - plan/Prosjektstyringsplan_G20_Rune_110.md](012%20fase%202%20-%20plan/Prosjektstyringsplan_G20_Rune_110.md) |
-| Gantt-diagram (MS Project) | [012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.mpp](012%20fase%202%20-%20plan/Gantt_LOG650_G20_Rune_110.mpp) |
-| Gantt-diagram (XML-eksport) | [012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.xml](012%20fase%202%20-%20plan/Gantt_LOG650_G20_Rune_110.xml) |
-| Litteraturliste (26 kilder) | [012 fase 2 - plan/Litteraturliste_LOG650_G20_Rune.xlsx](012%20fase%202%20-%20plan/Litteraturliste_LOG650_G20_Rune.xlsx) |
-| Proposal v3 | [011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md](011%20fase%201%20-%20proposal/Proposal_LOG650_G20_Rune_110_v3.md) |
-| Rapportskjelett v0.1 | [014 fase 4 - report/Rapport_LOG650_G20_Rune_110_v0.1.md](014%20fase%204%20-%20report/Rapport_LOG650_G20_Rune_110_v0.1.md) |
+| Proposal v3 (godkjent) | [011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md](011%20fase%201%20-%20proposal/Proposal_LOG650_G20_Rune_110_v3.md) |
+| Prosjektstyringsplan | [012 fase 2 - plan/Prosjektstyringsplan_G20_Rune_110.md](012%20fase%202%20-%20plan/Prosjektstyringsplan_G20_Rune_110.md) |
 | KI-erklæring og brukslogg | [KI_erklæring_LOG650_G20_Rune.md](KI_erklæring_LOG650_G20_Rune.md) |
 
 ---
@@ -61,45 +71,41 @@ Nøkkelantagelse: Vaktleder (VL) besvarer normalt ikke nødanrop, noe som gir ef
 
 | Kilde | Innhold | Status |
 |---|---|---|
-| LEO/BRIS 2020–2025 (110 Sør-Vest) | Hendelsestidsstempler, oppdragstype, varighet | Tilgjengelig |
-| LEO post-2024 (alle sentraler) | Sammenlignbare data — felles LEO-format | Tilgjengelig (bekreftet 10.03) |
-| DSB årsrapporter 2025 | Bemanning, anropsvolum alle sentraler | Offentlig |
+| BRIS/LEO 2025 (110 Sør-Vest) | 61 964 hendelser, 44 kolonner — primærdata | Tilgjengelig |
+| DSB MOB-rapporter 2022–2025 | Bemanning, anropsvolum alle 12 sentraler | Tilgjengelig |
 | SSB befolkningsdata | Innbyggertall per dekningsområde | Offentlig |
-| ROS/beredskapsanalyse 110 Sør-Vest | Dimensjoneringsgrunnlag | Tilgjengelig |
+| Prosedyre- og analysedokumenter | Arbeidsmetodikk, ROS, beredskapsanalyse | Intern tilgang |
 
-> **Merk:** Rådata er gitignored og lagres utelukkende lokalt i `004 data/`. Ingen operasjonelle data fra 110 Sør-Vest er lastet opp til GitHub.
+> **Merk:** Rådata er gitignored og lagres utelukkende lokalt i `004 data/`. Ingen operasjonelle data er lastet opp til GitHub.
 
 ---
 
 ## Mappestruktur
 
 ```
-000 templates/              Maler og referansestiler fra HiMolde
 001 info/                   Kursinformasjon og generelle notater
-002 meetings/               Møtereferater og korrespondanse
+002 meetings/               Møtereferater og korrespondanse (gitignored)
 003 references/             Litteratur (PDF-artikler)
-004 data/                   Rådata (gitignored — lagres kun lokalt)
+004 data/                   Rådata (gitignored)
+005 report/                 Rapport-output (figurer, tabeller)
 011 fase 1 - proposal/      Godkjent proposal
 012 fase 2 - plan/          Prosjektstyringsplan og Gantt-diagram
 013 fase 3 - review/        Peer review-dokumenter
-014 fase 4 - report/        Rapport (hovedleveranse)
-analyse/notebooks/          Jupyter notebooks (EDA, modellering)
-analyse/scripts/            Python-scripts
-figurer/                    Genererte figurer til rapporten
-KI_erklæring_LOG650_G20_Rune.md   Brukslogg og erklæring for KI-verktøy
+014 fase 4 - report/        Rapportkapitler (hovedleveranse)
+analyse/scripts/            Python-analyseskript
+analyse/figurer/            Genererte figurer
+analyse/notebooks/          Jupyter notebooks
 ```
 
 ---
 
 ## Teknisk stack
 
-- **Analyse:** Python (pandas, numpy, scipy, statsmodels)
+- **Analyse:** Python (pandas, numpy, scipy)
 - **Visualisering:** matplotlib, seaborn
-- **Notatbok:** Jupyter Notebooks
-- **Prosjektstyring:** MS Project (Gantt med referanseplan/baseline)
 - **Versjonskontroll:** Git / GitHub
 - **KI-verktøy:** Claude Code (Anthropic), ChatGPT (OpenAI) — se KI-erklæring
 
 ---
 
-*Opprettet: 2026-03-06 | Sist oppdatert: 2026-03-12*
+*Opprettet: 2026-03-06 | Sist oppdatert: 2026-04-05*
