@@ -136,20 +136,26 @@ L16 Hoved-utkast + peer review                   (Slutten av april)
 |---|---|
 | `011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md` | Godkjent proposal v3 |
 | `012 fase 2 - plan/Prosjektstyringsplan_G20_Rune_110.md` | Plan v1.8, innlevert 11. mars |
-| `012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.mpp` | Gantt med baseline (MS Project) |
-| `012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.xml` | Gantt XML-eksport (AI-lesbar) |
-| `012 fase 2 - plan/Litteraturliste_LOG650_G20_Rune.xlsx` | 26 kilder, verifisert og fargekodet |
-| `014 fase 4 - report/Rapport_LOG650_G20_Rune_110_v0.1.md` | Rapportskjelett v0.1 (markdown) |
+| `014 fase 4 - report/Rapport_LOG650_G20_Rune_110_v0.1.md` | Rapportskjelett med pekere til kapittelfiler |
+| `014 fase 4 - report/kap4_casebeskrivelse.md` | Casebeskrivelse v1.1 |
+| `014 fase 4 - report/kap5_metode_data.md` | Metode og data v2.0 |
+| `014 fase 4 - report/kap6_modell.md` | Modell v2.0 |
+| `014 fase 4 - report/kap7_analyse_resultater.md` | Analyse og resultater v1.0 |
 | `KI_erklæring_LOG650_G20_Rune.md` | Løpende KI-brukslogg og erklæring |
-| `004 data/` | Rådata (gitignored) — LEO/BRIS legges her i fase 3 |
-| `OLD_forkastet/` | Gammelt prosjekt (røykdykkerbekledning/METRIC) — ikke bruk |
+| `004 data/` | Rådata (gitignored) |
+| `002 meetings/` | Møtereferater og e-poster (gitignored) |
 
 ## Analyse — skript og notebooks
 
 ### Eksisterende skript
-| Fil | Beskrivelse | Kjør med |
-|---|---|---|
-| `analyse/scripts/benchmark_trend_analyse.py` | Trendanalyse og benchmarking alle 12 110-sentraler 2022–2025. Laster MOB-filer + BRIS fullrapport, produserer 3 figurer i `figurer/` og `analyse/benchmark_tabell.csv` | `py "G20-rune-individuell/analyse/scripts/benchmark_trend_analyse.py"` |
+| Fil | Beskrivelse |
+|---|---|
+| `analyse/scripts/konflikt_v4_korrigert.py` | Primærmodell: ankomstkonflikt med sammenstilte anrop |
+| `analyse/scripts/bindingstid_analyse.py` | Bindingstidsberegning og fordeling |
+| `analyse/scripts/benchmark_trend_analyse.py` | Benchmarking alle 12 sentraler 2022–2025 |
+| `analyse/scripts/scenario_pluss1.py` | Scenarioanalyse (+1 operatør) |
+| `analyse/scripts/kapasitet_figurer.py` | Figurgenerering for kapasitetsanalyse |
+| `analyse/scripts/konflikt_beredskap_v3.py` | Tidligere versjon av konfliktmodellen |
 
 ### Datafilnavn i `004 data/` (eksisterende nedlastede filer)
 ```
@@ -183,21 +189,60 @@ Risiko-og-sarbarhetsanalyse-Bergen-brannvesen-2023-.pdf
 ### Sentralnavn-normalisering
 Sentralnavn i BRIS/MOB kan ha encoding-feil (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`). Bruk `SENTRALER_NORM`-ordboken i `benchmark_trend_analyse.py` som referanse ved ny kode.
 
-### Notebooks
-`analyse/notebooks/` er tom — EDA-notebooks skal opprettes her i fase 3.
+## Rapportregler
+
+### Språk og notasjon
+- Bruk norsk i rapporttekst. Behold æ, ø, å i Markdown og tabeller.
+- Inline matematikk skrives med `$...$`, ikke `\(...\)`.
+- Lagre tekstfiler som UTF-8.
+
+### Kapittelskille (VIKTIG)
+Skill tydelig mellom:
+- **Casebeskrivelse (kap 4):** Beskriver sentralen, situasjonen og historiske fakta.
+  Beskrivende figurer for volum og belastning hører her.
+- **Metode og data (kap 5):** Beskriver metodevalg, datagrunnlag, operasjonalisering
+  og datakvalitet. Ingen resultater eller modellformulering.
+- **Modell (kap 6):** Modellformulering, matematikk og implementasjon.
+- **Analyse/Resultat (kap 7):** Resultater presenteres nøkternt med figurer og tabeller.
+  Ingen vurdering — det hører i diskusjon (kap 8).
+- **Diskusjon (kap 8):** Vurdering av funn mot problemstilling, teori og begrensninger.
+
+### Figurer i rapporten
+Standard format for figurer:
+```html
+<div align="center">
+  <img src="..." alt="..." width="80%">
+  <p align="center"><small><i>Figur X.Y: Kort figurtekst.</i></small></p>
+</div>
+```
+Figurtekst skal være kort og nøktern, ikke en hel forklaring.
+
+### Tabeller i rapporten
+- Tabeller limes inn som Markdown-tabeller.
+- Bruk tabellnummer i teksten (f.eks. Tabell 5.1).
+- Kort introduksjonssetning i brødteksten før tabellen.
+
+### Rapportsjekkliste
+- Innledningen skal være kort (1–2 sider), aktualisere temaet og lede til problemstilling.
+- Problemstillingen må være så presis at rapporten verken svarer på mer eller mindre enn det som er formulert.
+- Avgrensninger skal begrunnes faglig, ikke med tidsmangel.
+- Antagelser skal skrives eksplisitt som antagelser med konsekvenser — aldri som verifiserte fakta.
+- Resultatkapitlet presenterer funn nøkternt; vurderinger hører i diskusjonskapitlet.
+- Diskusjonskapitlet knytter funn til problemstilling, litteratur, usikkerhet og praktiske implikasjoner.
+- Konklusjonen svarer direkte på problemstillingen.
+
+### Review
+Når en aktivitet eller et kapittel skal reviewes, bruk en egen subagent (Agent-verktøyet)
+for å sikre uavhengighet fra konteksten i hovedsamtalen.
 
 ## Tekniske retningslinjer
-- **Rapport skrives i Markdown, IKKE Word** — foreleseren var eksplisitt på dette (9. mars 2026).
-  Én fil per kapittel, lenket inn i hoved-`rapport.md`. Se `014 fase 4 - report/`.
-- **`005 report/`** — mappe for ferdig rapport-output (f.eks. eksporterte tabeller og figurer til rapport). Ikke forveksle med `014 fase 4 - report/` som er selve rapportskriptet.
-- **Filskriving:** Edit/Write-tool kan feile med EEXIST på noen mapper —
-  bruk Python-skript i `C:\Users\runeg\AppData\Local\Temp\` og kjør med `py "C:/path/script.py"`
-- **Encoding:** Alltid `encoding='utf-8'` i Python-filoperasjoner
-- **Bash Unicode:** Unngå heredoc med Unicode — bruk .py-skriptfiler
+- **Rapport i Markdown** — én fil per kapittel i `014 fase 4 - report/`, lenket fra `Rapport_LOG650_G20_Rune_110_v0.1.md`
+- **Encoding:** Alltid `encoding='utf-8'` i Python. BRIS CSV leses med `encoding='utf-8-sig'` (BOM)
 - **Python-stack:** pandas, numpy, scipy, matplotlib, seaborn, openpyxl
 - **Versjonskontroll:** Git (GitHub: LOG650/G20-rune-individuell)
 - **Referansestil:** APA 7th norsk (se `000 templates/Referansestiler/`)
-- **Rådata:** Lagres i `004 data/` — aldri modifisert direkte; all behandling i Jupyter notebooks
+- **Rådata:** Lagres i `004 data/` (gitignored) — aldri modifisert direkte
+- **Figurer:** Genererte figurer lagres i `analyse/figurer/`
 - **KI-brukslogg:** Oppdater `KI_erklæring_LOG650_G20_Rune.md` etter hver session
 
 ## Risikofaktorer å huske
