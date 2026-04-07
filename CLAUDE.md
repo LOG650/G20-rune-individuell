@@ -145,6 +145,44 @@ L16 Hoved-utkast + peer review                   (Slutten av april)
 | `004 data/` | Rådata (gitignored) |
 | `002 meetings/` | Møtereferater og e-poster (gitignored) |
 
+## LOG650Vault — kuratert litteraturbase (LLM Wiki)
+
+**Lokasjon:** `../LOG650Vault/` (utenfor dette repoet — `C:\Users\runeg\OneDrive\Documents\Skole utdanning\Logistikk studie\LOG650 LOGISTIKK OG KI\LOG650Vault\`)
+
+Dette er en Obsidian-basert LLM-wiki som inneholder kuraterte sammendrag av all relevant litteratur for prosjektet. Den skal **brukes aktivt** ved alt teori-, litteratur- og diskusjonsarbeid i resten av oppgaven.
+
+### Struktur
+- `raw/` — 30+ originale PDF-er (immutable kilder, leses men endres aldri)
+- `wiki/sources/` — én kuratert sammendragsside per kilde (29 ferdige)
+- `wiki/concepts/` — begreper og teorier (Erlang-A, square-root staffing, QED-regime, ...)
+- `wiki/entities/` — personer, organisasjoner (Gustavsson, SOS Alarm, Mandelbaum, ...)
+- `wiki/topics/` — tematiske synteser på tvers av kilder (makkerpar_drift, prosedyrebasert_ankomstkonflikt, ...)
+- `index.md` — katalog over alle sider, **les denne først** for å finne relevante kilder
+- `log.md` — kronologisk append-only logg over ingest/query/lint
+- `CLAUDE.md` — vault-spesifikke regler (Obsidian wikilinks, YAML frontmatter, sitatformat)
+
+### Viktige klynger
+- **Klynge 1:** EMS call center kø-modeller (komplett) — burst-modeller, function differentiation, capacity planning
+- **Klynge 2:** Klassisk call center kø-teori (komplett) — Gans/Koole/Mandelbaum, Halfin-Whitt, ISA, square-root staffing
+- **Klynge 3:** Norsk nødmeldetjeneste (pågår) — DSB, brannstudien, SAMLOK, fagskole brann
+- **Klynge 4:** Internasjonale standarder (pågår) — NENA STA-020.1
+
+### Kanoniske kilder (KRITISK for diskusjon og teori)
+- **Gustavsson 2018 (lic-thesis)** — burst-modell + agent-oppførsel + tap av regionalkunnskap. Direkte parallell til vår makkerpar/solo-drift-observasjon.
+- **L'Ecuyer & Gustavsson 2018** — burst-modell SOS Alarm
+- **Dwars 2013** — DES + sammenslåingsanalyse 21→10 nederlandske sentraler
+- **Garnett, Mandelbaum & Reiman 2002** — Erlang-A + square-root staffing
+- **Gans, Koole & Mandelbaum 2003** — kanonisk tutorial
+- **Interdep. arbeidsgruppe 2009** — kanonisk policy-anbefaling for nødmelde-organisering
+- **NENA STA-020.1-2020** — kanonisk 9-1-1 service-level-standard
+
+### Bruksregler
+- **Ved spørsmål om litteratur eller teori:** les `LOG650Vault/index.md` først, deretter relevante `wiki/sources/*.md`-sider.
+- **Ved sitater i rapporten:** bruk wiki-sammendraget som inngang, men hent eksakt sitat fra originalen i `raw/`.
+- **Når kap 3 (teori) eller kap 8 (diskusjon) skal skrives:** start alltid med å sjekke vault for relevante kilder og topics.
+- **Vault-vedlikehold:** Du oppretter ikke wiki-sider på eget initiativ — det er en separat workflow brukeren styrer fra vaulten. Hovedrepoet konsumerer vaulten, men endrer den ikke.
+- **Hvis en relevant kilde mangler i vaulten:** flagg det til brukeren slik at hen kan ingest-e den der.
+
 ## Analyse — skript og notebooks
 
 ### Eksisterende skript
