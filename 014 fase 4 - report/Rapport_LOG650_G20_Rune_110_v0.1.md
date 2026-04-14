@@ -430,52 +430,14 @@ Erlang-C (M/M/c) presenteres som Fase 1 / sammenligningsgrunnlag i avsnitt 7.1. 
 
 ## 8. Diskusjon
 
-> *[3–4 sider. Diskutér hva resultatene betyr. Koble til problemstillingen og forskningslitteraturen. Metodediskusjon. Generaliserbarhet. Begrensninger.]*
-
-### 8.1 Diskusjon av hovedfunn
-
-> *[RQ1–RQ5 diskuteres her. Var resultatene som forventet? Uventede funn? Samsvar med litteraturen?]*
-
-**RQ1 — Belastningsmønstre:**
-> *[Diskusjonstekst]*
-
-**RQ2 — Håndteringstid og aktivt hendelsebilde:**
-> *[Diskutér i hvilken grad aktivt hendelsebilde utfordrer M/M/c-forutsetningene.]*
-
-**RQ3 — Prosedyrbasert kapasitetsanalyse:**
-> *[Diskutér sviktrate-gapet helg/hverdag. Erlang-C sa «alt er bra» (ρ < 6 %) — prosedyrmodellen avdekker et strukturelt problem. Diskutér hvorfor de to modellene gir så ulike svar, og hva det betyr for dimensjoneringslogikken. Lav utnyttelse er ikke nødvendigvis sløsing i beredskapssystemer.]*
-
-**RQ4 — ROS-gjennomgang:**
-> *[Metodisk vurdering av eksisterende dimensjoneringsgrunnlag. Bidrar den kvantitative analysen med noe ROS-analysen mangler?]*
-
-**RQ5 — Generaliserbarhet:**
-> *[Kan modellen anbefales som nasjonal dimensjoneringsstandard? Hvilke forutsetninger må oppfylles?]*
-
-> *[NOTE TIL FORFATTER — fange opp ved skriving: Diskutér asymmetrien mellom å produsere et kvantitativt grunnlag og å få det implementert. Analogien til dimensjoneringsforskriften er sentral her: for brannvesen sier forskriften at dersom innbyggertallet er under en terskel, skal det være deltid med vakt. Selv om en beredskapsanalyse peker på behov for kasernert styrke, er dette svært vanskelig å få gjennomslag for hos kommunene — kostnadene er store og forskriften gir rom for å si nei. Tilsvarende dynamikk gjelder for 110: en Erlang-C-modell som viser at c* > c_faktisk (dvs. underbemanning) er et faglig solid funn, men kommunene som finansierer sentralene kan avvise det med henvisning til egen ROS-analyse eller budsjettrammer. En nasjonal standard som likestiller den kvantitative dimensjoneringsmodellen med dimensjoneringsforskriftens rolle for brannvesen, ville endre denne maktsituasjonen — men å anbefale en slik standard overfor DSB er en politisk, ikke bare faglig, handling. Diskutér om prosjektets funn bidrar til å bygge en slik evidensbase, og hva som eventuelt gjenstår for at den skal kunne brukes normativt.]*
-
-### 8.2 Metodediskusjon
-
-#### 8.2.1 Modellbegrensninger — Erlang-C og prosedyrbasert modell
-
-> *[Erlang-C: Poisson-forutsetning (ring-flom), eksponentielle servicetider, stasjonær rate — diskutert som Fase 1-grunnlinje. Prosedyrbasert modell: bindingstidsestimater er kvalitative (intervjubaserte) og usikre — sensitivitetsanalysen viser robusthet, men begrensningen bør diskuteres. ABA solo vs. makkerpar (kap 6.3) — konservativ antakelse. Hva betyr disse begrensningene for konklusjonenes pålitelighet?]*
-
-#### 8.2.2 Datakvalitet og målefeil
-
-> *[LEO/BRIS-registeringspraksis — er håndteringstid nøyaktig registrert? Konfunderende faktorer.]*
-
-#### 8.2.3 Generaliserbarhet
-
-> *[Kan funn fra 110 Sør-Vest generaliseres til andre sentraler? Hvilke sentraler er sammenlignbare?]*
-
-### 8.3 Beredskapsperspektiv
-
-> *[Beredskapssystemer skiller seg fra effektivitetssystemer. Lav kapasitetsutnyttelse som nødvendig buffer. Implikasjoner for tolkning av c*-anbefalinger.]*
-
-### 8.4 Implikasjoner for praksis
-
-> *[Hva bør 110 Sør-Vest, DSB og norske 110-sentraler gjøre basert på disse funnene? Er empirisk kvantitativ dimensjonering bedre enn ROS-basert praksis?]*
-
-> *[NOTE TIL FORFATTER — fange opp ved skriving: Diskutér gapet mellom å produsere kvantitativ kunnskap og å omsette den til endring. Pek på følgende spenning: En modell som viser underbemanning (c* > c_faktisk) stiller krav om økte kostnader overfor kommunene — det er en hard selgeroppgave. Modellen er ikke nøytral: den kan brukes til å argumentere for mer bemanning, men den kan like gjerne brukes av kommuner til å begrunne kutt dersom modellen viser c* < c_faktisk. Strukturen minner om utfordringen brannvesenet møter med dimensjoneringsforskriften: forskriften setter en terskel (innbyggertall → bemanningstype), og selv om en faglig analyse viser at kasernert styrke er nødvendig, er det ekstremt vanskelig å gjennomføre fordi deltid med vakt er forskriftens standard og kostnadene ved avvik er enorme. For 110-sentraler mangler en tilsvarende regulatorisk standard helt — noe som paradoksalt gir kommunene mer handlingsrom til å ignorere faglige anbefalinger. Drøft hvilken posisjon DSB bør ha i dette: bør en kvantitativ dimensjoneringsmodell som denne forankres som nasjonalt normativt instrument på linje med dimensjoneringsforskriften? Hva er forutsetningene? Hva er risikoen?]*
+> **Se [kap8_diskusjon.md](kap8_diskusjon.md) — v1.0**
+>
+> Strukturert rundt fire tema:
+> - 8.1 Hvorfor Erlang-C er utilstrekkelig — det lav-belastede paradokset, makkerpar som flereenhets-betjening, bindingstid som kapasitetsbegrep
+> - 8.2 Modellprediksjoner versus opplevd virkelighet — gapet mellom modell og erfaring, kvalitetsreduksjon som usynlig buffer
+> - 8.3 Implikasjoner for dimensjonering — svar på problemstillingen, dag/natt-asymmetri, bakgrunnsbelastning, kvantitativ standard, overløpsarkitektur
+> - 8.4 Begrensninger — data, modell, antakelser
+> - 8.5 Videre forskning — tverrsentralvalidering, tidsvariabel analyse, DES
 
 ---
 
