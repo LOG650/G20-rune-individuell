@@ -12,11 +12,11 @@ Tre komplementære analysekomponenter benyttes:
 
 | Analysekomponent | Primærvariabel | Funksjon |
 |---|---|---|
-| **Prosedyrbasert ankomstkonfliktmodell** (primær) | Antall aktive hendelser ved hvert anrops ankomsttidspunkt | Måle andel beredskapsanrop der makkerpar-driftsstandarden ikke kan opprettholdes |
+| **Prosedyrbasert ankomstkonfliktmodell** (primær) — variant A: beredskap, variant B: total belastning | Antall aktive hendelser ved hvert anrops ankomsttidspunkt | Måle andel anrop der makkerpar-driftsstandarden ikke kan opprettholdes |
 | Erlang-C (M/M/c) (grunnlinje) | λ, μ, c_eff | Tradisjonell køteoretisk referansemodell |
 | Benchmarking (alle 12 sentraler) | Bemanning, oppdragsvolum, innbyggertall | Kontekstualisere casefunn mot nasjonal struktur |
 
-Analyseenheten varierer mellom komponentene: i primærmodellen er analyseenheten det enkelte innkommende anropet (beredskapsoppdrag og sammenstilte tilleggsanrop) ved dets ankomsttidspunkt, i Erlang-C er det aggregerte ankomstrater per skifttype, og i benchmarkingen er det den enkelte 110-sentralen.
+Analyseenheten varierer mellom komponentene: i primærmodellen er analyseenheten det enkelte innkommende anropet ved dets ankomsttidspunkt. Variant A avgrenser til beredskapsoppdrag (kategori D) og sammenstilte tilleggsanrop; variant B utvider til alle syv hendelseskategorier (se avsnitt 6.2). I Erlang-C er analyseenheten aggregerte ankomstrater per skifttype, og i benchmarkingen er det den enkelte 110-sentralen.
 
 ---
 
@@ -47,7 +47,7 @@ Fra høsten 2024 benytter alle tolv norske 110-sentraler det felles oppdragshån
 | Variabel | Kolonne i datasett | Bruk i analysen |
 |---|---|---|
 | Ankomsttidspunkt | `Dato anrop`, `Time på døgnet` | Grunnlag for ankomstrate (λ), tidsstempel per hendelse |
-| Hendelsestype | `Kilde` (Alarm/Samtale), initiell hendelsestype | Kategorisering (A/B/C/D), filtrering av beredskapsoppdrag |
+| Hendelsestype | `Oppdragstype`, `Opprinnelig oppdragstype`, `Kilde` | Klassifisering i syv kategorier (D, S, L-aba, L-hendelse, L-ukjent, F, V), se avsnitt 6.2 |
 | Ressursvarsling | Tidspunkt for ressurs varslet | Identifisering av kategori D (utrykningshendelser) |
 | Første ressurs fremme | Tidspunkt for første ressurs fremme | Bindingstidsberegning (akuttfasens varighet) |
 | Oppdragsidentifikator | `110_ID` (f.eks. B06-250101-4) | Sekvensgapanalyse for estimering av sammenstilte anrop |
@@ -138,14 +138,17 @@ I primærmodellen er analyseenheten det enkelte anropet ved dets ankomsttidspunk
 
 ### 5.3.2 Klassifisering av hendelser
 
-Hendelsene i datasettet er klassifisert i fire kategorier etter grad av operativ binding:
+Hendelsene i datasettet er klassifisert i syv kategorier basert på to BRIS-felt: `Oppdragstype` (sluttklassifisering) og `Opprinnelig oppdragstype` (initiell hendelsestype):
 
-- **Kategori A:** Lavprioritert eller avbrytbar last (service, test, administrative henvendelser)
-- **Kategori B:** Reelle hendelser uten utrykning
-- **Kategori C:** Tidskritiske avklaringshendelser (typisk ABA)
-- **Kategori D:** Utrykningshendelser med ressursvarsling
+- **D** (Utrykning): Hendelser med ressursvarsling — identifisert ved at `Ressurs varslet` har verdi
+- **S** (Service): Overføringstester av brannalarmanlegg
+- **L-aba** (ABA løst av 110): Automatisk brannalarm avklart uten utrykning
+- **L-hendelse** (Reell hendelse løst av 110): Innringer melder reell situasjon, løst uten ressurs
+- **L-ukjent** (Løst av 110, uklassifisert): Henvendelser uten formell opprinnelig oppdragstype
+- **F** (Feilringing): Feilringing, ikke-nødmelding, eCall feil
+- **V** (Viderevarsling): Viderekobling til annen etat eller intern varsling
 
-Kategori D identifiseres operasjonelt i datasettet gjennom tilstedeværelsen av tidspunkt for ressursvarsling. Av 61 964 synlige hendelser er 7 555 (12,2 %) klassifisert som kategori D. Avgrensningen til kategori D er valgt av hensyn til målepresisjon: det er den eneste kategorien der tidsstempler for hele akuttfasen kan observeres i registerdataene. Fullstendig definisjon av kategoriene er gitt i avsnitt 6.2.
+Av 61 964 synlige hendelser er 7 555 (12,2 %) klassifisert som kategori D. Primærmodellen (variant A) avgrenses til kategori D fordi det er den eneste kategorien der tidsstempler for hele akuttfasen kan observeres i registerdataene. Den utvidede modellen (variant B) inkluderer alle syv kategorier med operative bindingstidsestimater. Fullstendig klassifiseringslogikk og operative beskrivelser er gitt i avsnitt 6.2.
 
 ### 5.3.3 Beregning av bindingstid
 
@@ -224,7 +227,7 @@ Steg 1–6 representerer databehandling og operasjonalisering. Steg 7–8 er pri
 
 Analysens sentrale metrikk — kapasitetsnivå ved ankomst — bygger på observerte tidsstempler for kategori D-hendelser, som kan identifiseres robust gjennom ressursvarsling. Følgende forhold begrenser målevaliditeten:
 
-- **Kategori B og C er ikke inkludert i primærmodellen.** Reelle hendelser uten utrykning og tidskritiske avklaringer binder også operatørkapasitet, men lar seg ikke avgrense like robust i datasettet. Analysen behandler dermed den best observerbare delen av operatørbindingen.
+- **Ikke-D-kategorier har estimerte, ikke observerte bindingstider.** Kategoriene S, L-aba, L-hendelse, L-ukjent, F og V binder operatørkapasitet, men BRIS registrerer ikke håndteringstid for disse. Primærmodellen (variant A) avgrenses til kategori D; den utvidede modellen (variant B) inkluderer alle kategorier med operative bindingstidsestimater validert av vaktleder. Sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet av rimelige antakelser.
 - **Sammenstilte anrop estimeres indirekte.** Sekvensgapmetoden gir et estimat på antall, men det eksakte tidspunktet og varigheten for hvert enkelt anrop er ikke observert.
 - **Bindingstid for sammenstilte anrop er en forenklet antakelse.** Estimatet på 1 minutt er basert på operativ vurdering, ikke direkte måling. Dersom reell gjennomsnittlig bindingstid er høyere, vil analysen undervurdere effekten.
 - **Imputering med median.** De 23,5 % av kategori D-hendelsene med imputert bindingstid kan avvike fra faktisk varighet, særlig for tyngre hendelser.
