@@ -1,5 +1,5 @@
 # Litteraturliste — LOG650 G20 Rune Grødem
-## Komplett versjon 2.0 — 2026-04-12
+## Komplett versjon 3.0 — 2026-04-14
 
 > **Master:** `012 fase 2 - plan/Litteraturliste_LOG650_G20_Rune.xlsx`
 > Denne md-filen er generert fra xlsx-listen og skal holdes synkron med den.
@@ -52,10 +52,6 @@ https://doi.org/10.1287/msom.4.3.208.7753
 **[31]** Wallace, R. B., & Whitt, W. (2005). A staffing algorithm for call centers with skill-based routing. *Manufacturing & Service Operations Management, 7*(4), 276–294.
 https://doi.org/10.1287/msom.1050.0086
 `PDF: 31_A_Staffing_Algorithm_for_Call_.pdf` ✅
-
-**[46]** Aksin, Z., Armony, M., & Mehrotra, V. (2007). The modern call center: A multi-disciplinary perspective on operations management research. *Production and Operations Management, 16*(6), 665–688.
-https://doi.org/10.1111/j.1937-5956.2007.tb00288.x
-`PDF: 46-The modern call center A multi-disciplinary perspective on operations management research.pdf` ✅
 
 ---
 
@@ -146,15 +142,6 @@ https://doi.org/10.1016/S0166-4115(08)62386-9
 `PDF: 42-Development of NASA-TLX Task Load Index Results of empirical and theoretical research.pdf` ✅
 > *Kanonisk metodereferanse for kognitiv belastning. Lastet ned 2026-04-12 (tidligere merket «bestilles»).*
 
-**[47]** Jouini, O., Dallery, Y., & Nait-Abdallah, R. (2008). Analysis of the impact of team-based organizations in call center management. *Management Science, 54*(2), 400–414.
-https://doi.org/10.1287/mnsc.1070.0822
-`PDF: 47-Analysis of the impact of team-based organizations in call center management.pdf` ✅
-> *DOI korrigert fra .0792 til .0822.*
-
-**[48]** Kim, C., Lee, M., Dudin, A., & Klimenok, V. (2008). Multi-server queueing systems with cooperation of the servers. *Annals of Operations Research, 162*(1), 57–68.
-https://doi.org/10.1007/s10479-008-0319-0
-`PDF: 48-Multi-server queueing systems with cooperation of the servers.pdf` ✅
-
 **[51]** Hart, S. G. (2006). NASA-Task Load Index (NASA-TLX); 20 years later. *Proceedings of the Human Factors and Ergonomics Society Annual Meeting, 50*(9), 904–908.
 https://doi.org/10.1177/154193120605000909
 `PDF: 51-NASA-Task Load Index (NASA-TLX); 20 years later.pdf` ✅
@@ -233,17 +220,101 @@ https://risefr.no/media/publikasjoner/upload/2017/rapport-a17-20323-2.pdf
 https://www.regjeringen.no/no/dokumenter/meld.-st.-16-20232024/id3031003/
 `PDF: 34_stm202320240016000dddpdfs.pdf` ✅
 
+## Kategori 6: Avansert køteori — tidsvariert, abandonering, ikke-stasjonær
+
+**[46]** Aksin, Z., Armony, M., & Mehrotra, V. (2007). The modern call center: A multi-disciplinary perspective on operations management research. *Production and Operations Management, 16*(6), 665–688.
+https://doi.org/10.1111/j.1937-5956.2007.tb00288.x
+`PDF: 46-The modern call center A multi-disciplinary perspective on operations management research.pdf` ✅
+
+**[47]** Jouini, O., Dallery, Y., & Nait-Abdallah, R. (2008). Analysis of the impact of team-based organizations in call center management. *Management Science, 54*(2), 400–414.
+https://doi.org/10.1287/mnsc.1070.0822
+`PDF: 47-Analysis of the impact of team-based organizations in call center management.pdf` ✅
+
+**[48]** Kim, C., Lee, M., Dudin, A., & Klimenok, V. (2008). Multi-server queueing systems with cooperation of the servers. *Annals of Operations Research, 162*(1), 57–68.
+https://doi.org/10.1007/s10479-008-0319-0
+`PDF: 48-Multi-server queueing systems with cooperation of the servers.pdf` ✅
+
+**[52]** Jennings, O. B., Mandelbaum, A., Massey, W. A., & Whitt, W. (1996). Server staffing to meet time-varying demand. *Management Science, 42*(10), 1383–1394.
+https://doi.org/10.1287/mnsc.42.10.1383
+`PDF: 52-Server staffing to meet time-varying demand.pdf` ✅
+
+**[53]** Stolletz, R. (2008). Approximation of the non-stationary M(t)/M(t)/c(t)-queue using stationary queueing models: The stationary backlog-carryover approach. *European Journal of Operational Research, 190*(2), 478–493.
+https://doi.org/10.1016/j.ejor.2007.06.036
+`PDF: 53-Approximation of the non-stationary queue using stationary queueing models The stationary backlog-carryover approach.pdf` ✅
+
+**[54]** Zeltyn, S., & Mandelbaum, A. (2005). Call centers with impatient customers: Many-server asymptotics of the M/M/n+G queue. *Queueing Systems, 51*(3–4), 361–402.
+https://doi.org/10.1007/s11134-005-3699-8
+`PDF: 54-Call centers with impatient customers Many-server asymptotics of the MMn G queue.pdf` ✅
+
+---
+
+## Kategori 7: Beredskap — dispatch og multi-enhet
+
+**[55]** Chelst, K. R., & Barlach, Z. (1981). Multiple unit dispatches in emergency services: Models to estimate system performance. *Management Science, 27*(12), 1390–1409.
+https://doi.org/10.1287/mnsc.27.12.1390
+`PDF: 55-MULTIPLE_UNIT_DISPATCHES_IN_EM.pdf` ✅
+
+**[56]** Larson, R. C. (1974). A hypercube queuing model for facility location and redistricting in urban emergency services. *Computers & Operations Research, 1*(1), 67–95.
+https://doi.org/10.1016/0305-0548(74)90076-8
+`PDF: BESTILT` ⏳
+
+**[57]** Mukhopadhyay, A., Pettet, G., Vazirizade, S. M., Lu, D., Jaimes, A., El Said, S., Baroud, H., Vorobeychik, Y., Kochenderfer, M., & Dubey, A. (2022). A review of incident prediction, resource allocation, and dispatch models for emergency management. *Accident Analysis & Prevention, 165*, artikkel 106501.
+https://doi.org/10.1016/j.aap.2021.106501
+`PDF: 57-A Review of Incident Prediction, Resource Allocation, and Dispatch Models for Emergency Management.pdf` ✅
+
+---
+
+## Kategori 8: PSAP-bemanning og kognitiv belastning
+
+**[58]** National Emergency Number Association. (2003). *PSAP staffing guidelines report and staffing worksheet* (NENA-REF-001-2003). NENA.
+https://cdn.ymaws.com/www.nena.org/resource/resmgr/standards/NENA-REF-001-2003_PSAP_Staff.pdf
+`PDF: 58-PSAP STAFFING GUIDELINES REPORT     AS COMMISSIONED BY NENA SWAT OPERATIONS TEAM.pdf` ✅
+
+**[59]** Al-Sarhani, M., m.fl. (2025). Dispatch under pressure: An investigation into the cognitive load of Kuwait's emergency responders. *Journal of Engineering Research*.
+https://doi.org/10.1016/j.jer.2025.06.004
+`PDF: 59-Dispatch under pressure An investigation into the cognitive load of Kuwait's emergency responders.pdf` ✅
+
+**[60]** APCO International. (2005). *Project RETAINS effective practices guide: Staffing and retention in public safety communication centers*. APCO International.
+https://retains3.apcointl.org/
+`PDF: Ikke lastet ned` ⏳
+
+---
+
+## Kategori 9: Nordisk brann/redning og AMK (utvidet)
+
+**[61]** McNamee, M. S., Johansson, N., Frykmer, T., Johnson, V., Vylund, A. L., Eriksson, K., Steen-Hansen, A., Gjøsund, G., Haavik, T. K., Grytten Almklov, P., Grothe-Hammer, M., Markert, F., Allerup, C., & Fristed Hansen, M. (2025). *FIRE21 — Final report: Nordic fire and rescue services, problem-solving in the 21st century* (TVBB No. 3267). Lund University.
+https://lup.lub.lu.se/search/files/207496790/FIRE21_Final_report_FINAL.pdf
+`PDF: 61-FIRE21 final report Nordic fire and rescue services, problem-solving in the 21st century.pdf` ✅
+
+**[62]** Leonardsen, A. C. L., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2019). Exploring individual and work organizational peculiarities of working in emergency medical communication centers in Norway: A qualitative study. *BMC Health Services Research, 19*, artikkel 545.
+https://doi.org/10.1186/s12913-019-4370-0
+`PDF: 62-Exploring individual and work organizational peculiarities of working in emergency medical communication centers in Norway- a qualitative study.pdf` ✅
+
+---
+
+## Kategori 10: Norsk regulering (forskrifter)
+
+**[63]** Brann- og redningsvesenforskriften. (2021). Forskrift om organisering, bemanning og utrustning av brann- og redningsvesen og nødmeldesentralene (FOR-2021-09-15-2755).
+https://lovdata.no/dokument/SF/forskrift/2021-09-15-2755
+`Lovtekst — ingen PDF` ℹ️
+
+**[64]** Dimensjoneringsforskriften. (2023). Forskrift om dimensjonering, utrusting og bemanning av brannvesen (FOR-2023-01-06-23).
+https://lovdata.no/dokument/SF/forskrift/2023-01-06-23
+`Lovtekst — ingen PDF` ℹ️
+
 ---
 
 ## Oppsummering
 
 | Status | Antall |
 |---|---|
-| Totalt i xlsx (nr 1–51, uten 45) | **50** |
-| PDF lastet ned | **48** |
+| Totalt i xlsx (nr 1–64, uten 45) | **63** |
+| PDF lastet ned | **58** |
 | Nettside (ingen PDF forventet) | **1** (#18) |
+| Lovtekster (ingen PDF forventet) | **2** (#63, #64) |
+| PDF bestilt / ikke lastet ned | **2** (#56, #60) |
 | Dobbeltoppføring (#10 og #32 er samme paper) | **1** |
-| **Alle kilder med PDF tilgjengelig** | **✅ Komplett** |
+| Vault-sider opprettet | **58 av 58 relevante** |
 
 ### Korreksjonslogg (fra xlsx)
 | Nr | Opprinnelig feil | Korrigert til |
@@ -257,27 +328,11 @@ https://www.regjeringen.no/no/dokumenter/meld.-st.-16-20232024/id3031003/
 | 47 | DOI ...0792 | DOI ...0822 |
 | 49 | Forfatter Ellensen | Byrsell et al. |
 | 50 | Forfatter Rehn | Samdal et al. |
-
-### Kilder i tidligere md-versjon (v1.0) som IKKE er i xlsx
-Følgende kilder fantes i `Litteraturliste_komplett_v1.md` versjon 1.0 men har ingen xlsx-nummerering. Vurder om de skal legges til i xlsx med nye numre:
-
-- Chelst, K. R., & Barlach, Z. (1981) — Multiple unit dispatches
-- Gardett, I., & Clawson, J. J. (2013) — Emergency dispatch literature review
-- Larson, R. C. (1974) — Hypercube queuing model
-- Mukhopadhyay, A., et al. (2022) — Review incident prediction
-- Ohio Auditor of State (2025) — Washington County 911 feasibility
-- Stolletz, R. (2008) — Non-stationary M(t)/M(t)/c(t) approximation
-- Whitt, W. (1996) — Server staffing to meet time-varying demand
-- Robbins, T. R., & Harrison, T. P. (u.å.) — Erlang C vs. Erlang A
-- APCO International (2005) — Project RETAINS
-- Al-Sarhani, M., m.fl. (2025) — Cognitive load Kuwait
-- McNamee, M., m.fl. (2025) — FIRE21 Nordic
-- Leonardsen, A. C. L., m.fl. (2019) — BMC Health Services Research
-- Mandelbaum, A., & Zeltyn, S. (2005) — M/M/n+G queue
-- NENA (2003) — PSAP staffing guidelines
-- Brann- og redningsvesenforskriften (FOR-2021-09-15-2755)
-- Dimensjoneringsforskriften (FOR-2023-01-06-23)
+| 52 | Kun Whitt som forfatter | Jennings, Mandelbaum, Massey & Whitt |
+| 54 | Forfatterrekkefølge Mandelbaum & Zeltyn | Zeltyn & Mandelbaum |
+| 57 | Feil forfattere (Dubrawski, Schneider) | Korrekte forfattere verifisert mot PDF |
+| 62 | Ufullstendig tittel/forfattere | Verifisert mot PDF |
 
 ---
 
-*Versjon 2.0 — 2026-04-12 | Master: xlsx | PDF-status verifisert mot 003 references/*
+*Versjon 3.0 — 2026-04-14 | Master: xlsx | PDF-status verifisert mot 003 references/ og LOG650Vault*
