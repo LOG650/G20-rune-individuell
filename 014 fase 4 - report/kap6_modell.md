@@ -231,7 +231,67 @@ Begrensningene trekker i hovedsak i en retning: mot undervurdering. Resultatene 
 
 ---
 
-## 6.5 Implementasjon
+## 6.5 Utvidet modell: total operativ belastning (variant B)
+
+### 6.5.1 Motivasjon
+
+Primærmodellen (avsnitt 6.4) kvantifiserer kapasitetsnivå kun for kategori D (utrykningshendelser) og sammenstilte anrop — til sammen 26 456 av 80 865 estimerte anrop. De resterende 54 409 synlige oppdragene representerer henvendelser som ikke utløser utrykning, men som likevel binder operatørkapasitet: overføringstester, ABA-avklaringer, rådgivning, feilringing og viderevarsling. Å la denne belastningen forbli ukvantifisert ville innebære at prosjektet, som eksplisitt søker å erstatte kvalitative ROS-vurderinger med kvantitativ analyse, etterlater den største delen av arbeidsvolumet som en kvalitativ kommentar.
+
+Variant B bruker **samme sweep-algoritme** som primærmodellen, men utvider belastningsgrunnlaget til å inkludere alle 61 964 synlige oppdrag pluss 18 901 sammenstilte anrop. De to variantene besvarer ulike spørsmål:
+
+| Variant | Belastningsenheter | Spørsmål |
+|---|---|---|
+| **A (primær)** | Kategori D + sammenstilte (26 456) | Kan driftsstandard opprettholdes for beredskapsoppdrag? |
+| **B (utvidet)** | Alle kategorier + sammenstilte (80 865) | Hvor opptatt er operatørene faktisk gjennom skiftet? |
+
+### 6.5.2 Klassifisering basert på BRIS-felt
+
+Klassifiseringen bruker to felt fra BRIS i kombinasjon: `Oppdragstype` (sluttklassifisering) som primærkriterium og `Opprinnelig oppdragstype` (initiell hendelsestype) som sekundærkriterium der den er tilgjengelig.
+
+| Kategori | Regel i BRIS | Antall (2025) | Andel |
+|---|---|---|---|
+| **D** | `Ressurs varslet` er ikke-tom | 7 555 | 12,2 % |
+| **S** (Service) | `Oppdragstype = "Service"` | 22 542 | 36,4 % |
+| **L-aba** | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig = "ABA"` | 5 495 | 8,9 % |
+| **L-hendelse** | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` har verdi (≠ ABA) | 2 233 | 3,6 % |
+| **L-ukjent** | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` er tom | 16 768 | 27,1 % |
+| **F** (Feilringing) | `Oppdragstype` ∈ {Nødanrop feilring, Ikke reell nødmelding, ECall feil bruk, ECall teknisk/ukjent, ECall veihjelp} | 6 824 | 11,0 % |
+| **V** (Viderevarsling) | `Oppdragstype` inneholder «viderevarslet» eller «viderekoble» | 547 | 0,9 % |
+
+**Operativ beskrivelse av kategoriene:**
+
+- **S (Service/overføringstest):** Servicetekniker ringer for overføringstest av brannalarmanlegg. Operatør mottar samtale i LEO, setter adresse om den ikke kommer automatisk, tar imot signal i alarmmottak, verifiserer mottatt signal til servicetekniker, venter til anlegget er i hvile, kvitterer ut testen og lukker som service.
+- **L-aba (ABA løst av 110):** Automatisk brannalarm kommer inn og overføres til LEO. Operatør venter 90 sekunder. Dersom nødtelefon fra stedet mottas innen 90 sekunder og innringer bekrefter ufarlig årsak (f.eks. matlaging), lukkes oppdraget som «Oppdrag løst av 110». Uten nødtelefon innen fristen ville det ført til utrykning (kategori D).
+- **L-hendelse:** Innringer melder noe reelt (røyklukt, branntilløp, ulykke), operatør vurderer og løser uten å sende ressurs.
+- **L-ukjent:** Henvendelser som lukkes uten formell opprinnelig oppdragstype. Omfatter korte avklaringer (f.eks. bålregler), feilkategoriserte servicetester, og andre henvendelser som ikke krever formell oppdragsopprettelse. Feltet `Opprinnelig oppdragstype` har 16 % dekning for hendelser uten utrykning — dette er ikke en datakvalitetsfeil, men en rasjonell arbeidsøkonomisk tilpasning der operatørene ikke bruker tid på å klassifisere korte henvendelser.
+- **F (Feilringing):** Innringer har ringt feil nummer eller har en sak som ikke angår 110.
+- **V (Viderevarsling):** Viderekobling til annen etat (politi/AMK) eller intern varsling.
+
+### 6.5.3 Bindingstidsestimater
+
+Bindingstiden for kategori D er databasert (se avsnitt 6.4.6). For øvrige kategorier mangler BRIS tidsdata, og bindingstiden estimeres operativt. Estimatene er forelagt vaktleder ved 110 Sør-Vest for validering.
+
+Fordi estimatene er antakelser, ikke målinger, kjøres modellen med tre scenarioer:
+
+| Kategori | Lavt | Hovedscenario | Høyt |
+|---|---|---|---|
+| S (Service) | 1 min | 2 min | 4 min |
+| L-aba | 2 min | 3 min | 5 min |
+| L-hendelse | 3 min | 5 min | 8 min |
+| L-ukjent | 1 min | 3 min | 5 min |
+| F (Feilringing) | 15 sek | 30 sek | 1 min |
+| V (Viderevarsling) | 30 sek | 1 min | 2 min |
+| D (Utrykning) | Databasert | Databasert | Databasert |
+
+**Antagelse 6.1:** Bindingstidsestimatene representerer gjennomsnittlig tid operatøren er opptatt med hendelsen, inkludert LEO-arbeid og etterarbeid. Konsekvens: estimatene er usikre, men sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet lav–høy.
+
+### 6.5.4 Algoritmisk identitet med primærmodellen
+
+Variant B bruker nøyaktig samme sweep-algoritme som variant A (avsnitt 6.4.5). Eneste forskjell er at belastningsgrunnlaget utvides fra kategori D + sammenstilte til alle kategorier + sammenstilte, med kategori-spesifikk bindingstid. Kapasitetsnivåene (Normal/Brudd/Svikt) og c_eff-verdiene er identiske.
+
+---
+
+## 6.6 Implementasjon
 
 Begge modellene er implementert i Python. Erlang-C er beregnet med scipy.special og numpy. Ankomstkonfliktmodellen bruker en sweep-algoritme for sporing av aktive hendelsers utløpstidspunkter, noe som gir O(N log N) kompleksitet over N anrop.
 
@@ -265,4 +325,4 @@ KI-verktøy benyttet i implementasjonsfasen er dokumentert i Vedlegg D.
 
 ---
 
-*Kap 6 — Versjon 2.0 | Sist oppdatert: 2026-04-02*
+*Kap 6 — Versjon 3.0 | Sist oppdatert: 2026-04-13*

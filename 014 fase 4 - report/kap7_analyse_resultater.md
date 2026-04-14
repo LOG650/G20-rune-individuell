@@ -253,7 +253,64 @@ Scenarioanalysen viser den strukturelle effekten av økt bufferkapasitet, men si
 
 ---
 
-## 7.7 Generaliserbarhet
+## 7.7 Total operativ belastning (variant B)
+
+### 7.7.1 Bakgrunn
+
+Primærmodellen (variant A) kvantifiserer kapasitetsnivå basert på beredskapsoppdrag (kategori D) og sammenstilte anrop. Dette gir et presist bilde av beredskapskapasiteten, men dekker kun 26 456 av estimert 80 865 anrop. Variant B utvider analysen til å inkludere alle hendelseskategorier (se avsnitt 6.5) for å kvantifisere den samlede operative belastningen.
+
+### 7.7.2 Resultater: beredskapsbelastning versus total belastning
+
+**Tabell 7.7: Variant A (beredskap) vs Variant B (total) — hovedscenario**
+
+| Skifttype | | Variant A (beredskap) | | | Variant B (total) | |
+|---|---|---|---|---|---|---|
+| | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
+| **Dag hverdag** (c=3) | 77,9 % | 12,0 % | 10,1 % | **64,8 %** | **18,6 %** | **16,5 %** |
+| **Natt/helg** (c=2) | 48,1 % | 28,4 % | 23,5 % | **45,0 %** | **29,6 %** | **25,4 %** |
+| **Alle** | 65,3 % | 19,0 % | 15,8 % | **58,1 %** | **22,4 %** | **19,6 %** |
+
+<div align="center">
+  <img src="../analyse/figurer/total_belastning_A_vs_B.png" alt="Variant A vs B" width="95%">
+  <p align="center"><small><i>Figur 7.5: Variant A (beredskapsbelastning) vs Variant B (total operativ belastning), hovedscenario.</i></small></p>
+</div>
+
+Bakgrunnsbelastningen slår hardest på **dagtid**: Normal-andelen faller 13 prosentpoeng (fra 77,9 % til 64,8 %) og svikt øker fra 10,1 % til 16,5 %. Dette er konsistent med at servicevolumet (22 542 overføringstester per år) er konsentrert på dagtid når servicevirksomhet pågår. Natt/helg påvirkes i mindre grad (Normal faller 3 pp) fordi bakgrunnsvolumet er lavere.
+
+Funnet understreker at operatørene på dagtid ikke bare håndterer beredskap — de håndterer en kontinuerlig strøm av servicetester, avklaringer og feilringinger som binder kapasitet mellom beredskapsoppdragene. Med gjennomsnittlig ~10 bakgrunnshenvendelser per time på dagskift er operatørene sjelden reelt ledige selv i perioder uten beredskapsoppdrag.
+
+### 7.7.3 Sensitivitetsanalyse: robusthet mot bindingstidsantakelser
+
+Bindingstidene for ikke-D-kategorier er operative estimater, ikke målinger. For å teste robustheten kjøres modellen med tre scenarioer (se avsnitt 6.5.3).
+
+**Tabell 7.8: Sensitivitetsanalyse — variant B med tre bindingstidsscenarioer**
+
+| Scenario | Dag hverdag (c=3) | | | Natt/helg (c=2) | | |
+|---|---|---|---|---|---|---|
+| | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
+| **A (beredskap)** | 77,9 % | 12,0 % | 10,1 % | 48,1 % | 28,4 % | 23,5 % |
+| **B lav** | 75,3 % | 14,4 % | 10,3 % | 49,8 % | 28,6 % | 21,6 % |
+| **B hoved** | 64,8 % | 18,6 % | 16,5 % | 45,0 % | 29,6 % | 25,4 % |
+| **B høy** | 50,5 % | 21,8 % | 27,7 % | 40,2 % | 29,9 % | 30,0 % |
+
+<div align="center">
+  <img src="../analyse/figurer/total_belastning_sensitivitet.png" alt="Sensitivitetsanalyse" width="90%">
+  <p align="center"><small><i>Figur 7.6: Sensitivitetsanalyse — effekt av bindingstidsantakelser på kapasitetsnivå.</i></small></p>
+</div>
+
+Tre observasjoner:
+
+**1. Selv lavt scenario viser merkbar effekt.** Med minimale bindingstider (Service 1 min, feilringing 15 sek) faller Normal-andelen på dag fra 77,9 % til 75,3 %. Effekten er moderat men målbar, og bekrefter at bakgrunnsbelastningen ikke er triviell selv under de mest konservative antakelsene.
+
+**2. Hovedscenario gir vesentlig kapasitetsforverring på dagtid.** Normal faller til 64,8 % og svikt øker til 16,5 %. Dagskiftet, som i variant A fremstår som komfortabelt (78 % Normal), viser seg å være vesentlig mer presset når hele arbeidsvolumet inkluderes.
+
+**3. Høyt scenario illustrerer bristepunktet.** Med bindingstider i øvre sjikt (Service 4 min, L-ukjent 5 min) faller Normal under 50 % på dag — operatørene er oftere i degradert eller svikt enn i normal drift. For natt/helg er svikt-andelen 30 %. Dette scenarioet representerer dager med tungt servicevolum eller uerfarne operatører som bruker lengre tid per hendelse.
+
+**Konklusjon:** Hovedfunnet — at bakgrunnsbelastning forverrer kapasitetsbildet merkbart, spesielt på dagtid — er robust over hele spennet av rimelige bindingstidsantakelser.
+
+---
+
+## 7.8 Generaliserbarhet
 
 Den konkrete analysen er gjennomført på data fra 110 Sør-Vest, men modellrammeverket er utviklet for å kunne anvendes sentralsvis på alle norske 110-sentraler. Det sentrale er ikke de eksakte prosentverdiene i denne studien, men metoden for å identifisere hvor ofte en ny hendelse ankommer i en tilstand der tilgjengelig operatørkapasitet allerede er bundet.
 
@@ -267,9 +324,9 @@ Modellen kan dermed danne grunnlag for en nasjonal, etterprøvbar dimensjonering
 
 ---
 
-## 7.8 Sammenstilling og tolkning
+## 7.9 Sammenstilling og tolkning
 
-Analysen dokumenterer fire hovedfunn:
+Analysen dokumenterer fem hovedfunn:
 
 **Funn 1: Erlang-C alene er utilstrekkelig for 110-dimensjonering.**
 Den tradisjonelle køteoretiske modellen gir svært lav systemutnyttelse (ρ < 10 %) og P(W > 30s) < 0,5 % for alle skifttyper. Modellen behandler operatører som uavhengige servere, fanger ikke kapasitetstapet ved makkerpar-kravet, og baserer seg på en ankomstrate fra synlige oppdrag som undervurderer faktisk innkommende volum med anslagsvis 23 %.
@@ -283,10 +340,13 @@ Med den korrigerte modellen (operativ tilpasning + skjulte anrop) er 15,8 % av a
 **Funn 4: +1 operatør per skift har størst effekt på natt/helg.**
 Én ekstra operatør (c_eff 2→3 natt/helg, 3→4 dag) øker Normal fra 48,1 % til 76,5 % på natt/helg (+28,4 pp) og reduserer svikt fra 23,5 % til 12,0 %. På dag hverdag øker Normal fra 77,9 % til 89,9 %. Den ekstra operatøren gir den buffersonen som c=2 mangler — operatørene kan jobbe solo før det går til svikt. Analysen indikerer at bemanningsstrukturen er en mer direkte driver for observerte kapasitetsforskjeller enn samlet synlig oppdragsvolum alene.
 
+**Funn 5: Total operativ belastning forverrer kapasitetsbildet merkbart, spesielt på dagtid.**
+Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 77,9 % til 64,8 % (−13 pp) og svikt øker fra 10,1 % til 16,5 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) som er konsentrert på dagtid. Sensitivitetsanalysen viser at denne forverringen er robust: selv med minimale bindingstidsantakelser faller Normal til 75,3 %. Funnet understreker at beredskapskapasiteten ikke kan vurderes isolert fra den samlede arbeidsbyrden.
+
 Funnene har direkte parallell til dimensjoneringslogikken i brannstasjonsforskriften: S1-stasjoner (kasernerte brannstasjoner med størst beredskapsansvar) dimensjoneres med to kjøretøy ikke fordi begge alltid er i bruk, men fordi konsekvensen av utilstrekkelig kapasitet ved simultane hendelser er uakseptabel. Det samme prinsippet — dimensjonering for beredskapstopper, ikke for gjennomsnittsbelastning — bør ligge til grunn for 110-operatørkapasitet.
 
 ---
 
-*Skript for analyser og figurer: `analyse/scripts/konflikt_v4_korrigert.py`, `analyse/kapasitetsmodell_110.py`, `analyse/scripts/bindingstid_analyse.py`*
+*Skript for analyser og figurer: `analyse/scripts/konflikt_v4_korrigert.py` (variant A), `analyse/scripts/konflikt_total_belastning.py` (variant B), `analyse/kapasitetsmodell_110.py`, `analyse/scripts/bindingstid_analyse.py`*
 *Data: `004 data/110 SØR VEST TESTDATASETT.xlsx` (BRIS 2025, 61 964 synlige oppdrag, 7 555 beredskapsoppdrag kategori D)*
 *Prosedyreferanse: Rogaland brann og redning IKS (2024). Prosedyre arbeidsmetodikk, utalarmering og loggføring, versjon 4, 16.12.2024.*
