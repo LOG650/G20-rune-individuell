@@ -1,3 +1,12 @@
+"""
+Generer spørreskjema per 110-sentral basert på MOB- og BRIS-data.
+
+Skjemaet brukes for å verifisere DSB-rapporterte tall og innhente operative
+parametre nødvendige for benchmark av kapasitetsbelastning (normal / degradert /
+svikt) på tvers av alle 12 norske 110-sentraler.
+
+Output: én Markdown-fil per sentral i denne mappen.
+"""
 import pandas as pd
 import warnings, os, re
 warnings.filterwarnings('ignore')
@@ -58,9 +67,7 @@ for aar, fn in full_filer.items():
     full_alle.append(grp.reset_index().rename(columns={'110-sentral':'sentral'}))
 full_df = pd.concat(full_alle, ignore_index=True)
 
-# Finn faktiske kolonnenavn fra data — bruker eksakt match mot kjente oppdragstyper
 def finn_kolonne_eksakt(df, kandidater):
-    """Finn kolonnenavn ved aa matche mot liste av kjente kandidatnavn (ascii-normalisert)."""
     for col in df.columns:
         col_ascii = str(col).lower().encode('ascii', 'ignore').decode().strip()
         for k in kandidater:
@@ -72,16 +79,10 @@ sample_df = full_df[full_df['aar'] == 2022]
 KOL_BRANN   = finn_kolonne_eksakt(sample_df, ['Brann'])
 KOL_ULYKKE  = finn_kolonne_eksakt(sample_df, ['Ulykke'])
 KOL_UNODIGE = finn_kolonne_eksakt(sample_df, [
+    'Unødige og falske utrykninger',
     'Unodige og falske utrykninger',
-    'Unodige og falske utrykninger',
-    'Un\u00f8dige og falske utrykninger',
 ])
-KOL_UTEN_BV = finn_kolonne_eksakt(sample_df, [
-    '110-oppdrag uten involvering av brannvesen',
-])
-KOL_ANDRE   = finn_kolonne_eksakt(sample_df, ['Andre typer oppdrag'])
 
-# Fallback: iterer alle kolonnene og match paa starten av strengen
 def finn_kolonne_prefix(df, prefix):
     prefix_ascii = prefix.lower().encode('ascii', 'ignore').decode()
     for col in df.columns:
@@ -92,15 +93,321 @@ def finn_kolonne_prefix(df, prefix):
 
 if KOL_BRANN   is None: KOL_BRANN   = finn_kolonne_prefix(sample_df, 'brann')   or 'Brann'
 if KOL_ULYKKE  is None: KOL_ULYKKE  = finn_kolonne_prefix(sample_df, 'ulykke')  or 'Ulykke'
-if KOL_UNODIGE is None: KOL_UNODIGE = finn_kolonne_prefix(sample_df, 'un')       or 'Unodige'
-if KOL_UTEN_BV is None: KOL_UTEN_BV = finn_kolonne_prefix(sample_df, '110-oppdrag uten') or '110-oppdrag'
-if KOL_ANDRE   is None: KOL_ANDRE   = finn_kolonne_prefix(sample_df, 'andre typer') or 'Andre'
+if KOL_UNODIGE is None: KOL_UNODIGE = finn_kolonne_prefix(sample_df, 'un')      or 'Unodige'
 
 print(f"Kolonner funnet: Brann={KOL_BRANN}, Ulykke={KOL_ULYKKE}, Unodige={KOL_UNODIGE}")
 
+# === Nasjonal DSB 2025-data (for sentralspesifikke avklaringer) ===
+NASJONAL_DIR = os.path.join(os.path.dirname(utmappe), 'nasjonal_2025')
+try:
+    bench = pd.read_csv(os.path.join(NASJONAL_DIR, 'benchmarkmatrise.csv'), encoding='utf-8-sig')
+    tid = pd.read_csv(os.path.join(NASJONAL_DIR, 'tidsdata_kategori_D.csv'), encoding='utf-8-sig')
+    vol = pd.read_csv(os.path.join(NASJONAL_DIR, 'volumavstemming.csv'), encoding='utf-8-sig')
+    print(f"Nasjonal DSB 2025-data lastet ({len(bench)} sentraler)")
+except Exception as e:
+    print(f"ADVARSEL: Nasjonal DSB 2025-data ikke lastet: {e}")
+    bench = tid = vol = None
+
+def _stats(series):
+    s = series.dropna()
+    return {
+        'min': float(s.min()), 'max': float(s.max()),
+        'median': float(s.median()),
+        'q20': float(s.quantile(0.20)),
+        'q80': float(s.quantile(0.80)),
+    }
+
+NASJONAL_STATS = {}
+if bench is not None:
+    for kat in ['D_pct', 'L-aba_pct', 'L-hendelse_pct', 'L-ukjent_pct', 'F_pct', 'V_pct']:
+        NASJONAL_STATS[kat] = _stats(bench[kat])
+    for kol in ['alarmbeh_median_min', 'alarmbeh_p90_min']:
+        NASJONAL_STATS[kol] = _stats(tid[kol])
+    NASJONAL_STATS['DSB_vs_MOB_pct'] = _stats(vol['DSB_vs_MOB_pct'])
+
+
+def flagg(verdi, stats):
+    """Returner 'HØY'/'LAV'/'NORMAL' basert på 20/80-percentil (bottom-3 / top-3 av 12)."""
+    if verdi >= stats['q80']: return 'HØY'
+    if verdi <= stats['q20']: return 'LAV'
+    return 'NORMAL'
+
+
+def avklaring_aba(pct, n, flagg_navn, stats):
+    if flagg_navn == 'LAV':
+        return (
+            f"**ABA løst uten utrykning registrert som usedvanlig lav ({pct:.1f}%, {n} oppdrag).** "
+            f"Nasjonalt: median {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. "
+            f"Andre sentraler har rutinemessig 3–9 %.\n\n"
+            f"> *Avklaring:* Hvordan registreres automatiske brannalarmer som avklares uten utrykning (matlaging, damp, service utenom prosedyre)? "
+            f"Velger dere en annen verdi for «Opprinnelig oppdragstype» enn 'ABA' ved slik avklaring, "
+            f"eller utløser ABA rutinemessig utrykning hos dere uavhengig av avklaring innen 90 sek? "
+            f"Kan dere beskrive registreringspraksis og ev. lokal prosedyre som skiller dere fra Sør-Vest-modellen?"
+        )
+    if flagg_navn == 'HØY':
+        return (
+            f"**ABA løst uten utrykning er høy ({pct:.1f}%, {n} oppdrag).** "
+            f"Nasjonalt: median {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%.\n\n"
+            f"> *Avklaring:* Er terskelen for å lukke ABA uten utrykning annerledes hos dere — "
+            f"lengre venteperiode før utkalling, mer kontakt med objektet, eller annen prosedyre?"
+        )
+    return None
+
+
+def avklaring_utr(pct, stats):
+    if pct >= stats['q80']:
+        return (
+            f"**Utrykningsrate (D-andel) er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%.\n\n"
+            f"> *Avklaring:* Registreres færre oppdrag som «avklart uten utrykning» hos dere, eller har dere praksis "
+            f"der utrykning aktiveres raskere (f.eks. på ABA uten ventetid, eller ved lav terskel for bekreftelse)?"
+        )
+    if pct <= stats['q20']:
+        return (
+            f"**Utrykningsrate (D-andel) er lav ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
+            f"Andelen oppdrag som fører til utrykning er lavere enn for andre sentraler.\n\n"
+            f"> *Avklaring:* Filtreres flere henvendelser ut som «løst av 110» før utrykning aktiveres, eller har dere "
+            f"lokale samarbeidsformer (politi/AMK/brann) som håndterer en del hendelser før utalarmering?"
+        )
+    return None
+
+
+def avklaring_ukjent(pct, stats):
+    if pct >= stats['q80']:
+        return (
+            f"**L-ukjent-andel er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
+            f"Store mengder oppdrag er registrert som «Oppdrag løst av 110» uten at «Opprinnelig oppdragstype» er satt.\n\n"
+            f"> *Avklaring:* Hva er typisk innhold i disse oppdragene — korte avklaringer og spørsmål "
+            f"(bål-henvendelser, telefonhjelp), eller er det også reelle hendelser som ikke klassifiseres? "
+            f"Er det en lokal rutine å lukke enkelte henvendelsestyper uten opprinnelig type?"
+        )
+    if pct <= stats['q20']:
+        return (
+            f"**L-ukjent-andel er lav ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
+            f"Dere setter altså «Opprinnelig oppdragstype» oftere enn andre ved lukking.\n\n"
+            f"> *Avklaring:* Er det en lokal praksis å alltid klassifisere hendelser før lukking, eller "
+            f"reflekterer det at dere håndterer færre uklassifiserte henvendelser?"
+        )
+    return None
+
+
+def avklaring_l_hendelse(pct, stats):
+    if pct >= stats['q80']:
+        return (
+            f"**L-hendelse-andel er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
+            f"Dere registrerer mange reelle henvendelser som avklares uten utrykning, med «Opprinnelig oppdragstype» satt.\n\n"
+            f"> *Avklaring:* Er det en lokal praksis at alle reelle hendelser får en opprinnelig oppdragstype før lukking? "
+            f"Hva er typisk innhold — veiledningssamtaler, varsling fra publikum uten behov for utrykning, eller noe annet?"
+        )
+    if pct <= stats['q20']:
+        return (
+            f"**L-hendelse-andel er lav ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
+            f"Få reelle hendelser registreres som avklart uten utrykning hos dere.\n\n"
+            f"> *Avklaring:* Registreres disse under andre kategorier (L-ukjent, V), eller rykker dere ut oftere på "
+            f"hendelser som andre sentraler avklarer telefonisk?"
+        )
+    return None
+
+
+def avklaring_feilring(pct, stats):
+    if pct >= stats['q80']:
+        return (
+            f"**Feilring-andel er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%.\n\n"
+            f"> *Avklaring:* Er det reelt flere feilringinger hos dere (f.eks. fra samlokalisering med 112/113), "
+            f"eller klassifiseres flere henvendelser som «feilring» enn andre sentraler ville gjort?"
+        )
+    if pct <= stats['q20']:
+        return (
+            f"**Feilring-andel er lav ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%.\n\n"
+            f"> *Avklaring:* Registreres feilringinger under annen kategori (f.eks. L-ukjent eller V), "
+            f"eller er feilringinger faktisk sjeldnere i deres distrikt?"
+        )
+    return None
+
+
+def avklaring_v(pct, stats):
+    if pct >= stats['q80']:
+        return (
+            f"**Viderekoble-andel er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%.\n\n"
+            f"> *Avklaring:* Hvilke typer henvendelser viderekobles? Er det mye 112/113-feilringinger, "
+            f"eller har dere eksplisitt samarbeid med nabosentraler/andre etater som øker viderekobling?"
+        )
+    return None
+
+
+def avklaring_dsb_mob(ratio, mob, dsb, stats):
+    if ratio >= stats['q80']:
+        return (
+            f"**Forhold DSB/MOB er høyt ({ratio:.1f}×).** Nasjonal median: {stats['median']:.1f}×. "
+            f"MOB-selvrapport: {mob:,} mottatte anrop. DSB: {dsb:,} oppdrag.\n\n"
+            f"> *Avklaring:* Hva inkluderer dere ikke i MOB-tellingen? ABA-signaler uten samtale, "
+            f"oppdrag lukket uten anrop, eller noe annet? Er MOB-tallet kun telefonanrop?"
+        )
+    if ratio <= stats['q20']:
+        return (
+            f"**Forhold DSB/MOB er lavt ({ratio:.1f}×).** Nasjonal median: {stats['median']:.1f}×. "
+            f"MOB: {mob:,} anrop, DSB: {dsb:,} oppdrag.\n\n"
+            f"> *Avklaring:* Teller dere også ABA-signaler og lukkede oppdrag uten samtale i MOB-tallet, "
+            f"eller er det liten forskjell mellom anrop og registrerte oppdrag hos dere?"
+        )
+    return None
+
+
+def avklaring_tid(tid_row, stats_med, stats_p90):
+    ab_med = tid_row.get('alarmbeh_median_min')
+    ab_p90 = tid_row.get('alarmbeh_p90_min')
+    deler = []
+    if pd.notna(ab_med) and ab_med >= stats_med['q80']:
+        deler.append(
+            f"Median alarmbehandlingstid på D-oppdrag er **{ab_med:.2f} min** (nasj. median {stats_med['median']:.2f} min)."
+        )
+    if pd.notna(ab_p90) and ab_p90 >= stats_p90['q80']:
+        deler.append(
+            f"p90 alarmbehandlingstid er **{ab_p90:.1f} min** (nasj. median {stats_p90['median']:.1f} min) — altså 10 % av D-oppdrag bruker mer enn dette før utalarmering."
+        )
+    if not deler:
+        return None
+    return (
+        "**Alarmbehandlingstid avviker fra nasjonalt snitt.** " + " ".join(deler) + "\n\n"
+        "> *Avklaring:* Kan forskjellen forklares av geografiske forhold (lengre verifikasjon/kjentmenn), "
+        "volum per operatør, eller registreringspraksis (f.eks. hvordan tidspunkt for «ressurs varslet» settes)?"
+    )
+
+
+def sentralspesifikke_avklaringer(sentral_mob, start_spm=26):
+    """Bygg markdown-linjer for Del 7 for en gitt sentral. start_spm = første spørsmålsnummer."""
+    if bench is None:
+        return []
+
+    # MOB-navn: "Agder 110" → benchmarkmatrise: "Agder"
+    navn_kort = sentral_mob.replace(' 110', '').strip()
+    br = bench[bench['sentral'] == navn_kort]
+    if br.empty:
+        return []
+    br = br.iloc[0]
+    tr = tid[tid['sentral'] == navn_kort].iloc[0] if len(tid[tid['sentral'] == navn_kort]) else None
+    vr = vol[vol['sentral'] == navn_kort].iloc[0] if len(vol[vol['sentral'] == navn_kort]) else None
+
+    total_n = int(br['Totalt'])
+    mob_n = int(vr['MOB_selvrapport']) if vr is not None and pd.notna(vr['MOB_selvrapport']) else 0
+    dsb_mob_ratio = float(vr['DSB_vs_MOB_pct']) / 100 + 1 if vr is not None and pd.notna(vr['DSB_vs_MOB_pct']) else None
+    # DSB_vs_MOB_pct is (DSB-MOB)/MOB*100. ratio = DSB/MOB = DSB_vs_MOB/100 + 1
+    # But stored as %, so ratio_times = 1 + pct/100
+    # For the stats dict we stored pct, so convert sentral value similarly
+    sentral_dsb_mob_pct = float(vr['DSB_vs_MOB_pct']) if vr is not None and pd.notna(vr['DSB_vs_MOB_pct']) else None
+
+    L = []
+    L.append("---")
+    L.append("")
+    L.append("## Del 7 — Sentralspesifikke avklaringer (DSB 2025-data)")
+    L.append("")
+    L.append(
+        f"DSB har i 2026 levert et fullstendig hendelsesdatasett for alle 12 sentraler (2025). "
+        f"Jeg har klassifisert alle oppdrag etter samme logikk (D/S/L-aba/L-hendelse/L-ukjent/F/V) "
+        f"basert på kolonnene «Oppdragstype», «Opprinnelig oppdragstype» og «Ressurs varslet». "
+        f"Dette avdekker mønster som må forklares før sentralene kan sammenlignes kvantitativt. "
+        f"Under vises **deres tall i nasjonal sammenheng**, etterfulgt av oppfølgingsspørsmål på områdene der dere avviker."
+    )
+    L.append("")
+    L.append("### 7.1 Deres sentral i nasjonal sammenheng (DSB 2025)")
+    L.append("")
+    L.append(f"Totalvolum DSB 2025: **{total_n:,}** oppdrag. MOB-selvrapport: **{mob_n:,}** mottatte anrop. Forhold DSB/MOB: **{total_n/mob_n:.1f}×**." if mob_n else
+             f"Totalvolum DSB 2025: **{total_n:,}** oppdrag.")
+    L.append("")
+    L.append("| Kategori | Deres andel | Antall | Nasj. median | Nasj. spenn | Avvik |")
+    L.append("|---|---:|---:|---:|---:|---|")
+    kat_labels = {
+        'D': 'D — utrykning',
+        'L-aba': 'L-aba — ABA løst av 110',
+        'L-hendelse': 'L-hendelse — reell hendelse løst av 110',
+        'L-ukjent': 'L-ukjent — lukket uten opprinnelig type',
+        'F': 'F — feilringing',
+        'V': 'V — viderekobling',
+    }
+    for k, label in kat_labels.items():
+        pct = float(br[f'{k}_pct'])
+        n = int(br[k])
+        stats = NASJONAL_STATS[f'{k}_pct']
+        fl = flagg(pct, stats)
+        fl_visning = {'HØY': '↑ HØY', 'LAV': '↓ LAV', 'NORMAL': '–'}[fl]
+        L.append(
+            f"| {label} | {pct:.1f}% | {n:,} | {stats['median']:.1f}% | "
+            f"{stats['min']:.1f}–{stats['max']:.1f}% | {fl_visning} |"
+        )
+    L.append("")
+
+    # Lag avklaringer
+    avklaringer = []
+    # ABA
+    aba_pct = float(br['L-aba_pct'])
+    aba_n = int(br['L-aba'])
+    aba_fl = flagg(aba_pct, NASJONAL_STATS['L-aba_pct'])
+    if aba_fl != 'NORMAL':
+        t = avklaring_aba(aba_pct, aba_n, aba_fl, NASJONAL_STATS['L-aba_pct'])
+        if t: avklaringer.append(t)
+
+    # D
+    d_pct = float(br['D_pct'])
+    t = avklaring_utr(d_pct, NASJONAL_STATS['D_pct'])
+    if t: avklaringer.append(t)
+
+    # L-hendelse
+    lh_pct = float(br['L-hendelse_pct'])
+    t = avklaring_l_hendelse(lh_pct, NASJONAL_STATS['L-hendelse_pct'])
+    if t: avklaringer.append(t)
+
+    # L-ukjent
+    u_pct = float(br['L-ukjent_pct'])
+    t = avklaring_ukjent(u_pct, NASJONAL_STATS['L-ukjent_pct'])
+    if t: avklaringer.append(t)
+
+    # F
+    f_pct = float(br['F_pct'])
+    t = avklaring_feilring(f_pct, NASJONAL_STATS['F_pct'])
+    if t: avklaringer.append(t)
+
+    # V
+    v_pct = float(br['V_pct'])
+    t = avklaring_v(v_pct, NASJONAL_STATS['V_pct'])
+    if t: avklaringer.append(t)
+
+    # DSB/MOB ratio
+    if sentral_dsb_mob_pct is not None:
+        t = avklaring_dsb_mob(
+            1 + sentral_dsb_mob_pct / 100, mob_n, total_n,
+            {'median': 1 + NASJONAL_STATS['DSB_vs_MOB_pct']['median']/100,
+             'q20': 1 + NASJONAL_STATS['DSB_vs_MOB_pct']['q20']/100,
+             'q80': 1 + NASJONAL_STATS['DSB_vs_MOB_pct']['q80']/100}
+        )
+        if t: avklaringer.append(t)
+
+    # Tid
+    if tr is not None:
+        t = avklaring_tid(tr, NASJONAL_STATS['alarmbeh_median_min'], NASJONAL_STATS['alarmbeh_p90_min'])
+        if t: avklaringer.append(t)
+
+    L.append("### 7.2 Oppfølgingsspørsmål")
+    L.append("")
+    if not avklaringer:
+        L.append(
+            "Deres sentral ligger innenfor nasjonalt normalt spenn på alle kategorier. "
+            "Vi ber likevel om bekreftelse på tallene i 7.1 og korte kommentarer på om noe av dette virker overraskende."
+        )
+        L.append("")
+        L.append("> *Svar:*")
+        L.append("")
+    else:
+        for i, txt in enumerate(avklaringer, start=start_spm):
+            L.append(f"**Spm {i}.** {txt}")
+            L.append("")
+            L.append("> *Svar:*")
+            L.append("")
+
+    return L
+
+
 def v(val):
     if val is None or (isinstance(val, float) and pd.isna(val)):
-        return '-'
+        return '—'
     try:
         return str(int(float(val)))
     except:
@@ -145,8 +452,6 @@ for sentral in sentraler:
     safe = re.sub(r'[^\w]', '_', sentral)
     ans_endr = endring(mob_val(2022, 'ansatte'), mob_val(2025, 'ansatte'))
 
-    # Trend for sammenlignbare år: kun utrykning (Brann+Ulykke), 2022 vs 2024
-    # 2025 utelates fra trend fordi nytt system (LEO/OHV) endrer hva som telles
     utr22 = utrykn(2022)
     utr23 = utrykn(2023)
     utr24 = utrykn(2024)
@@ -162,165 +467,296 @@ for sentral in sentraler:
     oh  = v(mob_val(2025, 'op_dag_helg'))
     onh = v(mob_val(2025, 'op_natt_helg'))
 
-    lines = []
-    lines.append(f"# Sporreskjema -- {sentral}")
-    lines.append("## Studie: Kapasitetsanalyse av norske 110-sentraler (LOG650, Hogskolen i Molde, 2026)")
-    lines.append("")
-    lines.append("**Student:** Rune Grodem, G20 Individuell")
-    lines.append("**Formaal:** Masteroppgaven analyserer om faktisk bemanning ved norske 110-sentraler samsvarer med kapasitetsbehovet beregnet fra historiske hendelsesdata og koeteoretiske modeller.")
-    lines.append("")
-    lines.append(f"> Svarene behandles konfidensielt og brukes kun i aggregert form i rapporten, med mindre {sentral} eksplisitt samtykker til navngiving.")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    lines.append("## Del 1 -- Innrapporterte data fra DSB (2022-2025)")
-    lines.append("")
-    lines.append("Tabellen er basert paa data dere selv har rapportert til DSB via MOB-systemet. Vi ber dere bekrefte, korrigere eller utdype disse tallene.")
-    lines.append("")
-    lines.append("### 1.1 Bemanning (innrapportert)")
-    lines.append("")
-    lines.append("| | 2022 | 2023 | 2024 | 2025 | Endring 22-25 |")
-    lines.append("|---|---|---|---|---|---|")
-    lines.append(f"| Ansatte heltid | {v(mob_val(2022,'ansatte'))} | {v(mob_val(2023,'ansatte'))} | {v(mob_val(2024,'ansatte'))} | {v(mob_val(2025,'ansatte'))} | {ans_endr} |")
-    lines.append(f"| Operatorer dag - hverdag | {v(mob_val(2022,'op_dag_hverd'))} | {v(mob_val(2023,'op_dag_hverd'))} | {v(mob_val(2024,'op_dag_hverd'))} | {v(mob_val(2025,'op_dag_hverd'))} | |")
-    lines.append(f"| Operatorer natt - hverdag | {v(mob_val(2022,'op_natt_hverd'))} | {v(mob_val(2023,'op_natt_hverd'))} | {v(mob_val(2024,'op_natt_hverd'))} | {v(mob_val(2025,'op_natt_hverd'))} | |")
-    lines.append(f"| Operatorer dag - helg | {v(mob_val(2022,'op_dag_helg'))} | {v(mob_val(2023,'op_dag_helg'))} | {v(mob_val(2024,'op_dag_helg'))} | {v(mob_val(2025,'op_dag_helg'))} | |")
-    lines.append(f"| Operatorer natt - helg | {v(mob_val(2022,'op_natt_helg'))} | {v(mob_val(2023,'op_natt_helg'))} | {v(mob_val(2024,'op_natt_helg'))} | {v(mob_val(2025,'op_natt_helg'))} | |")
-    lines.append("")
-    lines.append("### 1.2 Oppdrag med utrykning (sammenlignbare tall 2022-2024)")
-    lines.append("")
-    lines.append("> **Datakvalitetsmerknad:** Fra 2024 tok flere sentraler i bruk nytt operativsystem (LEO/OHV),")
-    lines.append("> og i 2025 registreres alle innkommende telefonsamtaler som egne hendelsesrader.")
-    lines.append("> Totalt oppdragsvolum er derfor IKKE sammenlignbart paa tvers av alle aar.")
-    lines.append("> Tabellen nedenfor viser kun oppdrag MED utrykning (Brann + Ulykke), som er")
-    lines.append("> konsistent registrert i alle aar uavhengig av system.")
-    lines.append("")
-    lines.append("| | 2022 | 2023 | 2024 | 2025* | Endring 22-24 |")
-    lines.append("|---|---|---|---|---|---|")
-    lines.append(f"| Oppdrag - Brann | {v(full_val(2022,KOL_BRANN))} | {v(full_val(2023,KOL_BRANN))} | {v(full_val(2024,KOL_BRANN))} | {v(full_val(2025,KOL_BRANN))} | |")
-    lines.append(f"| Oppdrag - Ulykke | {v(full_val(2022,KOL_ULYKKE))} | {v(full_val(2023,KOL_ULYKKE))} | {v(full_val(2024,KOL_ULYKKE))} | {v(full_val(2025,KOL_ULYKKE))} | |")
-    lines.append(f"| **Sum med utrykning** | **{v(utr22)}** | **{v(utr23)}** | **{v(utr24)}** | **{v(utr25)}** | **{utr_endr_22_24}** |")
-    lines.append(f"| Unodige/falske utrykninger | {v(full_val(2022,KOL_UNODIGE))} | {v(full_val(2023,KOL_UNODIGE))} | {v(full_val(2024,KOL_UNODIGE))} | {v(full_val(2025,KOL_UNODIGE))} | |")
-    lines.append("")
-    lines.append("*2025-tall er inkludert for orientering, men bor ikke brukes i trendsammenligning.")
-    lines.append("")
-    lines.append("### 1.3 Mottatte 110-anrop (selvrapportert i MOB)")
-    lines.append("")
-    lines.append("> Disse tallene er sentralenes egne innrapporteringer til DSB og er uavhengig av")
-    lines.append("> registreringssystemet. De kan brukes som supplerende indikator paa anropsvolum.")
-    lines.append("")
-    lines.append("| | 2022 | 2023 | 2024 | 2025 |")
-    lines.append("|---|---|---|---|---|")
-    lines.append(f"| Mottatte 110-anrop (MOB) | {v(mob_val(2022,'anrop_110'))} | {v(mob_val(2023,'anrop_110'))} | {v(mob_val(2024,'anrop_110'))} | {v(mob_val(2025,'anrop_110'))} |")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    lines.append("## Del 2 -- Utdyping og korrigering")
-    lines.append("")
-    lines.append("**Spm 1.** Er tallene i tabellene ovenfor korrekte? Hvis nei -- hva er riktige tall, og hva forklarer avviket?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("**Spm 2.** Tabellen viser operatorantall som registrert minimum per vakttype. Er dette faktisk laveste planlagte bemanning, eller er det et normaltall? Hva er reelt operativt minimum ved lav bemanning (f.eks. sykdom, ferie)?")
-    lines.append("")
-    lines.append("| Vakttype | Innrapportert | Faktisk minimum | Merknad |")
-    lines.append("|---|---|---|---|")
-    lines.append(f"| Dag - hverdag | {od} | | |")
-    lines.append(f"| Natt - hverdag | {on} | | |")
-    lines.append(f"| Dag - helg | {oh} | | |")
-    lines.append(f"| Natt - helg/helligdag | {onh} | | |")
-    lines.append("")
-    lines.append(f"**Spm 3.** Besvarer vaktleder (VL) normalt innkommende nodanrop ved {sentral}?")
-    lines.append("")
-    lines.append("[ ] Ja, alltid   [ ] Ja, ved behov/hoy belastning   [ ] Nei, aldri   [ ] Ingen dedikert VL-rolle")
-    lines.append("")
-    lines.append(f"**Spm 4.** Oppdrag med utrykning (Brann+Ulykke) endret seg med **{utr_endr_22_24}** fra 2022 til 2024, mens ansatte heltid endret seg med **{ans_endr}** fra 2022 til 2025. Kan dere si noe om hva som forklarer denne utviklingen?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("**Spm 5.** Har det skjedd spesielle hendelser (storulykker, klimahendelser, nye oppgaver, organisasjonsendringer) som har hatt vesentlig pavirkning paa kapasitetssituasjonen i perioden 2022-2025?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    lines.append("## Del 3 -- Handleringstider per hendelsestype")
-    lines.append("")
-    lines.append("Studien bruker en koeteoretisk modell (Erlang-C) for aa beregne kapasitetsbehov. Modellen krever")
-    lines.append("gjennomsnittlig operatorbindingstid per hendelsestype -- den tiden en operator aktivt er bundet")
-    lines.append("til aa handtere en hendelse (ikke total hendelsesvarighet, som kan vaere mye lengre).")
-    lines.append("")
-    lines.append("| Type | Beskrivelse | Typiske eksempler | Estimert bindingstid (min) |")
-    lines.append("|---|---|---|---|")
-    lines.append("| T1 | Ren telefonhenvendelse -- ingen utrykking, ingen oppdragslogg | Test av anlegg, generelle henvendelser, feilmeldinger | |")
-    lines.append("| T2 | Automatisk brannalarm (ABA) -- begrenset handleringstid uavhengig av utfall | ABA kvittert som falsk alarm ELLER bekreftet og viderekoblet | |")
-    lines.append("| T3 | Hendelse med utrykning -- lang operatorbinding, potensielt flere operatorer | Brann i bygg, trafikkulykke med skadde, hjertestans med ressursutalarmering | |")
-    lines.append("| T4 | Melding vurdert og lukket uten utrykning -- lengre enn T1 men kortere enn T3 | Mulig brann avkreftet via intervju, oppdrag lost av 110 | |")
-    lines.append("")
-    lines.append(f"**Spm 6.** Stemmer denne inndelingen med operativ praksis ved {sentral}? Er det typer som mangler, overlapper eller bor slas sammen?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("**Spm 7.** For T3-hendelser: Hva er typisk tidsrom fra anrop mottas til operator er ferdig med aktiv handtering (selv om oppdraget fortsatt er apent i systemet)? Er det vanlig at en T3-hendelse binder mer enn en operator samtidig?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    lines.append("## Del 4 -- ROS- og beredskapsanalyse")
-    lines.append("")
-    lines.append("**Innrapportert status (fra MOB):**")
-    lines.append(f"- ROS-analyse sist revidert: **{v(ros_aar)}**")
-    lines.append(f"- Beredskapsanalyse utarbeidet: **{har_ber if har_ber else '-'}**, sist revidert: **{v(ber_aar)}**")
-    lines.append("")
-    lines.append("**Spm 8.** Bekrefter dere disse arstallene? Hvis nei -- hva er korrekte tall?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("**Spm 9.** Naar er neste planlagte revisjon av ROS-/beredskapsanalysen?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("**Spm 10.** Hvilke metoder/modeller bruker dere for aa dimensjonere bemanningsnivaa? Er det basert paa beredskapsanalysen, historiske data, avtaler, eller annet?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("**Spm 11.** Mener dere at ROS- og beredskapsanalyser i sin navaerende form er tilstrekkelig som grunnlag for aa dimensjonere antall operatorer? Hva er eventuelt de viktigste manglene?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    lines.append("## Del 5 -- Sammenfallende hendelser")
-    lines.append("")
-    lines.append("**Spm 12.** Opplever dere perioder der antall samtidige aktive hendelser overstiger operatorkapasiteten? Hvor hyppig skjer dette, og i hvilke situasjoner?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("**Spm 13.** Hva skjer operativt naar kapasitetsgrensen naas?")
-    lines.append("")
-    lines.append("[ ] Vaktleder trer inn som operator   [ ] Overfort til nabosentral   [ ] Prioritering mellom hendelser   [ ] Annet: ___")
-    lines.append("")
-    lines.append("**Spm 14.** Er det et definert antall samtidige hendelser/anrop som utloster tiltak eller varsling (f.eks. bistand fra nabosentral)?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    lines.append("## Del 6 -- Avsluttende kommentarer")
-    lines.append("")
-    lines.append(f"**Spm 15.** Er det andre forhold ved kapasitetssituasjonen ved {sentral} som dere mener er viktig aa forsta, og som ikke dekkes av sporsmalene ovenfor?")
-    lines.append("")
-    lines.append("> *Svar:*")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    lines.append("*Takk for at dere tar dere tid til aa svare. Svarene kan returneres til [e-post] innen [frist].*")
-    lines.append("*Sporsmal kan rettes til Rune Grodem, student LOG650, Hogskolen i Molde.*")
+    L = []
+    L.append(f"# Spørreskjema — {sentral}")
+    L.append("## Validering av kapasitetsdata for nasjonal benchmarkstudie")
+    L.append("### LOG650, Høgskolen i Molde, vår 2026")
+    L.append("")
+    L.append("**Student:** Rune Grødem")
+    L.append("**Kontakt:** rune.grodemm@himolde.no")
+    L.append("**Innlevering:** hovedutkast slutten av april 2026, endelig rapport 31. mai 2026")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Om studien")
+    L.append("")
+    L.append("Brannvesenet har en nasjonal dimensjoneringsforskrift (FOR-2023-01-06-23) som setter")
+    L.append("kvantitative, etterprøvbare krav til antall brannmannskap basert på innbyggertall og")
+    L.append("responstid. **Ingen tilsvarende standard finnes for 110-operatører.** Bemanningsnivået")
+    L.append("fastsettes lokalt gjennom ROS- og beredskapsanalyser som er kvalitative og vanskelige å")
+    L.append("etterprøve på tvers av sentraler.")
+    L.append("")
+    L.append("Forskningsprosjektet undersøker problemstillingen:")
+    L.append("")
+    L.append("> *I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet")
+    L.append("> beregnet fra historiske hendelsesdata og køteoretiske/prosedyrbaserte modeller?*")
+    L.append("")
+    L.append("Målet er å bygge et **kvantitativt referansepunkt** for 110-bemanning — ikke for å kritisere")
+    L.append("lokale valg, men for å komplettere ROS-analyser med tallbaserte målepunkter som kan")
+    L.append("sammenlignes på tvers av alle 12 sentraler.")
+    L.append("")
+    L.append("- **Primærcase:** 110 Sør-Vest, der jeg har detaljerte LEO/BRIS-data og intern beredskapsanalyse")
+    L.append("- **Benchmarkgrunnlag:** alle 12 sentraler via DSB-årsrapporter (MOB) og BRIS-fullrapporter")
+    L.append("- **Modell:** prosedyrbasert ankomstkonfliktmodell som måler andel beredskapsanrop som")
+    L.append("  håndteres i normal-, degradert- (solo) eller sviktnivå")
+    L.append("")
+    L.append(f"**Hvorfor jeg kontakter {sentral}:** for å kunne benchmarke kapasitetsbelastning må jeg")
+    L.append("verifisere at DSB-tallene gjenspeiler operativ virkelighet, og forstå lokale særtrekk ved")
+    L.append("bemanning, vaktordning og arbeidsmetodikk.")
+    L.append("")
+    L.append(f"> Svarene behandles konfidensielt. {sentral} navngis kun med eksplisitt samtykke.")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Del 1 — Verifisering av DSB-rapporterte data (2022–2025)")
+    L.append("")
+    L.append("Tabellene under er hentet fra det dere selv har rapportert til DSB via MOB-systemet. Jeg")
+    L.append("ber dere bekrefte, korrigere eller utdype disse tallene.")
+    L.append("")
+    L.append("### 1.1 Bemanning (MOB-rapportert)")
+    L.append("")
+    L.append("| Kategori | 2022 | 2023 | 2024 | 2025 | Endring 22–25 |")
+    L.append("|---|---|---|---|---|---|")
+    L.append(f"| Ansatte heltid | {v(mob_val(2022,'ansatte'))} | {v(mob_val(2023,'ansatte'))} | {v(mob_val(2024,'ansatte'))} | {v(mob_val(2025,'ansatte'))} | {ans_endr} |")
+    L.append(f"| Operatører dag — hverdag | {v(mob_val(2022,'op_dag_hverd'))} | {v(mob_val(2023,'op_dag_hverd'))} | {v(mob_val(2024,'op_dag_hverd'))} | {v(mob_val(2025,'op_dag_hverd'))} | |")
+    L.append(f"| Operatører natt — hverdag | {v(mob_val(2022,'op_natt_hverd'))} | {v(mob_val(2023,'op_natt_hverd'))} | {v(mob_val(2024,'op_natt_hverd'))} | {v(mob_val(2025,'op_natt_hverd'))} | |")
+    L.append(f"| Operatører dag — helg | {v(mob_val(2022,'op_dag_helg'))} | {v(mob_val(2023,'op_dag_helg'))} | {v(mob_val(2024,'op_dag_helg'))} | {v(mob_val(2025,'op_dag_helg'))} | |")
+    L.append(f"| Operatører natt — helg | {v(mob_val(2022,'op_natt_helg'))} | {v(mob_val(2023,'op_natt_helg'))} | {v(mob_val(2024,'op_natt_helg'))} | {v(mob_val(2025,'op_natt_helg'))} | |")
+    L.append("")
+    L.append("### 1.2 Oppdrag med utrykning (sammenlignbare tall 2022–2024)")
+    L.append("")
+    L.append("> **Datakvalitetsmerknad:** Flere sentraler tok i bruk nytt operativsystem (LEO/OHV) fra")
+    L.append("> 2024, og fra 2025 registreres alle innkommende telefonsamtaler som egne hendelsesrader.")
+    L.append("> Totalt oppdragsvolum er derfor **ikke** sammenlignbart på tvers av alle år. Tabellen")
+    L.append("> nedenfor viser kun oppdrag MED utrykning (Brann + Ulykke), som er konsistent registrert")
+    L.append("> alle år uavhengig av system.")
+    L.append("")
+    L.append("| Kategori | 2022 | 2023 | 2024 | 2025* | Endring 22–24 |")
+    L.append("|---|---|---|---|---|---|")
+    L.append(f"| Oppdrag — Brann | {v(full_val(2022,KOL_BRANN))} | {v(full_val(2023,KOL_BRANN))} | {v(full_val(2024,KOL_BRANN))} | {v(full_val(2025,KOL_BRANN))} | |")
+    L.append(f"| Oppdrag — Ulykke | {v(full_val(2022,KOL_ULYKKE))} | {v(full_val(2023,KOL_ULYKKE))} | {v(full_val(2024,KOL_ULYKKE))} | {v(full_val(2025,KOL_ULYKKE))} | |")
+    L.append(f"| **Sum med utrykning** | **{v(utr22)}** | **{v(utr23)}** | **{v(utr24)}** | **{v(utr25)}** | **{utr_endr_22_24}** |")
+    L.append(f"| Unødige/falske utrykninger | {v(full_val(2022,KOL_UNODIGE))} | {v(full_val(2023,KOL_UNODIGE))} | {v(full_val(2024,KOL_UNODIGE))} | {v(full_val(2025,KOL_UNODIGE))} | |")
+    L.append("")
+    L.append("*2025-tall vises for orientering, men bør ikke brukes i trendsammenligning på grunn av systembytte.")
+    L.append("")
+    L.append("### 1.3 Mottatte 110-anrop (MOB, selvrapportert)")
+    L.append("")
+    L.append("> Sentralenes egne innrapporteringer, uavhengig av registreringssystem.")
+    L.append("")
+    L.append("| | 2022 | 2023 | 2024 | 2025 |")
+    L.append("|---|---|---|---|---|")
+    L.append(f"| Mottatte 110-anrop (MOB) | {v(mob_val(2022,'anrop_110'))} | {v(mob_val(2023,'anrop_110'))} | {v(mob_val(2024,'anrop_110'))} | {v(mob_val(2025,'anrop_110'))} |")
+    L.append("")
+    L.append("**Spm 1.** Er tallene i 1.1–1.3 korrekte? Hvis nei — hva er riktige tall, og hva forklarer avviket?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Del 2 — Vaktordning og bemanningsstruktur")
+    L.append("")
+    L.append("**Kontekst (110 Sør-Vest):** Todelt skift med dag 07–19 og natt 19–07. Sentralen har")
+    L.append("**6 vaktlag à 3 operatører + 1 vaktleder**. Dag hverdag bemannes med 3 operatører + VL;")
+    L.append("natt og helg med 2 operatører + VL. **Minimumsbemanning er 4 (3 operatører + VL) på dag")
+    L.append("hverdag og 3 (2 operatører + VL) på natt og helg.** Det benyttes **ikke** ekstra vakter/")
+    L.append("vikarer for å nå normalbemanning på natt/helg — 3-personers oppsett er normalen. Sentralen")
+    L.append("tillater at den 3. personen på natt/helg kan være vikar. Vi vet at noen sentraler kjører")
+    L.append("dagturnus i stedet for todelt skift, og at faktisk bemanning kan avvike fra MOB-rapporten.")
+    L.append("")
+    L.append(f"**Spm 2.** Hvilken vaktordning kjører {sentral}?")
+    L.append("")
+    L.append("- [ ] Todelt skift (dag ca. 07–19, natt ca. 19–07)")
+    L.append("- [ ] Dagturnus med separat natt (f.eks. 08–16 dag + egen natt)")
+    L.append("- [ ] Annen ordning (beskriv under)")
+    L.append("")
+    L.append("> *Beskrivelse:*")
+    L.append("")
+    L.append("**Spm 3.** Avviker helgeordningen fra hverdager? På hvilken måte?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 4.** Er operatørantallet i tabell 1.1 et minimum, normaltall eller maksimum? Hvor lavt kan bemanningen i praksis gå?")
+    L.append("")
+    L.append("| Vakttype | MOB-tall | Normalt planlagt | Minimum ved fravær | Maks ved topp |")
+    L.append("|---|---|---|---|---|")
+    L.append(f"| Dag — hverdag | {od} | | | |")
+    L.append(f"| Natt — hverdag | {on} | | | |")
+    L.append(f"| Dag — helg | {oh} | | | |")
+    L.append(f"| Natt — helg/helligdag | {onh} | | | |")
+    L.append("")
+    L.append("**Spm 5.** Hvordan dekkes vakter ved sykdom eller annet fravær?")
+    L.append("")
+    L.append("- [ ] Tilkall fra vikarliste / ekstrahjelper")
+    L.append("- [ ] Beredskapsvakt (hjemmevakt)")
+    L.append("- [ ] Kolleger som tar over / forlenger egen vakt")
+    L.append("- [ ] Driftes med redusert bemanning")
+    L.append("- [ ] Annet: ___")
+    L.append("")
+    L.append("**Spm 6.** Anslagsvis hvor stor andel av vaktene dekkes av vikarer/ekstrahjelper sammenlignet med fast ansatte?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 7.** Er vaktlag ofte satt opp med planlagt overkapasitet (f.eks. planlagt 5, definert minimum 4)? Anslag for typisk overkapasitet per vakttype?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append(f"**Spm 8.** Besvarer vaktleder (VL) normalt innkommende nødanrop ved {sentral}?")
+    L.append("")
+    L.append("- [ ] Ja, alltid")
+    L.append("- [ ] Ja, ved behov / høy belastning")
+    L.append("- [ ] Nei, aldri")
+    L.append("- [ ] Ingen dedikert VL-rolle")
+    L.append("")
+    L.append("> *Utdyping:*")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Del 3 — Arbeidsmetodikk: makkerpar vs solo-drift")
+    L.append("")
+    L.append("**Kontekst (110 Sør-Vest):**")
+    L.append("Prosedyrestandarden krever at hver beredskapshendelse håndteres av to operatører")
+    L.append("(«makkerpar»): én på samtale med innringer, én som håndterer ressursutkalling, loggføring")
+    L.append("og oppfølging. I praksis går drift ofte over i **solo-håndtering** når flere hendelser")
+    L.append("inntreffer samtidig — alternativet er å la neste innringer vente. Kvaliteten synker, men")
+    L.append("blir «godt nok». Modellen vår forsøker å kvantifisere hvor ofte dette skjer.")
+    L.append("")
+    L.append(f"**Spm 9.** Hvordan beskriver dere prosedyrestandarden ved {sentral}?")
+    L.append("")
+    L.append("- [ ] Makkerpar er standard, solo-drift kun ved samtidige hendelser eller press")
+    L.append("- [ ] Solo-drift er utgangspunktet; makkerpar aktiveres kun ved store hendelser")
+    L.append("- [ ] Annen modell (beskriv)")
+    L.append("")
+    L.append("> *Beskrivelse:*")
+    L.append("")
+    L.append("**Spm 10.** Omtrentlig: hvor ofte må operatør jobbe solo på beredskapshendelser ved vanlig bemanning? (daglig, ukentlig, sjelden)")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 11.** Har dere en intern norm/grense for hvor lenge et anrop kan vente før overføring til nabosentral? (Sør-Vest: 30 sek ubesvart → automatisk overføring til Agder; 10. anrop i kø overføres også.)")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Del 4 — Hendelseskategorier og operatørbindingstider")
+    L.append("")
+    L.append("Studien bruker en **prosedyrebasert ankomstkonfliktmodell** der hver ny beredskapshendelse")
+    L.append("måles mot kapasitetstilstanden (normal / degradert / svikt) på ankomsttidspunktet. Dette")
+    L.append("krever at vi vet hvor lenge en operatør er **aktivt bundet** av en hendelse — ikke total")
+    L.append("varighet i systemet, men fra anrop mottas til operatør er ferdig med oppfølging.")
+    L.append("")
+    L.append("BRIS gir tidsdata for beredskapshendelser med utrykning, men mangler tidsdata for alle")
+    L.append("andre henvendelsestyper. Derfor trenger vi operative estimater. Kategoriseringen nedenfor")
+    L.append("er utledet fra BRIS 2025 ved 110 Sør-Vest. Referansetallene er Sør-Vests estimater og er")
+    L.append("oppgitt som utgangspunkt for diskusjon.")
+    L.append("")
+    L.append("| Kategori | Hva det er i praksis | Sør-Vest ref (min) | Deres estimat (min) |")
+    L.append("|---|---|---|---|")
+    L.append("| **D — Beredskap med utrykning** | Nødanrop / ABA som fører til ressursutkalling og utrykning | 13 (median) | |")
+    L.append("| **S — Service/overføringstest** | Servicetekniker tester brannalarmanlegg; operatør verifiserer signal og kvitterer ut | 2 | |")
+    L.append("| **L-aba — ABA løst av 110** | Automatisk brannalarm der nødtelefon innen 90 sek bekrefter ufarlig årsak (f.eks. matlaging) — lukkes uten utrykning | 3 | |")
+    L.append("| **L-hendelse — Reell hendelse løst av 110** | Innringer melder noe reelt; operatør gir råd eller avklarer uten å sende ressurs | 5 | |")
+    L.append("| **L-ukjent — Løst av 110, uklassifisert** | Bål-spørsmål, service lukket feil, korte avklaringer uten formell oppdragstype | 3 | |")
+    L.append("| **F — Feilringing** | Feilringing, «ønsket 112/113», eCall feil bruk | 0,5 | |")
+    L.append("| **V — Viderevarsling** | Viderekobling til annen etat eller intern varsling | 1 | |")
+    L.append("")
+    L.append(f"**Spm 12.** Er kategoriseringen gjenkjennbar ved {sentral}? Mangler det en type, eller er noe slått sammen som burde vært skilt?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 13.** Er Sør-Vests bindingstidsestimater rimelige sammenlignet med deres operative praksis? Hvilke kategorier avviker mest, og hvorfor?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 14.** For beredskapshendelser (D): er det vanlig at én hendelse binder to eller flere operatører samtidig (makkerpar-håndtering)? Hvor lenge holder den parallelle bindingen?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Del 5 — ROS- og beredskapsanalyse")
+    L.append("")
+    L.append("**Innrapportert status (fra MOB):**")
+    L.append(f"- ROS-analyse sist revidert: **{v(ros_aar)}**")
+    L.append(f"- Beredskapsanalyse utarbeidet: **{har_ber if har_ber else '—'}**, sist revidert: **{v(ber_aar)}**")
+    L.append("")
+    L.append("**Spm 15.** Bekrefter dere årstallene ovenfor? Hvis nei — hva er korrekt?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 16.** Har dere selv god kjennskap til analysen? Brukes den aktivt i driftsplanlegging, eller er den et formelt dokument som revideres periodisk?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 17.** Når er neste planlagte revisjon?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 18.** Hvilke metoder/data bruker dere for å dimensjonere bemanningsnivå? (Beredskapsanalyse, historiske hendelsesdata, avtaler med eier, faglig skjønn, annet?)")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 19.** Er ROS-/beredskapsanalysen i nåværende form tilstrekkelig som grunnlag for å dimensjonere antall operatører? Hva mangler eventuelt?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Del 6 — Operativ belastning og opplevd bemanning")
+    L.append("")
+    L.append("**Spm 20.** Hvor ofte opplever dere perioder der antall aktive hendelser overstiger ledig operatørkapasitet? (Daglig, ukentlig, sjelden?)")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 21.** Hva skjer operativt når kapasitetsgrensen nås?")
+    L.append("")
+    L.append("- [ ] Vaktleder trer inn som operatør")
+    L.append("- [ ] Overført til nabosentral")
+    L.append("- [ ] Prioritering mellom hendelser")
+    L.append("- [ ] Redusert kvalitet på håndtering (f.eks. solo-drift, kortere intervju)")
+    L.append("- [ ] Annet: ___")
+    L.append("")
+    L.append("**Spm 22.** Er det et definert antall samtidige hendelser/anrop som utløser tiltak eller varsling (f.eks. bistand fra nabosentral)?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("**Spm 23.** Hvordan oppleves dagens bemanning fra et operativt perspektiv?")
+    L.append("")
+    L.append("- [ ] Overdimensjonert")
+    L.append("- [ ] Passe")
+    L.append("- [ ] Knapt nok")
+    L.append("- [ ] Underdimensjonert")
+    L.append("")
+    L.append("> *Utdyping (gjerne med eksempler på når det merkes):*")
+    L.append("")
+    # Sentralspesifikke avklaringer (Del 7) — basert på DSB 2025-avvik
+    n_del1_6 = sum(1 for line in L if line.startswith('**Spm '))
+    del7 = sentralspesifikke_avklaringer(sentral, start_spm=n_del1_6 + 1)
+    L.extend(del7)
+    n_del7 = sum(1 for line in del7 if line.startswith('**Spm '))
+    neste_spm = n_del1_6 + n_del7 + 1
+
+    L.append("---")
+    L.append("")
+    L.append("## Del 8 — Avsluttende kommentarer")
+    L.append("")
+    L.append(f"**Spm {neste_spm}.** Har det skjedd spesielle hendelser (storulykker, klimahendelser, nye oppgaver, organisasjonsendringer) i perioden 2022–2025 som har hatt vesentlig påvirkning på kapasitetssituasjonen?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append(f"**Spm {neste_spm + 1}.** Er det andre forhold ved kapasitetssituasjonen ved {sentral} som er viktig å forstå, og som ikke dekkes av spørsmålene ovenfor?")
+    L.append("")
+    L.append("> *Svar:*")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("*Takk for at dere tar dere tid til å svare. Svarene kan returneres til rune.grodemm@himolde.no.*")
+    L.append("*Spørsmål kan rettes til Rune Grødem, student LOG650 Forskningsprosjekt, Høgskolen i Molde.*")
 
     filnavn = os.path.join(utmappe, f'{safe}.md')
     with open(filnavn, 'w', encoding='utf-8') as fout:
-        fout.write('\n'.join(lines))
-    print(f'Skrevet: {sentral}')
+        fout.write('\n'.join(L))
+    print(f'Skrevet: {sentral} -> {os.path.basename(filnavn)}')
 
 print('Ferdig.')

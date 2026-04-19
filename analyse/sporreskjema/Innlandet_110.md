@@ -1,154 +1,317 @@
-# Sporreskjema -- Innlandet 110
-## Studie: Kapasitetsanalyse av norske 110-sentraler (LOG650, Hogskolen i Molde, 2026)
+# Spørreskjema — Innlandet 110
+## Validering av kapasitetsdata for nasjonal benchmarkstudie
+### LOG650, Høgskolen i Molde, vår 2026
 
-**Student:** Rune Grodem, G20 Individuell
-**Formaal:** Masteroppgaven analyserer om faktisk bemanning ved norske 110-sentraler samsvarer med kapasitetsbehovet beregnet fra historiske hendelsesdata og koeteoretiske modeller.
-
-> Svarene behandles konfidensielt og brukes kun i aggregert form i rapporten, med mindre Innlandet 110 eksplisitt samtykker til navngiving.
+**Student:** Rune Grødem
+**Kontakt:** rune.grodemm@himolde.no
+**Innlevering:** hovedutkast slutten av april 2026, endelig rapport 31. mai 2026
 
 ---
 
-## Del 1 -- Innrapporterte data fra DSB (2022-2025)
+## Om studien
 
-Tabellen er basert paa data dere selv har rapportert til DSB via MOB-systemet. Vi ber dere bekrefte, korrigere eller utdype disse tallene.
+Brannvesenet har en nasjonal dimensjoneringsforskrift (FOR-2023-01-06-23) som setter
+kvantitative, etterprøvbare krav til antall brannmannskap basert på innbyggertall og
+responstid. **Ingen tilsvarende standard finnes for 110-operatører.** Bemanningsnivået
+fastsettes lokalt gjennom ROS- og beredskapsanalyser som er kvalitative og vanskelige å
+etterprøve på tvers av sentraler.
 
-### 1.1 Bemanning (innrapportert)
+Forskningsprosjektet undersøker problemstillingen:
 
-| | 2022 | 2023 | 2024 | 2025 | Endring 22-25 |
+> *I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet
+> beregnet fra historiske hendelsesdata og køteoretiske/prosedyrbaserte modeller?*
+
+Målet er å bygge et **kvantitativt referansepunkt** for 110-bemanning — ikke for å kritisere
+lokale valg, men for å komplettere ROS-analyser med tallbaserte målepunkter som kan
+sammenlignes på tvers av alle 12 sentraler.
+
+- **Primærcase:** 110 Sør-Vest, der jeg har detaljerte LEO/BRIS-data og intern beredskapsanalyse
+- **Benchmarkgrunnlag:** alle 12 sentraler via DSB-årsrapporter (MOB) og BRIS-fullrapporter
+- **Modell:** prosedyrbasert ankomstkonfliktmodell som måler andel beredskapsanrop som
+  håndteres i normal-, degradert- (solo) eller sviktnivå
+
+**Hvorfor jeg kontakter Innlandet 110:** for å kunne benchmarke kapasitetsbelastning må jeg
+verifisere at DSB-tallene gjenspeiler operativ virkelighet, og forstå lokale særtrekk ved
+bemanning, vaktordning og arbeidsmetodikk.
+
+> Svarene behandles konfidensielt. Innlandet 110 navngis kun med eksplisitt samtykke.
+
+---
+
+## Del 1 — Verifisering av DSB-rapporterte data (2022–2025)
+
+Tabellene under er hentet fra det dere selv har rapportert til DSB via MOB-systemet. Jeg
+ber dere bekrefte, korrigere eller utdype disse tallene.
+
+### 1.1 Bemanning (MOB-rapportert)
+
+| Kategori | 2022 | 2023 | 2024 | 2025 | Endring 22–25 |
 |---|---|---|---|---|---|
 | Ansatte heltid | 23 | 24 | 24 | 24 | +4.3% |
-| Operatorer dag - hverdag | 3 | 4 | 4 | 4 | |
-| Operatorer natt - hverdag | 3 | 4 | 4 | 4 | |
-| Operatorer dag - helg | 3 | 4 | 4 | 4 | |
-| Operatorer natt - helg | 3 | 4 | 4 | 4 | |
+| Operatører dag — hverdag | 3 | 4 | 4 | 4 | |
+| Operatører natt — hverdag | 3 | 4 | 4 | 4 | |
+| Operatører dag — helg | 3 | 4 | 4 | 4 | |
+| Operatører natt — helg | 3 | 4 | 4 | 4 | |
 
-### 1.2 Oppdrag med utrykning (sammenlignbare tall 2022-2024)
+### 1.2 Oppdrag med utrykning (sammenlignbare tall 2022–2024)
 
-> **Datakvalitetsmerknad:** Fra 2024 tok flere sentraler i bruk nytt operativsystem (LEO/OHV),
-> og i 2025 registreres alle innkommende telefonsamtaler som egne hendelsesrader.
-> Totalt oppdragsvolum er derfor IKKE sammenlignbart paa tvers av alle aar.
-> Tabellen nedenfor viser kun oppdrag MED utrykning (Brann + Ulykke), som er
-> konsistent registrert i alle aar uavhengig av system.
+> **Datakvalitetsmerknad:** Flere sentraler tok i bruk nytt operativsystem (LEO/OHV) fra
+> 2024, og fra 2025 registreres alle innkommende telefonsamtaler som egne hendelsesrader.
+> Totalt oppdragsvolum er derfor **ikke** sammenlignbart på tvers av alle år. Tabellen
+> nedenfor viser kun oppdrag MED utrykning (Brann + Ulykke), som er konsistent registrert
+> alle år uavhengig av system.
 
-| | 2022 | 2023 | 2024 | 2025* | Endring 22-24 |
+| Kategori | 2022 | 2023 | 2024 | 2025* | Endring 22–24 |
 |---|---|---|---|---|---|
-| Oppdrag - Brann | 1331 | 1372 | 1329 | 1308 | |
-| Oppdrag - Ulykke | 1296 | 1858 | 1396 | 1403 | |
+| Oppdrag — Brann | 1331 | 1372 | 1329 | 1308 | |
+| Oppdrag — Ulykke | 1296 | 1858 | 1396 | 1403 | |
 | **Sum med utrykning** | **2627** | **3230** | **2725** | **2711** | **+3.7%** |
-| Unodige/falske utrykninger | 2929 | 3163 | 3232 | 2898 | |
+| Unødige/falske utrykninger | 2929 | 3163 | 3232 | 2898 | |
 
-*2025-tall er inkludert for orientering, men bor ikke brukes i trendsammenligning.
+*2025-tall vises for orientering, men bør ikke brukes i trendsammenligning på grunn av systembytte.
 
-### 1.3 Mottatte 110-anrop (selvrapportert i MOB)
+### 1.3 Mottatte 110-anrop (MOB, selvrapportert)
 
-> Disse tallene er sentralenes egne innrapporteringer til DSB og er uavhengig av
-> registreringssystemet. De kan brukes som supplerende indikator paa anropsvolum.
+> Sentralenes egne innrapporteringer, uavhengig av registreringssystem.
 
 | | 2022 | 2023 | 2024 | 2025 |
 |---|---|---|---|---|
 | Mottatte 110-anrop (MOB) | 11565 | 13550 | 12299 | 14500 |
 
----
-
-## Del 2 -- Utdyping og korrigering
-
-**Spm 1.** Er tallene i tabellene ovenfor korrekte? Hvis nei -- hva er riktige tall, og hva forklarer avviket?
+**Spm 1.** Er tallene i 1.1–1.3 korrekte? Hvis nei — hva er riktige tall, og hva forklarer avviket?
 
 > *Svar:*
 
-**Spm 2.** Tabellen viser operatorantall som registrert minimum per vakttype. Er dette faktisk laveste planlagte bemanning, eller er det et normaltall? Hva er reelt operativt minimum ved lav bemanning (f.eks. sykdom, ferie)?
+---
 
-| Vakttype | Innrapportert | Faktisk minimum | Merknad |
+## Del 2 — Vaktordning og bemanningsstruktur
+
+**Kontekst (110 Sør-Vest):** Todelt skift med dag 07–19 og natt 19–07. Sentralen har
+**6 vaktlag à 3 operatører + 1 vaktleder**. Dag hverdag bemannes med 3 operatører + VL;
+natt og helg med 2 operatører + VL. **Minimumsbemanning er 4 (3 operatører + VL) på dag
+hverdag og 3 (2 operatører + VL) på natt og helg.** Det benyttes **ikke** ekstra vakter/
+vikarer for å nå normalbemanning på natt/helg — 3-personers oppsett er normalen. Sentralen
+tillater at den 3. personen på natt/helg kan være vikar. Vi vet at noen sentraler kjører
+dagturnus i stedet for todelt skift, og at faktisk bemanning kan avvike fra MOB-rapporten.
+
+**Spm 2.** Hvilken vaktordning kjører Innlandet 110?
+
+- [ ] Todelt skift (dag ca. 07–19, natt ca. 19–07)
+- [ ] Dagturnus med separat natt (f.eks. 08–16 dag + egen natt)
+- [ ] Annen ordning (beskriv under)
+
+> *Beskrivelse:*
+
+**Spm 3.** Avviker helgeordningen fra hverdager? På hvilken måte?
+
+> *Svar:*
+
+**Spm 4.** Er operatørantallet i tabell 1.1 et minimum, normaltall eller maksimum? Hvor lavt kan bemanningen i praksis gå?
+
+| Vakttype | MOB-tall | Normalt planlagt | Minimum ved fravær | Maks ved topp |
+|---|---|---|---|---|
+| Dag — hverdag | 4 | | | |
+| Natt — hverdag | 4 | | | |
+| Dag — helg | 4 | | | |
+| Natt — helg/helligdag | 4 | | | |
+
+**Spm 5.** Hvordan dekkes vakter ved sykdom eller annet fravær?
+
+- [ ] Tilkall fra vikarliste / ekstrahjelper
+- [ ] Beredskapsvakt (hjemmevakt)
+- [ ] Kolleger som tar over / forlenger egen vakt
+- [ ] Driftes med redusert bemanning
+- [ ] Annet: ___
+
+**Spm 6.** Anslagsvis hvor stor andel av vaktene dekkes av vikarer/ekstrahjelper sammenlignet med fast ansatte?
+
+> *Svar:*
+
+**Spm 7.** Er vaktlag ofte satt opp med planlagt overkapasitet (f.eks. planlagt 5, definert minimum 4)? Anslag for typisk overkapasitet per vakttype?
+
+> *Svar:*
+
+**Spm 8.** Besvarer vaktleder (VL) normalt innkommende nødanrop ved Innlandet 110?
+
+- [ ] Ja, alltid
+- [ ] Ja, ved behov / høy belastning
+- [ ] Nei, aldri
+- [ ] Ingen dedikert VL-rolle
+
+> *Utdyping:*
+
+---
+
+## Del 3 — Arbeidsmetodikk: makkerpar vs solo-drift
+
+**Kontekst (110 Sør-Vest):**
+Prosedyrestandarden krever at hver beredskapshendelse håndteres av to operatører
+(«makkerpar»): én på samtale med innringer, én som håndterer ressursutkalling, loggføring
+og oppfølging. I praksis går drift ofte over i **solo-håndtering** når flere hendelser
+inntreffer samtidig — alternativet er å la neste innringer vente. Kvaliteten synker, men
+blir «godt nok». Modellen vår forsøker å kvantifisere hvor ofte dette skjer.
+
+**Spm 9.** Hvordan beskriver dere prosedyrestandarden ved Innlandet 110?
+
+- [ ] Makkerpar er standard, solo-drift kun ved samtidige hendelser eller press
+- [ ] Solo-drift er utgangspunktet; makkerpar aktiveres kun ved store hendelser
+- [ ] Annen modell (beskriv)
+
+> *Beskrivelse:*
+
+**Spm 10.** Omtrentlig: hvor ofte må operatør jobbe solo på beredskapshendelser ved vanlig bemanning? (daglig, ukentlig, sjelden)
+
+> *Svar:*
+
+**Spm 11.** Har dere en intern norm/grense for hvor lenge et anrop kan vente før overføring til nabosentral? (Sør-Vest: 30 sek ubesvart → automatisk overføring til Agder; 10. anrop i kø overføres også.)
+
+> *Svar:*
+
+---
+
+## Del 4 — Hendelseskategorier og operatørbindingstider
+
+Studien bruker en **prosedyrebasert ankomstkonfliktmodell** der hver ny beredskapshendelse
+måles mot kapasitetstilstanden (normal / degradert / svikt) på ankomsttidspunktet. Dette
+krever at vi vet hvor lenge en operatør er **aktivt bundet** av en hendelse — ikke total
+varighet i systemet, men fra anrop mottas til operatør er ferdig med oppfølging.
+
+BRIS gir tidsdata for beredskapshendelser med utrykning, men mangler tidsdata for alle
+andre henvendelsestyper. Derfor trenger vi operative estimater. Kategoriseringen nedenfor
+er utledet fra BRIS 2025 ved 110 Sør-Vest. Referansetallene er Sør-Vests estimater og er
+oppgitt som utgangspunkt for diskusjon.
+
+| Kategori | Hva det er i praksis | Sør-Vest ref (min) | Deres estimat (min) |
 |---|---|---|---|
-| Dag - hverdag | 4 | | |
-| Natt - hverdag | 4 | | |
-| Dag - helg | 4 | | |
-| Natt - helg/helligdag | 4 | | |
+| **D — Beredskap med utrykning** | Nødanrop / ABA som fører til ressursutkalling og utrykning | 13 (median) | |
+| **S — Service/overføringstest** | Servicetekniker tester brannalarmanlegg; operatør verifiserer signal og kvitterer ut | 2 | |
+| **L-aba — ABA løst av 110** | Automatisk brannalarm der nødtelefon innen 90 sek bekrefter ufarlig årsak (f.eks. matlaging) — lukkes uten utrykning | 3 | |
+| **L-hendelse — Reell hendelse løst av 110** | Innringer melder noe reelt; operatør gir råd eller avklarer uten å sende ressurs | 5 | |
+| **L-ukjent — Løst av 110, uklassifisert** | Bål-spørsmål, service lukket feil, korte avklaringer uten formell oppdragstype | 3 | |
+| **F — Feilringing** | Feilringing, «ønsket 112/113», eCall feil bruk | 0,5 | |
+| **V — Viderevarsling** | Viderekobling til annen etat eller intern varsling | 1 | |
 
-**Spm 3.** Besvarer vaktleder (VL) normalt innkommende nodanrop ved Innlandet 110?
-
-[ ] Ja, alltid   [ ] Ja, ved behov/hoy belastning   [ ] Nei, aldri   [ ] Ingen dedikert VL-rolle
-
-**Spm 4.** Oppdrag med utrykning (Brann+Ulykke) endret seg med **+3.7%** fra 2022 til 2024, mens ansatte heltid endret seg med **+4.3%** fra 2022 til 2025. Kan dere si noe om hva som forklarer denne utviklingen?
-
-> *Svar:*
-
-**Spm 5.** Har det skjedd spesielle hendelser (storulykker, klimahendelser, nye oppgaver, organisasjonsendringer) som har hatt vesentlig pavirkning paa kapasitetssituasjonen i perioden 2022-2025?
+**Spm 12.** Er kategoriseringen gjenkjennbar ved Innlandet 110? Mangler det en type, eller er noe slått sammen som burde vært skilt?
 
 > *Svar:*
 
----
-
-## Del 3 -- Handleringstider per hendelsestype
-
-Studien bruker en koeteoretisk modell (Erlang-C) for aa beregne kapasitetsbehov. Modellen krever
-gjennomsnittlig operatorbindingstid per hendelsestype -- den tiden en operator aktivt er bundet
-til aa handtere en hendelse (ikke total hendelsesvarighet, som kan vaere mye lengre).
-
-| Type | Beskrivelse | Typiske eksempler | Estimert bindingstid (min) |
-|---|---|---|---|
-| T1 | Ren telefonhenvendelse -- ingen utrykking, ingen oppdragslogg | Test av anlegg, generelle henvendelser, feilmeldinger | |
-| T2 | Automatisk brannalarm (ABA) -- begrenset handleringstid uavhengig av utfall | ABA kvittert som falsk alarm ELLER bekreftet og viderekoblet | |
-| T3 | Hendelse med utrykning -- lang operatorbinding, potensielt flere operatorer | Brann i bygg, trafikkulykke med skadde, hjertestans med ressursutalarmering | |
-| T4 | Melding vurdert og lukket uten utrykning -- lengre enn T1 men kortere enn T3 | Mulig brann avkreftet via intervju, oppdrag lost av 110 | |
-
-**Spm 6.** Stemmer denne inndelingen med operativ praksis ved Innlandet 110? Er det typer som mangler, overlapper eller bor slas sammen?
+**Spm 13.** Er Sør-Vests bindingstidsestimater rimelige sammenlignet med deres operative praksis? Hvilke kategorier avviker mest, og hvorfor?
 
 > *Svar:*
 
-**Spm 7.** For T3-hendelser: Hva er typisk tidsrom fra anrop mottas til operator er ferdig med aktiv handtering (selv om oppdraget fortsatt er apent i systemet)? Er det vanlig at en T3-hendelse binder mer enn en operator samtidig?
+**Spm 14.** For beredskapshendelser (D): er det vanlig at én hendelse binder to eller flere operatører samtidig (makkerpar-håndtering)? Hvor lenge holder den parallelle bindingen?
 
 > *Svar:*
 
 ---
 
-## Del 4 -- ROS- og beredskapsanalyse
+## Del 5 — ROS- og beredskapsanalyse
 
 **Innrapportert status (fra MOB):**
 - ROS-analyse sist revidert: **2025**
 - Beredskapsanalyse utarbeidet: **Ja**, sist revidert: **2026**
 
-**Spm 8.** Bekrefter dere disse arstallene? Hvis nei -- hva er korrekte tall?
+**Spm 15.** Bekrefter dere årstallene ovenfor? Hvis nei — hva er korrekt?
 
 > *Svar:*
 
-**Spm 9.** Naar er neste planlagte revisjon av ROS-/beredskapsanalysen?
+**Spm 16.** Har dere selv god kjennskap til analysen? Brukes den aktivt i driftsplanlegging, eller er den et formelt dokument som revideres periodisk?
 
 > *Svar:*
 
-**Spm 10.** Hvilke metoder/modeller bruker dere for aa dimensjonere bemanningsnivaa? Er det basert paa beredskapsanalysen, historiske data, avtaler, eller annet?
+**Spm 17.** Når er neste planlagte revisjon?
 
 > *Svar:*
 
-**Spm 11.** Mener dere at ROS- og beredskapsanalyser i sin navaerende form er tilstrekkelig som grunnlag for aa dimensjonere antall operatorer? Hva er eventuelt de viktigste manglene?
+**Spm 18.** Hvilke metoder/data bruker dere for å dimensjonere bemanningsnivå? (Beredskapsanalyse, historiske hendelsesdata, avtaler med eier, faglig skjønn, annet?)
 
 > *Svar:*
 
----
-
-## Del 5 -- Sammenfallende hendelser
-
-**Spm 12.** Opplever dere perioder der antall samtidige aktive hendelser overstiger operatorkapasiteten? Hvor hyppig skjer dette, og i hvilke situasjoner?
-
-> *Svar:*
-
-**Spm 13.** Hva skjer operativt naar kapasitetsgrensen naas?
-
-[ ] Vaktleder trer inn som operator   [ ] Overfort til nabosentral   [ ] Prioritering mellom hendelser   [ ] Annet: ___
-
-**Spm 14.** Er det et definert antall samtidige hendelser/anrop som utloster tiltak eller varsling (f.eks. bistand fra nabosentral)?
+**Spm 19.** Er ROS-/beredskapsanalysen i nåværende form tilstrekkelig som grunnlag for å dimensjonere antall operatører? Hva mangler eventuelt?
 
 > *Svar:*
 
 ---
 
-## Del 6 -- Avsluttende kommentarer
+## Del 6 — Operativ belastning og opplevd bemanning
 
-**Spm 15.** Er det andre forhold ved kapasitetssituasjonen ved Innlandet 110 som dere mener er viktig aa forsta, og som ikke dekkes av sporsmalene ovenfor?
+**Spm 20.** Hvor ofte opplever dere perioder der antall aktive hendelser overstiger ledig operatørkapasitet? (Daglig, ukentlig, sjelden?)
+
+> *Svar:*
+
+**Spm 21.** Hva skjer operativt når kapasitetsgrensen nås?
+
+- [ ] Vaktleder trer inn som operatør
+- [ ] Overført til nabosentral
+- [ ] Prioritering mellom hendelser
+- [ ] Redusert kvalitet på håndtering (f.eks. solo-drift, kortere intervju)
+- [ ] Annet: ___
+
+**Spm 22.** Er det et definert antall samtidige hendelser/anrop som utløser tiltak eller varsling (f.eks. bistand fra nabosentral)?
+
+> *Svar:*
+
+**Spm 23.** Hvordan oppleves dagens bemanning fra et operativt perspektiv?
+
+- [ ] Overdimensjonert
+- [ ] Passe
+- [ ] Knapt nok
+- [ ] Underdimensjonert
+
+> *Utdyping (gjerne med eksempler på når det merkes):*
+
+---
+
+## Del 7 — Sentralspesifikke avklaringer (DSB 2025-data)
+
+DSB har i 2026 levert et fullstendig hendelsesdatasett for alle 12 sentraler (2025). Jeg har klassifisert alle oppdrag etter samme logikk (D/S/L-aba/L-hendelse/L-ukjent/F/V) basert på kolonnene «Oppdragstype», «Opprinnelig oppdragstype» og «Ressurs varslet». Dette avdekker mønster som må forklares før sentralene kan sammenlignes kvantitativt. Under vises **deres tall i nasjonal sammenheng**, etterfulgt av oppfølgingsspørsmål på områdene der dere avviker.
+
+### 7.1 Deres sentral i nasjonal sammenheng (DSB 2025)
+
+Totalvolum DSB 2025: **44,001** oppdrag. MOB-selvrapport: **14,500** mottatte anrop. Forhold DSB/MOB: **3.0×**.
+
+| Kategori | Deres andel | Antall | Nasj. median | Nasj. spenn | Avvik |
+|---|---:|---:|---:|---:|---|
+| D — utrykning | 15.0% | 6,600 | 18.4% | 9.3–24.9% | – |
+| L-aba — ABA løst av 110 | 5.6% | 2,469 | 4.9% | 0.0–8.9% | – |
+| L-hendelse — reell hendelse løst av 110 | 3.1% | 1,345 | 5.3% | 2.9–10.2% | ↓ LAV |
+| L-ukjent — lukket uten opprinnelig type | 39.6% | 17,415 | 29.4% | 13.8–40.4% | ↑ HØY |
+| F — feilringing | 13.0% | 5,734 | 13.9% | 8.6–20.6% | – |
+| V — viderekobling | 2.6% | 1,125 | 1.2% | 0.6–2.6% | ↑ HØY |
+
+### 7.2 Oppfølgingsspørsmål
+
+**Spm 24.** **L-hendelse-andel er lav (3.1%).** Nasjonal median: 5.3%. Få reelle hendelser registreres som avklart uten utrykning hos dere.
+
+> *Avklaring:* Registreres disse under andre kategorier (L-ukjent, V), eller rykker dere ut oftere på hendelser som andre sentraler avklarer telefonisk?
+
+> *Svar:*
+
+**Spm 25.** **L-ukjent-andel er høy (39.6%).** Nasjonal median: 29.4%. Store mengder oppdrag er registrert som «Oppdrag løst av 110» uten at «Opprinnelig oppdragstype» er satt.
+
+> *Avklaring:* Hva er typisk innhold i disse oppdragene — korte avklaringer og spørsmål (bål-henvendelser, telefonhjelp), eller er det også reelle hendelser som ikke klassifiseres? Er det en lokal rutine å lukke enkelte henvendelsestyper uten opprinnelig type?
+
+> *Svar:*
+
+**Spm 26.** **Viderekoble-andel er høy (2.6%).** Nasjonal median: 1.2%.
+
+> *Avklaring:* Hvilke typer henvendelser viderekobles? Er det mye 112/113-feilringinger, eller har dere eksplisitt samarbeid med nabosentraler/andre etater som øker viderekobling?
 
 > *Svar:*
 
 ---
 
-*Takk for at dere tar dere tid til aa svare. Svarene kan returneres til [e-post] innen [frist].*
-*Sporsmal kan rettes til Rune Grodem, student LOG650, Hogskolen i Molde.*
+## Del 8 — Avsluttende kommentarer
+
+**Spm 27.** Har det skjedd spesielle hendelser (storulykker, klimahendelser, nye oppgaver, organisasjonsendringer) i perioden 2022–2025 som har hatt vesentlig påvirkning på kapasitetssituasjonen?
+
+> *Svar:*
+
+**Spm 28.** Er det andre forhold ved kapasitetssituasjonen ved Innlandet 110 som er viktig å forstå, og som ikke dekkes av spørsmålene ovenfor?
+
+> *Svar:*
+
+---
+
+*Takk for at dere tar dere tid til å svare. Svarene kan returneres til rune.grodemm@himolde.no.*
+*Spørsmål kan rettes til Rune Grødem, student LOG650 Forskningsprosjekt, Høgskolen i Molde.*
