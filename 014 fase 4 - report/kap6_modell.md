@@ -20,29 +20,33 @@ Modellrammeverket er utviklet med 110 Sør-Vest som case, men er prinsipielt ove
 
 Dimensjonering av nødmeldesentraler kan ikke baseres på samlet telefonvolum alene. Det avgjørende er hvor mange henvendelser som på et gitt tidspunkt binder operatørkapasitet på en måte som reduserer evnen til å håndtere nye prioriterte hendelser.
 
-Klassifiseringen bruker to felt fra BRIS i kombinasjon: `Oppdragstype` (sluttklassifisering) som primærkriterium og `Opprinnelig oppdragstype` (initiell hendelsestype) som sekundærkriterium der den er tilgjengelig. Alle 61 964 synlige oppdrag i 2025-datasettet klassifiseres i syv kategorier:
+Klassifiseringen bruker tre felt fra BRIS i kombinasjon: `Oppdragstype` (sluttklassifisering), `Opprinnelig oppdragstype` (initiell hendelsestype) og `Kilde` (Alarm/Samtale/blank — innringingskanal). Alle 61 964 synlige oppdrag i 2025-datasettet klassifiseres i åtte kategorier. D-hendelser er delt i to undertyper fordi operativ prosedyre og makkerpar-krav skiller seg fundamentalt mellom pri-1-hendelser og ABA-utløst utrykning (se avsnitt 6.4.3–6.4.4).
 
 | Kategori | Regel i BRIS | Antall (2025) | Andel |
 |---|---|---|---|
-| **D** (Utrykning) | `Ressurs varslet` er ikke-tom | 7 555 | 12,2 % |
+| **D-pri1** (Pri-1-utrykning) | `Ressurs varslet` er ikke-tom ∧ ikke-(ABA + Alarm) | 4 499 | 7,3 % |
+| **D-aba** (ABA-utløst utrykning) | `Ressurs varslet` ∧ `Opprinnelig` starter med «ABA» ∧ `Kilde = Alarm` | 3 056 | 4,9 % |
 | **S** (Service) | `Oppdragstype = "Service"` | 22 542 | 36,4 % |
-| **L-aba** (ABA løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig = "ABA"` | 5 495 | 8,9 % |
-| **L-hendelse** (Reell hendelse løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` har verdi (≠ ABA) | 2 233 | 3,6 % |
+| **L-aba** (ABA løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig = "ABA"` ∧ `Kilde = Alarm` | 3 430 | 5,5 % |
+| **L-hendelse** (Reell hendelse løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` har verdi ∧ (≠ ABA ∨ `Kilde ≠ Alarm`) | 4 298 | 6,9 % |
 | **L-ukjent** (Løst av 110, uklassifisert) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` er tom | 16 768 | 27,1 % |
 | **F** (Feilringing) | `Oppdragstype` ∈ {Nødanrop feilring, Ikke reell nødmelding, ECall feil bruk, ECall teknisk/ukjent, ECall veihjelp} | 6 824 | 11,0 % |
 | **V** (Viderevarsling) | `Oppdragstype` inneholder «viderevarslet» eller «viderekoble» | 547 | 0,9 % |
 
+**Kilde = Alarm-kravet for L-aba og D-aba:** Empirisk manuell gjennomgang av 50 L-aba-hendelser (LABA-dybdeanalyse, se avsnitt 5.4) viste at 24,5 % av oppdrag klassifisert med `Opprinnelig = ABA` faktisk ikke representerer automatisk brannalarm i operativ forstand — de omfatter publikumsmeldinger om brannalarm, private bygg uten 110-tilknytning, tester feilrevidert som oppdrag, og duplikatoppdrag. Kilde-feltet skiller hvordan hendelsen ankom 110: `Alarm` (ABA-signal), `Samtale` (publikumsinnringing), eller blank (operatør-initiert). Reell ABA har `Kilde = Alarm`. Ved å kreve dette for L-aba og D-aba sikres at klassifiseringen gjenspeiler operativ dynamikk, ikke registreringspraksis.
+
 **Operativ beskrivelse av kategoriene:**
 
-- **D (Utrykning):** Hendelser med ressursvarsling og callout. Den mest kritiske og tydelig observerbare kategorien, og den som i størst grad utløser samtidig RØD- og GUL-binding i akuttfasen. Bindingstid er databasert (se avsnitt 6.4.6).
+- **D-pri1 (Pri-1-utrykning):** Byggnings- og objektbrann, trafikkulykke, farlig gods og tilsvarende pri-1-hendelser. Gir makkerpar-binding (RØD + GUL parallelt), trippelvarsling, tidskritisk informasjon via BAPS. Bindingstid er databasert (se avsnitt 6.4.5).
+- **D-aba (ABA-utløst utrykning):** Automatisk brannalarm som fører til ressurs varslet fordi avklaring ikke kom innen 90 sekunder. Ikke pri-1 — operatør oppretter oppdrag og utalarmerer serielt i ~3 min, uten makkerpar-krav (se avsnitt 6.4.6).
 - **S (Service/overføringstest):** Servicetekniker ringer for overføringstest av brannalarmanlegg. Operatør mottar samtale i LEO, setter adresse om den ikke kommer automatisk, tar imot signal i alarmmottak, verifiserer mottatt signal til servicetekniker, venter til anlegget er i hvile, kvitterer ut testen og lukker som service.
-- **L-aba (ABA løst av 110):** Automatisk brannalarm kommer inn og overføres til LEO. Operatør venter 90 sekunder. Dersom nødtelefon fra stedet mottas innen 90 sekunder og innringer bekrefter ufarlig årsak (f.eks. matlaging), lukkes oppdraget som «Oppdrag løst av 110». Uten nødtelefon innen fristen ville det ført til utrykning (kategori D).
-- **L-hendelse (Reell hendelse løst av 110):** Innringer melder noe reelt (røyklukt, branntilløp, ulykke), operatør vurderer og løser uten å sende ressurs.
+- **L-aba (ABA løst av 110):** Automatisk brannalarm kommer inn og overføres til LEO. Operatør venter 90 sekunder. Dersom nødtelefon fra stedet mottas innen 90 sekunder og innringer bekrefter ufarlig årsak (f.eks. matlaging), lukkes oppdraget som «Oppdrag løst av 110». Bindingstiden er empirisk kalibrert til 6 min via LABA-dybdeanalysen (avsnitt 5.4). Uten nødtelefon innen fristen ville det ført til utrykning (kategori D-aba).
+- **L-hendelse (Reell hendelse løst av 110):** Innringer melder noe reelt (røyklukt, branntilløp, ulykke), operatør vurderer og løser uten å sende ressurs. Inkluderer ABA-oppdrag med `Kilde = Samtale` (publikum rapporterer brannalarm uten ABA-signal).
 - **L-ukjent (Løst av 110, uklassifisert):** Henvendelser som lukkes uten formell opprinnelig oppdragstype. Omfatter korte avklaringer (f.eks. bålregler), feilkategoriserte servicetester og andre henvendelser som ikke krever formell oppdragsopprettelse. Feltet `Opprinnelig oppdragstype` har 16 % dekning for hendelser uten utrykning — dette er ikke en datakvalitetsfeil, men en rasjonell arbeidsøkonomisk tilpasning der operatørene ikke bruker tid på å klassifisere korte henvendelser.
 - **F (Feilringing):** Innringer har ringt feil nummer eller har en sak som ikke angår 110.
 - **V (Viderevarsling):** Viderekobling til annen etat (politi/AMK) eller intern varsling.
 
-I den foreliggende analysen kvantifiseres primært kategori D i primærmodellen (variant A, avsnitt 6.4), fordi denne kan identifiseres robust i datasettet gjennom ressursvarsling og tidspunkt for første ressurs fremme. Den utvidede modellen (variant B, avsnitt 6.5) inkluderer alle syv kategorier for å kvantifisere samlet operativ belastning. Bindingstider for ikke-D-kategorier er operative estimater validert av vaktleder (se avsnitt 6.5.3).
+I den foreliggende analysen kvantifiseres primært beredskapskategoriene D-pri1 og D-aba i primærmodellen (variant A, avsnitt 6.4). Den utvidede modellen (variant B, avsnitt 6.5) inkluderer alle åtte kategorier for å kvantifisere samlet operativ belastning. Bindingstider for ikke-D-kategorier er enten empirisk kalibrert (L-aba: LABA-dybdeanalyse, 6 min) eller operativt estimert og validert av vaktleder (S, L-hendelse, L-ukjent, F, V).
 
 ### Sentrale begreper: anrop, oppdrag og hendelse
 
@@ -121,127 +125,152 @@ Primærmodellen tar utgangspunkt i prosedyrens kapasitetslogikk og stiller et pr
 
 Dette er en **prosedyrkonformitetsmetrikk** — ikke et ventetidsmål. Kapasitetsproblemet ved 110-sentraler er i de fleste tilfeller ikke at anrop venter i kø, men at de ankommer når operatørene allerede er bundet i aktive hendelser slik at makkerpar-prinsippet brytes.
 
-### 6.4.2 Operativ tilpasningslogikk
+### 6.4.2 Op-binder-semantikk
 
-Modellen bygger pa en sentral observasjon om hvordan operatorene faktisk tilpasser seg ved samtidskonflikter: **makkerparet splittes**. Nar et nytt anrop ankommer og begge operatorene allerede er bundet i en aktiv hendelse, bryter de makkerparet og fordeler seg slik at hver operator handterer sin hendelse solo. Denne tilpasningen er ikke et sammenbrudd -- det er den operative virkeligheten som gjor at tjenesten opprettholdes under press.
+Modellens kjerne er *op-binder-semantikk*: hver hendelse genererer én eller flere op-binder-events, hvert med tre attributter:
 
-I den operative virkeligheten binder en aktiv hendelse normalt 2 operatorer (ROD + GUL), men ved samtidskonflikter splittes makkerparet slik at operatorene fordeler seg. Modellen teller derfor antall aktive hendelser mot tilgjengelig kapasitet for a avgjore om neste hendelse kan handteres med makkerpar (den operative virkeligheten, ikke prosedyrekravet om 2). Antall ledige operatorer ved et gitt tidspunkt er:
+- **Ankomsttidspunkt** $t$
+- **Bindingstid** $d$ (minutter)
+- **Operatører bundet** $q \in \{1, 2\}$
+
+Ulike hendelsestyper binder ulike antall operatører. Pri-1-utrykning (D-pri1) krever makkerpar — to operatører bindes parallelt fra første sekund. ABA-utrykning (D-aba) og alle andre kategorier krever ikke makkerpar — én operatør håndterer serielt. Denne distinksjonen er forankret i prosedyre og operatørintervjuer (se avsnitt 4.2 og 5.3).
+
+Sweep-algoritmen akkumulerer *antall aktive op-binder* ved hvert nytt ankomsttidspunkt:
+
+$$n_{\text{aktive}}(t_i) = \sum_{j < i : t_j + d_j > t_i} q_j$$
+
+Antall ledige operatører:
 
 $$\text{ledige}(t_i) = c_{\text{eff}} - n_{\text{aktive}}(t_i)$$
 
-der $n_{\text{aktive}}$ er antall hendelser med uutlopt bindingstid som fortsatt er aktive.
+### 6.4.3 Kapasitetsnivåer
 
-### 6.4.3 Kapasitetsnivaer
+Basert på antall ledige operatører klassifiseres hvert innkommende beredskapsanrop til ett av tre nivåer:
 
-Basert pa antall ledige operatorer klassifiseres hvert innkommende anrop til ett av tre nivaer:
+**Tabell 6.2: Kapasitetsnivåer — operativ tilpasningsmodell**
 
-**Tabell 6.2: Kapasitetsnivaer -- operativ tilpasningsmodell**
-
-| Niva | Definisjon | Betingelse | Operativ konsekvens |
+| Nivå | Definisjon | Betingelse | Operativ konsekvens |
 |---|---|---|---|
-| **Normal** | Makkerpar mulig for neste hendelse | ledige >= 2 | Full prosedyre, kvalitetssikret handtering |
-| **Brudd pa driftsstandard** | Kun 1 ledig -- solo-handtering | ledige = 1 | Operatoren klarer det, men uten makker. Okt kognitiv belastning, okt feilrisiko |
-| **Svikt** | Ingen ledig operator | ledige = 0 | VL ma overta eller overlop til Agder |
+| **Normal** | Makkerpar mulig for neste hendelse | ledige ≥ 2 | Full prosedyre, kvalitetssikret håndtering |
+| **Brudd på driftsstandard** | Kun 1 ledig — solo-håndtering | ledige = 1 | Operatøren klarer det, men uten makker. Økt kognitiv belastning, økt feilrisiko |
+| **Svikt** | Ingen ledig operatør | ledige ≤ 0 | VL må overta eller overløp til Agder |
 
-For a illustrere hva dette innebarer i praksis:
+For å illustrere hva dette innebærer i praksis med c_eff = 2 (natt/helg):
 
-**Med c_eff = 2 (natt/helg):**
+| Tilstand | Eksempel aktive events | n_aktive | ledige | Nivå |
+|---|---|---:|---:|---|
+| Tomt | Ingen | 0 | 2 | Normal |
+| 1 D-aba Fase 1 | D-aba binder 1 op i 3 min | 1 | 1 | Brudd |
+| 1 D-pri1 | D-pri1 binder 2 ops i 14 min | 2 | 0 | Svikt |
+| 2 D-aba | To D-aba serielt (2 × 1 op) | 2 | 0 | Svikt |
 
-| Situasjon | Hva skjer operativt | Kapasitetsniva |
-|---|---|---|
-| 0 aktive hendelser, nytt anrop | Makkerpar handterer sammen (ROD + GUL fra forste sekund) | Normal |
-| 1 aktiv hendelse, nytt anrop | Makkerparet splitter -- hver tar sin hendelse solo | Brudd pa driftsstandard |
-| 2 aktive hendelser, nytt anrop | Begge operatorer allerede opptatt solo -- ingen kan ta anropet | Svikt |
+**Asymmetri c=2 vs c=3:** Med c_eff = 2 er én D-pri1-hendelse nok til å tømme all operatørkapasitet — neste beredskapsanrop i samme tidsvindu ankommer i Svikt. Med c_eff = 3 forblir én operatør ledig selv under en aktiv D-pri1, slik at pri-1-hendelser gir Brudd (ikke Svikt) for neste ankomst.
 
-**Med c_eff = 3 (dag hverdag):**
+### 6.4.4 D-pri1: makkerpar-binding
 
-| Situasjon | Hva skjer operativt | Kapasitetsniva |
-|---|---|---|
-| 0 aktive, nytt anrop | Makkerpar + 1 gronn ledig | Normal |
-| 1 aktiv, nytt anrop | 2 ledige -- makkerpar mulig for neste hendelse | Normal |
-| 2 aktive, nytt anrop | Kun 1 ledig -- solo-handtering | Brudd pa driftsstandard |
-| 3 aktive, nytt anrop | Ingen ledig | Svikt |
+Pri-1-hendelser følger prosedyrens RØD-GUL-rolle fra første sekund:
 
-Den kritiske asymmetrien mellom c_eff = 2 og c_eff = 3 er at med c_eff = 2 er det kun ett steg fra normal drift til svikt: allerede ved andre samtidige hendelse er begge operatorene opptatt. Med c_eff = 3 finnes en buffersone der operatorene kan jobbe solo for svikt inntreffer.
+- **0–~1 min:** RØD i samtale med innringer, GUL i medlytt og lokalisering
+- **~1–~2 min:** GUL utalarmerer ressurser (median 83 sek fra anrop til ressurs varslet), RØD fortsetter samtalen
+- **~2–~11 min:** RØD i fortsatt innringerkontakt, GUL koordinerer samband og gir tidskritisk informasjon via BAPS
+- **~11 min:** Første ressurs fremme → vindusmelding
+- **+3 min:** Kvittering og loggføring → GUL delvis frigjort
 
-### 6.4.4 Sammenstilte tilleggsanrop som belastningsenhet
+Både RØD og GUL er bundet parallelt gjennom hele akuttfasen. Bindingstid per D-pri1 beregnes databasert som:
 
-En vesentlig utvidelse av modellen er inkludering av **skjulte/sammenstilte anrop** -- anrop som automatisk knyttes til eksisterende oppdrag i LEO/BRIS og ikke registreres som egne saker (se avsnitt 7.2).
+$$d_{\text{D-pri1}} = (T_{\text{første ressurs fremme}} - T_{\text{anrop}}) + 3 \text{ min kvittering}$$
 
-#### Identifisering
+For 4 499 D-pri1-hendelser i 2025 er median 14,1 min (P25 = 11,2, P90 = 27,3). De 25 % av D-pri1 som mangler tidspunkt for første ressurs fremme tildeles median.
 
-Disse anropene identifiseres gjennom gap i sekvensnummereringen i 110_ID-feltet. Hvert synlige oppdrag har et daglig sekvensnummer (f.eks. B06-250101-4, B06-250101-6). Manglende sekvensnumre (i dette tilfellet -5) representerer anrop som ble sammenstilt med et eksisterende oppdrag.
+**D-pri1 i sweep:** Hver D-pri1-hendelse genererer én op-binder-event med $q = 2$, $d = d_{\text{D-pri1}}$, ankomst $t$.
 
-Et viktig forbehold: sekvensgapet forteller at et anrop ble sammenstilt, men ikke *hvilket* oppdrag det ble knyttet til. Dersom de synlige oppdragene er -23, -26 og -29, kan de manglende numrene (-24, -25, -27, -28) i prinsippet alle tilhore oppdrag -23, eller de kan vaere fordelt pa ulike aktive oppdrag. For kapasitetsmodellen har dette imidlertid ingen betydning: det avgjorende er at en operator var opptatt med et anrop pa det aktuelle tidspunktet, uavhengig av hvilket oppdrag anropet ble registrert under.
+### 6.4.5 D-aba: serielt solo-håndtert med valgfri oppfølging
 
-#### Bindingstid
+ABA-utrykning er ikke pri-1. Prosedyren krever ikke makkerpar fordi ABA ikke trippelvarsles, det gis ikke tidskritisk informasjon i BAPS, og operatøren som kvitterer alarmen er normalt den samme som oppretter oppdraget og utalarmerer ressurser. D-aba modelleres derfor i to faser:
 
-Sammenstilte anrop er typisk korte. Operatoren kjenner allerede hendelsen, og samtalen bestar normalt av en kort avklaring, bekreftelse pa at ressurs er pa vei, og sa legger innringer pa. Bindingstiden er i modellen satt til **1 minutt** som et kvalitativt estimat. Faktisk varighet kan variere: noen anrop kan vaere kortere (20-30 sekunder ved ren bekreftelse), andre noe lenger dersom innringer er stresset eller situasjonen har utviklet seg. Estimatet pa 1 minutt anses som rimelig konservativt for gjennomsnittet av slike anrop.
+**Fase 1 — oppdragsopprettelse og call-out (alltid)**
+Én operatør kvitterer ABA-signalet, oppretter oppdrag i LEO og utalarmerer ressurser. Empirisk fra BRIS 2025: median 74 sek fra anrop til ressurs varslet (P75 = 80, P90 = 111). Med påfølgende registrering estimeres Fase 1 til:
 
-Selv om bindingstiden er kort, er den operative konsekvensen reell: operatoren er utilgjengelig for neste hendelse i det kritiske vinduet. I perioder med hoyt press kan det vaere nettopp dette korte anropet som vipper kapasiteten fra handterbart til svikt.
+$$d_{\text{D-aba, Fase 1}} = 3 \text{ min}, \quad q = 1$$
 
-#### Modellparametere
+**Fase 2 — nødtelefon og panel-veiledning (valgfri)**
+Etter call-out kommer ofte en nødtelefon fra stedet. Denne besvares av vilkårlig ledig operatør og inneholder intervju med innringer, veiledning til brannpanel, områdeavklaring, eventuelt tilbakestilling av alarm. Fase 2 modelleres stokastisk:
 
-I modellen behandles sammenstilte anrop som egne belastningsenheter med:
-- **Tidspunkt:** Interpolert fra naermeste synlige oppdrags ankomsttidspunkt
-- **Bindingstid:** 1 minutt (kvalitativt estimat, se over)
+- Sannsynlighet $p$ for at Fase 2 forekommer (hoved: $p = 0{,}50$)
+- Bindingstid $Y$ for Fase 2 når den forekommer (hoved: $Y = 6$ min)
+- Fase 2 starter 90 sekunder etter Fase 1 (= 1,5 min offset)
 
-For 2025 er det identifisert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305x). Disse legges til de 7 555 kategori D-hendelsene, slik at modellen totalt analyserer 26 456 belastningsenheter.
+$$d_{\text{D-aba, Fase 2}} = Y, \quad q = 1, \quad t_{\text{Fase 2}} = t + 1{,}5 \text{ min}$$
 
-### 6.4.5 Matematisk formulering
+For reproduserbarhet brukes fast random seed til å velge hvilke D-aba som får Fase 2.
 
-La $\{t_i, d_i\}$ for $i = 1, \ldots, N$ betegne N belastningsenheter (beredskapsoppdrag + sammenstilte anrop) med ankomsttidspunkt $t_i$ og bindingstid $d_i$.
+**Empirisk grunnlag for p:** Sekvensgap-metoden gir underkant-estimat på 8,7–37 % for tidsvindu 3–15 min etter D-aba. Estimatet er underkant fordi nødtelefoner logget *inni* hovedoppdraget (uten eget 110-ID) er usynlige. Operatørens kvalitative beskrivelse («ofte kommer det nødtelefon etter call-out») og empirisk observasjon tilsier reell andel 40–60 %, som støtter hovedcase $p = 0{,}50$.
 
-For hvert anrop $i$ beregnes:
+**Sensitivitetsspenn:** Lav ($p = 0{,}30$, $Y = 3$), hoved ($p = 0{,}50$, $Y = 6$), høy ($p = 0{,}70$, $Y = 10$).
 
-$$n_{\text{aktive}}(t_i) = \left|\{j < i : t_j + d_j > t_i\}\right|$$
+### 6.4.6 Sammenstilte tilleggsanrop
 
-det vil si antall tidligere belastningsenheter hvis bindingstid enna ikke er utlopt ved $t_i$.
+**Skjulte/sammenstilte anrop** — anrop som automatisk knyttes til eksisterende oppdrag i LEO/BRIS og ikke registreres som egne saker — identifiseres gjennom gap i sekvensnummereringen i 110_ID-feltet. Hvert synlige oppdrag har et daglig sekvensnummer (f.eks. B06-250101-4, B06-250101-6). Manglende sekvensnumre representerer anrop som ble sammenstilt med et eksisterende oppdrag.
 
-Kapasitetsniva for anrop $i$:
+For 2025 er det identifisert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305×). I modellen behandles de som op-binder-events med:
 
-$$\text{Niva}(i) = \begin{cases}
+$$t = \text{interpolert fra nærmeste synlige oppdrag}, \quad d = 1 \text{ min}, \quad q = 1$$
+
+Bindingstiden på 1 min er et konservativt estimat. Faktisk varighet kan være kortere (20–30 sek ved ren bekreftelse) eller lenger (dersom innringer er stresset). Selv kort bindingstid har operativ konsekvens — operatøren er utilgjengelig for neste hendelse i det kritiske vinduet.
+
+### 6.4.7 Matematisk formulering
+
+La $\mathcal{E} = \{(t_i, d_i, q_i)\}_{i=1}^{N}$ være mengden av op-binder-events generert fra alle hendelser, sortert etter $t$.
+
+For hvert beredskapsanrop (D-pri1-ankomst, D-aba-ankomst, eller skjult anrop) beregnes:
+
+$$n_{\text{aktive}}(t_i) = \sum_{j < i : t_j + d_j > t_i} q_j$$
+
+Kapasitetsnivå:
+
+$$\text{Nivå}(i) = \begin{cases}
 \text{Normal} & \text{hvis } c_{\text{eff}} - n_{\text{aktive}}(t_i) \geq 2 \\
-\text{Svikt} & \text{hvis } c_{\text{eff}} - n_{\text{aktive}}(t_i) \leq 0 \\
-\text{Brudd} & \text{ellers (ledige} = 1\text{)}
+\text{Brudd} & \text{hvis } c_{\text{eff}} - n_{\text{aktive}}(t_i) = 1 \\
+\text{Svikt} & \text{hvis } c_{\text{eff}} - n_{\text{aktive}}(t_i) \leq 0
 \end{cases}$$
 
-Bindingstid $d_i$ settes ulikt for de to typene belastningsenheter:
-- **Kategori D:** $d_i$ = (Forste ressurs fremme -- Dato/tid anrop) + 3 min kvittering. Median 13,0 min.
-- **Sammenstilt anrop:** $d_i$ = 1 min (kort avklaring).
+Events per hendelsestype:
 
-### 6.4.6 Bindingstid-proxy for kategori D
+| Kategori | Events per hendelse | $q$ | $d$ |
+|---|---|---:|---|
+| D-pri1 | 1 | 2 | Observert fra BRIS (median 14,1 min) |
+| D-aba | 1 alltid + 1 med sannsynlighet $p$ | 1 | Fase 1: 3 min / Fase 2: $Y$ min |
+| L-aba | 1 | 1 | 6 min (LABA-kalibrert) |
+| L-hendelse | 1 | 1 | 5 min |
+| L-ukjent | 1 | 1 | 3 min |
+| S | 1 | 1 | 2 min |
+| F | 1 | 1 | 0,5 min |
+| V | 1 | 1 | 1 min |
+| Skjult | 1 | 1 | 1 min |
 
-Bindingstid-proxyen fanger den mest operative og dimensjoneringsrelevante fasen av hendelseshandteringen:
+### 6.4.8 Hva modellen måler — og hva den ikke måler
 
-- **Akuttfasen er den mest tidskritiske:** Bade ROD og GUL bindes fra forste sekund. GUL gar umiddelbart i medlytt nar ROD besvarer anropet, for a bygge situasjonsforstaelse og avhjelpe med lokalisering. Deretter utalarmerer GUL ressurser, handterer samband og gir tidskritisk informasjon til mannskap underveis.
-- **GUL forblir bundet til vindusmelding:** GUL-operatoren er bundet frem til vindusmelding mottas om at forste ressurs er fremme pa stedet. Etter kvittering og loggforing (anslagsvis 3 minutter) er GUL delvis frigjort.
-- **Etter fremme stabiliseres driften:** Mange hendelser gar over i en mer stabil driftsfase med sporadisk belastning pa operatoren.
-
-Av 7 555 kategori D-hendelser har 5 777 (76,5 %) registrert tidspunkt for forste ressurs fremme. De resterende tildeles median bindingstid. Observert fordeling: median 13,0 min, P90 21,6 min. Merk at bindingstiden representerer perioden der bade ROD og GUL er bundet parallelt -- ikke bare en av dem.
-
-### 6.4.7 Hva modellen maler -- og hva den ikke maler
-
-Modellen maler **P(brudd pa driftsstandard ved ankomst)**: sannsynligheten for at et anrop ankommer i en tilstand der makkerpar-driftsstandarden ikke kan opprettholdes.
+Modellen måler **P(brudd på driftsstandard ved ankomst)**: sannsynligheten for at et beredskapsanrop ankommer i en tilstand der makkerpar-driftsstandarden ikke kan opprettholdes.
 
 Dette er ikke det samme som:
-- P(ingen svarer) -- noen svarer i nesten alle tilfeller
-- P(W > t) i Erlang-C-forstand -- tradisjonell ventetid i ko
-- P(kapasitetskollaps) -- systemet kollapser sjelden totalt
+- P(ingen svarer) — noen svarer i nesten alle tilfeller
+- P(W > t) i Erlang-C-forstand — tradisjonell ventetid i kø
+- P(kapasitetskollaps) — systemet kollapser sjelden totalt
 
-Det er en **operasjonell prosedyrmetrikk** som speiler 110-operatorenes erfarte kapasitetsproblem: ikke at anrop forblir ubesvarte, men at de besvares under betingelser der den operative standarden for korrekt og trygg hendelseshandtering ikke er oppfylt.
+Det er en **operasjonell prosedyrmetrikk** som speiler 110-operatørenes erfarte kapasitetsproblem: ikke at anrop forblir ubesvarte, men at de besvares under betingelser der den operative standarden for korrekt og trygg hendelseshåndtering ikke er oppfylt.
 
-### 6.4.8 Modellens konservatisme
+### 6.4.9 Modellens konservatisme
 
-Selv med inkludering av sammenstilte anrop gir modellen sannsynligvis et **konservativt anslag** pa faktisk operativ belastning:
+Modellen gir sannsynligvis et **konservativt anslag** på faktisk operativ belastning:
 
-1. **Ikke-D-kategorier er ikke inkludert i variant A.** Reelle hendelser uten utrykning (L-hendelse), ABA-avklaringer (L-aba), servicetester (S) og øvrige kategorier binder også operatørkapasitet, men er ikke modellert som belastningsenheter i primærmodellen. Variant B (avsnitt 6.5) adresserer dette.
-2. **Imputering med median.** De 23,5 % av kategori D-hendelsene som mangler tidspunkt for forste ressurs fremme er tildelt median bindingstid -- dette kan undervurdere de tyngre hendelsene.
-3. **Kun akuttfasen er modellert.** Mange hendelser binder operatorkapasitet lenger gjennom oppfolging, samband og loggforing.
-4. **Sammenstilte anrop antas 1 minutt.** Faktisk varighet kan variere; noen kan vare lenger dersom innringer trenger mer avklaring.
-5. **Feilkategoriserte tilleggsanrop.** Under hoyt press hender det at anrop som operativt tilhorer en pagaende hendelse lukkes som egne saker med ikke-beredskapsrelevant hendelsestype (service, feilringing, lost av 110) i stedet for a bli sammenstilt med det aktive oppdraget. Estimatet pa 18 901 sammenstilte anrop er derfor sannsynligvis et underestimat.
+1. **Ikke-D-kategorier er ikke inkludert i variant A.** Reelle hendelser uten utrykning (L-hendelse), ABA-avklaringer (L-aba), servicetester (S) og øvrige kategorier binder også operatørkapasitet, men er ikke modellert i primærmodellen. Variant B (avsnitt 6.5) adresserer dette.
+2. **Imputering med median for D-pri1.** De ~25 % av D-pri1-hendelsene som mangler tidspunkt for første ressurs fremme er tildelt median bindingstid — dette kan undervurdere de tyngre hendelsene.
+3. **Kun akuttfasen er modellert for D-pri1.** Mange hendelser binder operatørkapasitet lenger gjennom oppfølging, samband og loggføring.
+4. **Sammenstilte anrop antas 1 minutt.** Faktisk varighet kan være lenger dersom innringer trenger mer avklaring.
+5. **D-aba Fase 2-sannsynlighet er underkant-estimert.** Sekvensgap-metoden fanger kun nødtelefoner med eget 110-ID. Nødtelefoner logget inni hovedoppdraget er usynlige. Hoved-scenario ($p = 0{,}50$) kompenserer delvis, men tung sensitivitet mot $p$ er undersøkt i avsnitt 7.7.3.
+6. **Feilkategoriserte tilleggsanrop.** Under høyt press hender det at anrop som operativt tilhører en pågående hendelse lukkes som egne saker med ikke-beredskapsrelevant hendelsestype (service, feilringing, løst av 110). Estimatet på 18 901 sammenstilte anrop er derfor sannsynligvis underestimat.
 
-Begrensningene trekker i hovedsak i en retning: mot undervurdering. Resultatene bor leses som et minimumsanslag pa brudd- og sviktrisiko, ikke som et maksimumsanslag.
+Begrensningene trekker i hovedsak i én retning: mot undervurdering. Resultatene bør leses som et minimumsanslag på brudd- og sviktrisiko, ikke som et maksimumsanslag.
 
 ---
 
@@ -249,71 +278,84 @@ Begrensningene trekker i hovedsak i en retning: mot undervurdering. Resultatene 
 
 ### 6.5.1 Motivasjon
 
-Primærmodellen (avsnitt 6.4) kvantifiserer kapasitetsnivå kun for kategori D (utrykningshendelser) og sammenstilte anrop — til sammen 26 456 av 80 865 estimerte anrop. De resterende 54 409 synlige oppdragene representerer henvendelser som ikke utløser utrykning, men som likevel binder operatørkapasitet: overføringstester, ABA-avklaringer, rådgivning, feilringing og viderevarsling. Å la denne belastningen forbli ukvantifisert ville innebære at prosjektet, som eksplisitt søker å erstatte kvalitative ROS-vurderinger med kvantitativ analyse, etterlater den største delen av arbeidsvolumet som en kvalitativ kommentar.
+Primærmodellen (avsnitt 6.4) kvantifiserer kapasitetsnivå kun for beredskapskategoriene (D-pri1, D-aba og sammenstilte anrop) — til sammen 27 960 op-binder-events av ca. 82 000 i variant B. De resterende ~54 000 op-binder-events representerer henvendelser som ikke utløser utrykning, men som likevel binder operatørkapasitet: overføringstester, ABA-avklaringer, rådgivning, feilringing og viderevarsling. Å la denne belastningen forbli ukvantifisert ville innebære at prosjektet, som eksplisitt søker å erstatte kvalitative ROS-vurderinger med kvantitativ analyse, etterlater den største delen av arbeidsvolumet som en kvalitativ kommentar.
 
 Variant B bruker **samme sweep-algoritme** som primærmodellen, men utvider belastningsgrunnlaget til å inkludere alle 61 964 synlige oppdrag pluss 18 901 sammenstilte anrop. De to variantene besvarer ulike spørsmål:
 
 | Variant | Belastningsenheter | Spørsmål |
 |---|---|---|
-| **A (primær)** | Kategori D + sammenstilte (26 456) | Kan driftsstandard opprettholdes for beredskapsoppdrag? |
-| **B (utvidet)** | Alle kategorier + sammenstilte (80 865) | Hvor opptatt er operatørene faktisk gjennom skiftet? |
+| **A (primær)** | D-pri1 + D-aba (Fase 1+2) + sammenstilte (27 960 events) | Kan driftsstandard opprettholdes for beredskapsoppdrag? |
+| **B (utvidet)** | Alle kategorier + sammenstilte (~82 000 events) | Hvor opptatt er operatørene faktisk gjennom skiftet? |
 
 ### 6.5.2 Bindingstidsestimater
 
-Bindingstiden for kategori D er databasert (se avsnitt 6.4.6). For øvrige kategorier mangler BRIS tidsdata, og bindingstiden estimeres operativt. Estimatene er forelagt vaktleder ved 110 Sør-Vest for validering (se Vedlegg X).
+Bindingstiden for D-pri1 er databasert (avsnitt 6.4.4). L-aba er empirisk kalibrert via LABA-dybdeanalysen (avsnitt 5.4). D-aba Fase 1 bygger på operativ prosedyre (avsnitt 4.2). D-aba Fase 2 ($p$, $Y$) og øvrige ikke-D-kategorier (S, L-hendelse, L-ukjent, F, V) er operative estimater forelagt vaktleder ved 110 Sør-Vest for validering (se Vedlegg X).
 
-Fordi estimatene er antakelser, ikke målinger, kjøres modellen med tre scenarioer:
+Fordi mange av estimatene er antakelser snarere enn målinger, kjøres modellen med tre scenarioer:
 
 | Kategori | Lavt | Hovedscenario | Høyt |
 |---|---|---|---|
-| S (Service) | 1 min | 2 min | 4 min |
-| L-aba | 2 min | 3 min | 5 min |
+| D-pri1 | Databasert | Databasert | Databasert |
+| D-aba Fase 1 | 3 min | 3 min | 3 min |
+| D-aba Fase 2 ($p$, $Y$) | 0,30, 3 min | 0,50, 6 min | 0,70, 10 min |
+| L-aba | 3 min (konservativ) | 6 min (LABA-mean) | 9 min (P90-nært) |
 | L-hendelse | 3 min | 5 min | 8 min |
 | L-ukjent | 1 min | 3 min | 5 min |
+| S (Service) | 1 min | 2 min | 4 min |
 | F (Feilringing) | 15 sek | 30 sek | 1 min |
 | V (Viderevarsling) | 30 sek | 1 min | 2 min |
-| D (Utrykning) | Databasert | Databasert | Databasert |
 
 **Antagelse 6.1:** Bindingstidsestimatene representerer gjennomsnittlig tid operatøren er opptatt med hendelsen, inkludert LEO-arbeid og etterarbeid. Konsekvens: estimatene er usikre, men sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet lav–høy.
 
 ### 6.5.3 Algoritmisk identitet med primærmodellen
 
-Variant B bruker nøyaktig samme sweep-algoritme som variant A (avsnitt 6.4.5). Eneste forskjell er at belastningsgrunnlaget utvides fra kategori D + sammenstilte til alle kategorier + sammenstilte, med kategori-spesifikk bindingstid. Kapasitetsnivåene (Normal/Brudd/Svikt) og c_eff-verdiene er identiske.
+Variant B bruker nøyaktig samme sweep-algoritme som variant A (avsnitt 6.4.7). Eneste forskjell er at belastningsgrunnlaget utvides fra D-pri1 + D-aba + sammenstilte til alle kategorier + sammenstilte, med kategori-spesifikk bindingstid og op-binder-tall. Kapasitetsnivåene (Normal/Brudd/Svikt) og c_eff-verdiene er identiske.
 
 ---
 
 ## 6.6 Implementasjon
 
-Begge modellene er implementert i Python. Erlang-C er beregnet med scipy.special og numpy. Ankomstkonfliktmodellen bruker en sweep-algoritme for sporing av aktive hendelsers utløpstidspunkter, noe som gir O(N log N) kompleksitet over N anrop.
+Begge modellene er implementert i Python. Erlang-C er beregnet med scipy.special og numpy. Ankomstkonfliktmodellen bruker en sweep-algoritme over sorterte op-binder-events som gir O(N) kompleksitet for sweep-en over N events (pluss O(N log N) for sortering).
+
+Hovedlogikken: hver hendelse ekspanderes til én eller flere op-binder-events. D-pri1 gir ett event med $q = 2$. D-aba gir Fase 1 alltid ($q = 1$, 3 min) pluss Fase 2 med sannsynlighet $p$ ($q = 1$, $Y$ min, offset 1,5 min). Øvrige hendelser gir ett event med $q = 1$. Sweep-en akkumulerer aktiv op-binder ved hver ankomst.
 
 ```python
-# Pseudokode — ankomstkonfliktdeteksjon
-import heapq
+# Pseudokode — op-binder-semantikk
+def ekspander_events(hendelse, scenario):
+    """Konverter én hendelse til én eller flere op-binder-events."""
+    if hendelse.kategori == "D-pri1":
+        return [Event(t=hendelse.t, d=hendelse.bind_D, q=2)]
+    if hendelse.kategori == "D-aba":
+        events = [Event(t=hendelse.t, d=3.0, q=1)]  # Fase 1 alltid
+        if rng.random() < scenario["daba_p"]:
+            events.append(Event(t=hendelse.t + 1.5, d=scenario["daba_Y"], q=1))
+        return events
+    # Alle andre: 1 op-bind
+    return [Event(t=hendelse.t, d=scenario[hendelse.kategori], q=1)]
 
-def ankomstkonflikt(anrop, bindingstid_func, c_eff):
-    aktive = []  # min-heap over utløpstidspunkter
-    for anrop_i in sorted(anrop, key=lambda x: x.tidspunkt):
-        # Fjern utløpte hendelser
-        while aktive and aktive[0] <= anrop_i.tidspunkt:
-            heapq.heappop(aktive)
-        n_aktive = len(aktive)
+def sweep_opbinder(events, c_eff):
+    """Sorter events etter ankomst. Akkumuler aktiv op-binder."""
+    events = sorted(events, key=lambda e: e.t)
+    aktive = []  # liste av (slutt_ts, q) for pågående events
+    for e in events:
+        aktive = [(s, q) for s, q in aktive if s > e.t]  # fjern utløpte
+        n_aktive = sum(q for _, q in aktive)
         ledige = c_eff - n_aktive
-        # Klassifiser
         if ledige >= 2:
-            nivaa = "Normal"
-        elif ledige <= 0:
-            nivaa = "Svikt"
+            nivå = "Normal"
+        elif ledige == 1:
+            nivå = "Brudd"
         else:
-            nivaa = "Brudd"
-        # Legg til ny aktiv hendelse
-        utlop = anrop_i.tidspunkt + bindingstid_func(anrop_i.kategori)
-        heapq.heappush(aktive, utlop)
-        yield anrop_i, n_aktive, nivaa
+            nivå = "Svikt"
+        aktive.append((e.t + e.d, e.q))
+        yield e, n_aktive, nivå
 ```
+
+Modellen er implementert i `analyse/scripts/konflikt_total_belastning.py`. Scenario +1 operatør bruker samme logikk med doblede c_eff-verdier (`analyse/scripts/scenario_pluss1.py`). Parameterkalibrering og beslutningsgrunnlag er dokumentert i `analyse/notat_V3_modellutvikling.md`.
 
 Kildekode og Jupyter notebooks er versjonskontrollert på GitHub (se Vedlegg A).
 KI-verktøy benyttet i implementasjonsfasen er dokumentert i Vedlegg D.
 
 ---
 
-*Kap 6 — Versjon 3.0 | Sist oppdatert: 2026-04-13*
+*Kap 6 — Versjon 3.1 | Sist oppdatert: 2026-04-19 (V3 op-binder-semantikk, D-pri1/D-aba-splitt)*

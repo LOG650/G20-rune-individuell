@@ -30,7 +30,7 @@ For 110-dimensjonering innebærer dette at samtaletid alene er et alvorlig utils
 
 ### 8.2.1 Gapet mellom modell og erfaring
 
-Modellen predikerer at 23,5 % av beredskapsanropene på natt/helg ankommer i svikt-tilstand — der ingen operatør er ledig (funn 3). Likevel opplever ikke operatørene total kollaps. Anropene besvares. Hendelsene håndteres. Hvordan kan modellen vise så høy sviktrate når systemet tilsynelatende fungerer?
+Modellen predikerer at 32,6 % av beredskapsanropene på natt/helg ankommer i svikt-tilstand — der ingen operatør er ledig (funn 3). Dette er hvert tredje beredskapsanrop. Likevel opplever ikke operatørene total kollaps. Anropene besvares. Hendelsene håndteres. Hvordan kan modellen vise så høy sviktrate når systemet tilsynelatende fungerer?
 
 Forklaringen ligger i det modellen er designet for å måle: den måler brudd på *driftsstandarden*, ikke brudd på *tjenesten*. Svikt betyr at makkerpar-prosedyren ikke kan opprettholdes — ikke at ingen svarer. Operatørene kompenserer ved å tilpasse seg: makkerparet splittes, solo-drift inntreffer, kvalitetssikringen forsvinner, men anropet besvares. Denne tilpasningen er ikke et sammenbrudd — det er den daglige operative virkeligheten som gjør at tjenesten opprettholdes under press.
 
@@ -58,19 +58,19 @@ Disse funnene fra internasjonal og norsk forskning tyder på at kapasitetsproble
 
 Problemstillingen spør: *I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller?*
 
-Svaret er todelt. Erlang-C-analysen, som er den modelltypen nærmest gjeldende praksis for dimensjonering, gir inntrykk av at bemanningen er komfortabel (ρ < 6 %). Den prosedyrbaserte modellen viser at dette bildet er misvisende: med faktisk bemanning er 35 % av beredskapsanropene i brudd eller svikt (variant A), stigende til 42 % når total belastning inkluderes (variant B). På natt/helg er over halvparten av anropene i degradert eller svikt-tilstand.
+Svaret er todelt. Erlang-C-analysen, som er den modelltypen nærmest gjeldende praksis for dimensjonering, gir inntrykk av at bemanningen er komfortabel (ρ < 6 %). Den prosedyrbaserte modellen viser at dette bildet er misvisende: med faktisk bemanning er 40,4 % av beredskapsanropene i brudd eller svikt (variant A), stigende til 46,0 % når total belastning inkluderes (variant B hoved). På natt/helg er over halvparten av beredskapsanropene i brudd eller svikt-tilstand (53,1 % variant A, 55,6 % variant B).
 
-Samsvaret mellom bemanning og kapasitetsbehov avhenger dermed av hvilken standard man måler mot. Mot en ren køteoretisk standard (ventetid < 30 sek) ser bemanningen tilstrekkelig ut. Mot en prosedyrbasert standard (makkerpar opprettholdt) er det et strukturelt gap — størst på natt/helg (c_eff = 2), der asymmetrien mellom kapasitet og makkerpar-kravet er mest akutt.
+Samsvaret mellom bemanning og kapasitetsbehov avhenger dermed av hvilken standard man måler mot. Mot en ren køteoretisk standard (ventetid < 30 sek) ser bemanningen tilstrekkelig ut. Mot en prosedyrbasert standard (makkerpar opprettholdt) er det et strukturelt gap — størst på natt/helg (c_eff = 2), der asymmetrien mellom kapasitet og makkerpar-kravet er mest akutt. Modellen avdekker også at kapasitetsgapet primært drives av pri-1-hendelser (D-pri1): én aktiv bygningsbrann eller trafikkulykke binder hele makkerparet på natt/helg, slik at neste beredskapsanrop i samme tidsvindu automatisk ankommer i svikt.
 
 ### 8.3.2 Asymmetrien mellom dag og natt
 
-Funn 4 viser at +1 operatør har størst effekt på natt/helg: Normal øker fra 48,1 % til 76,5 % (+28,4 pp). Årsaken er strukturell: med c_eff = 2 er det kun ett steg fra normal drift til svikt. Den tredje operatøren gir ikke bare 50 % mer kapasitet — den gir en kvalitativt annen driftssituasjon der operatørene kan jobbe solo før svikt inntreffer.
+Funn 4 viser at +1 operatør har størst effekt på natt/helg: Normal øker fra 46,9 % til 67,2 % (+20,3 pp) og svikt halveres fra 32,8 % til 16,7 %. Årsaken er strukturell: med c_eff = 2 er det kun ett steg fra normal drift til svikt når en D-pri1 er aktiv. Den tredje operatøren gir ikke bare 50 % mer kapasitet — den gir en kvalitativt annen driftssituasjon der D-pri1-hendelser ikke lenger automatisk medfører svikt for neste ankomst, og der operatørene kan jobbe solo før kapasiteten er helt uttømt.
 
-Denne asymmetrien er konsistent med Garnetts square-root staffing-logikk: marginalverdien av en ekstra server er størst når antallet servere er lavt. For c_eff = 2 er $\sqrt{c}$ = 1,41 — nesten like stor som c selv. For c_eff = 4 er $\sqrt{c}$ = 2 — halvparten av c. Investeringen i en ekstra operatør gir dermed avtagende avkastning for hvert nivå, men den første ekstra operatøren på natt/helg gir den klart største kapasitetsgevinsten.
+Denne asymmetrien er konsistent med Garnetts square-root staffing-logikk (kap 3.2): marginalverdien av en ekstra server er størst når antallet servere er lavt. For c_eff = 2 er $\sqrt{c}$ = 1,41 — nesten like stor som c selv. For c_eff = 4 er $\sqrt{c}$ = 2 — halvparten av c. Investeringen i en ekstra operatør gir dermed avtagende avkastning for hvert nivå, men den første ekstra operatøren på natt/helg gir den klart største kapasitetsgevinsten. Dette stemmer også med multiserver-job-rammeverket (Harchol-Balter, 2022) der systemer med store $\vec{k}$-jobber har uforholdsmessig stor sensitivitet til marginell kapasitetsøkning (kap 3.6.3).
 
 ### 8.3.3 Bakgrunnsbelastningens rolle
 
-Funn 5 viser at når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 77,9 % til 64,8 %. Effekten skyldes primært servicevolumet (22 542 overføringstester per år) som er konsentrert på dagtid.
+Funn 5 viser at når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 58,9 % (−10 pp) og svikt øker fra 14,9 % til 22,0 %. Effekten skyldes primært servicevolumet (22 542 overføringstester per år) som er konsentrert på dagtid.
 
 Dette funnet har implikasjoner for organisering. Ved 110 Sør-Vest håndterer de samme operatørene som tar nødanrop også servicetester. Midt-Norge 110 har en annen modell der servicetesting er skilt ut til dedikert personell. Van Buuren et al. (2017) viser gjennom DES-simulering at funksjonsdifferensiering — der ulike oppgavetyper håndteres av spesialiserte roller — kan forbedre kapasitetsbildet uten å endre bemanningsnivå. Jouini, Dallery og Nait-Abdallah (2008) finner tilsvarende at team-organisering med spesialisering kan oppnå høyere agenteffektivitet enn full pooling, fordi motivasjon og spesialistkompetanse kan veie opp for det statistiske tapet ved å ikke poole.
 
@@ -100,6 +100,8 @@ Analysen bygger på data fra én sentral (110 Sør-Vest) i ett kalenderår (2025
 
 Feltet `Opprinnelig oppdragstype` har 16 % dekning for hendelser uten utrykning. Dette medfører at 27 % av oppdragene klassifiseres som L-ukjent (avsnitt 6.2). Hadde dekningen vært høyere, kunne fordelingen mellom L-aba, L-hendelse og L-ukjent vært mer presis — men sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust uavhengig av bindingstidsantakelsene for disse kategoriene.
 
+Nasjonal sammenligning gjennom DSBs 2025-datasett (508 228 oppdrag, alle 12 sentraler) viser at L-aba-andelen varierer betydelig mellom sentraler (0,0 % Sør-Øst og Oslo → 7,5 % Nordland). Denne variasjonen skyldes trolig ulik registreringspraksis mer enn reell ABA-belastning, og understreker at nasjonal benchmarking krever felles klassifiseringsregler før kvantitative sammenligninger kan tolkes normativt.
+
 ### 8.4.2 Modellmessige begrensninger
 
 Modellen behandler kapasitetsbinding som binær: en operatør er enten tilgjengelig eller opptatt. I praksis finnes grader av tilgjengelighet — en operatør i GUL-oppfølgingsfase kan avbrytes for et nytt akutt anrop, men med en kostnad i form av kontekstbytte og potensielt forsinket respons. Modellen fanger ikke denne graderingen, noe som kan overestimere svikt i perioder der operatører er i sen oppfølgingsfase.
@@ -110,7 +112,9 @@ Ring-flom (call surge) fra flere innringere som melder samme hendelse er delvis 
 
 ### 8.4.3 Antakelser med konsekvenser
 
-Bindingstidsestimatene for ikke-D-kategorier (variant B) er operative estimater, ikke målinger. Selv om de er forelagt vaktleder for validering og testet gjennom sensitivitetsanalyse, innebærer de en grad av usikkerhet som er høyere enn for de databasertte kategori D-estimatene. Konsekvensen er at variant B-resultatene bør tolkes som indikasjoner på størrelsesorden snarere enn presise verdier.
+Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba: LABA-dybdeanalyse, 50 hendelser) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V — forelagt vaktleder for validering). Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over hele spennet av rimelige antakelser — svikt på natt/helg er 30–38 % i alle scenarioer. D-aba Fase 2-parametrene ($p = 0,30/0,50/0,70$; $Y = 3/6/10$ min) fanger både operatørvurderingen og empirisk underkant-estimat fra sekvensgap-metoden.
+
+LABA-dybdeanalysens utvalgsstørrelse (n = 30 for Kilde=Alarm-subset) er begrenset — 95 % CI for mean er [3,70; 8,56] min. Konsekvens: L-aba-bindingstiden på 6 min i hoved-scenario har reell usikkerhet. Median (2,87 min) og høy-scenario (9 min) er dekket i sensitivitetsanalysen.
 
 Antagelsen om at sammenstilte anrop har 1 minutts bindingstid er en forenkling. Dersom reell bindingstid er høyere (f.eks. 2–3 minutter for anrop der innringer er stresset), undervurderer modellen effekten av skjulte anrop ytterligere.
 

@@ -42,23 +42,25 @@ Denne rapporten analyserer i hvilken grad faktisk bemanning ved norske 110-sentr
 
 ## 1. Innledning
 
-> *[1–3 sider. Led leseren fra generelt tema → kjent kunnskap → kunnskapsgap → vår problemstilling. Skap nysgjerrighet — ikke avsløre resultatet.]*
-
 ### 1.1 Bakgrunn og tema
 
-Norske 110-sentraler er det primære kontaktpunktet for brann- og redningsnødmeldinger i Norge. De tolv sentralene [LISTE SENTRALER] opererer døgnet rundt og koordinerer utrykningsressurser over store geografiske områder.
+Norske 110-sentraler er det primære kontaktpunktet for brann- og redningsnødmeldinger i Norge. De tolv sentralene — Finnmark, Troms, Nordland, Midt-Norge, Møre og Romsdal, Vest, Sør-Vest, Agder, Sør-Øst, Oslo, Øst og Innlandet — opererer døgnet rundt og koordinerer utrykningsressurser over store geografiske områder. I 2025 håndterte de samlet 508 228 registrerte oppdrag, med betydelig variasjon i volum og kategorifordeling mellom sentralene.
 
-Bemanningsdimensjonering av 110-operatorer reguleres av brann- og redningsvesenforskriften, som pålegger minimum to operatører i vaktrommet, men overlater fastsettelse av bemanning utover dette til lokale risiko- og beredskapsanalyser. I kontrast gir dimensjoneringsforskriften (FOR-2023-01-06-23) ferdige, etterprøvbare bemanningskrav for kasernert og deltidsbrannvesen basert på innbyggertall og responstid. En tilsvarende kvantitativ standard mangler for 110-operatorer.
+Bemanningsdimensjoneringen av 110-operatører reguleres av brann- og redningsvesenforskriften, som pålegger minimum to operatører i vaktrommet, men overlater fastsettelsen av bemanning utover dette til lokale risiko- og beredskapsanalyser. I kontrast gir dimensjoneringsforskriften for brannvesen (FOR-2023-01-06-23) ferdige, etterprøvbare bemanningskrav for kasernert og deltidsbrannvesen basert på innbyggertall og responstid. En tilsvarende kvantitativ, nasjonal standard mangler for 110-operatører.
 
-> *[Aktualisér temaet: hva skjer dersom 110 er underdimensjonert? Hva koster overbemanning? Kort om beredskapslogikk — kapasitetsbuffer er ikke sløsing.]*
+Konsekvensene av utilstrekkelig kapasitet er todelt. Direkte: anrop kan overføres til nabosentral (Agder 110 i Sør-Vest-regionen) med tap av regionalkunnskap og forlenget responstid. Indirekte: operatørene kompenserer under press gjennom kvalitetsreduksjon — de fortsetter å svare, men uten makkerpar, uten full prosedyre-etterlevelse, med økt kognitiv belastning. Denne tilpasningen holder tjenesten i gang, men flytter kostnaden over på operatørens arbeidsforhold og over tid på beslutningskvaliteten i enkeltsituasjoner.
+
+Problemstillingen er ikke at 110-sentraler generelt er overbemannet eller underbemannet. Den er at det ikke finnes et kvantitativt, etterprøvbart grunnlag for å avgjøre hva som er tilstrekkelig bemanning — og at eksisterende kvalitative vurderinger ikke fanger kapasitetsdynamikken som oppstår ved samtidige hendelser og makkerpar-krav ved pri-1-utrykninger.
 
 ### 1.2 Tidligere forskning og kunnskapsgap
 
-> *[SKRIVES ETTER LITTERATURSØK — ca. ½–1 side. Hva finnes av forskning på 110-dimensjonering, call-center-kapasitet og Erlang-C i beredskapsoperative systemer? Hva mangler?]*
+Erlang-C-modellen (M/M/c) er veletablert innen kapasitetsplanlegging for flerserver-telefonisystemer og call-center-miljøer (Erlang, 1917; Gans, Koole & Mandelbaum, 2003). Halfin og Whitt (1981) etablerte kvalitetsdrevet bemanning (QED-regimet) gjennom square-root staffing-formelen, og Garnett, Mandelbaum og Reiman (2002) utvidet rammeverket til Erlang-A der kunder med tålmodighetsterskel forlater systemet. Disse modellene er metodisk velprøvde for kommersielle call-sentre, men anvendt sjelden på nødmeldesentraler med de særtrekkene som kjennetegner 110-operasjoner: makkerpar-prosedyre, aktivt hendelsebilde utover samtaletid, ring-flom ved enkelthendelser, og overløpsmekanismer.
 
-Erlang-C-modellen er veletablert innen kapasitetsplanlegging for fler-server telefonisystemer og call-center-miljøer (Erlang 1917; Gans et al. 2003; [YTTERLIGERE REF]). Modellen er imidlertid sjelden anvendt på nødmeldesentraler med de særtrekkene som kjennetegner 110-operasjoner — herunder aktivt hendelsebilde, ring-flom og VL-rollen.
+Internasjonalt har Gustavsson (2018), L'Ecuyer og Gustavsson (2018) og Dwars (2013) anvendt stokastiske modeller direkte på nordiske og europeiske nødmeldesentraler. Chelst og Barlach (1981) og Larson (1974) utviklet flerserver-dispatch-modeller som fanger at én hendelse kan binde flere servere parallelt. Harchol-Balter (2022) formaliserer multiserver-jobs (MSJ) som rammeverk der jobber krever flere servere samtidig — direkte relevant for makkerpar-logikk. Van Buuren et al. (2017) viser gjennom diskret hendelsessimulering at funksjonsdifferensiering kan forbedre kapasitet uten bemanningsøkning. Forskningen på prosedyrkonformitet og kognitiv belastning (Normark, 2002; Al-Sarhani et al., 2025) dokumenterer at operatørenes faktiske arbeidsmønster avviker vesentlig fra det klassiske kømodeller forutsetter.
 
-> *[Identifiser kunnskapsgapet eksplisitt: «ingen studier har kvantitativt analysert…»]*
+Norsk og nordisk forskning på 110-sentralenes kapasitet er derimot svært begrenset. Leonardsen et al. (2021) gir kvalitative funn fra AMK-sentraler. Rehn et al. (2021) analyserer dispatch-nøyaktighet for ambulanser. Men ingen identifiserte studier har publisert kvantitative kapasitetsanalyser av norske 110-sentraler basert på historiske hendelsesdata.
+
+Kunnskapsgapet er dermed konkret: **det finnes ingen kvantitativ, etterprøvbar analyse av 110-kapasitet som fanger makkerpar-bindingen, skiller ulike hendelsesdynamikker, og kan anvendes systematisk på tvers av sentralene i Norge.** Eksisterende ROS- og beredskapsanalyser er kvalitative og ikke sammenlignbare på tvers. Denne studien søker å fylle dette gapet ved å utvikle og anvende en prosedyrbasert ankomstkonfliktmodell med 110 Sør-Vest som primærcase og nasjonal benchmarking som kontekst.
 
 ### 1.3 Problemstilling
 
@@ -84,7 +86,7 @@ Prosjektet avgrenses til følgende:
 
 ### 1.5 Rapportens struktur
 
-> *[Kort veiviser — 1 avsnitt. «Kapittel 2 presenterer… Kapittel 3 gir det teoretiske grunnlaget…»]*
+Rapporten består av ni kapitler. **Kapittel 2** gjennomgår relevant litteratur strukturert etter fem tematiske områder: klassisk køteori, nødmeldesentraler, team-basert kapasitet og prosedyrkonformitet, nordisk nødmeldeforskning, og dimensjoneringsregulering. **Kapittel 3** etablerer det teoretiske rammeverket — Erlang-C som grunnlinje, QED-regimet, multiserver-jobs og op-binder-semantikk. **Kapittel 4** beskriver 110 Sør-Vest som case med bemanning, arbeidsmetodikk og operative særtrekk. **Kapittel 5** presenterer metode og data, inkludert V3-klassifiseringsregelen og LABA-dybdeanalysen. **Kapittel 6** utvikler kapasitetsmodellen gjennom tre faser: Erlang-C, simultanitetsanalyse og prosedyrbasert ankomstkonfliktmodell. **Kapittel 7** presenterer analyseresultater for 110 Sør-Vest 2025. **Kapittel 8** diskuterer funnene mot problemstilling, teori og begrensninger. **Kapittel 9** besvarer problemstillingen og gir anbefalinger for dimensjonering og videre forskning.
 
 ---
 

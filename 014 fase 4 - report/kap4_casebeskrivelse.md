@@ -58,6 +58,12 @@ Den operative arbeidsmetodikken ved 110 Sør-Vest er formalisert i prosedyre for
 
 Den normale driftsformen er et **makkerpar**: én rød og én gul operatør samarbeider om én hendelse, mens øvrige operatører er grønne. Prosedyren understreker at «tiden to operatører er involvert i samme hendelse gjøres så kort som mulig, for å raskt frigjøre kapasitet til neste hendelse». Makkerpar-prinsippet innebærer dermed at to operatører normalt aktiveres fra starten av et nødanrop og forblir bundet gjennom akuttfasen av hendelsen.
 
+**Pri-1-hendelser versus ABA-utrykning — ulik operativ dynamikk.** Makkerpar-prosedyren gjelder primært pri-1-hendelser: bygningsbrann, trafikkulykke, farlig gods og tilsvarende tidskritiske situasjoner som krever trippelvarsling (AMK + politi), tidskritisk informasjon til utrykkende mannskap via BAPS, og parallell koordinering av flere ressurser. For disse hendelsene aktiveres både RØD og GUL fra første sekund og forblir bundet gjennom hele akuttfasen.
+
+ABA-utrykning — der en automatisk brannalarm leder til ressursvarsling fordi avklaring ikke kom innen 90 sekunder — følger en annen operativ logikk. ABA er ikke pri-1: det gis ikke trippelvarsling, det foreligger ingen tidskritisk informasjon å formidle via BAPS, og operatøren som kvitterer alarmen er normalt den samme som oppretter oppdraget og utalarmerer ressurser. Arbeidsflyten er serial og utføres av én operatør: kvitter alarm (ca. 30 sek) → opprett oppdrag i LEO (ca. 60 sek) → gjennomfør call-out med ressursvarsling (ca. 60 sek) → operatør er tilgjengelig igjen (grønn) etter ~3 min. Eventuell nødtelefon fra stedet som kommer etter call-out kan besvares av vilkårlig ledig operatør og inneholder typisk intervju med innringer, veiledning til brannpanel, områdeavklaring og eventuell alarm-tilbakestilling.
+
+Skillet mellom pri-1-hendelser og ABA-utrykning er sentralt for kapasitetsanalysen fordi de har fundamentalt ulike op-binder-profiler. En pri-1-hendelse binder 2 operatører parallelt i median 14 minutter. En ABA-utrykning binder 1 operatør serielt i ~3 minutter, pluss eventuelt 1 operatør i 3–10 minutter dersom nødtelefon kommer. For 110 Sør-Vest 2025 utgjør ABA-utrykning ca. 41 % av alle utrykningshendelser. Denne operative distinksjonen danner grunnlaget for modellens differensiering mellom D-pri1 og D-aba (se avsnitt 6.4).
+
 ### 4.2.3 Operative særtrekk og kapasitetsgrenser
 
 Flere forhold ved driften har direkte betydning for kapasitetsanalysen:
