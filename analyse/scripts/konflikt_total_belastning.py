@@ -1,19 +1,36 @@
 """
 V3: Total operativ belastning — utvidet ankomstkonfliktmodell
 =============================================================
-Bruker SAMME sweep-algoritme som konflikt_v4_korrigert.py,
-men inkluderer ALLE hendelser (61 964), ikke bare kategori D.
+Oppdatert 2026-04-19: Op-binder-semantikk.
 
-Klassifisering basert paa Oppdragstype + Opprinnelig oppdragstype:
-  D         Utrykningshendelse (Ressurs_varslet finnes)   -> databasert
-  S         Service/overfoeingstest                        -> 2 min
-  L-aba     ABA loest av 110                               -> 3 min
-  L-hendelse Reell hendelse loest av 110                   -> 5 min
-  L-ukjent  Loest av 110, ukjent type                      -> 3 min
-  F         Feilringing / ikke-noedmelding / eCall feil     -> 0.5 min
-  V         Viderevarsling / viderekobling                  -> 1 min
+Tidligere modell telte hver hendelse som 1 makkerpar-slot. Dette ga feil
+bilde for hendelser som ikke faktisk binder makkerparet (primaert ABA->D:
+lav-pri utrykning der én operator haandterer serielt uten makkerpar-krav,
+jf. operatør-intervju 2026-04-19).
 
-Kjoerer tre scenarioer (lav/hoved/hoey) for sensitivitetsanalyse.
+Ny semantikk: Hver hendelse genererer en eller to op-binder-events med
+(bindingstid, ops_bundet). Sweep akkumulerer summen av ops_bundet for
+aktive events. Klassifisering:
+  Normal:  ledige >= 2  (makkerpar mulig for ny hendelse)
+  Brudd:   ledige == 1  (kun solo-haandtering mulig)
+  Svikt:   ledige <= 0
+
+Klassifisering basert paa Oppdragstype + Opprinnelig oppdragstype + Kilde:
+  D-pri1     Utrykning ikke-ABA (byggningsbrann, trafikk, etc.)
+             -> 2 ops bundet i full bindingstid (makkerpar, median 13 min)
+  D-aba      Utrykning utloest av ABA (Opprinnelig = ABA, Kilde = Alarm)
+             -> Fase 1: 1 op, 3 min (kvittering + oppdrag + call-out)
+             -> Fase 2 (andel p): 1 op, Y min (noedtelefon + panel-veiledning)
+             -> Fase 2-offset: 90 sek etter ankomst
+  S          Service/overfoeringstest                        -> 1 op, 2 min
+  L-aba      ABA loest av 110, Kilde=Alarm                   -> 1 op, 6 min
+  L-hendelse Reell hendelse loest av 110 (inkl. ABA m/Samtale) -> 1 op, 5 min
+  L-ukjent   Loest av 110, ukjent type                       -> 1 op, 3 min
+  F          Feilringing / ikke-noedmelding / eCall feil     -> 1 op, 0.5 min
+  V          Viderevarsling / viderekobling                  -> 1 op, 1 min
+  skjult     Sammenstilte anrop (sekvensgap-metode)          -> 1 op, 1 min
+
+Tre scenarioer for sensitivitetsanalyse (lav/hoved/hoey).
 Eksisterende kode (konflikt_v4_korrigert.py) endres IKKE.
 """
 import pathlib
@@ -31,14 +48,26 @@ DATA_DIR = PROJECT / "004 data"
 FIG_DIR = PROJECT / "analyse" / "figurer"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
-KVITTERING_MIN = 3.0  # kvittering etter foerste ressurs fremme (kat D)
+KVITTERING_MIN = 3.0  # kvittering etter foerste ressurs fremme (D-pri1)
 SKJULT_BIND_MIN = 1.0  # sammenstilte anrop
 
-# Bindingstider per scenario (minutter)
+# D-aba-parametre (operatør-informert, 2026-04-19)
+DABA_FASE1_MIN = 3.0          # kvittering + oppdragsopprettelse + call-out
+DABA_FASE2_OFFSET_MIN = 1.5   # 90 sek foersinkelse foer evt. noedtelefon
+
+SEED_DABA = 20260419  # reproduserbar fase-2-sampling
+
+# Bindingstider og D-aba-parametre per scenario
+# L-aba: hoved 6 min fra LABA-dybdeanalyse (mean 5.88 for Kilde=Alarm-subset)
+# D-aba fase 2: p = andel D-aba med noedtelefon-oppfoelging; Y = bindingstid
+# L-aba scenario-spenn: 3 min (konservativ) til 9 min (langhalede industrivern)
 SCENARIOS = {
-    "lav": {"S": 1, "L-aba": 2, "L-hendelse": 3, "L-ukjent": 1, "F": 0.25, "V": 0.5},
-    "hoved": {"S": 2, "L-aba": 3, "L-hendelse": 5, "L-ukjent": 3, "F": 0.5, "V": 1},
-    "hoey": {"S": 4, "L-aba": 5, "L-hendelse": 8, "L-ukjent": 5, "F": 1, "V": 2},
+    "lav":   {"S": 1, "L-aba": 3, "L-hendelse": 3, "L-ukjent": 1, "F": 0.25, "V": 0.5,
+              "daba_p": 0.30, "daba_Y": 3},
+    "hoved": {"S": 2, "L-aba": 6, "L-hendelse": 5, "L-ukjent": 3, "F": 0.5,  "V": 1,
+              "daba_p": 0.50, "daba_Y": 6},
+    "hoey":  {"S": 4, "L-aba": 9, "L-hendelse": 8, "L-ukjent": 5, "F": 1,    "V": 2,
+              "daba_p": 0.70, "daba_Y": 10},
 }
 
 sns.set_style("whitegrid")
@@ -114,11 +143,21 @@ for v in sorted(df["Oppdragstype"].dropna().unique())[:10]:
 
 # Bruk faktiske strengverdier fra dataen
 def klassifiser_kategori_v2(row):
+    """V3-regel (oppdatert 2026-04-19):
+    - D-aba: Ressurs_varslet finnes, Opprinnelig starter med 'ABA', Kilde=Alarm
+    - D-pri1: Andre D-hendelser (byggningsbrann, trafikk, etc.)
+    - L-aba krever Kilde=Alarm. ABA med Samtale/blank kilde -> L-hendelse."""
+    # D-hendelser: har ressursvarsling
     if pd.notna(row["Ressurs_varslet"]):
-        return "D"
+        oot_d = str(row["Opprinnelig_oppdragstype"]).strip() if pd.notna(row["Opprinnelig_oppdragstype"]) else ""
+        kilde_d = str(row["Kilde"]).strip() if pd.notna(row["Kilde"]) else ""
+        if oot_d.startswith("ABA") and kilde_d == "Alarm":
+            return "D-aba"
+        return "D-pri1"
 
     ot = str(row["Oppdragstype"]).strip() if pd.notna(row["Oppdragstype"]) else ""
     oot = str(row["Opprinnelig_oppdragstype"]).strip() if pd.notna(row["Opprinnelig_oppdragstype"]) else ""
+    kilde = str(row["Kilde"]).strip() if pd.notna(row["Kilde"]) else ""
 
     if ot == "Service":
         return "S"
@@ -132,8 +171,11 @@ def klassifiser_kategori_v2(row):
         return "V"
 
     if "ppdrag" in ot and "110" in ot:  # "Oppdrag løst av 110"
-        if oot == "ABA":
+        if oot == "ABA" and kilde == "Alarm":
             return "L-aba"
+        elif oot == "ABA":
+            # ABA uten Kilde=Alarm (Samtale eller blank) -> L-hendelse
+            return "L-hendelse"
         elif oot and oot != "nan":
             return "L-hendelse"
         else:
@@ -145,7 +187,7 @@ df["v3_kat"] = df.apply(klassifiser_kategori_v2, axis=1)
 
 print("\n=== V3-kategorisering ===")
 kat_counts = df["v3_kat"].value_counts()
-for kat in ["D", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]:
+for kat in ["D-pri1", "D-aba", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]:
     n = kat_counts.get(kat, 0)
     print(f"  {kat:12s}: {n:>6} ({n/len(df)*100:>5.1f}%)")
 print(f"  {'TOTAL':12s}: {len(df):>6}")
@@ -181,40 +223,44 @@ for dato, group in df.groupby("dato_id"):
 
 print(f"\nSkjulte/sammenstilte anrop: {len(hidden_rows)}")
 
-# === 4. BEREGN BINDINGSTID FOR KATEGORI D (databasert) ===
-d_mask = df["v3_kat"] == "D"
-df.loc[d_mask, "bind_raa"] = (
-    (df.loc[d_mask, "Forste_ressurs_fremme"] - df.loc[d_mask, "Dato_og_Tid"]).dt.total_seconds() / 60
+# === 4. BEREGN BINDINGSTID FOR D-PRI1 (databasert) ===
+# D-pri1 binder makkerparet i full bindingstid (Dato_og_Tid -> Forste_ressurs_fremme + kvittering).
+# D-aba behandles separat i bygg_events (Fase 1 + valgfri Fase 2).
+d_pri1_mask = df["v3_kat"] == "D-pri1"
+df.loc[d_pri1_mask, "bind_raa"] = (
+    (df.loc[d_pri1_mask, "Forste_ressurs_fremme"] - df.loc[d_pri1_mask, "Dato_og_Tid"]).dt.total_seconds() / 60
 )
 df.loc[df["bind_raa"] < 0, "bind_raa"] = np.nan
 df.loc[df["bind_raa"] > 180, "bind_raa"] = np.nan
-median_bind_d = df.loc[d_mask & df["bind_raa"].notna(), "bind_raa"].median()
-df.loc[d_mask & df["bind_raa"].isna(), "bind_raa"] = median_bind_d
-df.loc[d_mask, "bind_D"] = df.loc[d_mask, "bind_raa"] + KVITTERING_MIN
+median_bind_d = df.loc[d_pri1_mask & df["bind_raa"].notna(), "bind_raa"].median()
+df.loc[d_pri1_mask & df["bind_raa"].isna(), "bind_raa"] = median_bind_d
+df.loc[d_pri1_mask, "bind_D"] = df.loc[d_pri1_mask, "bind_raa"] + KVITTERING_MIN
 
-print(f"Kategori D median bindingstid: {median_bind_d:.1f} min (+ {KVITTERING_MIN} kvittering)")
+print(f"D-pri1 median bindingstid: {median_bind_d:.1f} min (+ {KVITTERING_MIN} kvittering)")
 
-# === 5. SWEEP-FUNKSJON ===
+# === 5. SWEEP-FUNKSJON (op-binder-semantikk) ===
 def kjor_sweep(events_df, label=""):
-    """Kjoer ankomstkonflikt-sweep paa sortert events_df med kolonnene
-    Dato_og_Tid, bind_min, c_eff. Returnerer events_df med n_aktive og kapasitet."""
+    """Ankomstkonflikt-sweep. Hver event har (bind_min, ops_bundet).
+    n_aktive_ops akkumuleres ved hver ankomst som summen av ops_bundet
+    for events med slutt_ts > t_i."""
     events = events_df.sort_values("Dato_og_Tid").reset_index(drop=True)
     events["slutt_ts"] = events["Dato_og_Tid"] + pd.to_timedelta(events["bind_min"], unit="m")
 
     n = len(events)
     ankomst = events["Dato_og_Tid"].values
     slutt = events["slutt_ts"].values
+    ops = events["ops_bundet"].values.astype(int)
     c_eff_arr = events["c_eff"].values
 
-    n_aktive = np.zeros(n, dtype=int)
-    active_set = []
+    n_aktive_ops = np.zeros(n, dtype=int)
+    active_set = []  # liste av (slutt_ts, ops_bundet)
     for i in range(n):
         t_i = ankomst[i]
-        active_set = [s for s in active_set if s > t_i]
-        n_aktive[i] = len(active_set)
-        active_set.append(slutt[i])
+        active_set = [(s, o) for s, o in active_set if s > t_i]
+        n_aktive_ops[i] = sum(o for _, o in active_set)
+        active_set.append((slutt[i], ops[i]))
 
-    events["n_aktive"] = n_aktive
+    events["n_aktive"] = n_aktive_ops  # beholder navn for bakoverkompat, men betyr nå op-binder
 
     def klass(n_a, c):
         ledige = c - n_a
@@ -225,36 +271,85 @@ def kjor_sweep(events_df, label=""):
         else:
             return "Svikt"
 
-    events["kapasitet"] = [klass(na, ce) for na, ce in zip(n_aktive, c_eff_arr)]
+    events["kapasitet"] = [klass(na, ce) for na, ce in zip(n_aktive_ops, c_eff_arr)]
     return events
 
 
-def bygg_events(scenario_name):
-    """Bygg kombinert event-dataframe for et gitt scenario."""
+def _expand_d_aba(df_daba, p, Y):
+    """Generer Fase 1 (alltid) + Fase 2 (med sannsynlighet p) events for D-aba.
+    Returnerer DataFrame med kolonnene: Dato_og_Tid, v3_kat, Time, Skift,
+    Er_helg, bind_min, ops_bundet."""
+    rng = np.random.default_rng(SEED_DABA)
+    fase2_flag = rng.random(len(df_daba)) < p
+
+    # Fase 1: alltid, 1 op, DABA_FASE1_MIN
+    f1 = df_daba[["Dato_og_Tid", "Time", "Skift", "Er_helg"]].copy()
+    f1["v3_kat"] = "D-aba-f1"
+    f1["bind_min"] = DABA_FASE1_MIN
+    f1["ops_bundet"] = 1
+
+    # Fase 2: andel p, 1 op, Y min, starter +90 sek
+    f2_src = df_daba[fase2_flag].copy()
+    f2 = f2_src[["Dato_og_Tid", "Time", "Skift", "Er_helg"]].copy()
+    f2["Dato_og_Tid"] = f2["Dato_og_Tid"] + pd.to_timedelta(DABA_FASE2_OFFSET_MIN, unit="m")
+    f2["v3_kat"] = "D-aba-f2"
+    f2["bind_min"] = Y
+    f2["ops_bundet"] = 1
+
+    return pd.concat([f1, f2], ignore_index=True)
+
+
+def bygg_events(scenario_name, include_only=None):
+    """Bygg kombinert event-dataframe for et gitt scenario.
+    include_only: liste av v3_kat som skal inkluderes (None = alle).
+                  Eks: ['D-pri1','D-aba','skjult'] for Variant A."""
     scen = SCENARIOS[scenario_name]
 
-    # Alle synlige hendelser
-    ev = df[["Dato_og_Tid", "v3_kat", "Time", "Skift", "Er_helg"]].copy()
-    ev = ev[ev["Dato_og_Tid"].notna()].copy()
+    # Basisdata
+    df_live = df[df["Dato_og_Tid"].notna()].copy()
 
-    # Sett bindingstid
-    ev["bind_min"] = 0.0
-    for kat, bind in scen.items():
-        ev.loc[ev["v3_kat"] == kat, "bind_min"] = bind
-    # D: databasert
-    ev.loc[ev["v3_kat"] == "D", "bind_min"] = df.loc[ev[ev["v3_kat"] == "D"].index, "bind_D"]
+    events_list = []
 
-    # Skjulte anrop
-    if hidden_rows:
+    # D-pri1: 2 op-binder (makkerpar) i full bindingstid
+    d_pri1 = df_live[df_live["v3_kat"] == "D-pri1"]
+    if len(d_pri1) > 0 and (include_only is None or "D-pri1" in include_only):
+        e = d_pri1[["Dato_og_Tid", "Time", "Skift", "Er_helg"]].copy()
+        e["v3_kat"] = "D-pri1"
+        e["bind_min"] = df.loc[d_pri1.index, "bind_D"]
+        e["ops_bundet"] = 2
+        events_list.append(e)
+
+    # D-aba: Fase 1 + valgfri Fase 2 (med sannsynlighet p, bindingstid Y)
+    d_aba = df_live[df_live["v3_kat"] == "D-aba"]
+    if len(d_aba) > 0 and (include_only is None or "D-aba" in include_only):
+        events_list.append(_expand_d_aba(d_aba, scen["daba_p"], scen["daba_Y"]))
+
+    # S, L-aba, L-hendelse, L-ukjent, F, V: 1 op per event
+    for kat in ["S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]:
+        if include_only is not None and kat not in include_only:
+            continue
+        sub = df_live[df_live["v3_kat"] == kat]
+        if len(sub) == 0:
+            continue
+        e = sub[["Dato_og_Tid", "Time", "Skift", "Er_helg"]].copy()
+        e["v3_kat"] = kat
+        e["bind_min"] = scen[kat]
+        e["ops_bundet"] = 1
+        events_list.append(e)
+
+    # Skjulte anrop: 1 op, 1 min
+    if hidden_rows and (include_only is None or "skjult" in include_only):
         hdf = pd.DataFrame(hidden_rows)
         hdf["Dato_og_Tid"] = pd.to_datetime(hdf["Dato_og_Tid"])
         hdf["Time"] = hdf["Dato_og_Tid"].dt.hour
         hdf["Skift"] = np.where(hdf["Time"].between(7, 18), "Dag", "Natt")
         hdf["Er_helg"] = hdf["Dato_og_Tid"].dt.dayofweek >= 5
+        hdf["v3_kat"] = "skjult"
         hdf["bind_min"] = SKJULT_BIND_MIN
-        combined = pd.concat([ev, hdf[["Dato_og_Tid", "v3_kat", "Time", "Skift", "Er_helg", "bind_min"]]])
-    else:
-        combined = ev
+        hdf["ops_bundet"] = 1
+        events_list.append(hdf[["Dato_og_Tid", "v3_kat", "Time", "Skift", "Er_helg", "bind_min", "ops_bundet"]])
+
+    combined = pd.concat(events_list, ignore_index=True)
 
     # c_eff
     dag_hverdag = (combined["Skift"] == "Dag") & (~combined["Er_helg"])
@@ -263,29 +358,15 @@ def bygg_events(scenario_name):
     return combined.sort_values("Dato_og_Tid").reset_index(drop=True)
 
 
-# === 6. KJOER VARIANT A (kun D + skjulte) og VARIANT B (alle, tre scenarioer) ===
+# === 6. KJOER VARIANT A (kun beredskap: D-pri1 + D-aba + skjulte) og VARIANT B ===
 
-# Variant A: reproduser eksisterende modell
+# Variant A: beredskapsbelastning (D-pri1 + D-aba + skjulte) — bruker hoved-scenario for D-aba fase 2
 print("\n" + "=" * 70)
-print("VARIANT A: Kun kategori D + skjulte anrop (eksisterende modell)")
+print("VARIANT A: Beredskapsbelastning (D-pri1 + D-aba + skjulte)")
+print("D-aba fase 2 bruker hoved-scenario (p=0.50, Y=6 min)")
 print("=" * 70)
 
-ev_a = df[df["v3_kat"] == "D"][["Dato_og_Tid", "v3_kat", "Time", "Skift", "Er_helg"]].copy()
-ev_a = ev_a[ev_a["Dato_og_Tid"].notna()].copy()
-ev_a["bind_min"] = df.loc[ev_a.index, "bind_D"]
-
-if hidden_rows:
-    hdf = pd.DataFrame(hidden_rows)
-    hdf["Dato_og_Tid"] = pd.to_datetime(hdf["Dato_og_Tid"])
-    hdf["Time"] = hdf["Dato_og_Tid"].dt.hour
-    hdf["Skift"] = np.where(hdf["Time"].between(7, 18), "Dag", "Natt")
-    hdf["Er_helg"] = hdf["Dato_og_Tid"].dt.dayofweek >= 5
-    hdf["bind_min"] = SKJULT_BIND_MIN
-    hdf["v3_kat"] = "skjult"
-    ev_a = pd.concat([ev_a, hdf[["Dato_og_Tid", "v3_kat", "Time", "Skift", "Er_helg", "bind_min"]]])
-
-dag_hv_a = (ev_a["Skift"] == "Dag") & (~ev_a["Er_helg"])
-ev_a["c_eff"] = np.where(dag_hv_a, 3, 2)
+ev_a = bygg_events("hoved", include_only=["D-pri1", "D-aba", "skjult"])
 result_a = kjor_sweep(ev_a, "Variant A")
 
 order = ["Normal", "Brudd", "Svikt"]
