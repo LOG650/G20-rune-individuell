@@ -2,11 +2,18 @@
 Stratifisert uttrekk av L-aba-hendelser (ABA løst av 110) for 110 Sør-Vest 2025,
 for manuell dybdeanalyse i LEO-loggen.
 
-- 50 hendelser totalt
-- 4 per måned (10 mnd) + 5 per måned (2 mnd) = 50
-- Tilfeldig utvalg innen hver måned (fast seed for reproduserbarhet)
+V3-definisjon L-aba:
+  - Opprinnelig oppdragstype = "ABA"
+  - Kilde = "Alarm"
+  - Oppdragstype = "Oppdrag løst av 110"
+  - Ressurs varslet = tom (ikke utrykning)
 
-Output: analyse/uttrekk/laba_sorvest_2025_dybdeanalyse.xlsx
+Uttrekksparametre:
+  N_TOTAL: antall hendelser i utvalget
+  SEED:    random seed for reproduserbarhet
+  OUT_FIL: output-fil
+
+Gjeldende: 100 hendelser, 8 per måned (8 mnd) + 9 per måned (4 mnd) = 100.
 """
 import pathlib
 import random
@@ -21,10 +28,10 @@ PROJECT = pathlib.Path(__file__).resolve().parent.parent.parent
 DSB_FIL = PROJECT / "004 data" / "2025_fullrapport_110_alle_sentraler_fra_dsb.xlsx"
 OUT_DIR = PROJECT / "analyse" / "uttrekk"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-OUT_FIL = OUT_DIR / "laba_sorvest_2025_dybdeanalyse.xlsx"
+OUT_FIL = OUT_DIR / "laba_sorvest_2025_dybdeanalyse_n100.xlsx"
 
-N_TOTAL = 50
-SEED = 20260418  # dagens dato — reproduserbar
+N_TOTAL = 100
+SEED = 20260419  # 2026-04-19 — ny seed for n=100-utvalget
 
 # === 1. LAST DATA ===
 print("Laster DSB 2025-data...")
@@ -93,18 +100,18 @@ for m in range(1, 13):
     n = (laba["maaned"] == m).sum()
     print(f"  Måned {m:2d}: {n}")
 
-# 10 mnd × 4 + 2 mnd × 5 = 50
+# N=100: 8 per måned (8 mnd) + 9 per måned (4 mnd) = 64 + 36 = 100
 random.seed(SEED)
 np.random.seed(SEED)
 
 maaneder = list(range(1, 13))
-# Velg 2 tilfeldige måneder som får 5 hendelser (resten får 4)
-ekstra_mnd = sorted(random.sample(maaneder, 2))
-print(f"\nMåneder som får 5 hendelser: {ekstra_mnd}")
+# Velg 4 tilfeldige måneder som får 9 hendelser (resten får 8)
+ekstra_mnd = sorted(random.sample(maaneder, 4))
+print(f"\nMåneder som får 9 hendelser: {ekstra_mnd}")
 
 utvalg = []
 for m in maaneder:
-    n = 5 if m in ekstra_mnd else 4
+    n = 9 if m in ekstra_mnd else 8
     pool = laba[laba["maaned"] == m]
     if len(pool) < n:
         print(f"ADVARSEL måned {m}: kun {len(pool)} L-aba tilgjengelig, tar alle")
@@ -183,7 +190,8 @@ ws.cell(row=1, column=1).font = Font(size=14, bold=True, color="1A3A5C")
 ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(OUTPUT_KOLONNER))
 
 ws.cell(row=2, column=1).value = (
-    "Utvalg på 50 hendelser, stratifisert 4 per måned (10 mnd) + 5 per måned (2 mnd). "
+    "Utvalg på 100 hendelser, stratifisert 8 per måned (8 mnd) + 9 per måned (4 mnd). "
+    "V3 L-aba: Opprinnelig=ABA, Kilde=Alarm, Oppdragstype='Oppdrag løst av 110', Ressurs varslet tom. "
     "Fyll ut tidskolonnene manuelt fra LEO-loggen. Bindingstid beregnes automatisk fra T_alarm_inn → T_operatør_frigjort."
 )
 ws.cell(row=2, column=1).font = Font(size=10, italic=True, color="555555")
@@ -291,7 +299,7 @@ for m in range(1, 13):
 ws2["A22"] = "Reproduserbarhet:"
 ws2["A22"].font = Font(bold=True)
 ws2["A23"] = f"Random seed: {SEED}"
-ws2["A24"] = "Måneder med 5 hendelser: " + ", ".join(MND_NAVN[m-1] for m in ekstra_mnd)
+ws2["A24"] = "Måneder med 9 hendelser: " + ", ".join(MND_NAVN[m-1] for m in ekstra_mnd)
 
 ws2.column_dimensions["A"].width = 30
 ws2.column_dimensions["B"].width = 15
