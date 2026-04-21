@@ -1,7 +1,7 @@
 # Ønskeliste — BRIS-datauttrekk for kapasitets- og belastningsanalyser ved 110-sentraler
 
-**Utarbeidet av:** Rune Grødem, student LOG650 Forskningsprosjekt, Høgskolen i Molde
-**Kontakt:** rune.grodemm@himolde.no
+**Utarbeidet av:** Rune Grødem, student LOG650 Forskningsprosjekt, Høgskolen i Molde — Operatør, 110 Sør-Vest
+**Kontakt:** rune.grodem@rogbr.no
 **Dato:** april 2026
 **Mottaker:** DSB (til videre dialog og vurdering)
 
@@ -9,32 +9,41 @@
 
 ## 1. Bakgrunn og formål
 
-Brannvesenet har en nasjonal dimensjoneringsforskrift (FOR-2023-01-06-23) som setter kvantitative, etterprøvbare krav til antall brannmannskap basert på innbyggertall og responstid. **Ingen tilsvarende nasjonal standard finnes for 110-operatører.** Bemanningsnivået fastsettes lokalt gjennom ROS- og beredskapsanalyser som er kvalitative og vanskelige å etterprøve på tvers av sentraler.
+Dagens BRIS-uttrekk og MOB-årsrapporter er ikke tilstrekkelig til å gjennomføre robust, sammenlignbar bemannings- og belastningsanalyse på tvers av de 12 norske 110-sentralene. **Dette dokumentet er en prioritert ønskeliste** over data som — hvis gjort tilgjengelig i fremtidige BRIS-uttrekk — vil muliggjøre kvantitativ kapasitetsanalyse på to nivåer: sentral-nivå (nasjonal benchmarking) og operatør-nivå (individuell belastning og arbeidsmønster).
 
-I forbindelse med forskningsprosjektet LOG650 ved Høgskolen i Molde («I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller?») er det gjennomført en systematisk gjennomgang av de data som i dag er tilgjengelig via BRIS-uttrekk og DSBs årsrapporter. Denne gjennomgangen har avdekket flere data-hull som begrenser hvilke analyser som lar seg gjennomføre.
+Bakgrunnen er kort: brannvesenet har en nasjonal dimensjoneringsforskrift (FOR-2023-01-06-23) som setter kvantitative bemanningskrav basert på innbyggertall og responstid. Ingen tilsvarende nasjonal standard finnes for 110-operatører — bemanning fastsettes lokalt gjennom kvalitative ROS-analyser. Behovet for et kvantitativt nasjonalt referansegrunnlag er identifisert i forskningsprosjektet LOG650 ved Høgskolen i Molde, der en gjennomgang av DSBs egne datasett (BRIS fullrapport 2025: 508 228 oppdrag, MOB 2022–2025) har avdekket konkrete data-hull. Listen er utarbeidet fra et 110-operativt perspektiv.
 
-Dette dokumentet er en **prioritert ønskeliste** over data som — hvis gjort tilgjengelig i BRIS-uttrekk — vil muliggjøre kvantitativ bemannings- og belastningsanalyse på to nivåer:
+### 1.1 Begrepsforklaring
 
-1. **Sentral-nivå** (benchmarking på tvers av de 12 sentralene)
-2. **Operatør-nivå** (dypere analyser av individuell belastning og arbeidsmønster)
+For å gjøre dokumentet leselig uten å kreve kjennskap til den underliggende rapporten, defineres her de sentrale begrepene som brukes:
 
-Listen er utarbeidet fra **et 110-operativt perspektiv** med fokus på data som direkte påvirker evnen til å dimensjonere og evaluere bemanning.
+| Begrep | Forklaring |
+|---|---|
+| **Op-binder** | Et tidsavgrenset intervall der én eller to operatører er aktivt bundet av en hendelse. Brukes som måleenhet for kapasitetsbelastning. |
+| **D-pri1** | Pri-1-utrykning (bygningsbrann, trafikkulykke, farlig gods). Krever to operatører bundet parallelt («makkerpar»). |
+| **D-aba** | Utrykning utløst av automatisk brannalarm (ABA). Håndteres serielt av én operatør (kvittering + oppdragsopprettelse + call-out, ca. 3 min). |
+| **L-aba** | Automatisk brannalarm avklart uten utrykning (f.eks. matlaging bekreftet av nødtelefon innen 90 sek). |
+| **Makkerpar-driftsstandard** | Prosedyrekrav om at to operatører (RØD = samtale med innringer + GUL = ressursvarsling og samband) håndterer hver pri-1-hendelse parallelt fra første sekund av akuttfasen. |
+| **T1-henvendelser** | Korte telefonhenvendelser uten registrert hendelsestype (henvendelser, avklaringer, lukkede saker uten kategori). Utgjør ~88 % av samtalevolumet ved 110 Sør-Vest 2025. |
+| **V3** | Versjon 3 av klassifiseringsregelen utviklet i forskningsprosjektet, der ABA-kategoriene (D-aba, L-aba) krever Kilde=Alarm for å skille reelle alarmsignaler fra publikumsmeldinger feilklassifisert som ABA. |
+| **MOB** | DSBs årlige selvrapporteringsskjema fra 110-sentralene (planlagt bemanning, anropsvolum, oppdragstall). |
+| **BRIS** | DSBs hendelsesdatabase med fullrapport-eksport per oppdrag (44 kolonner per rad). |
 
 ---
 
 ## 2. Avgrensning mot tilstøtende systemer
 
-For å unngå duplisering bygger ønskelisten på at følgende data dekkes — eller vil dekkes — av andre systemer:
+For å unngå duplisering bygger ønskelisten på en **forutsetning** om at følgende data kan hentes ut — i strukturert, eksportbart format — fra andre systemer enn BRIS:
 
-| System | Forventet innhold |
-|---|---|
-| **Alarmmottak (dagens lokale systemer)** | Adresse, objekt-ID, objekttype, service-kontrakt for ABA-tilknytning |
-| **Transwire (kommende nasjonalt ABA-system)** | Strukturert objektregister, ABA-historikk, sone/gruppe-informasjon |
-| **Frequentis ICCS (nytt kommunikasjonssystem)** | Samtale-metadata, linje-type, samtalehåndtering |
+| System | Forventet innhold | Status / forbehold |
+|---|---|---|
+| **Alarmmottak (dagens lokale systemer)** | Adresse, objekt-ID, objekttype, service-kontrakt for ABA-tilknytning | Varierer mellom sentraler; nasjonal eksport ikke etablert |
+| **Transwire (kommende nasjonalt ABA-system)** | Strukturert objektregister, ABA-historikk, sone/gruppe-informasjon | Under innføring — datatilgang for analyse må avklares |
+| **Frequentis ICCS (nytt kommunikasjonssystem)** | Samtale-metadata, linje-type, samtalehåndtering | Under innføring — eksport-API for forskning ikke avklart |
 
-Ønskelisten fokuserer derfor på **BRIS-native data** — det vil si oppdrags- og hendelsesdata som det er naturlig at 110 registrerer og lagrer som en del av saksbehandlingen, og som i dag enten ikke registreres, ikke eksporteres, eller ikke er lenket mot andre objekter i uttrekket.
+**Hvis dataene over ikke lar seg hente ut fra disse systemene** i et format som er egnet for sammenstilt nasjonal analyse, vil det være naturlig at de tilsvarende feltene **inkluderes som en del av BRIS-uttrekket** (eventuelt som referansenøkler mot kildesystemet). For hver tilstøtende systemkategori bør DSB derfor avklare: (a) er data praktisk uttrekkbart der i dag, (b) hvis nei, hva er tidshorisont for at det skal bli det, og (c) hvis tidshorisonten er lang eller usikker, bør tilsvarende felt vurderes for BRIS-eksport i mellomtiden.
 
-Der det er overlapp med kommende systemer, er det ønskelig at BRIS **peker til** (f.eks. Transwire-objekt-ID) snarere enn duplisere innholdet.
+Ønskelisten under fokuserer derfor på **BRIS-native data** — det vil si oppdrags- og hendelsesdata som det er naturlig at 110 registrerer og lagrer som en del av saksbehandlingen, og som i dag enten ikke registreres, ikke eksporteres, eller ikke er lenket mot andre objekter i uttrekket. Der det er overlapp med tilstøtende systemer, er det ønskelig at BRIS **peker til** (f.eks. Transwire-objekt-ID) snarere enn å duplisere innholdet — *forutsatt* at de tilstøtende systemene faktisk leverer den forutsatte dataen.
 
 ---
 
@@ -47,7 +56,7 @@ Gjennomgangen av DSB-datasettet for 2025 (508 228 oppdrag, alle 12 sentraler) vi
 | Totalvolum per sentral | ✅ Direkte | — |
 | Kategorifordeling (D/S/L-aba/L-hendelse/L-ukjent/F/V) | ⚠️ Inferert | Ingen eksplisitt kategori-kolonne; må utledes via Oppdragstype × Opprinnelig oppdragstype × Ressurs varslet |
 | Bindingstid for utrykning (D) | ⚠️ Delvis | Alarmbehandlingstid kun fylt for ~12 % av rader |
-| Bindingstid for ikke-utrykning (S, L, F, V) | ❌ Ingen data | Må estimeres — denne studien bruker manuell LEO-oppslag (50 hendelser) som validering |
+| Bindingstid for ikke-utrykning (S, L, F, V) | ❌ Ingen data | Må estimeres skjønnsmessig eller via tidkrevende manuell LEO-oppslag¹ |
 | Samtalevarighet | ❌ Ingen data | T1-anrop (88 % av volum) har ingen tidsregistrering |
 | Operatør-belastning | ❌ Ingen data | Operatør-ID har 0 % dekning i dagens BRIS-uttrekk |
 | Makkerpar-samhandling | ❌ Ingen data | Umulig å måle uten operatør-ID |
@@ -55,9 +64,13 @@ Gjennomgangen av DSB-datasettet for 2025 (508 228 oppdrag, alle 12 sentraler) vi
 | Faktisk vs planlagt bemanning | ❌ Ingen data | MOB-selvrapportering er årsaggregert planlagt bemanning |
 | Realiseringsgrad av varslinger | ✅ Delvis | «Rykket ut»-timestamp er tilgjengelig, men ikke avlysningsgrunn |
 
+¹ *I forskningsprosjektet er bindingstid for L-aba kalibrert via en manuell dybdeanalyse av 50 trukne LEO-loggføringer (hovedparameter bygger på Kilde=Alarm-subsettet, n = 30; et utvidet utvalg n = 100 er under innhenting). Dette er en ressurskrevende workaround som ikke vil være praktisk gjennomførbar for nasjonal benchmarking på tvers av 12 sentraler.*
+
 ---
 
 ## 4. Prioritert ønskeliste
+
+> **Avgrensningsprinsipp:** Ønskelisten ber **ikke** om at BRIS skal bli et alt-omfattende system. Hvert datapunkt under er enten (a) data som er naturlig at 110 selv registrerer som del av saksbehandlingen og som derfor hører hjemme i BRIS, eller (b) data som primært bør hentes fra et tilstøtende system (Alarmmottak / Transwire / ICCS) — men hvor BRIS bør inneholde en **referansenøkkel** for kobling. Hvis tilstøtende systemer ikke leverer den forutsatte dataen i sammenstilt nasjonalt format (jf. §2), bør tilsvarende felt vurderes for BRIS-eksport i mellomtiden.
 
 Prioriteringen er basert på hvilke analyser dataene låser opp. **Høy** = direkte nødvendig for kapasitetsdimensjonering. **Medium** = muliggjør dypere analyse. **Lav** = kvalitetssikring og auditering.
 
@@ -70,7 +83,7 @@ Prioriteringen er basert på hvilke analyser dataene låser opp. **Høy** = dire
 | 3 | **Eksplisitt samtale↔oppdrag-tilknytning** | Muliggjør direkte måling av sammenstilte anrop og operatørtid per hendelse. I dag må sammenstilte utledes via gap-analyse |
 | 4 | **Ventetid før besvarelse** + antall samtaler på vent ved ankomst | Grunnlag for direkte Erlang-A/Erlang-C-modellering. I dag er ventetider helt fraværende — vi kan ikke validere modellantakelser |
 | 5 | **Skift-bemanningsliste** (operatør-IDer som var på vakt, per time eller per skift) | Kobler faktisk bemanning til faktisk belastning. I dag er MOB-selvrapportering årsaggregert planlagt bemanning, ikke faktisk |
-| 6 | **Eksplisitt V3-lignende kategori-felt** satt av operatør (D/S/L-aba/L-hendelse/F/V eller tilsvarende) | Eliminerer klassifiseringslogikk som må utledes via fuzzy-matching av Oppdragstype og Opprinnelig oppdragstype |
+| 6 | **Eksplisitt V3-lignende kategori-felt** satt av operatør (D-pri1/D-aba/S/L-aba/L-hendelse/L-ukjent/F/V eller tilsvarende), inkludert eksplisitt skille mellom pri-1-utrykning (makkerpar) og ABA-utrykning (serielt), og krav om Kilde=Alarm for ABA-kategoriene | Eliminerer klassifiseringslogikk som i dag må utledes via fuzzy-matching av Oppdragstype × Opprinnelig oppdragstype × Kilde × Ressurs varslet. Avdekker også vesentlig variasjon mellom sentraler i registreringspraksis (L-aba-andel varierer 0,0–7,5 % mellom sentraler i 2025) |
 
 ### 4.2 Medium prioritet — dypere operatør- og kø-analyser
 
@@ -173,6 +186,6 @@ Forslagene er ikke ment som kritikk av dagens registreringspraksis, men som inns
 
 Kontakt for dialog, avklaringer eller utdyping:
 
-- **Rune Grødem** — rune.grodemm@himolde.no
+- **Rune Grødem** — rune.grodem@rogbr.no
 - Student, LOG650 Forskningsprosjekt, Høgskolen i Molde
-- Operatør/vaktleder, 110 Sør-Vest
+- Operatør, 110 Sør-Vest

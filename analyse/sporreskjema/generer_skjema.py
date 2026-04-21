@@ -119,8 +119,9 @@ def _stats(series):
 
 NASJONAL_STATS = {}
 if bench is not None:
-    for kat in ['D_pct', 'L-aba_pct', 'L-hendelse_pct', 'L-ukjent_pct', 'F_pct', 'V_pct']:
-        NASJONAL_STATS[kat] = _stats(bench[kat])
+    for kat in ['D_pct', 'D-pri1_pct', 'D-aba_pct', 'L-aba_pct', 'L-hendelse_pct', 'L-ukjent_pct', 'F_pct', 'V_pct']:
+        if kat in bench.columns:
+            NASJONAL_STATS[kat] = _stats(bench[kat])
     for kol in ['alarmbeh_median_min', 'alarmbeh_p90_min']:
         NASJONAL_STATS[kol] = _stats(tid[kol])
     NASJONAL_STATS['DSB_vs_MOB_pct'] = _stats(vol['DSB_vs_MOB_pct'])
@@ -133,126 +134,138 @@ def flagg(verdi, stats):
     return 'NORMAL'
 
 
-def avklaring_aba(pct, n, flagg_navn, stats):
+def avklaring_aba(pct, n, flagg_navn, stats, sentral=''):
+    label = f" ved {sentral}" if sentral else ""
     if flagg_navn == 'LAV':
         return (
-            f"**ABA løst uten utrykning registrert som usedvanlig lav ({pct:.1f}%, {n} oppdrag).** "
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** ABA løst uten utrykning registrert som usedvanlig lav ({pct:.1f}%, {n} oppdrag). "
             f"Nasjonalt: median {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. "
-            f"Andre sentraler har rutinemessig 3–9 %.\n\n"
-            f"> *Avklaring:* Hvordan registreres automatiske brannalarmer som avklares uten utrykning (matlaging, damp, service utenom prosedyre)? "
+            f"Andre sentraler har rutinemessig 3–9 %. **Dette avviker betydelig fra forventet mønster og må forklares lokalt** — uten avklaring kan vi ikke benchmarke dere mot øvrige sentraler.\n\n"
+            f"> *Avklaring:* Hvordan registreres automatiske brannalarmer som avklares uten utrykning (matlaging, damp, service utenom prosedyre){label}? "
             f"Velger dere en annen verdi for «Opprinnelig oppdragstype» enn 'ABA' ved slik avklaring, "
             f"eller utløser ABA rutinemessig utrykning hos dere uavhengig av avklaring innen 90 sek? "
             f"Kan dere beskrive registreringspraksis og ev. lokal prosedyre som skiller dere fra Sør-Vest-modellen?"
         )
     if flagg_navn == 'HØY':
         return (
-            f"**ABA løst uten utrykning er høy ({pct:.1f}%, {n} oppdrag).** "
-            f"Nasjonalt: median {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** ABA løst uten utrykning er høy ({pct:.1f}%, {n} oppdrag). "
+            f"Nasjonalt: median {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dette avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Er terskelen for å lukke ABA uten utrykning annerledes hos dere — "
             f"lengre venteperiode før utkalling, mer kontakt med objektet, eller annen prosedyre?"
         )
     return None
 
 
-def avklaring_utr(pct, stats):
+def avklaring_utr(pct, stats, sentral=''):
+    label = f" ved {sentral}" if sentral else ""
     if pct >= stats['q80']:
         return (
-            f"**Utrykningsrate (D-andel) er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** Utrykningsrate (D-andel) er høy ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere ligger blant de øverste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Registreres færre oppdrag som «avklart uten utrykning» hos dere, eller har dere praksis "
             f"der utrykning aktiveres raskere (f.eks. på ABA uten ventetid, eller ved lav terskel for bekreftelse)?"
         )
     if pct <= stats['q20']:
         return (
-            f"**Utrykningsrate (D-andel) er lav ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
-            f"Andelen oppdrag som fører til utrykning er lavere enn for andre sentraler.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** Utrykningsrate (D-andel) er lav ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere ligger blant de nederste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Filtreres flere henvendelser ut som «løst av 110» før utrykning aktiveres, eller har dere "
             f"lokale samarbeidsformer (politi/AMK/brann) som håndterer en del hendelser før utalarmering?"
         )
     return None
 
 
-def avklaring_ukjent(pct, stats):
+def avklaring_ukjent(pct, stats, sentral=''):
+    label = f" ved {sentral}" if sentral else ""
     if pct >= stats['q80']:
         return (
-            f"**L-ukjent-andel er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
-            f"Store mengder oppdrag er registrert som «Oppdrag løst av 110» uten at «Opprinnelig oppdragstype» er satt.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** L-ukjent-andel er høy ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere ligger blant de øverste 3 av 12 sentraler — store mengder oppdrag er registrert som «Oppdrag løst av 110» uten at «Opprinnelig oppdragstype» er satt. Dette må forklares lokalt før vi kan tolke L-ukjent som sammenlignbar kategori.**\n\n"
             f"> *Avklaring:* Hva er typisk innhold i disse oppdragene — korte avklaringer og spørsmål "
             f"(bål-henvendelser, telefonhjelp), eller er det også reelle hendelser som ikke klassifiseres? "
             f"Er det en lokal rutine å lukke enkelte henvendelsestyper uten opprinnelig type?"
         )
     if pct <= stats['q20']:
         return (
-            f"**L-ukjent-andel er lav ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
-            f"Dere setter altså «Opprinnelig oppdragstype» oftere enn andre ved lukking.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** L-ukjent-andel er lav ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere setter «Opprinnelig oppdragstype» oftere enn andre sentraler ved lukking — avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Er det en lokal praksis å alltid klassifisere hendelser før lukking, eller "
             f"reflekterer det at dere håndterer færre uklassifiserte henvendelser?"
         )
     return None
 
 
-def avklaring_l_hendelse(pct, stats):
+def avklaring_l_hendelse(pct, stats, sentral=''):
+    label = f" ved {sentral}" if sentral else ""
     if pct >= stats['q80']:
         return (
-            f"**L-hendelse-andel er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
-            f"Dere registrerer mange reelle henvendelser som avklares uten utrykning, med «Opprinnelig oppdragstype» satt.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** L-hendelse-andel er høy ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere ligger blant de øverste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Er det en lokal praksis at alle reelle hendelser får en opprinnelig oppdragstype før lukking? "
             f"Hva er typisk innhold — veiledningssamtaler, varsling fra publikum uten behov for utrykning, eller noe annet?"
         )
     if pct <= stats['q20']:
         return (
-            f"**L-hendelse-andel er lav ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%. "
-            f"Få reelle hendelser registreres som avklart uten utrykning hos dere.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** L-hendelse-andel er lav ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere ligger blant de nederste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Registreres disse under andre kategorier (L-ukjent, V), eller rykker dere ut oftere på "
             f"hendelser som andre sentraler avklarer telefonisk?"
         )
     return None
 
 
-def avklaring_feilring(pct, stats):
+def avklaring_feilring(pct, stats, sentral=''):
+    label = f" ved {sentral}" if sentral else ""
     if pct >= stats['q80']:
         return (
-            f"**Feilring-andel er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** Feilring-andel er høy ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere ligger blant de øverste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Er det reelt flere feilringinger hos dere (f.eks. fra samlokalisering med 112/113), "
             f"eller klassifiseres flere henvendelser som «feilring» enn andre sentraler ville gjort?"
         )
     if pct <= stats['q20']:
         return (
-            f"**Feilring-andel er lav ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** Feilring-andel er lav ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere ligger blant de nederste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Registreres feilringinger under annen kategori (f.eks. L-ukjent eller V), "
             f"eller er feilringinger faktisk sjeldnere i deres distrikt?"
         )
     return None
 
 
-def avklaring_v(pct, stats):
+def avklaring_v(pct, stats, sentral=''):
+    label = f" ved {sentral}" if sentral else ""
     if pct >= stats['q80']:
         return (
-            f"**Viderekoble-andel er høy ({pct:.1f}%).** Nasjonal median: {stats['median']:.1f}%.\n\n"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** Viderekoble-andel er høy ({pct:.1f}%). Nasjonal median: {stats['median']:.1f}%, spenn {stats['min']:.1f}–{stats['max']:.1f}%. **Dere ligger blant de øverste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**\n\n"
             f"> *Avklaring:* Hvilke typer henvendelser viderekobles? Er det mye 112/113-feilringinger, "
             f"eller har dere eksplisitt samarbeid med nabosentraler/andre etater som øker viderekobling?"
         )
     return None
 
 
-def avklaring_dsb_mob(ratio, mob, dsb, stats):
+def avklaring_dsb_mob(ratio, mob, dsb, stats, sentral=''):
+    label = f" ved {sentral}" if sentral else ""
+    felles_avklaring = (
+        f"**Hva teller dere egentlig i MOB-feltet «Mottatte 110-anrop»?** "
+        f"MOB-skjemaet gir ikke en entydig definisjon, og variasjonen mellom sentraler kan skyldes dette. "
+        f"Vi ber om å få bekreftet konkret hva deres tall inkluderer: "
+        f"(a) kun besvarte telefonanrop på 110-nødlinjen, "
+        f"(b) alle telefonanrop inkludert overførte, viderekoblede og avbrutte, "
+        f"(c) også automatiske ABA-signaler som kommer inn uten samtale, "
+        f"(d) også servicetelefon, eller "
+        f"(e) alle henvendelser uavhengig av kanal. "
+        f"Dette er en nøkkelavklaring for om MOB-anroptallet kan brukes som felles mål på tvers av sentraler."
+    )
     if ratio >= stats['q80']:
         return (
-            f"**Forhold DSB/MOB er høyt ({ratio:.1f}×).** Nasjonal median: {stats['median']:.1f}×. "
-            f"MOB-selvrapport: {mob:,} mottatte anrop. DSB: {dsb:,} oppdrag.\n\n"
-            f"> *Avklaring:* Hva inkluderer dere ikke i MOB-tellingen? ABA-signaler uten samtale, "
-            f"oppdrag lukket uten anrop, eller noe annet? Er MOB-tallet kun telefonanrop?"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** Forhold DSB/MOB er høyt ({ratio:.1f}×). Nasjonal median: {stats['median']:.1f}×. "
+            f"MOB-selvrapport: {mob:,} mottatte anrop. DSB-oppdrag: {dsb:,}. **Dere ligger blant de øverste 3 av 12 sentraler i differanse — krever forklaring for at MOB- og DSB-tall skal kunne brukes konsistent.**\n\n"
+            f"> *Avklaring:* {felles_avklaring}"
         )
     if ratio <= stats['q20']:
         return (
-            f"**Forhold DSB/MOB er lavt ({ratio:.1f}×).** Nasjonal median: {stats['median']:.1f}×. "
-            f"MOB: {mob:,} anrop, DSB: {dsb:,} oppdrag.\n\n"
-            f"> *Avklaring:* Teller dere også ABA-signaler og lukkede oppdrag uten samtale i MOB-tallet, "
-            f"eller er det liten forskjell mellom anrop og registrerte oppdrag hos dere?"
+            f"**[SENTRALSPESIFIKT AVVIK{label}]** Forhold DSB/MOB er lavt ({ratio:.1f}×). Nasjonal median: {stats['median']:.1f}×. "
+            f"MOB-selvrapport: {mob:,} mottatte anrop. DSB-oppdrag: {dsb:,}. **Dere ligger blant de nederste 3 av 12 sentraler i differanse — krever forklaring for at MOB- og DSB-tall skal kunne brukes konsistent.**\n\n"
+            f"> *Avklaring:* {felles_avklaring}"
         )
     return None
 
 
-def avklaring_tid(tid_row, stats_med, stats_p90):
+def avklaring_tid(tid_row, stats_med, stats_p90, sentral=''):
+    label = f" ved {sentral}" if sentral else ""
     ab_med = tid_row.get('alarmbeh_median_min')
     ab_p90 = tid_row.get('alarmbeh_p90_min')
     deler = []
@@ -267,7 +280,7 @@ def avklaring_tid(tid_row, stats_med, stats_p90):
     if not deler:
         return None
     return (
-        "**Alarmbehandlingstid avviker fra nasjonalt snitt.** " + " ".join(deler) + "\n\n"
+        f"**[SENTRALSPESIFIKT AVVIK{label}]** Alarmbehandlingstid avviker fra nasjonalt snitt. " + " ".join(deler) + " **Dere ligger blant de øverste 3 av 12 sentraler — krever lokal forklaring.**\n\n"
         "> *Avklaring:* Kan forskjellen forklares av geografiske forhold (lengre verifikasjon/kjentmenn), "
         "volum per operatør, eller registreringspraksis (f.eks. hvordan tidspunkt for «ressurs varslet» settes)?"
     )
@@ -298,14 +311,22 @@ def sentralspesifikke_avklaringer(sentral_mob, start_spm=26):
     L = []
     L.append("---")
     L.append("")
-    L.append("## Del 7 — Sentralspesifikke avklaringer (DSB 2025-data)")
+    L.append(f"## Del 7 — Sentralspesifikke avklaringer for {sentral_mob} (DSB 2025-data)")
     L.append("")
     L.append(
+        f"> **Hvorfor dette avsnittet er spesifikt for {sentral_mob}:** "
         f"DSB har i 2026 levert et fullstendig hendelsesdatasett for alle 12 sentraler (2025). "
-        f"Jeg har klassifisert alle oppdrag etter samme logikk (D/S/L-aba/L-hendelse/L-ukjent/F/V) "
-        f"basert på kolonnene «Oppdragstype», «Opprinnelig oppdragstype» og «Ressurs varslet». "
-        f"Dette avdekker mønster som må forklares før sentralene kan sammenlignes kvantitativt. "
-        f"Under vises **deres tall i nasjonal sammenheng**, etterfulgt av oppfølgingsspørsmål på områdene der dere avviker."
+        f"Jeg har klassifisert alle oppdrag etter V3-logikken (D-pri1 / D-aba / S / L-aba / L-hendelse / L-ukjent / F / V) "
+        f"basert på kolonnene «Oppdragstype», «Opprinnelig oppdragstype», «Kilde» og «Ressurs varslet». "
+        f"D er splittet i D-pri1 (pri-1-utrykning, krever makkerpar) og D-aba (ABA-utrykning med Kilde=Alarm, håndteres serielt). "
+        f"Sammenligningen avdekker at **{sentral_mob} avviker betydelig fra nasjonalt snitt på enkelte kategorier** — "
+        f"spørsmålene under er generert kun for dere, basert på hvor deres tall ligger i topp-3 (↑ HØY) eller bunn-3 (↓ LAV) av de 12 sentralene. "
+        f"**Vi kan ikke benchmarke dere mot andre sentraler uten å forstå om disse avvikene skyldes registreringspraksis, lokal organisering eller reell operativ forskjell.**"
+    )
+    L.append("")
+    L.append(
+        f"Under vises **{sentral_mob}s tall i nasjonal sammenheng**. Avvikene er flagget med ↑ HØY eller ↓ LAV. "
+        f"For hver flagget kategori følger et spesifikt oppfølgingsspørsmål merket **[SENTRALSPESIFIKT AVVIK ved {sentral_mob}]**."
     )
     L.append("")
     L.append("### 7.1 Deres sentral i nasjonal sammenheng (DSB 2025)")
@@ -316,8 +337,9 @@ def sentralspesifikke_avklaringer(sentral_mob, start_spm=26):
     L.append("| Kategori | Deres andel | Antall | Nasj. median | Nasj. spenn | Avvik |")
     L.append("|---|---:|---:|---:|---:|---|")
     kat_labels = {
-        'D': 'D — utrykning',
-        'L-aba': 'L-aba — ABA løst av 110',
+        'D-pri1': 'D-pri1 — pri-1-utrykning (makkerpar)',
+        'D-aba': 'D-aba — ABA-utrykning (serielt)',
+        'L-aba': 'L-aba — ABA løst av 110 uten utrykning',
         'L-hendelse': 'L-hendelse — reell hendelse løst av 110',
         'L-ukjent': 'L-ukjent — lukket uten opprinnelig type',
         'F': 'F — feilringing',
@@ -342,32 +364,62 @@ def sentralspesifikke_avklaringer(sentral_mob, start_spm=26):
     aba_n = int(br['L-aba'])
     aba_fl = flagg(aba_pct, NASJONAL_STATS['L-aba_pct'])
     if aba_fl != 'NORMAL':
-        t = avklaring_aba(aba_pct, aba_n, aba_fl, NASJONAL_STATS['L-aba_pct'])
+        t = avklaring_aba(aba_pct, aba_n, aba_fl, NASJONAL_STATS['L-aba_pct'], sentral_mob)
         if t: avklaringer.append(t)
 
-    # D
+    # D (aggregert utrykningsrate) — beholdes som overordnet flagg
     d_pct = float(br['D_pct'])
-    t = avklaring_utr(d_pct, NASJONAL_STATS['D_pct'])
+    t = avklaring_utr(d_pct, NASJONAL_STATS['D_pct'], sentral_mob)
     if t: avklaringer.append(t)
+
+    # D-pri1 / D-aba — splittsjekk
+    if 'D-pri1_pct' in br.index and 'D-pri1_pct' in NASJONAL_STATS:
+        dpri_pct = float(br['D-pri1_pct'])
+        dpri_fl = flagg(dpri_pct, NASJONAL_STATS['D-pri1_pct'])
+        if dpri_fl != 'NORMAL':
+            label = f" ved {sentral_mob}"
+            retning = "høy" if dpri_fl == 'HØY' else "lav"
+            posisjon = "øverste" if dpri_fl == 'HØY' else "nederste"
+            tekst = (
+                f"**[SENTRALSPESIFIKT AVVIK{label}]** D-pri1-andel (pri-1-utrykninger som krever makkerpar) er {retning} ({dpri_pct:.1f}%). "
+                f"Nasjonal median: {NASJONAL_STATS['D-pri1_pct']['median']:.1f}%, spenn {NASJONAL_STATS['D-pri1_pct']['min']:.1f}–{NASJONAL_STATS['D-pri1_pct']['max']:.1f}%. "
+                f"**Dere ligger blant de {posisjon} 3 av 12 sentraler.**\n\n"
+                f"> *Avklaring:* Skyldes dette ulik registreringspraksis (f.eks. om Opprinnelig oppdragstype settes til ABA på utrykninger som ikke er ren ABA), reell forskjell i pri-1-volum, eller lokal terskel for å klassifisere oppdrag som pri-1 vs ABA-utrykning?"
+            )
+            avklaringer.append(tekst)
+    if 'D-aba_pct' in br.index and 'D-aba_pct' in NASJONAL_STATS:
+        daba_pct = float(br['D-aba_pct'])
+        daba_fl = flagg(daba_pct, NASJONAL_STATS['D-aba_pct'])
+        if daba_fl != 'NORMAL':
+            label = f" ved {sentral_mob}"
+            retning = "høy" if daba_fl == 'HØY' else "lav"
+            posisjon = "øverste" if daba_fl == 'HØY' else "nederste"
+            tekst = (
+                f"**[SENTRALSPESIFIKT AVVIK{label}]** D-aba-andel (ABA-utrykninger registrert med Kilde=Alarm) er {retning} ({daba_pct:.1f}%). "
+                f"Nasjonal median: {NASJONAL_STATS['D-aba_pct']['median']:.1f}%, spenn {NASJONAL_STATS['D-aba_pct']['min']:.1f}–{NASJONAL_STATS['D-aba_pct']['max']:.1f}%. "
+                f"**Dere ligger blant de {posisjon} 3 av 12 sentraler.**\n\n"
+                f"> *Avklaring:* Reflekterer dette objekttetthet (mange ABA-objekter), terskel for utrykning på ABA, eller registreringspraksis (settes Kilde=Alarm konsistent for ABA-signaler hos dere)?"
+            )
+            avklaringer.append(tekst)
 
     # L-hendelse
     lh_pct = float(br['L-hendelse_pct'])
-    t = avklaring_l_hendelse(lh_pct, NASJONAL_STATS['L-hendelse_pct'])
+    t = avklaring_l_hendelse(lh_pct, NASJONAL_STATS['L-hendelse_pct'], sentral_mob)
     if t: avklaringer.append(t)
 
     # L-ukjent
     u_pct = float(br['L-ukjent_pct'])
-    t = avklaring_ukjent(u_pct, NASJONAL_STATS['L-ukjent_pct'])
+    t = avklaring_ukjent(u_pct, NASJONAL_STATS['L-ukjent_pct'], sentral_mob)
     if t: avklaringer.append(t)
 
     # F
     f_pct = float(br['F_pct'])
-    t = avklaring_feilring(f_pct, NASJONAL_STATS['F_pct'])
+    t = avklaring_feilring(f_pct, NASJONAL_STATS['F_pct'], sentral_mob)
     if t: avklaringer.append(t)
 
     # V
     v_pct = float(br['V_pct'])
-    t = avklaring_v(v_pct, NASJONAL_STATS['V_pct'])
+    t = avklaring_v(v_pct, NASJONAL_STATS['V_pct'], sentral_mob)
     if t: avklaringer.append(t)
 
     # DSB/MOB ratio
@@ -376,20 +428,21 @@ def sentralspesifikke_avklaringer(sentral_mob, start_spm=26):
             1 + sentral_dsb_mob_pct / 100, mob_n, total_n,
             {'median': 1 + NASJONAL_STATS['DSB_vs_MOB_pct']['median']/100,
              'q20': 1 + NASJONAL_STATS['DSB_vs_MOB_pct']['q20']/100,
-             'q80': 1 + NASJONAL_STATS['DSB_vs_MOB_pct']['q80']/100}
+             'q80': 1 + NASJONAL_STATS['DSB_vs_MOB_pct']['q80']/100},
+            sentral_mob
         )
         if t: avklaringer.append(t)
 
     # Tid
     if tr is not None:
-        t = avklaring_tid(tr, NASJONAL_STATS['alarmbeh_median_min'], NASJONAL_STATS['alarmbeh_p90_min'])
+        t = avklaring_tid(tr, NASJONAL_STATS['alarmbeh_median_min'], NASJONAL_STATS['alarmbeh_p90_min'], sentral_mob)
         if t: avklaringer.append(t)
 
-    L.append("### 7.2 Oppfølgingsspørsmål")
+    L.append(f"### 7.2 Oppfølgingsspørsmål — sentralspesifikke avvik for {sentral_mob}")
     L.append("")
     if not avklaringer:
         L.append(
-            "Deres sentral ligger innenfor nasjonalt normalt spenn på alle kategorier. "
+            f"**{sentral_mob} ligger innenfor nasjonalt normalt spenn (mellom 20- og 80-percentil av 12 sentraler) på alle kategorier.** "
             "Vi ber likevel om bekreftelse på tallene i 7.1 og korte kommentarer på om noe av dette virker overraskende."
         )
         L.append("")
@@ -473,7 +526,7 @@ for sentral in sentraler:
     L.append("### LOG650, Høgskolen i Molde, vår 2026")
     L.append("")
     L.append("**Student:** Rune Grødem")
-    L.append("**Kontakt:** rune.grodemm@himolde.no")
+    L.append("**Kontakt:** rune.grodem@rogbr.no")
     L.append("**Innlevering:** hovedutkast slutten av april 2026, endelig rapport 31. mai 2026")
     L.append("")
     L.append("---")
@@ -515,6 +568,10 @@ for sentral in sentraler:
     L.append("")
     L.append("### 1.1 Bemanning (MOB-rapportert)")
     L.append("")
+    L.append("> **Merknad:** MOB-tallene under er ett enkelt tall per skift-type per år, og skiller ikke mellom **normal bemanning** (planlagt nivå når alle stiller) og **minimumsbemanning** (det laveste nivået sentralen kan operere på, f.eks. ved sykdom eller fravær). Skillet er sentralt for kapasitetsanalysen og presiseres i Spm 4 (tabell 1.1b).")
+    L.append("")
+    L.append("**Tabell 1.1a — MOB-rapportert bemanning per år:**")
+    L.append("")
     L.append("| Kategori | 2022 | 2023 | 2024 | 2025 | Endring 22–25 |")
     L.append("|---|---|---|---|---|---|")
     L.append(f"| Ansatte heltid | {v(mob_val(2022,'ansatte'))} | {v(mob_val(2023,'ansatte'))} | {v(mob_val(2024,'ansatte'))} | {v(mob_val(2025,'ansatte'))} | {ans_endr} |")
@@ -522,6 +579,8 @@ for sentral in sentraler:
     L.append(f"| Operatører natt — hverdag | {v(mob_val(2022,'op_natt_hverd'))} | {v(mob_val(2023,'op_natt_hverd'))} | {v(mob_val(2024,'op_natt_hverd'))} | {v(mob_val(2025,'op_natt_hverd'))} | |")
     L.append(f"| Operatører dag — helg | {v(mob_val(2022,'op_dag_helg'))} | {v(mob_val(2023,'op_dag_helg'))} | {v(mob_val(2024,'op_dag_helg'))} | {v(mob_val(2025,'op_dag_helg'))} | |")
     L.append(f"| Operatører natt — helg | {v(mob_val(2022,'op_natt_helg'))} | {v(mob_val(2023,'op_natt_helg'))} | {v(mob_val(2024,'op_natt_helg'))} | {v(mob_val(2025,'op_natt_helg'))} | |")
+    L.append("")
+    L.append("Tallene over er det dere har rapportert til DSB. Tabell 1.1b under ber om presisering av hva som er *normalt planlagt* versus *minimum* — dette skillet kan ikke utledes fra MOB.")
     L.append("")
     L.append("### 1.2 Oppdrag med utrykning (sammenlignbare tall 2022–2024)")
     L.append("")
@@ -552,17 +611,29 @@ for sentral in sentraler:
     L.append("")
     L.append("> *Svar:*")
     L.append("")
+    L.append("**Spm 1b.** Hva inkluderer MOB-feltet «Mottatte 110-anrop» *konkret* hos dere? (Velg alle som gjelder — **flere svar kan brukes**)")
+    L.append("")
+    L.append("- [ ] Kun besvarte telefonanrop på 110-nødlinjen")
+    L.append("- [ ] Alle telefonanrop inkludert overførte, viderekoblede og avbrutte")
+    L.append("- [ ] Automatiske ABA-signaler som kommer inn uten samtale")
+    L.append("- [ ] Servicetelefon / teknisk support")
+    L.append("- [ ] Alle henvendelser uavhengig av kanal")
+    L.append("- [ ] Annet: ___")
+    L.append("")
+    L.append("> *Kommentar (eksakt definisjon dere bruker):* MOB-skjemaet gir ikke en entydig definisjon, og variasjonen mellom sentraler i forholdet mellom MOB-anrop og DSB-oppdrag kan skyldes ulik tolkning. En presis avklaring her er nøkkel for nasjonal sammenligning.")
+    L.append("")
     L.append("---")
     L.append("")
     L.append("## Del 2 — Vaktordning og bemanningsstruktur")
     L.append("")
     L.append("**Kontekst (110 Sør-Vest):** Todelt skift med dag 07–19 og natt 19–07. Sentralen har")
-    L.append("**6 vaktlag à 3 operatører + 1 vaktleder**. Dag hverdag bemannes med 3 operatører + VL;")
-    L.append("natt og helg med 2 operatører + VL. **Minimumsbemanning er 4 (3 operatører + VL) på dag")
-    L.append("hverdag og 3 (2 operatører + VL) på natt og helg.** Det benyttes **ikke** ekstra vakter/")
-    L.append("vikarer for å nå normalbemanning på natt/helg — 3-personers oppsett er normalen. Sentralen")
-    L.append("tillater at den 3. personen på natt/helg kan være vikar. Vi vet at noen sentraler kjører")
-    L.append("dagturnus i stedet for todelt skift, og at faktisk bemanning kan avvike fra MOB-rapporten.")
+    L.append("**6 vaktlag à 3 operatører + 1 vaktleder**. Normalbemanning er **3 operatører + VL = 4")
+    L.append("personer på alle vakter** (også natt og helg). Sentralen kan på natt og helg gå ned til")
+    L.append("**minimumsbemanning 2 operatører + VL = 3 personer**, og det er ikke planlagt å fylle opp")
+    L.append("med vikarer ved fravær på disse skiftene. **Mer enn 50 % av vaktene på natt/helg")
+    L.append("gjennomføres derfor på minimumsbemanning** (2+1 i stedet for 3+1). Sentralen tillater at")
+    L.append("den 3. personen på natt/helg kan være vikar. Vi vet at noen sentraler kjører dagturnus i")
+    L.append("stedet for todelt skift, og at faktisk bemanning kan avvike fra MOB-rapporten.")
     L.append("")
     L.append(f"**Spm 2.** Hvilken vaktordning kjører {sentral}?")
     L.append("")
@@ -576,16 +647,20 @@ for sentral in sentraler:
     L.append("")
     L.append("> *Svar:*")
     L.append("")
-    L.append("**Spm 4.** Er operatørantallet i tabell 1.1 et minimum, normaltall eller maksimum? Hvor lavt kan bemanningen i praksis gå?")
+    L.append("**Spm 4. — Tabell 1.1b: Normalbemanning vs. minimumsbemanning per skifttype.**")
     L.append("")
-    L.append("| Vakttype | MOB-tall | Normalt planlagt | Minimum ved fravær | Maks ved topp |")
+    L.append("MOB-tallet under er det dere rapporterte til DSB for 2025. **Vi ber dere fylle ut hva som er normalbemanning (planlagt nivå når alle stiller) og minimumsbemanning (det laveste nivået sentralen faktisk kan operere på).** Skillet er sentralt for kapasitetsanalysen — fyll inn antall operatører + VL der det er relevant. Hvis MOB-tallet ikke samsvarer med normal eller minimum, forklar gjerne i kommentarfeltet under.")
+    L.append("")
+    L.append("| Vakttype | MOB-tall (2025) | Normalbemanning (op + VL) | Minimumsbemanning (op + VL) | Maks ved topp |")
     L.append("|---|---|---|---|---|")
     L.append(f"| Dag — hverdag | {od} | | | |")
     L.append(f"| Natt — hverdag | {on} | | | |")
     L.append(f"| Dag — helg | {oh} | | | |")
     L.append(f"| Natt — helg/helligdag | {onh} | | | |")
     L.append("")
-    L.append("**Spm 5.** Hvordan dekkes vakter ved sykdom eller annet fravær?")
+    L.append("> *Kommentar:* Andel av vaktene som gjennomføres på minimumsbemanning (anslag, %)?")
+    L.append("")
+    L.append("**Spm 5.** Hvordan dekkes vakter ved sykdom eller annet fravær? (**Flere svar kan velges**)")
     L.append("")
     L.append("- [ ] Tilkall fra vikarliste / ekstrahjelper")
     L.append("- [ ] Beredskapsvakt (hjemmevakt)")
@@ -651,15 +726,16 @@ for sentral in sentraler:
     L.append("er utledet fra BRIS 2025 ved 110 Sør-Vest. Referansetallene er Sør-Vests estimater og er")
     L.append("oppgitt som utgangspunkt for diskusjon.")
     L.append("")
-    L.append("| Kategori | Hva det er i praksis | Sør-Vest ref (min) | Deres estimat (min) |")
-    L.append("|---|---|---|---|")
-    L.append("| **D — Beredskap med utrykning** | Nødanrop / ABA som fører til ressursutkalling og utrykning | 13 (median) | |")
-    L.append("| **S — Service/overføringstest** | Servicetekniker tester brannalarmanlegg; operatør verifiserer signal og kvitterer ut | 2 | |")
-    L.append("| **L-aba — ABA løst av 110** | Automatisk brannalarm der nødtelefon innen 90 sek bekrefter ufarlig årsak (f.eks. matlaging) — lukkes uten utrykning | 3 | |")
-    L.append("| **L-hendelse — Reell hendelse løst av 110** | Innringer melder noe reelt; operatør gir råd eller avklarer uten å sende ressurs | 5 | |")
-    L.append("| **L-ukjent — Løst av 110, uklassifisert** | Bål-spørsmål, service lukket feil, korte avklaringer uten formell oppdragstype | 3 | |")
-    L.append("| **F — Feilringing** | Feilringing, «ønsket 112/113», eCall feil bruk | 0,5 | |")
-    L.append("| **V — Viderevarsling** | Viderekobling til annen etat eller intern varsling | 1 | |")
+    L.append("| Kategori | Hva det er i praksis | Sør-Vest ref (min) | Ops bundet | Deres estimat (min) |")
+    L.append("|---|---|---|---|---|")
+    L.append("| **D-pri1 — Pri-1-utrykning (makkerpar)** | Bygningsbrann, trafikkulykke, farlig gods og andre pri-1-hendelser. Krever to operatører bundet parallelt fra første sekund (RØD = innringer-samtale, GUL = ressursvarsling/samband) gjennom hele akuttfasen | 14 (median) | 2 | |")
+    L.append("| **D-aba — ABA-utrykning (serielt)** | Automatisk brannalarm som leder til utrykning fordi avklaring ikke kom innen 90 sek. Ikke pri-1 — én operatør kvitterer alarm, oppretter oppdrag og utalarmerer ressurser serielt | ca. 3 min (lengre dersom nødtelefon kommer fra stedet etterpå) | 1 | |")
+    L.append("| **S — Service/overføringstest** | Servicetekniker tester brannalarmanlegg; operatør verifiserer signal og kvitterer ut | 2 | 1 | |")
+    L.append("| **L-aba — ABA løst av 110 uten utrykning** | Automatisk brannalarm der nødtelefon innen 90 sek bekrefter ufarlig årsak (f.eks. matlaging) — lukkes uten utrykning. Krever Kilde=Alarm i registreringen | 6 | 1 | |")
+    L.append("| **L-hendelse — Reell hendelse løst av 110** | Innringer melder noe reelt; operatør gir råd eller avklarer uten å sende ressurs. Inkluderer ABA-oppdrag med Kilde=Samtale (publikumsmelding om alarm uten ABA-signal) | 5 | 1 | |")
+    L.append("| **L-ukjent — Løst av 110 uten initiell hendelsestype** | Oppdrag lukket som «Løst av 110» der feltet «Opprinnelig oppdragstype» ikke er satt — typisk bål-spørsmål, service lukket feil, korte avklaringer og andre henvendelser uten formell klassifisering før lukking | 3 | 1 | |")
+    L.append("| **F — Feilringing** | Feilringing, «ønsket 112/113», eCall feil bruk | 0,5 | 1 | |")
+    L.append("| **V — Viderevarsling** | Viderekobling til annen etat eller intern varsling | 1 | 1 | |")
     L.append("")
     L.append(f"**Spm 12.** Er kategoriseringen gjenkjennbar ved {sentral}? Mangler det en type, eller er noe slått sammen som burde vært skilt?")
     L.append("")
@@ -751,7 +827,7 @@ for sentral in sentraler:
     L.append("")
     L.append("---")
     L.append("")
-    L.append("*Takk for at dere tar dere tid til å svare. Svarene kan returneres til rune.grodemm@himolde.no.*")
+    L.append("*Takk for at dere tar dere tid til å svare. Svarene kan returneres til rune.grodem@rogbr.no.*")
     L.append("*Spørsmål kan rettes til Rune Grødem, student LOG650 Forskningsprosjekt, Høgskolen i Molde.*")
 
     filnavn = os.path.join(utmappe, f'{safe}.md')

@@ -158,17 +158,22 @@ print("2. V3-KATEGORISERING")
 print("=" * 70)
 
 def klassifiser(row):
-    """V3-kat: D/S/L-aba/L-hendelse/L-ukjent/F/V
-    Oppdatert 2026-04-19: L-aba krever Kilde=Alarm. ABA-oppdrag med
-    Kilde=Samtale eller blank reklassifiseres til L-hendelse."""
-    if K_RESSURS_VARSLET and pd.notna(row[K_RESSURS_VARSLET]):
-        return "D"
-
-    ot = str(row[K_OPPDRAGTYPE]).strip() if pd.notna(row[K_OPPDRAGTYPE]) else ""
+    """V3-kat: D-pri1/D-aba/S/L-aba/L-hendelse/L-ukjent/F/V
+    Oppdatert 2026-04-21: D splittet i D-pri1 (pri-1-utrykning, makkerpar) og
+    D-aba (ABA-utløst utrykning, serielt). L-aba krever Kilde=Alarm; ABA-oppdrag
+    med Kilde=Samtale eller blank reklassifiseres til L-hendelse.
+    D-aba krever Opprinnelig=ABA OG Kilde=Alarm; D uten dette er D-pri1."""
     oot = str(row[K_OPPRINNELIG]).strip() if pd.notna(row[K_OPPRINNELIG]) else ""
     kilde = ""
     if K_KILDE and pd.notna(row[K_KILDE]):
         kilde = str(row[K_KILDE]).strip()
+
+    if K_RESSURS_VARSLET and pd.notna(row[K_RESSURS_VARSLET]):
+        if oot == "ABA" and kilde == "Alarm":
+            return "D-aba"
+        return "D-pri1"
+
+    ot = str(row[K_OPPDRAGTYPE]).strip() if pd.notna(row[K_OPPDRAGTYPE]) else ""
 
     if ot == "Service":
         return "S"
@@ -201,7 +206,7 @@ df["v3_kat"] = df.apply(klassifiser, axis=1)
 
 kat_totalt = df["v3_kat"].value_counts()
 print("Nasjonalt totalt:")
-for k in ["D", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]:
+for k in ["D-pri1", "D-aba", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]:
     n = kat_totalt.get(k, 0)
     print(f"  {k:12s}: {n:>8,} ({n/len(df)*100:>5.1f}%)")
 print(f"  {'TOTAL':12s}: {len(df):>8,}")
@@ -213,11 +218,13 @@ print("3. BENCHMARKMATRISE PER SENTRAL")
 print("=" * 70)
 
 bench = df.groupby(["sentral", "v3_kat"]).size().unstack(fill_value=0)
-for k in ["D", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]:
+for k in ["D-pri1", "D-aba", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]:
     if k not in bench.columns:
         bench[k] = 0
-bench = bench[["D", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]]
-bench["Totalt"] = bench.sum(axis=1)
+bench = bench[["D-pri1", "D-aba", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]]
+# Aggregert D = D-pri1 + D-aba (beholdt for bakoverkompatibilitet og enklere nasjonale plots)
+bench["D"] = bench["D-pri1"] + bench["D-aba"]
+bench["Totalt"] = bench[["D-pri1", "D-aba", "S", "L-aba", "L-hendelse", "L-ukjent", "F", "V"]].sum(axis=1)
 
 # Andeler
 bench_pct = bench.div(bench["Totalt"], axis=0).drop(columns="Totalt") * 100
@@ -226,7 +233,7 @@ bench_pct.columns = [f"{c}_pct" for c in bench_pct.columns]
 bench_full = pd.concat([bench, bench_pct], axis=1).reset_index()
 bench_full.to_csv(OUT_DIR / "benchmarkmatrise.csv", index=False, encoding="utf-8-sig")
 print(f"Skrevet: benchmarkmatrise.csv")
-print(bench[["D", "L-aba", "L-hendelse", "L-ukjent", "F", "V", "Totalt"]].to_string())
+print(bench[["D-pri1", "D-aba", "D", "L-aba", "L-hendelse", "L-ukjent", "F", "V", "Totalt"]].to_string())
 
 
 # === 4. VOLUMAVSTEMMING ===
@@ -339,7 +346,7 @@ print("\n" + "=" * 70)
 print("6. TIDSDATA PER SENTRAL (kun kategori D)")
 print("=" * 70)
 
-d_df = df[df["v3_kat"] == "D"].copy()
+d_df = df[df["v3_kat"].isin(["D-pri1", "D-aba"])].copy()
 
 def as_min(series):
     """Konverter tidskolonne (timedelta eller string) til minutter."""

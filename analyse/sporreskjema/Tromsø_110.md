@@ -3,7 +3,7 @@
 ### LOG650, Høgskolen i Molde, vår 2026
 
 **Student:** Rune Grødem
-**Kontakt:** rune.grodemm@himolde.no
+**Kontakt:** rune.grodem@rogbr.no
 **Innlevering:** hovedutkast slutten av april 2026, endelig rapport 31. mai 2026
 
 ---
@@ -45,6 +45,10 @@ ber dere bekrefte, korrigere eller utdype disse tallene.
 
 ### 1.1 Bemanning (MOB-rapportert)
 
+> **Merknad:** MOB-tallene under er ett enkelt tall per skift-type per år, og skiller ikke mellom **normal bemanning** (planlagt nivå når alle stiller) og **minimumsbemanning** (det laveste nivået sentralen kan operere på, f.eks. ved sykdom eller fravær). Skillet er sentralt for kapasitetsanalysen og presiseres i Spm 4 (tabell 1.1b).
+
+**Tabell 1.1a — MOB-rapportert bemanning per år:**
+
 | Kategori | 2022 | 2023 | 2024 | 2025 | Endring 22–25 |
 |---|---|---|---|---|---|
 | Ansatte heltid | 10 | 11 | 10 | 10 | +0.0% |
@@ -52,6 +56,8 @@ ber dere bekrefte, korrigere eller utdype disse tallene.
 | Operatører natt — hverdag | 3 | 3 | 2 | 2 | |
 | Operatører dag — helg | 2 | 2 | 2 | 2 | |
 | Operatører natt — helg | 3 | 3 | 2 | 2 | |
+
+Tallene over er det dere har rapportert til DSB. Tabell 1.1b under ber om presisering av hva som er *normalt planlagt* versus *minimum* — dette skillet kan ikke utledes fra MOB.
 
 ### 1.2 Oppdrag med utrykning (sammenlignbare tall 2022–2024)
 
@@ -82,17 +88,29 @@ ber dere bekrefte, korrigere eller utdype disse tallene.
 
 > *Svar:*
 
+**Spm 1b.** Hva inkluderer MOB-feltet «Mottatte 110-anrop» *konkret* hos dere? (Velg alle som gjelder — **flere svar kan brukes**)
+
+- [ ] Kun besvarte telefonanrop på 110-nødlinjen
+- [ ] Alle telefonanrop inkludert overførte, viderekoblede og avbrutte
+- [ ] Automatiske ABA-signaler som kommer inn uten samtale
+- [ ] Servicetelefon / teknisk support
+- [ ] Alle henvendelser uavhengig av kanal
+- [ ] Annet: ___
+
+> *Kommentar (eksakt definisjon dere bruker):* MOB-skjemaet gir ikke en entydig definisjon, og variasjonen mellom sentraler i forholdet mellom MOB-anrop og DSB-oppdrag kan skyldes ulik tolkning. En presis avklaring her er nøkkel for nasjonal sammenligning.
+
 ---
 
 ## Del 2 — Vaktordning og bemanningsstruktur
 
 **Kontekst (110 Sør-Vest):** Todelt skift med dag 07–19 og natt 19–07. Sentralen har
-**6 vaktlag à 3 operatører + 1 vaktleder**. Dag hverdag bemannes med 3 operatører + VL;
-natt og helg med 2 operatører + VL. **Minimumsbemanning er 4 (3 operatører + VL) på dag
-hverdag og 3 (2 operatører + VL) på natt og helg.** Det benyttes **ikke** ekstra vakter/
-vikarer for å nå normalbemanning på natt/helg — 3-personers oppsett er normalen. Sentralen
-tillater at den 3. personen på natt/helg kan være vikar. Vi vet at noen sentraler kjører
-dagturnus i stedet for todelt skift, og at faktisk bemanning kan avvike fra MOB-rapporten.
+**6 vaktlag à 3 operatører + 1 vaktleder**. Normalbemanning er **3 operatører + VL = 4
+personer på alle vakter** (også natt og helg). Sentralen kan på natt og helg gå ned til
+**minimumsbemanning 2 operatører + VL = 3 personer**, og det er ikke planlagt å fylle opp
+med vikarer ved fravær på disse skiftene. **Mer enn 50 % av vaktene på natt/helg
+gjennomføres derfor på minimumsbemanning** (2+1 i stedet for 3+1). Sentralen tillater at
+den 3. personen på natt/helg kan være vikar. Vi vet at noen sentraler kjører dagturnus i
+stedet for todelt skift, og at faktisk bemanning kan avvike fra MOB-rapporten.
 
 **Spm 2.** Hvilken vaktordning kjører Tromsø 110?
 
@@ -106,16 +124,20 @@ dagturnus i stedet for todelt skift, og at faktisk bemanning kan avvike fra MOB-
 
 > *Svar:*
 
-**Spm 4.** Er operatørantallet i tabell 1.1 et minimum, normaltall eller maksimum? Hvor lavt kan bemanningen i praksis gå?
+**Spm 4. — Tabell 1.1b: Normalbemanning vs. minimumsbemanning per skifttype.**
 
-| Vakttype | MOB-tall | Normalt planlagt | Minimum ved fravær | Maks ved topp |
+MOB-tallet under er det dere rapporterte til DSB for 2025. **Vi ber dere fylle ut hva som er normalbemanning (planlagt nivå når alle stiller) og minimumsbemanning (det laveste nivået sentralen faktisk kan operere på).** Skillet er sentralt for kapasitetsanalysen — fyll inn antall operatører + VL der det er relevant. Hvis MOB-tallet ikke samsvarer med normal eller minimum, forklar gjerne i kommentarfeltet under.
+
+| Vakttype | MOB-tall (2025) | Normalbemanning (op + VL) | Minimumsbemanning (op + VL) | Maks ved topp |
 |---|---|---|---|---|
 | Dag — hverdag | 2 | | | |
 | Natt — hverdag | 2 | | | |
 | Dag — helg | 2 | | | |
 | Natt — helg/helligdag | 2 | | | |
 
-**Spm 5.** Hvordan dekkes vakter ved sykdom eller annet fravær?
+> *Kommentar:* Andel av vaktene som gjennomføres på minimumsbemanning (anslag, %)?
+
+**Spm 5.** Hvordan dekkes vakter ved sykdom eller annet fravær? (**Flere svar kan velges**)
 
 - [ ] Tilkall fra vikarliste / ekstrahjelper
 - [ ] Beredskapsvakt (hjemmevakt)
@@ -181,15 +203,16 @@ andre henvendelsestyper. Derfor trenger vi operative estimater. Kategoriseringen
 er utledet fra BRIS 2025 ved 110 Sør-Vest. Referansetallene er Sør-Vests estimater og er
 oppgitt som utgangspunkt for diskusjon.
 
-| Kategori | Hva det er i praksis | Sør-Vest ref (min) | Deres estimat (min) |
-|---|---|---|---|
-| **D — Beredskap med utrykning** | Nødanrop / ABA som fører til ressursutkalling og utrykning | 13 (median) | |
-| **S — Service/overføringstest** | Servicetekniker tester brannalarmanlegg; operatør verifiserer signal og kvitterer ut | 2 | |
-| **L-aba — ABA løst av 110** | Automatisk brannalarm der nødtelefon innen 90 sek bekrefter ufarlig årsak (f.eks. matlaging) — lukkes uten utrykning | 3 | |
-| **L-hendelse — Reell hendelse løst av 110** | Innringer melder noe reelt; operatør gir råd eller avklarer uten å sende ressurs | 5 | |
-| **L-ukjent — Løst av 110, uklassifisert** | Bål-spørsmål, service lukket feil, korte avklaringer uten formell oppdragstype | 3 | |
-| **F — Feilringing** | Feilringing, «ønsket 112/113», eCall feil bruk | 0,5 | |
-| **V — Viderevarsling** | Viderekobling til annen etat eller intern varsling | 1 | |
+| Kategori | Hva det er i praksis | Sør-Vest ref (min) | Ops bundet | Deres estimat (min) |
+|---|---|---|---|---|
+| **D-pri1 — Pri-1-utrykning (makkerpar)** | Bygningsbrann, trafikkulykke, farlig gods og andre pri-1-hendelser. Krever to operatører bundet parallelt fra første sekund (RØD = innringer-samtale, GUL = ressursvarsling/samband) gjennom hele akuttfasen | 14 (median) | 2 | |
+| **D-aba — ABA-utrykning (serielt)** | Automatisk brannalarm som leder til utrykning fordi avklaring ikke kom innen 90 sek. Ikke pri-1 — én operatør kvitterer alarm, oppretter oppdrag og utalarmerer ressurser serielt | ca. 3 min (lengre dersom nødtelefon kommer fra stedet etterpå) | 1 | |
+| **S — Service/overføringstest** | Servicetekniker tester brannalarmanlegg; operatør verifiserer signal og kvitterer ut | 2 | 1 | |
+| **L-aba — ABA løst av 110 uten utrykning** | Automatisk brannalarm der nødtelefon innen 90 sek bekrefter ufarlig årsak (f.eks. matlaging) — lukkes uten utrykning. Krever Kilde=Alarm i registreringen | 6 | 1 | |
+| **L-hendelse — Reell hendelse løst av 110** | Innringer melder noe reelt; operatør gir råd eller avklarer uten å sende ressurs. Inkluderer ABA-oppdrag med Kilde=Samtale (publikumsmelding om alarm uten ABA-signal) | 5 | 1 | |
+| **L-ukjent — Løst av 110 uten initiell hendelsestype** | Oppdrag lukket som «Løst av 110» der feltet «Opprinnelig oppdragstype» ikke er satt — typisk bål-spørsmål, service lukket feil, korte avklaringer og andre henvendelser uten formell klassifisering før lukking | 3 | 1 | |
+| **F — Feilringing** | Feilringing, «ønsket 112/113», eCall feil bruk | 0,5 | 1 | |
+| **V — Viderevarsling** | Viderekobling til annen etat eller intern varsling | 1 | 1 | |
 
 **Spm 12.** Er kategoriseringen gjenkjennbar ved Tromsø 110? Mangler det en type, eller er noe slått sammen som burde vært skilt?
 
@@ -262,9 +285,11 @@ oppgitt som utgangspunkt for diskusjon.
 
 ---
 
-## Del 7 — Sentralspesifikke avklaringer (DSB 2025-data)
+## Del 7 — Sentralspesifikke avklaringer for Tromsø 110 (DSB 2025-data)
 
-DSB har i 2026 levert et fullstendig hendelsesdatasett for alle 12 sentraler (2025). Jeg har klassifisert alle oppdrag etter samme logikk (D/S/L-aba/L-hendelse/L-ukjent/F/V) basert på kolonnene «Oppdragstype», «Opprinnelig oppdragstype» og «Ressurs varslet». Dette avdekker mønster som må forklares før sentralene kan sammenlignes kvantitativt. Under vises **deres tall i nasjonal sammenheng**, etterfulgt av oppfølgingsspørsmål på områdene der dere avviker.
+> **Hvorfor dette avsnittet er spesifikt for Tromsø 110:** DSB har i 2026 levert et fullstendig hendelsesdatasett for alle 12 sentraler (2025). Jeg har klassifisert alle oppdrag etter V3-logikken (D-pri1 / D-aba / S / L-aba / L-hendelse / L-ukjent / F / V) basert på kolonnene «Oppdragstype», «Opprinnelig oppdragstype», «Kilde» og «Ressurs varslet». D er splittet i D-pri1 (pri-1-utrykning, krever makkerpar) og D-aba (ABA-utrykning med Kilde=Alarm, håndteres serielt). Sammenligningen avdekker at **Tromsø 110 avviker betydelig fra nasjonalt snitt på enkelte kategorier** — spørsmålene under er generert kun for dere, basert på hvor deres tall ligger i topp-3 (↑ HØY) eller bunn-3 (↓ LAV) av de 12 sentralene. **Vi kan ikke benchmarke dere mot andre sentraler uten å forstå om disse avvikene skyldes registreringspraksis, lokal organisering eller reell operativ forskjell.**
+
+Under vises **Tromsø 110s tall i nasjonal sammenheng**. Avvikene er flagget med ↑ HØY eller ↓ LAV. For hver flagget kategori følger et spesifikt oppfølgingsspørsmål merket **[SENTRALSPESIFIKT AVVIK ved Tromsø 110]**.
 
 ### 7.1 Deres sentral i nasjonal sammenheng (DSB 2025)
 
@@ -272,28 +297,35 @@ Totalvolum DSB 2025: **19,327** oppdrag. MOB-selvrapport: **7,844** mottatte anr
 
 | Kategori | Deres andel | Antall | Nasj. median | Nasj. spenn | Avvik |
 |---|---:|---:|---:|---:|---|
-| D — utrykning | 20.3% | 3,927 | 18.4% | 9.3–24.9% | – |
-| L-aba — ABA løst av 110 | 8.0% | 1,548 | 4.9% | 0.0–8.9% | ↑ HØY |
-| L-hendelse — reell hendelse løst av 110 | 6.5% | 1,255 | 5.3% | 2.9–10.2% | – |
+| D-pri1 — pri-1-utrykning (makkerpar) | 9.8% | 1,902 | 10.3% | 7.0–24.9% | – |
+| D-aba — ABA-utrykning (serielt) | 10.5% | 2,025 | 4.6% | 0.0–14.1% | ↑ HØY |
+| L-aba — ABA løst av 110 uten utrykning | 6.1% | 1,174 | 3.8% | 0.0–7.5% | ↑ HØY |
+| L-hendelse — reell hendelse løst av 110 | 8.4% | 1,629 | 7.3% | 3.3–10.2% | – |
 | L-ukjent — lukket uten opprinnelig type | 35.9% | 6,934 | 29.4% | 13.8–40.4% | ↑ HØY |
 | F — feilringing | 10.4% | 2,008 | 13.9% | 8.6–20.6% | ↓ LAV |
 | V — viderekobling | 0.6% | 116 | 1.2% | 0.6–2.6% | ↓ LAV |
 
-### 7.2 Oppfølgingsspørsmål
+### 7.2 Oppfølgingsspørsmål — sentralspesifikke avvik for Tromsø 110
 
-**Spm 24.** **ABA løst uten utrykning er høy (8.0%, 1548 oppdrag).** Nasjonalt: median 4.9%, spenn 0.0–8.9%.
+**Spm 25.** **[SENTRALSPESIFIKT AVVIK ved Tromsø 110]** ABA løst uten utrykning er høy (6.1%, 1174 oppdrag). Nasjonalt: median 3.8%, spenn 0.0–7.5%. **Dette avviker fra forventet mønster og må forklares lokalt.**
 
 > *Avklaring:* Er terskelen for å lukke ABA uten utrykning annerledes hos dere — lengre venteperiode før utkalling, mer kontakt med objektet, eller annen prosedyre?
 
 > *Svar:*
 
-**Spm 25.** **L-ukjent-andel er høy (35.9%).** Nasjonal median: 29.4%. Store mengder oppdrag er registrert som «Oppdrag løst av 110» uten at «Opprinnelig oppdragstype» er satt.
+**Spm 26.** **[SENTRALSPESIFIKT AVVIK ved Tromsø 110]** D-aba-andel (ABA-utrykninger registrert med Kilde=Alarm) er høy (10.5%). Nasjonal median: 4.6%, spenn 0.0–14.1%. **Dere ligger blant de øverste 3 av 12 sentraler.**
+
+> *Avklaring:* Reflekterer dette objekttetthet (mange ABA-objekter), terskel for utrykning på ABA, eller registreringspraksis (settes Kilde=Alarm konsistent for ABA-signaler hos dere)?
+
+> *Svar:*
+
+**Spm 27.** **[SENTRALSPESIFIKT AVVIK ved Tromsø 110]** L-ukjent-andel er høy (35.9%). Nasjonal median: 29.4%, spenn 13.8–40.4%. **Dere ligger blant de øverste 3 av 12 sentraler — store mengder oppdrag er registrert som «Oppdrag løst av 110» uten at «Opprinnelig oppdragstype» er satt. Dette må forklares lokalt før vi kan tolke L-ukjent som sammenlignbar kategori.**
 
 > *Avklaring:* Hva er typisk innhold i disse oppdragene — korte avklaringer og spørsmål (bål-henvendelser, telefonhjelp), eller er det også reelle hendelser som ikke klassifiseres? Er det en lokal rutine å lukke enkelte henvendelsestyper uten opprinnelig type?
 
 > *Svar:*
 
-**Spm 26.** **Feilring-andel er lav (10.4%).** Nasjonal median: 13.9%.
+**Spm 28.** **[SENTRALSPESIFIKT AVVIK ved Tromsø 110]** Feilring-andel er lav (10.4%). Nasjonal median: 13.9%, spenn 8.6–20.6%. **Dere ligger blant de nederste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**
 
 > *Avklaring:* Registreres feilringinger under annen kategori (f.eks. L-ukjent eller V), eller er feilringinger faktisk sjeldnere i deres distrikt?
 
@@ -303,15 +335,15 @@ Totalvolum DSB 2025: **19,327** oppdrag. MOB-selvrapport: **7,844** mottatte anr
 
 ## Del 8 — Avsluttende kommentarer
 
-**Spm 27.** Har det skjedd spesielle hendelser (storulykker, klimahendelser, nye oppgaver, organisasjonsendringer) i perioden 2022–2025 som har hatt vesentlig påvirkning på kapasitetssituasjonen?
+**Spm 29.** Har det skjedd spesielle hendelser (storulykker, klimahendelser, nye oppgaver, organisasjonsendringer) i perioden 2022–2025 som har hatt vesentlig påvirkning på kapasitetssituasjonen?
 
 > *Svar:*
 
-**Spm 28.** Er det andre forhold ved kapasitetssituasjonen ved Tromsø 110 som er viktig å forstå, og som ikke dekkes av spørsmålene ovenfor?
+**Spm 30.** Er det andre forhold ved kapasitetssituasjonen ved Tromsø 110 som er viktig å forstå, og som ikke dekkes av spørsmålene ovenfor?
 
 > *Svar:*
 
 ---
 
-*Takk for at dere tar dere tid til å svare. Svarene kan returneres til rune.grodemm@himolde.no.*
+*Takk for at dere tar dere tid til å svare. Svarene kan returneres til rune.grodem@rogbr.no.*
 *Spørsmål kan rettes til Rune Grødem, student LOG650 Forskningsprosjekt, Høgskolen i Molde.*
