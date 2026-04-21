@@ -210,11 +210,16 @@ def parse_md_til_flowables(md_tekst, sentral_navn):
 
         # Svar-boks — matcher både "> *Svar:*" og "> *Utdyping (...)*"
         m_svar = re.match(r'^>\s*\*([^*]+)\*:?\s*$', stripped)
-        if m_svar and any(k in m_svar.group(1).lower() for k in ('svar', 'utdyp', 'beskriv')):
+        if m_svar and any(k in m_svar.group(1).lower() for k in ('svar', 'utdyp', 'beskriv', 'kommentar')):
             etikett = m_svar.group(1).strip().rstrip(':')
-            legg_til(Spacer(1, 3))
-            legg_til(Tekstboks(hoyde_cm=2.6, etikett=etikett))
             legg_til(Spacer(1, 4))
+            # Svar-boks: 4 cm som standard (tidligere 2,6) for å gi mer plass
+            hoyde = 4.0
+            # Lengre høyde for eksplisitt "beskriv" / utdypingsspørsmål
+            if any(k in etikett.lower() for k in ('utdyp', 'beskriv')):
+                hoyde = 5.0
+            legg_til(Tekstboks(hoyde_cm=hoyde, etikett=etikett))
+            legg_til(Spacer(1, 6))
             # Svar-boks er siste element i en Spm-blokk — flush
             flush_blokk()
             i += 1
@@ -352,13 +357,15 @@ def lag_tabell(md_rader):
         ('TEXTCOLOR', (0, 0), (-1, 0), white),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('ROWBACKGROUNDS', (0, 1), (-1, -1), [white, FARGE_LYS]),
-        ('BOX', (0, 0), (-1, -1), 0.4, HexColor('#d1d5db')),
-        ('LINEBELOW', (0, 0), (-1, 0), 0.4, FARGE_SEKUNDAR),
+        # Streker i ALLE bokser (GRID) — tydelige, 0.4pt
+        ('GRID', (0, 0), (-1, -1), 0.4, HexColor('#9ca3af')),
+        ('BOX', (0, 0), (-1, -1), 0.8, FARGE_SEKUNDAR),
+        ('LINEBELOW', (0, 0), (-1, 0), 1.0, FARGE_SEKUNDAR),
         ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
         ('LEFTPADDING', (0, 0), (-1, -1), 5),
         ('RIGHTPADDING', (0, 0), (-1, -1), 5),
-        ('TOPPADDING', (0, 0), (-1, -1), 4),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
+        ('TOPPADDING', (0, 0), (-1, -1), 5),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
     ]))
     return tbl
 
@@ -379,7 +386,7 @@ def lag_header_footer(sentral_navn):
         # Footer
         canvas.setFont('Helvetica', 8.5)
         canvas.setFillColor(FARGE_GRÅ)
-        canvas.drawString(2 * cm, 1.2 * cm, "Rune Grødem · rune.grodemm@himolde.no")
+        canvas.drawString(2 * cm, 1.2 * cm, "Rune Grødem · rune.grodem@rogbr.no")
         canvas.drawRightString(w - 2 * cm, 1.2 * cm, f"Side {doc.page}")
         canvas.restoreState()
     return draw

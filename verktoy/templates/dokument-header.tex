@@ -1,0 +1,84 @@
+% LaTeX-header for faglige dokumenter (rapport, vedlegg, notater) — LOG650
+% Brukes via: pandoc --include-in-header=dokument-header.tex
+
+% --- Pakker ---
+\usepackage{booktabs}        % pene tabell-streker
+\usepackage{longtable}       % tabeller over flere sider
+\usepackage{array}           % kolonne-spesifikasjoner
+\usepackage{makecell}        % multi-linjet tabellinnhold
+\usepackage{colortbl}        % farger i tabeller
+\usepackage{xcolor}          % farger
+\usepackage{graphicx}        % figurer
+\usepackage{float}           % figurplassering
+\usepackage{caption}         % figurtekst
+\usepackage{fancyhdr}        % topp/bunntekst
+\usepackage{lastpage}        % sidetall x av y
+\usepackage{microtype}       % bedre typografi
+% (babel lastes av pandoc via -V lang=nb-NO)
+\usepackage{amsmath, amssymb} % matematikk
+
+% --- Sidehoder/-foter ---
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\fancyhead[L]{\small\itshape LOG650 · Rune Grødem}
+\fancyhead[R]{\small\itshape Vår 2026}
+\fancyfoot[L]{\small rune.grodem@rogbr.no}
+\fancyfoot[R]{\small Side \thepage{} av \pageref{LastPage}}
+
+% --- Tabeller med streker i alle bokser ---
+\renewcommand{\arraystretch}{1.25}      % luft i celler
+\setlength{\tabcolsep}{6pt}              % horisontal padding
+
+% Tving alle pandoc-tabeller til å bruke streker (override default booktabs-stil)
+\let\oldtoprule\toprule
+\let\oldmidrule\midrule
+\let\oldbottomrule\bottomrule
+\renewcommand{\toprule}{\hline}
+\renewcommand{\midrule}{\hline}
+\renewcommand{\bottomrule}{\hline}
+
+% Vertikale streker mellom kolonner via redefinering av longtable-omgivelser
+\AtBeginEnvironment{longtable}{\setlength{\arrayrulewidth}{0.4pt}}
+
+% --- Figurer alltid sentrert med tekst under ---
+\captionsetup{font=small,labelfont=bf,labelsep=period,justification=centering}
+\setkeys{Gin}{width=0.85\linewidth,keepaspectratio}
+
+% --- Lenker ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue!60!black,
+  citecolor=black,
+  pdfborder={0 0 0}
+}
+
+% --- Avsnittavstand ---
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+% --- Header og enumitem-fix ---
+\providecommand{\tightlist}{\setlength{\itemsep}{2pt}\setlength{\parskip}{2pt}}
+
+% --- Kode-blokker ---
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+
+% --- Sideskift etter tittel, abstract og ToC ---
+\usepackage{etoolbox}
+\AtBeginDocument{\pagenumbering{roman}}
+\AtEndEnvironment{abstract}{\newpage}
+\pretocmd{\tableofcontents}{}{\typeout{ToC}}{}
+\apptocmd{\tableofcontents}{\clearpage\pagenumbering{arabic}\setcounter{page}{1}}{\typeout{ToC}}{}
+
+% Tittelside-formattering: litt mer luft og sentrert
+\usepackage{titling}
+\pretitle{\begin{center}\LARGE\bfseries\color{black!80}}
+\posttitle{\par\end{center}\vspace{0.5em}}
+\preauthor{\begin{center}\normalsize}
+\postauthor{\par\end{center}}
+\predate{\begin{center}\normalsize\itshape}
+\postdate{\par\end{center}\vspace{2em}}

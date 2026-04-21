@@ -30,7 +30,7 @@ Klassifiseringen bruker tre felt fra BRIS i kombinasjon: `Oppdragstype` (sluttkl
 | **L-aba** (ABA løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig = "ABA"` ∧ `Kilde = Alarm` | 3 430 | 5,5 % |
 | **L-hendelse** (Reell hendelse løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` har verdi ∧ (≠ ABA ∨ `Kilde ≠ Alarm`) | 4 298 | 6,9 % |
 | **L-ukjent** (Løst av 110, uklassifisert) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` er tom | 16 768 | 27,1 % |
-| **F** (Feilringing) | `Oppdragstype` ∈ {Nødanrop feilring, Ikke reell nødmelding, ECall feil bruk, ECall teknisk/ukjent, ECall veihjelp} | 6 824 | 11,0 % |
+| **F** (Feilringing) | `Oppdragstype` $\in$ {Nødanrop feilring, Ikke reell nødmelding, ECall feil bruk, ECall teknisk/ukjent, ECall veihjelp} | 6 824 | 11,0 % |
 | **V** (Viderevarsling) | `Oppdragstype` inneholder «viderevarslet» eller «viderekoble» | 547 | 0,9 % |
 
 **Kilde = Alarm-kravet for L-aba og D-aba:** Empirisk manuell gjennomgang av 50 L-aba-hendelser (LABA-dybdeanalyse, se avsnitt 5.4) viste at 24,5 % av oppdrag klassifisert med `Opprinnelig = ABA` faktisk ikke representerer automatisk brannalarm i operativ forstand — de omfatter publikumsmeldinger om brannalarm, private bygg uten 110-tilknytning, tester feilrevidert som oppdrag, og duplikatoppdrag. Kilde-feltet skiller hvordan hendelsen ankom 110: `Alarm` (ABA-signal), `Samtale` (publikumsinnringing), eller blank (operatør-initiert). Reell ABA har `Kilde = Alarm`. Ved å kreve dette for L-aba og D-aba sikres at klassifiseringen gjenspeiler operativ dynamikk, ikke registreringspraksis.

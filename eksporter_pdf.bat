@@ -1,21 +1,48 @@
 @echo off
-REM Eksporterer rapport-kapitler fra Markdown til PDF med Pandoc + XeLaTeX
-REM Bruk: dobbeltklikk eller kjor fra kommandolinje
+REM ============================================================
+REM Eksporter MD til PDF — LOG650 G20 Rune
+REM Bruker verktoy\build_pdf.py som master-pipeline
+REM ============================================================
 
-set PANDOC="%LOCALAPPDATA%\Microsoft\WinGet\Packages\JohnMacFarlane.Pandoc_Microsoft.Winget.Source_8wekyb3d8bbwe\pandoc-3.9.0.2\pandoc.exe"
-set XELATEX="%LOCALAPPDATA%\Programs\MiKTeX\miktex\bin\x64\xelatex.exe"
-set OUTDIR=005 report
+setlocal enabledelayedexpansion
 
-if not exist "%OUTDIR%" mkdir "%OUTDIR%"
+if not "%~1"=="" goto direkte
 
-echo Eksporterer kapitler til PDF...
-
-%PANDOC% "014 fase 4 - report\kap6_modell.md" -o "%OUTDIR%\kap6_modell.pdf" --pdf-engine=%XELATEX% -V geometry:margin=2.5cm -V fontsize=11pt -V mainfont="Segoe UI"
-if %ERRORLEVEL% EQU 0 (echo   kap6 OK) else (echo   kap6 FEILET)
-
-%PANDOC% "014 fase 4 - report\kap7_analyse_resultater.md" -o "%OUTDIR%\kap7_analyse_resultater.pdf" --pdf-engine=%XELATEX% -V geometry:margin=2.5cm -V fontsize=11pt -V mainfont="Segoe UI"
-if %ERRORLEVEL% EQU 0 (echo   kap7 OK) else (echo   kap7 FEILET)
-
+:meny
 echo.
-echo Ferdige PDF-er i %OUTDIR%\
+echo ===== PDF-eksport LOG650 =====
+echo.
+echo   1. Samlet rapport (kap 1-9 med innholdsfortegnelse)
+echo   2. Alle kapitler separat
+echo   3. DSB-onskeliste
+echo   4. Ett spesifikt dokument (angi sti)
+echo   5. Ett spesifikt sporreskjema
+echo   6. Alle sporreskjemaer (AcroForm-PDF)
+echo   7. Avslutt
+echo.
+set /p valg="Velg [1-7]: "
+
+if "%valg%"=="1" ( python verktoy\build_pdf.py --rapport-full & goto slutt )
+if "%valg%"=="2" ( python verktoy\build_pdf.py --alle-kapitler & goto slutt )
+if "%valg%"=="3" ( python verktoy\build_pdf.py --dokument "analyse\DSB_onskeliste_BRIS_datauttrekk.md" --toc & goto slutt )
+if "%valg%"=="4" (
+    set /p fil="Angi MD-fil: "
+    python verktoy\build_pdf.py --dokument "!fil!"
+    goto slutt
+)
+if "%valg%"=="5" (
+    set /p sentral="Sentralnavn (f.eks. Oslo_110): "
+    python verktoy\build_pdf.py --skjema "!sentral!"
+    goto slutt
+)
+if "%valg%"=="6" ( python verktoy\build_pdf.py --alle-skjema & goto slutt )
+if "%valg%"=="7" ( goto slutt )
+echo Ugyldig valg.
+goto slutt
+
+:direkte
+python verktoy\build_pdf.py %*
+
+:slutt
+endlocal
 pause

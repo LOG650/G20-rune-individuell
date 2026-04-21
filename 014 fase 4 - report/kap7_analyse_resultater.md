@@ -156,8 +156,10 @@ Hovedscenario: **L-aba = 6 min × 1 operatør**. Sensitivitetsscenarioer: 3 min 
 | **V** (viderevarsling) | 547 | 1 | 1 | Operativ estimat |
 | **Skjulte** | 18 901 | 1 | 1 | Sekvensgap-metode |
 
-![Figur 7.1: Bindingstidsfordeling D-pri1](../analyse/figurer/bindingstid_beredskap_fordeling_v2.png)
-*Figur 7.1: Fordeling av bindingstid per D-pri1-oppdrag (makkerpar-bundet). Median 14,1 min, høyreskjev fordeling.*
+<div align="center">
+  <img src="../analyse/figurer/bindingstid_beredskap_fordeling_v2.png" alt="Figur 7.1 Bindingstidsfordeling D-pri1" width="80%">
+  <p align="center"><small><i>Figur 7.1: Fordeling av bindingstid per D-pri1-oppdrag (makkerpar-bundet). Median 14,1 min, høyreskjev fordeling.</i></small></p>
+</div>
 
 Dag- og nattskift viser tilnærmet lik D-pri1-bindingstid, noe som indikerer at bindingstiden primært drives av hendelsestype og geografi, ikke tidspunkt på døgnet.
 
