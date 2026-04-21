@@ -6,6 +6,17 @@ Prosjektet er gjennomført som en kvantitativ casestudie av 110 Sør-Vest, suppl
 
 Casestudiedesignet er valgt fordi problemstillingen er tett knyttet til en spesifikk organisatorisk og operativ kontekst, der bemanning, arbeidsmetodikk og registreringspraksis må forstås samlet for å kunne modellere kapasitetsbinding. Forfatteren har operativ tilknytning til 110 Sør-Vest, noe som gir tilgang til prosedyredokumentasjon, beredskapsanalyse og operative informanter som er nødvendige for å konstruere og validere modellparametere. Modellrammeverket er utviklet for å være overførbart til andre sentraler gitt tilsvarende datatilgang (se avsnitt 6.1 og 7.7).
 
+### Refleksivitet: insider-forskning og objektivitetstiltak
+
+Forfatterens operative tilknytning til 110 Sør-Vest gir både privilegert tilgang og en risiko for systematisk bias — særlig ved tolkning av prosedyrer, vurdering av bemanningsstandarder og fortolkning av operatørers arbeidssituasjon. Studien adresserer dette gjennom fire konkrete grep:
+
+1. **Objektive registerdata som primærgrunnlag.** Hovedfunnene springer ut av tidsstempler, ressursvarslinger og kategoriklassifisering i LEO/BRIS — registreringer som er gjort uavhengig av prosjektet og ikke gjenstand for forfatterens tolkning.
+2. **Skript-basert, deterministisk analyseflyt.** All bearbeiding er implementert i versjonskontrollerte Python-skript med fast random seed (`SEED_DABA = 20260419`). Analyseflyten er dermed deterministisk gitt valgte parametre — gjentas analysen med samme inngangsdata og samme parametre, gir den identisk resultat. Flere sentrale parametre (D-aba Fase 2-sannsynlighet, L-aba-bindingstid, ikke-D bindingstider) bygger imidlertid på operativ kalibrering og delvis manuell validering og er ikke fri for skjønn (jf. antagelsestabellen i kap 6.7). Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over rimelige variasjoner i disse parametrene.
+3. **Eksplisitt antagelsesdokumentasjon.** Alle modellantagelser er listet med kilde og status (kap 6.7, Tabell 5.5–5.6). Antagelser som hviler på operative samtaler er merket som sådanne — ikke fremstilt som direkte empiri.
+4. **Triangulering mellom kilder.** Hvor antagelser bygger på samtaler, kontrolleres de mot prosedyredokumentasjon (Rogaland brann og redning IKS, 2024) og BRIS-tidsstempler. D-aba Fase 1 er for eksempel både prosedyrforankret (~90 sek call-out) og empirisk verifisert (median 74 sek).
+
+Den primære risikoen som disse grepene ikke fullt eliminerer, er valg av modellramme — selve operasjonaliseringen av makkerpar som kapasitetsmetrikk reflekterer forfatterens forståelse av prosedyren og kunne blitt formulert annerledes av en utenforstående forsker. Denne begrensningen drøftes i kap 8.4.
+
 Tre komplementære analysekomponenter benyttes:
 
 **Tabell 5.1: Analysekomponenter**
@@ -16,7 +27,7 @@ Tre komplementære analysekomponenter benyttes:
 | Erlang-C (M/M/c) (grunnlinje) | λ, μ, c_eff | Tradisjonell køteoretisk referansemodell |
 | Benchmarking (alle 12 sentraler) | Bemanning, oppdragsvolum, innbyggertall | Kontekstualisere casefunn mot nasjonal struktur |
 
-Analyseenheten varierer mellom komponentene: i primærmodellen er analyseenheten det enkelte innkommende anropet ved dets ankomsttidspunkt. Variant A avgrenser til beredskapsoppdrag (kategori D) og sammenstilte tilleggsanrop; variant B utvider til alle syv hendelseskategorier (se avsnitt 6.2). I Erlang-C er analyseenheten aggregerte ankomstrater per skifttype, og i benchmarkingen er det den enkelte 110-sentralen.
+Analyseenheten varierer mellom komponentene: i primærmodellen er analyseenheten det enkelte innkommende anropet ved dets ankomsttidspunkt. Variant A avgrenser til beredskapsoppdrag (kategori D — D-pri1 og D-aba) og sammenstilte tilleggsanrop; variant B utvider til alle åtte hendelseskategorier (D-pri1, D-aba, S, L-aba, L-hendelse, L-ukjent, F, V — se avsnitt 5.3.2 og 6.2). I Erlang-C er analyseenheten aggregerte ankomstrater per skifttype, og i benchmarkingen er det den enkelte 110-sentralen.
 
 ---
 
@@ -62,7 +73,7 @@ Datasettet har fullstendig dekning for ankomsttidspunkt gjennom hele analyseperi
 | Felt | Dekningsgrad | Konsekvens for analysen |
 |---|---|---|
 | `Operatør-ID` | 0 % (100 % null) | Serverutnyttelse kan ikke observeres direkte på operatørnivå. Systemstrukturell begrensning bekreftet av DSB (mars 2026) |
-| `Innsatsvarighet` | 76,4 % av kategori D (5 771 av 7 555) | Måler total varighet fra utrykning til siste ressurs ledig — kan vare i timer. Ikke relevant som operatørbindingsmål fordi 110-operatørens binding er avgrenset til akuttfasen, ikke hele innsatsperioden |
+| `Innsatsvarighet` | 76,4 % av kategori D (5 771 av 7 555) | Måler total varighet fra utrykning til siste ressurs ledig — kan vare i timer. **[Antagelse 5.1]** Variabelen er ikke benyttet som operatørbindingsmål fordi 110-operatørens binding antas avgrenset til akuttfasen (RØD + GUL), ikke hele innsatsperioden. Antagelsen er forankret i prosedyre og operative samtaler (avsnitt 5.2.4), men ikke direkte målt på operatørnivå (jf. manglende Operatør-ID over) |
 | `Alarmbehandlingstid` | 99,0 % av kategori D (7 478 av 7 555) | Tilgjengelig for nesten alle utrykningshendelser |
 | Første ressurs fremme | 76,5 % av kategori D (5 777 av 7 555) | Primært mål for bindingstid; resterende 23,5 % imputert med median |
 
@@ -125,6 +136,8 @@ Følgende steg er gjennomført for å klargjøre primærdatasettet for analyse:
 6. **Håndtering av ekstreme verdier:** Bindingstider er kontrollert for negative verdier og urealistisk lange varigheter. Beregningene bygger på registrerte tidsstempler og er ikke manuelt justert.
 7. **Encoding:** CSV-filen er lest med `encoding='utf-8-sig'` for å håndtere BOM-markør. Sentralnavn med encoding-avvik er normalisert via en oppslagstabell.
 
+**Tilleggsbearbeiding for nasjonal benchmarking (kap 7.8 og 8.4.1):** Det nasjonale BRIS-datasettet for 2025 (508 228 oppdrag, alle 12 sentraler) er bearbeidet med samme V3-klassifiseringsregel som primærdatasettet (`Kilde = Alarm`-krav for L-aba og D-aba). Bearbeidingen er nødvendig fordi sentralnavn forekommer med ulike encoding-varianter (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`, `Sør-Vest 110`) og fordi `Opprinnelig oppdragstype` har ulik dekningsgrad mellom sentraler. To konkrete grep er gjort: (i) sentralnavn normaliseres via `SENTRALER_NORM`-oppslagstabellen i `analyse/scripts/benchmark_trend_analyse.py`; (ii) L-aba/D-aba-andelen rapporteres uten å justeres for ulik dekningsgrad — variasjonen mellom sentraler (0,0–7,5 %) tolkes derfor eksplisitt som indikasjon på heterogen registreringspraksis (jf. kap 8.4.1), ikke som direkte sammenlignbare nivåer. Den prosedyrbaserte ankomstkonfliktmodellen er per nå kjørt på 110 Sør-Vest alene; nasjonal modellanvendelse forutsetter klassifiseringsharmonisering (kap 9.4).
+
 ---
 
 ## 5.3 Databehandling og operasjonalisering
@@ -178,17 +191,17 @@ Beregningen bygger på to registrerte tidsstempler: `Dato/tid anrop` og `Første
 
 Fase 1-varigheten er forankret i operativ prosedyre og verifisert empirisk: median tid fra anrop til ressurs varslet er 74 sek for D-aba (P75 = 80, P90 = 111) — konsistent med operativ beskrivelse av ~90 sek call-out. Med etterfølgende registrering estimeres Fase 1 til 3 min. Fase 2-parametrene ($p$, $Y$) varieres i tre scenarioer (lav/hoved/høy: $p = 0{,}30/0{,}50/0{,}70$; $Y = 3/6/10$ min), og hoved-scenarioet $p = 0{,}50$, $Y = 6$ min er grunnlaget i primæranalysen.
 
-**L-aba (empirisk kalibrert, LABA-dybdeanalyse):**
+**L-aba (empirisk kalibrert, LABA-dybdeanalyse — [orienteringsanslag, n=30 Kilde=Alarm-subset]):**
 
 > **Bindingstid = 6 min × 1 operatør (hoved)**
 
-Bindingstiden for L-aba er kalibrert via en strukturert manuell dybdeanalyse av 50 L-aba-hendelser (avsnitt 5.4).
+Bindingstiden for L-aba er kalibrert via en strukturert manuell dybdeanalyse av 50 L-aba-hendelser (avsnitt 5.4). Det benyttede tallet er et **orienteringsanslag** basert på Kilde=Alarm-subsettet (n = 30) med 95 % CI [3,70; 8,56] minutter — denne usikkerheten er reell og betydelig. Et utvidet utvalg (n = 100) er sendt til utfylling 20.04.2026 for smalere CI; ny mean kan medføre en mindre revisjon av modellresultatene.
 
 **Øvrige kategorier (operativt estimert, sensitivitetsscenarioer):**
 
 S: 1/2/4 min; L-hendelse: 3/5/8 min; L-ukjent: 1/3/5 min; F: 0,25/0,5/1 min; V: 0,5/1/2 min. Hovedscenario benyttes i primærresultatene; lavt og høyt i sensitivitetsanalyse (avsnitt 7.7).
 
-**Sammenstilte tilleggsanrop:** 1 min × 1 operatør. Dette er et forenklet estimat basert på operativ vurdering, ikke en direkte observasjon.
+**Sammenstilte tilleggsanrop:** 1 min × 1 operatør. **[Antagelse 5.2]** Forenklet estimat basert på operativ vurdering, ikke en direkte observasjon. Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over rimelige variasjoner.
 
 ### 5.3.4 Estimering av sammenstilte anrop
 
@@ -231,7 +244,9 @@ Verdien av $c_{\text{eff}}$ er satt til 3 for dag/hverdag og 2 for øvrige skift
 
 ## 5.4 LABA-dybdeanalyse — empirisk kalibrering av L-aba-bindingstid
 
-For å kalibrere bindingstidsestimatet for L-aba er det gjennomført en strukturert dybdeanalyse av et stratifisert utvalg på 50 L-aba-hendelser fra 110 Sør-Vest 2025. Analysen har to formål: (1) empirisk måling av faktisk operatørbindingstid for automatiske brannalarmer løst uten utrykning, og (2) vurdering av klassifiseringsnøyaktigheten i BRIS L-aba-kategorien.
+For å kalibrere bindingstidsestimatet for L-aba er det gjennomført en strukturert dybdeanalyse av et stratifisert utvalg på 50 L-aba-hendelser fra 110 Sør-Vest 2025. Av disse hadde 49 gyldige tidsstempler. Modellparameteren for L-aba bygger på Kilde=Alarm-subsettet (n = 30) — denne avgrensningen er nødvendig fordi V3-regelen krever Kilde=Alarm for L-aba (avsnitt 5.3.2). Et utvidet utvalg (n = 100) er sendt til utfylling 20.04.2026 og inngår *ikke* i hovedresultatet i denne rapportversjonen. **Den standardiserte LABA-omtalen i rapporten er derfor: 50 trukne / 49 gyldige / n = 30 Kilde=Alarm-subset (hovedparameter) / n = 100 under innhenting (ikke del av hovedresultat).**
+
+Analysen har to formål: (1) empirisk måling av faktisk operatørbindingstid for automatiske brannalarmer løst uten utrykning, og (2) vurdering av klassifiseringsnøyaktigheten i BRIS L-aba-kategorien.
 
 ### 5.4.1 Utvalgsdesign
 
@@ -392,7 +407,7 @@ Kildekode og analyseskript er versjonskontrollert på GitHub. Sentrale skript:
 
 Parameterkalibrering og modellutvikling er dokumentert i `analyse/notat_V3_modellutvikling.md` som inkluderer endringslogg, beslutningsrasjonale og fullstendig modellspesifikasjon.
 
-Generative KI-verktøy (Claude, GitHub Copilot) er benyttet som støtteverktøy for koding, litteratursøk og rapportskriving. All bruk er dokumentert med dato, kontekst og hva som ble produsert (se Vedlegg D). Alle analytiske beslutninger, tolkninger og konklusjoner er forfatterens egne.
+Generative KI-verktøy (Claude Code av Anthropic og ChatGPT av OpenAI) er benyttet som støtteverktøy for koding, litteratursøk og rapportskriving. All bruk er dokumentert med dato, kontekst og hva som ble produsert (se Vedlegg D / `KI_erklæring_LOG650_G20_Rune.md`). Alle analytiske beslutninger, tolkninger og konklusjoner er forfatterens egne. Den deterministiske, skript-baserte analyseflyten beskrevet over (refleksivitetsavsnittet i 5.1) sikrer at KI-verktøyenes rolle er begrenset til kode- og tekststøtte — ikke til generering av modellresultater eller tolkninger.
 
 ---
 

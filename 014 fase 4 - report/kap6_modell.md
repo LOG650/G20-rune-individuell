@@ -92,7 +92,7 @@ $$P(W > T) = C(c, A) \cdot e^{-(c\mu - \lambda)T}$$
 
 **Tabell 6.1: Erlang-C resultater — 110 Sør-Vest 2025**
 
-| Skifttype | λ (anrop/t) | c_eff | ρ | C(c,A) | P(W > 60s) |
+| Skifttype | λ (anrop/t) | c_eff | ρ | C(c,A) | P(W > 30s) |
 |---|---|---|---|---|---|
 | Dag / Hverdag | 2,57 | 3 | 4,9 % | 0,05 % | 0,02 % |
 | Dag / Helg | 2,06 | 2 | 5,9 % | 0,66 % | 0,38 % |
@@ -155,6 +155,8 @@ Basert på antall ledige operatører klassifiseres hvert innkommende beredskapsa
 | **Brudd på driftsstandard** | Kun 1 ledig — solo-håndtering | ledige = 1 | Operatøren klarer det, men uten makker. Økt kognitiv belastning, økt feilrisiko |
 | **Svikt** | Ingen ledig operatør | ledige ≤ 0 | VL må overta eller overløp til Agder |
 
+> **[Antagelse 6.1]** *Brudd*-tilstanden er definert som operativt mulig — det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning — men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021). Konsekvensene drøftes i kap 8.2.
+
 For å illustrere hva dette innebærer i praksis med c_eff = 2 (natt/helg):
 
 | Tilstand | Eksempel aktive events | n_aktive | ledige | Nivå |
@@ -204,7 +206,7 @@ $$d_{\text{D-aba, Fase 2}} = Y, \quad q = 1, \quad t_{\text{Fase 2}} = t + 1{,}5
 
 For reproduserbarhet brukes fast random seed til å velge hvilke D-aba som får Fase 2.
 
-**Empirisk grunnlag for p:** Sekvensgap-metoden gir underkant-estimat på 8,7–37 % for tidsvindu 3–15 min etter D-aba. Estimatet er underkant fordi nødtelefoner logget *inni* hovedoppdraget (uten eget 110-ID) er usynlige. Operatørens kvalitative beskrivelse («ofte kommer det nødtelefon etter call-out») og empirisk observasjon tilsier reell andel 40–60 %, som støtter hovedcase $p = 0{,}50$.
+**Empirisk grunnlag for p:** Sekvensgap-metoden gir underkant-estimat på 8,7–37 % for tidsvindu 3–15 min etter D-aba. Estimatet er underkant fordi nødtelefoner logget *inni* hovedoppdraget (uten eget 110-ID) er usynlige. Operatørenes kvalitative beskrivelse fra valideringssamtaler (avsnitt 5.2.4) — bekreftet av prosedyrereferansen (Rogaland brann og redning IKS, 2024) — er at nødtelefon ofte følger en ABA-utrykning. Sammenholdt med sekvensgap-undergrensen tilsier dette reell andel 40–60 %, som støtter hovedcase $p = 0{,}50$. Verdien er derfor ikke direkte målt; den er et **forankret operativt estimat** med sensitivitetsspenn under.
 
 **Sensitivitetsspenn:** Lav ($p = 0{,}30$, $Y = 3$), hoved ($p = 0{,}50$, $Y = 6$), høy ($p = 0{,}70$, $Y = 10$).
 
@@ -351,11 +353,30 @@ def sweep_opbinder(events, c_eff):
         yield e, n_aktive, nivå
 ```
 
-Modellen er implementert i `analyse/scripts/konflikt_total_belastning.py`. Scenario +1 operatør bruker samme logikk med doblede c_eff-verdier (`analyse/scripts/scenario_pluss1.py`). Parameterkalibrering og beslutningsgrunnlag er dokumentert i `analyse/notat_V3_modellutvikling.md`.
+Modellen er implementert i `analyse/scripts/konflikt_total_belastning.py`. Scenario +1 operatør bruker samme logikk med $c_{\text{eff}} + 1$ per skifttype (dag hverdag: 3 → 4, øvrige skift: 2 → 3) — se `analyse/scripts/scenario_pluss1.py`. Parameterkalibrering og beslutningsgrunnlag er dokumentert i `analyse/notat_V3_modellutvikling.md`.
 
 Kildekode og Jupyter notebooks er versjonskontrollert på GitHub (se Vedlegg A).
 KI-verktøy benyttet i implementasjonsfasen er dokumentert i Vedlegg D.
 
 ---
 
-*Kap 6 — Versjon 3.1 | Sist oppdatert: 2026-04-19 (V3 op-binder-semantikk, D-pri1/D-aba-splitt)*
+## 6.7 Samlet oversikt over modellens antagelser
+
+For sporbarhet og kritisk vurdering oppsummeres her de sentrale antagelsene som modellen hviler på, med kilde og status:
+
+| # | Antagelse | Verdi | Kilde / status | Type |
+|---|---|---|---|---|
+| A1 | $c_{\text{eff}} = c_{\text{total}} - 1$ (VL svarer ikke nødanrop) | c=3 dag/hverdag, c=2 øvrige | Prosedyre + valideringssamtaler (avsnitt 4.2.1, 5.2.4, `VL_validering_bindingstider.md`) | Forankret antagelse |
+| A2 | D-pri1 binder makkerpar parallelt gjennom hele akuttfasen | $q = 2$, varighet databasert | Prosedyre + BRIS-tidsstempler (avsnitt 6.4.4) | Empirisk |
+| A3 | D-aba Fase 1 håndteres serielt av én operatør | $q = 1$, $d = 3$ min | Prosedyre + BRIS-verifisert (median 74 sek call-out) | Forankret + verifisert |
+| A4 | D-aba Fase 2 forekommer med $p = 0{,}50$ og $Y = 6$ min | hoved-scenario | Operativ samtale + sekvensgap-undergrense; sensitivitetstestet (avsnitt 7.7) | Forankret operativt estimat |
+| A5 | L-aba bindingstid = 6 min | hoved-verdi | LABA-dybdeanalyse n=30 Kilde=Alarm-subset, mean 5,88 min, CI [3,70; 8,56] | **Orienteringsanslag** — n=100 venter |
+| A6 | Sammenstilte tilleggsanrop binder 1 min | per anrop | Operativ vurdering, ikke direkte målt | Forenklet antagelse |
+| A7 | Brudd-tilstand innebærer at solo-håndtering er operativt mulig, men med redusert kvalitetssikring og økt belastning. Konsekvensen for tjenestekvalitet er ikke direkte empirisk målt i denne studien | (kvalitativ) | Prosedyre + valideringssamtaler; kvalitetstapet drøftes i kap 8.2 med støtte i Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021) | Antagelse — ikke empirisk verifisert for 110 Sør-Vest |
+| A8 | Bindingstider for S, L-hendelse, L-ukjent, F, V (variant B) | tre sensitivitetsscenarioer | Operative estimater forelagt vaktleder | Operativt estimat med sensitivitetsspenn |
+
+Antagelsene er sortert etter sentralitet: A1–A4 driver hovedfunnet og er empirisk eller prosedyrforankret. A5–A6 har størst restusikkerhet og oppdateres når LABA n=100 er ferdig utfylt (jf. avsnitt 5.4). A7 er en tolkningsmessig antagelse som drøftes i kap 8.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 7.7.
+
+---
+
+*Kap 6 — Versjon 3.2 | Sist oppdatert: 2026-04-21 (antagelsestabell 6.7 + antagelsesfotnote 6.4.3)*

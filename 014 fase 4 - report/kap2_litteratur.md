@@ -32,6 +32,8 @@ Litteratursøket er gjennomført i to runder. Første runde fulgte prosjektets o
 
 **Eksklusjonskriterier:** Rene simuleringsmodeller uten analytisk grunnlag; studier utelukkende om ressursdisponering i felt (ikke sentralnivå); bransjeblogger uten fagfellevurdering.
 
+Av samlet ~670 målrettede treff er 45 inkludert som primær- eller støttekilder. Hovedfunnet på tvers av materialet er at Erlang-C og varianter dominerer call-center-litteraturen, mens nødmeldesentraler er svakt dekket — særlig i nordisk og norsk kontekst. Multiserver-job-rammeverket og prosedyrkonformitet som kapasitetsmetrikk er etablert teoretisk, men ikke tidligere anvendt på 110-data. De tematiske avsnittene under (2.2–2.5) gjennomgår funnene; avsnitt 2.6 oppsummerer kunnskapsgapene som denne studien adresserer.
+
 ---
 
 ## 2.2 Erlang-C og køteoretisk kapasitetsplanlegging
@@ -92,7 +94,7 @@ Rehn m.fl. (2021) analyserer dispatch-nøyaktighet for legebemannede ambulanser 
 
 McNamee m.fl. (2025) kartlegger norske og nordiske brann- og redningsvesenets kapasitetsutfordringer i FIRE21-prosjektet og identifiserer dimensjonering og bemanning som sentrale problemstillinger på tvers av de nordiske landene.
 
-Norsk regulering belyses gjennom brann- og redningsvesenforskriften (2021), dimensjoneringsforskriften (2023), og stortingsmeldingene St.meld. nr. 41 (2001) og Meld. St. 16 (2024). Sistnevnte kobler eksplisitt ROS-analyse til bemanningskrav for nødmeldetjenesten og legitimerer prosjektets kvantitative tilnærming som svar på et dokumentert styringsbehov. RISE Fire Research (2017) gir metodikk og parametre fra empirisk dimensjoneringsanalyse for norsk brannvesen — nærmeste metodiske forgjenger for dette prosjektets tilnærming.
+Norsk regulering belyses gjennom brann- og redningsvesenforskriften (2021), dimensjoneringsforskriften (2023), og stortingsmeldingene St.meld. nr. 41 (2001) og Meld. St. 16 (2024). Sistnevnte kobler eksplisitt ROS-analyse til bemanningskrav for nødmeldetjenesten og legitimerer prosjektets kvantitative tilnærming som svar på et dokumentert styringsbehov. Den interdepartementale arbeidsgruppen (2009) er en sentral policy-anbefaling som drøfter felles organisering, svartidskrav og dimensjoneringsprinsipper for nødmeldetjenesten — og som eksplisitt erkjenner at det ikke finnes vitenskapelig grunnlag for gjeldende terskelverdier. Dette gapet motiverer prosjektets kvantitative ambisjon. RISE Fire Research (2017) gir metodikk og parametre fra empirisk dimensjoneringsanalyse for norsk brannvesen — nærmeste metodiske forgjenger for dette prosjektets tilnærming.
 
 ---
 
@@ -103,8 +105,8 @@ Litteraturgjennomgangen identifiserer fem gap som dette prosjektet adresserer:
 **Gap 1 — Prosedyrkonformitet som kapasitetsmetrikk.**
 Eksisterende litteratur måler kapasitet som sannsynlighet for kø eller ventetid (Erlang-C) eller som andel anrop besvart innen t sekunder. Ingen av de gjennomgåtte studiene bruker prosedyrkonformitet ved ankomst — det vil si sannsynligheten for at et anrop ankommer i en tilstand der driftsstandarden (makkerpar) kan opprettholdes — som primær kapasitetsmetrikk.
 
-**Gap 2 — To-server-per-kunde som driftsstandard.**
-Standard M/M/c-modellen forutsetter én server per kunde. Kim et al. (2008) og Jouini et al. (2008) nærmer seg team-basert kapasitet, men ingen studier modellerer et system der to servere er prosedyrens normkrav per hendelse — og der brudd på dette kravet er det operative kapasitetsproblemet som skal kvantifiseres.
+**Gap 2 — Makkerpar-bundet håndtering (D-pri1) som driftsstandard.**
+Standard M/M/c-modellen forutsetter én server per kunde. Kim et al. (2008) og Jouini et al. (2008) nærmer seg team-basert kapasitet, og Harchol-Balter (2022) formaliserer multiserver-jobs (MSJ) som teoretisk rammeverk, men etter litteratursøket i denne studien har vi ikke funnet publiserte arbeider som modellerer et nødmeldesystem der pri-1-utrykninger (D-pri1) krever makkerpar (to operatører bundet parallelt) mens ABA-utrykninger (D-aba) håndteres serielt av én operatør — og der brudd på makkerpar-kravet er det operative kapasitetsproblemet som skal kvantifiseres. Den prosedyrbaserte modellen i denne studien fremstår dermed som en ny empirisk anvendelse av en op-binder-formalisering (jf. kap 3.7) på en nordisk 110-sentral.
 
 **Gap 3 — Kapasitetsbinding utover samtaletid.**
 Erlang-C-modellen forutsetter at servere er ledige igjen umiddelbart etter samtalens slutt. I 110-kontekst er operatøren bundet i koordineringsfasen (GUL-funksjon) etter at samtalen er avsluttet. «After-call work» er diskutert i kommersiell call-center-litteratur (Gans et al., 2003), men er ikke modellert empirisk i nødmeldesentralkontekst.
@@ -112,10 +114,14 @@ Erlang-C-modellen forutsetter at servere er ledige igjen umiddelbart etter samta
 **Gap 4 — Bemanningsdifferensiering uten empirisk beredskapsgrunnlag.**
 Ingen identifiserte studier dokumenterer og kvantifiserer helge/hverdag-asymmetrier i bemanning relativt til beredskapsbelastning i nødmeldesentraler. Den praksis dette prosjektet identifiserer — at bemanningsreduksjon på helg er begrunnet i lavere servicetelefon-volum, ikke i lavere beredskapsbelastning — er ikke belyst i litteraturen.
 
-**Gap 5 — Norsk 110-forskning.**
-Det finnes ingen publiserte, kvantitative kapasitetsanalyser av norske 110-sentraler. Eksisterende dimensjoneringsgrunnlag baseres utelukkende på lokale, kvalitative ROS-analyser. Dette prosjektet er etter det vi kan fastslå det første som anvender historiske hendelsesdata og kvantitativ modellering for å vurdere om faktisk bemanning ved en norsk 110-sentral er tilstrekkelig.
+**Gap 5 — Norsk 110-forskning og felles klassifisering.**
+Etter litteratursøket i denne studien har vi ikke funnet publiserte, kvantitative kapasitetsanalyser av norske 110-sentraler. Eksisterende dimensjoneringsgrunnlag synes å baseres utelukkende på lokale, kvalitative ROS-analyser. Den interdepartementale arbeidsgruppen (2009) anbefalte felles dimensjoneringsstandarder for nødmeldetjenesten, men bemerket samtidig at det «ikke finnes vitenskapelig grunnlag for de valgte terskelverdiene» for svartid (jf. avsnitt 2.5). Dette prosjektet fremstår dermed som en av de første kvantitative analysene av en norsk 110-sentrals bemanning basert på historiske hendelsesdata, og foreslår parallelt en V3-klassifiseringsregel (D-pri1, D-aba, L-aba med Kilde=Alarm-krav) som forutsetning for sammenlignbar benchmarking på tvers av sentraler.
+
+### Studiens posisjonering i forhold til de fem gapene
+
+Denne studien fyller særlig **Gap 1, 2 og 5** ved å transformere kvalitative ROS-analyser til en kvantifiserbar ankomstkonfliktmodell: prosedyrkonformitet ved ankomst (Gap 1) operasjonaliseres som målbar metrikk via op-binder-semantikk (Gap 2 — D-pri1 med makkerpar-krav som direkte teoretisk parallell til multiserver-jobs), anvendt på norske 110-data for første gang (Gap 5). Studien adresserer også Gap 3 (kapasitetsbinding utover samtaletid via observerte tidsstempler for første ressurs fremme) og Gap 4 (helg/hverdag-asymmetri kvantifisert mot beredskapsbelastning, ikke bare totalvolum). Metodisk originalitet ligger i operasjonaliseringen av prosedyrekrav som målbar kapasitetsmetrikk — ikke i utvikling av ny køteori.
 
 ---
 
-*Kap 2 — Versjon 1.0 | Sist oppdatert: 2026-03-29*
+*Kap 2 — Versjon 1.1 | Sist oppdatert: 2026-04-21 (V3-terminologi, Interdep. 2009, Gap-posisjonering)*
 *Neste: Kapitlene 3 (Teori), 4 (Case) og 6 (Modell) suppleres basert på samme kildegrunnlag.*

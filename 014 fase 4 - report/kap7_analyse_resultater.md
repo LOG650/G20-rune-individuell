@@ -2,7 +2,9 @@
 
 ## 7.1 Metodisk tilnærming: fra køteori til prosedyrbasert kapasitetsmodell
 
-Prosjektet startet med Erlang-C (M/M/c) som primærmodell for kapasitetsanalyse. Erlang-C estimerer sannsynligheten for at et innkommende anrop må vente, gitt ankomstrate (λ), gjennomsnittlig servicetid (μ⁻¹) og antall servere (c). En innledende analyse med Erlang-C viste imidlertid svært lav systemutnyttelse (ρ < 10 %) for alle skifttyper, noe som isolert sett kunne tyde på at bemanningsnivået er komfortabelt (se Tabell 7.1).
+Den opprinnelige modellhypotesen i prosjektet var at Erlang-C (M/M/c) kunne brukes som hovedmodell for kapasitetsanalysen. Erlang-C estimerer sannsynligheten for at et innkommende anrop må vente, gitt ankomstrate (λ), gjennomsnittlig servicetid (μ⁻¹) og antall servere (c). Resultatene fra denne innledende analysen er presentert i Tabell 7.1 og inngår nå som **referansemodell** (baseline) som dokumenterer hvorfor klassisk køteori er utilstrekkelig for 110-konteksten — ikke som studiens hovedmodell. Den prosedyrbaserte ankomstkonfliktmodellen, utviklet i avsnitt 7.5 og formelt definert i kap 6.4, er studiens **hovedmodell** og originale bidrag.
+
+Erlang-C-analysen viste svært lav systemutnyttelse, med høyeste observerte verdi 5,9 % (Dag/Helg) for alle skifttyper, noe som isolert sett kunne tyde på at bemanningsnivået er komfortabelt (se Tabell 7.1).
 
 **Tabell 7.1: Erlang-C resultater — beredskapsoppdrag, 110 Sør-Vest 2025**
 
@@ -42,9 +44,9 @@ Dette har tre konsekvenser for analysen:
 
 1. **Ankomstraten λ i Erlang-C er for lav.** En modell som bruker synlige oppdrag som grunnlag for λ vil systematisk undervurdere faktisk arbeidsbelastning. Selv en perfekt M/M/c-modell ville derfor vært basert på et ufullstendig inputgrunnlag.
 
-2. **Kapasitetsanalysen er konservativ.** Ankomstkonfliktmodellen (avsnitt 7.5) er basert på synlige oppdrag med ressursvarsling. De sammenstilte tilleggsanropene opptar en operatør som ellers kunne vært ledig for neste hendelse, men er ikke modellert som egne belastningsenheter. Modellen gir dermed et minimumsanslag på faktisk operativ belastning.
+2. **Sammenstilte anrop er modellert som egne belastningsenheter — men modellen er fortsatt konservativ.** I den prosedyrbaserte ankomstkonfliktmodellen (avsnitt 7.5, formell definisjon i kap 6.4.6) er de 18 901 estimerte sammenstilte anropene inkludert som egne op-binder-events med interpolert ankomsttidspunkt og bindingstid 1 minutt ($q = 1$, $d = 1$ min). De bidrar dermed til $n_{\text{aktive}}$ ved senere ankomster og kan utløse Brudd eller Svikt på samme måte som synlige oppdrag. Modellen er likevel konservativ av to grunner: (i) bindingstiden 1 min er et nedre estimat (faktisk varighet kan være lengre dersom innringer er stresset eller anropet håndteres som full hendelse), og (ii) sekvensgap-metoden fanger kun anrop som er sammenstilt med eksisterende oppdrag — beredskapsrelaterte anrop som er feilkategorisert og lukket som egne saker (f.eks. som «service» eller «feilringing» under høyt press) er fortsatt usynlige. Det reelle antallet beredskapsrelaterte tilleggsanrop er derfor sannsynligvis høyere enn 18 901.
 
-3. **Skjult belastning påvirker dimensjonering direkte.** Sammenstilte tilleggsanrop påvirker ikke bare ankomstraten i køteoretisk forstand, men også den operative bindingen i den prosedyrbaserte modellen. Når flere innringere melder om samme hendelse, kan disse anropene oppta en operatør som ellers ville vært ledig for neste hendelse, eller forsterke belastningen i en allerede aktiv hendelse. For dimensjonering betyr dette at analyser basert på oppdragsteller alene kan undervurdere både arbeidsbelastning, samtidighetskonflikt og behovet for bufferkapasitet.
+3. **Skjult belastning påvirker dimensjonering direkte.** Sammenstilte tilleggsanrop påvirker ikke bare ankomstraten i køteoretisk forstand, men også den operative bindingen i den prosedyrbaserte modellen. Inkluderingen av skjulte anrop som egne op-binder-events (punkt 2) gjør at primærmodellen fanger denne effekten i variant A — men siden underestimatet av antall skjulte anrop fortsatt eksisterer, betyr det at modellens svikt- og brudd-andeler er nedre estimater. For dimensjonering tilsier dette at analyser basert utelukkende på oppdragsteller (uten skjult-anrop-korreksjon) systematisk vil undervurdere både arbeidsbelastning, samtidighetskonflikt og behovet for bufferkapasitet.
 
 Skillet mellom synlig oppdragsvolum og faktisk anropsvolum viser at kapasitetsanalyse ikke kan ta utgangspunkt i registrerte saker alene. Det neste spørsmålet blir derfor ikke bare hvor mange oppdrag som finnes, men hvordan sentralens arbeidsmetodikk gjør at disse anropene binder operatører over tid.
 
@@ -189,7 +191,7 @@ De sammenstilte tilleggsanropene er tildelt 1 minutts bindingstid — en konserv
 | **Natt/helg (c=2)** | 46,9 % | 20,5 % | **32,6 %** | 12 016 |
 | **Alle** | 59,6 % | 17,9 % | 22,5 % | 27 960 |
 
-Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3) er 69 % av beredskapsanrop i Normal og 15 % i Svikt. På natt/helg (c=2) er Normal-andelen under halvparten (47 %), og hvert tredje anrop ankommer i Svikt-tilstand (33 %). Dette er en dobling av sviktraten fra dagskiftet — primært fordi c=2 gir null buffer når en pri-1-hendelse binder makkerparet.
+Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3) er 69,2 % av beredskapsanrop i Normal og 14,9 % i Svikt. På natt/helg (c=2) er Normal-andelen under halvparten (46,9 %), og hvert tredje anrop ankommer i Svikt-tilstand (32,6 %). Dette er en dobling av sviktraten fra dagskiftet — primært fordi c=2 gir null buffer når en pri-1-hendelse binder makkerparet.
 
 ### D-pri1 som primær svikt-driver
 
@@ -279,7 +281,7 @@ Primærmodellen (variant A) kvantifiserer kapasitetsnivå basert på beredskapso
   <p align="center"><small><i>Figur 7.5: Variant A (beredskapsbelastning) vs Variant B (total operativ belastning), hovedscenario.</i></small></p>
 </div>
 
-Bakgrunnsbelastningen slår hardest på **dagtid**: Normal-andelen faller 10 prosentpoeng (fra 69,2 % til 58,9 %) og svikt øker fra 14,9 % til 22,0 %. Dette er konsistent med at servicevolumet (22 542 overføringstester per år) er konsentrert på dagtid når servicevirksomhet pågår. Natt/helg påvirkes i mindre grad (Normal faller 2,5 pp, Svikt stiger 0,8 pp) fordi bakgrunnsvolumet er lavere — men utgangspunktet er allerede kritisk: Svikt-andelen på natt/helg er 33 % også i variant B.
+Bakgrunnsbelastningen slår hardest på **dagtid**: Normal-andelen faller 10 prosentpoeng (fra 69,2 % til 58,9 %) og svikt øker fra 14,9 % til 22,0 %. Dette er konsistent med at servicevolumet (22 542 overføringstester per år) er konsentrert på dagtid når servicevirksomhet pågår. Natt/helg påvirkes i mindre grad (Normal faller 2,5 pp, Svikt stiger 0,8 pp) fordi bakgrunnsvolumet er lavere — men utgangspunktet er allerede kritisk: Svikt-andelen på natt/helg er 33,4 % i variant B (mot 32,6 % i variant A).
 
 Funnet understreker at operatørene på dagtid ikke bare håndterer beredskap — de håndterer en kontinuerlig strøm av servicetester, avklaringer og feilringinger som binder kapasitet mellom beredskapsoppdragene. Med gjennomsnittlig ~10 bakgrunnshenvendelser per time på dagskift er operatørene sjelden reelt ledige selv i perioder uten beredskapsoppdrag.
 
@@ -324,7 +326,7 @@ Andre sentraler kan bruke samme analyseopplegg dersom de har tilgang til:
 - En proxy for akuttfasens varighet (første ressurs fremme eller tilsvarende)
 - Eventuelt indikatorer på sammenstilte tilleggsanrop for korreksjon av ankomstrate
 
-Modellen kan dermed danne grunnlag for en nasjonal, etterprøvbar dimensjoneringsstandard for 110-operatører — analogt med dimensjoneringsforskriftens rolle for brannstasjoner, men basert på operatørbinding fremfor responstid.
+Forutsatt felles klassifiseringsregler (V3-regelen, jf. avsnitt 5.3.2) og tilstrekkelig datatilgang er metoden teknisk overførbar til alle 12 sentraler. De normative implikasjonene — om dette bør utgjøre grunnlag for en nasjonal dimensjoneringsstandard — drøftes i kap 8.3 og 9.3.
 
 ---
 
@@ -333,7 +335,7 @@ Modellen kan dermed danne grunnlag for en nasjonal, etterprøvbar dimensjonering
 Analysen dokumenterer fem hovedfunn:
 
 **Funn 1: Erlang-C alene er utilstrekkelig for 110-dimensjonering.**
-Den tradisjonelle køteoretiske modellen gir svært lav systemutnyttelse (ρ < 10 %) og P(W > 30s) < 0,5 % for alle skifttyper. Modellen behandler operatører som uavhengige servere, fanger ikke kapasitetstapet ved makkerpar-kravet for pri-1-hendelser, differensierer ikke mellom ulike hendelsesdynamikker, og baserer seg på en ankomstrate fra synlige oppdrag som undervurderer faktisk innkommende volum med anslagsvis 23 %.
+Den tradisjonelle køteoretiske modellen gir svært lav systemutnyttelse (høyeste observerte verdi 5,9 %) og P(W > 30s) < 0,5 % for alle skifttyper. Modellen behandler operatører som uavhengige servere, fanger ikke kapasitetstapet ved makkerpar-kravet for pri-1-hendelser, differensierer ikke mellom ulike hendelsesdynamikker, og baserer seg på en ankomstrate fra synlige oppdrag som undervurderer faktisk innkommende volum med anslagsvis 23 %.
 
 **Funn 2: D-pri1 og D-aba har fundamentalt ulik operativ dynamikk.**
 Pri-1-hendelser (bygningsbrann, trafikkulykke, farlig gods) binder makkerparet (RØD og GUL) parallelt i median 14,1 min. ABA-utrykninger er ikke pri-1 og håndteres serielt av én operatør i 3 min (oppdragsopprettelse + call-out), med valgfri oppfølgingsfase for nødtelefon og panel-veiledning. For 110 Sør-Vest 2025 utgjør D-pri1 59 % (4 499) og D-aba 41 % (3 056) av utrykningshendelsene. Differensieringen er avgjørende for korrekt kapasitetsmodellering — uten den ville modellen antatt at en ABA-utrykning binder makkerparet tilsvarende en bygningsbrann, noe som er operativt feil.
@@ -342,12 +344,12 @@ Pri-1-hendelser (bygningsbrann, trafikkulykke, farlig gods) binder makkerparet (
 På natt/helg (c=2) er 32,6 % av beredskapsanropene i Svikt-tilstand og kun 46,9 % i Normal. Svikt-raten skyldes primært at én aktiv D-pri1-hendelse binder hele makkerparet, slik at en ny beredskapsanrop i samme tidsvindu ankommer uten ledig op. D-aba bidrar relativt mindre til Svikt fordi serial-håndteringen etterlater 1 op ledig. Resultatene er robust på tvers av D-aba-parameterscenarioer (Svikt 30–38 % i sensitivitetsspennet).
 
 **Funn 4: +1 operatør per skift halverer sviktraten på natt/helg.**
-Én ekstra operatør (c_eff 2→3 natt/helg, 3→4 dag) øker Normal fra 46,9 % til 67,2 % på natt/helg (+20,3 pp) og reduserer Svikt fra 32,8 % til 16,7 %. På dag hverdag øker Normal fra 69,2 % til 85,1 %. Den strukturelle forbedringen er størst på natt/helg fordi c=3 endrer kapasitetsdynamikken kvalitativt: D-pri1 binder fortsatt 2 ops men etterlater 1 ledig op, slik at pri-1-hendelser ikke lenger automatisk medfører Svikt. Analysen indikerer at bemanningsstrukturen er en mer direkte driver for kapasitetsbildet enn samlet synlig oppdragsvolum alene.
+Én ekstra operatør (c_eff 2→3 natt/helg, 3→4 dag) øker Normal fra 46,9 % til 67,2 % på natt/helg (+20,3 pp) og reduserer Svikt fra 32,8 % til 16,7 % (jf. Tabell 7.5 — scenarioets baseline 32,8 % skyldes annen tilfeldig D-aba Fase 2-realisasjon enn primærmodellens 32,6 %; differansen er innenfor stokastisk støy). På dag hverdag øker Normal fra 69,2 % til 85,1 %. Den strukturelle forbedringen er størst på natt/helg fordi c=3 endrer kapasitetsdynamikken kvalitativt: D-pri1 binder fortsatt 2 ops men etterlater 1 ledig op, slik at pri-1-hendelser ikke lenger automatisk medfører Svikt. Analysen indikerer at bemanningsstrukturen er en mer direkte driver for kapasitetsbildet enn samlet synlig oppdragsvolum alene.
 
 **Funn 5: Total operativ belastning forverrer dagkapasiteten merkbart.**
 Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 58,9 % (−10 pp) og Svikt øker fra 14,9 % til 22,0 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes i mindre grad fordi bakgrunnsvolumet er lavere. Sensitivitetsanalysen viser at denne forverringen er robust: selv med minimale bindingstidsantakelser (variant B lav) er natt/helg Svikt 30,1 %. Funnet understreker at beredskapskapasiteten ikke kan vurderes isolert fra den samlede arbeidsbyrden.
 
-Funnene har direkte parallell til dimensjoneringslogikken i brannstasjonsforskriften: S1-stasjoner (kasernerte brannstasjoner med størst beredskapsansvar) dimensjoneres med to kjøretøy ikke fordi begge alltid er i bruk, men fordi konsekvensen av utilstrekkelig kapasitet ved simultane hendelser er uakseptabel. Det samme prinsippet — dimensjonering for beredskapstopper, ikke for gjennomsnittsbelastning — bør ligge til grunn for 110-operatørkapasitet.
+Sammenstillingen over presenterer fem hovedfunn som rene resultater. Tolkningen av funnene mot dimensjoneringspraksis, parallellen til dimensjoneringsforskriften for brannvesen, og de praktiske implikasjonene drøftes i kap 8 (særlig 8.3) og kap 9.
 
 ---
 

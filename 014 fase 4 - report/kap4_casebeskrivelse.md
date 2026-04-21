@@ -44,7 +44,7 @@ Sentralen opererer med tolv-timers skift og er organisert i seks vaktlag à fire
 
 Kapasitetsanalysen i denne rapporten bygger gjennomgående på minimumsbemanningen, ikke planlagt normalbemanning. Begrunnelsen er todelt: for det første er minimumsbemanning det nivået som i praksis hyppig forekommer, særlig på natt og helg. For det andre er dette nivået det som ROS- og beredskapsanalysen for 110 Sør-Vest vurderer som tilstrekkelig bemanning. Analysen tester dermed om det bemanningsnivået som anses som akseptabelt faktisk samsvarer med den operative belastningen.
 
-Vaktleder (VL) besvarer som hovedregel ikke nødanrop direkte, men ivaretar oversikt, prioritering, pressehåndtering og innkalling av ekstra ressurser. Effektiv operatørkapasitet er derfor c_eff = c_total − 1 for alle skifttyper. Denne forutsetningen er bekreftet gjennom prosedyredokumentasjon og operative intervjuer.
+Vaktleder (VL) besvarer som hovedregel ikke nødanrop direkte, men ivaretar oversikt, prioritering, pressehåndtering og innkalling av ekstra ressurser. Effektiv operatørkapasitet er derfor c_eff = c_total − 1 for alle skifttyper. Denne forutsetningen er bekreftet gjennom prosedyredokumentasjon og operative intervjuer (jf. avsnitt 5.2.3 og notatet `014 fase 4 - report/VL_validering_bindingstider.md` for detaljert empirisk grunnlag).
 
 ### 4.2.2 Operativ arbeidsmetodikk
 
@@ -86,7 +86,7 @@ For 2025 registrerte 110 Sør-Vest 61 964 synlige oppdrag i BRIS/LEO. Av disse e
 
 <div align="center">
   <img src="../analyse/figurer/bindingstid_per_time.png" alt="Figur 4.1 Bindingstid og volum per time" width="80%">
-  <p align="center"><small><i>Figur 4.1: Døgnprofil for anropsvolum og bindingstid per time ved 110 Sør-Vest (2025).</i></small></p>
+  <p align="center"><small><i>Figur 4.1: Døgnprofil for anropsvolum (alle synlige BRIS-oppdrag) og median bindingstid for beredskapsoppdrag (kategori D), 110 Sør-Vest 2025.</i></small></p>
 </div>
 
 Belastningsmønsteret viser en tydelig døgnprofil med høyest samlet volum på dagtid og lavest volum nattestid. Figuren illustrerer døgnprofilen i anropsvolumet og viser samtidig at bindingstiden per beredskapsoppdrag varierer mindre over døgnet enn totalvolumet. Hvordan dette volumet fordeler seg mellom ulike hendelsestyper og hvorvidt det representerer beredskapsdimensjonerende belastning, analyseres i kapittel 7.

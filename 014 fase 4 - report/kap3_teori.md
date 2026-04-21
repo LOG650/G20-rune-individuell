@@ -97,7 +97,15 @@ Van Buuren, Kommer, van der Mei og Bhulai (2017) validerer dette gjennom diskret
 
 ## 3.7 Op-binder-semantikk som formalt rammeverk
 
-Basert på multiserver-job-litteraturen formaliseres *op-binder-semantikk* som det teoretiske grunnlaget for den prosedyrbaserte modellen:
+Op-binder-semantikken er forfatterens syntese: den oversetter multiserver-job-rammeverket fra Chelst og Barlach (1981) og Harchol-Balter (2022) til 110-konteksten ved å (i) tillate heterogene job sizes per hendelseskategori, (ii) bruke prosedyrekalibrerte varigheter $d$ snarere enn eksponentielt fordelte servicetider, og (iii) operasjonalisere kapasitet som *ankomstkonflikt-andel* snarere enn ventetid. Rammeverket er ikke en ny teoretisk konstruksjon, men en konkret formalisering tilpasset prosedyrbasert nødmeldedrift.
+
+Konkret for 110 Sør-Vest betyr dette:
+
+- En **D-pri1-hendelse** (bygningsbrann med utrykning) skaper én op-binder-event med $q = 2$ — makkerparet er bundet i hele akuttfasen (RØD- og GUL-funksjon).
+- En **D-aba-hendelse** (automatisk brannalarm med utrykning) skaper én op-binder-event med $q = 1$ for Fase 1 (oppdragsopprettelse + call-out), og — med sannsynlighet $p$ — én tilleggs-event med $q = 1$ for Fase 2 (nødtelefon eller panel-veiledning).
+- En **L-aba-hendelse** (ABA uten utrykning, men med Kilde=Alarm) skaper én op-binder-event med $q = 1$.
+
+De formelle definisjonene under generaliserer dette mønsteret:
 
 **Definisjon 3.1 (Op-binder-event).** Et op-binder-event $e = (t, d, q)$ er en tidsavgrenset binding av $q$ operatører, der $q \in \{1, 2\}$, startende ved $t$ og varende i $d$ minutter.
 
@@ -128,7 +136,7 @@ Al-Sarhani et al. (2025) viser at simultane hendelser øker kognitiv belastning 
 
 Jamtli, Svendsen, Jørgensen, Kramer-Johansen, Hov og Hardeland (2024) finner at operatører ved AMK Oslo under arbeidspress avviker fra protokollen og stoler mer på intuisjon — en rasjonell tilpasning som likevel øker risikoen for feil.
 
-Felles for disse studiene er at de dokumenterer en **skjult buffer**: systemet fungerer ofte «godt nok» fordi operatørene bærer belastningen individuelt gjennom kvalitetsreduksjon, selv når den formelle driftsstandarden er brutt. Dette er en sentral tolkningsramme for kap 8.2: modellens prediksjon av svikt ved 33 % av beredskapsanrop på natt/helg er ikke motargument mot at sentralen fungerer, men en kvantifisering av den operative kostnaden som bæres av operatørene.
+Felles for disse studiene er at de dokumenterer en **skjult buffer**: systemet fungerer ofte «godt nok» fordi operatørene bærer belastningen individuelt gjennom kvalitetsreduksjon, selv når den formelle driftsstandarden er brutt. Dette er en sentral tolkningsramme for kap 8.2: modellens prediksjon av svikt ved 32,6 % av beredskapsanropene på natt/helg (variant A) er ikke motargument mot at sentralen fungerer, men en kvantifisering av den operative kostnaden som bæres av operatørene.
 
 ## 3.9 Oppsummering
 

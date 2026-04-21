@@ -66,7 +66,7 @@ Kunnskapsgapet er dermed konkret: **det finnes ingen kvantitativ, etterprøvbar 
 
 **I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller?**
 
-Problemstillingen adresseres gjennom følgende forskningsspørsmål:
+Problemstillingen er todelt: den krever (i) en operasjonalisering av begrepet *kapasitetsbehov* som er relevant for 110-driftens prosedyrekrav, og (ii) en empirisk vurdering av hvor godt faktisk bemanning matcher dette behovet. Erlang-C danner grunnlinjen, men viser seg utilstrekkelig i denne konteksten (jf. kap 6); studien utvikler derfor en prosedyrbasert variant — den prosedyrbaserte ankomstkonfliktmodellen — som måler operativ kapasitet ved hvert beredskapsanrops ankomsttidspunkt. Forskningsspørsmålene under operasjonaliserer problemstillingen: RQ1–RQ2 etablerer det empiriske grunnlaget (ankomstrate og kapasitetsbinding), RQ3 måler kapasitetsgapet mot prosedyrstandarden, RQ4 sammenligner mot dagens kvalitative dimensjoneringsgrunnlag, og RQ5 prøver overførbarheten til en nasjonal dimensjoneringslogikk.
 
 - **RQ1:** Hva er ankomstraten (λ) til 110 Sør-Vest per skiftperiode, og hvilke belastningsmønstre fremgår av historiske LEO/BRIS-data?
 - **RQ2:** Hva er gjennomsnittlig håndteringstid (μ⁻¹) per hendelseskategori, og i hvilken grad binder aktivt hendelsebilde operatørkapasitet utover samtaletid?
@@ -74,7 +74,21 @@ Problemstillingen adresseres gjennom følgende forskningsspørsmål:
 - **RQ4:** I hvilken grad gir eksisterende ROS- og beredskapsanalyse for 110 Sør-Vest et tilstrekkelig metodisk grunnlag for å begrunne faktisk bemanning?
 - **RQ5:** Kan strukturelle prediktorer (hendelsesvolum, innbyggertall, areal) danne grunnlag for en generaliserbar dimensjoneringsmodell på tvers av norske 110-sentraler?
 
-### 1.4 Avgrensninger
+### 1.4 Sentrale begreper og notasjon
+
+Modellen og rapporten bygger på en spesifikk nomenklatur som introduseres formelt i kap 3 og 6, men brukes gjennomgående fra kap 4. Tabellen under gir minimumsdefinisjoner for leseren:
+
+| Begrep | Kort definisjon |
+|---|---|
+| **D-pri1** | Pri-1-utrykning (bygningsbrann, trafikkulykke, farlig gods). Krever makkerpar — to operatører bundet parallelt under akuttfasen. |
+| **D-aba** | ABA-utrykning (automatisk brannalarm). Håndteres serielt av én operatør; valgfri Fase 2 (nødtelefon/panel-veiledning) med sannsynlighet $p$. |
+| **L-aba** | ABA-hendelse uten utrykning, men med Kilde=Alarm. Egen kategori for å skille reelle alarmhendelser fra øvrige korte oppdrag. |
+| **L-hendelse / L-ukjent** | Korte oppdrag uten initiell hendelsestype eller uten registrert klassifisering. |
+| **Op-binder** | Tidsavgrenset binding av $q \in \{1, 2\}$ operatører fra et tidspunkt $t$ i $d$ minutter. Hver hendelse ekspanderes til ett eller flere op-binder-events. |
+| **Kilde=Alarm-krav** | V3-regel: L-aba og D-aba krever at oppdragets Kilde-felt er «Alarm» — sikrer at ABA-kategoriene ikke forurenses av telefonhenvendelser feilklassifisert som ABA. |
+| **c_eff** | Effektiv operatørkapasitet $= c_{\text{total}} - 1$ (vaktleder besvarer normalt ikke nødanrop). |
+
+### 1.5 Avgrensninger
 
 Prosjektet avgrenses til følgende:
 
@@ -84,7 +98,7 @@ Prosjektet avgrenses til følgende:
 - **Ekstraordinære hendelser** (langvarige storbranner, katastrofescenarier) holdes utenfor modellens primære gyldighetsområde og behandles i diskusjonskapittelet
 - **Ring-flom (call surge)** belyses som operativ ekstrembelastning, men modelleres ikke som primærscenario
 
-### 1.5 Rapportens struktur
+### 1.6 Rapportens struktur
 
 Rapporten består av ni kapitler. **Kapittel 2** gjennomgår relevant litteratur strukturert etter fem tematiske områder: klassisk køteori, nødmeldesentraler, team-basert kapasitet og prosedyrkonformitet, nordisk nødmeldeforskning, og dimensjoneringsregulering. **Kapittel 3** etablerer det teoretiske rammeverket — Erlang-C som grunnlinje, QED-regimet, multiserver-jobs og op-binder-semantikk. **Kapittel 4** beskriver 110 Sør-Vest som case med bemanning, arbeidsmetodikk og operative særtrekk. **Kapittel 5** presenterer metode og data, inkludert V3-klassifiseringsregelen og LABA-dybdeanalysen. **Kapittel 6** utvikler kapasitetsmodellen gjennom tre faser: Erlang-C, simultanitetsanalyse og prosedyrbasert ankomstkonfliktmodell. **Kapittel 7** presenterer analyseresultater for 110 Sør-Vest 2025. **Kapittel 8** diskuterer funnene mot problemstilling, teori og begrensninger. **Kapittel 9** besvarer problemstillingen og gir anbefalinger for dimensjonering og videre forskning.
 

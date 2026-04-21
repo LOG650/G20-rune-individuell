@@ -2,6 +2,14 @@
 
 Denne diskusjonen knytter analysens fem hovedfunn (avsnitt 7.9) til problemstillingen, relevant teori og praktiske implikasjoner. Diskusjonen er strukturert rundt fire tema: det metodiske argumentet for en prosedyrbasert modell fremfor klassisk køteori, forholdet mellom modellprediksjoner og opplevd virkelighet, implikasjoner for bemanningsdimensjonering, og begrensninger og videre forskning.
 
+> **Kort oversikt — diskusjonens svar på RQ1–RQ5** (fulltekstsvar i kap 9.2):
+>
+> - **RQ1 (ankomstrate og belastningsmønster):** Empirisk grunnlag etablert; topptung dagprofil og sårbar overgangssone ved skiftveksling kl. 19:00. Drøftes i 8.1.3 og 8.3.3.
+> - **RQ2 (håndteringstid og kapasitetsbinding):** Aktiv bindingstid (median 13,0 min) er vesentlig lenger enn samtaletid (3,4 min). Drøftes i 8.1.3.
+> - **RQ3 (ankomstkonflikt og dag/natt-gap):** Strukturelt gap dokumentert; svikt natt/helg 32,6 % (variant A) / 33,4 % (variant B). Drøftes i 8.2.1, 8.3.1 og 8.3.2.
+> - **RQ4 (ROS-grunnlaget):** Kvalitativt — uten kvantitativ benchmark. Drøftes i 8.3.4.
+> - **RQ5 (generaliserbarhet):** Teknisk overførbar, men forutsetter felles klassifisering. Drøftes i 8.3.4 og 8.4.1.
+
 ## 8.1 Hvorfor Erlang-C er utilstrekkelig — og hva som erstatter den
 
 ### 8.1.1 Det lav-belastede paradokset
@@ -16,7 +24,7 @@ Dwars (2013) observerer det samme fenomenet i sin analyse av nederlandske ambula
 
 Den fundamentale begrensningen ved Erlang-C for 110-konteksten er ikke ankomstprosessen eller fordelingen av betjeningstid, men antagelsen om at én server betjener én kunde. Prosedyren ved 110 Sør-Vest krever at to operatører (RØD og GUL) aktiveres fra første sekund av et beredskapsanrop (avsnitt 4.2.2). Dette er en form for simultan flereenhets-betjening som har vært formelt behandlet i køteorien siden Chelst og Barlach (1981), som utvider Larsons hyperkubemodell med «Type 2-anrop» — hendelser som krever to enheter samtidig. Brill og Green (1984) viser at slike systemer har vesentlig annen kapasitetsdynamikk enn enenhet-systemer, og Harchol-Balter (2022) generaliserer dette til multiserver-job-køer der jobber krever flere servere parallelt.
 
-Primærmodellen i denne rapporten adresserer nettopp dette: i stedet for å modellere operatører som uavhengige servere, spør modellen hvor mange aktive hendelser som binder operatørkapasitet ved hvert anrops ankomsttidspunkt. Kapasitetsnivåene (Normal/Brudd/Svikt) er direkte utledet fra prosedyrens rollestruktur, ikke fra køteoretiske antagelser om serverutnyttelse.
+Primærmodellen i denne rapporten adresserer nettopp dette gjennom op-binder-semantikken (kap 3.7): i stedet for å modellere operatører som uavhengige servere som hver behandler én kunde av gangen, ekspanderes hver hendelse til ett eller flere op-binder-events som hver binder $q \in \{1, 2\}$ operatører i $d$ minutter. Dette løser Erlang-C-mangelen på tre presise måter: (i) D-pri1-events med $q = 2$ representerer makkerpar-bindingen direkte, slik at en aktiv pri-1-hendelse alltid blokkerer to operatører — ikke én; (ii) heterogene job sizes ($q = 2$ for D-pri1, $q = 1$ for D-aba og øvrige) fanger den operative differensieringen mellom hendelseskategorier som Erlang-C behandler likt; og (iii) prosedyrekalibrerte varigheter $d$ erstatter den eksponentielle servicetiden, slik at modellen reflekterer faktiske bindingsmønstre snarere enn matematisk bekvemmelighet. Kapasitetsnivåene (Normal/Brudd/Svikt) er direkte utledet fra prosedyrens rollestruktur, ikke fra køteoretiske antagelser om serverutnyttelse.
 
 ### 8.1.3 Bindingstid som kapasitetsbegrep
 
@@ -41,6 +49,8 @@ Gustavsson (2018) dokumenterer denne mekanismen ved SOS Alarm: agenter under pre
 Leonardsen, Hardeland, Hellesø og Grøndahl (2021) beskriver det samme fenomenet kvalitativt ved norske AMK-sentraler: operatørene utfører komplekse, simultane oppgaver — snakke, lokalisere, klassifisere, beslutte respons, gi førstehjelp per telefon — uten anerkjennelse for kompetansen som kreves. Arbeidspresset absorberes i hverdagstilpasningen og forblir usynlig for omgivelsene.
 
 Modellens styrke er at den *gjør synlig det som ellers er usynlig*. Den kvantifiserer ikke feil eller forsinkelser — den kvantifiserer hvor ofte operatørene befinner seg i en tilstand der den operative standarden for korrekt og trygg hendelseshåndtering ikke er oppfylt. At operatørene likevel leverer en tilstrekkelig tjeneste under disse betingelsene er ikke et motargument mot modellen — det er en beskrivelse av den operative kostnaden som bæres av den enkelte operatøren.
+
+**Driftsstandard versus regulatorisk minimumskrav.** Det er presisert at makkerpar-prinsippet ikke er et eksplisitt lovkrav i brann- og redningsvesenforskriften — forskriften fastsetter kun minimum to operatører per skift. Makkerpar er en *prosedyrestandard* etablert lokalt for å oppfylle de faglige sikkerhetsprinsippene som forskriften og tilhørende ROS-analyser bygger på: kvalitetssikring gjennom medlytt, redusert risiko for feil i adressefangst og utalarmering, og evne til å overholde 90-sekunders dispatch-frist. Når modellen viser at 32,6 % av beredskapsanropene på natt/helg ankommer i Svikt og ytterligere 20,3 % i Brudd, er den operative konsekvensen at sentralen i over halvparten av beredskapsanropene på disse skiftene må håndtere hendelsen med svekket eller fraværende kvalitetssikring sammenlignet med den standarden ROS-analysen forutsetter. Dette er en *systematisk planlagt avvikelse* fra driftsstandarden, ikke en sjelden unntaksbelastning. Spørsmålet for dimensjoneringspraksis er derfor ikke om sentralen overholder minimumsbemanningen (det gjør den), men om bemanningen faktisk realiserer de sikkerhetsprinsippene ROS-analysen legger til grunn — eller om den i realiteten planlegger med kronisk svekket kvalitetssikring som normaltilstand.
 
 ### 8.2.3 Implikasjoner for operatørbelastning
 
@@ -98,7 +108,7 @@ For 110-sentralene innebærer dette at overløpsarkitekturen mellom nabosentrale
 
 Analysen bygger på data fra én sentral (110 Sør-Vest) i ett kalenderår (2025). Generaliserbarhet til andre sentraler forutsetter at operative prosedyrer og registreringspraksis er tilstrekkelig like. Felles oppdragshåndteringssystem (LEO) fra høsten 2024 gir bedre grunnlag for sammenligning enn tidligere, men det er ikke verifisert at alle sentraler registrerer sammenstilte anrop og hendelsestyper likt.
 
-Feltet `Opprinnelig oppdragstype` har 16 % dekning for hendelser uten utrykning. Dette medfører at 27 % av oppdragene klassifiseres som L-ukjent (avsnitt 6.2). Hadde dekningen vært høyere, kunne fordelingen mellom L-aba, L-hendelse og L-ukjent vært mer presis — men sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust uavhengig av bindingstidsantakelsene for disse kategoriene.
+Feltet `Opprinnelig oppdragstype` har 16 % dekning for hendelser uten utrykning. Dette medfører at 27 % av oppdragene klassifiseres som L-ukjent (avsnitt 6.2). L-ukjent er her en *naturlig kategori* for oppdrag uten registrert initiell hendelsestype — ikke et uttrykk for «missing data» i tradisjonell forstand. Andelen reflekterer at ikke alle henvendelser klassifiseres formelt før oppdraget lukkes, særlig korte avklaringer og videreformidlinger. Hadde dekningen vært høyere, kunne fordelingen mellom L-aba, L-hendelse og L-ukjent vært mer presis — men sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust uavhengig av bindingstidsantakelsene for disse kategoriene.
 
 Nasjonal sammenligning gjennom DSBs 2025-datasett (508 228 oppdrag, alle 12 sentraler) viser at L-aba-andelen varierer betydelig mellom sentraler (0,0 % Sør-Øst og Oslo → 7,5 % Nordland). Denne variasjonen skyldes trolig ulik registreringspraksis mer enn reell ABA-belastning, og understreker at nasjonal benchmarking krever felles klassifiseringsregler før kvantitative sammenligninger kan tolkes normativt.
 
@@ -112,9 +122,9 @@ Ring-flom (call surge) fra flere innringere som melder samme hendelse er delvis 
 
 ### 8.4.3 Antakelser med konsekvenser
 
-Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba: LABA-dybdeanalyse, 50 hendelser) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V — forelagt vaktleder for validering). Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over hele spennet av rimelige antakelser — svikt på natt/helg er 30–38 % i alle scenarioer. D-aba Fase 2-parametrene ($p = 0,30/0,50/0,70$; $Y = 3/6/10$ min) fanger både operatørvurderingen og empirisk underkant-estimat fra sekvensgap-metoden.
+Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba: LABA-dybdeanalyse, 50 trukne hendelser / 49 gyldige — hovedparameter bygger på Kilde=Alarm-subsettet, n = 30) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V — forelagt vaktleder for validering). Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over hele spennet av rimelige antakelser — svikt på natt/helg er 30–38 % i alle scenarioer. D-aba Fase 2-parametrene ($p = 0,30/0,50/0,70$; $Y = 3/6/10$ min) fanger både operatørvurderingen og empirisk underkant-estimat fra sekvensgap-metoden.
 
-LABA-dybdeanalysens utvalgsstørrelse (n = 30 for Kilde=Alarm-subset) er begrenset — 95 % CI for mean er [3,70; 8,56] min. Konsekvens: L-aba-bindingstiden på 6 min i hoved-scenario har reell usikkerhet. Median (2,87 min) og høy-scenario (9 min) er dekket i sensitivitetsanalysen.
+LABA-hovedparameteren bygger på Kilde=Alarm-subsettet (n = 30) og har 95 % CI [3,70; 8,56] min for mean — en reell og betydelig usikkerhet. Et utvidet utvalg (n = 100) er under innhenting og inngår ikke i hovedresultatet i denne rapportversjonen; ny mean kan medføre en mindre revisjon. Median (2,87 min) og høy-scenario (9 min) er dekket i sensitivitetsanalysen.
 
 Antagelsen om at sammenstilte anrop har 1 minutts bindingstid er en forenkling. Dersom reell bindingstid er høyere (f.eks. 2–3 minutter for anrop der innringer er stresset), undervurderer modellen effekten av skjulte anrop ytterligere.
 
