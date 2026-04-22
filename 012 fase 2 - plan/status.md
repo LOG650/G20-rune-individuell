@@ -51,19 +51,19 @@ Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplan
 
 | Kapittel | Fil | Status | Kommentar |
 |---|---|---|---|
-| Sammendrag | rapport.md | Skall | Skrives sist når helheten er klar |
-| 1 Innledning | rapport.md | **Ferdig v1.0 (19.04)** | Bakgrunn, kunnskapsgap, problemstilling, RQ1–RQ5, avgrensninger, struktur |
-| 2 Litteratur | kap2_litteratur.md | Ferdig v1.1 (19.04) | 121 linjer + Harchol-Balter og Brill & Green som multiserver-jobs-referanser |
-| 3 Teori | kap3_teori.md | **Ferdig v1.0 (19.04)** | 153 linjer. Erlang-C, QED/square-root staffing, multiserver-jobs, op-binder-semantikk som formalt rammeverk |
-| 4 Casebeskrivelse | kap4_casebeskrivelse.md | Ferdig v1.2 (19.04) | 110 Sør-Vest + ABA-dynamikk-skille (pri-1 vs ABA-utrykning) |
-| 5 Metode og data | kap5_metode_data.md | Ferdig v3.0 (19.04) | V3-regel (Kilde=Alarm), ny 5.4 LABA-dybdeanalyse, D-pri1/D-aba-splitt |
-| 6 Modell | kap6_modell.md | Ferdig v3.1 (19.04) | Op-binder-semantikk, D-pri1 (2 ops) + D-aba (Fase 1 + Fase 2) som undertyper |
-| 7 Analyse og resultater | kap7_analyse_resultater.md | Ferdig v2.0 (19.04) | Alle variant A/B-tall V3. Natt/helg Svikt 32,6/33,4 %. Fem funn reformulert |
-| 8 Diskusjon | kap8_diskusjon.md | Ferdig v1.1 (19.04) | V3-tall, modell-vs-virkelighet beholdt/styrket, D-pri1 som primær svikt-driver |
-| 9 Konklusjon | kap9_konklusjon.md | **Ferdig v1.0 (19.04)** | Svar på problemstilling + RQ1–RQ5, tre anbefalinger, avsluttende refleksjon |
-| Referanser | rapport.md / Litteraturliste v3.0 | Pågår | Må synkroniseres mot kap 2/3 nye referanser (Harchol-Balter, Brill & Green m.fl.) |
-| Vedlegg | — | **Ikke startet** | KI-erklæring, spørreskjemaer, DSB-ønskeliste, LABA-dybdeanalyse-detaljer, kode |
-| Skjelett-synk | Rapport_LOG650_G20_Rune_110_v0.1.md | **Gjenstår** | Skjelett-fil må integreres med separate kapittelfiler (kap 2, 3, 4, 5, 6, 7, 8, 9) |
+| Forside + sammendrag | _forside_og_kap1.md | **Ferdig v1.1 (22.04)** | YAML-frontmatter med tittel, undertittel, forfatter, dato, abstract (350 ord). Renderer via Pandoc titling som dedikert forside |
+| 1 Innledning | _forside_og_kap1.md | **Ferdig v1.1 (22.04)** | Bakgrunn, kunnskapsgap, problemstilling, RQ1–RQ5, V3-nomenklaturtabell (1.4), avgrensninger med eksplisitt single-case-omfang, struktur |
+| 2 Litteratur | kap2_litteratur.md | **Ferdig v1.2 (21.04)** | Gap 1–5 + studiens posisjonering (Gap 1/2/5). Originalitet myket («fremstår som en av de første»). Interdep. arbeidsgruppe 2009 + Harchol-Balter + Brill & Green |
+| 3 Teori | kap3_teori.md | **Ferdig v1.1 (21.04)** | Op-binder-semantikk klargjort som forfatterens syntese av Chelst & Barlach + Harchol-Balter, med 110-konkret eksempel før Definisjon 3.1 |
+| 4 Casebeskrivelse | kap4_casebeskrivelse.md | **Ferdig v1.3 (21.04)** | VL-forutsetning henviser til VL_validering_bindingstider.md. Figur 4.1 bildetekst presisert |
+| 5 Metode og data | kap5_metode_data.md | **Ferdig v3.2 (22.04)** | V3-regel, refleksivitet/insider-bias-avsnitt, deterministisk analyseflyt myket, datavask for nasjonal benchmarking, **LABA n=100-statistikk** (mean 4,53 min, CI [3,74; 5,43]) |
+| 6 Modell | kap6_modell.md | **Ferdig v3.3 (22.04)** | Op-binder-semantikk, D-pri1/D-aba-splitt, [Antagelse 6.1] under Tabell 6.2, ny seksjon 6.7 antagelsestabell A1–A8 (A5 oppgradert til empirisk kalibrert med n=100) |
+| 7 Analyse og resultater | kap7_analyse_resultater.md | **Ferdig v2.1 (22.04)** | Erlang-C 5,9 % (referansemodell). V3-funn variant A 32,6 % / variant B **33,2 %** (oppdatert etter LABA n=100). Funn 4 explicit om scenario-baseline 32,8 (stokastisk støy). 4 figurer |
+| 8 Diskusjon | kap8_diskusjon.md | **Ferdig v1.2 (22.04)** | RQ-oversikt, multiserver-job-konkretisering, driftsstandard vs lovpålagt minimum, L-ukjent som naturlig kategori, LABA n=100-omtale |
+| 9 Konklusjon | kap9_konklusjon.md | **Ferdig v1.1 (22.04)** | Eksplisitt single-case-omfang, prosedyrkonformitet vs tjenesteleveranse, kø-effektivitet vs prosedyre-sikkerhet i 9.5, 9.4 strukturert i tre nivåer (case/forutsetninger/forskning) |
+| Referanser | _referanser_og_vedlegg.md | **Ferdig v1.0 (22.04)** | 33 APA-referanser (foreløpig utvalg) — synkroniseres mot full Litteraturliste_LOG650 v3.0 ved endelig innlevering |
+| Vedlegg A–G | _referanser_og_vedlegg.md | **Ferdig v1.0 (22.04)** | A: Python/skript + GitHub. B: Spørreskjema. C: DSB-ønskeliste. D: KI-erklæring. E: LABA-detaljer. F: VL-validering. G: Prosjektdokumentasjon |
+| Samlet rapport-PDF | Rapport_LOG650_G20_Rune_110_samlet.pdf | **Bygget v1.1 (22.04)** | 74 sider, A4, forside, ToC, alle kapitler med 5 figurer, referanser, vedlegg. Genereres via `verktoy/build_pdf.py --rapport-full` |
 
 ## Analyseartefakter
 
@@ -77,9 +77,11 @@ Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplan
 | **Nasjonal DSB 2025 (NY)** | nasjonal_oversikt.py | nasjonal_oversikt_*.png (7 stk) | Fullført |
 | **Nasjonal 2025 per sentral (NY)** | nasjonal_2025_analyse.py | nasjonal_2025_*.png (3 stk) | Fullført |
 | **LABA dybdeanalyse n=50 (NY)** | uttrekk_laba_sorvest.py | laba_sorvest_2025_dybdeanalyse.xlsx | Fullført (utfylt + analysert) |
-| **LABA dybdeanalyse n=100 (NY)** | uttrekk_laba_sorvest.py (oppdatert) | laba_sorvest_2025_dybdeanalyse_n100.xlsx | **Sendt til utfylling 20.04** |
-| **Spørreskjemageneratør (NY)** | generer_skjema.py, md_til_pdf.py | 11 md-skjemaer + 1 PDF så langt | I intern kalibrering |
+| **LABA dybdeanalyse n=100 (NY)** | uttrekk_laba_sorvest.py | laba_sorvest_2025_dybdeanalyse_n100-ferdig utfylt.xlsx | **Ferdig 22.04**: mean 4,53 min, CI [3,74; 5,43], 78 % m/nødtelefon |
+| **Spørreskjemageneratør (NY)** | generer_skjema.py, md_til_pdf.py | 12 md-skjemaer + 12 AcroForm-PDFer | Klare for utsendelse — venter på godkjenning av tider/innhold |
 | **Sporbarhets-notat (NY)** | analyse/notat_V3_modellutvikling.md | — | Fullført 19.04 |
+| **PDF-pipeline (NY)** | verktoy/build_pdf.py + dokument-header.tex | Pandoc + XeLaTeX | Etablert 21.04 — håndterer rapport, ønskelister, AcroForm-skjema |
+| **Nasjonal D-pri1/D-aba-splitt (NY)** | nasjonal_2025_analyse.py (oppdatert) | benchmarkmatrise.csv regenerert | Ferdig 21.04: 4 472 D-pri1 + 3 055 D-aba nasjonalt |
 
 ## Milepæler
 
@@ -98,9 +100,9 @@ Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplan
 1. **Modellendring (fra v1.1):** Planen forutsatte Erlang-C som primærmodell. Analysen avdekket at Erlang-C er metodisk utilstrekkelig for 110-konteksten. Primærmodell er nå V3 prosedyrbasert ankomstkonfliktmodell med op-binder-semantikk. Erlang-C beholdes som grunnlinje.
 2. **Sekvensgapmetode (fra v2.0):** Identifisering av sammenstilte anrop via sekvensgap i 110_ID var ikke planlagt. Gir 18 901 estimerte tilleggsanrop (korreksjonsfaktor 1,305×).
 3. **D-pri1/D-aba-splitt (19.04):** Operativ innsikt avdekket at ABA-utrykning har fundamentalt annen dynamikk enn pri-1-hendelser. Modellen differensierer nå makkerpar-bundet D-pri1 (2 ops) fra serial D-aba (1 op + valgfri Fase 2). Dette er en metodisk forbedring som styrker dimensjoneringsargumentet.
-4. **Nye arbeidspakker:** L8d, L13b, L13c, L14b, L17, L18, L19, L20 er lagt til siden v2.0 som respons på empirisk validering, nasjonal generaliseringsambisjon og operativ innsikt.
-5. **Kap 1, 3 og 9 skrevet 19.04.** Tidligere flagget som kritisk sti mot M6. Nå ferdig.
-6. **Rapportskjelett må synkroniseres med separate kapittelfiler.** Skjelett-filen (`Rapport_LOG650_G20_Rune_110_v0.1.md`) har fortsatt kap 2-9 som eget innhold — må erstattes med referanser til separate filer eller inline-integreres.
+4. **LABA to-trinns kalibrering (22.04):** Ikke planlagt opprinnelig. Runde 1 (n=49 / n=30 Kilde=Alarm) ga orienteringsanslag 5,88 min. Runde 2 (n=100, alle Kilde=Alarm) gir empirisk hovedparameter 4,53 min ([3,74; 5,43]). Reduserer L-aba-bindingstid fra 6 → 4,5 min; variant B Svikt natt/helg endret marginalt 33,4 → 33,2 %.
+5. **Nye arbeidspakker:** L8d, L13b, L13c, L14b, L17, L18, L19, L20 + PDF-pipeline (build_pdf.py) er lagt til siden v2.0 som respons på empirisk validering, nasjonal generaliseringsambisjon, operativ innsikt og leveranseformat (PDF).
+6. **Skjelett-fil ikke synkronisert (avvik avklart 22.04):** Ny pipeline bruker `_forside_og_kap1.md` + kapittelfilene + `_referanser_og_vedlegg.md` direkte. Skjelett-filen `Rapport_LOG650_G20_Rune_110_v0.1.md` er beholdt som arkiv og ikke lenger aktiv del av leveransen.
 
 ## Datagrunnlag
 
@@ -115,7 +117,7 @@ Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplan
 | Henvendelsesdata fra LEO (inquiries-array) | Forespurt fra DSB — ikke nødvendig for analyse |
 | Spørreskjemaer til alle 12 sentraler | Utviklet (md + PDF-infrastruktur) — i intern kalibrering hos lokale operatører. Ingen sendt til eksterne sentraler ennå |
 | LABA dybdeanalyse 50 hendelser (110 Sør-Vest 2025) | Utfylt av lokal operatør — mean bindingstid 5,88 min (Kilde=Alarm-subset, n=30), 24 % feilklassifisert. Driver V3-regel 19.04 |
-| LABA dybdeanalyse 100 hendelser (110 Sør-Vest 2025) | **Sendt til utfylling 20.04** — utvidet utvalg for smalere CI. Populasjon 3 430, utvalg 100 (2,9 %) |
+| LABA dybdeanalyse 100 hendelser (110 Sør-Vest 2025) | **Ferdig utfylt 22.04** — mean 4,53 min (CI [3,74; 5,43]), median 3,27 min, P90 9,48 min, 78 % m/nødtelefon. Hovedparameter L-aba justert 6 → 4,5 min |
 | DSB-ønskeliste BRIS-datauttrekk | Ferdig — kan sendes til DSB |
 | Datadelingsvurdering fra DSB | E-post sendt til bris-support 5. april 2026 — avventer svar |
 
@@ -129,6 +131,7 @@ Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplan
 | 05.04.2026 | bris-support@dsb.no | E-post | Datadelingsvurdering for peer review |
 | April 2026 | Lokale operatører 110 Sør-Vest | Intern kalibrering | Spørreskjema-utforming, LABA-dybdeanalyse (50 hendelser utfylt), tidsestimat-validering før utsendelse til andre sentraler |
 | 20.04.2026 | Lokal operatør 110 Sør-Vest | LABA-dybdeanalyse utvidet | n=100-utvalg sendt til utfylling for smalere CI på L-aba-bindingstid |
+| 22.04.2026 | Lokal operatør 110 Sør-Vest | LABA n=100 returnert | Ferdig utfylt utvalg returnert. Mean L-aba 4,53 min med strammere CI. Hovedparameter justert i modellen |
 
 ## Risikoregister
 
@@ -147,23 +150,34 @@ Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplan
 | R11 | **Skjema til andre sentraler ikke sendt** | Åpen | Venter på verifisert tidsgrunnlag fra lokal kalibrering. Responstid fra eksterne sentraler vil uansett ikke rekke peer review 27.04 — benchmark-data fra DSB (L8d/L14b) dekker nasjonal del for peer review |
 | R12 | **L-aba-klassifisering nasjonalt heterogen (NY)** | Åpen | Sør-Øst og Oslo har ≈0 % L-aba — trolig ulik registreringspraksis. Må adresseres i kap 8.3 som begrensning ved nasjonal benchmarking |
 
-## Neste steg (prioritert mot peer review 27.04)
+## Neste steg (5 dager til peer review 27.04)
 
-1. **Ventende (når LABA n=100 er tilbake):**
-   - Statistikk på n=100 (mean/median/P90, bootstrap CI) og sammenligning mot n=30-subset
-   - Oppdater L-aba-bindingstid i modellen dersom ny mean avviker fra 6 min
-   - Gjennomgang av alle bindingstider gjennomgående i rapporten (kap 5.5, 6.4, 7.4, 7.6) for konsistens
-   - Oppdater spørreskjema til sentralene basert på verifiserte verdier
-2. **Denne uken (uke 16, 20.–25.04):**
-   - Sammenstille rapportutkast: synkronisere skjelettfil med separate kapittelfiler
-   - Skrive sammendrag/abstract basert på ferdig innhold
-   - Skrive vedlegg: LABA-dybdeanalyse-detaljer, KI-erklæring, spørreskjema-eksempel, DSB-ønskeliste, kodeoversikt
-   - Finjustere referanseliste (legg til Harchol-Balter, Brill & Green og øvrige nye refs fra kap 2/3)
-3. **Uke 17 (26.–27.04):**
-   - Endelig gjennomgang av hoved-utkast
-   - Levere til peer review 27. april
-4. **Mai:** Revisjon basert på peer review + endelig innlevering 31. mai
-5. **Før peer review dersom tid:** Send DSB-ønskeliste til Vidar Falkenberg. Skjema til eksterne sentraler utsettes til etter hoved-utkast.
+### MÅ gjøres før peer review
+
+1. **Endelig gjennomlesing av samlet rapport-PDF** (74 sider): sjekk at forside, ToC, alle kapitler, figurer, referanser og vedlegg ser riktig ut i bladbar PDF-format
+2. **Synkronisere kap-2-tabell** med rapportstatus over (kapittel-versjoner)
+3. **Oppdater Gantt** med L13c lukket (LABA n=100 ferdig 22.04) og PDF-pipeline-leveranser
+4. **Levere til peer review 27. april** — last opp PDF + ev. tilleggsmateriale
+
+### KAN gjøres før peer review (lavere prioritet)
+
+5. **Send DSB-ønskeliste** til Vidar Falkenberg (DSB) — dokumentet er ferdig (PDF i `005 report/`)
+6. **Send LABA n=100-resultater** til lokal operatør med takk + sluttrapport
+7. **Send spørreskjema til 1–2 utvalgte sentraler** for å starte responsinnsamling (Midt-Norge naturlig kandidat — har bekreftet positiv kontakt). Responstid utenfor peer review-vinduet, men datagrunnlag inn mot endelig innlevering 31.05
+
+### Mai 2026 — etter peer review
+
+8. **Motta peer review-tilbakemelding** ca. 4.–10. mai
+9. **Revisjon av rapport** basert på review (uke 19–20)
+10. **Endelig referanseliste-finjustering** mot full Litteraturliste v3.0 (33 → 50+ kilder)
+11. **D-pri1/D-aba-splittet** kunne med fordel også implementeres i nasjonal benchmarking-figurer for kap 7.8 (i dag bare D aggregert i nasjonale plots)
+12. **Endelig innlevering** 31. mai 2026
+13. **Forberede muntlig eksamen** tidlig juni
+
+### Eksplisitt nedprioritert (ikke nødvendig før innlevering)
+
+- **D-aba Fase 2 empirisk validering** — vurdert 22.04, prioritert til DSB-datatilgang fremfor ad hoc-skript på dagens BRIS-eksport (ufullstendig data gir kun underkant-estimat). Lagt til som styrkelse av punkt 3 i DSB-ønskelisten.
+- **Skjelett-fil-synk** — ikke aktuelt lenger; ny pipeline bygger fra `_forside_og_kap1.md` + kapittelfiler + `_referanser_og_vedlegg.md`. Skjelett-filen `Rapport_LOG650_G20_Rune_110_v0.1.md` beholdes som arkiv.
 
 ## Versjonshistorikk
 
