@@ -133,11 +133,11 @@ Etter call-out kommer ofte en nødtelefon fra stedet, typisk innen 90–120 seku
 
 Empirisk underkant-estimat for p fra sekvensgap-metoden (sammenstilte anrop innen 90 sek–Δ min etter D-aba): 8,7 % ved 3 min, 16,7 % ved 5 min, 28,8 % ved 10 min. Dette fanger kun nødtelefoner med eget 110-ID; de som logges inni hovedoppdraget er usynlige. Operatørens kvalitative beskrivelse tilsier at reell andel ligger betydelig høyere, noe som støtter hoved-scenario på 50 %.
 
-### 7.4.4 L-aba: empirisk kalibrert via dybdeanalyse
+### 7.4.4 L-aba: empirisk kalibrert via dybdeanalyse (n=100)
 
-Bindingstid for L-aba (ABA løst av 110 uten utrykning) ble empirisk kalibrert gjennom en dybdeanalyse av 50 stratifiserte L-aba-hendelser fra 2025 (metode i avsnitt 5.4). En operatør ved 110 Sør-Vest registrerte faktiske tidsstempler i LEO for hver hendelse. For det endelige utvalget (Kilde = Alarm, n = 30) er mean bindingstid 5,88 min (95 % CI [3,70; 8,56]), median 2,87 min, P90 = 11,51 min. Mean velges som hovedverdi fordi den fanger den høyreskjeve fordelingen som drives av langhalede tilfeller (industrivern-oppfølging, varmekamera-avklaring).
+Bindingstid for L-aba (ABA løst av 110 uten utrykning) ble empirisk kalibrert gjennom to runder med dybdeanalyse av stratifiserte L-aba-hendelser fra 2025 (metode i avsnitt 5.4). Runde 1 (n=49 totalt / n=30 Kilde=Alarm-subset) ga et orienteringsanslag på mean 5,88 min med betydelig usikkerhet (CI [3,70; 8,56]). Runde 2 (n=100, alle Kilde=Alarm) gir den endelige modellparameteren: **mean 4,53 min, 95 % CI [3,74; 5,43], median 3,27 min, P90 = 9,48 min**. Standardavvik 4,37 min reflekterer at fordelingen forblir høyreskjev — drevet av langhalede tilfeller (industrivern-oppfølging, varmekamera-avklaring) — men terskelen for «høy bindingstid» er lavere enn antatt etter runde 1. Mean velges som hovedverdi.
 
-Hovedscenario: **L-aba = 6 min × 1 operatør**. Sensitivitetsscenarioer: 3 min (konservativ), 9 min (pessimistisk).
+Hovedscenario: **L-aba = 4,5 min × 1 operatør**. Sensitivitetsscenarioer: 3 min (CI-nedre), 7 min (over CI-øvre).
 
 ### 7.4.5 Oppsummering: op-binder per kategori
 
@@ -149,7 +149,7 @@ Hovedscenario: **L-aba = 6 min × 1 operatør**. Sensitivitetsscenarioer: 3 min 
 | **D-aba Fase 1** | 3 056 | 1 | 3 (alltid) | Operativ prosedyre + BRIS |
 | **D-aba Fase 2** | ~1 528 | 1 | 6 (p = 0,50) | Operatørinformert, LABA-dybdeanalyse |
 | **S** (service) | 22 542 | 1 | 2 | Operativ estimat |
-| **L-aba** | 3 430 | 1 | 6 | LABA-dybdeanalyse (mean) |
+| **L-aba** | 3 430 | 1 | 4,5 | LABA-dybdeanalyse n=100 (mean 4,53) |
 | **L-hendelse** | 4 298 | 1 | 5 | Operativ estimat |
 | **L-ukjent** | 16 768 | 1 | 3 | Operativ estimat |
 | **F** (feilring) | 6 824 | 1 | 0,5 | Operativ estimat |
@@ -250,7 +250,7 @@ Scenarioanalysen viser den strukturelle effekten av økt bufferkapasitet, men si
 | Bindingstid D-aba Fase 1 | 3 min | Operativ prosedyre + BRIS (median 74 sek call-out) |
 | Bindingstid D-aba Fase 2 | 6 min (hoved) | Operatørinformert, sensitivitet 3/6/10 min |
 | Sannsynlighet D-aba Fase 2 (p) | 0,50 (hoved) | Operatørestimert, sensitivitet 0,30/0,50/0,70 |
-| Bindingstid L-aba | 6 min | LABA-dybdeanalyse mean (Kilde=Alarm-subset) |
+| Bindingstid L-aba | 4,5 min | LABA-dybdeanalyse n=100 mean (Kilde=Alarm-subset) |
 | Bindingstid skjulte anrop | 1 min | Operativ vurdering |
 | Kapasitetsnivå: Normal | ledige ≥ 2 | Makkerpar mulig |
 | Kapasitetsnivå: Brudd | ledige = 1 | Solo-håndtering |
@@ -274,8 +274,8 @@ Primærmodellen (variant A) kvantifiserer kapasitetsnivå basert på beredskapso
 | Skifttype | | Variant A (beredskap) | | | Variant B (total) | |
 |---|---|---|---|---|---|---|
 | | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
-| **Dag hverdag** (c=3) | 69,2 % | 15,9 % | 14,9 % | **58,9 %** | **19,0 %** | **22,0 %** |
-| **Natt/helg** (c=2) | 46,9 % | 20,5 % | 32,6 % | **44,4 %** | **22,2 %** | **33,4 %** |
+| **Dag hverdag** (c=3) | 69,2 % | 15,9 % | 14,9 % | **59,5 %** | **19,0 %** | **21,6 %** |
+| **Natt/helg** (c=2) | 46,9 % | 20,5 % | 32,6 % | **44,8 %** | **22,0 %** | **33,2 %** |
 | **Alle** | 59,6 % | 17,9 % | 22,5 % | **53,9 %** | **20,1 %** | **25,9 %** |
 
 <div align="center">
@@ -283,7 +283,7 @@ Primærmodellen (variant A) kvantifiserer kapasitetsnivå basert på beredskapso
   <p align="center"><small><i>Figur 7.5: Variant A (beredskapsbelastning) vs Variant B (total operativ belastning), hovedscenario.</i></small></p>
 </div>
 
-Bakgrunnsbelastningen slår hardest på **dagtid**: Normal-andelen faller 10 prosentpoeng (fra 69,2 % til 58,9 %) og svikt øker fra 14,9 % til 22,0 %. Dette er konsistent med at servicevolumet (22 542 overføringstester per år) er konsentrert på dagtid når servicevirksomhet pågår. Natt/helg påvirkes i mindre grad (Normal faller 2,5 pp, Svikt stiger 0,8 pp) fordi bakgrunnsvolumet er lavere — men utgangspunktet er allerede kritisk: Svikt-andelen på natt/helg er 33,4 % i variant B (mot 32,6 % i variant A).
+Bakgrunnsbelastningen slår hardest på **dagtid**: Normal-andelen faller knapt 10 prosentpoeng (fra 69,2 % til 59,5 %) og svikt øker fra 14,9 % til 21,6 %. Dette er konsistent med at servicevolumet (22 542 overføringstester per år) er konsentrert på dagtid når servicevirksomhet pågår. Natt/helg påvirkes i mindre grad (Normal faller 2,1 pp, Svikt stiger 0,6 pp) fordi bakgrunnsvolumet er lavere — men utgangspunktet er allerede kritisk: Svikt-andelen på natt/helg er 33,2 % i variant B (mot 32,6 % i variant A).
 
 Funnet understreker at operatørene på dagtid ikke bare håndterer beredskap — de håndterer en kontinuerlig strøm av servicetester, avklaringer og feilringinger som binder kapasitet mellom beredskapsoppdragene. Med gjennomsnittlig ~10 bakgrunnshenvendelser per time på dagskift er operatørene sjelden reelt ledige selv i perioder uten beredskapsoppdrag.
 
@@ -298,7 +298,7 @@ Bindingstidene for ikke-D-kategorier og D-aba Fase 2-parametrene er operative es
 | | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
 | **A (beredskap)** | 69,2 % | 15,9 % | 14,9 % | 46,9 % | 20,5 % | 32,6 % |
 | **B lav** | 68,8 % | 16,6 % | 14,6 % | 51,1 % | 18,8 % | 30,1 % |
-| **B hoved** | 58,9 % | 19,0 % | 22,0 % | 44,4 % | 22,2 % | 33,4 % |
+| **B hoved** | 59,5 % | 19,0 % | 21,6 % | 44,8 % | 22,0 % | 33,2 % |
 | **B høy** | 45,3 % | 21,0 % | 33,7 % | 38,1 % | 24,2 % | 37,7 % |
 
 <div align="center">
@@ -310,7 +310,7 @@ Tre observasjoner:
 
 **1. Selv lavt scenario viser merkbar bakgrunnseffekt.** Med minimale bindingstider (Service 1 min, L-aba 3 min, feilringing 15 sek, D-aba Fase 2 kun for 30 % med Y = 3 min) er dag-hverdag-resultatet nesten uendret fra variant A (Normal 68,8 vs 69,2 %). På natt/helg gir lav-scenarioet faktisk litt bedre Normal (51 %) enn variant A (47 %) — D-aba Fase 2 slås mindre til når p = 0,30. Dette bekrefter at variant A-resultatet ikke er avhengig av optimistiske antakelser.
 
-**2. Hovedscenario gir vesentlig kapasitetsforverring på dagtid.** Normal faller til 58,9 % og svikt øker til 22,0 %. Dagskiftet, som i variant A framstår som komfortabelt (69 % Normal), blir klart mer presset når hele arbeidsvolumet inkluderes.
+**2. Hovedscenario gir vesentlig kapasitetsforverring på dagtid.** Normal faller til 59,5 % og svikt øker til 21,6 %. Dagskiftet, som i variant A framstår som komfortabelt (69 % Normal), blir klart mer presset når hele arbeidsvolumet inkluderes.
 
 **3. Høyt scenario illustrerer bristepunktet.** Med bindingstider i øvre sjikt (Service 4 min, L-aba 9 min, D-aba Fase 2 p = 0,70 og Y = 10 min) faller Normal under 50 % på dag — operatørene er oftere i Brudd eller Svikt enn i normal drift. For natt/helg når Svikt 38 %. Dette representerer dager med tungt servicevolum, uerfarne operatører, eller stor andel ABA-hendelser med oppfølgende nødtelefon.
 
@@ -349,7 +349,7 @@ På natt/helg (c=2) er 32,6 % av beredskapsanropene i Svikt-tilstand og kun 46,9
 Én ekstra operatør (c_eff 2→3 natt/helg, 3→4 dag) øker Normal fra 46,9 % til 67,2 % på natt/helg (+20,3 pp) og reduserer Svikt fra 32,8 % til 16,7 % (jf. Tabell 7.5 — scenarioets baseline 32,8 % skyldes annen tilfeldig D-aba Fase 2-realisasjon enn primærmodellens 32,6 %; differansen er innenfor stokastisk støy). På dag hverdag øker Normal fra 69,2 % til 85,1 %. Den strukturelle forbedringen er størst på natt/helg fordi c=3 endrer kapasitetsdynamikken kvalitativt: D-pri1 binder fortsatt 2 ops men etterlater 1 ledig op, slik at pri-1-hendelser ikke lenger automatisk medfører Svikt. Analysen indikerer at bemanningsstrukturen er en mer direkte driver for kapasitetsbildet enn samlet synlig oppdragsvolum alene.
 
 **Funn 5: Total operativ belastning forverrer dagkapasiteten merkbart.**
-Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 58,9 % (−10 pp) og Svikt øker fra 14,9 % til 22,0 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes i mindre grad fordi bakgrunnsvolumet er lavere. Sensitivitetsanalysen viser at denne forverringen er robust: selv med minimale bindingstidsantakelser (variant B lav) er natt/helg Svikt 30,1 %. Funnet understreker at beredskapskapasiteten ikke kan vurderes isolert fra den samlede arbeidsbyrden.
+Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 59,5 % (−9,7 pp) og Svikt øker fra 14,9 % til 21,6 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes i mindre grad fordi bakgrunnsvolumet er lavere. Sensitivitetsanalysen viser at denne forverringen er robust: selv med minimale bindingstidsantakelser (variant B lav) er natt/helg Svikt 30,1 %. Funnet understreker at beredskapskapasiteten ikke kan vurderes isolert fra den samlede arbeidsbyrden.
 
 Sammenstillingen over presenterer fem hovedfunn som rene resultater. Tolkningen av funnene mot dimensjoneringspraksis, parallellen til dimensjoneringsforskriften for brannvesen, og de praktiske implikasjonene drøftes i kap 8 (særlig 8.3) og kap 9.
 

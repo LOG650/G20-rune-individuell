@@ -191,11 +191,11 @@ Beregningen bygger på to registrerte tidsstempler: `Dato/tid anrop` og `Første
 
 Fase 1-varigheten er forankret i operativ prosedyre og verifisert empirisk: median tid fra anrop til ressurs varslet er 74 sek for D-aba (P75 = 80, P90 = 111) — konsistent med operativ beskrivelse av ~90 sek call-out. Med etterfølgende registrering estimeres Fase 1 til 3 min. Fase 2-parametrene ($p$, $Y$) varieres i tre scenarioer (lav/hoved/høy: $p = 0{,}30/0{,}50/0{,}70$; $Y = 3/6/10$ min), og hoved-scenarioet $p = 0{,}50$, $Y = 6$ min er grunnlaget i primæranalysen.
 
-**L-aba (empirisk kalibrert, LABA-dybdeanalyse — [orienteringsanslag, n=30 Kilde=Alarm-subset]):**
+**L-aba (empirisk kalibrert, LABA-dybdeanalyse n = 100 Kilde=Alarm):**
 
-> **Bindingstid = 6 min × 1 operatør (hoved)**
+> **Bindingstid = 4,5 min × 1 operatør (hoved)**
 
-Bindingstiden for L-aba er kalibrert via en strukturert manuell dybdeanalyse av 50 L-aba-hendelser (avsnitt 5.4). Det benyttede tallet er et **orienteringsanslag** basert på Kilde=Alarm-subsettet (n = 30) med 95 % CI [3,70; 8,56] minutter — denne usikkerheten er reell og betydelig. Et utvidet utvalg (n = 100) er sendt til utfylling 20.04.2026 for smalere CI; ny mean kan medføre en mindre revisjon av modellresultatene.
+Bindingstiden for L-aba er kalibrert via en strukturert manuell dybdeanalyse i to runder (avsnitt 5.4). Hovedparameteren bygger på utvidet utvalg (n = 100, alle Kilde=Alarm) med mean 4,53 min og 95 % CI [3,74; 5,43] minutter. Forrige rapportversjon brukte n=30-anslaget (mean 5,88 min, CI [3,70; 8,56]) og er erstattet i denne versjonen.
 
 **Øvrige kategorier (operativt estimert, sensitivitetsscenarioer):**
 
@@ -233,7 +233,7 @@ Verdien av $c_{\text{eff}}$ er satt til 3 for dag/hverdag og 2 for øvrige skift
 | Bindingstid D-pri1 | Beregnet fra observerte tidsstempler; ~25 % imputert med median | BRIS/LEO + imputering |
 | Bindingstid D-aba Fase 1 | Operativ prosedyre + BRIS-verifisert (median 74 sek call-out) | Prosedyre + BRIS |
 | Bindingstid D-aba Fase 2 ($p$, $Y$) | Operatørinformert, empirisk underkant-verifisert | Samtaler + sekvensgap |
-| Bindingstid L-aba | Empirisk kalibrert (mean 5,88 min, n=30) | LABA-dybdeanalyse |
+| Bindingstid L-aba | Empirisk kalibrert (mean 4,53 min, n=100, CI [3,74; 5,43]) | LABA-dybdeanalyse runde 2 |
 | Bindingstider S, L-hendelse, L-ukjent, F, V | Operative estimater, tre sensitivitetsscenarioer | Samtaler + vaktleder-validering |
 | Sammenstilte anrop (antall) | Estimert | Sekvensgapanalyse |
 | Sammenstilte anrop (tidspunkt) | Interpolert | Nærmeste synlige oppdrag |
@@ -244,17 +244,17 @@ Verdien av $c_{\text{eff}}$ er satt til 3 for dag/hverdag og 2 for øvrige skift
 
 ## 5.4 LABA-dybdeanalyse — empirisk kalibrering av L-aba-bindingstid
 
-For å kalibrere bindingstidsestimatet for L-aba er det gjennomført en strukturert dybdeanalyse av et stratifisert utvalg på 50 L-aba-hendelser fra 110 Sør-Vest 2025. Av disse hadde 49 gyldige tidsstempler. Modellparameteren for L-aba bygger på Kilde=Alarm-subsettet (n = 30) — denne avgrensningen er nødvendig fordi V3-regelen krever Kilde=Alarm for L-aba (avsnitt 5.3.2). Et utvidet utvalg (n = 100) er sendt til utfylling 20.04.2026 og inngår *ikke* i hovedresultatet i denne rapportversjonen. **Den standardiserte LABA-omtalen i rapporten er derfor: 50 trukne / 49 gyldige / n = 30 Kilde=Alarm-subset (hovedparameter) / n = 100 under innhenting (ikke del av hovedresultat).**
+For å kalibrere bindingstidsestimatet for L-aba er det gjennomført en strukturert dybdeanalyse i to runder ved 110 Sør-Vest 2025. Første runde omfattet 50 trukne hendelser (49 gyldige) og ga en innledende kalibrering med betydelig restusikkerhet. Andre runde utvidet utvalget til **100 hendelser (alle med gyldige tidsstempler, alle Kilde=Alarm)**, og er grunnlaget for den endelige modellparameteren. **Den standardiserte LABA-omtalen i rapporten er derfor: 100 trukne / 100 gyldige / Kilde=Alarm-subset (hovedparameter, n = 100).** Den første runden (n=49 totalt / n=30 Kilde=Alarm-subset, mean 5,88 min med CI [3,70; 8,56]) er metodisk dokumentert i `analyse/notat_V3_modellutvikling.md`.
 
 Analysen har to formål: (1) empirisk måling av faktisk operatørbindingstid for automatiske brannalarmer løst uten utrykning, og (2) vurdering av klassifiseringsnøyaktigheten i BRIS L-aba-kategorien.
 
 ### 5.4.1 Utvalgsdesign
 
-Populasjonen består av 5 495 L-aba-hendelser for 110 Sør-Vest 2025 (etter V2-klassifisering, før Kilde=Alarm-filter). Utvalget er stratifisert på måned for å sikre jevn dekning over året:
+Populasjonen består av 3 430 L-aba-hendelser for 110 Sør-Vest 2025 (etter V3-klassifisering med Kilde=Alarm-krav). Utvalget for runde 2 er stratifisert på måned for å sikre jevn dekning over året:
 
-- 4 hendelser per måned × 10 måneder + 5 hendelser per måned × 2 måneder = 50 hendelser
+- 8 hendelser per måned × 8 måneder + 9 hendelser per måned × 4 måneder = 100 hendelser
 - Tilfeldig utvalg innen hver måned med fast seed (`SEED = 20260418`) for reproduserbarhet
-- Utvalgsandel: 0,91 %
+- Utvalgsandel: 2,9 %
 
 ### 5.4.2 Gjennomføring
 
@@ -265,37 +265,41 @@ For hver hendelse i utvalget åpnet en operatør ved 110 Sør-Vest LEO-loggen og
 - `T_avklart` — når operatør bekreftet ufarlig årsak
 - `T_operatør_frigjort` — når oppdraget ble lukket
 
-Bindingstid beregnes automatisk som $T_{\text{operatør\_frigjort}} - T_{\text{alarm\_inn}}$. Kommentarfelt ble brukt til observasjoner om klassifiseringsavvik, datakvalitet og operative særtrekk.
+Bindingstid beregnes automatisk som $T_{\text{operatør\_frigjort}} - T_{\text{alarm\_inn}}$. Kommentarfelt ble brukt til observasjoner om klassifiseringsavvik, datakvalitet og operative særtrekk. Av de 100 hendelsene var 78 registrert med påfølgende nødtelefon fra stedet (subgruppe-mean 4,41 min, median 3,30 min) og 22 uten (subgruppe-mean 4,95 min, median 2,59 min).
 
 ### 5.4.3 Resultater
 
-Av 50 utvalgte hendelser hadde 49 gyldige tidsstempler; én manglet loggføring (flagget som datakvalitetstilfelle).
-
-**Hele utvalget (n = 49):**
+**Kilde = Alarm-subset, n = 100 (modellparameter):**
 
 | Metrikk | Verdi |
 |---|---:|
-| Mean bindingstid | 6,63 min |
-| Median | 2,97 min |
-| P90 | 13,73 min |
-| P95 | 26,61 min |
-| Max | 51,77 min (datakvalitetsanomali, flagget) |
-| 95 % CI mean (bootstrap, 10 000 resampling) | [4,41; 9,55] |
+| Mean bindingstid | **4,53 min** |
+| Median | 3,27 min |
+| Standardavvik | 4,37 min |
+| Min | 0,57 min |
+| P25 | 1,80 min |
+| P75 | 5,18 min |
+| P90 | 9,48 min |
+| P95 | 13,58 min |
+| Max | 25,23 min |
+| **95 % CI mean (bootstrap, 10 000 resampling)** | **[3,74; 5,43]** |
 
-**Kilde = Alarm-subset (ekte L-aba, n = 30):**
+**Sammenligning runde 1 (n=30) → runde 2 (n=100):**
 
-| Metrikk | Verdi |
-|---|---:|
-| Mean bindingstid | 5,88 min |
-| Median | 2,87 min |
-| P90 | 11,51 min |
-| 95 % CI mean | [3,70; 8,56] |
+| Metrikk | Runde 1 (n=30) | Runde 2 (n=100) | Endring |
+|---|---|---|---|
+| Mean | 5,88 min | 4,53 min | −1,35 min (−23 %) |
+| Median | 2,87 min | 3,27 min | +0,40 min |
+| P90 | 11,51 min | 9,48 min | −2,03 min |
+| 95 % CI-bredde | 4,86 min | 1,69 min | redusert til 35 % |
+
+Mean fra runde 2 er **utenfor** 95 % CI fra runde 1 (5,88 lå innenfor [3,70; 8,56], men 4,53 ligger nærmere CI-nedre). Standardavvik (4,37 min) reflekterer at fordelingen forblir høyreskjev — drevet av langhalede tilfeller (industrivern-oppfølging, varmekamera-avklaring), men terskelen for «høy bindingstid» er lavere enn antatt i runde 1.
 
 ### 5.4.4 Klassifiseringsobservasjoner
 
-Operatørens kommentarer avdekket at 12 av 49 gyldige hendelser (24,5 %) ikke representerte automatisk brannalarm i operativ forstand:
+Operatørens kommentarer (begge runder) avdekket at en betydelig andel L-aba-oppdrag ikke representerer automatisk brannalarm i operativ forstand. I runde 1 (n=49) var dette 12 av 49 (24,5 %), fordelt på følgende kategorier:
 
-| Kategori | N |
+| Kategori | N (av 49) |
 |---|---:|
 | «Privat brannalarm uten tilknytting til 110» (ikke ISM-kunde) | 4 |
 | «Kun nødanrop, ikke alarm i ISM» (publikumsmelding, ikke ABA-signal) | 3 |
@@ -303,19 +307,20 @@ Operatørens kommentarer avdekket at 12 av 49 gyldige hendelser (24,5 %) ikke re
 | «Innbruddsalarm ikke innlagt i ISM» (feilkategorisert) | 1 |
 | «Ikke i henhold til prosedyre» | 1 |
 
-Disse hendelsene har det til felles at `Kilde = Samtale` eller blank, mens ekte ABA-signal har `Kilde = Alarm`. Observasjonen motiverte V3-klassifiseringsregelen som krever `Kilde = Alarm` for L-aba og D-aba (avsnitt 5.3.2 og 6.2).
+Disse hendelsene har det til felles at `Kilde = Samtale` eller blank, mens ekte ABA-signal har `Kilde = Alarm`. Observasjonen motiverte V3-klassifiseringsregelen som krever `Kilde = Alarm` for L-aba og D-aba (avsnitt 5.3.2 og 6.2). Runde 2 (n=100, alle Kilde=Alarm) bekrefter at klassifiseringsregelen virker som tilsiktet — alle 100 trukne hendelser er ekte ABA-signaler i operativ forstand.
 
 ### 5.4.5 Valgte parametre og sensitivitet
 
-Basert på Kilde=Alarm-subsettet velges mean (5,88 min ≈ 6 min) som hovedverdi. Median ville undervurdere eksponeringen fordi fordelingen er høyreskjev — langhalede tilfeller (industrivern-oppfølging, varmekamera-avklaring) drar opp gjennomsnittet. Sensitivitetsscenarioer i variant B: lav (3 min, konservativ antakelse), hoved (6 min, empirisk mean), høy (9 min, P90-nært).
+Basert på n=100-resultatet velges mean **4,53 min ≈ 4,5 min** som hovedverdi. Median ville undervurdere eksponeringen fordi fordelingen er høyreskjev. Sensitivitetsscenarioer i variant B er justert tilsvarende: lav (3 min, CI-nedre), hoved (4,5 min, empirisk mean), høy (7 min, over CI-øvre). Tidligere scenarioer (3/6/9 min basert på n=30) er erstattet.
 
 ### 5.4.6 Begrensninger
 
-- **Utvalgsstørrelse:** n = 50 er lite for presise estimater, men tilstrekkelig for å etablere størrelsesorden og avdekke klassifiseringsproblematikk. 95 % CI ([3,70; 8,56] for Kilde=Alarm-subset) avspeiler denne usikkerheten.
-- **Enkelt-operatør-perspektiv:** Utfyllingen er gjort av én operatør. Flere operatører ville kunne vurdere klassifiseringstvil ulikt.
+- **Utvalgsstørrelse:** n = 100 gir 95 % CI ±0,85 min for mean — substansielt strammere enn n=30-runden (±2,4 min). Restusikkerheten er lav nok til at parameteren kan brukes som empirisk kalibrert hovedverdi, ikke kun orienteringsanslag.
+- **Enkelt-operatør-perspektiv:** Utfyllingen er gjort av én operatør. Flere operatører ville kunne vurdere klassifiseringstvil ulikt — men siden runde 2 kun trekker fra Kilde=Alarm-subsettet er rommet for klassifiseringstvil betydelig redusert.
+- **Tre ekstreme verdier (>15 min):** Av 100 hendelser har 3 bindingstid over 15 min. To har eksplisitt forklarende kommentar (én «feilrevidert», én «nødanrop ikke lagt til, baserer tid på første logglinje») og kunne potensielt utelates. Mean uten disse 3: ca. 4,1 min. Tallet 4,5 min beholdes som hovedparameter for konservatisme.
 - **Datakvalitetsobservasjon ikke reell feilmelding:** Analysen avdekket uventet variasjon i loggkvalitet. Enkelte hendelser har mangelfulle eller fraværende tidsstempler i LEO. Dette er rapportert tilbake til 110 Sør-Vest som empirisk datakvalitetsinput.
 
-Fullstendig metodebeskrivelse, resultattabeller og kommentarlogg er gitt i `analyse/notat_V3_modellutvikling.md` og det utfylte datasettet `analyse/laba_sorvest_2025_dybdeanalyse ferdig utfylt.xlsx`.
+Fullstendig metodebeskrivelse, resultattabeller og kommentarlogg er gitt i `analyse/notat_V3_modellutvikling.md` og det utfylte datasettet `analyse/uttrekk/Kopi av laba_sorvest_2025_dybdeanalyse_n100-ferdig utfylt.xlsx`.
 
 ---
 

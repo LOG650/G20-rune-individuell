@@ -33,20 +33,20 @@ Klassifiseringen bruker tre felt fra BRIS i kombinasjon: `Oppdragstype` (sluttkl
 | **F** (Feilringing) | `Oppdragstype` $\in$ {Nødanrop feilring, Ikke reell nødmelding, ECall feil bruk, ECall teknisk/ukjent, ECall veihjelp} | 6 824 | 11,0 % |
 | **V** (Viderevarsling) | `Oppdragstype` inneholder «viderevarslet» eller «viderekoble» | 547 | 0,9 % |
 
-**Kilde = Alarm-kravet for L-aba og D-aba:** Empirisk manuell gjennomgang av 50 L-aba-hendelser (LABA-dybdeanalyse, se avsnitt 5.4) viste at 24,5 % av oppdrag klassifisert med `Opprinnelig = ABA` faktisk ikke representerer automatisk brannalarm i operativ forstand — de omfatter publikumsmeldinger om brannalarm, private bygg uten 110-tilknytning, tester feilrevidert som oppdrag, og duplikatoppdrag. Kilde-feltet skiller hvordan hendelsen ankom 110: `Alarm` (ABA-signal), `Samtale` (publikumsinnringing), eller blank (operatør-initiert). Reell ABA har `Kilde = Alarm`. Ved å kreve dette for L-aba og D-aba sikres at klassifiseringen gjenspeiler operativ dynamikk, ikke registreringspraksis.
+**Kilde = Alarm-kravet for L-aba og D-aba:** Empirisk manuell gjennomgang av 50 L-aba-hendelser (LABA-dybdeanalyse runde 1, se avsnitt 5.4) viste at 24,5 % av oppdrag klassifisert med `Opprinnelig = ABA` faktisk ikke representerer automatisk brannalarm i operativ forstand — de omfatter publikumsmeldinger om brannalarm, private bygg uten 110-tilknytning, tester feilrevidert som oppdrag, og duplikatoppdrag. Kilde-feltet skiller hvordan hendelsen ankom 110: `Alarm` (ABA-signal), `Samtale` (publikumsinnringing), eller blank (operatør-initiert). Reell ABA har `Kilde = Alarm`. Ved å kreve dette for L-aba og D-aba sikres at klassifiseringen gjenspeiler operativ dynamikk, ikke registreringspraksis.
 
 **Operativ beskrivelse av kategoriene:**
 
 - **D-pri1 (Pri-1-utrykning):** Byggnings- og objektbrann, trafikkulykke, farlig gods og tilsvarende pri-1-hendelser. Gir makkerpar-binding (RØD + GUL parallelt), trippelvarsling, tidskritisk informasjon via BAPS. Bindingstid er databasert (se avsnitt 6.4.5).
 - **D-aba (ABA-utløst utrykning):** Automatisk brannalarm som fører til ressurs varslet fordi avklaring ikke kom innen 90 sekunder. Ikke pri-1 — operatør oppretter oppdrag og utalarmerer serielt i ~3 min, uten makkerpar-krav (se avsnitt 6.4.6).
 - **S (Service/overføringstest):** Servicetekniker ringer for overføringstest av brannalarmanlegg. Operatør mottar samtale i LEO, setter adresse om den ikke kommer automatisk, tar imot signal i alarmmottak, verifiserer mottatt signal til servicetekniker, venter til anlegget er i hvile, kvitterer ut testen og lukker som service.
-- **L-aba (ABA løst av 110):** Automatisk brannalarm kommer inn og overføres til LEO. Operatør venter 90 sekunder. Dersom nødtelefon fra stedet mottas innen 90 sekunder og innringer bekrefter ufarlig årsak (f.eks. matlaging), lukkes oppdraget som «Oppdrag løst av 110». Bindingstiden er empirisk kalibrert til 6 min via LABA-dybdeanalysen (avsnitt 5.4). Uten nødtelefon innen fristen ville det ført til utrykning (kategori D-aba).
+- **L-aba (ABA løst av 110):** Automatisk brannalarm kommer inn og overføres til LEO. Operatør venter 90 sekunder. Dersom nødtelefon fra stedet mottas innen 90 sekunder og innringer bekrefter ufarlig årsak (f.eks. matlaging), lukkes oppdraget som «Oppdrag løst av 110». Bindingstiden er empirisk kalibrert til 4,5 min (mean 4,53 min, CI [3,74; 5,43]) via LABA-dybdeanalysen runde 2 med n=100 (avsnitt 5.4). Uten nødtelefon innen fristen ville det ført til utrykning (kategori D-aba).
 - **L-hendelse (Reell hendelse løst av 110):** Innringer melder noe reelt (røyklukt, branntilløp, ulykke), operatør vurderer og løser uten å sende ressurs. Inkluderer ABA-oppdrag med `Kilde = Samtale` (publikum rapporterer brannalarm uten ABA-signal).
 - **L-ukjent (Løst av 110, uklassifisert):** Henvendelser som lukkes uten formell opprinnelig oppdragstype. Omfatter korte avklaringer (f.eks. bålregler), feilkategoriserte servicetester og andre henvendelser som ikke krever formell oppdragsopprettelse. Feltet `Opprinnelig oppdragstype` har 16 % dekning for hendelser uten utrykning — dette er ikke en datakvalitetsfeil, men en rasjonell arbeidsøkonomisk tilpasning der operatørene ikke bruker tid på å klassifisere korte henvendelser.
 - **F (Feilringing):** Innringer har ringt feil nummer eller har en sak som ikke angår 110.
 - **V (Viderevarsling):** Viderekobling til annen etat (politi/AMK) eller intern varsling.
 
-I den foreliggende analysen kvantifiseres primært beredskapskategoriene D-pri1 og D-aba i primærmodellen (variant A, avsnitt 6.4). Den utvidede modellen (variant B, avsnitt 6.5) inkluderer alle åtte kategorier for å kvantifisere samlet operativ belastning. Bindingstider for ikke-D-kategorier er enten empirisk kalibrert (L-aba: LABA-dybdeanalyse, 6 min) eller operativt estimert og validert av vaktleder (S, L-hendelse, L-ukjent, F, V).
+I den foreliggende analysen kvantifiseres primært beredskapskategoriene D-pri1 og D-aba i primærmodellen (variant A, avsnitt 6.4). Den utvidede modellen (variant B, avsnitt 6.5) inkluderer alle åtte kategorier for å kvantifisere samlet operativ belastning. Bindingstider for ikke-D-kategorier er enten empirisk kalibrert (L-aba: LABA-dybdeanalyse n=100, 4,5 min) eller operativt estimert og validert av vaktleder (S, L-hendelse, L-ukjent, F, V).
 
 ### Sentrale begreper: anrop, oppdrag og hendelse
 
@@ -242,7 +242,7 @@ Events per hendelsestype:
 |---|---|---:|---|
 | D-pri1 | 1 | 2 | Observert fra BRIS (median 14,1 min) |
 | D-aba | 1 alltid + 1 med sannsynlighet $p$ | 1 | Fase 1: 3 min / Fase 2: $Y$ min |
-| L-aba | 1 | 1 | 6 min (LABA-kalibrert) |
+| L-aba | 1 | 1 | 4,5 min (LABA n=100, mean 4,53) |
 | L-hendelse | 1 | 1 | 5 min |
 | L-ukjent | 1 | 1 | 3 min |
 | S | 1 | 1 | 2 min |
@@ -300,7 +300,7 @@ Fordi mange av estimatene er antakelser snarere enn målinger, kjøres modellen 
 | D-pri1 | Databasert | Databasert | Databasert |
 | D-aba Fase 1 | 3 min | 3 min | 3 min |
 | D-aba Fase 2 ($p$, $Y$) | 0,30, 3 min | 0,50, 6 min | 0,70, 10 min |
-| L-aba | 3 min (konservativ) | 6 min (LABA-mean) | 9 min (P90-nært) |
+| L-aba | 3 min (CI-nedre) | 4,5 min (LABA n=100 mean) | 7 min (over CI-øvre) |
 | L-hendelse | 3 min | 5 min | 8 min |
 | L-ukjent | 1 min | 3 min | 5 min |
 | S (Service) | 1 min | 2 min | 4 min |
@@ -370,13 +370,13 @@ For sporbarhet og kritisk vurdering oppsummeres her de sentrale antagelsene som 
 | A2 | D-pri1 binder makkerpar parallelt gjennom hele akuttfasen | $q = 2$, varighet databasert | Prosedyre + BRIS-tidsstempler (avsnitt 6.4.4) | Empirisk |
 | A3 | D-aba Fase 1 håndteres serielt av én operatør | $q = 1$, $d = 3$ min | Prosedyre + BRIS-verifisert (median 74 sek call-out) | Forankret + verifisert |
 | A4 | D-aba Fase 2 forekommer med $p = 0{,}50$ og $Y = 6$ min | hoved-scenario | Operativ samtale + sekvensgap-undergrense; sensitivitetstestet (avsnitt 7.7) | Forankret operativt estimat |
-| A5 | L-aba bindingstid = 6 min | hoved-verdi | LABA-dybdeanalyse n=30 Kilde=Alarm-subset, mean 5,88 min, CI [3,70; 8,56] | **Orienteringsanslag** — n=100 venter |
+| A5 | L-aba bindingstid = 4,5 min | hoved-verdi | LABA-dybdeanalyse n=100 Kilde=Alarm, mean 4,53 min, CI [3,74; 5,43] | **Empirisk kalibrert** (oppgradert fra orienteringsanslag etter n=100-runden 22.04.2026) |
 | A6 | Sammenstilte tilleggsanrop binder 1 min | per anrop | Operativ vurdering, ikke direkte målt | Forenklet antagelse |
 | A7 | Brudd-tilstand innebærer at solo-håndtering er operativt mulig, men med redusert kvalitetssikring og økt belastning. Konsekvensen for tjenestekvalitet er ikke direkte empirisk målt i denne studien | (kvalitativ) | Prosedyre + valideringssamtaler; kvalitetstapet drøftes i kap 8.2 med støtte i Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021) | Antagelse — ikke empirisk verifisert for 110 Sør-Vest |
 | A8 | Bindingstider for S, L-hendelse, L-ukjent, F, V (variant B) | tre sensitivitetsscenarioer | Operative estimater forelagt vaktleder | Operativt estimat med sensitivitetsspenn |
 
-Antagelsene er sortert etter sentralitet: A1–A4 driver hovedfunnet og er empirisk eller prosedyrforankret. A5–A6 har størst restusikkerhet og oppdateres når LABA n=100 er ferdig utfylt (jf. avsnitt 5.4). A7 er en tolkningsmessig antagelse som drøftes i kap 8.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 7.7.
+Antagelsene er sortert etter sentralitet: A1–A5 driver hovedfunnet og er empirisk eller prosedyrforankret (A5 oppgradert til empirisk kalibrert etter LABA n=100-runden 22.04.2026, jf. avsnitt 5.4). A6 (sammenstilte = 1 min) har størst restusikkerhet av de empiriske parametrene. A7 er en tolkningsmessig antagelse som drøftes i kap 8.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 7.7.
 
 ---
 
-*Kap 6 — Versjon 3.2 | Sist oppdatert: 2026-04-21 (antagelsestabell 6.7 + antagelsesfotnote 6.4.3)*
+*Kap 6 — Versjon 3.3 | Sist oppdatert: 2026-04-22 (LABA n=100, L-aba 6 → 4,5 min, A5 til empirisk kalibrert)*

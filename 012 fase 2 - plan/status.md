@@ -1,8 +1,8 @@
 # Prosjektstatus — LOG650 G20 Rune Grødem
 
-Statusdato: 2026-04-20
+Statusdato: 2026-04-22
 
-Denne statusen bygger på arbeidskopien per 2026-04-20, med prosjektstyringsplanen og WBS som referanse for avvik.
+Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplanen og WBS som referanse for avvik.
 
 ## Kort status
 
@@ -11,10 +11,12 @@ Denne statusen bygger på arbeidskopien per 2026-04-20, med prosjektstyringsplan
 - Erlang-C-grunnlinjen er fullført og brukes som kontrastpunkt.
 - Total belastningsmodell (variant B) og scenario +1 operatør er oppdatert med V3-semantikk.
 - **V3-klassifisering implementert gjennomgående:** L-aba og D-aba krever Kilde=Alarm. D-pri1 binder 2 ops (makkerpar), D-aba binder 1 op serielt (Fase 1 + valgfri Fase 2).
-- **Hovedresultat V3 (110 Sør-Vest 2025):** Natt/helg Svikt 32,6 % (variant A), 33,4 % (variant B hoved). +1 op halverer Svikt natt/helg til 16,7 %.
-- **LABA-utvalg utvidet til n=100** (20.04) — sendt til utfylling hos lokal operatør for å få smalere CI på L-aba-bindingstid enn n=30 ga ([3,70; 8,56]).
-- Gjenstående rapportarbeid: sammendrag/abstract (skrives sist), vedlegg (KI-erklæring, spørreskjemaer, DSB-ønskeliste, kode), synkronisering skjelett → kapittelfiler, referanseliste-finjustering.
-- Peer review planlagt fra 27. april (7 dager igjen). Rapportfrist 31. mai 2026.
+- **LABA n=100 ferdig utfylt 22.04** — Mean L-aba-bindingstid justert fra 5,88 min (n=30, CI [3,70; 8,56]) til **4,53 min (n=100, CI [3,74; 5,43])**. Hovedparameter satt til 4,5 min. Antagelse A5 oppgradert fra orienteringsanslag til empirisk kalibrert. Modell re-kjørt; sensitivitetsscenarioer endret til 3/4,5/7 min.
+- **Hovedresultat V3 (110 Sør-Vest 2025) etter LABA n=100:** Natt/helg Svikt 32,6 % (variant A), **33,2 %** (variant B hoved, marginal endring fra 33,4 %). +1 op halverer Svikt natt/helg til 16,7 %. Variant A er uendret (L-aba inngår ikke).
+- **PDF-pipeline etablert** (`verktoy/build_pdf.py`, Pandoc + XeLaTeX): samlet rapport-PDF (74 sider, A4, forside, ToC, alle kapitler med 5 figurer, referanser, vedlegg), DSB-ønskeliste-PDF, og 12 interaktive AcroForm-spørreskjemaer.
+- Spørreskjema regenerert med oppdatert L-aba-referanse (4,5 min, LABA n=100).
+- Gjenstående rapportarbeid: vedlegg-finpuss (KI-erklæring, spørreskjemaer, DSB-ønskeliste, kode), referanseliste-finjustering.
+- Peer review 27. april (5 dager igjen). Rapportfrist 31. mai 2026.
 - E-post sendt til DSB (bris-support) 5. april om vurdering av datadeling for peer review.
 
 ## Faktisk fremdrift
@@ -173,3 +175,4 @@ Denne statusen bygger på arbeidskopien per 2026-04-20, med prosjektstyringsplan
 | 2.1 | 2026-04-18 | Kap 8 ferdig, total belastningsmodell, VL-validering, V3-kategorikonsistens, litteraturliste v3.0. Nye arbeidspakker L8d/L13b/L14b/L17/L18 lagt til. R11 (skjemarespons) ny risiko. Neste steg omprioritert mot peer review 27.04 |
 | 2.2 | 2026-04-19 | LABA-dybdeanalyse (50 hendelser) utfylt av lokal operatør. V3-regel skjerpet: L-aba krever Kilde=Alarm. 2 065 oppdrag flyttet L-aba → L-hendelse. L-aba-bindingstid 3 → 6 min. Variant B natt/helg Normal 52 % → 44 %, Svikt 22 % → 26 %. L17 presisert: kun intern kalibrering, ingen eksterne sendinger ennå. R12 (heterogen nasjonal L-aba-klassifisering) ny risiko. L19 ny leveranse (V3-regelutvidelse). Kap 5/6/7 flagget for oppdatering |
 | 2.3 | 2026-04-20 | V3 op-binder-semantikk og D-pri1/D-aba-splitt implementert (L20). Alle hovedkapitler ferdig: kap 1, 3, 9 skrevet; kap 2, 4, 5, 6, 7, 8 oppdatert til V3. Scenario +1 op halverer Svikt natt/helg (33 → 17 %). LABA n=100-utvalg (L13c) sendt til utfylling. Rapport-status: kun sammendrag, vedlegg og skjelett-synk gjenstår før peer review. R8 (prokrastinering) nedgradert fra kritisk til redusert |
+| 2.4 | 2026-04-22 | **LABA n=100 ferdig utfylt** (L13c lukket). Hovedparameter L-aba: 6 min → **4,5 min** (mean 4,53 min, CI [3,74; 5,43]). Antagelse A5 oppgradert til empirisk kalibrert. Modell re-kjørt: variant B natt/helg Svikt 33,4 → 33,2 % (variant A uendret 32,6 %). Kap 5.4, 6.4.5, 6.7, 7.4.4, 7.7, 8.4.3 og 9 oppdatert. Spørreskjema regenerert med 4,5 min som Sør-Vest-referanse. **PDF-pipeline etablert** (`verktoy/build_pdf.py`, Pandoc + XeLaTeX): samlet rapport-PDF (74 sider med forside, ToC, 5 figurer), DSB-ønskeliste-PDF, 12 AcroForm-skjemaer. _forside_og_kap1.md og _referanser_og_vedlegg.md skapt for ren samlet bygging |

@@ -6,7 +6,7 @@ Denne diskusjonen knytter analysens fem hovedfunn (avsnitt 7.9) til problemstill
 >
 > - **RQ1 (ankomstrate og belastningsmønster):** Empirisk grunnlag etablert; topptung dagprofil og sårbar overgangssone ved skiftveksling kl. 19:00. Drøftes i 8.1.3 og 8.3.3.
 > - **RQ2 (håndteringstid og kapasitetsbinding):** Aktiv bindingstid (median 13,0 min) er vesentlig lenger enn samtaletid (3,4 min). Drøftes i 8.1.3.
-> - **RQ3 (ankomstkonflikt og dag/natt-gap):** Strukturelt gap dokumentert; svikt natt/helg 32,6 % (variant A) / 33,4 % (variant B). Drøftes i 8.2.1, 8.3.1 og 8.3.2.
+> - **RQ3 (ankomstkonflikt og dag/natt-gap):** Strukturelt gap dokumentert; svikt natt/helg 32,6 % (variant A) / 33,2 % (variant B). Drøftes i 8.2.1, 8.3.1 og 8.3.2.
 > - **RQ4 (ROS-grunnlaget):** Kvalitativt — uten kvantitativ benchmark. Drøftes i 8.3.4.
 > - **RQ5 (generaliserbarhet):** Teknisk overførbar, men forutsetter felles klassifisering. Drøftes i 8.3.4 og 8.4.1.
 
@@ -68,7 +68,7 @@ Disse funnene fra internasjonal og norsk forskning tyder på at kapasitetsproble
 
 Problemstillingen spør: *I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller?*
 
-Svaret er todelt. Erlang-C-analysen, som er den modelltypen nærmest gjeldende praksis for dimensjonering, gir inntrykk av at bemanningen er komfortabel (ρ < 6 %). Den prosedyrbaserte modellen viser at dette bildet er misvisende: med faktisk bemanning er 40,4 % av beredskapsanropene i brudd eller svikt (variant A), stigende til 46,0 % når total belastning inkluderes (variant B hoved). På natt/helg er over halvparten av beredskapsanropene i brudd eller svikt-tilstand (53,1 % variant A, 55,6 % variant B).
+Svaret er todelt. Erlang-C-analysen, som er den modelltypen nærmest gjeldende praksis for dimensjonering, gir inntrykk av at bemanningen er komfortabel (ρ < 6 %). Den prosedyrbaserte modellen viser at dette bildet er misvisende: med faktisk bemanning er 40,4 % av beredskapsanropene i brudd eller svikt (variant A), stigende til 45,6 % når total belastning inkluderes (variant B hoved). På natt/helg er over halvparten av beredskapsanropene i brudd eller svikt-tilstand (53,1 % variant A, 55,2 % variant B).
 
 Samsvaret mellom bemanning og kapasitetsbehov avhenger dermed av hvilken standard man måler mot. Mot en ren køteoretisk standard (ventetid < 30 sek) ser bemanningen tilstrekkelig ut. Mot en prosedyrbasert standard (makkerpar opprettholdt) er det et strukturelt gap — størst på natt/helg (c_eff = 2), der asymmetrien mellom kapasitet og makkerpar-kravet er mest akutt. Modellen avdekker også at kapasitetsgapet primært drives av pri-1-hendelser (D-pri1): én aktiv bygningsbrann eller trafikkulykke binder hele makkerparet på natt/helg, slik at neste beredskapsanrop i samme tidsvindu automatisk ankommer i svikt.
 
@@ -80,7 +80,7 @@ Denne asymmetrien er konsistent med Garnetts square-root staffing-logikk (kap 3.
 
 ### 8.3.3 Bakgrunnsbelastningens rolle
 
-Funn 5 viser at når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 58,9 % (−10 pp) og svikt øker fra 14,9 % til 22,0 %. Effekten skyldes primært servicevolumet (22 542 overføringstester per år) som er konsentrert på dagtid.
+Funn 5 viser at når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 59,5 % (−9,7 pp) og svikt øker fra 14,9 % til 21,6 %. Effekten skyldes primært servicevolumet (22 542 overføringstester per år) som er konsentrert på dagtid.
 
 Dette funnet har implikasjoner for organisering. Ved 110 Sør-Vest håndterer de samme operatørene som tar nødanrop også servicetester. Midt-Norge 110 har en annen modell der servicetesting er skilt ut til dedikert personell. Van Buuren et al. (2017) viser gjennom DES-simulering at funksjonsdifferensiering — der ulike oppgavetyper håndteres av spesialiserte roller — kan forbedre kapasitetsbildet uten å endre bemanningsnivå. Jouini, Dallery og Nait-Abdallah (2008) finner tilsvarende at team-organisering med spesialisering kan oppnå høyere agenteffektivitet enn full pooling, fordi motivasjon og spesialistkompetanse kan veie opp for det statistiske tapet ved å ikke poole.
 
@@ -122,9 +122,9 @@ Ring-flom (call surge) fra flere innringere som melder samme hendelse er delvis 
 
 ### 8.4.3 Antakelser med konsekvenser
 
-Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba: LABA-dybdeanalyse, 50 trukne hendelser / 49 gyldige — hovedparameter bygger på Kilde=Alarm-subsettet, n = 30) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V — forelagt vaktleder for validering). Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over hele spennet av rimelige antakelser — svikt på natt/helg er 30–38 % i alle scenarioer. D-aba Fase 2-parametrene ($p = 0,30/0,50/0,70$; $Y = 3/6/10$ min) fanger både operatørvurderingen og empirisk underkant-estimat fra sekvensgap-metoden.
+Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba: LABA-dybdeanalyse, 100 trukne hendelser / 100 gyldige — hovedparameter bygger på Kilde=Alarm-subsettet, n = 100) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V — forelagt vaktleder for validering). Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over hele spennet av rimelige antakelser — svikt på natt/helg er 30–37 % i alle scenarioer. D-aba Fase 2-parametrene ($p = 0,30/0,50/0,70$; $Y = 3/6/10$ min) fanger både operatørvurderingen og empirisk underkant-estimat fra sekvensgap-metoden.
 
-LABA-hovedparameteren bygger på Kilde=Alarm-subsettet (n = 30) og har 95 % CI [3,70; 8,56] min for mean — en reell og betydelig usikkerhet. Et utvidet utvalg (n = 100) er under innhenting og inngår ikke i hovedresultatet i denne rapportversjonen; ny mean kan medføre en mindre revisjon. Median (2,87 min) og høy-scenario (9 min) er dekket i sensitivitetsanalysen.
+LABA-hovedparameteren bygger på Kilde=Alarm-subsettet (n = 100) og har 95 % CI [3,74; 5,43] min for mean — substansielt strammere enn første runde (n = 30, CI [3,70; 8,56]). Median (3,27 min) og høy-scenario (7 min) er dekket i sensitivitetsanalysen. Endringen fra n=30 til n=100 reduserte hovedverdien fra 6 min til 4,5 min og senket variant B-Svikt på natt/helg marginalt (33,4 → 33,2 %).
 
 Antagelsen om at sammenstilte anrop har 1 minutts bindingstid er en forenkling. Dersom reell bindingstid er høyere (f.eks. 2–3 minutter for anrop der innringer er stresset), undervurderer modellen effekten av skjulte anrop ytterligere.
 

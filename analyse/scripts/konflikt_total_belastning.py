@@ -58,15 +58,16 @@ DABA_FASE2_OFFSET_MIN = 1.5   # 90 sek foersinkelse foer evt. noedtelefon
 SEED_DABA = 20260419  # reproduserbar fase-2-sampling
 
 # Bindingstider og D-aba-parametre per scenario
-# L-aba: hoved 6 min fra LABA-dybdeanalyse (mean 5.88 for Kilde=Alarm-subset)
+# L-aba: hoved 4.5 min fra LABA-dybdeanalyse n=100 (mean 4.53, 95% CI [3.74; 5.43])
+#        Erstatter tidligere n=30-anslag (mean 5.88, CI [3.70; 8.56])
 # D-aba fase 2: p = andel D-aba med noedtelefon-oppfoelging; Y = bindingstid
-# L-aba scenario-spenn: 3 min (konservativ) til 9 min (langhalede industrivern)
+# L-aba scenario-spenn (n=100): 3 min (CI-nedre) til 7 min (over CI-oevre)
 SCENARIOS = {
-    "lav":   {"S": 1, "L-aba": 3, "L-hendelse": 3, "L-ukjent": 1, "F": 0.25, "V": 0.5,
+    "lav":   {"S": 1, "L-aba": 3,   "L-hendelse": 3, "L-ukjent": 1, "F": 0.25, "V": 0.5,
               "daba_p": 0.30, "daba_Y": 3},
-    "hoved": {"S": 2, "L-aba": 6, "L-hendelse": 5, "L-ukjent": 3, "F": 0.5,  "V": 1,
+    "hoved": {"S": 2, "L-aba": 4.5, "L-hendelse": 5, "L-ukjent": 3, "F": 0.5,  "V": 1,
               "daba_p": 0.50, "daba_Y": 6},
-    "hoey":  {"S": 4, "L-aba": 9, "L-hendelse": 8, "L-ukjent": 5, "F": 1,    "V": 2,
+    "hoey":  {"S": 4, "L-aba": 7,   "L-hendelse": 8, "L-ukjent": 5, "F": 1,    "V": 2,
               "daba_p": 0.70, "daba_Y": 10},
 }
 
