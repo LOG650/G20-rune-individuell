@@ -22,7 +22,7 @@ Ankomstraten er estimert per skifttype: 2,57 anrop/t (dag/hverdag), 2,06 (dag/he
 
 **RQ2: Hva er gjennomsnittlig håndteringstid (μ⁻¹) per hendelseskategori, og i hvilken grad binder aktivt hendelsebilde operatørkapasitet utover samtaletid?**
 
-Modellen skiller mellom D-pri1 (pri-1-utrykning, makkerpar, median 14,1 min × 2 ops) og D-aba (ABA-utrykning, serial 3 min + valgfri Fase 2 på 6 min). L-aba er empirisk kalibrert til 6 min via LABA-dybdeanalysen (mean fra 50-hendelsers utvalg). Aktivt hendelsebilde binder operatørkapasitet vesentlig utover samtaletid — samtalen utgjør kun første del av akuttfasen, og operatørene er bundet frem til ressursene er fremme og loggføring er kvittert.
+Modellen skiller mellom D-pri1 (pri-1-utrykning, makkerpar, median 14,1 min × 2 ops) og D-aba (ABA-utrykning, serial 3 min + valgfri Fase 2 på 6 min). L-aba er empirisk kalibrert til 4,5 min via LABA-dybdeanalysen runde 2 (n=100, mean 4,53 min, 95 % CI [3,74; 5,43]). Aktivt hendelsebilde binder operatørkapasitet vesentlig utover samtaletid — samtalen utgjør kun første del av akuttfasen, og operatørene er bundet frem til ressursene er fremme og loggføring er kvittert.
 
 **RQ3: I hvilken andel av beredskapsanropene ankommer anropet i en tilstand der sentralens operative driftsstandard (makkerpar) ikke kan opprettholdes — og hva er det strukturelle kapasitetsgapet mellom hverdag og helg?**
 

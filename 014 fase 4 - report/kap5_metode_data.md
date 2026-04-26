@@ -337,7 +337,7 @@ Analysen er gjennomført i følgende steg:
 | 3 | Beregning av bindingstid for observerte D-pri1 (median 14,1 min) | BRIS/LEO | Beregnet |
 | 4 | Imputering av bindingstid for D-pri1 uten fremme-tidspunkt med median | Steg 3 | Imputert |
 | 5 | Ekspansjon av D-aba til Fase 1 (alltid) + Fase 2 (med sannsynlighet $p$) | Operativ prosedyre + scenarioer | Modellbasert |
-| 6 | Empirisk kalibrering av L-aba-bindingstid til 6 min | LABA-dybdeanalyse (avsnitt 5.4) | Empirisk |
+| 6 | Empirisk kalibrering av L-aba-bindingstid til 4,5 min | LABA-dybdeanalyse n=100 (avsnitt 5.4) | Empirisk |
 | 7 | Estimering av sammenstilte anrop gjennom sekvensgap i 110_ID: 18 901 anrop | BRIS/LEO | Estimert |
 | 8 | Ekspansjon av hver hendelse til op-binder-events med (bindingstid, ops_bundet) | Steg 2–7 | Beregnet |
 | 9 | Sweep-algoritme: beregn $n_{\text{aktive}}$ ved hvert ankomsttidspunkt | Steg 8 | Beregnet |
@@ -360,7 +360,7 @@ Analysens sentrale metrikk — kapasitetsnivå ved ankomst — bygger på observ
 - **Sammenstilte anrop estimeres indirekte.** Sekvensgapmetoden gir et estimat på antall, men det eksakte tidspunktet og varigheten for hvert enkelt anrop er ikke observert.
 - **D-aba Fase 2-sannsynligheten $p$ er delvis empirisk underbygd.** Sekvensgap-metoden gir underkant-estimat (17–37 % avhengig av tidsvindu) fordi nødtelefoner logget inni hovedoppdraget er usynlige. Hovedscenario $p = 0{,}50$ reflekterer operatørens kvalitative vurdering.
 - **Imputering med median.** De ~25 % av D-pri1-hendelsene med imputert bindingstid kan avvike fra faktisk varighet, særlig for tyngre hendelser.
-- **LABA-dybdeanalysen har begrenset utvalgsstørrelse (n = 30 for Kilde=Alarm-subset).** 95 % CI for mean er [3,70; 8,56], noe som reflekterer reell usikkerhet rundt L-aba-parameterets eksakte verdi.
+- **LABA-dybdeanalysen har fortsatt begrenset utvalgsstørrelse, men er styrket i runde 2 (n = 100 for Kilde=Alarm).** 95 % CI for mean er [3,74; 5,43], som gjør L-aba-parameteren langt bedre kalibrert enn runde 1 (n = 30), men fortsatt avgrenset til 110 Sør-Vest 2025.
 
 Begrensningene trekker i hovedsak i én retning: mot at analysen gir et konservativt estimat av faktisk kapasitetsbelastning.
 

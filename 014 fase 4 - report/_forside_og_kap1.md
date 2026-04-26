@@ -2,7 +2,7 @@
 title: "Kapasitetsstyring og bemanningsdimensjonering ved norske 110-sentraler"
 subtitle: "En analyse av operatørkapasitet med prosedyrbasert ankomstkonfliktmodell"
 author: "Rune Grødem · G20 Individuell"
-date: "April 2026 · Hoved-utkast"
+date: "April 2026 · Peer review-utkast"
 abstract: |
   Norske 110-sentraler er kritisk beredskapsinfrastruktur som mottar nødmeldinger og koordinerer brann- og redningsinnsats. Bemanningsnivået fastsettes lokalt gjennom risiko- og beredskapsanalyser (ROS), men det finnes ingen nasjonal, kvantitativ standard for hvordan operativ belastning oversettes til konkret bemanning. Brannvesenet har derimot en egen dimensjoneringsforskrift (FOR-2023-01-06-23) som setter kvantitative krav basert på innbyggertall og responstid.
 

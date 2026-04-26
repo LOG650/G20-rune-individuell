@@ -124,7 +124,7 @@ Det offisielle HiMolde-skjemaet «Erklæring om bruk av kunstig intelligens» le
 
 ### Vedlegg E — LABA-dybdeanalyse (detaljert metode)
 
-Dybdeanalysen av L-aba-bindingstid er dokumentert i kap 5.4. Rådata (50 trukne hendelser / 49 gyldige, Kilde=Alarm-subset n=30) ligger i `004 data/laba_sorvest_2025_dybdeanalyse.xlsx`. Utvidet utvalg (n=100) er under innhenting og inngår ikke i hovedresultatet i denne rapportversjonen.
+Dybdeanalysen av L-aba-bindingstid er dokumentert i kap 5.4. Første runde (50 trukne hendelser / 49 gyldige, Kilde=Alarm-subset n=30) ligger i `analyse/laba_sorvest_2025_dybdeanalyse ferdig utfylt.xlsx`. Utvidet runde 2 (n=100, alle Kilde=Alarm) ligger i `analyse/uttrekk/Kopi av laba_sorvest_2025_dybdeanalyse_n100-ferdig utfylt.xlsx` og inngår som hovedgrunnlag for rapportens L-aba-parameter (mean 4,53 min, 95 % CI [3,74; 5,43]).
 
 ### Vedlegg F — VL-validering av bindingstider
 
@@ -134,5 +134,5 @@ Empirisk validering av forutsetningen $c_{\text{eff}} = c_{\text{total}} - 1$ (v
 
 - `011 fase 1 - proposal/Proposal_LOG650_G20_Rune_110_v3.md` — godkjent proposal
 - `012 fase 2 - plan/Prosjektstyringsplan_G20_Rune_110.md` — prosjektstyringsplan v1.8
-- `012 fase 2 - plan/status.md` — løpende statuslogg v2.3
+- `012 fase 2 - plan/status.md` — løpende statuslogg v2.4
 - `012 fase 2 - plan/Gantt_LOG650_G20_Rune_110.mpp` / `.xml` — Gantt-diagram

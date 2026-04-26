@@ -47,7 +47,7 @@
 	<MoveCompletedEndsForward>0</MoveCompletedEndsForward>
 	<BaselineForEarnedValue>0</BaselineForEarnedValue>
 	<AutoAddNewResourcesAndTasks>1</AutoAddNewResourcesAndTasks>
-	<StatusDate>2026-04-20T17:00:00</StatusDate>
+	<StatusDate>2026-04-22T17:00:00</StatusDate>
 	<CurrentDate>2026-04-21T08:00:00</CurrentDate>
 	<MicrosoftProjectServerURL>1</MicrosoftProjectServerURL>
 	<Autolink>0</Autolink>
@@ -98,14 +98,14 @@
 			<IsCustomized>true</IsCustomized>
 		</Table>
 	</Tables>
-	<Maps/>
-	<Reports/>
-	<Drawings/>
-	<DataLinks/>
-	<VBAProjects/>
-	<OutlineCodes/>
-	<WBSMasks/>
-	<ExtendedAttributes/>
+	<Maps />
+	<Reports />
+	<Drawings />
+	<DataLinks />
+	<VBAProjects />
+	<OutlineCodes />
+	<WBSMasks />
+	<ExtendedAttributes />
 	<Calendars>
 		<Calendar>
 			<UID>1</UID>
@@ -1113,7 +1113,7 @@
 				<Start>2026-03-07T08:00:00</Start>
 				<Finish>2026-03-07T17:00:00</Finish>
 				<Unit>2</Unit>
-				<Value></Value>
+				<Value />
 			</TimephasedData>
 		</Task>
 		<Task>
@@ -2228,7 +2228,7 @@
 			<FinishSlack>81600</FinishSlack>
 			<FixedCost>0</FixedCost>
 			<FixedCostAccrual>1</FixedCostAccrual>
-			<PercentComplete>76</PercentComplete>
+			<PercentComplete>93</PercentComplete>
 			<PercentWorkComplete>0</PercentWorkComplete>
 			<Cost>0</Cost>
 			<OvertimeCost>0</OvertimeCost>
@@ -3679,7 +3679,7 @@
 			<FinishSlack>48000</FinishSlack>
 			<FixedCost>0</FixedCost>
 			<FixedCostAccrual>1</FixedCostAccrual>
-			<PercentComplete>58</PercentComplete>
+			<PercentComplete>100</PercentComplete>
 			<PercentWorkComplete>0</PercentWorkComplete>
 			<Cost>0</Cost>
 			<OvertimeCost>0</OvertimeCost>
@@ -3902,7 +3902,7 @@
 				<Unit>2</Unit>
 				<Value>3.85</Value>
 			</TimephasedData>
-		</Task>
+		<ActualFinish>2026-04-19T17:00:00</ActualFinish></Task>
 		<Task>
 			<UID>23</UID>
 			<GUID>067BAC31-4A3D-F111-A1DC-1091D1EC98BA</GUID>
@@ -4254,7 +4254,7 @@
 			<LevelingDelay>0</LevelingDelay>
 			<LevelingDelayFormat>8</LevelingDelayFormat>
 			<IgnoreResourceCalendar>0</IgnoreResourceCalendar>
-			<Notes>Uke 15-16. Nasjonal dimensjoneringsmodell-ambisjon. Omfang tilpasses tilgjengelige data.</Notes>
+			<Notes>Uke 15-16. Nasjonal dimensjoneringsmodell-ambisjon. Omtalt i kap 7.7 og 8.3, styrket av L8d/L14b. Endelig finpuss i sluttfase.</Notes>
 			<HideBar>0</HideBar>
 			<Rollup>0</Rollup>
 			<BCWS>0.00</BCWS>
@@ -4395,7 +4395,7 @@
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
 			<ActualStart>2026-04-04T08:00:00</ActualStart>
-			<ActualFinish>2026-04-10T17:00:00</ActualFinish>
+			<ActualFinish>2026-04-19T17:00:00</ActualFinish>
 			<ActualDuration>PT40H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -4417,7 +4417,7 @@
 			<LevelingDelay>0</LevelingDelay>
 			<LevelingDelayFormat>8</LevelingDelayFormat>
 			<IgnoreResourceCalendar>0</IgnoreResourceCalendar>
-			<Notes>Uke 16. Beredskapsperspektiv: lav utnyttelse ≠ overbemanning.</Notes>
+			<Notes>Kap 7 og 8 ferdig 19.04 v2.0/v1.1. Beredskapsperspektiv: lav utnyttelse er ikke lik overbemanning.</Notes>
 			<HideBar>0</HideBar>
 			<Rollup>0</Rollup>
 			<BCWS>0.00</BCWS>
@@ -4571,7 +4571,7 @@
 				<Start>2026-04-19T08:00:00</Start>
 				<Finish>2026-04-19T17:00:00</Finish>
 				<Unit>2</Unit>
-				<Value></Value>
+				<Value />
 			</TimephasedData>
 		</Task>
 		<Task>
@@ -4629,7 +4629,7 @@
 			<Cost>0</Cost>
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
-			<ActualStart>2026-04-07T08:00:00</ActualStart>
+			<ActualStart>2026-04-19T08:00:00</ActualStart>
 			<ActualFinish>2026-04-19T17:00:00</ActualFinish>
 			<ActualDuration>PT8H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
@@ -4767,9 +4767,9 @@
 				<Start>2026-04-19T08:00:00</Start>
 				<Finish>2026-04-19T17:00:00</Finish>
 				<Unit>2</Unit>
-				<Value></Value>
+				<Value />
 			</TimephasedData>
-		</Task>
+		<Notes>Skrevet samlet 19.04.</Notes></Task>
 		<Task>
 			<UID>36</UID>
 			<GUID>137BAC31-4A3D-F111-A1DC-1091D1EC98BA</GUID>
@@ -4825,7 +4825,7 @@
 			<Cost>0</Cost>
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
-			<ActualStart>2026-04-07T08:00:00</ActualStart>
+			<ActualStart>2026-04-19T08:00:00</ActualStart>
 			<ActualFinish>2026-04-19T17:00:00</ActualFinish>
 			<ActualDuration>PT8H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
@@ -4963,9 +4963,9 @@
 				<Start>2026-04-19T08:00:00</Start>
 				<Finish>2026-04-19T17:00:00</Finish>
 				<Unit>2</Unit>
-				<Value></Value>
+				<Value />
 			</TimephasedData>
-		</Task>
+		<Notes>Skrevet samlet 19.04. Overlapper L12, behold begge for sporbarhet.</Notes></Task>
 		<Task>
 			<UID>37</UID>
 			<GUID>147BAC31-4A3D-F111-A1DC-1091D1EC98BA</GUID>
@@ -5103,9 +5103,9 @@
 				<Start>2026-04-19T08:00:00</Start>
 				<Finish>2026-04-19T17:00:00</Finish>
 				<Unit>2</Unit>
-				<Value></Value>
+				<Value />
 			</TimephasedData>
-		</Task>
+		<Notes>Ferdig v1.1.</Notes></Task>
 		<Task>
 			<UID>38</UID>
 			<GUID>157BAC31-4A3D-F111-A1DC-1091D1EC98BA</GUID>
@@ -5161,8 +5161,8 @@
 			<Cost>0</Cost>
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
-			<ActualStart>2026-04-19T17:00:00</ActualStart>
-			<ActualFinish>2026-04-20T17:00:00</ActualFinish>
+			<ActualStart>2026-04-19T08:00:00</ActualStart>
+			<ActualFinish>2026-04-19T17:00:00</ActualFinish>
 			<ActualDuration>PT8H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -5205,7 +5205,7 @@
 				<Unit>2</Unit>
 				<Value>100</Value>
 			</TimephasedData>
-		</Task>
+		<Notes>Skrevet samlet 19.04.</Notes></Task>
 		<Task>
 			<UID>39</UID>
 			<GUID>167BAC31-4A3D-F111-A1DC-1091D1EC98BA</GUID>
@@ -5261,7 +5261,7 @@
 			<Cost>0</Cost>
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
-			<ActualStart>2026-04-20T08:00:00</ActualStart>
+			<ActualStart>2026-04-19T08:00:00</ActualStart>
 			<ActualDuration>PT12H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -5456,7 +5456,7 @@
 				<Unit>1</Unit>
 				<Value>2.5</Value>
 			</TimephasedData>
-		</Task>
+		<Notes>Gjenstår frem til peer review-frist 27.04: sammendrag, vedlegg, skjelett-synk og referanseliste.</Notes></Task>
 		<Task>
 			<UID>40</UID>
 			<GUID>177BAC31-4A3D-F111-A1DC-1091D1EC98BA</GUID>
@@ -5513,7 +5513,7 @@
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
 			<ActualStart>2026-04-15T08:00:00</ActualStart>
-			<ActualFinish>2026-04-20T17:00:00</ActualFinish>
+			<ActualFinish>2026-04-18T17:00:00</ActualFinish>
 			<ActualDuration>PT32H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -5655,7 +5655,7 @@
 			<FinishSlack>115200</FinishSlack>
 			<FixedCost>0</FixedCost>
 			<FixedCostAccrual>1</FixedCostAccrual>
-			<PercentComplete>69</PercentComplete>
+			<PercentComplete>70</PercentComplete>
 			<PercentWorkComplete>70</PercentWorkComplete>
 			<Cost>0</Cost>
 			<OvertimeCost>0</OvertimeCost>
@@ -5864,7 +5864,7 @@
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
 			<ActualStart>2026-04-17T08:00:00</ActualStart>
-			<ActualFinish>2026-04-20T17:00:00</ActualFinish>
+			<ActualFinish>2026-04-18T17:00:00</ActualFinish>
 			<ActualDuration>PT16H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -5996,7 +5996,7 @@
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
 			<ActualStart>2026-04-18T08:00:00</ActualStart>
-			<ActualFinish>2026-04-21T17:00:00</ActualFinish>
+			<ActualFinish>2026-04-19T17:00:00</ActualFinish>
 			<ActualDuration>PT16H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -6128,7 +6128,7 @@
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
 			<ActualStart>2026-04-18T08:00:00</ActualStart>
-			<ActualFinish>2026-04-21T17:00:00</ActualFinish>
+			<ActualFinish>2026-04-19T17:00:00</ActualFinish>
 			<ActualDuration>PT16H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -6260,7 +6260,7 @@
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
 			<ActualStart>2026-04-17T08:00:00</ActualStart>
-			<ActualFinish>2026-04-21T17:00:00</ActualFinish>
+			<ActualFinish>2026-04-19T17:00:00</ActualFinish>
 			<ActualDuration>PT24H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -6281,7 +6281,7 @@
 			<LevelingDelay>0</LevelingDelay>
 			<LevelingDelayFormat>8</LevelingDelayFormat>
 			<IgnoreResourceCalendar>0</IgnoreResourceCalendar>
-			<Notes>LABA Sør-Vest n=50 utfylt. Første dybdeanalyse før n=100-runde.</Notes>
+			<Notes>Status.md-ref: L13b. LABA Sør-Vest n=50 utfylt. Første dybdeanalyse før n=100-runde.</Notes>
 			<HideBar>0</HideBar>
 			<Rollup>0</Rollup>
 			<BCWS>0.00</BCWS>
@@ -6348,7 +6348,7 @@
 			<UID>46</UID>
 			<GUID>1D7BAC31-4A3D-F111-A1DC-1091D1EC98BA</GUID>
 			<ID>40</ID>
-			<Name>L13c — LABA Sør-Vest dybdeanalyse n=100 (sendt 20.04, venter)</Name>
+			<Name>L13c — LABA Sør-Vest dybdeanalyse n=100 (ferdig utfylt)</Name>
 			<Active>1</Active>
 			<Manual>0</Manual>
 			<Type>0</Type>
@@ -6394,7 +6394,7 @@
 			<FinishSlack>120000</FinishSlack>
 			<FixedCost>0</FixedCost>
 			<FixedCostAccrual>1</FixedCostAccrual>
-			<PercentComplete>33</PercentComplete>
+			<PercentComplete>100</PercentComplete>
 			<PercentWorkComplete>30</PercentWorkComplete>
 			<Cost>0</Cost>
 			<OvertimeCost>0</OvertimeCost>
@@ -6420,7 +6420,7 @@
 			<LevelingDelay>0</LevelingDelay>
 			<LevelingDelayFormat>8</LevelingDelayFormat>
 			<IgnoreResourceCalendar>0</IgnoreResourceCalendar>
-			<Notes>LABA n=100 sendt 20.04 — venter på utfylling og retur.</Notes>
+			<Notes>Status.md-ref: L13c. LABA n=100 ferdig utfylt 22.04 — mean 4,53 min, 95 % CI [3,74; 5,43].</Notes>
 			<HideBar>0</HideBar>
 			<Rollup>0</Rollup>
 			<BCWS>0.00</BCWS>
@@ -6458,7 +6458,7 @@
 				<Unit>2</Unit>
 				<Value>16.67</Value>
 			</TimephasedData>
-		</Task>
+		<ActualFinish>2026-04-22T17:00:00</ActualFinish></Task>
 		<Task>
 			<UID>47</UID>
 			<GUID>1E7BAC31-4A3D-F111-A1DC-1091D1EC98BA</GUID>
@@ -6515,7 +6515,7 @@
 			<OvertimeCost>0</OvertimeCost>
 			<OvertimeWork>PT0H0M0S</OvertimeWork>
 			<ActualStart>2026-04-16T08:00:00</ActualStart>
-			<ActualFinish>2026-04-20T17:00:00</ActualFinish>
+			<ActualFinish>2026-04-18T17:00:00</ActualFinish>
 			<ActualDuration>PT24H0M0S</ActualDuration>
 			<ActualCost>0</ActualCost>
 			<ActualOvertimeCost>0</ActualOvertimeCost>
@@ -6536,7 +6536,7 @@
 			<LevelingDelay>0</LevelingDelay>
 			<LevelingDelayFormat>8</LevelingDelayFormat>
 			<IgnoreResourceCalendar>0</IgnoreResourceCalendar>
-			<Notes>Nasjonal 2025-analyse — per sentral (alle 12 norske 110-sentraler).</Notes>
+			<Notes>Status.md-ref: L14b. Nasjonal 2025-analyse — per sentral (alle 12 norske 110-sentraler).</Notes>
 			<HideBar>0</HideBar>
 			<Rollup>0</Rollup>
 			<BCWS>0.00</BCWS>
