@@ -47,3 +47,14 @@ node_modules/
 package-lock.json
 package.json
 .mcp.json
+
+# ============================================================
+# Claude Code — lokale settings
+# ============================================================
+.claude/
+
+# ============================================================
+# Gantt — backup-filer fra redigeringsverktoy
+# ============================================================
+012 fase 2 - plan/*.bak_*
+012 fase 2 - plan/*_bak_*
