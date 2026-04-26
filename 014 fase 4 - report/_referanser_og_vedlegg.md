@@ -60,11 +60,9 @@ Leonardsen, A.-C. L., Bjørnsen, A. C., Hardeland, C., Hellesø, R., & Grøndahl
 
 Leonardsen, A.-C. L., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2021). Work experiences of emergency medical dispatchers in Norway: a qualitative study. *BMC Health Services Research, 21*.
 
-Mandelbaum, A., & Zeltyn, S. (2005). Service engineering: Data-based course development and teaching. *Annals of Operations Research, 144*(1), 121–155.
-
 Matteson, D. S., McLean, M. W., Woodard, D. B., & Henderson, S. G. (2011). Forecasting emergency medical service call arrival rates. *The Annals of Applied Statistics*, *5*(2B), 1379–1406.
 
-McNamee, M., Sjöström, J., Glansberg, K., Stølen, R., Steen-Hansen, A., & Mikalsen, R. F. (2025). *Nordic fire and rescue services — capacity, dimensioning and future challenges* (FIRE21-prosjektet). RISE Fire Research / NordForsk.
+McNamee, M., Johansson, N., Frykmer, T., Johnson, P., Vylund, L., Eriksson, K., Steen-Hansen, A., Gjøsund, G., Haavik, T., Almklov, P., Grothe-Hammer, M., Markert, F., Allerup, M., & Hansen, P. (2024). *FIRE21 — Nordic fire and rescue services, problem-solving in the 21st century* (Final report, Lund University Report 3267). NORDFORSK.
 
 Meld. St. 16. (2023–2024). *Felles verdier — felles ansvar*. Justis- og beredskapsdepartementet.
 
@@ -80,7 +78,7 @@ Penverne, Y., Martinez, V., Cellier, N., Le Conte, P., Jenvrin, J., Hardouin, J.
 
 Rehn, M., Hyldmo, P. K., Magnusson, V., Kurola, J., Kongstad, P., Rognås, L., Juvet, L. K., & Sandberg, M. (2021). Scandinavian SSAI clinical practice guideline on pre-hospital airway management — dispatch accuracy in the Norwegian helicopter emergency medical service. *Scandinavian Journal of Trauma, Resuscitation and Emergency Medicine, 29*.
 
-RISE Fire Research. (2017). *Brannstudien — Underlag for dimensjonering av norsk brannvesen* (RISE-rapport). RISE Fire Research / SINTEF Norlab.
+Storesund, K., Hox, K., Steen-Hansen, A., Sesseng, C., & Ishol, A. M. (2017). *Utredning i forbindelse med brannvesenets dimensjonering* (RISE Fire Research, Rapport A17 20323:2 — oppdrag fra DSB). SP Fire Research AS.
 
 Rogaland brann og redning IKS. (2024). *Prosedyre arbeidsmetodikk, utalarmering og loggføring* (versjon 4, 16.12.2024). [Intern prosedyre.]
 
@@ -96,7 +94,9 @@ Vera Institute. (2019). *Behind the call: Understanding the work of 9-1-1 dispat
 
 Wallace, R. B., & Whitt, W. (2005). A staffing algorithm for call centers with skill-based routing. *Manufacturing & Service Operations Management*, *7*(4), 276–294.
 
-Whitt, W. (1999). Predicting queue lengths and delays in single-server and multi-server queues with time-varying arrival rates. *Management Science*, *45*(6), 870–888. [Sitert i kap 3.4 som «Whitt, 1996» — fullstendig referanse verifiseres mot original ved endelig levering.]
+Whitt, W. (1999). Improving service by informing customers about anticipated delays. *Management Science*, *45*(2), 192–207. [Sitert i kap 2.2 og 3.4 som «Whitt, 1996»; sitatform korrigeres til «Whitt, 1999» ved endelig levering når original er verifisert.]
+
+Zeltyn, S., & Mandelbaum, A. (2005). Call centers with impatient customers: Many-server asymptotics of the M/M/n+G queue. *Queueing Systems, 51*(3–4), 361–402.
 
 ---
 

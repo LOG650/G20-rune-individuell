@@ -1,14 +1,14 @@
 # 8. Diskusjon
 
-Denne diskusjonen knytter analysens fem hovedfunn (avsnitt 7.9) til problemstillingen, relevant teori og praktiske implikasjoner. Diskusjonen er strukturert rundt fire tema: det metodiske argumentet for en prosedyrbasert modell fremfor klassisk køteori, forholdet mellom modellprediksjoner og opplevd virkelighet, implikasjoner for bemanningsdimensjonering, og begrensninger og videre forskning.
+Denne diskusjonen knytter analysens fem hovedfunn (avsnitt 7.11) til problemstillingen, relevant teori og praktiske implikasjoner. Diskusjonen er strukturert rundt fire tema: det metodiske argumentet for en prosedyrbasert modell fremfor klassisk køteori, forholdet mellom modellprediksjoner og opplevd virkelighet, implikasjoner for bemanningsdimensjonering, og begrensninger og videre forskning.
 
 > **Kort oversikt — diskusjonens svar på RQ1–RQ5** (fulltekstsvar i kap 9.2):
 >
 > - **RQ1 (ankomstrate og belastningsmønster):** Empirisk grunnlag etablert; topptung dagprofil og sårbar overgangssone ved skiftveksling kl. 19:00. Drøftes i 8.1.3 og 8.3.3.
 > - **RQ2 (håndteringstid og kapasitetsbinding):** Aktiv bindingstid (median 13,0 min) er vesentlig lenger enn samtaletid (3,4 min). Drøftes i 8.1.3.
 > - **RQ3 (ankomstkonflikt og dag/natt-gap):** Strukturelt gap dokumentert; svikt natt/helg 32,6 % (variant A) / 33,2 % (variant B). Drøftes i 8.2.1, 8.3.1 og 8.3.2.
-> - **RQ4 (ROS-grunnlaget):** Kvalitativt — uten kvantitativ benchmark. Drøftes i 8.3.4.
-> - **RQ5 (generaliserbarhet):** Teknisk overførbar, men forutsetter felles klassifisering. Drøftes i 8.3.4 og 8.4.1.
+> - **RQ4 (ROS-grunnlaget):** Kvalitativt — uten kvantitativ benchmark. Resultatobservasjoner i 7.8; vurdering i 8.3.4.
+> - **RQ5 (generaliserbarhet):** Teknisk overførbar, men forutsetter felles klassifisering. Nasjonal benchmarking i 7.9; drøftes i 8.3.4 og 8.4.1.
 
 ## 8.1 Hvorfor Erlang-C er utilstrekkelig — og hva som erstatter den
 

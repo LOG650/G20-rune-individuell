@@ -30,7 +30,7 @@ der $\beta > 0$ er en parameter som reflekterer ønsket servicenivå. Resultatet
 
 Feldman, Mandelbaum, Massey og Whitt (2008) uttrykker dette direkte: *«When the load is small, the addition or removal of a single server will greatly affect the delay probability.»* For en 110-sentral med $c_{\text{eff}} = 2$ på natt/helg er denne følsomheten ekstrem — én operatør utgjør halve den operative kapasiteten.
 
-Garnett, Mandelbaum og Reiman (2002) og Mandelbaum og Zeltyn (2005) utvidet rammeverket til Erlang-A (M/M/c+M), der kunder forlater systemet etter en eksponentielt fordelt tålmodighetsterskel. For 110 er dette operativt relevant: anrop som ikke besvares innen 30 sekunder overføres automatisk til Agder 110 — en tålmodighetsmekanisme som bryter med Erlang-C-forutsetningen om uendelig kø.
+Garnett, Mandelbaum og Reiman (2002) og Zeltyn og Mandelbaum (2005) utvidet rammeverket til Erlang-A (M/M/c+M), der kunder forlater systemet etter en eksponentielt fordelt tålmodighetsterskel. For 110 er dette operativt relevant: anrop som ikke besvares innen 30 sekunder overføres automatisk til Agder 110 — en tålmodighetsmekanisme som bryter med Erlang-C-forutsetningen om uendelig kø.
 
 ## 3.3 Det lav-belastede paradokset
 

@@ -4,7 +4,7 @@
 
 Problemstillingen er: *I hvilken grad samsvarer faktisk bemanning ved norske 110-sentraler med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller?*
 
-**Omfang for konklusjonen.** Hovedanalysen er gjennomført på 110 Sør-Vest 2025 som casestudie. Nasjonal del (kap 7.8 og 8.4.1) er benchmarking og kontekst, ikke full prosedyrbasert kapasitetsmodellering for de øvrige 11 sentralene. Konklusjonen under er derfor primært en *case-konklusjon for 110 Sør-Vest*, mens nasjonale implikasjoner er formulert som hypoteser/indikasjoner som forutsetter klassifiseringsharmonisering og bredere validering (jf. RQ5 og kap 9.4).
+**Omfang for konklusjonen.** Hovedanalysen er gjennomført på 110 Sør-Vest 2025 som casestudie. Nasjonal del (kap 7.9 og 8.4.1) er benchmarking og kontekst, ikke full prosedyrbasert kapasitetsmodellering for de øvrige 11 sentralene. Konklusjonen under er derfor primært en *case-konklusjon for 110 Sør-Vest*, mens nasjonale implikasjoner er formulert som hypoteser/indikasjoner som forutsetter klassifiseringsharmonisering og bredere validering (jf. RQ5 og kap 9.4).
 
 For 110 Sør-Vest avhenger svaret kritisk av hvilken kapasitetsstandard som anvendes.
 

@@ -318,9 +318,119 @@ Tre observasjoner:
 
 ---
 
-## 7.8 Generaliserbarhet
+## 7.8 ROS- og beredskapsanalyse som dimensjoneringsgrunnlag (RQ4)
 
-Den konkrete analysen er gjennomført på data fra 110 Sør-Vest, men modellrammeverket er utviklet for å kunne anvendes sentralsvis på alle norske 110-sentraler. Det sentrale er ikke de eksakte prosentverdiene i denne studien, men metoden for å identifisere hvor ofte en ny hendelse ankommer i en tilstand der tilgjengelig operatørkapasitet allerede er bundet.
+For å besvare RQ4 er beredskapsanalysen for 110 Sør-Vest (Beredskapsanalyse 110 Vest, 2022) og tilhørende ROS-dokument (Risiko- og sårbarhetsanalyse 110 Vest) gjennomgått systematisk. Analysen er rent observerende — vurderingen mot funnene fra primærmodellen drøftes i kap 8.3.4.
+
+**Tabell 7.9: Hva ROS-/beredskapsanalysen for 110 Sør-Vest dokumenterer kvantitativt**
+
+| Element | Dokumentert i ROS/beredskapsanalyse | Form |
+|---|---|---|
+| Minimumsbemanning per skift | 2 operatører (ekskl. VL) | Forskriftsfestet (FOR-2021-09-17-2856) |
+| Faktisk bemanning dag/natt | Dag: 3 + VL; natt/helg: 2 + VL | Numerisk angitt i beredskapsanalysen |
+| Overløpsmekanisme til Agder | 30-sek-regel + 10. kø-anrop | Operativ regel, J03 s. 25 |
+| Servicegrad (kvantifisert mål) | Ikke spesifisert | Ingen tallfestet servicenivåterskel |
+| Andel anrop besvart innen X sek | Ikke spesifisert | Ingen mål satt |
+| Andel hendelser med makkerpar | Ikke spesifisert | Ikke uttrykt som målbar metrikk |
+| Modellbasert kapasitetsestimat | Ikke gjennomført | ROS bygger på kvalitativ vurdering |
+| Sammenligningsgrunnlag andre sentraler | Ikke inkludert | Sentral-spesifikk analyse |
+
+**Observasjon:** ROS-/beredskapsanalysen dokumenterer minimumskrav, faktisk bemanning og overløpsmekanismer, men inneholder ingen kvantitative servicenivåmål eller andre etterprøvbare terskler som kan måles direkte mot observerte hendelsesdata. Analysens grunnlag er kvalitative vurderinger av risiko og operativ erfaring. Den interdepartementale arbeidsgruppen (2009) bemerket eksplisitt at det «ikke finnes vitenskapelig grunnlag for de valgte terskelverdiene» for svartid på nasjonalt nivå — en observasjon som er konsistent med funnet at lokal ROS heller ikke etablerer slike terskler. Meld. St. 16 (2023–2024) viderefører den kvalitative tilnærmingen uten å introdusere en nasjonal kvantitativ standard.
+
+For sammenligning gir dimensjoneringsforskriften for brannvesen (FOR-2023-01-06-23) ferdige bemanningskrav basert på innbyggertall og responstid — en kvantitativ standard som ikke har en parallell for 110-operatører. Den analytiske tolkningen av dette gapet, og hvilke implikasjoner det har for dimensjoneringspraksis, drøftes i kap 8.3.4.
+
+---
+
+## 7.9 Nasjonal benchmarking — DSB 2025-data (RQ5)
+
+For å besvare RQ5 er DSBs samlede 2025-datasett (508 228 oppdrag, alle 12 sentraler) klassifisert etter V3-regelen (avsnitt 5.3.2) og sammenlignet på sentralnivå. Avsnittet er rent beskrivende — de normative implikasjonene drøftes i kap 8.3.4 og 9.3.
+
+### 7.9.1 Volum og arbeidsmengde
+
+**Tabell 7.10: Volum og operatørbelastning per sentral, DSB 2025**
+
+| Sentral | Totalvolum | Beredskap (D) | D-andel | c_eff dag | Oppdrag/c_eff | Arbmengde (timer/dag) |
+|---|---:|---:|---:|---:|---:|---:|
+| Oslo | 71 421 | 17 811 | 24,9 % | 4 | 17 855 | 19,4 |
+| Sør-Øst | 68 654 | 14 174 | 20,6 % | 5 | 13 731 | 16,4 |
+| Sør-Vest | 61 934 | 7 527 | 12,2 % | 3 | 20 645 | 11,5 |
+| Øst | 58 138 | 12 478 | 21,5 % | 5 | 11 628 | 13,9 |
+| Vest | 50 778 | 8 041 | 15,8 % | 3 | 16 926 | 10,5 |
+| Innlandet | 44 001 | 6 600 | 15,0 % | 3 | 14 667 | 8,9 |
+| Midt-Norge | 41 374 | 8 043 | 19,4 % | 3 | 13 791 | 9,3 |
+| Nordland | 29 577 | 2 749 | 9,3 % | 2 | 14 789 | 4,9 |
+| Møre og Romsdal | 29 384 | 3 492 | 11,9 % | 3 | 9 795 | 5,1 |
+| Agder | 26 238 | 6 409 | 24,4 % | 3 | 8 746 | 6,6 |
+| Tromsø | 19 327 | 3 927 | 20,3 % | 1 | 19 327 | 4,7 |
+| Finnmark | 7 402 | 1 281 | 17,3 % | 2 | 3 701 | 1,6 |
+
+*Kilde: `analyse/nasjonal_2025/storrelse_ranking.csv` og `benchmarkmatrise.csv`. c_eff dag = c_total dag − 1 (VL-korreksjon). Arbmengde = volum × kategori-spesifikk bindingstid summert over et år.*
+
+Totalvolumet varierer 9,6× mellom Finnmark (7 402) og Oslo (71 421). Belastning per effektiv operatør (oppdrag/c_eff) viser at Sør-Vest (20 645) ligger på topp foran Tromsø (19 327) og Oslo (17 855), mens Finnmark (3 701) ligger lavest. Arbeidsmengde per dag spenner fra 1,6 timer (Finnmark) til 19,4 timer (Oslo).
+
+### 7.9.2 Kategorifordeling og klassifiseringspraksis
+
+**Tabell 7.11: Andel av totalvolum per V3-kategori, DSB 2025**
+
+| Sentral | D-pri1 | D-aba | S | L-aba | L-hendelse | L-ukjent | F | V |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Agder | 10,3 % | 14,1 % | 30,9 % | 3,8 % | 7,6 % | 13,8 % | 18,5 % | 1,0 % |
+| Finnmark | 14,0 % | 3,3 % | 31,4 % | 5,3 % | 8,1 % | 28,1 % | 8,6 % | 1,2 % |
+| Innlandet | 10,2 % | 4,8 % | 21,2 % | 5,2 % | 3,4 % | 39,6 % | 13,0 % | 2,6 % |
+| Midt-Norge | 9,7 % | 9,7 % | 22,4 % | 0,6 % | 3,8 % | 35,9 % | 17,2 % | 0,7 % |
+| Møre og Romsdal | 9,7 % | 2,2 % | 47,1 % | 3,8 % | 3,3 % | 18,8 % | 13,8 % | 1,3 % |
+| Nordland | 7,0 % | 2,3 % | 38,0 % | 7,5 % | 4,5 % | 30,1 % | 9,1 % | 1,5 % |
+| Oslo | 24,9 % | 0,0 % | 9,3 % | 0,0 % | 9,3 % | 40,4 % | 14,5 % | 1,5 % |
+| Sør-Vest | 7,2 % | 4,9 % | 36,4 % | 5,5 % | 6,9 % | 27,1 % | 11,0 % | 0,9 % |
+| Sør-Øst | 20,6 % | 0,0 % | 22,9 % | 0,0 % | 10,2 % | 28,7 % | 15,8 % | 1,6 % |
+| Tromsø | 9,8 % | 10,5 % | 18,3 % | 6,1 % | 8,4 % | 35,9 % | 10,4 % | 0,6 % |
+| Vest | 11,4 % | 4,4 % | 38,1 % | 0,6 % | 9,9 % | 20,6 % | 13,9 % | 1,1 % |
+| Øst | 11,8 % | 9,6 % | 13,5 % | 2,3 % | 5,8 % | 34,8 % | 20,6 % | 1,5 % |
+
+*Kilde: `analyse/nasjonal_2025/benchmarkmatrise.csv`. V3-klassifisering med Kilde=Alarm-krav for D-aba og L-aba.*
+
+Tre observasjoner:
+
+**1. L-aba-andel varierer 0,0 %–7,5 %** — Sør-Øst og Oslo har tilnærmet null L-aba (3 hendelser samlet), mens Nordland topper med 7,5 %. Dette er konsistent med ulik registreringspraksis: ABA-hendelser uten utrykning kan klassifiseres under L-hendelse, L-ukjent eller F i sentraler uten L-aba-bruk.
+
+**2. D-pri1-andel varierer 7,0 %–24,9 %** — Oslo (24,9 %) og Sør-Øst (20,6 %) ligger 2–3× høyere enn Sør-Vest (7,2 %) og Nordland (7,0 %). Mønsteret er konsistent med at noen sentraler varsler tidlig, mens andre avklarer på telefon først.
+
+**3. L-ukjent er gjennomgående høy (13,8 %–40,4 %)** — feltet `Opprinnelig oppdragstype` lukkes ofte uten utfylling. Dette gir høy datausikkerhet for kategorifordelingen og er en strukturell begrensning på tvers av alle sentraler.
+
+### 7.9.3 Skjulte 110-ID-sekvenser
+
+**Tabell 7.12: Andel skjulte sekvensnumre i 110-ID per sentral, DSB 2025**
+
+| Sentral | Registrerte oppdrag | Skjulte sekvensnr | Estimert totalt | Skjult-rate |
+|---|---:|---:|---:|---:|
+| Finnmark | 7 402 | 13 780 | 21 182 | 65,1 % |
+| Agder | 26 238 | 31 339 | 57 577 | 54,4 % |
+| Øst | 58 138 | 47 577 | 105 715 | 45,0 % |
+| Tromsø | 19 327 | 13 447 | 32 774 | 41,0 % |
+| Innlandet | 44 001 | 28 761 | 72 762 | 39,5 % |
+| Sør-Øst | 68 652 | 35 323 | 103 975 | 34,0 % |
+| Nordland | 29 577 | 12 837 | 42 414 | 30,3 % |
+| Vest | 50 778 | 20 723 | 71 501 | 29,0 % |
+| Møre og Romsdal | 29 384 | 10 791 | 40 175 | 26,9 % |
+| Oslo | 71 421 | 26 140 | 97 561 | 26,8 % |
+| Sør-Vest | 61 934 | 18 930 | 80 864 | 23,4 % |
+| Midt-Norge | 41 374 | 12 223 | 53 597 | 22,8 % |
+
+*Skjulte sekvensnumre dekker tre fenomener: (i) sammenstilte anrop, (ii) overføringer til nabosentral via 30-sek-regelen, og (iii) avbrutte anrop. Ulike sentraler har ulik fordeling mellom disse — Finnmark og Agder har trolig stor andel overføringer, mens Sør-Vest har validert at dette primært er sammenstilte anrop (jf. avsnitt 7.2).*
+
+Skjult-raten varierer 22,8 %–65,1 %. Den faktiske operatørbelastningen er dermed systematisk høyere enn registrerte oppdrag tilsier, og korreksjonsfaktoren er sentralspesifikk.
+
+### 7.9.4 Strukturelle prediktorer — beskrivende sammenheng
+
+DSB-datasettet inneholder ikke direkte mål for innbyggertall og areal, men kobling mot SSB-befolkningsdata og sentralenes geografiske dekning er teknisk mulig. Innenfor rammen av denne studien presenteres kategorifordeling og volum som beskrivende benchmark; en formell regresjonsanalyse av strukturelle prediktorer (volum, innbyggertall, areal) som forklaringsvariabler for bemanningsbehov forutsetter (i) harmoniserte klassifiseringsregler på tvers av sentraler — som tabell 7.11 viser at ikke er oppfylt i dag — og (ii) at full prosedyrbasert kapasitetsmodell kjøres på data fra flere sentraler. Begge forutsetningene er identifisert som videre forskning (kap 8.5 og 9.4).
+
+For den nåværende studien er nasjonal del derfor avgrenset til **benchmarking og strukturobservasjon**, ikke prediktiv modellering. De normative implikasjonene — om V3-klassifiseringen kan danne grunnlag for nasjonal harmonisering, og om en nasjonal dimensjoneringsstandard er praktisk gjennomførbar — drøftes i kap 8.3.4 og 9.3.
+
+---
+
+## 7.10 Generaliserbarhet av modellrammeverket
+
+Den konkrete primærmodellen er gjennomført på data fra 110 Sør-Vest, men modellrammeverket er utviklet for å kunne anvendes sentralsvis på alle norske 110-sentraler. Det sentrale er ikke de eksakte prosentverdiene i denne studien, men metoden for å identifisere hvor ofte en ny hendelse ankommer i en tilstand der tilgjengelig operatørkapasitet allerede er bundet.
 
 Andre sentraler kan bruke samme analyseopplegg dersom de har tilgang til:
 - Ankomsttidspunkt for hendelser
@@ -332,7 +442,7 @@ Forutsatt felles klassifiseringsregler (V3-regelen, jf. avsnitt 5.3.2) og tilstr
 
 ---
 
-## 7.9 Sammenstilling og tolkning
+## 7.11 Sammenstilling og tolkning
 
 Analysen dokumenterer fem hovedfunn:
 

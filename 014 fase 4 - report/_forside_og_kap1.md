@@ -69,7 +69,7 @@ Prosjektet avgrenses til følgende:
 
 - **Vaktromsbemanning** — ikke ressursdisponering i brannvesenet, taktisk hendelseshåndtering eller organisatoriske beslutninger.
 - **Retrospektivt og planleggingsrettet** — ikke et sanntidssystem for kapasitetsstyring.
-- **Primærcase 110 Sør-Vest (2025)** — hovedmodellen er kjørt på denne sentralen. Nasjonal del (kap 7.8, kap 8.4.1) er benchmarking og kontekst, ikke full prosedyrbasert kapasitetsmodellering for de øvrige 11 sentralene.
+- **Primærcase 110 Sør-Vest (2025)** — hovedmodellen er kjørt på denne sentralen. Nasjonal del (kap 7.9, kap 8.4.1) er benchmarking og kontekst, ikke full prosedyrbasert kapasitetsmodellering for de øvrige 11 sentralene.
 - **Ekstraordinære hendelser** (langvarige storbranner, katastrofescenarier) holdes utenfor modellens primære gyldighetsområde og behandles i diskusjonskapittelet.
 - **Ring-flom (call surge)** belyses som operativ ekstrembelastning, men modelleres ikke som primærscenario.
 
