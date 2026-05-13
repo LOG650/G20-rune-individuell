@@ -2,99 +2,103 @@
 
 ## 10. Referanser
 
-*Foreløpig utvalg — fullstendig APA 7th norsk referanseliste vedlikeholdes i `012 fase 2 - plan/Litteraturliste_LOG650_G20_Rune.xlsx` og synkroniseres til rapporten ved endelig innlevering.*
+Al-Sarhani, M., m.fl. (2025). Dispatch under pressure: An investigation into the cognitive load of Kuwait's emergency responders. *Journal of Engineering Research*. https://doi.org/10.1016/j.jer.2025.06.004
 
-Al-Sarhani, A., et al. (2025). *Cognitive load among emergency dispatchers: implications for error rates in simultaneous incident handling.*
+APCO International. (2005). *Project RETAINS effective practices guide: Staffing and retention in public safety communication centers*. APCO International.
 
-APCO International. (2005). *Project RETAINS: Staffing and retention in public safety communications centers.*
+Beredskapsanalyse 110 Vest. (2022). *Beredskapsanalyse 110 Vest* [Intern rapport].
 
-Brann- og redningsvesenforskriften. (2021). *Forskrift om organisering, bemanning og utrustning av brann- og redningsvesen og nødmeldesentralene* (FOR-2021-09-17-2856). Justis- og beredskapsdepartementet.
+Bergen brannvesen. (2023). *Risiko- og sårbarhetsanalyse 110 Vest* [Intern rapport].
 
-Brill, P. H., & Green, L. (1984). Queues in which customers receive simultaneous service from a random number of servers. *Management Science*, *30*(1), 51–68.
+Brann- og redningsvesenforskriften. (2021). *Forskrift om organisering, bemanning og utrustning av brann- og redningsvesen og nødmeldesentralene* (FOR-2021-09-15-2755). Justis- og beredskapsdepartementet. https://lovdata.no/dokument/SF/forskrift/2021-09-15-2755
 
-Chelst, K., & Barlach, Z. (1981). Multiple unit dispatches in emergency services: models to estimate system performance. *Management Science*, *27*(12), 1390–1409.
+Brill, P. H., & Green, L. (1984). Queues in which customers receive simultaneous service from a random number of servers. *Management Science, 30*(1), 51–68.
 
-Dimensjoneringsforskriften. (2023). *Forskrift om dimensjonering, utrusting og bemanning av brannvesen* (FOR-2023-01-06-23). Justis- og beredskapsdepartementet.
+Byrsell, F., Jonsson, M., Claesson, A., Ringh, M., Svensson, L., Riva, G., Nordberg, P., Forsberg, S., Hollenberg, J., & Nord, A. (2023). Swedish emergency medical dispatch centres' ability to answer emergency medical calls. *Resuscitation, 189*, Article 109896. https://doi.org/10.1016/j.resuscitation.2023.109896
 
-DSB. (2025). *Årsrapport 110-sentralene 2025*. Direktoratet for samfunnssikkerhet og beredskap.
+California Governor's Office of Emergency Services. (2024). *California PSAP and staffing study 2024*. CalOES. https://www.caloes.ca.gov/wp-content/uploads/PSC/Documents/CalOES-2024-Staffing-Study.pdf
 
-Dwars, E. (2013). *Capacity planning in an emergency dispatch center: a case study of the Dutch ambulance service* (MSc-thesis). Universiteit van Amsterdam.
+Chelst, K., & Barlach, Z. (1981). Multiple unit dispatches in emergency services: Models to estimate system performance. *Management Science, 27*(12), 1390–1409.
 
-Ellensen, E. N., Naess, A.-C., Wisborg, T., Hunskaar, S., & Zakariassen, E. (2023). Variation in time-critical incidents reported to medical emergency communication centres in Norway. *BMC Emergency Medicine, 23*.
+Direktoratet for samfunnssikkerhet og beredskap (DSB). (2022–2025). *Melding om brannvernet (MOB)* [Årsrapportering].
 
-Erlang, A. K. (1917). Solution of some problems in the theory of probabilities of significance in automatic telephone exchanges. *The Post Office Electrical Engineers' Journal*, *10*, 189–197.
+Direktoratet for samfunnssikkerhet og beredskap (DSB). (2025). *BRIS/LEO-datauttrekk for 110-sentralene 2025* [Datasett].
 
-Feldman, Z., Mandelbaum, A., Massey, W. A., & Whitt, W. (2008). Staffing of time-varying queues to achieve time-stable performance. *Management Science*, *54*(2), 324–338.
+Dwars, R. P. (2013). *Capacity planning of emergency call centers* [Masteroppgave, VU University Amsterdam]. https://www.math.vu.nl/~sbhulai/papers/thesis-dwars.pdf
 
-Gans, N., Koole, G., & Mandelbaum, A. (2003). Telephone call centers: Tutorial, review, and research prospects. *Manufacturing & Service Operations Management*, *5*(2), 79–141.
+Erlang, A. K. (1917). Solution of some problems in the theory of probabilities of significance in automatic telephone exchanges. *The Post Office Electrical Engineers' Journal, 10*, 189–197.
 
-Garnett, O., Mandelbaum, A., & Reiman, M. (2002). Designing a call center with impatient customers. *Manufacturing & Service Operations Management*, *4*(3), 208–227.
+Feldman, Z., Mandelbaum, A., Massey, W. A., & Whitt, W. (2008). Staffing of time-varying queues to achieve time-stable performance. *Management Science, 54*(2), 324–338.
 
-Green, L. V., Kolesar, P. J., & Whitt, W. (2007). Coping with time-varying demand when setting staffing requirements for a service system. *Production and Operations Management*, *16*(1), 13–39.
+Gans, N., Koole, G., & Mandelbaum, A. (2003). Telephone call centers: Tutorial, review, and research prospects. *Manufacturing & Service Operations Management, 5*(2), 79–141.
 
-Gustavsson, J. (2018). *Capacity planning and agent behavior in emergency call centers: a study of SOS Alarm Sweden* (Lic. thesis). Linköping University.
+Garnett, O., Mandelbaum, A., & Reiman, M. (2002). Designing a call center with impatient customers. *Manufacturing & Service Operations Management, 4*(3), 208–227.
 
-Halfin, S., & Whitt, W. (1981). Heavy-traffic limits for queues with many exponential servers. *Operations Research*, *29*(3), 567–588.
+Green, L. V., Kolesar, P. J., & Whitt, W. (2007). Coping with time-varying demand when setting staffing requirements for a service system. *Production and Operations Management, 16*(1), 13–39.
 
-Harchol-Balter, M. (2022). The multiserver-job queueing model. *Queueing Systems*, *100*(3–4), 201–225.
+Gustavsson, K. (2018). *Stochastic modeling and management of an emergency call center* [Doktoravhandling, Université de Montréal]. https://www.iro.umontreal.ca/~lecuyer/myftp/theses/thesis-gustavsson2018.pdf
 
-Ibrahim, R., Ye, H., L'Ecuyer, P., & Shen, H. (2016). Modeling and forecasting call center arrivals: A literature survey and a case study. *International Journal of Forecasting*, *32*(3), 865–874.
+Halfin, S., & Whitt, W. (1981). Heavy-traffic limits for queues with many exponential servers. *Operations Research, 29*(3), 567–588.
+
+Harchol-Balter, M. (2022). The multiserver-job queueing model. *Queueing Systems, 100*(3–4), 201–225.
+
+Ibrahim, R., Ye, H., L'Ecuyer, P., & Shen, H. (2016). Modeling and forecasting call center arrivals: A literature survey and a case study. *International Journal of Forecasting, 32*(3), 865–874. https://doi.org/10.1016/j.ijforecast.2015.11.012
 
 Interdepartemental arbeidsgruppe. (2009). *Forslag til felles organisering av nødmeldetjenesten*. Justis- og politidepartementet.
 
-Jamtli, B., Svendsen, V. G., Jørgensen, M., Kramer-Johansen, J., Hov, M. R., & Hardeland, C. (2024). Protocol adherence and intuition-based decision making at the Oslo emergency medical communication center. *Scandinavian Journal of Trauma, Resuscitation and Emergency Medicine, 32*.
+Jamtli, B., Svendsen, E. J., Jorgensen, T. M., Kramer-Johansen, J., Hov, M. R., & Hardeland, C. (2024). Factors affecting emergency medical dispatchers decision making in stroke calls — a qualitative study. *BMC Emergency Medicine, 24*, 214. https://doi.org/10.1186/s12873-024-01129-0
 
-Jennings, O. B., Mandelbaum, A., Massey, W. A., & Whitt, W. (1996). Server staffing to meet time-varying demand. *Management Science*, *42*(10), 1383–1394.
+Jennings, O. B., Mandelbaum, A., Massey, W. A., & Whitt, W. (1996). Server staffing to meet time-varying demand. *Management Science, 42*(10), 1383–1394.
 
-Jouini, O., Dallery, Y., & Nait-Abdallah, R. (2008). Analysis of the impact of team-based organizations in call center management. *Management Science*, *54*(2), 400–414.
+Jouini, O., Dallery, Y., & Nait-Abdallah, R. (2008). Analysis of the impact of team-based organizations in call center management. *Management Science, 54*(2), 400–414.
 
-Kim, J. S., Cho, Y. J., Baek, J. W., & Kim, H. M. (2008). Service capacity analysis of multi-server systems with cooperation. *European Journal of Operational Research*, *191*(3), 1137–1152.
+Kim, C., Lee, M., Dudin, A., & Klimenok, V. (2008). Multi-server queueing systems with cooperation of the servers. *Annals of Operations Research, 162*(1), 57–68. https://doi.org/10.1007/s10479-008-0319-0
 
-Koole, G., & Mandelbaum, A. (2002). Queueing models of call centers: An introduction. *Annals of Operations Research*, *113*(1–4), 41–59.
+Koole, G., & Mandelbaum, A. (2002). Queueing models of call centers: An introduction. *Annals of Operations Research, 113*(1–4), 41–59.
 
-Larson, R. C. (1974). A hypercube queueing model for facility location and redistricting in urban emergency services. *Computers & Operations Research*, *1*(1), 67–95.
+Larson, R. C. (1974). A hypercube queueing model for facility location and redistricting in urban emergency services. *Computers & Operations Research, 1*(1), 67–95.
 
-L'Ecuyer, P., & Gustavsson, J. (2018). Modeling bursts in emergency call arrivals. *Proceedings of the 2018 Winter Simulation Conference*, 2956–2967.
+L'Ecuyer, P., Gustavsson, K., & Olsson, L. (2018). Modeling bursts in the arrival process to an emergency call center. *Proceedings of the 2018 Winter Simulation Conference*, 3292–3303. https://www.informs-sim.org/wsc18papers/includes/files/043.pdf
 
-Leonardsen, A.-C. L., Bjørnsen, A. C., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2019). Healthcare workers experiences with the Norwegian emergency medical communication centre — a qualitative study. *BMC Health Services Research, 19*.
+Leonardsen, A.-C. L., Bjørnsen, A. C., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2019). Healthcare workers' experiences with the Norwegian emergency medical communication centre: A qualitative study. *BMC Health Services Research, 19*.
 
-Leonardsen, A.-C. L., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2021). Work experiences of emergency medical dispatchers in Norway: a qualitative study. *BMC Health Services Research, 21*.
+Leonardsen, A.-C. L., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2021). Work experiences of emergency medical dispatchers in Norway: A qualitative study. *BMC Health Services Research, 21*.
 
-Matteson, D. S., McLean, M. W., Woodard, D. B., & Henderson, S. G. (2011). Forecasting emergency medical service call arrival rates. *The Annals of Applied Statistics*, *5*(2B), 1379–1406.
+Matteson, D. S., McLean, M. W., Woodard, D. B., & Henderson, S. G. (2011). Forecasting emergency medical service call arrival rates. *The Annals of Applied Statistics, 5*(2B), 1379–1406.
 
-McNamee, M., Johansson, N., Frykmer, T., Johnson, P., Vylund, L., Eriksson, K., Steen-Hansen, A., Gjøsund, G., Haavik, T., Almklov, P., Grothe-Hammer, M., Markert, F., Allerup, M., & Hansen, P. (2024). *FIRE21 — Nordic fire and rescue services, problem-solving in the 21st century* (Final report, Lund University Report 3267). NORDFORSK.
+McNamee, M. S., Johansson, N., Frykmer, T., Johnson, V., Vylund, A. L., Eriksson, K., Steen-Hansen, A., Gjøsund, G., Haavik, T. K., Grytten Almklov, P., Grothe-Hammer, M., Markert, F., Allerup, C., & Fristed Hansen, M. (2025). *FIRE21 — Final report: Nordic fire and rescue services, problem-solving in the 21st century* (TVBB No. 3267). Lund University. https://lup.lub.lu.se/search/files/207496790/FIRE21_Final_report_FINAL.pdf
 
 Meld. St. 16. (2023–2024). *Felles verdier — felles ansvar*. Justis- og beredskapsdepartementet.
 
 Mukhopadhyay, A., Pettet, G., Vazirizade, S. M., Lu, D., Jaimes, A., Said, S. E., Baroud, H., Vorobeychik, Y., Kochenderfer, M., & Dubey, A. (2022). A review of incident prediction, resource allocation, and dispatch models for emergency management. *Accident Analysis & Prevention, 165*.
 
-NENA. (2003). *NENA-04-001: Recommended PSAP equipment standards for the United States.* National Emergency Number Association.
+National Emergency Number Association (NENA). (2003). *PSAP staffing guidelines report and staffing worksheet* (NENA-REF-001-2003). NENA. https://cdn.ymaws.com/www.nena.org/resource/resmgr/standards/NENA-REF-001-2003_PSAP_Staff.pdf
 
-NENA. (2020). *NENA STA-020.1-2020: PSAP service level standard for 9-1-1.*
+National Emergency Number Association (NENA). (2020). *NENA standard for 9-1-1 call processing* (NENA-STA-020.1-2020). NENA. https://cdn.ymaws.com/www.nena.org/resource/resmgr/standards/nena-sta-020.1-2020_911_call.pdf
 
-Normark, M. (2002). *Work and technology at an emergency call center.* Luleå University of Technology.
+Normark, M. (2002). *Using technology for real-time coordination of work: A study of work and artifact use in the everyday activities at SOS Alarm* [Licentiatavhandling, KTH]. TRITA-NA-0144.
 
-Penverne, Y., Martinez, V., Cellier, N., Le Conte, P., Jenvrin, J., Hardouin, J. B., & Montassier, E. (2024). Performance evaluation of emergency call centre interconnection vs. virtualization: A digital twin simulation. *Resuscitation Plus, 18*.
+Penverne, Y., Martinez, C., Cellier, N., Pehlivan, C., Jenvrin, J., Savary, D., Debierre, V., Deciron, F., Bichri, A., Lebastard, Q., Montassier, E., Leclere, B., & Fontanili, F. (2024). A simulation based digital twin approach to assessing the organization of response to emergency calls. *npj Digital Medicine, 7*, 385. https://doi.org/10.1038/s41746-024-01392-2
 
-Rehn, M., Hyldmo, P. K., Magnusson, V., Kurola, J., Kongstad, P., Rognås, L., Juvet, L. K., & Sandberg, M. (2021). Scandinavian SSAI clinical practice guideline on pre-hospital airway management — dispatch accuracy in the Norwegian helicopter emergency medical service. *Scandinavian Journal of Trauma, Resuscitation and Emergency Medicine, 29*.
+Rogaland brann og redning IKS. (2024). *Prosedyre arbeidsmetodikk, utalarmering og loggføring* (versjon 4, 16.12.2024) [Intern prosedyre].
 
-Storesund, K., Hox, K., Steen-Hansen, A., Sesseng, C., & Ishol, A. M. (2017). *Utredning i forbindelse med brannvesenets dimensjonering* (RISE Fire Research, Rapport A17 20323:2 — oppdrag fra DSB). SP Fire Research AS.
+Samdal, M., Thorsen, K., Graesli, O., Sandberg, M., & Rehn, M. (2021). Dispatch accuracy of physician-staffed emergency medical services in trauma care in South-East Norway. *Scandinavian Journal of Trauma, Resuscitation and Emergency Medicine, 29*, 169. https://doi.org/10.1186/s13049-021-00982-3
 
-Rogaland brann og redning IKS. (2024). *Prosedyre arbeidsmetodikk, utalarmering og loggføring* (versjon 4, 16.12.2024). [Intern prosedyre.]
+Shen, H., & Huang, J. Z. (2008). Interday forecasting and intraday updating of call center arrivals. *Manufacturing & Service Operations Management, 10*(3), 391–410.
 
-Shen, H., & Huang, J. Z. (2008). Interday forecasting and intraday updating of call center arrivals. *Manufacturing & Service Operations Management*, *10*(3), 391–410.
+Statistisk sentralbyrå. (2026). *Folkemengde per 1. januar 2026* [Statistikkbanken]. SSB.
 
 St.meld. nr. 41. (2000–2001). *Brann- og eksplosjonsvern*. Kommunal- og regionaldepartementet.
 
-Stolletz, R. (2008). Approximation of the non-stationary M(t)/M(t)/c(t)-queue using stationary queueing models: The stationary backlog-carryover approach. *European Journal of Operational Research*, *190*(2), 478–493.
+Stolletz, R. (2008). Approximation of the non-stationary M(t)/M(t)/c(t)-queue using stationary queueing models: The stationary backlog-carryover approach. *European Journal of Operational Research, 190*(2), 478–493.
 
-Van Buuren, M., Kommer, G. J., van der Mei, R., & Bhulai, S. (2017). EMS call center models with and without function differentiation: a comparison. *Operations Research for Health Care, 12*, 16–28.
+Storesund, K., Hox, K., Steen-Hansen, A., Sesseng, C., & Ishol, A. M. (2017). *Utredning i forbindelse med brannvesenets dimensjonering* (RISE Fire Research, Rapport A17 20323:2). SP Fire Research AS.
 
-Vera Institute. (2019). *Behind the call: Understanding the work of 9-1-1 dispatchers.*
+Van Buuren, M., Kommer, G. J., van der Mei, R., & Bhulai, S. (2017). EMS call center models with and without function differentiation: A comparison. *Operations Research for Health Care, 12*, 16–28.
 
-Wallace, R. B., & Whitt, W. (2005). A staffing algorithm for call centers with skill-based routing. *Manufacturing & Service Operations Management*, *7*(4), 276–294.
+Vera Institute of Justice. (2019). *The 911 call processing system: A review of the literature as it relates to policing*. Vera Institute of Justice.
 
-Whitt, W. (1999). Improving service by informing customers about anticipated delays. *Management Science*, *45*(2), 192–207. [Sitert i kap 2.2 og 3.4 som «Whitt, 1996»; sitatform korrigeres til «Whitt, 1999» ved endelig levering når original er verifisert.]
+Wallace, R. B., & Whitt, W. (2005). A staffing algorithm for call centers with skill-based routing. *Manufacturing & Service Operations Management, 7*(4), 276–294.
 
 Zeltyn, S., & Mandelbaum, A. (2005). Call centers with impatient customers: Many-server asymptotics of the M/M/n+G queue. *Queueing Systems, 51*(3–4), 361–402.
 

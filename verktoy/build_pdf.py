@@ -248,7 +248,9 @@ def rapport_full():
             tmp_filer.append(Path(tf.name))
 
         cmd = [PANDOC] + [str(t) for t in tmp_filer] + ["-o", str(pdf_out)] + flagg_dokument(toc=True)
-        cmd += [f"--resource-path={rapport_dir};{ROOT};{ROOT / "analyse"};{ROOT / "analyse" / "figurer"}"]
+        analyse_dir = ROOT / "analyse"
+        figurer_dir = ROOT / "analyse" / "figurer"
+        cmd += [f"--resource-path={rapport_dir};{ROOT};{analyse_dir};{figurer_dir}"]
         print(f"Bygger samlet rapport ({len(deler)} filer) -> {pdf_out.name}")
         res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
         if res.returncode != 0:

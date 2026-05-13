@@ -23,7 +23,7 @@ Norge har tolv 110-sentraler som mottar nødmeldinger og koordinerer brann- og r
 | Øst 110 | Viken øst |
 | Innlandet 110 | Innlandet |
 
-Bemanningsdimensjonering av 110-operatører reguleres av brann- og redningsvesenforskriften, som pålegger minimum to operatører i vaktrommet. Fastsettelse av bemanning utover dette overlates til lokale risiko- og beredskapsanalyser (ROS). I kontrast gir dimensjoneringsforskriften (FOR-2023-01-06-23) ferdige, etterprøvbare bemanningskrav for kasernert og deltidsbrannvesen basert på innbyggertall og responstid. En tilsvarende kvantitativ standard mangler for 110-operatører — dette kunnskapsgapet er utgangspunktet for denne rapporten.
+Bemanningsdimensjonering av 110-operatører reguleres av brann- og redningsvesenforskriften, som pålegger minimum to operatører i vaktrommet. Fastsettelse av bemanning utover dette overlates til lokale risiko- og beredskapsanalyser (ROS). Forskriften inneholder samtidig konkrete krav til brann- og redningsvesenets organisering, beredskap, bemanning og innsatstid. En tilsvarende kvantitativ standard for hvordan historisk 110-belastning skal oversettes til operatørbemanning mangler — dette kunnskapsgapet er utgangspunktet for denne rapporten.
 
 ## 4.2 110 Sør-Vest — primærcase
 
@@ -31,7 +31,7 @@ Bemanningsdimensjonering av 110-operatører reguleres av brann- og redningsvesen
 
 ### 4.2.1 Skiftstruktur og bemanning
 
-Sentralen opererer med tolv-timers skift og er organisert i seks vaktlag à fire personer (inkludert vaktleder). Planlagt normalbemanning er dermed fire operatører på alle skift. Sentralen benytter årsturnus der alle vakter planlegges for hele året. Hvert vaktlag har overskuddstimer som må plasseres ut i turnusen for å fylle årsverket. I praksis fører dette til at dagtidsvakter på hverdag kan bemannes med fem eller seks personer. Natt- og helgeskift er i turnusplanen bemannet med fire personer, men siden minimumsbemanningen er tre, blir sykdom, avspasering og annet ikke-planlagt fravær ikke erstattet. Resultatet er at natt og helg ofte bemannes med tre — minimumsbemanningen.
+Sentralen opererer med tolv-timers skift og er organisert i seks vaktlag à fire personer (inkludert vaktleder). Planlagt normalbemanning er dermed fire personer på alle skift. Sentralen benytter årsturnus der alle vakter planlegges for hele året. Hvert vaktlag har overskuddstimer som må plasseres ut i turnusen for å fylle årsverket. I praksis fører dette til at dagtidsvakter på hverdag kan bemannes med fem eller seks personer. Natt- og helgeskift er i turnusplanen bemannet med fire personer, men siden minimumsbemanningen er tre, blir sykdom, avspasering og annet ikke-planlagt fravær ikke erstattet. Resultatet er at natt og helg ofte bemannes med tre — minimumsbemanningen.
 
 **Tabell 4.2: Minimumsbemanning 110 Sør-Vest**
 
@@ -60,7 +60,7 @@ Den normale driftsformen er et **makkerpar**: én rød og én gul operatør sama
 
 **Pri-1-hendelser versus ABA-utrykning — ulik operativ dynamikk.** Makkerpar-prosedyren gjelder primært pri-1-hendelser: bygningsbrann, trafikkulykke, farlig gods og tilsvarende tidskritiske situasjoner som krever trippelvarsling (AMK + politi), tidskritisk informasjon til utrykkende mannskap via BAPS, og parallell koordinering av flere ressurser. For disse hendelsene aktiveres både RØD og GUL fra første sekund og forblir bundet gjennom hele akuttfasen.
 
-ABA-utrykning — der en automatisk brannalarm leder til ressursvarsling fordi avklaring ikke kom innen 90 sekunder — følger en annen operativ logikk. ABA er ikke pri-1: det gis ikke trippelvarsling, det foreligger ingen tidskritisk informasjon å formidle via BAPS, og operatøren som kvitterer alarmen er normalt den samme som oppretter oppdraget og utalarmerer ressurser. Arbeidsflyten er serial og utføres av én operatør: kvitter alarm (ca. 30 sek) → opprett oppdrag i LEO (ca. 60 sek) → gjennomfør call-out med ressursvarsling (ca. 60 sek) → operatør er tilgjengelig igjen (grønn) etter ~3 min. Eventuell nødtelefon fra stedet som kommer etter call-out kan besvares av vilkårlig ledig operatør og inneholder typisk intervju med innringer, veiledning til brannpanel, områdeavklaring og eventuell alarm-tilbakestilling.
+ABA-utrykning — der en automatisk brannalarm leder til ressursvarsling fordi avklaring ikke kom innen 90 sekunder — følger en annen operativ logikk. ABA er ikke pri-1: det gis ikke trippelvarsling, det foreligger ingen tidskritisk informasjon å formidle via BAPS, og operatøren som kvitterer alarmen er normalt den samme som oppretter oppdraget og utalarmerer ressurser. Arbeidsflyten er seriell og utføres av én operatør: kvitter alarm (ca. 30 sek) → opprett oppdrag i LEO (ca. 60 sek) → gjennomfør call-out med ressursvarsling (ca. 60 sek) → operatør er tilgjengelig igjen (grønn) etter ~3 min. Eventuell nødtelefon fra stedet som kommer etter call-out kan besvares av vilkårlig ledig operatør og inneholder typisk intervju med innringer, veiledning til brannpanel, områdeavklaring og eventuell alarm-tilbakestilling.
 
 Skillet mellom pri-1-hendelser og ABA-utrykning er sentralt for kapasitetsanalysen fordi de har fundamentalt ulike op-binder-profiler. En pri-1-hendelse binder 2 operatører parallelt i median 14 minutter. En ABA-utrykning binder 1 operatør serielt i ~3 minutter, pluss eventuelt 1 operatør i 3–10 minutter dersom nødtelefon kommer. For 110 Sør-Vest 2025 utgjør ABA-utrykning ca. 41 % av alle utrykningshendelser. Denne operative distinksjonen danner grunnlaget for modellens differensiering mellom D-pri1 og D-aba (se avsnitt 6.4).
 
@@ -82,14 +82,14 @@ Et sentralt strukturelt trekk ved bemanningsordningen er at dagskiftet på helg 
 
 ## 4.3 Hendelsesvolum og belastningsmønster
 
-For 2025 registrerte 110 Sør-Vest 61 964 synlige oppdrag i BRIS/LEO. Av disse er 7 555 (12,2 %) beredskapsoppdrag med ressursvarsling (kategori D). Figuren under viser hvordan anropsvolumet fordeler seg over døgnet.
+For 2025 registrerte 110 Sør-Vest 61 964 synlige oppdrag i BRIS/LEO. Tallet refererer til registrerte oppdrag — faktisk antall innkommende anrop er høyere fordi flere anrop til samme hendelse rutinemessig sammenstilles i ett oppdrag (jf. kap 6.2). Av oppdragene er 7 555 (12,2 %) beredskapsoppdrag med ressursvarsling (kategori D). Figuren under viser hvordan henvendelsesvolumet fordeler seg over døgnet.
 
 <div align="center">
   <img src="../analyse/figurer/bindingstid_per_time.png" alt="Figur 4.1 Bindingstid og volum per time" width="80%">
-  <p align="center"><small><i>Figur 4.1: Døgnprofil for anropsvolum (alle synlige BRIS-oppdrag) og median bindingstid for beredskapsoppdrag (kategori D), 110 Sør-Vest 2025.</i></small></p>
+  <p align="center"><small><i>Døgnprofil for anropsvolum (alle synlige BRIS-oppdrag) og median bindingstid for beredskapsoppdrag (kategori D), 110 Sør-Vest 2025.</i></small></p>
 </div>
 
-Belastningsmønsteret viser en tydelig døgnprofil med høyest samlet volum på dagtid og lavest volum nattestid. Figuren illustrerer døgnprofilen i anropsvolumet og viser samtidig at bindingstiden per beredskapsoppdrag varierer mindre over døgnet enn totalvolumet. Hvordan dette volumet fordeler seg mellom ulike hendelsestyper og hvorvidt det representerer beredskapsdimensjonerende belastning, analyseres i kapittel 7.
+Belastningsmønsteret viser en tydelig døgnprofil med høyest samlet volum på dagtid og lavest volum nattestid. Figuren illustrerer døgnprofilen i registrert oppdragsvolum (proxy for anropsvolum, med kjent undertelling pga. sammenstilling) og viser samtidig at bindingstiden per beredskapsoppdrag varierer mindre over døgnet enn totalvolumet. Hvordan dette volumet fordeler seg mellom ulike hendelsestyper og hvorvidt det representerer beredskapsdimensjonerende belastning, analyseres i kapittel 7.
 
 ## 4.4 Konsekvenser av utilstrekkelig kapasitet
 
@@ -110,7 +110,3 @@ Disse konsekvensene er ikke bare teoretiske. De representerer operative forhold 
 Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i sentralens risiko- og beredskapsanalyse (ROS) og tilhørende beredskapsanalyse. Disse dokumentene vurderer kvalitativt hvilke risikoer sentralen er eksponert for og hvilken bemanning som anses nødvendig. 110 Sør-Vest brukes i denne rapporten som primærcase for å utvikle og teste en kvantitativ analysemodell som prinsipielt kan anvendes på andre 110-sentraler. En nærmere gjennomgang av disse analysenes metodiske grunnlag opp mot kvantitative funn i denne rapporten inngår i diskusjonen (kapittel 8).
 
 Det er viktig å understreke at ROS-analysene er kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler. Prosjektets ambisjon er å supplere — ikke erstatte — disse analysene med et kvantitativt referansepunkt for operatørbemanning.
-
----
-
-*Kap 4 — Versjon 1.1 | Sist oppdatert: 2026-04-04*

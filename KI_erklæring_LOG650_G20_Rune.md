@@ -4,7 +4,7 @@
 **Emne:** LOG650 – Logistikk og kunstig intelligens, Høgskolen i Molde, Vår 2026
 **Oppgavetittel:** Kapasitetsstyring og bemanningsdimensjonering ved norske 110-sentraler
 **Dokument:** Løpende KI-erklæring og brukslogg
-**Sist oppdatert:** 2026-03-09
+**Sist oppdatert:** 2026-05-12
 
 > **Bruk:** Dette dokumentet tjener to formål:
 > 1. Grunnlag for seksjonen «Bruk av kunstig intelligens» i rapporten (seksjon 3.4 / 5.4 og Vedlegg D)
@@ -84,48 +84,19 @@ Alle vesentlige faglige beslutninger — problemstilling, modellvalg, analytisk 
 | 2026-03-09 | Fase 2 | Litteraturliste: 5 nye referanser lagt til (Garnett 2002, Wallace & Whitt 2005, L'Ecuyer 2018, Vera Institute 2019, Meld. St. 16 2024) | Oppdatert Excel | Utvalg basert på scope-vurdering |
 | 2026-03-09 | Fase 4 | Rapport v0.1 gjennomgått — 8 feil identifisert og rettet (v0.2) | Korrigeringer i rapportskall | Godkjenning av alle endringer |
 | 2026-03-09 | Alle | Opprettelse av dette KI-erklæringsdokumentet | KI_erklæring_LOG650_G20_Rune.md | Godkjenning av innhold |
-
-### ChatGPT (OpenAI, GPT-4)
-
-| Dato | Formål | Output / hva ble tatt inn | Undertegnedes bidrag |
-|---|---|---|---|
-| 2026-03-07 | Litteratursøk — referanseforslag for Erlang-C og 110/PSAP | Liste på ~26 referanser | Kritisk verifisering, forkastelse av uverifiserbare, valg av 5 nye til litteraturliste |
-| 2026-03-08 | Gantt-gjennomgang runde 1 — metodiske forbedringsforslag | 3 forslag (ROS-framing, tre-lags analyse, beredskapsperspektiv) | Aksepterte 2 av 3; avviste «kveldsskift» som tredje periode |
-| 2026-03-08 | Gantt-gjennomgang runde 2 — strukturelle forbedringsforslag | 4 forslag (L8c, L11b, M4-avhengighet, L10-sekvens) | Aksepterte alle 4 etter faglig vurdering |
-| 2026-03-09 | Utvidet modellgjennomgang — rammeverk utover Erlang-C | Oversikt over 12 modelltyper, ~25 referanseforslag, metodisk «oppskrift» | Aksepterte 5 referanser, metodisk framing for diskusjonskapittel; avviste sim-opt/MDP som utenfor scope |
-
----
-
-## Del 3 — Administrativ erklæring
-
-*Dette avsnittet tilsvarer det formelle «Erklæring om bruk av kunstig intelligens»-skjemaet fra HiMolde. Erklæringen signeres og leveres som administrativt vedlegg.*
-
-**Jeg bekrefter at:**
-
-- [ ] Jeg har lest og forstått HiMolde sine retningslinjer for bruk av KI på hjemmeeksamen
-- [ ] All bruk av KI-verktøy er dokumentert i dette dokumentet
-- [ ] Ingen KI-generert tekst er levert som mitt eget arbeid uten tydelig markering
-- [ ] Alle referanser er verifisert mot originale akademiske kilder
-- [ ] Ingen personopplysninger, konfidensielle data eller opphavsrettsbeskyttet materiale er lagt inn i åpne KI-verktøy
-- [ ] All kode er gjennomgått, testet og forstått av meg
-- [ ] Alle analytiske beslutninger, tolkninger og konklusjoner er mine egne
-
-**Student:** Rune Grødem
-**Dato:** [SIGNERES VED INNLEVERING]
-**Underskrift:** ___________________________
-
-> *Det offisielle skjemaet ligger i `000 templates/declaration-of-use-of-artificial-intelligence_-final.docx`. Fylles ut og signeres, og leveres som separat administrativt vedlegg ved innlevering av sluttrapport.*
-
----
-
-## Del 4 — Personvern og konfidensialitet
-
-Følgende er bekreftet for dette prosjektet:
-
-- **Operasjonelle data fra 110 Sør-Vest** er ikke lagt inn i åpne KI-verktøy. LEO/BRIS-data behandles lokalt og deles ikke med Claude.ai-nettjenesten (kun Claude Code lokalt via VSCode-extension/terminal).
-- **Personopplysninger** fra intervjuobjekter lagres ikke i KI-verktøy.
-- **ROS/beredskapsanalyse** (intern, ikke offentlig) behandles konfidensielt og er ikke delt med åpne KI-plattformer.
-
----
-
-*Versjon 1.0 | Opprettet: 2026-03-09 | Neste oppdatering: etter hver session med KI-bruk*
+| 2026-03-13 | Fase 3 | EDA på BRIS 2025: hendelsesfordeling, døgnprofil, kategoriklassifisering | Python-skript for klassifisering og figurer | Alle beslutninger om kategorigrenser og figurutforming |
+| 2026-03-15 | Fase 3 | Bindingstidsanalyse — første utkast av kapasitetsmodell | `bindingstid_analyse.py`, fordelinger og figurer | Tolkning av fordelinger, valg av imputerings­strategi |
+| 2026-03-22 | Fase 3 | Erlang-C-grunnlinje — implementasjon og tolkning | Python + sympy/scipy for Erlang-C-formelen | Valg av samtaletid (3,44 min), tolkning av lav ρ |
+| 2026-04-05 | Fase 3 | Benchmarking alle 12 sentraler 2022–2025 | `benchmark_trend_analyse.py`, MOB-bearbeidelse | Datavalg, figuroppsett |
+| 2026-04-07 | Fase 3 | V1: Sammenstilte anrop og sekvensgap-metoden — diskusjon av modellantagelser | Notat med beslutningsgrunnlag | Vurdering av konservativitet, dokumentasjon |
+| 2026-04-07 | Fase 3 | V2: Kategori A som operativ bakgrunnsbelastning — modellutvidelse | Variant B-design | Beslutning om todelt modell A/B |
+| 2026-04-07 | Fase 3 | V3: Total operativ belastning — metodisk avklaring av A vs B | Sluttdesign i kap 6.5 | Faglig vurdering |
+| 2026-04-15 | Fase 3 | Spørreskjemautvikling for 12 sentraler — strukturoppsett | `generer_skjema.py` + 12 md-skjemaer | Spørsmålsformuleringer, prioritering, intern kalibrering med lokale operatører |
+| 2026-04-18 | Fase 3 | Nasjonal DSB 2025-oversikt — 508 228 oppdrag, 7 figurer | `nasjonal_oversikt.py`, anomalidokumentasjon | Tolkning av kategoriavvik, normalisering av sentralnavn |
+| 2026-04-18 | Fase 3 | DSB-ønskeliste BRIS-datauttrekk — 22 prioriterte felt | `analyse/DSB_onskeliste_BRIS_datauttrekk.md` | Prioriterte felt, faglig begrunnelse |
+| 2026-04-19 | Fase 3 | LABA dybdeanalyse n=50 utfylt — V3-regelutvidelse (Kilde=Alarm-krav) | Re-klassifisering av 2 065 oppdrag, V3-regel implementert i alle 5 skript | Tolkning av klassifiseringsobservasjoner, regeldesign |
+| 2026-04-19 | Fase 3 | V3 op-binder-semantikk + D-pri1/D-aba-splitt — modellrefaktorering | Refaktorert primærmodell, D-pri1 (makkerpar) vs D-aba (seriell) | Operativ vurdering, prosedyreverifisering |
+| 2026-04-19 | Fase 4 | Skriving av kap 1, 3, 9 — innledning, teori, konklusjon (v1.0) | Markdown-utkast | Alle faglige formuleringer, valg av kanoniske kilder, struktur |
+| 2026-04-19 | Fase 4 | Oppdatering av kap 2, 4, 5, 6, 7, 8 til V3-semantikk | Konsistent V3-terminologi gjennom hele rapporten | Faglig verifisering av alle endringer |
+| 2026-04-19 | Fase 4 | Sammenstilling av modellutvikling-notat (V1–V3) | `analyse/notat_V3_modellutvikling.md` | Beslutningsrasjonale, sporbarhet |
+| 2026-04-20 | Fase 3 | LABA 

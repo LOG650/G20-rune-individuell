@@ -19,6 +19,7 @@ OLD_forkastet/004 data/
 # output — genererte figurer og rapporter
 # ============================================================
 output/
+demo/
 
 # ============================================================
 # Generelle OS- og editor-filer
@@ -58,3 +59,26 @@ package.json
 # ============================================================
 012 fase 2 - plan/*.bak_*
 012 fase 2 - plan/*_bak_*
+
+# ============================================================
+# Pandoc temp-filer fra PDF-pipeline (verktoy/build_pdf.py)
+# ============================================================
+_tmp_*.md
+014 fase 4 - report/_tmp_*.md
+
+# ============================================================
+# Linux-preview-PDF (kun for verifisering, ikke leveranse)
+# ============================================================
+*_LINUX_PREVIEW.pdf
+
+# ============================================================
+# KML-arbeid (utenfor LOG650-scope)
+# ============================================================
+KML-kompendium-komplett.pdf
+kml_tmp/
+
+# ============================================================
+# Spørreskjemasvar fra eksterne sentraler (potensielt sensitive)
+# Holdes utenfor git inntil eksplisitt godkjent for publisering
+# ============================================================
+analyse/sporreskjema/svar/

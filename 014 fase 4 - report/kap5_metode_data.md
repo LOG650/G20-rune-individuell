@@ -4,18 +4,18 @@
 
 Prosjektet er gjennomført som en kvantitativ casestudie av 110 Sør-Vest, supplert med nasjonal benchmarking for å kontekstualisere casefunnene. Forskningsdesignet er retrospektivt og planleggingsrettet: analysen baseres på historiske hendelsesdata for å vurdere om faktisk bemanning samsvarer med observert belastning.
 
-Casestudiedesignet er valgt fordi problemstillingen er tett knyttet til en spesifikk organisatorisk og operativ kontekst, der bemanning, arbeidsmetodikk og registreringspraksis må forstås samlet for å kunne modellere kapasitetsbinding. Forfatteren har operativ tilknytning til 110 Sør-Vest, noe som gir tilgang til prosedyredokumentasjon, beredskapsanalyse og operative informanter som er nødvendige for å konstruere og validere modellparametere. Modellrammeverket er utviklet for å være overførbart til andre sentraler gitt tilsvarende datatilgang (se avsnitt 6.1 og 7.7).
+Casestudiedesignet er valgt fordi problemstillingen er tett knyttet til en spesifikk organisatorisk og operativ kontekst. Bemanning, arbeidsmetodikk og registreringspraksis må forstås samlet for å kunne modellere kapasitetsbinding. Forfatteren har operativ tilknytning til 110 Sør-Vest. Det gir tilgang til prosedyredokumentasjon, beredskapsanalyse og operative informanter — alle nødvendige for å konstruere og validere modellparametere. Modellrammeverket er utviklet for å være overførbart til andre sentraler gitt tilsvarende datatilgang (se avsnitt 6.1 og 7.7).
 
 ### Refleksivitet: insider-forskning og objektivitetstiltak
 
-Forfatterens operative tilknytning til 110 Sør-Vest gir både privilegert tilgang og en risiko for systematisk bias — særlig ved tolkning av prosedyrer, vurdering av bemanningsstandarder og fortolkning av operatørers arbeidssituasjon. Studien adresserer dette gjennom fire konkrete grep:
+Forfatterens operative tilknytning til 110 Sør-Vest gir både privilegert tilgang og en risiko for systematisk bias. Bias-risikoen er størst ved tolkning av prosedyrer, vurdering av bemanningsstandarder og fortolkning av operatørers arbeidssituasjon. Studien adresserer dette gjennom fire konkrete grep:
 
 1. **Objektive registerdata som primærgrunnlag.** Hovedfunnene springer ut av tidsstempler, ressursvarslinger og kategoriklassifisering i LEO/BRIS — registreringer som er gjort uavhengig av prosjektet og ikke gjenstand for forfatterens tolkning.
-2. **Skript-basert, deterministisk analyseflyt.** All bearbeiding er implementert i versjonskontrollerte Python-skript med fast random seed (`SEED_DABA = 20260419`). Analyseflyten er dermed deterministisk gitt valgte parametre — gjentas analysen med samme inngangsdata og samme parametre, gir den identisk resultat. Flere sentrale parametre (D-aba Fase 2-sannsynlighet, L-aba-bindingstid, ikke-D bindingstider) bygger imidlertid på operativ kalibrering og delvis manuell validering og er ikke fri for skjønn (jf. antagelsestabellen i kap 6.7). Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over rimelige variasjoner i disse parametrene.
-3. **Eksplisitt antagelsesdokumentasjon.** Alle modellantagelser er listet med kilde og status (kap 6.7, Tabell 5.5–5.6). Antagelser som hviler på operative samtaler er merket som sådanne — ikke fremstilt som direkte empiri.
+2. **Skript-basert, deterministisk analyseflyt.** All bearbeiding er implementert i versjonskontrollerte Python-skript med fast random seed (`SEED_DABA = 20260419`). Analyseflyten er deterministisk gitt valgte parametre. Gjentas analysen med samme inngangsdata og samme parametre, gir den identisk resultat. Flere sentrale parametre bygger imidlertid på operativ kalibrering og delvis manuell validering (D-aba Fase 2-sannsynlighet, L-aba-bindingstid, ikke-D bindingstider). Disse er ikke fri for skjønn — jf. antagelsestabellen i kap 6.7. Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over rimelige variasjoner i disse parametrene.
+3. **Eksplisitt antagelsesdokumentasjon.** Alle modellantagelser er listet med kilde og status (kap 6.7, Tabell 6.3), og observasjonsstatus/analysegjennomføring er oppsummert i Tabell 5.5 og 5.6. Antagelser som hviler på operative samtaler er merket som sådanne — ikke fremstilt som direkte empiri.
 4. **Triangulering mellom kilder.** Hvor antagelser bygger på samtaler, kontrolleres de mot prosedyredokumentasjon (Rogaland brann og redning IKS, 2024) og BRIS-tidsstempler. D-aba Fase 1 er for eksempel både prosedyrforankret (~90 sek call-out) og empirisk verifisert (median 74 sek).
 
-Den primære risikoen som disse grepene ikke fullt eliminerer, er valg av modellramme — selve operasjonaliseringen av makkerpar som kapasitetsmetrikk reflekterer forfatterens forståelse av prosedyren og kunne blitt formulert annerledes av en utenforstående forsker. Denne begrensningen drøftes i kap 8.4.
+Den primære risikoen som disse grepene ikke fullt eliminerer, er valg av modellramme. Operasjonaliseringen av makkerpar som kapasitetsmetrikk reflekterer forfatterens forståelse av prosedyren. En utenforstående forsker kunne ha formulert metrikken annerledes. Denne begrensningen drøftes i kap 8.4.
 
 Tre komplementære analysekomponenter benyttes:
 
@@ -27,7 +27,7 @@ Tre komplementære analysekomponenter benyttes:
 | Erlang-C (M/M/c) (grunnlinje) | λ, μ, c_eff | Tradisjonell køteoretisk referansemodell |
 | Benchmarking (alle 12 sentraler) | Bemanning, oppdragsvolum, innbyggertall | Kontekstualisere casefunn mot nasjonal struktur |
 
-Analyseenheten varierer mellom komponentene: i primærmodellen er analyseenheten det enkelte innkommende anropet ved dets ankomsttidspunkt. Variant A avgrenser til beredskapsoppdrag (kategori D — D-pri1 og D-aba) og sammenstilte tilleggsanrop; variant B utvider til alle åtte hendelseskategorier (D-pri1, D-aba, S, L-aba, L-hendelse, L-ukjent, F, V — se avsnitt 5.3.2 og 6.2). I Erlang-C er analyseenheten aggregerte ankomstrater per skifttype, og i benchmarkingen er det den enkelte 110-sentralen.
+Analyseenheten varierer mellom komponentene. I primærmodellen er analyseenheten det enkelte innkommende anropet ved dets ankomsttidspunkt. Variant A avgrenser til beredskapsoppdrag (kategori D — D-pri1 og D-aba) og sammenstilte tilleggsanrop. Variant B utvider til alle åtte hendelseskategorier (D-pri1, D-aba, S, L-aba, L-hendelse, L-ukjent, F, V — se avsnitt 5.3.2 og 6.2). I Erlang-C er analyseenheten aggregerte ankomstrater per skifttype. I benchmarkingen er det den enkelte 110-sentralen.
 
 ---
 
@@ -49,9 +49,9 @@ Hovedanalysen er kvantitativ og registerbasert. De kvalitative kildene (prosedyr
 
 ### 5.2.1 LEO/BRIS-data (primærdata)
 
-Primærdatasettet er hendelsesdata fra 110 Sør-Vest eksportert fra LEO/BRIS-systemet. Uttrekket dekker hele kalenderåret 2025 (01.01.2025–31.12.2025) og inneholder 61 964 registrerte hendelser med 44 variabler per hendelse. Datasettet er eksportert som CSV med UTF-8-encoding (med BOM).
+Primærdatasettet er hendelsesdata fra 110 Sør-Vest eksportert fra LEO/BRIS-systemet. Uttrekket dekker hele kalenderåret 2025 (01.01.2025–31.12.2025) og inneholder 61 964 registrerte oppdrag (synlige BRIS-rader) med 44 variabler per oppdrag. Faktisk antall innkommende anrop er høyere. Tilleggsanrop til samme hendelse sammenstilles med eksisterende oppdrag og forsvinner som egne observasjoner. Sekvensgapmetoden estimerer 18 901 sammenstilte anrop i tillegg (avsnitt 5.3.4). Datasettet er eksportert som CSV med UTF-8-encoding (med BOM).
 
-Fra høsten 2024 benytter alle tolv norske 110-sentraler det felles oppdragshåndteringssystemet LEO. Valget av 2025 som analyseår sikrer at hele perioden er dekket av det nye systemet, noe som gir bedre datakonsistens enn eldre perioder der systemovergangen kan ha påvirket registreringspraksis.
+Fra høsten 2024 benytter alle tolv norske 110-sentraler det felles oppdragshåndteringssystemet LEO. Valget av 2025 som analyseår sikrer at hele perioden er dekket av det nye systemet. Det gir bedre datakonsistens enn eldre perioder, der systemovergangen kan ha påvirket registreringspraksis.
 
 **Nøkkelvariabler benyttet i analysen:**
 
@@ -73,7 +73,7 @@ Datasettet har fullstendig dekning for ankomsttidspunkt gjennom hele analyseperi
 | Felt | Dekningsgrad | Konsekvens for analysen |
 |---|---|---|
 | `Operatør-ID` | 0 % (100 % null) | Serverutnyttelse kan ikke observeres direkte på operatørnivå. Systemstrukturell begrensning bekreftet av DSB (mars 2026) |
-| `Innsatsvarighet` | 76,4 % av kategori D (5 771 av 7 555) | Måler total varighet fra utrykning til siste ressurs ledig — kan vare i timer. **[Antagelse 5.1]** Variabelen er ikke benyttet som operatørbindingsmål fordi 110-operatørens binding antas avgrenset til akuttfasen (RØD + GUL), ikke hele innsatsperioden. Antagelsen er forankret i prosedyre og operative samtaler (avsnitt 5.2.4), men ikke direkte målt på operatørnivå (jf. manglende Operatør-ID over) |
+| `Innsatsvarighet` | 76,4 % av kategori D (5 771 av 7 555) | Måler total varighet fra utrykning til siste ressurs ledig — kan vare i timer. **[Metodeforbehold 5.1]** Variabelen er ikke benyttet som operatørbindingsmål fordi 110-operatørens binding antas avgrenset til akuttfasen (RØD + GUL), ikke hele innsatsperioden. Antagelsen er forankret i prosedyre og operative samtaler (avsnitt 5.2.4), men ikke direkte målt på operatørnivå (jf. manglende Operatør-ID over) |
 | `Alarmbehandlingstid` | 99,0 % av kategori D (7 478 av 7 555) | Tilgjengelig for nesten alle utrykningshendelser |
 | Første ressurs fremme | 76,5 % av kategori D (5 777 av 7 555) | Primært mål for bindingstid; resterende 23,5 % imputert med median |
 
@@ -81,7 +81,9 @@ Denne kildens viktigste begrensning er at den viser synlige oppdrag, ikke alle i
 
 ### 5.2.2 DSB MOB-rapporter
 
-Bemannings- og oppdragsdata for alle tolv norske 110-sentraler er hentet fra DSBs årlige rapportering gjennom MOB-systemet (Melding Om Brannvesen). Data foreligger for perioden 2022–2025 og inkluderer antall ansatte, bemanning per vakttype (dag/natt, hverdag/helg), antall operatørplasser og selvrapportert anropsvolum. Denne kilden brukes primært til benchmarking av casefunn mot nasjonal bemanningsstruktur. Denne kildens viktigste begrensning er at bemanningsnivået rapporteres som planlagt minimumsbemanning per vakttype, ikke som faktisk observert bemanning.
+Bemannings- og oppdragsdata for alle tolv norske 110-sentraler er hentet fra DSBs årlige rapportering gjennom MOB-systemet (Melding Om Brannvesen). Data foreligger for perioden 2022–2025. De inkluderer antall ansatte, rapportert bemanning per vakttype (dag/natt, hverdag/helg), antall operatørplasser og selvrapportert anropsvolum. Kilden brukes til deskriptiv benchmarking av casefunn mot nasjonal bemanningsstruktur. Den brukes ikke til å konkludere normativt om andre sentraler er riktig bemannet.
+
+Kildens viktigste begrensning er at MOB viser rapportert plan-/minimumsnivå per vakttype, ikke faktisk observert bemanning på enkeltvakter. Svar fra enkelte sentraler viser også at MOB-tallet kan representere ulike lokale begreper — normalbemanning, minimumsbemanning eller bemanning inkludert vaktleder. For 110 Sør-Vest fastsettes $c_{\text{eff}}$ derfor fra lokale prosedyre- og beredskapsdokumenter. MOB-bemanning for øvrige sentraler brukes som en offentlig rapportert proxy i nasjonal oversikt. Der lokale avklaringer mangler, tolkes bemanningstallene med forbehold.
 
 ### 5.2.3 Prosedyre- og analysedokumenter
 
@@ -97,7 +99,7 @@ Dokumentene er tilgjengelige gjennom forfatterens operative tilknytning til 110 
 
 ### 5.2.4 Operative valideringssamtaler og LABA-dybdeanalyse
 
-Modellforutsetninger og parameterestimater er validert gjennom tre komplementære kanaler: samtaler med operativt personell, en strukturert manuell dybdeanalyse av 50 L-aba-hendelser, og skriftlige spørreskjemaer til andre sentraler under kalibrering.
+Modellforutsetninger og parameterestimater er validert gjennom tre komplementære kanaler: samtaler med operativt personell ved 110 Sør-Vest, en strukturert manuell dybdeanalyse av L-aba-hendelser, og en begrenset ekstern avklaringsrunde med andre sentraler. Den eksterne runden brukes til plausibilitetskontroll og forklaring av store dataavvik, ikke som nødvendig datagrunnlag for hovedanalysen.
 
 **Tabell 5.4: Gjennomførte valideringsaktiviteter**
 
@@ -106,9 +108,13 @@ Modellforutsetninger og parameterestimater er validert gjennom tre komplementær
 | 15.03.2026 | Midt-Norge 110 | Telefon (uformell) | Bemanning, servicetesting-organisering |
 | Mars–april 2026 | 110 Sør-Vest | Løpende operativ dialog | Makkerpar, bindingstider, VL-rolle, overløp, D-pri1/D-aba-dynamikk |
 | 18.04.2026 | Lokal operatør 110 Sør-Vest | Strukturert utfylling (Excel) | LABA-dybdeanalyse: 50 hendelser med tidsstempler fra LEO |
+| 22.04.2026 | Lokal operatør 110 Sør-Vest | Utvidet strukturert utfylling (Excel) | LABA-dybdeanalyse runde 2: 100 Kilde=Alarm-hendelser |
 | April 2026 | Lokale operatører 110 Sør-Vest | Intern kalibrering av spørreskjemautkast | Verifisering av tider og spørsmålsformuleringer før utsending |
+| 23.04–06.05.2026 | Fire andre 110-sentraler | E-post, PDF og telefonintervju | Begrenset ekstern plausibilitetskontroll: bemanning, VL-praksis, ABA/service og registreringsavvik |
 
 Kanalene har avgrensede funksjoner: kalibrering av parametere og validering av operativ realisme i modellantakelsene. Konkret har samtalene og dybdeanalysen bidratt med:
+
+Valideringssamtalene er dokumentert på dato, rolle/funksjon og tema, uten navn eller personidentifiserende detaljer, og brukes kun som grunnlag for parameterkalibrering og operativ plausibilitetskontroll.
 
 - **Samtaletid for Erlang-C:** Vektet gjennomsnittlig samtaletid på 3,44 minutter (brukes kun i Erlang-C-grunnlinjen, ikke i primærmodellen)
 - **VL-forutsetningen:** Bekreftelse av at vaktleder normalt ikke besvarer nødanrop direkte
@@ -118,7 +124,7 @@ Kanalene har avgrensede funksjoner: kalibrering av parametere og validering av o
 - **Bindingstid for sammenstilte anrop:** Kvalitativt estimat på 1 minutt
 - **Organisatoriske forskjeller:** Midt-Norge har dedikert servicepersonell utenfor LEO, noe som påvirker sammenlignbarheten av servicevolum mellom sentraler
 
-**Skriftlige spørreskjemaer til alle tolv sentraler** er utviklet og er under intern kalibrering hos lokale operatører for å verifisere tidsantakelser og formuleringer før utsending. Utsendelse til eksterne sentraler skjer først når tidsgrunnlaget er bekreftet. Denne kildens viktigste begrensning er at den bygger på et begrenset antall samtaler og at operative vurderinger kan variere mellom informanter.
+**Avklaringer med andre sentraler** ble forsøkt innhentet for å forstå registreringspraksis og store avvik i DSB/MOB-tallene. Per 06.05.2026 foreligger dokumenterte svar fra Innlandet, Finnmark, Midt-Norge og Vest 110. Svarene viser at slike avklaringer er nyttige for å forklare avvik — for eksempel bålmeldinger som L-ukjent, direkte ABA-utalarmering og dedikert servicepersonell. Avklaringene er likevel ikke en forutsetning for hovedanalysens troverdighet. Hovedanalysen bygger på registerdata og lokal prosedyrevalidering ved 110 Sør-Vest. For de øvrige sentralene brukes LEO/BRIS- og MOB-tall som sekundærdata med eksplisitte forbehold. Manglende svar begrenser bare hvor sikkert lokale avvik kan forklares.
 
 ### 5.2.5 SSB befolkningsdata
 
@@ -136,7 +142,7 @@ Følgende steg er gjennomført for å klargjøre primærdatasettet for analyse:
 6. **Håndtering av ekstreme verdier:** Bindingstider er kontrollert for negative verdier og urealistisk lange varigheter. Beregningene bygger på registrerte tidsstempler og er ikke manuelt justert.
 7. **Encoding:** CSV-filen er lest med `encoding='utf-8-sig'` for å håndtere BOM-markør. Sentralnavn med encoding-avvik er normalisert via en oppslagstabell.
 
-**Tilleggsbearbeiding for nasjonal benchmarking (kap 7.8 og 8.4.1):** Det nasjonale BRIS-datasettet for 2025 (508 228 oppdrag, alle 12 sentraler) er bearbeidet med samme V3-klassifiseringsregel som primærdatasettet (`Kilde = Alarm`-krav for L-aba og D-aba). Bearbeidingen er nødvendig fordi sentralnavn forekommer med ulike encoding-varianter (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`, `Sør-Vest 110`) og fordi `Opprinnelig oppdragstype` har ulik dekningsgrad mellom sentraler. To konkrete grep er gjort: (i) sentralnavn normaliseres via `SENTRALER_NORM`-oppslagstabellen i `analyse/scripts/benchmark_trend_analyse.py`; (ii) L-aba/D-aba-andelen rapporteres uten å justeres for ulik dekningsgrad — variasjonen mellom sentraler (0,0–7,5 %) tolkes derfor eksplisitt som indikasjon på heterogen registreringspraksis (jf. kap 8.4.1), ikke som direkte sammenlignbare nivåer. Den prosedyrbaserte ankomstkonfliktmodellen er per nå kjørt på 110 Sør-Vest alene; nasjonal modellanvendelse forutsetter klassifiseringsharmonisering (kap 9.4).
+**Tilleggsbearbeiding for nasjonal benchmarking (kap 7.9 og 8.4.1):** Det nasjonale BRIS-datasettet for 2025 dekker alle 12 sentraler (508 228 registrerte oppdrag — proxy for henvendelser, med kjent undertelling pga. sammenstilling, jf. avsnitt 5.3.1 og 5.3.4). Datasettet er bearbeidet med samme V3-klassifiseringsregel som primærdatasettet (`Kilde = Alarm`-krav for L-aba og D-aba). Bearbeidingen er nødvendig av to grunner. Sentralnavn forekommer med ulike encoding-varianter (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`, `Sør-Vest 110`) I tillegg har `Opprinnelig oppdragstype` ulik dekningsgrad mellom sentraler. To konkrete grep er gjort: sentralnavn normaliseres via `SENTRALER_NORM`-oppslagstabellen i `analyse/scripts/benchmark_trend_analyse.py`. L-aba/D-aba-andelen rapporteres uten justering for ulik dekningsgrad. Variasjonen mellom sentraler (0,0–7,5 %) tolkes derfor eksplisitt som indikasjon på heterogen registreringspraksis (jf. kap 8.4.1), ikke som direkte sammenlignbare nivåer. Lokale svar brukes bare til å forklare avvik der de foreligger. Registertallene endres ikke uten dokumentert grunnlag. Den prosedyrbaserte ankomstkonfliktmodellen er per nå kjørt på 110 Sør-Vest alene. Nasjonal modellanvendelse forutsetter klassifiseringsharmonisering (kap 9.4).
 
 ---
 
@@ -167,11 +173,11 @@ Hendelsene i datasettet er klassifisert i åtte kategorier basert på tre BRIS-f
 - **F** (Feilringing): Feilringing, ikke-nødmelding, eCall feil
 - **V** (Viderevarsling): Viderekobling til annen etat eller intern varsling
 
-**Kilde = Alarm-kravet:** LABA-dybdeanalysen (avsnitt 5.4) viste at 24,5 % av oppdrag klassifisert med `Opprinnelig = ABA` faktisk ikke representerer automatisk brannalarm i operativ forstand — de inkluderer publikumsmeldinger om brannalarm, privat bygg uten 110-tilknytning, tester feilrevidert som oppdrag og duplikatoppdrag. Ved å kreve `Kilde = Alarm` for L-aba og D-aba skilles ekte ABA-signaler fra disse feilklassifiseringene. Oppdrag som tidligere ville vært L-aba men har `Kilde = Samtale` eller blank reklassifiseres til L-hendelse.
+**Kilde = Alarm-kravet:** LABA-dybdeanalysen (avsnitt 5.4) viste at 24,5 % av oppdrag klassifisert med `Opprinnelig = ABA` faktisk ikke representerer automatisk brannalarm i operativ forstand. Disse inkluderer publikumsmeldinger om brannalarm, privat bygg uten 110-tilknytning, tester feilrevidert som oppdrag og duplikatoppdrag. Ved å kreve `Kilde = Alarm` for L-aba og D-aba skilles ekte ABA-signaler fra disse feilklassifiseringene. Oppdrag som tidligere ville vært L-aba, men har `Kilde = Samtale` eller blank, reklassifiseres til L-hendelse.
 
-**D-pri1 vs D-aba-splitt:** Operatørintervju (avsnitt 5.2.4) og prosedyrereferanse (Rogaland brann og redning IKS, 2024) etablerer at pri-1-utrykning og ABA-utløst utrykning har fundamentalt ulik operativ dynamikk — makkerpar versus serial solo-håndtering. Denne splittingen er nødvendig for at kapasitetsmodellen skal reflektere korrekt op-binder-profil per hendelsestype (avsnitt 6.4).
+**D-pri1 vs D-aba-splitt:** Operatørintervju (avsnitt 5.2.4) og prosedyrereferanse (Rogaland brann og redning IKS, 2024) etablerer at pri-1-utrykning og ABA-utløst utrykning har fundamentalt ulik operativ dynamikk. Pri-1 krever makkerpar; ABA håndteres serielt og solo. Splittingen er nødvendig for at kapasitetsmodellen skal reflektere korrekt op-binder-profil per hendelsestype (avsnitt 6.4).
 
-Av 61 964 synlige hendelser i 2025 klassifiseres 4 499 (7,3 %) som D-pri1 og 3 056 (4,9 %) som D-aba. Primærmodellen (variant A) avgrenses til disse beredskapskategoriene pluss sammenstilte anrop. Den utvidede modellen (variant B) inkluderer alle åtte kategorier med empirisk kalibrerte eller operativt estimerte bindingstider. Fullstendig klassifiseringslogikk og operative beskrivelser er gitt i avsnitt 6.2.
+Av 61 964 synlige oppdrag i 2025 klassifiseres 4 499 (7,3 %) som D-pri1 og 3 056 (4,9 %) som D-aba. Primærmodellen (variant A) avgrenses til disse beredskapskategoriene pluss sammenstilte anrop. Den utvidede modellen (variant B) inkluderer alle åtte kategorier. Bindingstider er empirisk kalibrert eller operativt estimert. Fullstendig klassifiseringslogikk og operative beskrivelser er gitt i avsnitt 6.2.
 
 ### 5.3.3 Beregning av bindingstid
 
@@ -189,19 +195,19 @@ Beregningen bygger på to registrerte tidsstempler: `Dato/tid anrop` og `Første
 > **Fase 1 (alltid): 3 min × 1 operatør** — kvittering + oppdragsopprettelse + call-out
 > **Fase 2 (med sannsynlighet p): Y min × 1 operatør** — nødtelefon + panel-veiledning, starter 90 sek etter Fase 1
 
-Fase 1-varigheten er forankret i operativ prosedyre og verifisert empirisk: median tid fra anrop til ressurs varslet er 74 sek for D-aba (P75 = 80, P90 = 111) — konsistent med operativ beskrivelse av ~90 sek call-out. Med etterfølgende registrering estimeres Fase 1 til 3 min. Fase 2-parametrene ($p$, $Y$) varieres i tre scenarioer (lav/hoved/høy: $p = 0{,}30/0{,}50/0{,}70$; $Y = 3/6/10$ min), og hoved-scenarioet $p = 0{,}50$, $Y = 6$ min er grunnlaget i primæranalysen.
+Fase 1-varigheten er forankret i operativ prosedyre og verifisert empirisk. Median tid fra anrop til ressurs varslet er 74 sek for D-aba (P75 = 80, P90 = 111). Dette er konsistent med operativ beskrivelse av ~90 sek call-out. Med etterfølgende registrering estimeres Fase 1 til 3 min. Fase 2-parametrene ($p$, $Y$) varieres i tre scenarioer (lav/hoved/høy: $p = 0{,}30/0{,}50/0{,}70$; $Y = 3/6/10$ min). Hovedscenarioet $p = 0{,}50$, $Y = 6$ min er grunnlaget i primæranalysen.
 
 **L-aba (empirisk kalibrert, LABA-dybdeanalyse n = 100 Kilde=Alarm):**
 
 > **Bindingstid = 4,5 min × 1 operatør (hoved)**
 
-Bindingstiden for L-aba er kalibrert via en strukturert manuell dybdeanalyse i to runder (avsnitt 5.4). Hovedparameteren bygger på utvidet utvalg (n = 100, alle Kilde=Alarm) med mean 4,53 min og 95 % CI [3,74; 5,43] minutter. Forrige rapportversjon brukte n=30-anslaget (mean 5,88 min, CI [3,70; 8,56]) og er erstattet i denne versjonen.
+Bindingstiden for L-aba er kalibrert via en strukturert manuell dybdeanalyse i to runder (avsnitt 5.4). Hovedparameteren bygger på utvidet utvalg (n = 100, alle Kilde=Alarm). Mean er 4,53 min med 95 % CI [3,74; 5,43] minutter. Forrige rapportversjon brukte n=30-anslaget (mean 5,88 min, CI [3,70; 8,56]). Det er erstattet i denne versjonen.
 
 **Øvrige kategorier (operativt estimert, sensitivitetsscenarioer):**
 
 S: 1/2/4 min; L-hendelse: 3/5/8 min; L-ukjent: 1/3/5 min; F: 0,25/0,5/1 min; V: 0,5/1/2 min. Hovedscenario benyttes i primærresultatene; lavt og høyt i sensitivitetsanalyse (avsnitt 7.7).
 
-**Sammenstilte tilleggsanrop:** 1 min × 1 operatør. **[Antagelse 5.2]** Forenklet estimat basert på operativ vurdering, ikke en direkte observasjon. Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over rimelige variasjoner.
+**Sammenstilte tilleggsanrop:** 1 min × 1 operatør. **[Metodeforbehold 5.2]** Forenklet estimat basert på operativ vurdering, ikke en direkte observasjon. Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over rimelige variasjoner.
 
 ### 5.3.4 Estimering av sammenstilte anrop
 
@@ -211,7 +217,9 @@ Når flere innringere melder om samme hendelse, sammenstilles tilleggsanropene m
 - Manglende sekvensnumre i rekken (i dette tilfellet -5) tolkes som anrop som ble sammenstilt med et eksisterende oppdrag.
 - Tidspunkt for sammenstilte anrop er interpolert fra nærmeste synlige oppdrags ankomsttidspunkt, da det eksakte tidspunktet ikke er registrert.
 
-Metoden forutsetter at LEO tildeler sekvensnumre kronologisk og uten andre årsaker til gap. For 2025 er det gjennom denne metoden estimert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305x). Et viktig forbehold er at metoden identifiserer at et anrop ble sammenstilt, men ikke hvilket oppdrag det ble knyttet til.
+Metoden forutsetter at LEO tildeler sekvensnumre kronologisk. Gap kan i prinsippet også reflektere overflyt til nabosentral eller avbrutte anrop, ikke bare sammenstilte anrop. For Sør-Vest er sekvensgapene validert operativt som overveiende sammenstillinger (jf. avsnitt 7.2). For 2025 er det estimert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305x). Metoden identifiserer at et anrop mangler som synlig oppdrag, men ikke hvilket oppdrag det ble knyttet til.
+
+**Mulig retning av skjevhet.** Hvis en del av sekvensgapene faktisk reflekterer overflyt til Agder eller avbrutte anrop, og ikke sammenstillinger, vil modellen overestimere antall *operatørbundne* tilleggsanrop ved 110 Sør-Vest. Resultatet er at variant A-Svikt-andelen kan være noe overestimert. Motsatt: hvis beredskapsrelaterte anrop oftere feilkategoriseres som service eller feilringing under press (slik LABA-dybdeanalysen indikerer for L-aba, avsnitt 5.4.4), vil modellen underestimere reelt skjult volum. De to mekanismene drar i hver sin retning. For Sør-Vest med skjult-rate 23,4 % er nettoeffekten vurdert som liten — men ikke kvantifisert. Sentraler med høyere skjult-rate (Finnmark 65 %, Agder 54 %) ville hatt vesentlig større skjevhetspotensial dersom modellen kjøres på dem uten egen validering.
 
 ### 5.3.5 Konstruksjon av kapasitetsvariabler
 
@@ -354,21 +362,33 @@ Steg 1–8 representerer databehandling og operasjonalisering. Steg 9–10 er pr
 
 ### 5.6.1 Målevaliditet
 
-Analysens sentrale metrikk — kapasitetsnivå ved ankomst — bygger på observerte tidsstempler for D-pri1-hendelser (som kan identifiseres robust gjennom ressursvarsling) og på empirisk kalibrerte bindingstider for L-aba (LABA-dybdeanalyse, avsnitt 5.4). Følgende forhold begrenser målevaliditeten:
+Analysens sentrale metrikk er kapasitetsnivå ved ankomst. Den bygger på to ulike datakilder. D-pri1-hendelser identifiseres robust gjennom ressursvarsling. L-aba-bindingstider er empirisk kalibrert via LABA-dybdeanalyse (avsnitt 5.4). Tre konkrete trusler mot målevaliditet er identifisert.
 
-- **Ikke alle bindingstider er empirisk målt.** D-pri1 og L-aba bygger på direkte observasjon (databasert respektive LABA-dybdeanalyse). D-aba Fase 1 er forankret i operativ prosedyre og empirisk verifisert (median 74 sek call-out). D-aba Fase 2 og øvrige kategorier (S, L-hendelse, L-ukjent, F, V) er operative estimater validert av vaktleder. Sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet av rimelige antakelser.
-- **Sammenstilte anrop estimeres indirekte.** Sekvensgapmetoden gir et estimat på antall, men det eksakte tidspunktet og varigheten for hvert enkelt anrop er ikke observert.
-- **D-aba Fase 2-sannsynligheten $p$ er delvis empirisk underbygd.** Sekvensgap-metoden gir underkant-estimat (17–37 % avhengig av tidsvindu) fordi nødtelefoner logget inni hovedoppdraget er usynlige. Hovedscenario $p = 0{,}50$ reflekterer operatørens kvalitative vurdering.
-- **Imputering med median.** De ~25 % av D-pri1-hendelsene med imputert bindingstid kan avvike fra faktisk varighet, særlig for tyngre hendelser.
-- **LABA-dybdeanalysen har fortsatt begrenset utvalgsstørrelse, men er styrket i runde 2 (n = 100 for Kilde=Alarm).** 95 % CI for mean er [3,74; 5,43], som gjør L-aba-parameteren langt bedre kalibrert enn runde 1 (n = 30), men fortsatt avgrenset til 110 Sør-Vest 2025.
+**Trussel 1 — konstruktvaliditet for kapasitetsmetrikken.** Modellen måler andel beredskapsanrop der makkerpar-kravet ikke kan opprettholdes ved ankomst. Det er ikke det samme som andel anrop der tjenesten leveres med redusert kvalitet, eller andel der innringer opplever forsinkelse. Konstruktvaliditeten begrenses derfor til det modellen eksplisitt måler: en *prosedyrkonformitetsmetrikk*, ikke et tjenestekvalitetsmål. Diskusjonen i kap 8.2 og 8.2.3 problematiserer dette skillet eksplisitt.
 
-Begrensningene trekker i hovedsak i én retning: mot at analysen gir et konservativt estimat av faktisk kapasitetsbelastning.
+**Trussel 2 — målefeil i bindingstider.** Ikke alle bindingstider er empirisk målt:
+
+- D-pri1 og L-aba bygger på direkte observasjon (databasert respektive LABA-dybdeanalyse).
+- D-aba Fase 1 er forankret i operativ prosedyre og empirisk verifisert (median 74 sek call-out).
+- D-aba Fase 2 og øvrige kategorier (S, L-hendelse, L-ukjent, F, V) er operative estimater validert av vaktleder, ikke direkte observert.
+
+Sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet av rimelige antakelser. Det er likevel mulig at parametrene systematisk underestimerer bindingstid for noen kategorier (særlig under press), noe som ville gjøre Svikt-andelen høyere enn rapportert.
+
+**Trussel 3 — indirekte estimerte tilleggsanrop.** Sammenstilte anrop estimeres via sekvensgapmetoden (avsnitt 5.3.4). Antallet er estimert. Tidspunkt og varighet er ikke observert direkte. Hovedscenario $p = 0{,}50$ for D-aba Fase 2 reflekterer operatørens kvalitative vurdering, ikke direkte måling — sekvensgap-metoden gir underkant-estimat (17–37 % avhengig av tidsvindu) fordi nødtelefoner logget inni hovedoppdraget er usynlige. Imputering med median for de ~25 % av D-pri1-hendelsene uten registrert fremme-tidspunkt kan systematisk feilrepresentere tyngre hendelser.
+
+**Trussel 4 — ekstern validitet.** LABA-dybdeanalysen er empirisk grunnlag for L-aba-parameteren, men gjelder kun 110 Sør-Vest 2025. 95 % CI [3,74; 5,43] for mean er strammere enn runde 1 (n = 30), men kan ikke uten videre overføres til andre sentraler.
+
+Samlet trekker truslene i ulike retninger. Trussel 2 og 3 trekker i hovedsak mot konservativt estimat (undervurdering av faktisk belastning). Trussel 1 og 4 er kvalitative — de begrenser hva tallene *betyr*, ikke nødvendigvis hvor store de er.
 
 ### 5.6.2 Reliabilitet og reproduserbarhet
 
-Analysen bygger primært på registerdata fra et nasjonalt system (LEO/BRIS), noe som gir høy sporbarhet og konsistens. Sekvensgapmetoden for sammenstilte anrop og D-aba Fase 2-stokastikken er systematiske og bruker fast random seed (`SEED_DABA = 20260419`) for reproduserbarhet. Alle analysesteg er implementert i skriptbasert arbeidsflyt (se avsnitt 5.8), noe som muliggjør konsistent reproduksjon.
+Analysen bygger primært på registerdata fra et nasjonalt system (LEO/BRIS). Det gir høy sporbarhet og konsistens. Sekvensgapmetoden for sammenstilte anrop og D-aba Fase 2-stokastikken er systematiske og bruker fast random seed (`SEED_DABA = 20260419`) for reproduserbarhet. Alle analysesteg er implementert i skriptbasert arbeidsflyt (se avsnitt 5.8). Det muliggjør konsistent reproduksjon.
 
-Valideringssamtalene er vanskeligere å reprodusere eksakt, men brukes kun til å kalibrere parametere som er eksplisitt dokumentert (Tabell 5.5). En annen forsker med tilgang til samme data, prosedyredokumenter og `notat_V3_modellutvikling.md` vil kunne gjenta analysen med de dokumenterte parameterverdiene.
+Variant A er i hovedsak deterministisk — usikkerheten ligger i parameterantagelser, ikke i stokastisk simulering. Random seed er kun relevant for D-aba Fase 2-stokastikken i variant B, der hver D-aba-hendelse trekker uniformt mot Fase 2-sannsynligheten $p$. Identisk seed gir identisk realisasjon; en annen seed kan gi en marginalt ulik Svikt-andel — typisk innenfor ±0,3 prosentpoeng for natt/helg, jf. observert differanse mellom primærmodellens 32,6 % og scenarioets baseline 32,8 % (avsnitt 7.6).
+
+Valideringssamtalene er vanskeligere å reprodusere eksakt. De brukes kun til å kalibrere parametere som er eksplisitt dokumentert (Tabell 5.5). En annen forsker med tilgang til samme data, prosedyredokumenter og `notat_V3_modellutvikling.md` vil kunne gjenta analysen med de dokumenterte parameterverdiene.
+
+**Insider-perspektivets påvirkning på reliabilitet.** Refleksivitetsavsnittet i 5.1 lister fire grep mot insider-bias, men reliabilitet handler om mer enn det. Den residuelle risikoen er at *valget av modellramme* — selve operasjonaliseringen av makkerpar som kapasitetsmetrikk — er forfatterens. En utenforstående forsker uten operativ tilknytning kunne formulert metrikken annerledes. Tre konkrete eksempler på alternative valg: (i) å definere bindingstid som «første ressurs fremme» uten +3 min kvitteringsvindu, (ii) å klassifisere D-aba som makkerpar-bundet i Fase 2 fremfor seriell solo-håndtering, (iii) å bruke `Innsatsvarighet` som operatørbindingsmål fremfor akuttfase-proxy. Hvert alternativ ville gitt et annet Svikt-tall. Vurderingen av at de valgte definisjonene er korrekte hviler på forfatterens operative forståelse av prosedyren — det er en styrke for parameterkalibrering, men også en grense for hvor uavhengig replikasjon kan være.
 
 ### 5.6.3 Avgrensninger
 
@@ -376,48 +396,14 @@ Valideringssamtalene er vanskeligere å reprodusere eksakt, men brukes kun til �
 - **Analyseår 2025.** Datagrunnlaget dekker ett kalenderår. Sesongvariasjoner fanges, men årlige svingninger og langtidstrender er ikke adressert.
 - **Begrenset dekning av ikke-D-kategorier i variant A.** Øvrige kategorier inkluderes i variant B; hovedfunnet for variant A er en avgrenset beredskapsmetrikk, ikke total operatørbelastning.
 - **Operatør-ID er strukturelt fraværende.** Individuell serverbelastning kan ikke observeres direkte. Denne begrensningen gjelder for alle norske 110-sentraler.
-- **Benchmarkingdata er planlagt minimum.** MOB-dataene viser planlagt minimumsbemanning, ikke faktisk observert bemanning på enkeltvakter.
+- **MOB-bemanning er rapportert nivå, ikke faktisk vaktdata.** MOB-dataene viser bemanning rapportert per vakttype, men ikke faktisk observert bemanning på enkeltvakter. Lokale svar viser at tallet kan tolkes ulikt mellom sentraler, særlig om det representerer normalbemanning, minimumsbemanning og/eller inkluderer vaktleder.
+- **Manglende sentralavklaringer.** Det foreligger ikke svar fra alle øvrige 110-sentraler. Dette svekker ikke hovedanalysen av 110 Sør-Vest, men begrenser hvor presist avvik i nasjonal benchmarking kan forklares. Derfor trekkes det ikke normative konklusjoner om bemanningsriktighet for andre enkelt-sentraler.
 - **Poisson-forutsetning ikke formelt testet.** Erlang-C-grunnlinjen forutsetter Poisson-ankomster; dette er ikke empirisk validert. Primærmodellen er imidlertid ikke avhengig av denne antagelsen.
 
 ---
 
 ## 5.7 Etiske vurderinger og rolleforståelse
 
-Prosjektet benytter anonymiserte registerdata der ingen personopplysninger er tilgjengelige — operatør-ID er strukturelt fraværende i BRIS-eksporter. Valideringssamtaler er gjennomført som operative fagsamtaler, ikke som formelle forskningsintervjuer, og inneholder ikke personidentifiserbar informasjon. Studien er ikke vurdert å kreve godkjenning fra Sikt (tidligere NSD), da den ikke behandler personopplysninger.
+Prosjektet benytter anonymiserte registerdata der ingen personopplysninger er tilgjengelige — operatør-ID er strukturelt fraværende i BRIS-eksporter. Valideringssamtaler er gjennomført som operative fagsamtaler, ikke som formelle forskningsintervjuer, og inneholder ikke personidentifiserbar informasjon. Studien er ikke vurdert å kreve godkjenning fra Sikt (tidligere NSD), da den ikke behandler personopplysninger. Rådata og interne prosedyre- og beredskapsdokumenter publiseres ikke; rapporten presenterer kun aggregerte resultater, metodiske beskrivelser og kildehenvisninger på et nivå som ivaretar intern konfidensialitet.
 
-Forfatterens operative tilknytning til 110 Sør-Vest gir tilgang til dokumenter og operativ kontekst, men innebærer også nærhet til caset som kan påvirke tolkninger. Denne dobbeltposisjonen er håndtert gjennom:
-
-- **Registerbasert hovedanalyse:** Hovedfunnene bygger på kvantitative data fra registersystemer, ikke subjektive vurderinger.
-- **Eksplisitt dokumentasjon:** Alle modellforutsetninger og parametere er dokumentert slik at analysen er etterprøvbar (Tabell 5.5 og 5.6).
-- **Tydelig skille mellom observert og antatt:** Tabell 5.5 angir eksplisitt hvilke variabler som er direkte observert, beregnet, estimert eller antatt.
-- **Nasjonal benchmarking som korrektiv:** Casefunnene kontekstualiseres mot data fra alle tolv sentraler for å motvirke at lokale særtrekk overtolkes.
-
----
-
-## 5.8 Implementasjon og verktøy
-
-Alle analyser er implementert i Python med skriptbasert arbeidsflyt. Sentrale biblioteker er `pandas` og `numpy` for databehandling, `scipy` for statistiske beregninger og Erlang-C-formelen, `matplotlib` og `seaborn` for visualisering, og `openpyxl` for lesing av Excel-filer. Alle figurer og tabeller i rapporten er generert fra samme analysegrunnlag.
-
-Kildekode og analyseskript er versjonskontrollert på GitHub. Sentrale skript:
-
-| Skript | Funksjon |
-|---|---|
-| `analyse/scripts/konflikt_total_belastning.py` | Primærmodell (variant A og B) med op-binder-semantikk |
-| `analyse/scripts/scenario_pluss1.py` | Scenarioanalyse (+1 operatør) |
-| `analyse/scripts/bindingstid_analyse.py` | Bindingstidsberegning og fordeling |
-| `analyse/scripts/benchmark_trend_analyse.py` | Benchmarking alle 12 sentraler (MOB 2022–2025) |
-| `analyse/scripts/nasjonal_oversikt.py` | Nasjonal DSB 2025-analyse (alle 12 sentraler) |
-| `analyse/scripts/nasjonal_2025_analyse.py` | Nasjonal per sentral-analyse (kategorier, tidsdata) |
-| `analyse/scripts/uttrekk_laba_sorvest.py` | Stratifisert utvalgsgenerering for LABA-dybdeanalyse |
-
-Parameterkalibrering og modellutvikling er dokumentert i `analyse/notat_V3_modellutvikling.md` som inkluderer endringslogg, beslutningsrasjonale og fullstendig modellspesifikasjon.
-
-Generative KI-verktøy (Claude Code av Anthropic og ChatGPT av OpenAI) er benyttet som støtteverktøy for koding, litteratursøk og rapportskriving. All bruk er dokumentert med dato, kontekst og hva som ble produsert (se Vedlegg D / `KI_erklæring_LOG650_G20_Rune.md`). Alle analytiske beslutninger, tolkninger og konklusjoner er forfatterens egne. Den deterministiske, skript-baserte analyseflyten beskrevet over (refleksivitetsavsnittet i 5.1) sikrer at KI-verktøyenes rolle er begrenset til kode- og tekststøtte — ikke til generering av modellresultater eller tolkninger.
-
----
-
-Samlet gir datagrunnlaget et godt grunnlag for å modellere den best observerbare og mest beredskapsdimensjonerende delen av operatørbindingen, samtidig som enkelte belastningselementer må estimeres eller empirisk kalibreres. På dette grunnlaget utvikles i neste kapittel modellrammeverket for kapasitetsanalysen.
-
----
-
-*Kap 5 — Versjon 3.0 | Sist oppdatert: 2026-04-19 (V3 op-binder-semantikk, LABA-dybdeanalyse, D-pri1/D-aba-splitt)*
+Forfatterens operative tilknytning til 110 S

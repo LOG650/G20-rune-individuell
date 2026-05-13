@@ -4,7 +4,7 @@
 
 **Emne:** LOG650 — Logistikk og kunstig intelligens, Høgskolen i Molde, Vår 2026
 **Student:** Rune Grødem (G20 individuell)
-**Status:** Peer review-utkast (april 2026)
+**Status:** Revidert Markdown-grunnlag for peer review (mai 2026)
 
 ---
 
@@ -49,18 +49,18 @@ Output legges i `005 report/Rapport_LOG650_G20_Rune_110_samlet.pdf`. Pipelinen f
 
 - 32,6 % av beredskapsanropene på natt/helg ankommer i svikt-tilstand (variant A); 33,2 % ved total operativ belastning (variant B)
 - Erlang-C-grunnlinjen gir ρ ≤ 5,9 % for alle skifttyper — formelt korrekt, metodisk utilstrekkelig
-- Scenario «+1 operatør natt/helg» halverer sviktraten (32,8 % → 16,7 %)
+- Scenario «+1 operatør natt/helg» halverer sviktraten (ca. 33 % → 16,7 %)
 - L-aba-bindingstid empirisk kalibrert til 4,53 min (n=100, 95 % CI [3,74; 5,43])
 
 ## Tilstøtende dokumenter
 
 | Fil | Innhold |
 |---|---|
-| `V3_oppstart_brief.md` | V3-klassifiseringsregelens oppstartsbrief |
+| V3-arkivnotat | Lukket beslutningsgrunnlag for V3-klassifiseringsregelen |
 | `VL_validering_bindingstider.md` | Empirisk validering av c_eff = c_total − 1 |
-| `vurderinger_todo.md` | Løpende sjekkliste for revisjon og kvalitetssikring |
+| Vurderingslogg | Avsluttet vurderingslogg for V1-V3 og rapportavgrensninger |
 | `../012 fase 2 - plan/status.md` | Statuslogg for hele Fase 3-arbeidet |
 
 ---
 
-*Sist oppdatert: 2026-04-26 — peer review-utkast klargjort.*
+*Dokumentstatus per 2026-05-01: Markdown-kildene er gjennomgått for peer review.*

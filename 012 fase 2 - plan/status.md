@@ -1,23 +1,24 @@
 # Prosjektstatus — LOG650 G20 Rune Grødem
 
-Statusdato: 2026-04-22
+Statusdato: 2026-05-12
 
-Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplanen og WBS som referanse for avvik.
+Denne statusen bygger på arbeidskopien per 2026-05-12, med prosjektstyringsplanen og WBS som referanse for avvik.
 
 ## Kort status
 
-- Prosjektet er i fase 3 – gjennomføring. **Alle hovedkapitler er ferdigskrevet** i første versjon.
+- Prosjektet er i fase 3 – gjennomføring. **Alle hovedkapitler er skrevet og revidert** etter peer review.
+- **Peer review mottatt 3. mai 2026 fra G21** (Elisabeth K. Orlien og Kaylee Floden). PDF arkivert som `013 fase 3 - review/Peer_review_G21_til_G20_mottatt_2026-05-03.pdf`. **Detaljert gap-analyse: `013 fase 3 - review/peer_review_G21_mottatt_analyse.md`**.
+- **Revisjon 1 (delvis) ferdig 6. mai:** Formalia, kryssreferanser, tallavvik harmonisert, Penverne flyttet til kap 2, sekvensgap-forbehold inn i 5.3.4, √R-presisjon i 8.3.2, c_eff = c_total − 1 rammet inn i 9.5. Selvevaluering 1. mai (`014 fase 4 - report/peer_review_selvevaluering.md`) brukt som checkliste.
+- **Revisjon 2 åpen (12. mai):** G21s hovedkritikk — usikkerhet ikke integrert i analysens kvantitative funn, ensidig diskusjon, generaliserings­tone for sterk i kap 7.9/8.3/9 — er IKKE adressert. Språkrevisjon (lange setninger, inkonsekvent «110-sentraler») heller ikke gjennomført.
 - Primærmodellen (V3 prosedyrbasert ankomstkonfliktmodell med op-binder-semantikk) er implementert, validert og dokumentert. D-pri1 og D-aba splittet som egne undertyper basert på operativ prosedyre.
 - Erlang-C-grunnlinjen er fullført og brukes som kontrastpunkt.
 - Total belastningsmodell (variant B) og scenario +1 operatør er oppdatert med V3-semantikk.
 - **V3-klassifisering implementert gjennomgående:** L-aba og D-aba krever Kilde=Alarm. D-pri1 binder 2 ops (makkerpar), D-aba binder 1 op serielt (Fase 1 + valgfri Fase 2).
 - **LABA n=100 ferdig utfylt 22.04** — Mean L-aba-bindingstid justert fra 5,88 min (n=30, CI [3,70; 8,56]) til **4,53 min (n=100, CI [3,74; 5,43])**. Hovedparameter satt til 4,5 min. Antagelse A5 oppgradert fra orienteringsanslag til empirisk kalibrert. Modell re-kjørt; sensitivitetsscenarioer endret til 3/4,5/7 min.
 - **Hovedresultat V3 (110 Sør-Vest 2025) etter LABA n=100:** Natt/helg Svikt 32,6 % (variant A), **33,2 %** (variant B hoved, marginal endring fra 33,4 %). +1 op halverer Svikt natt/helg til 16,7 %. Variant A er uendret (L-aba inngår ikke).
-- **PDF-pipeline etablert** (`verktoy/build_pdf.py`, Pandoc + XeLaTeX): samlet rapport-PDF (74 sider, A4, forside, ToC, alle kapitler med 5 figurer, referanser, vedlegg), DSB-ønskeliste-PDF, og 12 interaktive AcroForm-spørreskjemaer.
-- Spørreskjema regenerert med oppdatert L-aba-referanse (4,5 min, LABA n=100).
-- Gjenstående rapportarbeid: vedlegg-finpuss (KI-erklæring, spørreskjemaer, DSB-ønskeliste, kode), referanseliste-finjustering.
-- Peer review 27. april (5 dager igjen). Rapportfrist 31. mai 2026.
-- E-post sendt til DSB (bris-support) 5. april om vurdering av datadeling for peer review.
+- **PDF-pipeline etablert** (`verktoy/build_pdf.py`, Pandoc + XeLaTeX): samlet rapport-PDF (siste bygg 6. mai, konsistent med kapittelfilene). PDF må rebygges etter revisjon 2.
+- Gjenstående administrativt: KI-erklæring (siste oppdatering 9. mars — bruksloggen mangler april/mai), HiMolde KI-skjema (mal ikke utfylt), Taushetserklæring (mal ikke utfylt), publiseringsavtale (mangler helt — sjekk innleveringskrav), forsidedata (studiepoeng, veileder, antall ord, endelig dato).
+- Rapportfrist 31. mai 2026 (19 dager igjen). Muntlig eksamen tidlig juni.
 
 ## Faktisk fremdrift
 
@@ -132,6 +133,9 @@ Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplan
 | April 2026 | Lokale operatører 110 Sør-Vest | Intern kalibrering | Spørreskjema-utforming, LABA-dybdeanalyse (50 hendelser utfylt), tidsestimat-validering før utsendelse til andre sentraler |
 | 20.04.2026 | Lokal operatør 110 Sør-Vest | LABA-dybdeanalyse utvidet | n=100-utvalg sendt til utfylling for smalere CI på L-aba-bindingstid |
 | 22.04.2026 | Lokal operatør 110 Sør-Vest | LABA n=100 returnert | Ferdig utfylt utvalg returnert. Mean L-aba 4,53 min med strammere CI. Hovedparameter justert i modellen |
+| 27.04.2026 | G21 (Orlien/Floden) | Sendt egen rapport til G21 for peer review | Utgående peer review-leveranse |
+| 02.05.2026 | G21 (Odfjell-bunkring) | Levert peer review til G21 | Utgående: 4-siders peer review-rapport, `013 fase 3 - review/Peer_review_G21_LOG650_G20_Rune_FINAL.pdf` (misvisende filnavn — innholdet er G20→G21) |
+| 03.05.2026 | G21 (Orlien/Floden) | Mottatt peer review fra G21 | Innkommende: 4-siders vurdering, `013 fase 3 - review/Peer_review_G21_til_G20_mottatt_2026-05-03.pdf`. Hovedkritikk: usikkerhet ikke integrert, ensidig diskusjon, generalisering for sterk, språk for komplekst |
 
 ## Risikoregister
 
@@ -144,49 +148,25 @@ Denne statusen bygger på arbeidskopien per 2026-04-22, med prosjektstyringsplan
 | R5 | Benchmarking vanskelig pga. heterogen bemanning | Håndtert | Benchmarking gjennomført med MOB-data. L8d/L14b styrker nasjonal dokumentasjon |
 | R6 | Tilgang til tvers-sentraldata | Lukket 10.03 | LEO felles fra høst 2024, tilgang bekreftet |
 | R7 | Tidskollisjon med vaktarbeid | Åpen | Buffer i Gantt — foreløpig håndterbart |
-| R8 | Prokrastinering mot frist | **Redusert** | Alle hovedkapitler skrevet 19.04. Gjenstår sammendrag, vedlegg, skjelett-synk — 7 dager igjen |
+| R8 | Prokrastinering mot frist | **Redusert** | Alle hovedkapitler skrevet 19.04 og delvis revidert etter peer review 6. mai. Hovedrevisjon (usikkerhet/nøkternhet/språk) gjenstår — 19 dager til innlevering |
+| R13 | **Generaliseringstone for sterk (NY)** | Åpen | G21 påpekte at kap 7.9, 8.3.4–8.3.5 og 9.3–9.4 trekker bredere implikasjoner enn ett case kan bære. Krever nedtoning av nasjonale anbefalinger til hypoteser/forutsetninger |
+| R14 | **Usikkerhet ikke integrert i resultater (NY)** | Åpen | G21 påpekte at Svikt 32,6 % og scenario +1 op presenteres som relativt definitive, uten at antagelses-usikkerhet integreres i selve resultatpresentasjonen. Krever konfidensintervall eller scenariobånd rundt hovedtall, ikke bare i Tabell 7.10 |
+| R15 | **Språklig kompleksitet (NY)** | Åpen | G21 påpekte at språket er tungt, lange setninger, inkonsekvent "110-sentraler". Krever en språklig korrekturrunde — ressurskrevende men nødvendig før innlevering |
 | R9 | Sensitive funn fra ROS-gjennomgang | Håndtert | Framing-retningslinje etablert: supplere, ikke angripe |
 | R10 | Datadeling for peer review uavklart | Åpen | E-post sendt til DSB 5. april. Avventer svar |
 | R11 | **Skjema til andre sentraler ikke sendt** | Åpen | Venter på verifisert tidsgrunnlag fra lokal kalibrering. Responstid fra eksterne sentraler vil uansett ikke rekke peer review 27.04 — benchmark-data fra DSB (L8d/L14b) dekker nasjonal del for peer review |
 | R12 | **L-aba-klassifisering nasjonalt heterogen (NY)** | Åpen | Sør-Øst og Oslo har ≈0 % L-aba — trolig ulik registreringspraksis. Må adresseres i kap 8.3 som begrensning ved nasjonal benchmarking |
 
-## Neste steg (5 dager til peer review 27.04)
+## Neste steg (19 dager til innlevering 31. mai)
 
-### MÅ gjøres før peer review
+### Kritiske revisjoner fra peer review (G21) — MÅ gjøres
 
-1. **Endelig gjennomlesing av samlet rapport-PDF** (74 sider): sjekk at forside, ToC, alle kapitler, figurer, referanser og vedlegg ser riktig ut i bladbar PDF-format
-2. **Synkronisere kap-2-tabell** med rapportstatus over (kapittel-versjoner)
-3. **Oppdater Gantt** med L13c lukket (LABA n=100 ferdig 22.04) og PDF-pipeline-leveranser
-4. **Levere til peer review 27. april** — last opp PDF + ev. tilleggsmateriale
+Detaljert punkt-for-punkt-analyse: `013 fase 3 - review/peer_review_G21_mottatt_analyse.md`.
 
-### KAN gjøres før peer review (lavere prioritet)
-
-5. **Send DSB-ønskeliste** til Vidar Falkenberg (DSB) — dokumentet er ferdig (PDF i `005 report/`)
-6. **Send LABA n=100-resultater** til lokal operatør med takk + sluttrapport
-7. **Send spørreskjema til 1–2 utvalgte sentraler** for å starte responsinnsamling (Midt-Norge naturlig kandidat — har bekreftet positiv kontakt). Responstid utenfor peer review-vinduet, men datagrunnlag inn mot endelig innlevering 31.05
-
-### Mai 2026 — etter peer review
-
-8. **Motta peer review-tilbakemelding** ca. 4.–10. mai
-9. **Revisjon av rapport** basert på review (uke 19–20)
-10. **Endelig referanseliste-finjustering** mot full Litteraturliste v3.0 (33 → 50+ kilder)
-11. **D-pri1/D-aba-splittet** kunne med fordel også implementeres i nasjonal benchmarking-figurer for kap 7.8 (i dag bare D aggregert i nasjonale plots)
-12. **Endelig innlevering** 31. mai 2026
-13. **Forberede muntlig eksamen** tidlig juni
-
-### Eksplisitt nedprioritert (ikke nødvendig før innlevering)
-
-- **D-aba Fase 2 empirisk validering** — vurdert 22.04, prioritert til DSB-datatilgang fremfor ad hoc-skript på dagens BRIS-eksport (ufullstendig data gir kun underkant-estimat). Lagt til som styrkelse av punkt 3 i DSB-ønskelisten.
-- **Skjelett-fil-synk** — ikke aktuelt lenger; ny pipeline bygger fra `_forside_og_kap1.md` + kapittelfiler + `_referanser_og_vedlegg.md`. Skjelett-filen `Rapport_LOG650_G20_Rune_110_v0.1.md` beholdes som arkiv.
-
-## Versjonshistorikk
-
-| Versjon | Dato | Endring |
-|---|---|---|
-| 1.0 | 2026-03-13 | Opprettet ved godkjenning av fase 2 |
-| 1.1 | 2026-03-17 | Datagrunnlag oppdatert, litteraturliste ferdig, intervjulogg opprettet |
-| 2.0 | 2026-04-06 | Full oppdatering: primærmodell ferdig, kap 2/4/5/6/7 ferdigskrevet, risikoregister oppdatert, analyseartefakter dokumentert, DSB-henvendelse om datadeling |
-| 2.1 | 2026-04-18 | Kap 8 ferdig, total belastningsmodell, VL-validering, V3-kategorikonsistens, litteraturliste v3.0. Nye arbeidspakker L8d/L13b/L14b/L17/L18 lagt til. R11 (skjemarespons) ny risiko. Neste steg omprioritert mot peer review 27.04 |
-| 2.2 | 2026-04-19 | LABA-dybdeanalyse (50 hendelser) utfylt av lokal operatør. V3-regel skjerpet: L-aba krever Kilde=Alarm. 2 065 oppdrag flyttet L-aba → L-hendelse. L-aba-bindingstid 3 → 6 min. Variant B natt/helg Normal 52 % → 44 %, Svikt 22 % → 26 %. L17 presisert: kun intern kalibrering, ingen eksterne sendinger ennå. R12 (heterogen nasjonal L-aba-klassifisering) ny risiko. L19 ny leveranse (V3-regelutvidelse). Kap 5/6/7 flagget for oppdatering |
-| 2.3 | 2026-04-20 | V3 op-binder-semantikk og D-pri1/D-aba-splitt implementert (L20). Alle hovedkapitler ferdig: kap 1, 3, 9 skrevet; kap 2, 4, 5, 6, 7, 8 oppdatert til V3. Scenario +1 op halverer Svikt natt/helg (33 → 17 %). LABA n=100-utvalg (L13c) sendt til utfylling. Rapport-status: kun sammendrag, vedlegg og skjelett-synk gjenstår før peer review. R8 (prokrastinering) nedgradert fra kritisk til redusert |
-| 2.4 | 2026-04-22 | **LABA n=100 ferdig utfylt** (L13c lukket). Hovedparameter L-aba: 6 min → **4,5 min** (mean 4,53 min, CI [3,74; 5,43]). Antagelse A5 oppgradert til empirisk kalibrert. Modell re-kjørt: variant B natt/helg Svikt 33,4 → 33,2 % (variant A uendret 32,6 %). Kap 5.4, 6.4.5, 6.7, 7.4.4, 7.7, 8.4.3 og 9 oppdatert. Spørreskjema regenerert med 4,5 min som Sør-Vest-referanse. **PDF-pipeline etablert** (`verktoy/build_pdf.py`, Pandoc + XeLaTeX): samlet rapport-PDF (74 sider med forside, ToC, 5 figurer), DSB-ønskeliste-PDF, 12 AcroForm-skjemaer. _forside_og_kap1.md og _referanser_og_vedlegg.md skapt for ren samlet bygging |
+1. **Nøktern resultatframstilling** (kap 7, særlig 7.5–7.6): Reformuler Svikt 32,6 % og scenario +1 op som *estimater under forutsetninger*, ikke som definitive funn. Integrer antagelses-usikkerhet i selve resultatpresentasjonen — minst som scenariobånd (lav/hoved/høy) ved sentrale tall, ikke kun i Tabell 7.10.
+2. **Nedtoning av generalisering** (kap 7.9, 8.3.4–8.3.5, 9.3–9.4): Modellen er kun kjørt på Sør-Vest. Bredere implikasjoner må formuleres som hypoteser/forutsetninger, ikke som dokumenterte resultater. Skill empiriske funn fra implikasjoner i alle tre kapitler.
+3. **Balansert diskusjon** (kap 8.1, 8.3): Inkluder alternative tolkninger. Behandle Erlang-C-kritikken mindre kategorisk — drøft hvor klassisk køteori fortsatt fungerer. Integrer begrensninger (kap 8.4) løpende i drøftingen i stedet for som adskilt sluttkapittel.
+4. **Antagelses-problematisering** (kap 5.3–5.4): Diskuter konsekvenser av antagelsene om bindingstider og hendelses­klassifisering. Gjør forskjellen mellom anrop og oppdrag tydeligere (5.3.4 — sekvensgapmetoden) — er nå nevnt, men ikke kritisk drøftet for systematiske skjevheter.
+5. **Insider-bias-håndtering** (kap 5.1, 5.6.2): Bias er identifisert; G21 påpeker at det er begrenset metodisk håndtert. Konkretiser hvordan tolkninger er kontrollert mot insider-perspektivet (f.eks. triangulering, ekstern blindlesing).
+6. **Innledning strammere** (kap 1.1–1.2): Korte ned, fjern overlapp med analyse/diskusjon. Introduser sentrale begreper gradvis i stedet for kompakt 1.4-tabell tidlig.
+7. **Litteraturkapittel mer analytisk** (kap 2.2–2.3): Reduser deskriptive partier. Knytt litteratur 

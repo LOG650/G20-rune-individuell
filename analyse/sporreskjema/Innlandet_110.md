@@ -6,6 +6,10 @@
 **Kontakt:** rune.grodem@rogbr.no
 **Innlevering:** hovedutkast slutten av april 2026, endelig rapport 31. mai 2026
 
+> <span style="color:red">**Intervjurunde 04.05.2026 — Mats, Innlandet 110: AVSLUTTET / FULLFØRT.** Alle nye/oppdaterte svar fra dette intervjuet er markert med rødt under. Tekst i sort er originalt skjemainnhold (kontekst og spørsmålsformulering). Spørsmål som ikke ble adressert i intervjuet står uten svar og betraktes som ikke besvart i denne runden.</span>
+
+> <span style="color:red">**Dekning fra intervjuet:** Spm 2, 3, 4 (delvis — minimum), 5, 6 (delvis), 8, 9, 11, 15 (delvis), 26. Øvrige spørsmål er ikke besvart i denne runden.</span>
+
 ---
 
 ## Om studien
@@ -114,15 +118,15 @@ stedet for todelt skift, og at faktisk bemanning kan avvike fra MOB-rapporten.
 
 **Spm 2.** Hvilken vaktordning kjører Innlandet 110?
 
-- [ ] Todelt skift (dag ca. 07–19, natt ca. 19–07)
+- <span style="color:red">[x]</span> Todelt skift (dag ca. 07–19, natt ca. 19–07)
 - [ ] Dagturnus med separat natt (f.eks. 08–16 dag + egen natt)
 - [ ] Annen ordning (beskriv under)
 
-> *Beskrivelse:*
+> *Beskrivelse:* <span style="color:red">Todelt skift med operatører. Faste vaktlag uten rotasjon. Innenfor laget er det definert vaktleder (VL) og nestkommanderende (NK). Administrasjonen jobber 07–15 (ikke relevant for sentraldrift).</span>
 
 **Spm 3.** Avviker helgeordningen fra hverdager? På hvilken måte?
 
-> *Svar:*
+> *Svar:* <span style="color:red">Ingen indikasjon på avvik mellom helg og hverdag (samme minimumsbemanning, samme skiftstruktur).</span>
 
 **Spm 4. — Tabell 1.1b: Normalbemanning vs. minimumsbemanning per skifttype.**
 
@@ -130,24 +134,24 @@ MOB-tallet under er det dere rapporterte til DSB for 2025. **Vi ber dere fylle u
 
 | Vakttype | MOB-tall (2025) | Normalbemanning (op + VL) | Minimumsbemanning (op + VL) | Maks ved topp |
 |---|---|---|---|---|
-| Dag — hverdag | 4 | | | |
-| Natt — hverdag | 4 | | | |
-| Dag — helg | 4 | | | |
-| Natt — helg/helligdag | 4 | | | |
+| Dag — hverdag | 4 | | <span style="color:red">3</span> | |
+| Natt — hverdag | 4 | | <span style="color:red">3</span> | |
+| Dag — helg | 4 | | <span style="color:red">3</span> | |
+| Natt — helg/helligdag | 4 | | <span style="color:red">3</span> | |
 
-> *Kommentar:* Andel av vaktene som gjennomføres på minimumsbemanning (anslag, %)?
+> *Kommentar:* <span style="color:red">Minimumsbemanning er 3 på alle vakter/skift (likt på dag, natt, hverdag og helg). Fordeling op/VL og normalbemanning ikke tallfestet ennå.</span>
 
 **Spm 5.** Hvordan dekkes vakter ved sykdom eller annet fravær? (**Flere svar kan velges**)
 
-- [ ] Tilkall fra vikarliste / ekstrahjelper
+- <span style="color:red">[x]</span> Tilkall fra vikarliste / ekstrahjelper
 - [ ] Beredskapsvakt (hjemmevakt)
 - [ ] Kolleger som tar over / forlenger egen vakt
 - [ ] Driftes med redusert bemanning
-- [ ] Annet: ___
+- <span style="color:red">[x] Annet: Tre dedikerte vikarer. Alle får melding ved ledig vakt; tildeling skjer basert på AML, kostnad osv. Ingen hjemmevakt/bakvakt. Alle vikarer jobber fulltid i beredskap (brann/utrykning) ved siden av, og skal ha minimum 2 vakter per måned på dagtid for å opprettholde kompetanse.</span>
 
 **Spm 6.** Anslagsvis hvor stor andel av vaktene dekkes av vikarer/ekstrahjelper sammenlignet med fast ansatte?
 
-> *Svar:*
+> *Svar:* <span style="color:red">Ikke direkte tallfestet — vikarpoolen er på tre personer som dekker ledige vakter.</span>
 
 **Spm 7.** Er vaktlag ofte satt opp med planlagt overkapasitet (f.eks. planlagt 5, definert minimum 4)? Anslag for typisk overkapasitet per vakttype?
 
@@ -156,11 +160,11 @@ MOB-tallet under er det dere rapporterte til DSB for 2025. **Vi ber dere fylle u
 **Spm 8.** Besvarer vaktleder (VL) normalt innkommende nødanrop ved Innlandet 110?
 
 - [ ] Ja, alltid
-- [ ] Ja, ved behov / høy belastning
+- <span style="color:red">[x]</span> Ja, ved behov / høy belastning
 - [ ] Nei, aldri
 - [ ] Ingen dedikert VL-rolle
 
-> *Utdyping:*
+> *Utdyping:* <span style="color:red">VL trer inn på nødanrop ved behov / høy belastning.</span>
 
 ---
 
@@ -177,9 +181,9 @@ blir «godt nok». Modellen vår forsøker å kvantifisere hvor ofte dette skjer
 
 - [ ] Makkerpar er standard, solo-drift kun ved samtidige hendelser eller press
 - [ ] Solo-drift er utgangspunktet; makkerpar aktiveres kun ved store hendelser
-- [ ] Annen modell (beskriv)
+- <span style="color:red">[x]</span> Annen modell (beskriv)
 
-> *Beskrivelse:*
+> *Beskrivelse:* <span style="color:red">Ingen formell prosedyre for makkerpar. Par etableres litt vilkårlig i den enkelte hendelsen, men fungerer stort sett greit i praksis. (Avviker fra Sør-Vest, som har makkerpar som prosedyrekrav.)</span>
 
 **Spm 10.** Omtrentlig: hvor ofte må operatør jobbe solo på beredskapshendelser ved vanlig bemanning? (daglig, ukentlig, sjelden)
 
@@ -187,7 +191,7 @@ blir «godt nok». Modellen vår forsøker å kvantifisere hvor ofte dette skjer
 
 **Spm 11.** Har dere en intern norm/grense for hvor lenge et anrop kan vente før overføring til nabosentral? (Sør-Vest: 30 sek ubesvart → automatisk overføring til Agder; 10. anrop i kø overføres også.)
 
-> *Svar:*
+> *Svar:* <span style="color:red">Ubesvarte 110-anrop overføres til makkersentral etter 30 sekunder, uavhengig av antall i kø. Gjelder kun 110-telefoner. Trippelvarsling har høyere prioritet, men går også over til makkersentral etter 30 sekunder.</span>
 
 ---
 
@@ -236,7 +240,7 @@ oppgitt som utgangspunkt for diskusjon.
 
 **Spm 15.** Bekrefter dere årstallene ovenfor? Hvis nei — hva er korrekt?
 
-> *Svar:*
+> *Svar:* <span style="color:red">Bekrefter at både ROS-analyse og beredskapsanalyse finnes ved Innlandet 110. Respondenten har selv ikke lest beredskapsanalysen, men bekrefter at den eksisterer.</span>
 
 **Spm 16.** Har dere selv god kjennskap til analysen? Brukes den aktivt i driftsplanlegging, eller er den et formelt dokument som revideres periodisk?
 
@@ -317,7 +321,7 @@ Totalvolum DSB 2025: **44,001** oppdrag. MOB-selvrapport: **14,500** mottatte an
 
 > *Avklaring:* Hva er typisk innhold i disse oppdragene — korte avklaringer og spørsmål (bål-henvendelser, telefonhjelp), eller er det også reelle hendelser som ikke klassifiseres? Er det en lokal rutine å lukke enkelte henvendelsestyper uten opprinnelig type?
 
-> *Svar:*
+> *Svar:* <span style="color:red">Forklaringen er at sentralen registrerer bålmeldinger per telefon. Disse opprettes på tilsvarende måte som servicemeldinger, men lukkes/revideres som «bålbrenning varslet». Dette gir en stor mengde oppdrag uten «Opprinnelig oppdragstype». **TODO Rune:** verifiser i datagrunnlaget — filtrer L-ukjent på tekst/oppdragstype-felt for å bekrefte at bålbrenning utgjør hovedtyngden.</span>
 
 **Spm 27.** **[SENTRALSPESIFIKT AVVIK ved Innlandet 110]** Viderekoble-andel er høy (2.6%). Nasjonal median: 1.2%, spenn 0.6–2.6%. **Dere ligger blant de øverste 3 av 12 sentraler — avviker fra forventet mønster og må forklares lokalt.**
 

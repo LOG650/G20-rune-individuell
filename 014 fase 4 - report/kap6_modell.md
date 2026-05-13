@@ -37,7 +37,7 @@ Klassifiseringen bruker tre felt fra BRIS i kombinasjon: `Oppdragstype` (sluttkl
 
 **Operativ beskrivelse av kategoriene:**
 
-- **D-pri1 (Pri-1-utrykning):** Byggnings- og objektbrann, trafikkulykke, farlig gods og tilsvarende pri-1-hendelser. Gir makkerpar-binding (RØD + GUL parallelt), trippelvarsling, tidskritisk informasjon via BAPS. Bindingstid er databasert (se avsnitt 6.4.5).
+- **D-pri1 (Pri-1-utrykning):** Bygnings- og objektbrann, trafikkulykke, farlig gods og tilsvarende pri-1-hendelser. Gir makkerpar-binding (RØD + GUL parallelt), trippelvarsling, tidskritisk informasjon via BAPS. Bindingstid er databasert (se avsnitt 6.4.5).
 - **D-aba (ABA-utløst utrykning):** Automatisk brannalarm som fører til ressurs varslet fordi avklaring ikke kom innen 90 sekunder. Ikke pri-1 — operatør oppretter oppdrag og utalarmerer serielt i ~3 min, uten makkerpar-krav (se avsnitt 6.4.6).
 - **S (Service/overføringstest):** Servicetekniker ringer for overføringstest av brannalarmanlegg. Operatør mottar samtale i LEO, setter adresse om den ikke kommer automatisk, tar imot signal i alarmmottak, verifiserer mottatt signal til servicetekniker, venter til anlegget er i hvile, kvitterer ut testen og lukker som service.
 - **L-aba (ABA løst av 110):** Automatisk brannalarm kommer inn og overføres til LEO. Operatør venter 90 sekunder. Dersom nødtelefon fra stedet mottas innen 90 sekunder og innringer bekrefter ufarlig årsak (f.eks. matlaging), lukkes oppdraget som «Oppdrag løst av 110». Bindingstiden er empirisk kalibrert til 4,5 min (mean 4,53 min, CI [3,74; 5,43]) via LABA-dybdeanalysen runde 2 med n=100 (avsnitt 5.4). Uten nødtelefon innen fristen ville det ført til utrykning (kategori D-aba).
@@ -155,7 +155,7 @@ Basert på antall ledige operatører klassifiseres hvert innkommende beredskapsa
 | **Brudd på driftsstandard** | Kun 1 ledig — solo-håndtering | ledige = 1 | Operatøren klarer det, men uten makker. Økt kognitiv belastning, økt feilrisiko |
 | **Svikt** | Ingen ledig operatør | ledige ≤ 0 | VL må overta eller overløp til Agder |
 
-> **[Antagelse 6.1]** *Brudd*-tilstanden er definert som operativt mulig — det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning — men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021). Konsekvensene drøftes i kap 8.2.
+> **[Antagelse A7]** *Brudd*-tilstanden er definert som operativt mulig — det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning — men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021). Konsekvensene drøftes i kap 8.2.
 
 For å illustrere hva dette innebærer i praksis med c_eff = 2 (natt/helg):
 
@@ -291,7 +291,7 @@ Variant B bruker **samme sweep-algoritme** som primærmodellen, men utvider bela
 
 ### 6.5.2 Bindingstidsestimater
 
-Bindingstiden for D-pri1 er databasert (avsnitt 6.4.4). L-aba er empirisk kalibrert via LABA-dybdeanalysen (avsnitt 5.4). D-aba Fase 1 bygger på operativ prosedyre (avsnitt 4.2). D-aba Fase 2 ($p$, $Y$) og øvrige ikke-D-kategorier (S, L-hendelse, L-ukjent, F, V) er operative estimater forelagt vaktleder ved 110 Sør-Vest for validering (se Vedlegg X).
+Bindingstiden for D-pri1 er databasert (avsnitt 6.4.4). L-aba er empirisk kalibrert via LABA-dybdeanalysen (avsnitt 5.4). D-aba Fase 1 bygger på operativ prosedyre (avsnitt 4.2). D-aba Fase 2 ($p$, $Y$) og øvrige ikke-D-kategorier (S, L-hendelse, L-ukjent, F, V) er operative estimater forelagt vaktleder ved 110 Sør-Vest for validering (avsnitt 5.2.4 og Tabell 6.3).
 
 Fordi mange av estimatene er antakelser snarere enn målinger, kjøres modellen med tre scenarioer:
 
@@ -307,7 +307,7 @@ Fordi mange av estimatene er antakelser snarere enn målinger, kjøres modellen 
 | F (Feilringing) | 15 sek | 30 sek | 1 min |
 | V (Viderevarsling) | 30 sek | 1 min | 2 min |
 
-**Antagelse 6.1:** Bindingstidsestimatene representerer gjennomsnittlig tid operatøren er opptatt med hendelsen, inkludert LEO-arbeid og etterarbeid. Konsekvens: estimatene er usikre, men sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet lav–høy.
+**Antagelse A8:** Bindingstidsestimatene representerer gjennomsnittlig tid operatøren er opptatt med hendelsen, inkludert LEO-arbeid og etterarbeid. Konsekvens: estimatene er usikre, men sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet lav–høy.
 
 ### 6.5.3 Algoritmisk identitet med primærmodellen
 
@@ -322,7 +322,6 @@ Begge modellene er implementert i Python. Erlang-C er beregnet med scipy.special
 Hovedlogikken: hver hendelse ekspanderes til én eller flere op-binder-events. D-pri1 gir ett event med $q = 2$. D-aba gir Fase 1 alltid ($q = 1$, 3 min) pluss Fase 2 med sannsynlighet $p$ ($q = 1$, $Y$ min, offset 1,5 min). Øvrige hendelser gir ett event med $q = 1$. Sweep-en akkumulerer aktiv op-binder ved hver ankomst.
 
 ```python
-# Pseudokode — op-binder-semantikk
 def ekspander_events(hendelse, scenario):
     """Konverter én hendelse til én eller flere op-binder-events."""
     if hendelse.kategori == "D-pri1":
@@ -364,19 +363,23 @@ KI-verktøy benyttet i implementasjonsfasen er dokumentert i Vedlegg D.
 
 For sporbarhet og kritisk vurdering oppsummeres her de sentrale antagelsene som modellen hviler på, med kilde og status:
 
+**Tabell 6.3: Modellantagelser og observasjonsstatus**
+
 | # | Antagelse | Verdi | Kilde / status | Type |
 |---|---|---|---|---|
-| A1 | $c_{\text{eff}} = c_{\text{total}} - 1$ (VL svarer ikke nødanrop) | c=3 dag/hverdag, c=2 øvrige | Prosedyre + valideringssamtaler (avsnitt 4.2.1, 5.2.4, `VL_validering_bindingstider.md`) | Forankret antagelse |
-| A2 | D-pri1 binder makkerpar parallelt gjennom hele akuttfasen | $q = 2$, varighet databasert | Prosedyre + BRIS-tidsstempler (avsnitt 6.4.4) | Empirisk |
-| A3 | D-aba Fase 1 håndteres serielt av én operatør | $q = 1$, $d = 3$ min | Prosedyre + BRIS-verifisert (median 74 sek call-out) | Forankret + verifisert |
-| A4 | D-aba Fase 2 forekommer med $p = 0{,}50$ og $Y = 6$ min | hoved-scenario | Operativ samtale + sekvensgap-undergrense; sensitivitetstestet (avsnitt 7.7) | Forankret operativt estimat |
-| A5 | L-aba bindingstid = 4,5 min | hoved-verdi | LABA-dybdeanalyse n=100 Kilde=Alarm, mean 4,53 min, CI [3,74; 5,43] | **Empirisk kalibrert** (oppgradert fra orienteringsanslag etter n=100-runden 22.04.2026) |
+| A1 | $c_{\text{eff}} = c_{\text{total}} - 1$ (VL svarer ikke nødanrop) | c=3 dag/hverdag, c=2 øvrige | Prosedyre + valideringssamtaler | Forankret antagelse |
+| A2 | D-pri1 binder makkerpar parallelt gjennom hele akuttfasen | $q = 2$, varighet databasert | Prosedyre + BRIS-tidsstempler | Empirisk |
+| A3 | D-aba Fase 1 håndteres serielt av én operatør | $q = 1$, $d = 3$ min | Prosedyre + BRIS-verifisert | Forankret + verifisert |
+| A4 | D-aba Fase 2 forekommer med $p = 0{,}50$ og $Y = 6$ min | hoved-scenario | Operativ samtale + sekvensgap; sensitivitetstestet | Forankret operativt estimat |
+| A5 | L-aba bindingstid = 4,5 min | hoved-verdi | LABA-dybdeanalyse n=100 Kilde=Alarm, mean 4,53, CI [3,74; 5,43] | **Empirisk kalibrert** |
 | A6 | Sammenstilte tilleggsanrop binder 1 min | per anrop | Operativ vurdering, ikke direkte målt | Forenklet antagelse |
-| A7 | Brudd-tilstand innebærer at solo-håndtering er operativt mulig, men med redusert kvalitetssikring og økt belastning. Konsekvensen for tjenestekvalitet er ikke direkte empirisk målt i denne studien | (kvalitativ) | Prosedyre + valideringssamtaler; kvalitetstapet drøftes i kap 8.2 med støtte i Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021) | Antagelse — ikke empirisk verifisert for 110 Sør-Vest |
+| A7 | Brudd-tilstand er operativt mulig, men med redusert kvalitetssikring | (kvalitativ) | Prosedyre + valideringssamtaler; drøftes i kap 8.2 | Antagelse — ikke empirisk verifisert |
 | A8 | Bindingstider for S, L-hendelse, L-ukjent, F, V (variant B) | tre sensitivitetsscenarioer | Operative estimater forelagt vaktleder | Operativt estimat med sensitivitetsspenn |
 
-Antagelsene er sortert etter sentralitet: A1–A5 driver hovedfunnet og er empirisk eller prosedyrforankret (A5 oppgradert til empirisk kalibrert etter LABA n=100-runden 22.04.2026, jf. avsnitt 5.4). A6 (sammenstilte = 1 min) har størst restusikkerhet av de empiriske parametrene. A7 er en tolkningsmessig antagelse som drøftes i kap 8.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 7.7.
+Antagelsene er sortert etter sentralitet. A1–A5 driver hovedfunnet og er empirisk eller prosedyrforankret (A5 oppgradert til empirisk kalibrert etter LABA n=100-runden 22.04.2026, jf. avsnitt 5.4). A6 (sammenstilte = 1 min) har størst restusikkerhet av de empiriske parametrene. A7 er en tolkningsmessig antagelse som drøftes i kap 8.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 7.7.
 
----
+### Konsekvenser hvis antagelsene svikter
 
-*Kap 6 — Versjon 3.3 | Sist oppdatert: 2026-04-22 (LABA n=100, L-aba 6 → 4,5 min, A5 til empirisk kalibrert)*
+For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene bygger på modellresultatene i kap 7 og sensitivitetsanalysen i avsnitt 7.7.
+
+**A1 — VL-rollen.** Hvis VL faktisk besvarer en ikke-triviell andel nødanrop: Svikt-andelen overestimert. Effekt: trolig 2–5 pp lavere Svikt på natt/helg ved aktivere VL-rolle. Modellens retning (asymmetri dag/natt) er robust.
