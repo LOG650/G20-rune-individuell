@@ -382,4 +382,24 @@ Antagelsene er sortert etter sentralitet. A1–A5 driver hovedfunnet og er empir
 
 For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene bygger på modellresultatene i kap 7 og sensitivitetsanalysen i avsnitt 7.7.
 
-**A1 — VL-rollen.** Hvis VL faktisk besvarer en ikke-triviell andel nødanrop: Svikt-andelen overestimert. Effekt: trolig 2–5 pp lavere Svikt på natt/helg ved aktivere VL-rolle. Modellens retning (asymmetri dag/natt) er robust.
+**A1 — VL-rollen.** Hvis VL faktisk besvarer en ikke-triviell andel nødanrop: Svikt-andelen overestimert. Effekt: trolig 2–5 pp lavere Svikt på natt/helg ved aktivere VL-rolle. Modellens retning (asymmetri dag/natt) er robust.
+
+**A2 — D-pri1 makkerpar-binding ($q = 2$).** Hvis GUL-operatøren i praksis frigjøres tidligere enn antatt (f.eks. ved at vindusmelding kvitteres raskere enn +3 min): Svikt-andelen overestimert. Effekt: trolig 3–7 pp lavere på natt/helg under et scenario der GUL frigjøres etter 7 min i stedet for 14 min. Prosedyre og operatørintervju støtter likevel at makkerpar er reelt bundet gjennom hele akuttfasen — endring av A2 ville krevd revurdering av prosedyrforståelsen, ikke bare parametere.
+
+**A3 — D-aba Fase 1 ($q = 1$, $d = 3$ min).** Empirisk verifisert via BRIS-tidsstempler (median 74 sek call-out + registrering). Restusikkerheten er liten. Hvis faktisk varighet er 5 min i stedet for 3 min: marginal effekt på Svikt natt/helg (under 1 pp). A3 er ikke en kritisk antagelse for hovedfunnet.
+
+**A4 — D-aba Fase 2 ($p = 0{,}50$, $Y = 6$ min).** Sensitivitetstestet eksplisitt (avsnitt 7.7, Tabell 7.10). Hele spennet $p \in [0{,}30; 0{,}70]$ og $Y \in [3; 10]$ min holder Svikt natt/helg innenfor 30–38 %. Asymmetrien dag/natt opprettholdes uansett. Hvis $p$ eller $Y$ ligger utenfor det testede spennet, må sensitivitetsanalysen utvides — men dette anses som usannsynlig basert på operativ vurdering.
+
+**A5 — L-aba bindingstid = 4,5 min.** Empirisk kalibrert: 95 % CI [3,74; 5,43] (n = 100). Hovedverdien har strammere usikkerhet enn øvrige bindingstider. Sensitivitetsanalysen tester 3 og 7 min. Selv ved 7 min er endring i variant B-Svikt natt/helg under 1 pp fordi L-aba binder kun 1 op og inngår ikke i variant A. A5 er den best kalibrerte ikke-D-parameteren.
+
+**A6 — Sammenstilte anrop binder 1 min.** Største restusikkerhet av de antatte parametrene. Hvis reell bindingstid er 2–3 min (operatøren håndterer som korte nødtelefoner): Svikt-andelen underestimert. Effekt: potensielt 2–4 pp høyere Svikt på natt/helg. Antagelsen trekker dermed mot konservativt estimat for hovedfunnet — den «riktige» retningen for å unngå overestimering av kapasitetspresset.
+
+**A7 — Brudd som operativt mulig.** Antagelsen påvirker ikke modellens tallverdier direkte (modellen klassifiserer Brudd uavhengig av om kvalitetstapet er kvantifisert). Hvis Brudd i praksis innebærer signifikant kvalitetsreduksjon — slik Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2019) dokumenterer — er den OPERATIVE konsekvensen av et 20–22 % Brudd-rate større enn modellen kommuniserer eksplisitt. Brudd og Svikt bør derfor leses sammen, ikke som adskilte kategorier. Drøftes i kap 8.2.
+
+**A8 — Bindingstider for S, L-hendelse, L-ukjent, F, V.** Sensitivitetstestet i avsnitt 7.7. Hele spennet av rimelige antakelser gir Svikt natt/helg 30–38 % (variant B). Hovedfunnet er robust. A8 påvirker ikke variant A (beredskapsbelastning) som er studiens primære metrikk. På dag hverdag er sensitivitetsspennet bredere (15–34 % Svikt), noe som tilsier større usikkerhet for dagskonklusjonen — men ikke for natt/helg-funnet.
+
+**Samlet vurdering av antagelsesrobusthet.** Hovedfunnet — at natt/helg Svikt-andelen ligger i intervallet 30–38 % — er robust over hele spennet av rimelige antagelser. Den mest kritiske antagelsen er A2 (D-pri1 makkerpar), fordi den definerer modellens behandling av pri-1-hendelser som tobindere. A2 er imidlertid godt forankret i prosedyre og operatørintervju. A6 (sammenstilte = 1 min) har størst parametrisk restusikkerhet og trekker mot konservativt estimat. A4 og A8 er sensitivitetstestet eksplisitt. A3 og A5 er empirisk verifisert. A7 er tolkningsmessig og påvirker hvordan tallene leses, ikke tallene selv. A1 (VL) trekker også mot konservativt estimat.
+
+---
+
+*Kap 6 — Versjon 3.4 | Sist oppdatert: 2026-05-13 (konsekvens-vurdering A1–A8, restaurering)*

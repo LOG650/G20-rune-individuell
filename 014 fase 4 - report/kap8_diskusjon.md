@@ -22,7 +22,7 @@ Erlang-C konkluderer med at 110 Sør-Vest har svært lav systemutnyttelse (ρ < 
 
 Fenomenet er godt dokumentert i køteoretisk litteratur. Garnett et al. (2002) viser at for systemer med lav tilbudt trafikk (R) dominerer kvadratrotleddet i bemanningsformelen: $N = R + \beta\sqrt{R}$. Når R er lav, som ved 110-sentraler, gir dette uunngåelig lav utnyttelse — ikke fordi systemet er overbemannet, men fordi det opererer i det kvalitetsdrevne regimet (QD) der overskuddskapasitet er en strukturell nødvendighet for å opprettholde servicenivå. Feldman et al. (2008, s. 334) formulerer dette direkte: «When the load is small, the addition or removal of a single server will greatly affect the delay probability.» Med c_eff = 2 på natt/helg er 110 Sør-Vest i denne sonen — ett operatørskifte endrer kapasitetsbildet fundamentalt.
 
-Dwars (2013) observerer det samme fenomenet i sin analyse av nederlandske ambulansesentraler: disse er «intrinsically lightly-loaded systems» der lav utnyttelse ikke bør tolkes som overkapasitet, men som en konsekvens av stordriftsulempen ved små enheter. Gans et al. (2003) beskriver den inverse mekanismen som «statistical economies of scale» — og ved 110-sentraler med 2–3 operatører er disse stordriftsfordelene i praksis fraværende.
+Dwars (2013) observerer det samme fenomenet i nederlandske ambulansesentraler: disse er «intrinsically lightly-loaded systems». Lav utnyttelse bør ikke tolkes som overkapasitet, men som en konsekvens av stordriftsulempen ved små enheter. Gans et al. (2003) beskriver den inverse mekanismen som «statistical economies of scale». Ved 110-sentraler med 2–3 operatører er disse stordriftsfordelene i praksis fraværende.
 
 ### 8.1.2 Makkerpar som flereenhets-betjening
 
@@ -143,4 +143,38 @@ Praktisk betyr dette at ikke alle spørsmål til andre sentraler må være bekre
 
 Andre opplysninger — som detaljerte lokale bindingstider, subjektiv opplevelse av bemanning, ROS-revisjonsår og interne turnusnyanser ved andre sentraler — er nyttige for senere lokal modellering, men er ikke nødvendige for denne rapportens hovedkonklusjon.
 
-Feltet `Opprinnelig oppdragstype` har 16 % dekning for oppdrag uten utrykning. Dette medfører at 27 % av oppdragene klassifiseres som L-ukjent (avsnitt 6.2). L-ukjent er her en *naturlig kategori* for oppdrag uten registrert initiell hendelsestype — ikke et uttrykk for «missing data» i tradisjo
+Feltet `Opprinnelig oppdragstype` har 16 % dekning for oppdrag uten utrykning. Dette medfører at 27 % av oppdragene klassifiseres som L-ukjent (avsnitt 6.2). L-ukjent er her en *naturlig kategori* for oppdrag uten registrert initiell hendelsestype — ikke et uttrykk for «missing data» i tradisjonell forstand. Andelen reflekterer at ikke alle henvendelser klassifiseres formelt før oppdraget lukkes, særlig korte avklaringer og videreformidlinger. Hadde dekningen vært høyere, kunne fordelingen mellom L-aba, L-hendelse og L-ukjent vært mer presis. Sensitivitetsanalysen (avsnitt 7.7) viser imidlertid at hovedfunnet er robust uavhengig av bindingstidsantakelsene for disse kategoriene.
+
+Nasjonal sammenligning gjennom DSBs 2025-datasett (508 228 oppdrag, alle 12 sentraler) viser at L-aba-andelen varierer betydelig mellom sentraler (0,0 % Sør-Øst og Oslo → 7,5 % Nordland). Denne variasjonen skyldes trolig ulik registreringspraksis mer enn reell ABA-belastning. Det understreker at nasjonal benchmarking krever felles klassifiseringsregler før kvantitative sammenligninger kan tolkes normativt.
+
+### 8.4.2 Modellmessige begrensninger
+
+Modellen behandler kapasitetsbinding som binær: en operatør er enten tilgjengelig eller opptatt. I praksis finnes grader av tilgjengelighet. En operatør i GUL-oppfølgingsfase kan avbrytes for et nytt akutt anrop, men med en kostnad i form av kontekstbytte og potensielt forsinket respons. Modellen fanger ikke denne graderingen — noe som kan overestimere svikt i perioder der operatører er i sen oppfølgingsfase.
+
+Vaktleder (VL) er ekskludert fra c_eff i alle skifttyper. I praksis kan VL tre inn som operatør under ekstremt press. Denne reservekapasiteten er ikke modellert, noe som gjør sviktanslaget konservativt. Samtidig innebærer VL-inntreden at oversiktsfunksjonen svekkes — en kostnad som ikke er kvantifisert.
+
+Ring-flom (call surge) fra flere innringere som melder samme hendelse er delvis fanget gjennom sammenstilte anrop. Den tidsmessige korrelasjonen mellom slike anrop er ikke eksplisitt modellert. Gustavssons (2018) burst-modell ($A \cdot e^{-tB}$) gir et rammeverk for dette, men krever mer detaljerte ankomstdata enn BRIS gir.
+
+### 8.4.3 Antakelser med konsekvenser
+
+Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba via LABA-dybdeanalyse, n=100, Kilde=Alarm-subset) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V — forelagt vaktleder). Sensitivitetsanalysen i avsnitt 7.7 viser at hovedfunnet er robust over hele spennet av rimelige antakelser — svikt på natt/helg er 30–38 % i alle scenarioer.
+
+LABA-hovedparameteren bygger på Kilde=Alarm-subsettet (n = 100) og har 95 % CI [3,74; 5,43] min for mean — substansielt strammere enn første runde (n = 30, CI [3,70; 8,56]). Median (3,27 min) og høy-scenario (7 min) er dekket i sensitivitetsanalysen. Endringen fra n=30 til n=100 reduserte hovedverdien fra 6 min til 4,5 min og senket variant B-Svikt på natt/helg marginalt (33,4 → 33,2 %).
+
+Antagelsen om at sammenstilte anrop har 1 minutts bindingstid er en forenkling. Dersom reell bindingstid er høyere (f.eks. 2–3 minutter for anrop der innringer er stresset), undervurderer modellen effekten av skjulte anrop ytterligere. En fullstendig vurdering av antagelses-konsekvenser er gitt i avsnitt 6.7 (Tabell 6.3 og «Konsekvenser hvis antagelsene svikter»).
+
+---
+
+## 8.5 Videre forskning
+
+Tre retninger fremstår som mest lovende.
+
+**1. Validering på tvers av sentraler.** Den viktigste utvidelsen er å kjøre samme modell på data fra flere 110-sentraler. Felles LEO-system fra 2024 gjør dette prinsipielt mulig. En tverrsentralanalyse ville teste om modellens funn er robuste utover 110 Sør-Vest, og gi grunnlag for å identifisere strukturelle prediktorer for dimensjoneringsbehov.
+
+**2. Tidsvariabel analyse.** Modellen behandler dag- og nattskift som homogene perioder. En mer finkornet analyse — per time eller per totime — ville identifisere spesifikke sårbare perioder (f.eks. skiftveksling kl. 19:00) og muliggjøre mer målrettet bemanningsplanlegging. Jennings et al. (1996) og Stolletz (2008) gir rammeverk for tidsvariabel bemanningsoptimering som kunne tilpasses 110-konteksten.
+
+**3. Simuleringsbasert modellering.** Dwars' (2013) DES-tilnærming og Penverne et al. (2024) digitale tvilling viser at diskret hendelsessimulering kan fange dynamikker som den deterministiske sweep-algoritmen ikke håndterer. Stokastisk variasjon i ankomsttidspunkt, variabel servicetid og overløpsarkitektur mellom sentraler er eksempler. En DES-modell kalibrert mot 110-data ville gi mer nyanserte kapasitetsestimater og mulighet for å teste organisatoriske endringer før implementering.
+
+---
+
+*Kap 8 — Versjon 1.3 | Sist oppdatert: 2026-05-13 (balansert diskusjon, alternative tolkninger, restaurering)*

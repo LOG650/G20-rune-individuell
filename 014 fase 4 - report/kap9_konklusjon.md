@@ -80,4 +80,10 @@ Erlang-C-paradokset er den sentrale metodiske lærdommen: ρ < 6 % betyr ikke at
 
 Forskjellen mellom *kø-effektivitet* og *prosedyre-sikkerhet* er den underliggende konflikten studien gjør synlig. **Kø-effektivitet** — den klassiske Erlang-C-metrikken — måler om anropet besvares innen en gitt svartid og forutsetter at én server håndterer én kunde. På denne målestokken framstår 110 Sør-Vest som komfortabelt bemannet (ρ < 6 %, P(W > 30s) < 1 %). **Prosedyre-sikkerhet** — den prosedyrbaserte ankomstkonfliktmetrikken — måler om anropet kan håndteres etter den driftsstandarden ROS-analysen forutsetter, det vil si med makkerpar-bundet kvalitetssikring. På denne målestokken estimeres et strukturelt gap: hvert tredje til fjerde beredskapsanrop på natt/helg ankommer uten ledig makker (variant A: 32,6 % Svikt, variant B: 33,2 % Svikt, scenariobånd 30–38 %). De to målestokkene gir motsatte konklusjoner om samme bemanning. Hvilken som er mest relevant avhenger av hvilken driftsstandard som anses som regulatorisk og faglig riktig — et normativt spørsmål denne studien ikke avgjør, men gjør målbart.
 
-Det operative kapasitetsproblemet modellen avdekker er derfor ikke at anrop ikke blir besvart — operatørene svarer i nesten alle tilfeller — men at de besvares under forhol
+Det operative kapasitetsproblemet modellen avdekker er derfor ikke at anrop ikke blir besvart — operatørene svarer i nesten alle tilfeller — men at de besvares under forhold der den prosedyrestandarden for korrekt og trygg hendelseshåndtering ikke er oppfylt. Denne operative kostnaden bæres i dag av den enkelte operatøren gjennom kvalitetsreduksjon som skjult buffer. Den forblir usynlig i tradisjonell statistikk: svartiden er akseptabel, oppdragene lukkes, årsrapporten viser ingen avvik. Modellens bidrag er å gjøre denne skjulte belastningen målbar, slik at dimensjoneringsbeslutninger kan tas med grunnlag i operativ realitet — ikke bare i statistikk som skjuler kostnaden.
+
+Studien er en case-analyse av 110 Sør-Vest. Hva resultatene betyr utover dette caset er en åpen empirisk problemstilling. Den krever klassifiseringsharmonisering, validering på flere sentraler, og normative beslutninger som ligger utenfor en enkelt masteroppgaves rekkevidde.
+
+---
+
+*Kap 9 — Versjon 1.2 | Sist oppdatert: 2026-05-13 (generaliseringsnedtoning i 9.1/9.5, restaurering)*

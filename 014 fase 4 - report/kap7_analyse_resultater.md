@@ -460,4 +460,62 @@ Tre observasjoner:
 | Sør-Vest | 61 934 | 18 930 | 80 864 | 23,4 % |
 | Midt-Norge | 41 374 | 12 223 | 53 597 | 22,8 % |
 
-*Skjulte sekvensnumre dekker tre fenomener: (i) sammenstilte anrop, (ii) overføringer til nabosentral via
+*Skjulte sekvensnumre dekker tre fenomener: (i) sammenstilte anrop til samme hendelse, (ii) overføringer til nabosentral via 10-kø-regelen eller 30-sekunders-regelen, og (iii) avbrutte anrop som aldri ble registrert som oppdrag. Validering i 7.2 indikerer at sammenstillinger dominerer for 110 Sør-Vest. Ved høyere skjult-rate (Finnmark 65 %, Agder 54 %) bør tolkningen kalibreres lokalt.*
+
+**Tre observasjoner:**
+
+**1. Skjult-raten varierer 23–65 %** — Finnmark, Agder og Øst har høyest rate. Dette kan skyldes (a) faktisk høyere andel sammenstilte anrop, (b) ulik registreringspraksis, eller (c) mer hyppig overflyt mellom nabosentraler. Datagrunnlaget tillater ikke å skille årsakene uten sentralvise valideringssamtaler.
+
+**2. Felles korreksjonsfaktor er ikke meningsfull** — fordi skjult-raten varierer mye mellom sentraler, gir det ikke mening å benytte én felles korreksjonsfaktor (f.eks. 1,305× fra Sør-Vest) på nasjonal benchmarking. Lokale faktorer må etableres for hver sentral.
+
+**3. Strukturelt forskningsspørsmål** — skjult-raten indikerer at synlig oppdragsvolum systematisk undervurderer faktisk anropsvolum, særlig i de små sentralene. Dette har konsekvenser for både kapasitetsplanlegging og benchmarking, og bør være tema i framtidig nasjonal analyse.
+
+---
+
+## 7.10 Generaliserbarhet og prinsipiell overførbarhet
+
+Den konkrete primærmodellen er gjennomført på data fra 110 Sør-Vest. Modellrammeverket er utviklet for å kunne anvendes sentralsvis på alle norske 110-sentraler under forutsetning av tilstrekkelig datatilgang. Det sentrale er ikke de eksakte prosentverdiene i denne studien, men metoden for å identifisere hvor ofte en ny hendelse ankommer i en tilstand der tilgjengelig operatørkapasitet allerede er bundet.
+
+Andre sentraler kan bruke samme analyseopplegg dersom de har tilgang til:
+
+- Ankomsttidspunkt for hendelser
+- Tidspunkt for ressursvarsling (identifiserer kategori D)
+- En proxy for akuttfasens varighet (første ressurs fremme eller tilsvarende)
+- Eventuelt indikatorer på sammenstilte tilleggsanrop for korreksjon av ankomstrate
+
+Forutsatt felles klassifiseringsregler (V3-regelen, jf. avsnitt 5.3.2) og tilstrekkelig datatilgang er metoden teknisk overførbar til alle 12 sentraler. De normative implikasjonene — om dette bør utgjøre grunnlag for en nasjonal dimensjoneringsstandard — drøftes i kap 8.3 og 9.3.
+
+Resultatene fra 110 Sør-Vest kan **ikke** uten videre antas å gjelde andre sentraler. Lokale forskjeller i hendelsesmiks, registreringspraksis, geografi og bemanningsdimensjonering kan gi vesentlig andre kapasitetsbilder. Generalisering fra ett case til nasjonalt nivå er derfor formulert som hypotese for videre forskning, ikke som dokumentert resultat.
+
+---
+
+## 7.11 Sammenstilling og tolkning
+
+Analysen dokumenterer fem hovedfunn. Funnene er punktestimater under modellens antagelsesgrunnlag (Tabell 6.3); scenariobånd er angitt der relevant.
+
+**Funn 1: Erlang-C alene er utilstrekkelig for 110-dimensjonering.**
+Den tradisjonelle køteoretiske modellen gir svært lav systemutnyttelse (høyeste observerte verdi 5,9 %) og P(W > 30s) < 0,5 % for alle skifttyper. Modellen behandler operatører som uavhengige servere, fanger ikke kapasitetstapet ved makkerpar-kravet for pri-1-hendelser, differensierer ikke mellom ulike hendelsesdynamikker, og baserer seg på en ankomstrate fra synlige oppdrag som undervurderer faktisk innkommende volum med anslagsvis 23 %.
+
+**Funn 2: D-pri1 og D-aba har fundamentalt ulik operativ dynamikk.**
+Pri-1-hendelser binder makkerparet (RØD og GUL) parallelt i median 14,1 min. ABA-utrykninger håndteres serielt av én operatør i 3 min for oppdragsopprettelse og call-out, med valgfri oppfølgingsfase. For 110 Sør-Vest 2025 utgjør D-pri1 59 % (4 499) og D-aba 41 % (3 056) av utrykningshendelsene. Differensieringen er avgjørende for korrekt kapasitetsmodellering.
+
+**Funn 3: Natt/helg er strukturelt sårbar — Svikt ved hvert tredje beredskapsanrop.**
+På natt/helg (c=2) er **32,6 % av beredskapsanropene i Svikt-tilstand** (variant A; scenariobånd variant B: 30–38 %) og kun 46,9 % i Normal. Svikt-raten skyldes primært at én aktiv D-pri1-hendelse binder hele makkerparet. D-aba bidrar relativt mindre til Svikt fordi serial-håndteringen etterlater 1 op ledig. Hovedfunnet er robust over hele sensitivitetsspennet.
+
+**Funn 4: +1 operatør per skift halverer sviktraten på natt/helg.**
+Én ekstra operatør (c_eff 2→3 natt/helg, 3→4 dag) øker Normal fra 46,9 % til 67,2 % på natt/helg (+20,3 pp) og reduserer Svikt fra 32,8 % til 16,7 %. På dag hverdag øker Normal fra 69,2 % til 85,1 %. Effekten er en modellprediksjon — robust mot parametervariasjon, men ikke validert mot historisk bemanningsendring.
+
+**Funn 5: Total operativ belastning forverrer dagkapasiteten merkbart.**
+Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 59,5 % (−9,7 pp) og Svikt øker fra 14,9 % til 21,6 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes i mindre grad fordi bakgrunnsvolumet er lavere; Svikt øker fra 32,6 % til 33,2 %. Sensitivitetsanalysen viser at denne forverringen er robust.
+
+Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av funnene mot dimensjoneringspraksis, parallellen til dimensjoneringsforskriften for brannvesen, og de praktiske implikasjonene drøftes i kap 8 (særlig 8.3) og kap 9.
+
+---
+
+*Skript for analyser og figurer: `analyse/scripts/konflikt_total_belastning.py` (variant A og B), `analyse/scripts/scenario_pluss1.py` (scenario +1 op), `analyse/scripts/bindingstid_analyse.py`, `analyse/scripts/uttrekk_laba_sorvest.py` (LABA-dybdeanalyse).*
+
+*Metodedokumentasjon: `analyse/notat_V3_modellutvikling.md` (parameterkalibrering, beslutningslogikk).*
+
+*Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
+
+*Kap 7 — Versjon 2.2 | Sist oppdatert: 2026-05-13 (scenariobånd, generaliseringsnedtoning, RQ4/RQ5, restaurering)*

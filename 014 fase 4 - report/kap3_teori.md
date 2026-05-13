@@ -154,4 +154,8 @@ Det teoretiske grunnlaget kan sammenfattes slik:
 | Function differentiation | Støtter organisatoriske alternativer til bemanningsøkning |
 | Kvalitetsreduksjon (Gustavsson, Leonardsen) | Tolkningsramme for modell-vs-virkelighet-gapet |
 
-Sammen gir disse det teoretiske fundamentet for å formulere 110-kapasitetsproblemet som en 
+Sammen gir disse det teoretiske fundamentet for å formulere 110-kapasitetsproblemet som en multiserver-job-modell med ankomstkonflikt-metrikk, operasjonalisert gjennom op-binder-semantikk (kap 6.4).
+
+---
+
+*Kap 3 — Versjon 1.2 | Sist oppdatert: 2026-05-13 (språkrevisjon, restaurering)* 

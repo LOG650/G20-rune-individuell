@@ -6,6 +6,8 @@ Denne casebeskrivelsen presenterer konteksten for kapasitetsanalysen: de norske 
 
 Norge har tolv 110-sentraler som mottar nødmeldinger og koordinerer brann- og redningsinnsats døgnet rundt. Sentralene dekker definerte geografiske områder og betjener til sammen hele landets befolkning. Fra høsten 2024 benytter alle sentralene det felles oppdragshåndteringssystemet LEO, noe som for første gang muliggjør sammenlignbare hendelsesdata på tvers av sentraler. Selv om felles oppdragshåndteringssystem gir bedre sammenlignbarhet enn tidligere, innebærer ikke dette at alle belastningsmål er direkte sammenlignbare mellom sentraler. Særlig gjelder dette hvordan flere anrop til samme hendelse registreres og sammenstilles.
 
+Tabell 4.1 lister sentralene og deres dekningsområder.
+
 **Tabell 4.1: Norske 110-sentraler**
 
 | Sentral | Dekningsområde |
@@ -31,7 +33,9 @@ Bemanningsdimensjonering av 110-operatører reguleres av brann- og redningsvesen
 
 ### 4.2.1 Skiftstruktur og bemanning
 
-Sentralen opererer med tolv-timers skift og er organisert i seks vaktlag à fire personer (inkludert vaktleder). Planlagt normalbemanning er dermed fire personer på alle skift. Sentralen benytter årsturnus der alle vakter planlegges for hele året. Hvert vaktlag har overskuddstimer som må plasseres ut i turnusen for å fylle årsverket. I praksis fører dette til at dagtidsvakter på hverdag kan bemannes med fem eller seks personer. Natt- og helgeskift er i turnusplanen bemannet med fire personer, men siden minimumsbemanningen er tre, blir sykdom, avspasering og annet ikke-planlagt fravær ikke erstattet. Resultatet er at natt og helg ofte bemannes med tre — minimumsbemanningen.
+Sentralen opererer med tolv-timers skift og er organisert i seks vaktlag à fire personer (inkludert vaktleder). Planlagt normalbemanning er dermed fire personer på alle skift. Sentralen benytter årsturnus der alle vakter planlegges for hele året. Hvert vaktlag har overskuddstimer som må plasseres ut i turnusen for å fylle årsverket. I praksis fører dette til at dagtidsvakter på hverdag kan bemannes med fem eller seks personer.
+
+Natt- og helgeskift er i turnusplanen bemannet med fire personer. Minimumsbemanningen er tre. Sykdom, avspasering og annet ikke-planlagt fravær blir derfor ikke erstattet. Resultatet er at natt og helg ofte bemannes med tre — minimumsbemanningen.
 
 **Tabell 4.2: Minimumsbemanning 110 Sør-Vest**
 
@@ -110,3 +114,7 @@ Disse konsekvensene er ikke bare teoretiske. De representerer operative forhold 
 Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i sentralens risiko- og beredskapsanalyse (ROS) og tilhørende beredskapsanalyse. Disse dokumentene vurderer kvalitativt hvilke risikoer sentralen er eksponert for og hvilken bemanning som anses nødvendig. 110 Sør-Vest brukes i denne rapporten som primærcase for å utvikle og teste en kvantitativ analysemodell som prinsipielt kan anvendes på andre 110-sentraler. En nærmere gjennomgang av disse analysenes metodiske grunnlag opp mot kvantitative funn i denne rapporten inngår i diskusjonen (kapittel 8).
 
 Det er viktig å understreke at ROS-analysene er kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler. Prosjektets ambisjon er å supplere — ikke erstatte — disse analysene med et kvantitativt referansepunkt for operatørbemanning.
+
+---
+
+*Kap 4 — Versjon 1.3 | Sist oppdatert: 2026-05-13 (Tabell 4.1 intro, restaurering)*

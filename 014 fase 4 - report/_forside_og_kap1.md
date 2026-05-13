@@ -21,7 +21,7 @@ abstract: |
 
 Norske 110-sentraler er det primære kontaktpunktet for brann- og redningsnødmeldinger i Norge. De tolv sentralene opererer døgnet rundt og koordinerer utrykningsressurser over store geografiske områder. I 2025 håndterte de samlet 508 228 registrerte oppdrag (DSB, 2025). Tallet refererer til oppdrag i BRIS — faktisk anropsvolum er høyere fordi tilleggsanrop til samme hendelse rutinemessig sammenstilles i ett oppdrag (se kap 6.2).
 
-Bemanningen av 110-operatører reguleres av brann- og redningsvesenforskriften. Forskriften pålegger minimum to operatører i vaktrommet, men overlater fastsettelsen av bemanning utover dette til lokale risiko- og beredskapsanalyser (ROS). Den samme forskriften inneholder konkrete kvantitative krav til brann- og redningsvesenets organisering, beredskap, bemanning og innsatstid. En tilsvarende kvantitativ, nasjonal standard for hvordan historisk 110-belastning skal oversettes til operatørbemanning, mangler.
+Bemanningen av 110-operatører reguleres av brann- og redningsvesenforskriften. Forskriften pålegger minimum to operatører i vaktrommet. Fastsettelsen av bemanning utover dette overlates til lokale risiko- og beredskapsanalyser (ROS). Samme forskrift inneholder konkrete kvantitative krav til brann- og redningsvesenets organisering, beredskap, bemanning og innsatstid. En tilsvarende kvantitativ, nasjonal standard for 110-bemanning mangler.
 
 Problemstillingen er ikke at 110-sentraler generelt er over- eller underbemannet. Den er at det ikke finnes et kvantitativt, etterprøvbart grunnlag for å avgjøre hva som er tilstrekkelig bemanning ved en gitt sentral. Konsekvensene drøftes i kap 8.
 
@@ -41,7 +41,9 @@ Kunnskapsgapet er dermed konkret: **det finnes ingen kjent kvantitativ, etterpr�
 
 Spørsmålet undersøkes fordi fraværet av en kvantitativ dimensjoneringsstandard gjør dagens lokale bemanningsvurderinger vanskelige å etterprøve på tvers av sentraler.
 
-Problemstillingen er todelt: den krever (i) en operasjonalisering av begrepet *kapasitetsbehov* som er relevant for 110-driftens prosedyrekrav, og (ii) en empirisk vurdering av hvor godt faktisk bemanning matcher dette behovet. Erlang-C danner grunnlinjen, men viser seg utilstrekkelig i denne konteksten (jf. kap 6); studien utvikler derfor en prosedyrbasert variant — den prosedyrbaserte ankomstkonfliktmodellen — som måler operativ kapasitet ved hvert beredskapsanrops ankomsttidspunkt. Forskningsspørsmålene under operasjonaliserer problemstillingen: RQ1–RQ2 etablerer det empiriske grunnlaget (ankomstrate og kapasitetsbinding), RQ3 måler kapasitetsgapet mot prosedyrstandarden, RQ4 sammenligner mot dagens kvalitative dimensjoneringsgrunnlag, og RQ5 prøver overførbarheten til en nasjonal dimensjoneringslogikk.
+Problemstillingen er todelt. Den krever (i) en operasjonalisering av begrepet *kapasitetsbehov* som er relevant for 110-driftens prosedyrekrav, og (ii) en empirisk vurdering av hvor godt faktisk bemanning matcher dette behovet. Erlang-C danner grunnlinjen, men viser seg utilstrekkelig i denne konteksten (jf. kap 6). Studien utvikler derfor en prosedyrbasert variant — den prosedyrbaserte ankomstkonfliktmodellen — som måler operativ kapasitet ved hvert beredskapsanrops ankomsttidspunkt.
+
+Forskningsspørsmålene under operasjonaliserer problemstillingen. RQ1–RQ2 etablerer det empiriske grunnlaget (ankomstrate og kapasitetsbinding). RQ3 måler kapasitetsgapet mot prosedyrstandarden. RQ4 sammenligner mot dagens kvalitative dimensjoneringsgrunnlag. RQ5 prøver overførbarheten til en nasjonal dimensjoneringslogikk.
 
 - **RQ1:** Hva er ankomstraten (λ) til 110 Sør-Vest per skiftperiode, og hvilke belastningsmønstre fremgår av historiske LEO/BRIS-data?
 - **RQ2:** Hva er gjennomsnittlig håndteringstid (μ⁻¹) per hendelseskategori, og i hvilken grad binder aktivt hendelsebilde operatørkapasitet utover samtaletid?
@@ -90,4 +92,39 @@ Modellen og rapporten bygger på en spesifikk nomenklatur som introduseres forme
 | **PSAP** | Public Safety Answering Point — amerikansk betegnelse for 110-, 112- eller 911-mottakssentral. |
 | **QED-regime** | Quality-and-Efficiency-Driven regime — Halfin-Whitt-asymptotikk for store servicesystemer der både kvalitet og effektivitet kan oppnås. |
 | **RØD** | Operativ funksjon: besvarer nødanropet og gjennomfører intervju. Hovedansvarlig under akuttfasen. |
-| **ROS** | Risiko- og sårbarhetsanalyse — kvalitativ analyse som ligger til
+| **ROS** | Risiko- og sårbarhetsanalyse — kvalitativ analyse som ligger til grunn for lokal bemanningsfastsettelse utover forskriftens minimum. |
+| **SSB** | Statistisk sentralbyrå — nasjonal kilde for befolknings- og strukturdata brukt i benchmarking. |
+| **V3** | Tredje generasjon klassifiseringsregel utviklet i denne studien. Definerer D-pri1, D-aba og L-aba med Kilde=Alarm-krav (kap 5.3.2). |
+| **VL** | Vaktleder — operativ leder per vakt. Besvarer som hovedregel ikke nødanrop, derav $c_{\text{eff}} = c_{\text{total}} - 1$. |
+
+### 1.5 Avgrensninger
+
+Prosjektet avgrenses til følgende områder:
+
+- **Vaktromsbemanning ved 110-sentral.** Ressursdisponering i brannvesenet, taktisk hendelseshåndtering og organisatoriske beslutninger utover sentralen ligger utenfor scope.
+- **Retrospektiv og planleggingsrettet analyse.** Modellen er et beslutningsverktøy for kapasitetsvurdering, ikke et sanntidssystem for operativ styring.
+- **Primærcase 110 Sør-Vest 2025.** Hovedmodellen er kjørt på denne ene sentralen. Den nasjonale delen (kap 7.9 og 8.4.1) er benchmarking og kontekst — ikke full prosedyrbasert modellering for de øvrige 11 sentralene.
+- **Ordinære driftsforhold.** Ekstraordinære hendelser som langvarige storbranner og katastrofescenarier holdes utenfor modellens gyldighetsområde. De drøftes i diskusjonskapittelet som grenser for modellens anvendbarhet.
+- **Ring-flom som kontekst.** Call surge belyses som operativ ekstrembelastning, men modelleres ikke som primærscenario.
+
+Disse avgrensningene er valgt fordi de definerer det området hvor data, prosedyrekunnskap og analytisk rammeverk er konsistent nok til å gi etterprøvbare resultater. Begrunnelsen er ikke tidsmangel, men metodisk avgrensning.
+
+### 1.6 Rapportens struktur
+
+Rapporten består av ni kapitler.
+
+**Kapittel 2** gjennomgår relevant litteratur strukturert etter fem tematiske områder: klassisk køteori, nødmeldesentraler, team-basert kapasitet og prosedyrkonformitet, nordisk nødmeldeforskning, og dimensjoneringsregulering.
+
+**Kapittel 3** etablerer det teoretiske rammeverket. Erlang-C presenteres som grunnlinje, QED-regimet som regimekarakteristikk, og multiserver-jobs som rammeverk for op-binder-semantikk.
+
+**Kapittel 4** beskriver 110 Sør-Vest som case. Bemanning, arbeidsmetodikk og operative særtrekk dokumenteres.
+
+**Kapittel 5** presenterer metode og data, inkludert V3-klassifiseringsregelen og LABA-dybdeanalysen.
+
+**Kapittel 6** utvikler kapasitetsmodellen gjennom tre faser: Erlang-C, simultanitetsanalyse og prosedyrbasert ankomstkonfliktmodell.
+
+**Kapittel 7** presenterer analyseresultater for 110 Sør-Vest 2025. Scenario +1 operatør og variant A/B inngår.
+
+**Kapittel 8** diskuterer funnene mot problemstilling, teori og begrensninger.
+
+**Kapittel 9** besvarer problemstillingen og gir anbefalinger for dimensjonering og videre forskning.

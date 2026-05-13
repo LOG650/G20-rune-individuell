@@ -219,7 +219,13 @@ Når flere innringere melder om samme hendelse, sammenstilles tilleggsanropene m
 
 Metoden forutsetter at LEO tildeler sekvensnumre kronologisk. Gap kan i prinsippet også reflektere overflyt til nabosentral eller avbrutte anrop, ikke bare sammenstilte anrop. For Sør-Vest er sekvensgapene validert operativt som overveiende sammenstillinger (jf. avsnitt 7.2). For 2025 er det estimert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305x). Metoden identifiserer at et anrop mangler som synlig oppdrag, men ikke hvilket oppdrag det ble knyttet til.
 
-**Mulig retning av skjevhet.** Hvis en del av sekvensgapene faktisk reflekterer overflyt til Agder eller avbrutte anrop, og ikke sammenstillinger, vil modellen overestimere antall *operatørbundne* tilleggsanrop ved 110 Sør-Vest. Resultatet er at variant A-Svikt-andelen kan være noe overestimert. Motsatt: hvis beredskapsrelaterte anrop oftere feilkategoriseres som service eller feilringing under press (slik LABA-dybdeanalysen indikerer for L-aba, avsnitt 5.4.4), vil modellen underestimere reelt skjult volum. De to mekanismene drar i hver sin retning. For Sør-Vest med skjult-rate 23,4 % er nettoeffekten vurdert som liten — men ikke kvantifisert. Sentraler med høyere skjult-rate (Finnmark 65 %, Agder 54 %) ville hatt vesentlig større skjevhetspotensial dersom modellen kjøres på dem uten egen validering.
+**Retning og størrelsesorden på skjevheten.** Sekvensgap-metoden kan i prinsippet feilklassifisere tre typer hendelser som sammenstilte anrop, og disse drar i hver sin retning.
+
+*Mulig overestimering:* Hvis et sekvensgap reflekterer (a) automatisk overflyt til Agder ved 10. kø-anrop, (b) automatisk overflyt etter 30 sekunder ubesvart, eller (c) avbrutt anrop som aldri ble registrert som oppdrag, har anropet ikke bundet en operatør ved 110 Sør-Vest. Modellen overestimerer da $n_{\text{aktive}}$ og dermed variant A-Svikt-andelen. *Plausibel øvre grense:* 10-anrops-overflyten forutsetter ti samtidige kø-anrop, som ved observert systemutnyttelse $\rho < 6$ % (kap 7.1) er en svært sjelden tilstand. 30-sekunders-overflyten kan inntreffe i Svikt-tilstander der alle operatører er bundet; siden modellen klassifiserer 32,6 % av natt/helg-anropene som Svikt (variant A), gir dette en realistisk øvre andel av sekvensgap som *kunne* være 30-sek-overflyt. Den faktiske andelen er sannsynligvis lavere fordi VL ofte tar anropet før 30-sekunders-grensen utløses (jf. avsnitt 4.2.1).
+
+*Mulig underestimering:* Hvis beredskapsrelaterte anrop blir feilkategorisert som «service», «feilringing» eller «løst av 110» og lukket som egne oppdrag (slik LABA-dybdeanalysen indikerer for L-aba, avsnitt 5.4.4 og kap 7.2), er det reelle antallet skjulte beredskapsanrop høyere enn 18 901. Modellen underestimerer da samlet operativ binding.
+
+*Netto vurdering for 110 Sør-Vest:* Operativ validering av sekvensgapene mot kjent driftspraksis (kap 7.2) støtter at de overveiende reflekterer sammenstilte anrop, ikke overflyt. De to skjevhetene drar i hver sin retning, og nettoeffekten er vurdert som liten på variant A-Svikt-andelen — innenfor scenariobåndet i Tabell 7.10 (28–39 % under variant B). Skjevheten er likevel ikke nøyaktig kvantifisert. For sentraler med vesentlig høyere skjult-rate (Finnmark 65 %, Agder 54 %) bør sekvensgap-tolkningen valideres lokalt før modellen anvendes nasjonalt; for disse er skjevhetspotensialet større.
 
 ### 5.3.5 Konstruksjon av kapasitetsvariabler
 
@@ -360,13 +366,13 @@ Steg 1–8 representerer databehandling og operasjonalisering. Steg 9–10 er pr
 
 ## 5.6 Validitet, reliabilitet og begrensninger
 
-### 5.6.1 Målevaliditet
+### 5.6.1 Validitet
 
-Analysens sentrale metrikk er kapasitetsnivå ved ankomst. Den bygger på to ulike datakilder. D-pri1-hendelser identifiseres robust gjennom ressursvarsling. L-aba-bindingstider er empirisk kalibrert via LABA-dybdeanalyse (avsnitt 5.4). Tre konkrete trusler mot målevaliditet er identifisert.
+Analysens sentrale metrikk er kapasitetsnivå ved ankomst. Den bygger på to ulike datakilder. D-pri1-hendelser identifiseres robust gjennom ressursvarsling. L-aba-bindingstider er empirisk kalibrert via LABA-dybdeanalyse (avsnitt 5.4). Validitetstruslene struktureres etter konstrukt-, intern- og ekstern validitet.
 
-**Trussel 1 — konstruktvaliditet for kapasitetsmetrikken.** Modellen måler andel beredskapsanrop der makkerpar-kravet ikke kan opprettholdes ved ankomst. Det er ikke det samme som andel anrop der tjenesten leveres med redusert kvalitet, eller andel der innringer opplever forsinkelse. Konstruktvaliditeten begrenses derfor til det modellen eksplisitt måler: en *prosedyrkonformitetsmetrikk*, ikke et tjenestekvalitetsmål. Diskusjonen i kap 8.2 og 8.2.3 problematiserer dette skillet eksplisitt.
+**Trussel 1 [konstruktvaliditet] — målet er en prosedyrkonformitetsmetrikk, ikke et tjenestekvalitetsmål.** Modellen måler andel beredskapsanrop der makkerpar-kravet ikke kan opprettholdes ved ankomst. Det er ikke det samme som andel anrop der tjenesten leveres med redusert kvalitet, eller andel der innringer opplever forsinkelse. Konstruktvaliditeten begrenses derfor til det modellen eksplisitt måler. Diskusjonen i kap 8.2 og 8.2.3 problematiserer dette skillet eksplisitt.
 
-**Trussel 2 — målefeil i bindingstider.** Ikke alle bindingstider er empirisk målt:
+**Trussel 2 [intern validitet] — målefeil i bindingstider.** Ikke alle bindingstider er empirisk målt:
 
 - D-pri1 og L-aba bygger på direkte observasjon (databasert respektive LABA-dybdeanalyse).
 - D-aba Fase 1 er forankret i operativ prosedyre og empirisk verifisert (median 74 sek call-out).
@@ -374,11 +380,13 @@ Analysens sentrale metrikk er kapasitetsnivå ved ankomst. Den bygger på to uli
 
 Sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet av rimelige antakelser. Det er likevel mulig at parametrene systematisk underestimerer bindingstid for noen kategorier (særlig under press), noe som ville gjøre Svikt-andelen høyere enn rapportert.
 
-**Trussel 3 — indirekte estimerte tilleggsanrop.** Sammenstilte anrop estimeres via sekvensgapmetoden (avsnitt 5.3.4). Antallet er estimert. Tidspunkt og varighet er ikke observert direkte. Hovedscenario $p = 0{,}50$ for D-aba Fase 2 reflekterer operatørens kvalitative vurdering, ikke direkte måling — sekvensgap-metoden gir underkant-estimat (17–37 % avhengig av tidsvindu) fordi nødtelefoner logget inni hovedoppdraget er usynlige. Imputering med median for de ~25 % av D-pri1-hendelsene uten registrert fremme-tidspunkt kan systematisk feilrepresentere tyngre hendelser.
+**Trussel 3 [intern validitet] — indirekte estimerte tilleggsanrop.** Sammenstilte anrop estimeres via sekvensgapmetoden (avsnitt 5.3.4). Antallet er estimert. Tidspunkt og varighet er ikke observert direkte. Hovedscenario $p = 0{,}50$ for D-aba Fase 2 reflekterer operatørens kvalitative vurdering, ikke direkte måling — sekvensgap-metoden gir underkant-estimat (17–37 % avhengig av tidsvindu) fordi nødtelefoner logget inni hovedoppdraget er usynlige. Imputering med median for de ~25 % av D-pri1-hendelsene uten registrert fremme-tidspunkt kan systematisk feilrepresentere tyngre hendelser.
 
-**Trussel 4 — ekstern validitet.** LABA-dybdeanalysen er empirisk grunnlag for L-aba-parameteren, men gjelder kun 110 Sør-Vest 2025. 95 % CI [3,74; 5,43] for mean er strammere enn runde 1 (n = 30), men kan ikke uten videre overføres til andre sentraler.
+**Trussel 4 [intern validitet] — bekreftelseskontroll på modellrammeverket.** Modellrammen er utviklet av forfatteren basert på operativ prosedyreforståelse. En alternativ analytiker uten samme operative tilknytning kunne formulert kapasitetsmetrikken annerledes (jf. tre konkrete eksempler i 5.6.2). Konsekvensen er ikke at hovedfunnet er feil, men at den isolerte Svikt-prosenten ikke kan tolkes uavhengig av valgte definisjoner. Sensitivitetsanalysen (avsnitt 7.7) tester parameterrobusthet, ikke definisjonsrobusthet — sistnevnte er drøftet kvalitativt i kap 8.2.3.
 
-Samlet trekker truslene i ulike retninger. Trussel 2 og 3 trekker i hovedsak mot konservativt estimat (undervurdering av faktisk belastning). Trussel 1 og 4 er kvalitative — de begrenser hva tallene *betyr*, ikke nødvendigvis hvor store de er.
+**Trussel 5 [ekstern validitet] — overførbarhet til andre sentraler.** LABA-dybdeanalysen er empirisk grunnlag for L-aba-parameteren, men gjelder kun 110 Sør-Vest 2025. 95 % CI [3,74; 5,43] for mean er strammere enn runde 1 (n = 30), men kan ikke uten videre overføres til andre sentraler. Nasjonal benchmarking i kap 7.9 viser dessuten store sentralforskjeller i L-aba-rate (0–7,5 %), trolig drevet av ulik registreringspraksis. Modellrammeverket er prinsipielt overførbart, men parameterverdiene må kalibreres lokalt.
+
+Samlet trekker truslene i ulike retninger. Trussel 2 og 3 trekker i hovedsak mot konservativt estimat (undervurdering av faktisk belastning). Trussel 1, 4 og 5 er definisjons- og kontekstavhengige — de begrenser hva tallene *betyr* og hvor de gjelder, ikke nødvendigvis hvor store de er.
 
 ### 5.6.2 Reliabilitet og reproduserbarhet
 
@@ -388,7 +396,17 @@ Variant A er i hovedsak deterministisk — usikkerheten ligger i parameterantage
 
 Valideringssamtalene er vanskeligere å reprodusere eksakt. De brukes kun til å kalibrere parametere som er eksplisitt dokumentert (Tabell 5.5). En annen forsker med tilgang til samme data, prosedyredokumenter og `notat_V3_modellutvikling.md` vil kunne gjenta analysen med de dokumenterte parameterverdiene.
 
-**Insider-perspektivets påvirkning på reliabilitet.** Refleksivitetsavsnittet i 5.1 lister fire grep mot insider-bias, men reliabilitet handler om mer enn det. Den residuelle risikoen er at *valget av modellramme* — selve operasjonaliseringen av makkerpar som kapasitetsmetrikk — er forfatterens. En utenforstående forsker uten operativ tilknytning kunne formulert metrikken annerledes. Tre konkrete eksempler på alternative valg: (i) å definere bindingstid som «første ressurs fremme» uten +3 min kvitteringsvindu, (ii) å klassifisere D-aba som makkerpar-bundet i Fase 2 fremfor seriell solo-håndtering, (iii) å bruke `Innsatsvarighet` som operatørbindingsmål fremfor akuttfase-proxy. Hvert alternativ ville gitt et annet Svikt-tall. Vurderingen av at de valgte definisjonene er korrekte hviler på forfatterens operative forståelse av prosedyren — det er en styrke for parameterkalibrering, men også en grense for hvor uavhengig replikasjon kan være.
+**Insider-perspektivets påvirkning på reliabilitet — kontrollmekanismer.** Refleksivitetsavsnittet i 5.1 lister fire kontrollmekanismer, og 5.6.1 listet tre validitetstrusler. Reliabilitet — i betydningen «om en annen analytiker ville få samme resultat» — er kontrollert gjennom fem grep:
+
+1. **Objektive registerdata som primærgrunnlag** (jf. 5.1, grep 1). Hovedfunnene springer ut av tidsstempler og kategoriklassifisering i LEO/BRIS — uavhengig av forfatterens tolkning.
+2. **Deterministisk skriptbasert analyseflyt** (jf. 5.1, grep 2). Identisk seed og parametere gir identisk resultat; alle skript er versjonskontrollert.
+3. **Triangulering mellom kilder** (jf. 5.1, grep 4). Operatørbaserte parametere kontrolleres mot prosedyredokumentasjon og BRIS-tidsstempler. Eksempel: D-aba Fase 1 er prosedyreforankret (~90 sek call-out) og empirisk verifisert (median 74 sek). LABA-tider er kontrollert mot interpolert call-handling-tid i BRIS.
+4. **Eksplisitt antagelsesdokumentasjon** (jf. 5.1, grep 3). Alle valgte parametere er listet i Tabell 5.5, 5.6 og Tabell 6.3 med kilde- og kalibreringsstatus. Andre forskere kan reprodusere analysen med dokumenterte parameterverdier eller systematisk variere dem.
+5. **Sensitivitetsanalyse over rimelige parameterspenn** (avsnitt 7.7, Tabell 7.10). Robusthet testes på tvers av tre scenarioer; resultatet er at hovedfunnet ikke avhenger av spesifikk parametersetting.
+
+Det disse grepene **ikke** kontrollerer er valg av modellramme. Operasjonaliseringen av makkerpar som kapasitetsmetrikk reflekterer forfatterens forståelse av prosedyren. En utenforstående forsker uten operativ tilknytning kunne formulert metrikken annerledes. Tre konkrete eksempler på alternative valg: (i) å definere bindingstid som «første ressurs fremme» uten +3 min kvitteringsvindu, (ii) å klassifisere D-aba som makkerpar-bundet i Fase 2 fremfor seriell solo-håndtering, (iii) å bruke `Innsatsvarighet` som operatørbindingsmål fremfor akuttfase-proxy. Hvert alternativ ville gitt et annet Svikt-tall.
+
+Innenfor rammen av nåværende prosjekt er det ikke gjennomført uavhengig replikasjon eller blind tolkning fra en utenforstående analytiker; dette ville krevd egen forskningsetisk vurdering og er foreslått som videre forskning (kap 9.4). Den residuelle insider-bias-risikoen er dermed eksplisitt erkjent som en grense for hvor uavhengig replikasjon kan være, ikke som et eliminert problem.
 
 ### 5.6.3 Avgrensninger
 
@@ -406,4 +424,12 @@ Valideringssamtalene er vanskeligere å reprodusere eksakt. De brukes kun til å
 
 Prosjektet benytter anonymiserte registerdata der ingen personopplysninger er tilgjengelige — operatør-ID er strukturelt fraværende i BRIS-eksporter. Valideringssamtaler er gjennomført som operative fagsamtaler, ikke som formelle forskningsintervjuer, og inneholder ikke personidentifiserbar informasjon. Studien er ikke vurdert å kreve godkjenning fra Sikt (tidligere NSD), da den ikke behandler personopplysninger. Rådata og interne prosedyre- og beredskapsdokumenter publiseres ikke; rapporten presenterer kun aggregerte resultater, metodiske beskrivelser og kildehenvisninger på et nivå som ivaretar intern konfidensialitet.
 
-Forfatterens operative tilknytning til 110 S
+Forfatterens operative tilknytning til 110 Sør-Vest er gjort eksplisitt og adressert metodisk gjennom refleksivitetsavsnittet i 5.1 og kontrollmekanismene i 5.6.2. Generative KI-verktøy (Claude Code av Anthropic og ChatGPT av OpenAI) er benyttet som støtteverktøy for koding, litteratursøk og rapportskriving. All bruk er dokumentert med dato, kontekst og hva som ble produsert (se Vedlegg D / `KI_erklæring_LOG650_G20_Rune.md`). Alle analytiske beslutninger, tolkninger og konklusjoner er forfatterens egne. Den deterministiske, skriptbaserte analyseflyten beskrevet over sikrer at KI-verktøyenes rolle er begrenset til kode- og tekststøtte — ikke til generering av modellresultater eller tolkninger.
+
+---
+
+Samlet gir datagrunnlaget et godt grunnlag for å modellere den best observerbare og mest beredskapsdimensjonerende delen av operatørbindingen. Enkelte belastningselementer må estimeres eller empirisk kalibreres. På dette grunnlaget utvikles i neste kapittel modellrammeverket for kapasitetsanalysen.
+
+---
+
+*Kap 5 — Versjon 3.3 | Sist oppdatert: 2026-05-13 (P2-revisjoner: sekvensgap-skjevhet, validitet skarpere, insider-bias-kontroller, restaurering)*
