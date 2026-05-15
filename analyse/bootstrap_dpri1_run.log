@@ -1,0 +1,126 @@
+Totalt rader: 61964
+
+=== V3-fordeling ===
+  D-pri1      :   4499 (  7.3%)
+  D-aba       :   3056 (  4.9%)
+  S           :  22542 ( 36.4%)
+  L-aba       :   3430 (  5.5%)
+  L-hendelse  :   4298 (  6.9%)
+  L-ukjent    :  16768 ( 27.1%)
+  F           :   6824 ( 11.0%)
+  V           :    547 (  0.9%)
+
+Skjulte sammenstilte anrop: 18901
+
+D-pri1: n_total=4499
+  observert Forste_ressurs_fremme: 3645 (81.0%)
+  manglende (imputeres):           854 (19.0%)
+  observert median: 11.05 min
+  observert mean:   14.97 min
+  observert P25/P75/P90: [ 7.91666667 16.23333333 25.59      ]
+
+======================================================================
+MAR-SJEKK: Missingness for 'Forste_ressurs_fremme' i D-pri1
+======================================================================
+
+Per Oppdragstype (top 10 etter n):
+  Oppdragstype                                  n  mangler      %
+  ----------------------------------------------------------------
+  Trafikkulykke                               628       39   6.2%
+  Helseoppdrag annet                          438       62  14.2%
+  Unødig kontroll av melding                  396       74  18.7%
+  Brann i bygning                             269       15   5.6%
+  Andre oppdrag                               200       57  28.5%
+  Avbrutt utrykning samtale                   192      141  73.4%
+  Beredskapsoppdrag                           190       61  32.1%
+  Helseoppdrag bære/løfte                     161       22  13.7%
+  Brann annet                                 136       12   8.8%
+  Naturhendelse annen                         128       18  14.1%
+
+Per Skift:
+  Skift           n  mangler      %
+  --------------------------------
+  Dag          2838      579  20.4%
+  Natt         1661      275  16.6%
+
+Per Skifttype:
+  Skifttype            n  mangler      %
+  -------------------------------------
+  Dag/helg           831      150  18.1%
+  Dag/hverdag       2007      429  21.4%
+  Natt/helg          547       92  16.8%
+  Natt/hverdag      1114      183  16.4%
+
+Per Maaned:
+  Maaned        n  mangler      %
+  ------------------------------
+  1           451       97  21.5%
+  2           374       84  22.5%
+  3           362       68  18.8%
+  4           354       59  16.7%
+  5           380       74  19.5%
+  6           376       84  22.3%
+  7           363       75  20.7%
+  8           367       65  17.7%
+  9           305       55  18.0%
+  10          426       80  18.8%
+  11          326       51  15.6%
+  12          415       62  14.9%
+
+MAR-rapport lagret: C:\Users\runeg\OneDrive\Documents\Skole utdanning\Logistikk studie\LOG650 LOGISTIKK OG KI\G20-rune-individuell\analyse\bootstrap_dpri1_mar_sjekk.csv
+
+Missingness CV paa tvers av Oppdragstype (n>=30): 0.98
+  CV < 0.30 -> rimelig uniform (MAR plausibel for pooled re-imputation)
+  CV > 0.50 -> klyngestruktur, vurder stratifisert imputering
+
+D-aba events (Fase 1 + Fase 2): 4560
+Skjulte events: 18901
+D-pri1 meta-events (timestamps faste): 4499
+
+======================================================================
+PUNKTESTIMAT (median-imputert, samme som hovedscript)
+======================================================================
+  Alle                      n= 27960: Normal= 59.6% Brudd= 17.8% Svikt= 22.5%
+  Dag hverdag (c=3)         n= 15944: Normal= 69.2% Brudd= 15.9% Svikt= 14.9%
+  Natt/helg (c=2)           n= 12016: Normal= 46.9% Brudd= 20.3% Svikt= 32.8%
+
+======================================================================
+BOOTSTRAP: 1000 iterasjoner (hver D-pri1 bindingstid trekkes
+med erstatning fra n=3645 observerte verdier)
+======================================================================
+  iter  100/1000 (20s elapsed, ~181s gjenstaar)
+  iter  200/1000 (39s elapsed, ~154s gjenstaar)
+  iter  300/1000 (53s elapsed, ~124s gjenstaar)
+  iter  400/1000 (66s elapsed, ~100s gjenstaar)
+  iter  500/1000 (79s elapsed, ~79s gjenstaar)
+  iter  600/1000 (93s elapsed, ~62s gjenstaar)
+  iter  700/1000 (106s elapsed, ~45s gjenstaar)
+  iter  800/1000 (121s elapsed, ~30s gjenstaar)
+  iter  900/1000 (134s elapsed, ~15s gjenstaar)
+  iter 1000/1000 (148s elapsed, ~0s gjenstaar)
+
+Bootstrap ferdig: 148.0s (148ms/iter)
+
+======================================================================
+BOOTSTRAP-CI (95 %, persentilmetode)
+======================================================================
+
+--- Alle ---
+  Normal  : punkt=59.65%  bootstrap mean=58.93%  95%CI=[58.57; 59.29]  bredde=0.72pp
+  Brudd   : punkt=17.81%  bootstrap mean=18.23%  95%CI=[18.01; 18.44]  bredde=0.44pp
+  Svikt   : punkt=22.55%  bootstrap mean=22.84%  95%CI=[22.52; 23.17]  bredde=0.65pp
+
+--- Dag hverdag ---
+  Normal  : punkt=69.24%  bootstrap mean=67.90%  95%CI=[67.29; 68.48]  bredde=1.19pp
+  Brudd   : punkt=15.91%  bootstrap mean=16.64%  95%CI=[16.31; 16.98]  bredde=0.67pp
+  Svikt   : punkt=14.85%  bootstrap mean=15.46%  95%CI=[15.07; 15.87]  bredde=0.80pp
+
+--- Natt/helg ---
+  Normal  : punkt=46.91%  bootstrap mean=47.03%  95%CI=[46.66; 47.40]  bredde=0.74pp
+  Brudd   : punkt=20.33%  bootstrap mean=20.33%  95%CI=[20.11; 20.55]  bredde=0.43pp
+  Svikt   : punkt=32.76%  bootstrap mean=32.64%  95%CI=[32.09; 33.16]  bredde=1.07pp
+
+CI-resultater lagret: C:\Users\runeg\OneDrive\Documents\Skole utdanning\Logistikk studie\LOG650 LOGISTIKK OG KI\G20-rune-individuell\analyse\bootstrap_dpri1_resultater.csv
+Figur: C:\Users\runeg\OneDrive\Documents\Skole utdanning\Logistikk studie\LOG650 LOGISTIKK OG KI\G20-rune-individuell\analyse\figurer\bootstrap_dpri1_ci.png
+
+=== FERDIG ===
