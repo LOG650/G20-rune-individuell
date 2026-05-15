@@ -356,6 +356,39 @@ Tre observasjoner:
 
 **Konklusjon:** Hovedfunnet, at natt/helg har 30 til 38 % Svikt uavhengig av bindingstidsantakelser, er robust over hele spennet. Dimensjoneringsproblemet på natt/helg kan ikke forklares bort gjennom alternative parametervalg.
 
+### 7.7.4 Bootstrap-konfidensintervall for D-pri1-bindingstidsfordelingen
+
+Sensitivitetsanalysen i 7.7.3 varierer parameterantakelser, men tester ikke statistisk usikkerhet i selve den observerte D-pri1-bindingstidsfordelingen. Av 4 499 D-pri1-hendelser i 2025 har 3 645 (81 %) observert tidsstempel for «første ressurs fremme», mens 854 (19 %) mangler eller har avvisende verdi (negativ varighet eller > 180 min) og er imputert med median. For å kvantifisere både *sampling-variabilitet* i den observerte fordelingen og *imputeringsusikkerhet* for de manglende verdiene, er det gjennomført en ikke-parametrisk bootstrap (B = 1 000 iterasjoner, persentilmetode, fast seed `SEED_BOOTSTRAP = 20260515`).
+
+I hver iterasjon trekkes 4 499 bindingstider med erstatning fra de 3 645 observerte verdiene og tildeles D-pri1-hendelsene i deres faktiske ankomstrekkefølge. Variant A-modellen (D-pri1 + D-aba Fase 1+2 + sammenstilte) reberegnes med disse trukne bindingstidene; D-aba Fase 2-sampling og øvrige parametere holdes deterministiske (samme `SEED_DABA = 20260419` som hovedscript) slik at bootstrap-CI isolerer D-pri1-usikkerheten.
+
+**Tabell 7.10b: Bootstrap-CI (95 %, persentilmetode, B = 1 000) for variant A**
+
+| Skifttype | Nivå | Punktestimat | Bootstrap-mean | 95 % CI | Bredde |
+|---|---|---:|---:|---|---:|
+| **Dag hverdag (c=3)** | Normal | 69,2 % | 67,9 % | [67,3; 68,5] | 1,2 pp |
+| | Brudd | 15,9 % | 16,6 % | [16,3; 17,0] | 0,7 pp |
+| | Svikt | 14,9 % | 15,5 % | [15,1; 15,9] | 0,8 pp |
+| **Natt/helg (c=2)** | Normal | 46,9 % | 47,0 % | [46,7; 47,4] | 0,7 pp |
+| | Brudd | 20,3 % | 20,3 % | [20,1; 20,6] | 0,4 pp |
+| | **Svikt** | **32,8 %** | **32,6 %** | **[32,1; 33,2]** | **1,1 pp** |
+| **Alle** | Normal | 59,6 % | 58,9 % | [58,6; 59,3] | 0,7 pp |
+| | Brudd | 17,8 % | 18,2 % | [18,0; 18,4] | 0,4 pp |
+| | Svikt | 22,5 % | 22,8 % | [22,5; 23,2] | 0,7 pp |
+
+*Punktestimat = median-imputering for manglende, som i hovedscript. Bootstrap-mean = gjennomsnitt over 1 000 iterasjoner der manglende imputeres ved trekk fra observert empirisk fordeling. Resultater: `analyse/bootstrap_dpri1_resultater.csv`. Implementasjon: `analyse/scripts/bootstrap_dpri1.py`.*
+
+Bootstrap-CI for Svikt natt/helg er **[32,1; 33,2] %** med bredde 1,1 pp. Punktestimatet (32,8 %) ligger sentralt i CI-en, og bootstrap-mean (32,6 %) er nær identisk. Hovedfunnet er dermed stabilt også når statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen propageres gjennom modellen. På dag hverdag er punktestimatet (14,9 %) marginalt lavere enn bootstrap-CI nedre grense (15,1 %); differansen reflekterer at median-imputering for høyreskjeve fordelinger gir lavere estimat enn trekk fra full empirisk fordeling, og er en ytterligere indikasjon på at hovedmodellen er en konservativ estimator.
+
+**Hva CI-en ikke fanger.** Bootstrap-CI kvantifiserer *parametrisk* usikkerhet i den observerte D-pri1-bindingstidsfordelingen, ikke *definisjonsmessig* usikkerhet i selve modellrammen. Den smale CI-bredden (1,1 pp) sier at *gitt* op-binder-semantikken, makkerpar-kravet og kategoriinndelingen i kap 6, så er Svikt-andelen statistisk presis. Den dominerende restusikkerheten gjelder valg av modellramme (Trussel 1 og 4 i kap 5.6.1) og er kvalitativt drøftet i kap 5.6.2 og 8.2.3, ikke kvantifisert her. Et smalere intervall enn ±0,5 pp må derfor ikke leses som total usikkerhet.
+
+**MAR-sjekk og imputeringsantagelse.** Bootstrap-en bruker pooled re-imputation, som forutsetter at manglende «første ressurs fremme»-tidsstempel er tilfeldig fordelt (MAR) på tvers av Oppdragstype. Empirisk varierer missingness fra 5,6 % («Brann i bygning») til 73,4 % («Avbrutt utrykning samtale»), med koeffisientvariasjon 0,98 på tvers av Oppdragstype (n ≥ 30). MAR-antagelsen er dermed *ikke* strengt oppfylt. Klyngingen er imidlertid systematisk og operativt forklarlig: hendelser uten registrert fremme-tidspunkt er typisk avbrutte utrykninger (ressurs returnerte før den nådde frem) som har *kortere* faktisk binding enn medianen for vellykkede utrykninger. Pooled imputering med observert median vil derfor systematisk *overestimere* binding for disse, noe som trekker Svikt-andelen oppover, ikke nedover. Bootstrap-CI rapportert over er dermed et øvre anslag på den statistiske usikkerheten; en stratifisert imputering ville gitt litt lavere Svikt-mean uten å endre konklusjonen om at intervallet er smalt og funnet stabilt. Detaljert MAR-rapport: `analyse/bootstrap_dpri1_mar_sjekk.csv`.
+
+<div align="center">
+  <img src="../analyse/figurer/bootstrap_dpri1_ci.png" alt="Bootstrap-CI for kapasitetsnivå" width="95%">
+  <p align="center"><small><i>Bootstrap-fordeling av kapasitetsnivå (B = 1 000). Stiplet linje: punktestimat (median-imputert). Punktert linje: 95 % CI-grenser.</i></small></p>
+</div>
+
 ---
 
 ## 7.8 ROS- og beredskapsanalyse som dimensjoneringsgrunnlag (RQ4)
@@ -518,4 +551,4 @@ Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av fu
 
 *Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
 
-*Kap 7, Versjon 2.2 | Sist oppdatert: 2026-05-13 (scenariobånd, generaliseringsnedtoning, RQ4/RQ5, restaurering)*
+*Kap 7, Versjon 2.3.1 | Sist oppdatert: 2026-05-15 (nytt avsnitt 7.7.4 Bootstrap-CI for D-pri1-bindingstid + Tabell 7.10b; eksplisitt avgrensning mot definisjonsmessig usikkerhet)*

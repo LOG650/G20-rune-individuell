@@ -1,8 +1,26 @@
 # Prosjektstatus — LOG650 G20 Rune Grødem
 
-Statusdato: 2026-05-13 (v2.7)
+Statusdato: 2026-05-15 (v2.8)
 
-Denne statusen bygger på arbeidskopien per 2026-05-13 kveld, med prosjektstyringsplanen og WBS som referanse for avvik.
+Denne statusen bygger på arbeidskopien per 2026-05-15, med prosjektstyringsplanen og WBS som referanse for avvik.
+
+## Endringer fra v2.7 (2026-05-15)
+
+**Bootstrap-CI for D-pri1-bindingstid (peer review-respons runde 2):** Ny ikke-parametrisk bootstrap-analyse (B = 1 000) propagerer statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen og imputeringsusikkerhet for de 19 % manglende verdiene gjennom variant A-modellen. Resultat: **95 % CI for Svikt natt/helg = [32,1; 33,2] %** rundt punktestimat 32,8 %. Hovedfunnet er statistisk svært stabilt (CI-bredde 1,1 pp). MAR-sjekk avdekket at missingness klynger seg på Oppdragstype (CV 0,98), særlig "Avbrutt utrykning samtale" (73 % missing) — men avviket trekker estimatet i konservativ retning og endrer ikke konklusjonen.
+
+Endringer i artefakter:
+- `analyse/scripts/bootstrap_dpri1.py` — nytt skript med MAR-sjekk + bootstrap-loop
+- `analyse/bootstrap_dpri1_resultater.csv` — CI per skift × niva
+- `analyse/bootstrap_dpri1_mar_sjekk.csv` — missingness per Oppdragstype/Skift/Måned
+- `analyse/figurer/bootstrap_dpri1_ci.png` — bootstrap-fordeling med punktestimat og CI
+- `analyse/bootstrap_dpri1_run.log` — full kjøringslogg
+
+Endringer i rapporten:
+- Kap 3 v1.3 — intro-setning rammer Erlang-C som spesialtilfelle, ikke konkurrerende modell (avvæpner halmmann-kritikk fra peer review runde 2)
+- Kap 5 v3.4 — bootstrap-CI lagt til som 6. reliabilitets-grep i 5.6.2; trussel 3 oppdatert; missingness korrigert til 19 % (var feilaktig 25 %)
+- Kap 6 v3.5 — A2-status oppgradert til "Empirisk + statistisk validert"; D-pri1-imputasjon korrigert til 19 %; bootstrap-CI lenket fra Tabell 6.3 og A2-konsekvensvurdering
+- Kap 7 v2.3 — nytt avsnitt 7.7.4 med Tabell 7.10b og bootstrap-figur
+- Kap 9 v1.3 — skarp åpningssetning i 9.1 med direkte svar på problemstillingen før alle nyansene; bootstrap-CI inkludert i hovedsvar
 
 ## Endringer fra v2.6 (samme dag, senere)
 
@@ -87,6 +105,7 @@ Denne statusen bygger på arbeidskopien per 2026-05-13 kveld, med prosjektstyrin
 | L20 V3 op-binder-semantikk + D-pri1/D-aba-splitt | Uke 16 | Ferdig 19.04 | D-pri1 (2 ops, makkerpar), D-aba (Fase 1 + Fase 2, serial). Natt/helg Svikt 26 → 33 % |
 | L16 Hoved-utkast + peer review | Slutten av april | Levert 27.04, peer review mottatt 03.05 | Innkommende peer review fra G21 gap-analysert (peer_review_G21_mottatt_analyse.md) |
 | **L21 Revisjon 2 etter peer review (NY)** | Uke 19 | **Ferdig 13.05** | Commit a7f24f5: P1.1–P1.4, P2.A–P2.C, P3.1–P3.2. Admin: KI-erklæring v1.1, HiMolde-skjema utfylt, forsidedata, PDF rebygget |
+| **L22 Bootstrap-CI for D-pri1 + skarpere 9.1 (NY)** | Uke 20 | **Ferdig 15.05** | Branch `bootstrap-dpri1-konfidensintervall`. 1000 iterasjoner, MAR-sjekk, ny 7.7.4, oppdatert 5.6.2 og 6.7. Kap 9.1 fikk direkte ettsetnings-svar på problemstillingen. Kap 3 fikk intro-setning som rammer Erlang-C som spesialtilfelle |
 
 ## Rapportstatus
 
@@ -122,6 +141,7 @@ Denne statusen bygger på arbeidskopien per 2026-05-13 kveld, med prosjektstyrin
 | Spørreskjemageneratør | generer_skjema.py, md_til_pdf.py | 12 md-skjemaer + 12 AcroForm-PDFer | Klare — i intern kalibrering |
 | Sporbarhets-notat | analyse/notat_V3_modellutvikling.md | — | Fullført 19.04 |
 | PDF-pipeline | verktoy/build_pdf.py + dokument-header.tex | Pandoc + XeLaTeX | Etablert 21.04 (Python 3.10-syntaksfiks 13.05) |
+| **Bootstrap-CI D-pri1 + MAR-sjekk** | bootstrap_dpri1.py | bootstrap_dpri1_ci.png | **Ferdig 15.05**: B=1000, 95 % CI Svikt natt/helg [32,1; 33,2] % |
 
 ## Milepæler
 
@@ -194,7 +214,7 @@ Denne statusen bygger på arbeidskopien per 2026-05-13 kveld, med prosjektstyrin
 | R11 | Skjema til andre sentraler ikke sendt | Lukket (utenfor scope) | Innenfor scope for innlevering — nasjonal del dekkes av DSB-data |
 | R12 | L-aba-klassifisering nasjonalt heterogen | Håndtert | Adressert i kap 8.3 som begrensning ved nasjonal benchmarking |
 | R13 | Generaliseringstone for sterk | Håndtert (rev 2 13.05) | Kap 7.9–7.10 og 9.1/9.5 reformulert som hypoteser/forutsetninger |
-| R14 | Usikkerhet ikke integrert i resultater | Håndtert (rev 2 13.05) | Scenariobånd 28–39 % integrert i kap 7.5–7.7 og 7.11 |
+| R14 | Usikkerhet ikke integrert i resultater | Håndtert (rev 2 13.05 + bootstrap 15.05) | Scenariobånd 28–39 % integrert i kap 7.5–7.7 og 7.11. Bootstrap-CI for Svikt natt/helg [32,1; 33,2] % i 7.7.4 |
 | R15 | Språklig kompleksitet | Stort sett håndtert | Kap 1, 2, 3, 5 språkrevidert + forkortelsesliste 1.4.2. Kap 4, 7, 8 har punktrevisjoner. Gjenstår: full setning-for-setning-gjennomgang av kap 4, 7, 8, 9 — naturlig del av brukerens final-read |
 | **R16** | **Adminstrative skjema ikke utfylt (NY)** | Åpen | Taushetserklæring og publiseringsavtale: status uavklart. Veileder, antall ord, endelig dato i forside må fylles inn ved innlevering |
 

@@ -1,0 +1,29 @@
+stratum,verdi,n,n_mangler,pct_mangler
+Oppdragstype,Trafikkulykke,628,39,6.2
+Oppdragstype,Helseoppdrag annet,438,62,14.2
+Oppdragstype,Unødig kontroll av melding,396,74,18.7
+Oppdragstype,Brann i bygning,269,15,5.6
+Oppdragstype,Andre oppdrag,200,57,28.5
+Oppdragstype,Avbrutt utrykning samtale,192,141,73.4
+Oppdragstype,Beredskapsoppdrag,190,61,32.1
+Oppdragstype,Helseoppdrag bære/løfte,161,22,13.7
+Oppdragstype,Brann annet,136,12,8.8
+Oppdragstype,Naturhendelse annen,128,18,14.1
+Skift,Dag,2838,579,20.4
+Skift,Natt,1661,275,16.6
+Skifttype,Dag/helg,831,150,18.1
+Skifttype,Dag/hverdag,2007,429,21.4
+Skifttype,Natt/helg,547,92,16.8
+Skifttype,Natt/hverdag,1114,183,16.4
+Maanedsnr,1,451,97,21.5
+Maanedsnr,2,374,84,22.5
+Maanedsnr,3,362,68,18.8
+Maanedsnr,4,354,59,16.7
+Maanedsnr,5,380,74,19.5
+Maanedsnr,6,376,84,22.3
+Maanedsnr,7,363,75,20.7
+Maanedsnr,8,367,65,17.7
+Maanedsnr,9,305,55,18.0
+Maanedsnr,10,426,80,18.8
+Maanedsnr,11,326,51,15.6
+Maanedsnr,12,415,62,14.9

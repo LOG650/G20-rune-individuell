@@ -1,6 +1,6 @@
 # 3. Teori
 
-Dette kapitlet etablerer det køteoretiske grunnlaget for kapasitetsanalysen. Det forklarer også hvorfor klassisk M/M/c-teori ikke er tilstrekkelig for 110-konteksten. Progresjonen går i fire trinn: Erlang-C som grunnlinje, deretter QED-regimet og square-root staffing, så multiserver-jobs (MSJ), og til slutt op-binder-semantikken, som er det teoretiske rammeverket for prosedyrbasert ankomstkonfliktmodellering.
+Dette kapitlet etablerer det køteoretiske grunnlaget for kapasitetsanalysen. Det forklarer også hvorfor klassisk M/M/c-teori ikke er tilstrekkelig for 110-konteksten. Progresjonen går i fire trinn: Erlang-C som grunnlinje, deretter QED-regimet og square-root staffing, så multiserver-jobs (MSJ), og til slutt op-binder-semantikken, som er det teoretiske rammeverket for prosedyrbasert ankomstkonfliktmodellering. Erlang-C presenteres først av pedagogiske grunner; det vises i 3.7 å være et spesialtilfelle av rammeverket som utvikles, ikke en konkurrerende modell som forkastes.
 
 ## 3.1 Erlang-C (M/M/c) som referansemodell
 
@@ -158,4 +158,4 @@ Sammen gir disse det teoretiske fundamentet for å formulere 110-kapasitetsprobl
 
 ---
 
-*Kap 3, Versjon 1.2 | Sist oppdatert: 2026-05-13 (språkrevisjon, restaurering)* 
+*Kap 3, Versjon 1.3 | Sist oppdatert: 2026-05-15 (intro-setning som rammer Erlang-C som spesialtilfelle, ikke konkurrerende modell)* 
