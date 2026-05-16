@@ -104,8 +104,6 @@ Zeltyn, S., & Mandelbaum, A. (2005). Call centers with impatient customers: Many
 
 ---
 
-## 11. Vedlegg
-
 ## 12. Vedlegg
 
 ### Vedlegg A: Python-implementasjon og GitHub-repo

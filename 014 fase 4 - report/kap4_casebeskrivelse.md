@@ -1,6 +1,6 @@
 # 4. Casebeskrivelse
 
-Denne casebeskrivelsen presenterer konteksten for kapasitetsanalysen: de norske 110-sentralenes organisering, primærcaset 110 Sør-Vest, og de operative forholdene som påvirker operatørkapasiteten. Kapitlet beskriver situasjonen og historiske fakta. Analyseresultater presenteres i kapittel 7.
+Denne casebeskrivelsen presenterer konteksten for kapasitetsanalysen: de norske 110-sentralenes organisering, primærcaset 110 Sør-Vest, og de operative forholdene som påvirker operatørkapasiteten. Kapitlet beskriver situasjonen og historiske fakta. Analysegrunnlaget utvikles i kapittel 7 og resultatene presenteres i kapittel 8.
 
 ## 4.1 Norske 110-sentraler: oversikt
 
@@ -90,10 +90,10 @@ For 2025 registrerte 110 Sør-Vest 61 964 synlige oppdrag i BRIS/LEO. Tallet ref
 
 <div align="center">
   <img src="../analyse/figurer/bindingstid_per_time.png" alt="Figur 4.1 Bindingstid og volum per time" width="80%">
-  <p align="center"><small><i>Døgnprofil for anropsvolum (alle synlige BRIS-oppdrag) og median bindingstid for beredskapsoppdrag (kategori D), 110 Sør-Vest 2025.</i></small></p>
+  <p align="center"><small><i>Figur 4.1: Døgnprofil for anropsvolum (alle synlige BRIS-oppdrag) og median bindingstid for beredskapsoppdrag (kategori D), 110 Sør-Vest 2025.</i></small></p>
 </div>
 
-Belastningsmønsteret viser en tydelig døgnprofil med høyest samlet volum på dagtid og lavest volum nattestid. Figuren illustrerer døgnprofilen i registrert oppdragsvolum (proxy for anropsvolum, med kjent undertelling pga. sammenstilling) og viser samtidig at bindingstiden per beredskapsoppdrag varierer mindre over døgnet enn totalvolumet. Hvordan dette volumet fordeler seg mellom ulike hendelsestyper og hvorvidt det representerer beredskapsdimensjonerende belastning, analyseres i kapittel 7.
+Belastningsmønsteret viser en tydelig døgnprofil med høyest samlet volum på dagtid og lavest volum nattestid. Figuren illustrerer døgnprofilen i registrert oppdragsvolum (proxy for anropsvolum, med kjent undertelling pga. sammenstilling) og viser samtidig at bindingstiden per beredskapsoppdrag varierer mindre over døgnet enn totalvolumet. Hvordan dette volumet fordeler seg mellom ulike hendelsestyper og hvorvidt det representerer beredskapsdimensjonerende belastning, analyseres i kapittel 7 og resultatene presenteres i kapittel 8.
 
 ## 4.4 Konsekvenser av utilstrekkelig kapasitet
 
@@ -111,10 +111,10 @@ Disse konsekvensene er ikke bare teoretiske. De representerer operative forhold 
 
 ## 4.5 ROS- og beredskapsanalysegrunnlag
 
-Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i sentralens risiko- og beredskapsanalyse (ROS) og tilhørende beredskapsanalyse. Disse dokumentene vurderer kvalitativt hvilke risikoer sentralen er eksponert for og hvilken bemanning som anses nødvendig. 110 Sør-Vest brukes i denne rapporten som primærcase for å utvikle og teste en kvantitativ analysemodell som prinsipielt kan anvendes på andre 110-sentraler. En nærmere gjennomgang av disse analysenes metodiske grunnlag opp mot kvantitative funn i denne rapporten inngår i diskusjonen (kapittel 8).
+Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i sentralens risiko- og beredskapsanalyse (ROS) og tilhørende beredskapsanalyse. Disse dokumentene vurderer kvalitativt hvilke risikoer sentralen er eksponert for og hvilken bemanning som anses nødvendig. 110 Sør-Vest brukes i denne rapporten som primærcase for å utvikle og teste en kvantitativ analysemodell som prinsipielt kan anvendes på andre 110-sentraler. Resultatobservasjonen av disse analysene presenteres i kap 8.4, og en nærmere drøfting av deres metodiske grunnlag opp mot de kvantitative funnene inngår i diskusjonen (kapittel 9).
 
 Det er viktig å understreke at ROS-analysene er kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler. Prosjektets ambisjon er å supplere, ikke erstatte, disse analysene med et kvantitativt referansepunkt for operatørbemanning.
 
 ---
 
-*Kap 4, Versjon 1.3 | Sist oppdatert: 2026-05-13 (Tabell 4.1 intro, restaurering)*
+*Kap 4, Versjon 1.4 | Sist oppdatert: 2026-05-16 (kryssreferanser oppdatert til ny kapittelstruktur; Figur 4.1-caption normalisert)*

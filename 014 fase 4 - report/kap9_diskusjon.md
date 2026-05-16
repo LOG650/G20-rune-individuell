@@ -4,18 +4,18 @@ Denne diskusjonen knytter analysens fem hovedfunn (avsnitt 8.7) til problemstill
 
 > **Kort oversikt: diskusjonens svar på RQ1 til RQ5** (fulltekstsvar i kap 10.2):
 >
-> - **RQ1 (ankomstrate og belastningsmønster):** Empirisk grunnlag etablert; topptung dagprofil og sårbar overgangssone ved skiftveksling kl. 19:00. Drøftes i 8.1.3 og 8.3.3.
-> - **RQ2 (håndteringstid og kapasitetsbinding):** Aktiv bindingstid (median 13,0 min) er vesentlig lenger enn samtaletid (3,4 min). Drøftes i 8.1.3.
-> - **RQ3 (ankomstkonflikt og dag/natt-gap):** Strukturelt gap dokumentert; svikt natt/helg 32,6 % (variant A) / 33,2 % (variant B). Drøftes i 8.2.1, 8.3.1 og 8.3.2.
-> - **RQ4 (ROS-grunnlaget):** Kvalitativt, uten kvantitativ benchmark. Resultatobservasjoner i 7.8; vurdering i 8.3.4.
-> - **RQ5 (generaliserbarhet):** Teknisk overførbar, men forutsetter felles klassifisering. Nasjonal benchmarking i 7.9; drøftes i 8.3.4 og 8.4.1.
+> - **RQ1 (ankomstrate og belastningsmønster):** Empirisk grunnlag etablert; topptung dagprofil og sårbar overgangssone ved skiftveksling kl. 19:00. Resultater i kap 8.1; drøftes i 9.1.
+> - **RQ2 (håndteringstid og kapasitetsbinding):** Aktiv bindingstid (D-pri1 median 14,1 min) er vesentlig lenger enn samtaletid (3,4 min). Drøftes i 9.1.3.
+> - **RQ3 (ankomstkonflikt og dag/natt-gap):** Strukturelt gap dokumentert; svikt natt/helg 32,6 % (variant A) / 33,2 % (variant B). Resultater i 8.1 til 8.3; drøftes i 9.2 og 9.3.
+> - **RQ4 (ROS-grunnlaget):** Kvalitativt, uten kvantitativ benchmark. Resultatobservasjoner i 8.4; drøftes i 9.3.4.
+> - **RQ5 (generaliserbarhet):** Teknisk overførbar, men forutsetter felles klassifisering. Nasjonal benchmarking i 8.5; drøftes i 9.3.4 og 9.4.1.
 
 
 Et forventet funn var at Erlang-C undervurderer kapasitetsbehovet når makkerpar-binding og aktivt hendelsebilde tas med. Mer overraskende er at total operativ belastning først og fremst forverrer dagkapasiteten, mens natt/helg fortsatt er strukturelt sårbar selv når modellen avgrenses til beredskapsbelastning.
 
 ## 9.1 Hvorfor Erlang-C er utilstrekkelig for 110-konteksten, og hvor den fortsatt fungerer
 
-Diskusjonen i 8.1 til 8.3 argumenterer for at en prosedyrbasert ankomstkonfliktmodell gir et mer nyttig dimensjoneringsbilde enn klassisk Erlang-C i 110-konteksten. Det er en konklusjon basert på ett case og bør ikke leses som en generell underkjenning av køteoretiske metoder. Erlang-C og dens etterfølgere forblir godt egnet for systemer der antagelsene de bygger på faktisk holder: store call centre med tilstrekkelig statistisk masse, én-til-én betjening uten makkerpar-krav, og et arbeidsvolum dominert av samtaletid. Kritikken nedenfor gjelder spesifikt 110-kontekstens kombinasjon av lav last, makkerpar-prosedyre og lang bindingstid utover samtaletid, ikke køteorien som sådan.
+Resultatene i 8.1 til 8.3 dokumenterer at en prosedyrbasert ankomstkonfliktmodell gir et mer nyttig dimensjoneringsbilde enn klassisk Erlang-C i 110-konteksten. Det er en konklusjon basert på ett case og bør ikke leses som en generell underkjenning av køteoretiske metoder. Erlang-C og dens etterfølgere forblir godt egnet for systemer der antagelsene de bygger på faktisk holder: store call centre med tilstrekkelig statistisk masse, én-til-én betjening uten makkerpar-krav, og et arbeidsvolum dominert av samtaletid. Kritikken nedenfor gjelder spesifikt 110-kontekstens kombinasjon av lav last, makkerpar-prosedyre og lang bindingstid utover samtaletid, ikke køteorien som sådan.
 
 ### 9.1.1 Det lav-belastede paradokset
 
@@ -33,7 +33,7 @@ Primærmodellen i denne rapporten adresserer nettopp dette gjennom op-binder-sem
 
 ### 9.1.3 Bindingstid som kapasitetsbegrep
 
-Funn 2 viser at operatørene er bundet i median 13,0 minutter per beredskapsoppdrag, vesentlig lenger enn den rene samtaletiden (median 3,4 minutter i Erlang-C). Denne diskrepansen er ikke overraskende i lys av litteraturen: van Buuren et al. (2017) dokumenterer i sin DES-modell av nederlandske nødmeldesentraler at funksjonsdifferensiering (call taker vs. dispatcher) gir markant ulike servicetider for ulike roller, og at den samlede bindingstiden per hendelse er summen av flere deloperasjoner. Gustavsson (2018) viser tilsvarende at agenter ved SOS Alarm komprimerer servicetiden under press, men at denne kompresjonen har en kvalitetskostnad.
+Funn 2 viser at operatørene for D-pri1-hendelser er bundet i median 14,1 minutter per oppdrag (inkludert +3 min kvitteringsvindu), vesentlig lenger enn den rene samtaletiden (median 3,4 minutter i Erlang-C). Denne diskrepansen er ikke overraskende i lys av litteraturen: van Buuren et al. (2017) dokumenterer i sin DES-modell av nederlandske nødmeldesentraler at funksjonsdifferensiering (call taker vs. dispatcher) gir markant ulike servicetider for ulike roller, og at den samlede bindingstiden per hendelse er summen av flere deloperasjoner. Gustavsson (2018) viser tilsvarende at agenter ved SOS Alarm komprimerer servicetiden under press, men at denne kompresjonen har en kvalitetskostnad.
 
 For 110-dimensjonering innebærer dette at samtaletid alene er et alvorlig utilstrekkelig mål på kapasitetsbinding. Bindingstidsproxyen (anrop → første ressurs fremme + kvittering) fanger den operative virkeligheten bedre, men er fortsatt konservativ: den inkluderer ikke oppfølging, samband og loggføring etter at første ressurs er fremme.
 
@@ -63,11 +63,11 @@ Diskusjonen over har lagt en bestemt tolkning til grunn: at modellens høye Svik
 
 **Alternativ 1: Modellens definisjon av Svikt er for streng.** Modellen klassifiserer en operatør som «opptatt» gjennom hele bindingstiden, for D-pri1 i median 14,1 minutter. Hvis operatører i praksis frigjøres helt eller delvis i sluttfasen (f.eks. GUL etter at første ressurs er på plass), er modellens effektive bindingstid for konservativ. Sviktraten ville da være overestimert. Mot dette taler at bindingstidsdefinisjonen er forankret i operativ prosedyre og operatørens egne beskrivelser av når kvittering og loggføring faktisk er avsluttet, men en empirisk validering med tidssensitiv operatøraktivitetslogg ville gitt sterkere belegg.
 
-**Alternativ 2: VL-rollen i praksis er aktivere enn modellen antar.** Forutsetningen $c_{\text{eff}} = c_{\text{total}} - 1$ er empirisk støttet (jf. VL-valideringsnotatet), men kan tenkes å bryte sammen i akkurat de tilfellene modellen klassifiserer som Svikt, der VL trer inn fordi det ikke er noe alternativ. Hvis VL i praksis besvarer en ikke-triviell andel av anrop i Svikt-tilstand, reduseres den reelle ubesvarte-andelen, men oversiktsrollen svekkes til en kostnad som ikke er modellert. Dette er en gradvis svekkelse, ikke en binær feil: modellens Svikt-andel ville fortsatt beskrive en operasjonelt presset tilstand, men ikke en der ingen er tilgjengelig.
+**Alternativ 2: VL-rollen i praksis er mer aktiv enn modellen antar.** Forutsetningen $c_{\text{eff}} = c_{\text{total}} - 1$ er empirisk støttet (jf. VL-valideringsnotatet), men kan tenkes å bryte sammen i akkurat de tilfellene modellen klassifiserer som Svikt, der VL trer inn fordi det ikke er noe alternativ. Hvis VL i praksis besvarer en ikke-triviell andel av anrop i Svikt-tilstand, reduseres den reelle ubesvarte-andelen, men oversiktsrollen svekkes til en kostnad som ikke er modellert. Dette er en gradvis svekkelse, ikke en binær feil: modellens Svikt-andel ville fortsatt beskrive en operasjonelt presset tilstand, men ikke en der ingen er tilgjengelig.
 
 **Alternativ 3: Registreringspraksis i BRIS gjør sekvensgap til en upålitelig proxy for skjulte anrop.** Sekvensgap-metoden er validert lokalt for Sør-Vest, men antagelsen om at gap representerer sammenstilte anrop hviler på registreringspraksis som ikke er uavhengig revidert. Hvis en større andel av gapene reflekterer overflyt til Agder eller avbrutte anrop (jf. Tabell 8.10, der Sør-Vest har 23,4 % skjult-rate og andre sentraler 23 til 65 %), er de 18 901 skjulte anropene en blanding heller enn et rent sammenstillings-estimat. Modellens kapasitetsbinding fra skjulte anrop er da delvis spuriøs.
 
-Hver av disse alternativene trekker tolkningen i samme retning: Svikt-andelen som *registrert* over- eller underestimat avhenger av hvilken antagelse som svikter. Sensitivitetsanalysen (Tabell 8.5) fanger noe av usikkerheten, men ikke alternativene 1 og 2, som krever empirisk arbeid utover denne studiens ramme. Vurderingen er at hovedfunnet, at natt/helg er strukturelt sårbar, er robust mot alle tre alternativene, fordi alle tre i hovedsak påvirker tolkningen av tallets *størrelse*, ikke retningen av asymmetrien mellom dag og natt. Men leseren bør forstå at det presise tallet 32,6 % er en modellprediksjon under spesifikke antagelser, ikke en målt observasjon av faktiske kapasitetsbrudd.
+Hvert av disse alternativene trekker tolkningen i samme retning: Svikt-andelen som *registrert* over- eller underestimat avhenger av hvilken antagelse som svikter. Sensitivitetsanalysen (Tabell 8.5) fanger noe av usikkerheten, men ikke alternativene 1 og 2, som krever empirisk arbeid utover denne studiens ramme. Vurderingen er at hovedfunnet, at natt/helg er strukturelt sårbar, er robust mot alle tre alternativene, fordi alle tre i hovedsak påvirker tolkningen av tallets *størrelse*, ikke retningen av asymmetrien mellom dag og natt. Men leseren bør forstå at det presise tallet 32,6 % er en modellprediksjon under spesifikke antagelser, ikke en målt observasjon av faktiske kapasitetsbrudd.
 
 ### 9.2.4 Implikasjoner for operatørbelastning
 
@@ -160,7 +160,7 @@ Ring-flom (call surge) fra flere innringere som melder samme hendelse er delvis 
 
 ### 9.4.3 Antakelser med konsekvenser
 
-Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba via LABA-dybdeanalyse, n=100, Kilde=Alarm-subset) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V, forelagt vaktleder). Sensitivitetsanalysen i avsnitt 8.3 viser at hovedfunnet er robust over hele spennet av rimelige antakelser: svikt på natt/helg er 30 til 38 % i alle scenarioer.
+Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba via LABA-dybdeanalyse, n=100, Kilde=Alarm-subset) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V, forelagt vaktleder). Sensitivitetsanalysen i avsnitt 8.3 viser at hovedfunnet er robust over hele spennet av rimelige antagelser: svikt på natt/helg er 30 til 38 % i alle scenarioer.
 
 LABA-hovedparameteren bygger på Kilde=Alarm-subsettet (n = 100) og har 95 % CI [3,74; 5,43] min for mean, substansielt strammere enn første runde (n = 30, CI [3,70; 8,56]). Median (3,27 min) og høy-scenario (7 min) er dekket i sensitivitetsanalysen. Endringen fra n=30 til n=100 reduserte hovedverdien fra 6 min til 4,5 min og senket variant B-Svikt på natt/helg marginalt (33,4 til 33,2 %).
 
@@ -180,4 +180,4 @@ Tre retninger fremstår som mest lovende.
 
 ---
 
-*Kap 9 | Versjon 1.3 | Sist oppdatert: 2026-05-13 (balansert diskusjon, alternative tolkninger, restaurering)*
+*Kap 9 | Versjon 1.4 | Sist oppdatert: 2026-05-16 (kryssreferanser oppdatert til ny kapittelstruktur; D-pri1 14,1 min konsekvent brukt; språkvask)*

@@ -6,7 +6,7 @@ Problemstillingen er: *I hvilken grad samsvarer faktisk bemanning ved 110 Sør-V
 
 **Direkte svar.** For 110 Sør-Vest 2025 samsvarer faktisk bemanning *ikke* med kapasitetsbehovet når målestokken er prosedyrkonform håndtering av beredskapsanrop: hvert tredje beredskapsanrop på natt/helg ankommer i en tilstand der makkerpar-driftsstandarden ikke kan opprettholdes (Svikt 32,8 %, bootstrap-CI [32,1; 33,2] %). Mot en ren ventetidsmetrikk (Erlang-C) framstår derimot bemanningen som komfortabel (ρ < 6 %, P(W > 30s) < 1 %). De to målestokkene gir motsatte konklusjoner om samme bemanning, og hvilken som er mest relevant er et normativt spørsmål denne studien ikke avgjør, men gjør målbart. For nasjonal overførbarhet er modellrammeverket prinsipielt anvendbart, men den prosedyrbaserte standarden er bare empirisk testet ved 110 Sør-Vest; overførbarheten til de øvrige 11 sentralene forblir en hypotese inntil bredere validering er gjennomført.
 
-**Omfang for konklusjonen.** Hovedanalysen er gjennomført på 110 Sør-Vest 2025 som casestudie. Nasjonal del (kap 8.5 og 8.4.1) er benchmarking og kontekst, ikke full prosedyrbasert kapasitetsmodellering for de øvrige 11 sentralene. Konklusjonen under er derfor primært en *case-konklusjon for 110 Sør-Vest*, mens nasjonale implikasjoner er formulert som hypoteser/indikasjoner som forutsetter klassifiseringsharmonisering og bredere validering (jf. RQ5 og kap 10.4).
+**Omfang for konklusjonen.** Hovedanalysen er gjennomført på 110 Sør-Vest 2025 som casestudie. Nasjonal del (kap 8.5 og 8.6) er benchmarking og kontekst, ikke full prosedyrbasert kapasitetsmodellering for de øvrige 11 sentralene. Konklusjonen under er derfor primært en *case-konklusjon for 110 Sør-Vest*, mens nasjonale implikasjoner er formulert som hypoteser/indikasjoner som forutsetter klassifiseringsharmonisering og bredere validering (jf. RQ5 og kap 10.4).
 
 For 110 Sør-Vest avhenger svaret kritisk av hvilken kapasitetsstandard som anvendes.
 
@@ -88,4 +88,4 @@ Studien er en case-analyse av 110 Sør-Vest. Hva resultatene betyr utover dette 
 
 ---
 
-*Kap 10 | Versjon 1.3 | Sist oppdatert: 2026-05-15 (skarp åpningssetning i 9.1 med direkte svar på problemstillingen + bootstrap-CI)*
+*Kap 10 | Versjon 1.4 | Sist oppdatert: 2026-05-16 (skarp åpningssetning i 10.1 med direkte svar på problemstillingen + bootstrap-CI; kryssreferanser rettet etter ny kapittelstruktur)*

@@ -49,11 +49,18 @@ Nøkkelantagelse: Vaktleder (VL) besvarer normalt ikke nødanrop, noe som gir ef
 
 | Kapittel | Fil | Status |
 |---|---|---|
-| 4. Casebeskrivelse | [kap4_casebeskrivelse.md](014%20fase%204%20-%20report/kap4_casebeskrivelse.md) | v1.1 |
-| 5. Metode og data | [kap5_metode_data.md](014%20fase%204%20-%20report/kap5_metode_data.md) | v2.0 |
-| 6. Modell | [kap6_modell.md](014%20fase%204%20-%20report/kap6_modell.md) | v2.0 |
-| 7. Analyse og resultater | [kap7_analyse_resultater.md](014%20fase%204%20-%20report/kap7_analyse_resultater.md) | v1.0 |
-| Rapportskjelett | [Rapport_LOG650_G20_Rune_110_v0.1.md](014%20fase%204%20-%20report/Rapport_LOG650_G20_Rune_110_v0.1.md) | Pågår |
+| 1. Forside og innledning | [_forside_og_kap1.md](014%20fase%204%20-%20report/_forside_og_kap1.md) | Peer review-utkast |
+| 2. Litteratur | [kap2_litteratur.md](014%20fase%204%20-%20report/kap2_litteratur.md) | v1.1 |
+| 3. Teori | [kap3_teori.md](014%20fase%204%20-%20report/kap3_teori.md) | v3.x |
+| 4. Casebeskrivelse | [kap4_casebeskrivelse.md](014%20fase%204%20-%20report/kap4_casebeskrivelse.md) | v1.x |
+| 5. Metode og data | [kap5_metode_data.md](014%20fase%204%20-%20report/kap5_metode_data.md) | v3.x |
+| 6. Modell | [kap6_modell.md](014%20fase%204%20-%20report/kap6_modell.md) | v3.x |
+| 7. Analyse | [kap7_analyse.md](014%20fase%204%20-%20report/kap7_analyse.md) | v3.x |
+| 8. Resultat | [kap8_resultat.md](014%20fase%204%20-%20report/kap8_resultat.md) | v1.x |
+| 9. Diskusjon | [kap9_diskusjon.md](014%20fase%204%20-%20report/kap9_diskusjon.md) | v1.x |
+| 10. Konklusjon | [kap10_konklusjon.md](014%20fase%204%20-%20report/kap10_konklusjon.md) | v1.x |
+| 11–12. Referanser og vedlegg | [_referanser_og_vedlegg.md](014%20fase%204%20-%20report/_referanser_og_vedlegg.md) | Peer review-utkast |
+| Rapportoversikt | [Rapport_LOG650_G20_Rune_110_v0.1.md](014%20fase%204%20-%20report/Rapport_LOG650_G20_Rune_110_v0.1.md) | Pågår |
 
 ---
 

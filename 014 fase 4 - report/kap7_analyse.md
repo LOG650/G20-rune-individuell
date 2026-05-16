@@ -1,27 +1,16 @@
 # 7. Analyse
 
-Dette kapitlet presenterer den analytiske prosessen som danner grunnlag for resultatene i kap 9. Det er strukturert i fire deler: 7.1 viser den metodiske utviklingen fra køteori til prosedyrbasert kapasitetsmodell (inkludert Erlang-C-grunnlinjen som baseline), 7.2 dokumenterer differansen mellom synlig oppdragsvolum og estimert faktisk anropsvolum via sekvensgap-metoden, 7.3 utleder kapasitetsnivåene fra den operative arbeidsmetodikken (RØD/GUL/GRØNN/VL), og 7.4 estimerer bindingstider per hendelseskategori basert på empirisk dataanalyse og operative kalibreringssamtaler.
+Dette kapitlet presenterer den analytiske prosessen som danner grunnlag for resultatene i kap 8. Det er strukturert i fire deler: 7.1 viser den metodiske utviklingen fra køteori til prosedyrbasert kapasitetsmodell (inkludert Erlang-C-grunnlinjen som baseline), 7.2 dokumenterer differansen mellom synlig oppdragsvolum og estimert faktisk anropsvolum via sekvensgap-metoden, 7.3 utleder kapasitetsnivåene fra den operative arbeidsmetodikken (RØD/GUL/GRØNN/VL), og 7.4 estimerer bindingstider per hendelseskategori basert på empirisk dataanalyse og operative kalibreringssamtaler.
 
-Kapitlet svarer på RQ1 (avsnitt 7.1 og 7.2) og RQ2 (avsnitt 7.4). Resultatene som svarer på RQ3-RQ5 presenteres i kap 9.
+Kapitlet svarer på RQ1 (avsnitt 7.1 og 7.2) og RQ2 (avsnitt 7.4). Resultatene som svarer på RQ3-RQ5 presenteres i kap 8.
 
 ## 7.1 Metodisk tilnærming: fra køteori til prosedyrbasert kapasitetsmodell
 
-Den opprinnelige modellhypotesen i prosjektet var at Erlang-C (M/M/c) kunne brukes som hovedmodell for kapasitetsanalysen. Erlang-C estimerer sannsynligheten for at et innkommende anrop må vente, gitt ankomstrate (λ), gjennomsnittlig servicetid (μ⁻¹) og antall servere (c). Resultatene fra denne innledende analysen er presentert i Tabell 7.1 og inngår nå som **referansemodell** (baseline) som dokumenterer hvorfor klassisk køteori er utilstrekkelig for 110-konteksten, ikke som studiens hovedmodell. Den prosedyrbaserte ankomstkonfliktmodellen, formelt definert i kap 6.4 og kvantifisert i kap 9, er studiens **hovedmodell** og originale bidrag.
+Den opprinnelige modellhypotesen i prosjektet var at Erlang-C (M/M/c) kunne brukes som hovedmodell for kapasitetsanalysen. Erlang-C estimerer sannsynligheten for at et innkommende anrop må vente, gitt ankomstrate (λ), gjennomsnittlig servicetid (μ⁻¹) og antall servere (c). Resultatene fra denne innledende analysen er presentert i Tabell 6.1 (kap 6.3.3) og inngår nå som **referansemodell** (baseline) som dokumenterer hvorfor klassisk køteori er utilstrekkelig for 110-konteksten, ikke som studiens hovedmodell. Den prosedyrbaserte ankomstkonfliktmodellen, formelt definert i kap 6.4 og kvantifisert i kap 8, er studiens **hovedmodell** og originale bidrag.
 
-Erlang-C-analysen viste svært lav systemutnyttelse, med høyeste observerte verdi 5,9 % (Dag/Helg) for alle skifttyper, noe som isolert sett kunne tyde på at bemanningsnivået er komfortabelt (se Tabell 7.1).
+Erlang-C-analysen viste svært lav systemutnyttelse, med høyeste observerte verdi 5,9 % (Dag/Helg) for alle skifttyper, noe som isolert sett kunne tyde på at bemanningsnivået er komfortabelt (jf. Tabell 6.1). Resultatene er formelt korrekte gitt inputparametrene, men metodisk utilstrekkelige for 110-konteksten av tre grunner: modellen forutsetter at servere er *uavhengige* og *parallelle*, den behandler kapasitetsbinding utover samtaletid som null, og den baserer seg på en ankomstrate som undervurderer faktisk innkommende volum (se avsnitt 7.2). Samtaletiden brukt i Erlang-C er 3,44 min (vektet gjennomsnitt fra operative valideringssamtaler, avsnitt 5.2.4), vesentlig kortere enn den totale bindingstiden for D-pri1 (median 14,1 min inkl. akuttfase og kvittering) som brukes i primærmodellen.
 
-**Tabell 7.1: Erlang-C resultater for beredskapsoppdrag, 110 Sør-Vest 2025**
-
-| Skifttype | λ (anrop/t) | c_eff | ρ = λ/(c·μ) | P(vente) | P(W > 30s) |
-|---|---|---|---|---|---|
-| Dag / Hverdag | 2,57 | 3 | 4,9 % | 0,05 % | 0,02 % |
-| Dag / Helg | 2,06 | 2 | 5,9 % | 0,66 % | 0,38 % |
-| Natt / Hverdag | 1,18 | 2 | 3,4 % | 0,22 % | 0,13 % |
-| Natt / Helg | 1,30 | 2 | 3,7 % | 0,27 % | 0,15 % |
-
-*Samtaletid (μ⁻¹): vektet gjennomsnitt 3,44 min basert på operative valideringssamtaler (avsnitt 5.2.4). Merk: dette er samtaletiden brukt i Erlang-C, ikke den totale bindingstiden (median 13,0 min inkl. akuttfase og kvittering) som brukes i primærmodellen. λ inkluderer kun synlige beredskapsoppdrag fra BRIS/LEO, og faktisk innkommende volum er høyere (se avsnitt 7.2). P(W > 30s): sannsynlighet for ventetid over 30 sekunder, som er terskelen for automatisk overføring til Agder ved ubesvart anrop (beredskapsanalyse J03 s. 25).*
-
-Resultatene fra Erlang-C er formelt korrekte gitt inputparametrene, men metodisk utilstrekkelige for 110-konteksten. Årsaken er tredelt: modellen forutsetter at servere er *uavhengige* og *parallelle*, den behandler kapasitetsbinding utover samtaletid som null, og den baserer seg på en ankomstrate som undervurderer faktisk innkommende volum (se avsnitt 7.2). Gjennomgang av den operative prosedyren (Rogaland brann og redning IKS, 2024) avslørte at forutsetningen om én uavhengig server per anrop ikke stemmer med faktisk arbeidsmetodikk.
+Gjennomgang av den operative prosedyren (Rogaland brann og redning IKS, 2024) avslørte at forutsetningen om én uavhengig server per anrop ikke stemmer med faktisk arbeidsmetodikk.
 
 ---
 
@@ -31,7 +20,7 @@ En viktig begrensning ved BRIS/LEO-data er at statistikken viser synlige oppdrag
 
 For 2025 viser datasettet 61 964 synlige oppdrag, mens sekvensnummerlogikken i LEO indikerer et estimert faktisk anropsvolum på minst 80 865 anrop.
 
-**Tabell 7.2: Synlig versus faktisk anropsvolum, 110 Sør-Vest 2025**
+**Tabell 7.1: Synlig versus faktisk anropsvolum, 110 Sør-Vest 2025**
 
 | | Antall |
 |---|---|
@@ -48,7 +37,7 @@ Dette har tre konsekvenser for analysen:
 
 1. **Ankomstraten λ i Erlang-C er for lav.** En modell som bruker synlige oppdrag som grunnlag for λ vil systematisk undervurdere faktisk arbeidsbelastning. Selv en perfekt M/M/c-modell ville derfor vært basert på et ufullstendig inputgrunnlag.
 
-2. **Sammenstilte anrop er modellert som egne belastningsenheter, men modellen er fortsatt konservativ.** I den prosedyrbaserte ankomstkonfliktmodellen (kvantifisert i avsnitt 9.1, formell definisjon i kap 6.4.6) er de 18 901 estimerte sammenstilte anropene inkludert som egne op-binder-events med interpolert ankomsttidspunkt og bindingstid 1 minutt ($q = 1$, $d = 1$ min). De bidrar dermed til $n_{\text{aktive}}$ ved senere ankomster og kan utløse Brudd eller Svikt på samme måte som synlige oppdrag. Modellen er likevel konservativ av to grunner: (i) bindingstiden 1 min er et nedre estimat (faktisk varighet kan være lengre dersom innringer er stresset eller anropet håndteres som full hendelse), og (ii) sekvensgap-metoden fanger kun anrop som er sammenstilt med eksisterende oppdrag. Beredskapsrelaterte anrop som er feilkategorisert og lukket som egne saker (f.eks. som «service» eller «feilringing» under høyt press) er fortsatt usynlige. Det reelle antallet beredskapsrelaterte tilleggsanrop er derfor sannsynligvis høyere enn 18 901.
+2. **Sammenstilte anrop er modellert som egne belastningsenheter, men modellen er fortsatt konservativ.** I den prosedyrbaserte ankomstkonfliktmodellen (kvantifisert i avsnitt 8.1, formell definisjon i kap 6.4.6) er de 18 901 estimerte sammenstilte anropene inkludert som egne op-binder-events med interpolert ankomsttidspunkt og bindingstid 1 minutt ($q = 1$, $d = 1$ min). De bidrar dermed til $n_{\text{aktive}}$ ved senere ankomster og kan utløse Brudd eller Svikt på samme måte som synlige oppdrag. Modellen er likevel konservativ av to grunner: (i) bindingstiden 1 min er et nedre estimat (faktisk varighet kan være lengre dersom innringer er stresset eller anropet håndteres som full hendelse), og (ii) sekvensgap-metoden fanger kun anrop som er sammenstilt med eksisterende oppdrag. Beredskapsrelaterte anrop som er feilkategorisert og lukket som egne saker (f.eks. som «service» eller «feilringing» under høyt press) er fortsatt usynlige. Det reelle antallet beredskapsrelaterte tilleggsanrop er derfor sannsynligvis høyere enn 18 901.
 
 3. **Skjult belastning påvirker dimensjonering direkte.** Sammenstilte tilleggsanrop påvirker ikke bare ankomstraten i køteoretisk forstand, men også den operative bindingen i den prosedyrbaserte modellen. Inkluderingen av skjulte anrop som egne op-binder-events (punkt 2) gjør at primærmodellen fanger denne effekten i variant A, men siden underestimatet av antall skjulte anrop fortsatt eksisterer, betyr det at modellens svikt- og brudd-andeler er nedre estimater. For dimensjonering tilsier dette at analyser basert utelukkende på oppdragsteller (uten skjult-anrop-korreksjon) systematisk vil undervurdere både arbeidsbelastning, samtidighetskonflikt og behovet for bufferkapasitet.
 
@@ -71,7 +60,7 @@ Den normale driftsformen er dermed et **makkerpar**: én rød og én gul operat�
 
 Med utgangspunkt i prosedyrens rolledefinisjon etableres tre kapasitetsnivåer, som danner grunnlaget for den kvantitative analysen:
 
-**Tabell 7.3: Kapasitetsnivåer i operativ tilpasningsmodell**
+**Tabell 7.2: Kapasitetsnivåer i operativ tilpasningsmodell**
 
 | Nivå | Definisjon | Betingelse | c_eff = 2 | c_eff = 3 |
 |---|---|---|---|---|
@@ -95,7 +84,7 @@ Bindingstid defineres som den perioden operatørene er aktivt bundet til en hend
 
 Av 61 964 synlige oppdrag i datasettet har 7 555 (12,2 %) registrert tidspunkt for ressursvarsling. Disse splittes i 4 499 D-pri1 (7,3 %) og 3 056 D-aba (4,9 %) basert på om `Opprinnelig_oppdragstype` starter med «ABA» og `Kilde` = «Alarm». Hovedanalysen (variant A) avgrenses til disse hendelsene pluss sammenstilte tilleggsanrop (avsnitt 7.2) fordi de kan observeres robust.
 
-Hendelser uten ressursvarsling er ikke irrelevante for dimensjonering. L-hendelse, L-aba, S, F og V belaster operatørkapasitet, men lar seg ikke modellere like robust. Variant B (avsnitt 9.3) inkluderer disse med operative bindingstidsestimater.
+Hendelser uten ressursvarsling er ikke irrelevante for dimensjonering. L-hendelse, L-aba, S, F og V belaster operatørkapasitet, men lar seg ikke modellere like robust. Variant B (avsnitt 8.3) inkluderer disse med operative bindingstidsestimater.
 
 ### 7.4.2 D-pri1: makkerpar-binding
 
@@ -103,9 +92,9 @@ For D-pri1-hendelser binder makkerparet (RØD og GUL) to operatører parallelt g
 
 > **Bindingstid = (Dato/tid anrop → Første ressurs fremme) + 3 minutter kvitteringsvindu**
 
-De tre minuttene reflekterer vindusmelding som må kvitteres og logges av GUL-operatør etter at første ressurs er på plass. Av de 4 499 D-pri1-oppdragene har 3 357 registrert tidspunkt for første ressurs fremme. Resterende tildeles median bindingstid fra de observerte verdiene.
+De tre minuttene reflekterer vindusmelding som må kvitteres og logges av GUL-operatør etter at første ressurs er på plass. Av de 4 499 D-pri1-oppdragene har 3 645 (81 %) gyldig tidspunkt for første ressurs fremme. Resterende 854 (19 %) tildeles median bindingstid fra de observerte verdiene.
 
-**Tabell 7.4: Bindingstid per D-pri1-oppdrag, 110 Sør-Vest 2025 (inkl. +3 min kvittering)**
+**Tabell 7.3: Bindingstid per D-pri1-oppdrag, 110 Sør-Vest 2025 (inkl. +3 min kvittering)**
 
 | Persentil | Bindingstid (min) |
 |---|---|
@@ -145,7 +134,7 @@ Hovedscenario: **L-aba = 4,5 min × 1 operatør**. Sensitivitetsscenarioer: 3 mi
 
 ### 7.4.5 Oppsummering: op-binder per kategori
 
-**Tabell 7.5: Op-binder-profil per hendelseskategori (hoved-scenario)**
+**Tabell 7.4: Op-binder-profil per hendelseskategori (hoved-scenario)**
 
 | Kategori | N 2025 | Ops bundet | Bindingstid (min) | Kilde |
 |---|---:|---:|---:|---|
@@ -160,7 +149,7 @@ Hovedscenario: **L-aba = 4,5 min × 1 operatør**. Sensitivitetsscenarioer: 3 mi
 | **V** (viderevarsling) | 547 | 1 | 1 | Operativ estimat |
 | **Skjulte** | 18 901 | 1 | 1 | Sekvensgap-metode |
 
-Figur 7.1 viser fordelingen av D-pri1-bindingstid og illustrerer det høyreskjeve mønsteret som ligger til grunn for valget av median (14,1 min) som hovedparameter. Den lange halen (P90 = 27,3 min) er det som driver Svikt-tilstander når en pri-1-hendelse strekker seg utover normaltid.
+Figur 7.1 viser fordelingen av D-pri1-bindingstid og illustrerer det høyreskjeve mønsteret som ligger til grunn for valget av median (14,1 min) som hovedparameter for D-pri1 i primærmodellen. Den lange halen (P90 = 27,3 min) er det som driver Svikt-tilstander når en pri-1-hendelse strekker seg utover normaltid.
 
 <div align="center">
   <img src="../analyse/figurer/bindingstid_beredskap_fordeling_v2.png" alt="Figur 7.1 Bindingstidsfordeling D-pri1" width="80%">
@@ -171,7 +160,7 @@ Dag- og nattskift viser tilnærmet lik D-pri1-bindingstid, noe som indikerer at 
 
 ---
 
-Analysen i 7.1-7.4 etablerer den metodiske rammen og parametergrunnlaget for kapasitetsmodellen. Variant A og B, scenarioanalyse, sensitivitetsanalyse og bootstrap-CI presenteres som resultater i kap 9. Tolkningen av resultatene mot teori og praktiske implikasjoner skjer i kap 10.
+Analysen i 7.1-7.4 etablerer den metodiske rammen og parametergrunnlaget for kapasitetsmodellen. Variant A og B, scenarioanalyse, sensitivitetsanalyse og bootstrap-CI presenteres som resultater i kap 8. Tolkningen av resultatene mot teori og praktiske implikasjoner skjer i kap 9.
 
 ---
 
@@ -181,4 +170,4 @@ Analysen i 7.1-7.4 etablerer den metodiske rammen og parametergrunnlaget for kap
 
 *Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
 
-*Kap 7 | Versjon 3.0 | Sist oppdatert: 2026-05-16 (mal-konformitet: avgrenset til analyse-delen 7.1-7.4; tidligere 7.5-7.11 flyttet til kap 9 Resultat).*
+*Kap 7 | Versjon 3.1 | Sist oppdatert: 2026-05-16 (mal-konformitet: avgrenset til analyse-delen 7.1-7.4; tidligere 7.5-7.11 flyttet til kap 8 Resultat; Erlang-C-tabell konsolidert til Tabell 6.1).*

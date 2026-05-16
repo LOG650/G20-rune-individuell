@@ -4,7 +4,7 @@
 
 Prosjektet er gjennomført som en kvantitativ casestudie av 110 Sør-Vest, supplert med nasjonal benchmarking for å kontekstualisere casefunnene. Forskningsdesignet er retrospektivt og planleggingsrettet: analysen baseres på historiske hendelsesdata for å vurdere om faktisk bemanning samsvarer med observert belastning.
 
-Casestudiedesignet er valgt fordi problemstillingen er tett knyttet til en spesifikk organisatorisk og operativ kontekst. Bemanning, arbeidsmetodikk og registreringspraksis må forstås samlet for å kunne modellere kapasitetsbinding. Forfatteren har operativ tilknytning til 110 Sør-Vest. Det gir tilgang til prosedyredokumentasjon, beredskapsanalyse og operative informanter, alle nødvendige for å konstruere og validere modellparametere. Modellrammeverket er utviklet for å være overførbart til andre sentraler gitt tilsvarende datatilgang (se avsnitt 6.1 og 7.7).
+Casestudiedesignet er valgt fordi problemstillingen er tett knyttet til en spesifikk organisatorisk og operativ kontekst. Bemanning, arbeidsmetodikk og registreringspraksis må forstås samlet for å kunne modellere kapasitetsbinding. Forfatteren har operativ tilknytning til 110 Sør-Vest. Det gir tilgang til prosedyredokumentasjon, beredskapsanalyse og operative informanter, alle nødvendige for å konstruere og validere modellparametere. Modellrammeverket er utviklet for å være overførbart til andre sentraler gitt tilsvarende datatilgang (se avsnitt 6.1 og 8.6).
 
 ### Refleksivitet: insider-forskning og objektivitetstiltak
 
@@ -45,7 +45,7 @@ Analysen bygger på fem datakilder med ulik rolle og tilgangsstatus:
 | Operative valideringssamtaler | Kvalitative data | Mars til april 2026 | Kalibrering og validering av modellforutsetninger | Egne samtaler |
 | SSB befolkningsdata | Offentlig statistikk | 2026 | Generaliseringsanalyse: innbyggertall per dekningsområde | Offentlig |
 
-Hovedanalysen er kvantitativ og registerbasert. De kvalitative kildene (prosedyredokumenter og valideringssamtaler) har en støttende funksjon: de brukes til å forankre modellantakelser i operativ virkelighet, ikke som selvstendig empirisk grunnlag for hovedfunnene.
+Hovedanalysen er kvantitativ og registerbasert. De kvalitative kildene (prosedyredokumenter og valideringssamtaler) har en støttende funksjon: de brukes til å forankre modellantagelser i operativ virkelighet, ikke som selvstendig empirisk grunnlag for hovedfunnene.
 
 ### 5.2.1 LEO/BRIS-data (primærdata)
 
@@ -75,7 +75,7 @@ Datasettet har fullstendig dekning for ankomsttidspunkt gjennom hele analyseperi
 | `Operatør-ID` | 0 % (100 % null) | Serverutnyttelse kan ikke observeres direkte på operatørnivå. Systemstrukturell begrensning bekreftet av DSB (mars 2026) |
 | `Innsatsvarighet` | 76,4 % av kategori D (5 771 av 7 555) | Måler total varighet fra utrykning til siste ressurs ledig, og kan vare i timer. **[Metodeforbehold 5.1]** Variabelen er ikke benyttet som operatørbindingsmål fordi 110-operatørens binding antas avgrenset til akuttfasen (RØD + GUL), ikke hele innsatsperioden. Antagelsen er forankret i prosedyre og operative samtaler (avsnitt 5.2.4), men ikke direkte målt på operatørnivå (jf. manglende Operatør-ID over) |
 | `Alarmbehandlingstid` | 99,0 % av kategori D (7 478 av 7 555) | Tilgjengelig for nesten alle utrykningshendelser |
-| Første ressurs fremme | 76,5 % av kategori D (5 777 av 7 555) | Primært mål for bindingstid. Resterende 23,5 % er imputert med median |
+| Første ressurs fremme | 76,5 % av kategori D (5 777 av 7 555) | Primært mål for bindingstid. Resterende 23,5 % av samlet kategori D mangler. For D-pri1 spesifikt (4 499 oppdrag) har 3 645 (81 %) gyldig fremme-tidsstempel; resterende 854 (19 %) er imputert med median i primærmodellen (jf. avsnitt 5.3.3 og 8.3.4) |
 
 Denne kildens viktigste begrensning er at den viser synlige oppdrag, ikke alle innkommende anrop. Tilleggsanrop som sammenstilles med eksisterende oppdrag forsvinner som egne observasjoner (se avsnitt 5.3.4).
 
@@ -112,7 +112,7 @@ Modellforutsetninger og parameterestimater er validert gjennom tre komplementær
 | April 2026 | Lokale operatører 110 Sør-Vest | Intern kalibrering av spørreskjemautkast | Verifisering av tider og spørsmålsformuleringer før utsending |
 | 23.04.2026 til 06.05.2026 | Fire andre 110-sentraler | E-post, PDF og telefonintervju | Begrenset ekstern plausibilitetskontroll: bemanning, VL-praksis, ABA/service og registreringsavvik |
 
-Kanalene har avgrensede funksjoner: kalibrering av parametere og validering av operativ realisme i modellantakelsene. Konkret har samtalene og dybdeanalysen bidratt med:
+Kanalene har avgrensede funksjoner: kalibrering av parametere og validering av operativ realisme i modellantagelsene. Konkret har samtalene og dybdeanalysen bidratt med:
 
 Valideringssamtalene er dokumentert på dato, rolle/funksjon og tema, uten navn eller personidentifiserende detaljer, og brukes kun som grunnlag for parameterkalibrering og operativ plausibilitetskontroll.
 
@@ -138,11 +138,11 @@ Følgende steg er gjennomført for å klargjøre primærdatasettet for analyse:
 2. **Parsing av tidsvariabler:** `Dato anrop` er konvertert fra strengformat (`%d.%m.%Y`) til datetime-objekter. `Time på døgnet` er brukt til å konstruere fullstendige tidsstempler.
 3. **Konstruksjon av skifttype:** Hvert anrop er klassifisert som dag (07:00 til 18:59) eller natt (19:00 til 06:59), og som hverdag (mandag til fredag) eller helg (lørdag til søndag), basert på tidsstempel. Dette gir fire skifttyper: dag/hverdag, dag/helg, natt/hverdag, natt/helg.
 4. **Kontroll av sekvensnumre:** `110_ID`-feltets daglige sekvensnumre er ekstrahert og kontrollert for gap. Manglende sekvensnumre er registrert som estimerte sammenstilte anrop.
-5. **Håndtering av manglende verdier:** For kategori D-hendelser uten registrert tidspunkt for første ressurs fremme (23,5 %) er median bindingstid fra observerte verdier brukt som imputeringsverdi. Øvrige manglende felt (operatør-ID, innsatsvarighet) er dokumentert som strukturelle begrensninger, ikke imputert.
+5. **Håndtering av manglende verdier:** For D-pri1-hendelser uten registrert tidspunkt for første ressurs fremme (19 %, 854 av 4 499) er median bindingstid fra de 3 645 observerte verdiene brukt som imputeringsverdi i primærmodellen. (For samlet kategori D er fremme-dekningen 76,5 %.) Øvrige manglende felt (operatør-ID, innsatsvarighet) er dokumentert som strukturelle begrensninger, ikke imputert.
 6. **Håndtering av ekstreme verdier:** Bindingstider er kontrollert for negative verdier og urealistisk lange varigheter. Beregningene bygger på registrerte tidsstempler og er ikke manuelt justert.
 7. **Encoding:** CSV-filen er lest med `encoding='utf-8-sig'` for å håndtere BOM-markør. Sentralnavn med encoding-avvik er normalisert via en oppslagstabell.
 
-**Tilleggsbearbeiding for nasjonal benchmarking (kap 8.5 og 8.4.1):** Det nasjonale BRIS-datasettet for 2025 dekker alle 12 sentraler (508 228 registrerte oppdrag, proxy for henvendelser, med kjent undertelling pga. sammenstilling, jf. avsnitt 5.3.1 og 5.3.4). Datasettet er bearbeidet med samme V3-klassifiseringsregel som primærdatasettet (`Kilde = Alarm`-krav for L-aba og D-aba). Bearbeidingen er nødvendig av to grunner. Sentralnavn forekommer med ulike encoding-varianter (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`, `Sør-Vest 110`) I tillegg har `Opprinnelig oppdragstype` ulik dekningsgrad mellom sentraler. To konkrete grep er gjort: sentralnavn normaliseres via `SENTRALER_NORM`-oppslagstabellen i `analyse/scripts/benchmark_trend_analyse.py`. L-aba/D-aba-andelen rapporteres uten justering for ulik dekningsgrad. Variasjonen mellom sentraler (0,0 til 7,5 %) tolkes derfor eksplisitt som indikasjon på heterogen registreringspraksis (jf. kap 9.4.1), ikke som direkte sammenlignbare nivåer. Lokale svar brukes bare til å forklare avvik der de foreligger. Registertallene endres ikke uten dokumentert grunnlag. Den prosedyrbaserte ankomstkonfliktmodellen er per nå kjørt på 110 Sør-Vest alene. Nasjonal modellanvendelse forutsetter klassifiseringsharmonisering (kap 10.4).
+**Tilleggsbearbeiding for nasjonal benchmarking (kap 8.5):** Det nasjonale BRIS-datasettet for 2025 dekker alle 12 sentraler (508 228 registrerte oppdrag, proxy for henvendelser, med kjent undertelling pga. sammenstilling, jf. avsnitt 5.3.1 og 5.3.4). Datasettet er bearbeidet med samme V3-klassifiseringsregel som primærdatasettet (`Kilde = Alarm`-krav for L-aba og D-aba). Bearbeidingen er nødvendig av to grunner. Sentralnavn forekommer med ulike encoding-varianter (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`, `Sør-Vest 110`). I tillegg har `Opprinnelig oppdragstype` ulik dekningsgrad mellom sentraler. To konkrete grep er gjort: sentralnavn normaliseres via `SENTRALER_NORM`-oppslagstabellen i `analyse/scripts/benchmark_trend_analyse.py`. L-aba/D-aba-andelen rapporteres uten justering for ulik dekningsgrad. Variasjonen mellom sentraler (0,0 til 7,5 %) tolkes derfor eksplisitt som indikasjon på heterogen registreringspraksis (jf. kap 9.4.1), ikke som direkte sammenlignbare nivåer. Lokale svar brukes bare til å forklare avvik der de foreligger. Registertallene endres ikke uten dokumentert grunnlag. Den prosedyrbaserte ankomstkonfliktmodellen er per nå kjørt på 110 Sør-Vest alene. Nasjonal modellanvendelse forutsetter klassifiseringsharmonisering (kap 10.4).
 
 ---
 
@@ -164,7 +164,7 @@ I primærmodellen er analyseenheten det enkelte anropet ved dets ankomsttidspunk
 
 Hendelsene i datasettet er klassifisert i åtte kategorier basert på tre BRIS-felt: `Oppdragstype` (sluttklassifisering), `Opprinnelig oppdragstype` (initiell hendelsestype) og `Kilde` (Alarm/Samtale/blank, dvs. innringingskanal):
 
-- **D-pri1** (Pri-1-utrykning): Hendelser med ressursvarsling som ikke er ABA-utløst. Byggingsbrann, trafikkulykke, farlig gods, etc. Krever makkerpar-prosedyre.
+- **D-pri1** (Pri-1-utrykning): Hendelser med ressursvarsling som ikke er ABA-utløst. Bygningsbrann, trafikkulykke, farlig gods, etc. Krever makkerpar-prosedyre.
 - **D-aba** (ABA-utløst utrykning): Hendelser med ressursvarsling der `Opprinnelig = "ABA"` og `Kilde = "Alarm"`. Ikke pri-1, håndteres serielt.
 - **S** (Service): Overføringstester av brannalarmanlegg
 - **L-aba** (ABA løst av 110): Automatisk brannalarm avklart uten utrykning. Krever `Kilde = Alarm`
@@ -188,7 +188,7 @@ Bindingstid og antall operatører bundet per hendelse er differensiert per kateg
 > **Bindingstid = (Første ressurs fremme $-$ Dato/tid anrop) + 3 minutter kvitteringsvindu**
 > **Ops bundet = 2 (makkerpar: RØD + GUL parallelt)**
 
-Beregningen bygger på to registrerte tidsstempler: `Dato/tid anrop` og `Første ressurs fremme`. Kvitteringsvinduet på 3 minutter reflekterer at GUL-operatøren etter mottatt vindusmelding kvitterer og loggfører før kapasitet frigjøres. For de ~25 % av D-pri1-hendelsene som mangler tidspunkt for første ressurs fremme, er median bindingstid fra de observerte verdiene (14,1 minutter) brukt som imputeringsverdi.
+Beregningen bygger på to registrerte tidsstempler: `Dato/tid anrop` og `Første ressurs fremme`. Kvitteringsvinduet på 3 minutter reflekterer at GUL-operatøren etter mottatt vindusmelding kvitterer og loggfører før kapasitet frigjøres. For de 19 % av D-pri1-hendelsene (854 av 4 499) som mangler tidspunkt for første ressurs fremme eller har avvisende verdi, er median bindingstid fra de 3 645 observerte verdiene (14,1 minutter) brukt som imputeringsverdi.
 
 **D-aba (operativ prosedyre + BRIS-verifisert):**
 
@@ -243,15 +243,15 @@ Verdien av $c_{\text{eff}}$ er satt til 3 for dag/hverdag og 2 for øvrige skift
 |---|---|---|
 | Dato/tid anrop | Direkte observert | BRIS/LEO |
 | Ressurs varslet | Direkte observert | BRIS/LEO |
-| Første ressurs fremme | Direkte observert (~75 % av D-pri1) | BRIS/LEO |
-| Bindingstid D-pri1 | Beregnet fra observerte tidsstempler; ~25 % imputert med median | BRIS/LEO + imputering |
+| Første ressurs fremme | Direkte observert (81 % av D-pri1, 3 645 av 4 499) | BRIS/LEO |
+| Bindingstid D-pri1 | Beregnet fra observerte tidsstempler; 19 % (854 av 4 499) imputert med median | BRIS/LEO + imputering |
 | Bindingstid D-aba Fase 1 | Operativ prosedyre + BRIS-verifisert (median 74 sek call-out) | Prosedyre + BRIS |
 | Bindingstid D-aba Fase 2 ($p$, $Y$) | Operatørinformert, empirisk underkant-verifisert | Samtaler + sekvensgap |
 | Bindingstid L-aba | Empirisk kalibrert (mean 4,53 min, n=100, CI [3,74; 5,43]) | LABA-dybdeanalyse runde 2 |
 | Bindingstider S, L-hendelse, L-ukjent, F, V | Operative estimater, tre sensitivitetsscenarioer | Samtaler + vaktleder-validering |
 | Sammenstilte anrop (antall) | Estimert | Sekvensgapanalyse |
 | Sammenstilte anrop (tidspunkt) | Interpolert | Nærmeste synlige oppdrag |
-| Bindingstid sammenstilte anrop | Forenklet antakelse (1 min) | Operativ vurdering |
+| Bindingstid sammenstilte anrop | Forenklet antagelse (1 min) | Operativ vurdering |
 | c_eff | Operativt definert parameter | Prosedyre + valideringssamtaler |
 
 ---
@@ -370,7 +370,7 @@ Steg 1 til 8 representerer databehandling og operasjonalisering. Steg 9 til 10 e
 
 Analysens sentrale metrikk er kapasitetsnivå ved ankomst. Den bygger på to ulike datakilder. D-pri1-hendelser identifiseres robust gjennom ressursvarsling. L-aba-bindingstider er empirisk kalibrert via LABA-dybdeanalyse (avsnitt 5.4). Validitetstruslene struktureres etter konstrukt-, intern- og ekstern validitet.
 
-**Trussel 1 [konstruktvaliditet]: målet er en prosedyrkonformitetsmetrikk, ikke et tjenestekvalitetsmål.** Modellen måler andel beredskapsanrop der makkerpar-kravet ikke kan opprettholdes ved ankomst. Det er ikke det samme som andel anrop der tjenesten leveres med redusert kvalitet, eller andel der innringer opplever forsinkelse. Konstruktvaliditeten begrenses derfor til det modellen eksplisitt måler. Diskusjonen i kap 9.2 og 8.2.3 problematiserer dette skillet eksplisitt.
+**Trussel 1 [konstruktvaliditet]: målet er en prosedyrkonformitetsmetrikk, ikke et tjenestekvalitetsmål.** Modellen måler andel beredskapsanrop der makkerpar-kravet ikke kan opprettholdes ved ankomst. Det er ikke det samme som andel anrop der tjenesten leveres med redusert kvalitet, eller andel der innringer opplever forsinkelse. Konstruktvaliditeten begrenses derfor til det modellen eksplisitt måler. Diskusjonen i kap 9.2 og 9.2.3 problematiserer dette skillet eksplisitt.
 
 **Trussel 2 [intern validitet]: målefeil i bindingstider.** Ikke alle bindingstider er empirisk målt:
 
@@ -378,7 +378,7 @@ Analysens sentrale metrikk er kapasitetsnivå ved ankomst. Den bygger på to uli
 - D-aba Fase 1 er forankret i operativ prosedyre og empirisk verifisert (median 74 sek call-out).
 - D-aba Fase 2 og øvrige kategorier (S, L-hendelse, L-ukjent, F, V) er operative estimater validert av vaktleder, ikke direkte observert.
 
-Sensitivitetsanalysen (avsnitt 8.3) viser at hovedfunnet er robust over hele spennet av rimelige antakelser. Det er likevel mulig at parametrene systematisk underestimerer bindingstid for noen kategorier (særlig under press), noe som ville gjøre Svikt-andelen høyere enn rapportert.
+Sensitivitetsanalysen (avsnitt 8.3) viser at hovedfunnet er robust over hele spennet av rimelige antagelser. Det er likevel mulig at parametrene systematisk underestimerer bindingstid for noen kategorier (særlig under press), noe som ville gjøre Svikt-andelen høyere enn rapportert.
 
 **Trussel 3 [intern validitet]: indirekte estimerte tilleggsanrop.** Sammenstilte anrop estimeres via sekvensgapmetoden (avsnitt 5.3.4). Antallet er estimert. Tidspunkt og varighet er ikke observert direkte. Hovedscenario $p = 0{,}50$ for D-aba Fase 2 reflekterer operatørens kvalitative vurdering, ikke direkte måling. Sekvensgap-metoden gir underkant-estimat (17 til 37 % avhengig av tidsvindu) fordi nødtelefoner logget inni hovedoppdraget er usynlige. Imputering med median for de cirka 19 % av D-pri1-hendelsene uten registrert fremme-tidspunkt kan systematisk feilrepresentere enkelte hendelser, men er nå statistisk validert via bootstrap (avsnitt 8.3.4): bidraget til total usikkerhet i Svikt-andelen er ±0,5 pp.
 
@@ -390,20 +390,20 @@ Samlet trekker truslene i ulike retninger. Trussel 2 og 3 trekker i hovedsak mot
 
 ### 5.6.2 Reliabilitet og reproduserbarhet
 
-Analysen bygger primært på registerdata fra et nasjonalt system (LEO/BRIS). Det gir høy sporbarhet og konsistens. Sekvensgapmetoden for sammenstilte anrop og D-aba Fase 2-stokastikken er systematiske og bruker fast random seed (`SEED_DABA = 20260419`) for reproduserbarhet. Alle analysesteg er implementert i skriptbasert arbeidsflyt (se avsnitt 5.8). Det muliggjør konsistent reproduksjon.
+Analysen bygger primært på registerdata fra et nasjonalt system (LEO/BRIS). Det gir høy sporbarhet og konsistens. Sekvensgapmetoden for sammenstilte anrop og D-aba Fase 2-stokastikken er systematiske og bruker fast random seed (`SEED_DABA = 20260419`) for reproduserbarhet. Alle analysesteg er implementert i skriptbasert arbeidsflyt (se avsnitt 5.5). Det muliggjør konsistent reproduksjon.
 
 Variant A er i hovedsak deterministisk, ved at usikkerheten ligger i parameterantagelser, ikke i stokastisk simulering. Random seed er kun relevant for D-aba Fase 2-stokastikken i variant B, der hver D-aba-hendelse trekker uniformt mot Fase 2-sannsynligheten $p$. Identisk seed gir identisk realisasjon. En annen seed kan gi en marginalt ulik Svikt-andel, typisk innenfor ±0,3 prosentpoeng for natt/helg, jf. observert differanse mellom primærmodellens 32,6 % og scenarioets baseline 32,8 % (avsnitt 8.2).
 
 Valideringssamtalene er vanskeligere å reprodusere eksakt. De brukes kun til å kalibrere parametere som er eksplisitt dokumentert (Tabell 5.5). En annen forsker med tilgang til samme data, prosedyredokumenter og `notat_V3_modellutvikling.md` vil kunne gjenta analysen med de dokumenterte parameterverdiene.
 
-**Insider-perspektivets påvirkning på reliabilitet: kontrollmekanismer.** Refleksivitetsavsnittet i 5.1 lister fire kontrollmekanismer, og 5.6.1 listet tre validitetstrusler. Reliabilitet, i betydningen «om en annen analytiker ville få samme resultat», er kontrollert gjennom fem grep:
+**Insider-perspektivets påvirkning på reliabilitet: kontrollmekanismer.** Refleksivitetsavsnittet i 5.1 lister fire kontrollmekanismer, og 5.6.1 listet tre validitetstrusler. Reliabilitet, i betydningen «om en annen analytiker ville få samme resultat», er kontrollert gjennom seks grep:
 
 1. **Objektive registerdata som primærgrunnlag** (jf. 5.1, grep 1). Hovedfunnene springer ut av tidsstempler og kategoriklassifisering i LEO/BRIS, uavhengig av forfatterens tolkning.
 2. **Deterministisk skriptbasert analyseflyt** (jf. 5.1, grep 2). Identisk seed og parametere gir identisk resultat; alle skript er versjonskontrollert.
 3. **Triangulering mellom kilder** (jf. 5.1, grep 4). Operatørbaserte parametere kontrolleres mot prosedyredokumentasjon og BRIS-tidsstempler. Eksempel: D-aba Fase 1 er prosedyreforankret (cirka 90 sek call-out) og empirisk verifisert (median 74 sek). LABA-tider er kontrollert mot interpolert call-handling-tid i BRIS.
 4. **Eksplisitt antagelsesdokumentasjon** (jf. 5.1, grep 3). Alle valgte parametere er listet i Tabell 5.5, 5.6 og Tabell 6.3 med kilde- og kalibreringsstatus. Andre forskere kan reprodusere analysen med dokumenterte parameterverdier eller systematisk variere dem.
 5. **Sensitivitetsanalyse over rimelige parameterspenn** (avsnitt 8.3, Tabell 8.5). Robusthet testes på tvers av tre scenarioer; resultatet er at hovedfunnet ikke avhenger av spesifikk parametersetting.
-6. **Statistisk usikkerhetskvantifisering via bootstrap** (avsnitt 8.3.4, Tabell 8.6). Variant A er reberegnet med 1 000 bootstrap-iterasjoner der D-pri1-bindingstider trekkes med erstatning fra de observerte verdiene, slik at både sampling-variabilitet i den empiriske fordelingen og imputeringsusikkerhet for de 19 % manglende verdiene propageres til Svikt-andelen. Resultatet er en 95 % CI på [32,1; 33,2] % for Svikt natt/helg; punktestimat 32,8 % ligger sentralt i CI-en. MAR-antagelsen er ikke strengt oppfylt, men avviket trekker estimatet i konservativ retning, jf. drøfting i 7.7.4.
+6. **Statistisk usikkerhetskvantifisering via bootstrap** (avsnitt 8.3.4, Tabell 8.6). Variant A er reberegnet med 1 000 bootstrap-iterasjoner der D-pri1-bindingstider trekkes med erstatning fra de observerte verdiene, slik at både sampling-variabilitet i den empiriske fordelingen og imputeringsusikkerhet for de 19 % manglende verdiene propageres til Svikt-andelen. Resultatet er en 95 % CI på [32,1; 33,2] % for Svikt natt/helg; punktestimat 32,8 % ligger sentralt i CI-en. MAR-antagelsen er ikke strengt oppfylt, men avviket trekker estimatet i konservativ retning, jf. drøfting i 8.3.4.
 
 Det disse grepene **ikke** kontrollerer er valg av modellramme. Operasjonaliseringen av makkerpar som kapasitetsmetrikk reflekterer forfatterens forståelse av prosedyren. En utenforstående forsker uten operativ tilknytning kunne formulert metrikken annerledes. Tre konkrete eksempler på alternative valg: (i) å definere bindingstid som «første ressurs fremme» uten +3 min kvitteringsvindu, (ii) å klassifisere D-aba som makkerpar-bundet i Fase 2 fremfor seriell solo-håndtering, (iii) å bruke `Innsatsvarighet` som operatørbindingsmål fremfor akuttfase-proxy. Hvert alternativ ville gitt et annet Svikt-tall.
 
@@ -433,4 +433,4 @@ Samlet gir datagrunnlaget et godt grunnlag for å modellere den best observerbar
 
 ---
 
-*Kap 5, Versjon 3.4 | Sist oppdatert: 2026-05-15 (bootstrap-CI som 6. reliabilitets-grep i 5.6.2; trussel 3 oppdatert med bootstrap-validering og korrigert til 19 % missingness)*
+*Kap 5, Versjon 3.5 | Sist oppdatert: 2026-05-16 (kryssreferanser oppdatert til ny kapittelstruktur; D-pri1 missingness harmonisert til 19 % gjennomgående; språkvask: antagelse/Bygningsbrann/seks grep)*

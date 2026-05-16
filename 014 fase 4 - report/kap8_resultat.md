@@ -6,7 +6,7 @@ Dette kapitlet presenterer resultatene av kapasitetsanalysen for 110 Sør-Vest 2
 
 ### Hva modellen måler i 8.1
 
-Før resultatene presenteres er det viktig å være presis på *hva modellen kvantifiserer*. Erlang-C i Tabell 7.1 målte sannsynligheten for at et nytt anrop må stå i kø, altså en *ventetidsmetrikk*. Kapasitetsmodellen i 8.1 til 8.3 måler noe annet: sannsynligheten for at et nytt beredskapsanrop ankommer i en tilstand der den operative driftsstandarden (makkerpar) ikke kan opprettholdes. Det er en *prosedyrkonformitetsmetrikk*.
+Før resultatene presenteres er det viktig å være presis på *hva modellen kvantifiserer*. Erlang-C i Tabell 6.1 målte sannsynligheten for at et nytt anrop må stå i kø, altså en *ventetidsmetrikk*. Kapasitetsmodellen i 8.1 til 8.3 måler noe annet: sannsynligheten for at et nytt beredskapsanrop ankommer i en tilstand der den operative driftsstandarden (makkerpar) ikke kan opprettholdes. Det er en *prosedyrkonformitetsmetrikk*.
 
 Forskjellen er substansiell. Erlang-C-ventetiden på 30 sek kan være 0 % selv når Svikt-andelen er 30 %, fordi anropet kan besvares momentant av VL eller en operatør som forlater makker-rollen, men i begge tilfellene er den prosedyrekrevde driftsstandarden brutt. Modellen kvantifiserer altså *brudd på driftsstandarden ved ankomst*, ikke *brudd på tjenesteleveransen*.
 
@@ -32,7 +32,7 @@ Variant A omfatter:
 
 Totalt inngår 27 960 op-binder-events i sweep-en.
 
-De sammenstilte tilleggsanropene er tildelt 1 minutts bindingstid, en konservativ antakelse som representerer at slike anrop er korte (operatøren kjenner allerede hendelsen), men likevel beslaglegger én operatør i et kritisk tidsvindu. Dersom reell gjennomsnittlig bindingstid er høyere, vil modellen undervurdere effekten.
+De sammenstilte tilleggsanropene er tildelt 1 minutts bindingstid, en konservativ antagelse som representerer at slike anrop er korte (operatøren kjenner allerede hendelsen), men likevel beslaglegger én operatør i et kritisk tidsvindu. Dersom reell gjennomsnittlig bindingstid er høyere, vil modellen undervurdere effekten.
 
 ### Hovedresultater
 
@@ -52,7 +52,7 @@ Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3
 
 ### D-pri1 som primær svikt-driver
 
-Den sterkeste enkeltdriveren for svikt er D-pri1-hendelser. På c=2 binder én aktiv D-pri1 hele operatørkapasiteten, ved at begge ops er i makkerpar-rollen, og en ny beredskapsanrop i samme tidsvindu ankommer direkte i Svikt. D-aba derimot binder bare én op i Fase 1, slik at en D-aba-hendelse på natt/helg *tillater* en ny beredskapsanrop i parallell drift (Brudd, ikke Svikt).
+Den sterkeste enkeltdriveren for svikt er D-pri1-hendelser. På c=2 binder én aktiv D-pri1 hele operatørkapasiteten, ved at begge ops er i makkerpar-rollen, og et nytt beredskapsanrop i samme tidsvindu ankommer direkte i Svikt. D-aba derimot binder bare én op i Fase 1, slik at en D-aba-hendelse på natt/helg *tillater* en ny beredskapsanrop i parallell drift (Brudd, ikke Svikt).
 
 Dette forklarer hvorfor Brudd-andelen er relativt lav (20,5 % på natt/helg) mens Svikt-andelen er høy: modellen differensierer strukturelt mellom lette og tunge beredskapsoppgaver, og pri-1-hendelser går direkte til Svikt-terskelen når c=2.
 
@@ -108,9 +108,9 @@ Scenarioanalysen viser den strukturelle effekten av økt bufferkapasitet, men si
 
 ---
 
-### Oppsummering av modellantakelser
+### Oppsummering av modellantagelser
 
-**Tabell 8.3: Modellantakelser og parametere**
+**Tabell 8.3: Modellantagelser og parametere**
 
 | Parameter | Verdi | Kilde |
 |---|---|---|
@@ -158,7 +158,7 @@ Bakgrunnsbelastningen slår hardest på **dagtid**: Normal-andelen faller knapt 
 
 Funnet understreker at operatørene på dagtid ikke bare håndterer beredskap; de håndterer en kontinuerlig strøm av servicetester, avklaringer og feilringinger som binder kapasitet mellom beredskapsoppdragene. Med gjennomsnittlig ~10 bakgrunnshenvendelser per time på dagskift er operatørene sjelden reelt ledige selv i perioder uten beredskapsoppdrag.
 
-### 8.3.3 Sensitivitetsanalyse: robusthet mot bindingstidsantakelser
+### 8.3.3 Sensitivitetsanalyse: robusthet mot bindingstidsantagelser
 
 Bindingstidene for ikke-D-kategorier og D-aba Fase 2-parametrene er operative estimater (D-aba Fase 2) og delvis empirisk kalibrerte (L-aba via dybdeanalyse). For å teste robustheten kjøres modellen med tre scenarioer (se avsnitt 6.5.3). Både (p, Y) for D-aba Fase 2 og bindingstider for L-aba/L-hendelse/L-ukjent/S/F/V varieres samtidig fra lav til høy. Analysen er derfor en samlet scenariosensitivitet, ikke en ceteris paribus-test av én parameter om gangen.
 
@@ -176,22 +176,22 @@ Figur 8.3 viser hvordan kapasitetsnivåene endrer seg når bindingstidsparametre
 
 <div align="center">
   <img src="../analyse/figurer/total_belastning_sensitivitet.png" alt="Sensitivitetsanalyse" width="90%">
-  <p align="center"><small><i>Figur 8.3: Sensitivitetsanalyse: effekt av bindingstidsantakelser på kapasitetsnivå.</i></small></p>
+  <p align="center"><small><i>Figur 8.3: Sensitivitetsanalyse: effekt av bindingstidsantagelser på kapasitetsnivå.</i></small></p>
 </div>
 
 Tre observasjoner:
 
-**1. Selv lavt scenario viser merkbar bakgrunnseffekt.** Med minimale bindingstider (Service 1 min, L-aba 3 min, feilringing 15 sek, D-aba Fase 2 kun for 30 % med Y = 3 min) er dag-hverdag-resultatet nesten uendret fra variant A (Normal 68,8 vs 69,2 %). På natt/helg gir lav-scenarioet faktisk litt bedre Normal (51 %) enn variant A (47 %), fordi D-aba Fase 2 slås mindre til når p = 0,30. Dette bekrefter at variant A-resultatet ikke er avhengig av optimistiske antakelser.
+**1. Selv lavt scenario viser merkbar bakgrunnseffekt.** Med minimale bindingstider (Service 1 min, L-aba 3 min, feilringing 15 sek, D-aba Fase 2 kun for 30 % med Y = 3 min) er dag-hverdag-resultatet nesten uendret fra variant A (Normal 68,8 vs 69,2 %). På natt/helg gir lav-scenarioet faktisk litt bedre Normal (51 %) enn variant A (47 %), fordi D-aba Fase 2 slås mindre til når p = 0,30. Dette bekrefter at variant A-resultatet ikke er avhengig av optimistiske antagelser.
 
 **2. Hovedscenario gir vesentlig kapasitetsforverring på dagtid.** Normal faller til 59,5 % og svikt øker til 21,6 %. Dagskiftet, som i variant A framstår som komfortabelt (69 % Normal), blir klart mer presset når hele arbeidsvolumet inkluderes.
 
 **3. Høyt scenario illustrerer bristepunktet.** Med bindingstider i øvre sjikt (Service 4 min, L-aba 9 min, D-aba Fase 2 p = 0,70 og Y = 10 min) faller Normal under 50 % på dag, slik at operatørene er oftere i Brudd eller Svikt enn i normal drift. For natt/helg når Svikt 38 %. Dette representerer dager med tungt servicevolum, uerfarne operatører, eller stor andel ABA-hendelser med oppfølgende nødtelefon.
 
-**Konklusjon:** Hovedfunnet, at natt/helg har 30 til 38 % Svikt uavhengig av bindingstidsantakelser, er robust over hele spennet. Dimensjoneringsproblemet på natt/helg kan ikke forklares bort gjennom alternative parametervalg.
+**Konklusjon:** Hovedfunnet, at natt/helg har 30 til 38 % Svikt uavhengig av bindingstidsantagelser, er robust over hele spennet. Dimensjoneringsproblemet på natt/helg kan ikke forklares bort gjennom alternative parametervalg.
 
 ### 8.3.4 Bootstrap-konfidensintervall for D-pri1-bindingstidsfordelingen
 
-Sensitivitetsanalysen i 8.3.3 varierer parameterantakelser, men tester ikke statistisk usikkerhet i selve den observerte D-pri1-bindingstidsfordelingen. Av 4 499 D-pri1-hendelser i 2025 har 3 645 (81 %) observert tidsstempel for «første ressurs fremme», mens 854 (19 %) mangler eller har avvisende verdi (negativ varighet eller > 180 min) og er imputert med median. For å kvantifisere både *sampling-variabilitet* i den observerte fordelingen og *imputeringsusikkerhet* for de manglende verdiene, er det gjennomført en ikke-parametrisk bootstrap (B = 1 000 iterasjoner, persentilmetode, fast seed `SEED_BOOTSTRAP = 20260515`).
+Sensitivitetsanalysen i 8.3.3 varierer parameterantagelser, men tester ikke statistisk usikkerhet i selve den observerte D-pri1-bindingstidsfordelingen. Av 4 499 D-pri1-hendelser i 2025 har 3 645 (81 %) observert tidsstempel for «første ressurs fremme», mens 854 (19 %) mangler eller har avvisende verdi (negativ varighet eller > 180 min) og er imputert med median. For å kvantifisere både *sampling-variabilitet* i den observerte fordelingen og *imputeringsusikkerhet* for de manglende verdiene, er det gjennomført en ikke-parametrisk bootstrap (B = 1 000 iterasjoner, persentilmetode, fast seed `SEED_BOOTSTRAP = 20260515`).
 
 I hver iterasjon trekkes 4 499 bindingstider med erstatning fra de 3 645 observerte verdiene og tildeles D-pri1-hendelsene i deres faktiske ankomstrekkefølge. Variant A-modellen (D-pri1 + D-aba Fase 1+2 + sammenstilte) reberegnes med disse trukne bindingstidene; D-aba Fase 2-sampling og øvrige parametere holdes deterministiske (samme `SEED_DABA = 20260419` som hovedscript) slik at bootstrap-CI isolerer D-pri1-usikkerheten.
 
@@ -259,7 +259,7 @@ Tabellene i avsnitt 8.5 bruker det nasjonale DSB-uttrekket for sammenlignbarhet 
 
 **Tabell 8.8: Volum og operatørbelastning per sentral, DSB 2025**
 
-| Sentral | Totalvolum | Beredskap (D) | D-andel | c_eff dag (MOB) | Oppdrag/c_eff (MOB) | Arbmengde (timer/dag) |
+| Sentral | Totalvolum | Beredskap (D) | D-andel | c_eff dag (MOB) | Oppdrag/c_eff (MOB) | Arbeidsmengde (timer/dag) |
 |---|---:|---:|---:|---:|---:|---:|
 | Oslo | 71 421 | 17 811 | 24,9 % | 4 | 17 855 | 19,4 |
 | Sør-Øst | 68 654 | 14 174 | 20,6 % | 5 | 13 731 | 16,4 |
@@ -274,7 +274,7 @@ Tabellene i avsnitt 8.5 bruker det nasjonale DSB-uttrekket for sammenlignbarhet 
 | Tromsø | 19 327 | 3 927 | 20,3 % | 1 | 19 327 | 4,7 |
 | Finnmark | 7 402 | 1 281 | 17,3 % | 2 | 3 701 | 1,6 |
 
-*Kilde: `analyse/nasjonal_2025/storrelse_ranking.csv` og `benchmarkmatrise.csv`. c_eff dag (MOB) = rapportert c_total dag − 1 (VL-korreksjon). For andre sentraler enn Sør-Vest er dette en sammenligningsproxy, ikke lokalt validert faktisk bemanning. Arbmengde = volum × kategori-spesifikk bindingstid summert over et år.*
+*Kilde: `analyse/nasjonal_2025/storrelse_ranking.csv` og `benchmarkmatrise.csv`. c_eff dag (MOB) = rapportert c_total dag − 1 (VL-korreksjon). For andre sentraler enn Sør-Vest er dette en sammenligningsproxy, ikke lokalt validert faktisk bemanning. Arbeidsmengde = volum × kategori-spesifikk bindingstid summert over et år.*
 
 Totalvolumet varierer 9,6× mellom Finnmark (7 402) og Oslo (71 421). Basert på rapportert MOB-bemanning ligger Sør-Vest (20 645) høyt på oppdrag per effektiv operatør foran Tromsø (19 327) og Oslo (17 855), mens Finnmark (3 701) ligger lavest. Dette er et strukturelt benchmarksignal, ikke en konklusjon om faktisk vaktbelastning ved hver enkelt sentral. Arbeidsmengde per dag spenner fra 1,6 timer (Finnmark) til 19,4 timer (Oslo).
 
@@ -384,4 +384,4 @@ Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av fu
 
 *Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
 
-*Kap 9 | Versjon 1.0 | Sist oppdatert: 2026-05-16 (utskilt fra tidligere kap 7 i mal-konformitets-revisjon)*
+*Kap 8 | Versjon 1.1 | Sist oppdatert: 2026-05-16 (utskilt fra tidligere kap 7 i mal-konformitets-revisjon; sluttvask av kryssreferanser og kapittelnummer)*

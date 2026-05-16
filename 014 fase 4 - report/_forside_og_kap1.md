@@ -2,7 +2,7 @@
 title: "Kapasitetsstyring og bemanningsdimensjonering ved norske 110-sentraler"
 subtitle: "En analyse av operatørkapasitet med prosedyrbasert ankomstkonfliktmodell"
 author: "Rune Grødem · G20 Individuell"
-date: "LOG650 Logistikk og kunstig intelligens · Høgskolen i Molde · Vår 2026 · Innlevert 31. mai 2026 · Veileder: Bård Inge Austigard Pettersen · Antall ord: ca. 19 700 (kap. 1 til 10, eksklusive tabeller, kode og litteraturliste)"
+date: "LOG650 Logistikk og kunstig intelligens · Høgskolen i Molde · Vår 2026 · Innlevert 31. mai 2026 · Veileder: Bård Inge Austigard Pettersen · Antall ord: ca. 30 400 (kap. 1 til 10, eksklusive tabeller, kode og litteraturliste; maskinell narrativtelling)"
 ---
 
 \newpage
@@ -165,7 +165,7 @@ Prosjektet avgrenses til følgende områder:
 
 - **Vaktromsbemanning ved 110-sentral.** Ressursdisponering i brannvesenet, taktisk hendelseshåndtering og organisatoriske beslutninger utover sentralen ligger utenfor scope.
 - **Retrospektiv og planleggingsrettet analyse.** Modellen er et beslutningsverktøy for kapasitetsvurdering, ikke et sanntidssystem for operativ styring.
-- **Primærcase 110 Sør-Vest 2025.** Hovedmodellen er kjørt på denne ene sentralen. Den nasjonale delen (kap 8.5 og 8.4.1) er benchmarking og kontekst, ikke full prosedyrbasert modellering for de øvrige 11 sentralene.
+- **Primærcase 110 Sør-Vest 2025.** Hovedmodellen er kjørt på denne ene sentralen. Den nasjonale delen (kap 8.5 og 8.6) er benchmarking og kontekst, ikke full prosedyrbasert modellering for de øvrige 11 sentralene.
 - **Ordinære driftsforhold.** Ekstraordinære hendelser som langvarige storbranner og katastrofescenarier holdes utenfor modellens gyldighetsområde. De drøftes i diskusjonskapittelet som grenser for modellens anvendbarhet.
 - **Ring-flom som kontekst.** Call surge belyses som operativ ekstrembelastning, men modelleres ikke som primærscenario.
 

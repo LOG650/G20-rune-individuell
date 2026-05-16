@@ -21,13 +21,14 @@ Bruk denne filen til å finne riktig kapittel raskt, og til å se hvilken versjo
 | Forside + 1 | Sammendrag, innledning, problemstilling | [`_forside_og_kap1.md`](_forside_og_kap1.md) | Peer review-utkast |
 | 2 | Litteratur | [`kap2_litteratur.md`](kap2_litteratur.md) | v1.1 |
 | 3 | Teori | [`kap3_teori.md`](kap3_teori.md) | v3.x |
-| 4 | Casebeskrivelse: 110 Sør-Vest | [`kap4_casebeskrivelse.md`](kap4_casebeskrivelse.md) | v1.1 |
+| 4 | Casebeskrivelse: 110 Sør-Vest | [`kap4_casebeskrivelse.md`](kap4_casebeskrivelse.md) | v1.x |
 | 5 | Metode og data | [`kap5_metode_data.md`](kap5_metode_data.md) | v3.x (LABA n=100) |
 | 6 | Modell | [`kap6_modell.md`](kap6_modell.md) | v3.x (op-binder) |
-| 7 | Analyse og resultater | [`kap7_analyse_resultater.md`](kap7_analyse_resultater.md) | v3.x (variant A/B, scenario +1) |
-| 8 | Diskusjon | [`kap8_diskusjon.md`](kap8_diskusjon.md) | v1.0 |
-| 9 | Konklusjon | [`kap9_konklusjon.md`](kap9_konklusjon.md) | v1.x |
-| 10-11 | Referanser og vedlegg | [`_referanser_og_vedlegg.md`](_referanser_og_vedlegg.md) | Peer review-utkast |
+| 7 | Analyse | [`kap7_analyse.md`](kap7_analyse.md) | v3.x (analyserammen 7.1–7.4) |
+| 8 | Resultat | [`kap8_resultat.md`](kap8_resultat.md) | v1.x (variant A/B, scenario +1, bootstrap) |
+| 9 | Diskusjon | [`kap9_diskusjon.md`](kap9_diskusjon.md) | v1.x |
+| 10 | Konklusjon | [`kap10_konklusjon.md`](kap10_konklusjon.md) | v1.x |
+| 11–12 | Referanser og vedlegg | [`_referanser_og_vedlegg.md`](_referanser_og_vedlegg.md) | Peer review-utkast |
 
 ## Bygging av samlet PDF
 

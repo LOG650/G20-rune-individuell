@@ -14,7 +14,7 @@ Sannsynlighet for ventetid over en terskel $T$:
 
 $$P(W > T) = C(c, A) \cdot e^{-(c\mu - \lambda)T}$$
 
-Erlang-C er fundamentalt basert på fire antakelser: (1) Poisson-ankomster, (2) eksponentiell servicetid, (3) $c$ uavhengige og parallelle servere, og (4) én server betjener én kunde om gangen. De to siste forutsetningene er der modellen bryter sammen for 110-konteksten.
+Erlang-C er fundamentalt basert på fire antagelser: (1) Poisson-ankomster, (2) eksponentiell servicetid, (3) $c$ uavhengige og parallelle servere, og (4) én server betjener én kunde om gangen. De to siste forutsetningene er der modellen bryter sammen for 110-konteksten.
 
 ## 3.2 QED-regimet og square-root staffing
 
