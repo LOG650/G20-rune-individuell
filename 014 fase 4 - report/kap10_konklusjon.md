@@ -1,12 +1,12 @@
-# 9. Konklusjon
+# 10. Konklusjon
 
-## 9.1 Svar på problemstillingen
+## 10.1 Svar på problemstillingen
 
 Problemstillingen er: *I hvilken grad samsvarer faktisk bemanning ved 110 Sør-Vest med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller, og hva indikerer funnene om overførbarhet til norske 110-sentraler?*
 
 **Direkte svar.** For 110 Sør-Vest 2025 samsvarer faktisk bemanning *ikke* med kapasitetsbehovet når målestokken er prosedyrkonform håndtering av beredskapsanrop: hvert tredje beredskapsanrop på natt/helg ankommer i en tilstand der makkerpar-driftsstandarden ikke kan opprettholdes (Svikt 32,8 %, bootstrap-CI [32,1; 33,2] %). Mot en ren ventetidsmetrikk (Erlang-C) framstår derimot bemanningen som komfortabel (ρ < 6 %, P(W > 30s) < 1 %). De to målestokkene gir motsatte konklusjoner om samme bemanning, og hvilken som er mest relevant er et normativt spørsmål denne studien ikke avgjør, men gjør målbart. For nasjonal overførbarhet er modellrammeverket prinsipielt anvendbart, men den prosedyrbaserte standarden er bare empirisk testet ved 110 Sør-Vest; overførbarheten til de øvrige 11 sentralene forblir en hypotese inntil bredere validering er gjennomført.
 
-**Omfang for konklusjonen.** Hovedanalysen er gjennomført på 110 Sør-Vest 2025 som casestudie. Nasjonal del (kap 7.9 og 8.4.1) er benchmarking og kontekst, ikke full prosedyrbasert kapasitetsmodellering for de øvrige 11 sentralene. Konklusjonen under er derfor primært en *case-konklusjon for 110 Sør-Vest*, mens nasjonale implikasjoner er formulert som hypoteser/indikasjoner som forutsetter klassifiseringsharmonisering og bredere validering (jf. RQ5 og kap 9.4).
+**Omfang for konklusjonen.** Hovedanalysen er gjennomført på 110 Sør-Vest 2025 som casestudie. Nasjonal del (kap 8.5 og 8.4.1) er benchmarking og kontekst, ikke full prosedyrbasert kapasitetsmodellering for de øvrige 11 sentralene. Konklusjonen under er derfor primært en *case-konklusjon for 110 Sør-Vest*, mens nasjonale implikasjoner er formulert som hypoteser/indikasjoner som forutsetter klassifiseringsharmonisering og bredere validering (jf. RQ5 og kap 10.4).
 
 For 110 Sør-Vest avhenger svaret kritisk av hvilken kapasitetsstandard som anvendes.
 
@@ -14,9 +14,9 @@ Mot en ren køteoretisk standard (ventetid < 30 sekunder i M/M/c) fremstår bema
 
 Mot en prosedyrebasert standard der driftsstandarden er at to operatører (makkerpar) kan håndtere pri-1-hendelser, indikerer modellen et strukturelt kapasitetsgap. Primærmodellen (variant A) estimerer at 40,4 % av beredskapsanropene i 110 Sør-Vest 2025 ankommer i brudd eller svikt-tilstand under hovedscenario, stigende til 45,6 % når total operativ belastning inkluderes (variant B hoved). På natt/helg (c_eff = 2) er over halvparten av beredskapsanropene i brudd eller svikt. Hvert tredje beredskapsanrop på natt/helg ankommer i ren svikt-tilstand der ingen operatør er ledig (estimat 32,6 % variant A / 33,2 % variant B, scenariobånd 30 til 38 %).
 
-For 110 Sør-Vest tyder funnene dermed på at samsvaret mellom bemanning og kapasitetsbehov **ikke er tilstrekkelig** når målestokken er operativ prosedyrkonformitet, under modellens antagelser og innenfor 2025-data. Konklusjonen gjelder brudd på prosedyrstandarden (makkerpar-bundet håndtering), ikke brudd på selve tjenesteleveransen. Operatørene besvarer i praksis nesten alle anrop, men gjør det ofte under solo-drift med kvalitetsreduksjon som skjult buffer (jf. kap 8.2). Erlang-C-baserte vurderinger fanger ikke denne diskrepansen, fordi de ikke modellerer makkerpar-bindingen eller differensieringen mellom pri-1-hendelser (D-pri1, makkerpar) og ABA-utrykning (D-aba, seriell solo-håndtering). Hvorvidt et tilsvarende kapasitetsgap finnes ved de øvrige 11 sentralene er ikke testet i denne studien; modellrammeverket er *prinsipielt* overførbart gitt tilsvarende datatilgang og felles klassifisering, men overførbarheten forblir en hypotese inntil empirisk validering på flere sentraler er gjennomført.
+For 110 Sør-Vest tyder funnene dermed på at samsvaret mellom bemanning og kapasitetsbehov **ikke er tilstrekkelig** når målestokken er operativ prosedyrkonformitet, under modellens antagelser og innenfor 2025-data. Konklusjonen gjelder brudd på prosedyrstandarden (makkerpar-bundet håndtering), ikke brudd på selve tjenesteleveransen. Operatørene besvarer i praksis nesten alle anrop, men gjør det ofte under solo-drift med kvalitetsreduksjon som skjult buffer (jf. kap 9.2). Erlang-C-baserte vurderinger fanger ikke denne diskrepansen, fordi de ikke modellerer makkerpar-bindingen eller differensieringen mellom pri-1-hendelser (D-pri1, makkerpar) og ABA-utrykning (D-aba, seriell solo-håndtering). Hvorvidt et tilsvarende kapasitetsgap finnes ved de øvrige 11 sentralene er ikke testet i denne studien; modellrammeverket er *prinsipielt* overførbart gitt tilsvarende datatilgang og felles klassifisering, men overførbarheten forblir en hypotese inntil empirisk validering på flere sentraler er gjennomført.
 
-## 9.2 Svar på forskningsspørsmålene
+## 10.2 Svar på forskningsspørsmålene
 
 **RQ1: Hva er ankomstraten (λ) til 110 Sør-Vest per skiftperiode, og hvilke belastningsmønstre fremgår av historiske LEO/BRIS-data?**
 
@@ -38,13 +38,13 @@ ROS-analysen og beredskapsanalysen er kvalitative og gir ikke et etterprøvbart,
 
 Ja, som framtidig modellgrunnlag, men ikke som ferdig prediktiv modell i denne rapporten. Nasjonal DSB-oversikt for 2025 (508 228 registrerte oppdrag, proxy for henvendelser, med kjent undertelling pga. sammenstilling jf. kap 6.2, alle 12 sentraler) viser at volum varierer 10× mellom Finnmark (7 402) og Oslo (71 421), mens kategorifordeling (særlig L-aba) varierer med eksisterende registreringspraksis. Sentraler som Sør-Øst og Oslo har ≈0 % L-aba mens Nordland har 7,5 %, variasjoner som trolig skyldes ulik registreringspraksis mer enn reell ABA-belastning. Slike tall kan brukes til deskriptiv benchmarking og til å identifisere hvilke variabler som bør inngå i en framtidig dimensjoneringsmodell. Strukturell prediksjon og normativ sammenligning av kapasitet på tvers av sentraler krever derimot harmoniserte klassifiseringsregler og lokal avklaring av de største dataavvikene. Den V3-klassifiseringen som er utviklet i denne studien (D-pri1/D-aba/L-aba/L-hendelse/L-ukjent/S/F/V med Kilde=Alarm-krav for ABA-kategoriene) kan danne grunnlag for slik harmonisering.
 
-## 9.3 Bidrag og praktiske implikasjoner
+## 10.3 Bidrag og praktiske implikasjoner
 
 Rapporten bidrar på tre nivåer:
 
 **Metodisk bidrag.** Den prosedyrbaserte ankomstkonfliktmodellen introduserer *op-binder-semantikk* som teoretisk rammeverk: hver hendelse ekspanderes til én eller flere op-binder-events som reflekterer operativ binding snarere enn statiske serverslots. Dette er en konkretisering av multiserver-job-litteraturen (Chelst & Barlach, 1981; Harchol-Balter, 2022) tilpasset nødmeldesentralkontekst. Modellen reduserer til klassisk M/M/c som spesialtilfelle, men fanger dynamikk Erlang-C ikke kan uttrykke: differensiering mellom tunge og lette utrykninger, makkerpar-krav for pri-1, og ankomstkonflikt som kapasitetsmetrikk.
 
-**Empirisk bidrag.** Etter litteratursøket i denne studien fremstår arbeidet som en av de første kvantitative kapasitetsanalysene av en norsk 110-sentral basert på historiske hendelsesdata (jf. kap 2.6, Gap 5). Den dokumenterer strukturelt kapasitetsgap særlig på natt/helg, og kvantifiserer effekten av +1 operatør (svikt reduseres fra ca. 33 % til 16,7 % på natt/helg, jf. Tabell 7.7). LABA-dybdeanalysen etablerer empirisk grunnlag for L-aba-parameter og avdekker ca. 25 % feilklassifisering i eksisterende BRIS-kategorier.
+**Empirisk bidrag.** Etter litteratursøket i denne studien fremstår arbeidet som en av de første kvantitative kapasitetsanalysene av en norsk 110-sentral basert på historiske hendelsesdata (jf. kap 2.6, Gap 5). Den dokumenterer strukturelt kapasitetsgap særlig på natt/helg, og kvantifiserer effekten av +1 operatør (svikt reduseres fra ca. 33 % til 16,7 % på natt/helg, jf. Tabell 8.2). LABA-dybdeanalysen etablerer empirisk grunnlag for L-aba-parameter og avdekker ca. 25 % feilklassifisering i eksisterende BRIS-kategorier.
 
 **Praktiske implikasjoner.** For 110 Sør-Vest spesifikt peker analysen på to dimensjoneringsalternativer:
 
@@ -52,15 +52,15 @@ Rapporten bidrar på tre nivåer:
 
 2. **Funksjonsdifferensiering:** Skille servicelast fra beredskapslast. Servicevolumet (22 542 overføringstester per år, konsentrert på dagtid) kan håndteres av dedikert personell utenfor beredskapsoperatørgruppen, som allerede praktisert ved Midt-Norge 110. Van Buuren et al. (2017) og Jouini et al. (2008) gir teoretisk belegg for at dette kan forbedre kapasitetsbildet uten å øke total bemanning.
 
-For den nasjonale dimensjoneringsdebatten er det viktigste bidraget å vise at **en kvantitativ standard er mulig**, forutsatt at klassifiseringspraksis harmoniseres mellom sentralene og at datafundamentet utvides utover én sentral og ett år. Brann- og redningsvesenforskriften (FOR-2021-09-15-2755) viser at kvantitative og etterprøvbare krav er praktisk gjennomførbare på brann- og redningssiden. En tilsvarende standard for 110-operatører bør ta utgangspunkt i prosedyrkonform håndtering av beredskapsanrop som målemetrikk, ikke bare svartidsstatistikk. Denne studien etablerer prinsippet og verktøyet, men ikke den nasjonale standarden i seg selv: det krever bredere validering (jf. kap 8.5).
+For den nasjonale dimensjoneringsdebatten er det viktigste bidraget å vise at **en kvantitativ standard er mulig**, forutsatt at klassifiseringspraksis harmoniseres mellom sentralene og at datafundamentet utvides utover én sentral og ett år. Brann- og redningsvesenforskriften (FOR-2021-09-15-2755) viser at kvantitative og etterprøvbare krav er praktisk gjennomførbare på brann- og redningssiden. En tilsvarende standard for 110-operatører bør ta utgangspunkt i prosedyrkonform håndtering av beredskapsanrop som målemetrikk, ikke bare svartidsstatistikk. Denne studien etablerer prinsippet og verktøyet, men ikke den nasjonale standarden i seg selv: det krever bredere validering (jf. kap 9.5).
 
-## 9.4 Anbefalinger
+## 10.4 Anbefalinger
 
 Anbefalingene er strukturert i tre nivåer: konkrete dimensjoneringsbeslutninger på sentralnivå (case-spesifikke for 110 Sør-Vest), forutsetninger som må være på plass for at en nasjonal dimensjoneringsmodell skal kunne etableres, og forskningsoppgaver som forblir åpne. Anbefalingene under er **beslutningsstøtte for casen 110 Sør-Vest** og en **normativ rammeverksskisse for nasjonalt nivå**, ikke en ferdig nasjonal standard.
 
 **Dimensjoneringsbeslutninger (case 110 Sør-Vest):**
 
-1. **Vurder +1 operatør på natt/helg** som primær tiltak ved 110 Sør-Vest. Modellen viser at den første ekstra operatøren på natt/helg har størst marginalverdi i denne casen (Svikt reduseres fra ca. 33 % til 16,7 %, jf. Tabell 7.7). Alternativt eller i tillegg: skille servicelast (overføringstester) ut av beredskapsoperatørgruppen, slik Midt-Norge 110 har praksis for. Funksjonsdifferensiering kan forbedre kapasitetsbildet uten å øke total bemanning (van Buuren et al., 2017). Tiltaket er casebasert; tilsvarende vurdering for andre sentraler krever egne analyser.
+1. **Vurder +1 operatør på natt/helg** som primær tiltak ved 110 Sør-Vest. Modellen viser at den første ekstra operatøren på natt/helg har størst marginalverdi i denne casen (Svikt reduseres fra ca. 33 % til 16,7 %, jf. Tabell 8.2). Alternativt eller i tillegg: skille servicelast (overføringstester) ut av beredskapsoperatørgruppen, slik Midt-Norge 110 har praksis for. Funksjonsdifferensiering kan forbedre kapasitetsbildet uten å øke total bemanning (van Buuren et al., 2017). Tiltaket er casebasert; tilsvarende vurdering for andre sentraler krever egne analyser.
 
 **Forutsetninger for nasjonal implementering:**
 
@@ -74,9 +74,9 @@ Anbefalingene er strukturert i tre nivåer: konkrete dimensjoneringsbeslutninger
 
 **Videre forskning:**
 
-6. **Validering og utvidelse:** Validering på tvers av sentraler, tidsvariabel DES-modellering, og dypere analyse av nødtelefonfase etter D-aba er prioriterte retninger (se avsnitt 8.5).
+6. **Validering og utvidelse:** Validering på tvers av sentraler, tidsvariabel DES-modellering, og dypere analyse av nødtelefonfase etter D-aba er prioriterte retninger (se avsnitt 9.5).
 
-## 9.5 Avsluttende refleksjon
+## 10.5 Avsluttende refleksjon
 
 Erlang-C-paradokset er den sentrale metodiske lærdommen: ρ < 6 % betyr ikke at systemet er overbemannet *når makkerpar er prosedyrekravet*. For små nødmeldesentraler opererer kapasitetsteorien i et regime der klassiske mål for servere og ventetid er utilstrekkelige som dimensjoneringsgrunnlag.
 
@@ -88,4 +88,4 @@ Studien er en case-analyse av 110 Sør-Vest. Hva resultatene betyr utover dette 
 
 ---
 
-*Kap 9 | Versjon 1.3 | Sist oppdatert: 2026-05-15 (skarp åpningssetning i 9.1 med direkte svar på problemstillingen + bootstrap-CI)*
+*Kap 10 | Versjon 1.3 | Sist oppdatert: 2026-05-15 (skarp åpningssetning i 9.1 med direkte svar på problemstillingen + bootstrap-CI)*

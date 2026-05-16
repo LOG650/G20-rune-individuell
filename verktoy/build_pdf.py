@@ -117,6 +117,10 @@ UNICODE_ERSTATNINGER = {
     # NB: matematiske symboler (∈ ≤ ≥ ≈ ⊆) beholdes — de brukes inni $...$ og
     # rendres som LaTeX-matematikk. Pandoc-warnings for disse utenfor math-mode
     # er ikke-fatale og kan ignoreres.
+    # Checkbox-glyphs (brukt i forsiden) - Segoe UI mangler disse
+    "☒": "**[X]**",         # checkbox X
+    "☐": "[ ]",             # checkbox tom
+    "☑": "**[X]**",         # checkbox check
     # Sammenstilte piler i spørreskjema-tabeller håndteres av reportlab, ikke her.
 }
 
@@ -219,9 +223,10 @@ def rapport_full():
         rapport_dir / "kap4_casebeskrivelse.md",
         rapport_dir / "kap5_metode_data.md",
         rapport_dir / "kap6_modell.md",
-        rapport_dir / "kap7_analyse_resultater.md",
-        rapport_dir / "kap8_diskusjon.md",
-        rapport_dir / "kap9_konklusjon.md",
+        rapport_dir / "kap7_analyse.md",
+        rapport_dir / "kap8_resultat.md",
+        rapport_dir / "kap9_diskusjon.md",
+        rapport_dir / "kap10_konklusjon.md",
         rapport_dir / "_referanser_og_vedlegg.md",
     ]
     manglende = [d for d in deler if not d.exists()]
