@@ -1,6 +1,6 @@
 ---
 
-## 10. Referanser
+## 11. Bibliografi
 
 Al-Sarhani, M., m.fl. (2025). Dispatch under pressure: An investigation into the cognitive load of Kuwait's emergency responders. *Journal of Engineering Research*. https://doi.org/10.1016/j.jer.2025.06.004
 
@@ -105,6 +105,8 @@ Zeltyn, S., & Mandelbaum, A. (2005). Call centers with impatient customers: Many
 ---
 
 ## 11. Vedlegg
+
+## 12. Vedlegg
 
 ### Vedlegg A: Python-implementasjon og GitHub-repo
 

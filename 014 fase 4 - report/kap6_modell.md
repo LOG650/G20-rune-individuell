@@ -155,7 +155,7 @@ Basert på antall ledige operatører klassifiseres hvert innkommende beredskapsa
 | **Brudd på driftsstandard** | Kun 1 ledig (solo-håndtering) | ledige = 1 | Operatøren klarer det, men uten makker. Økt kognitiv belastning, økt feilrisiko |
 | **Svikt** | Ingen ledig operatør | ledige ≤ 0 | VL må overta eller overløp til Agder |
 
-> **[Antagelse A7]** *Brudd*-tilstanden er definert som operativt mulig, det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning, men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021). Konsekvensene drøftes i kap 8.2.
+> **[Antagelse A7]** *Brudd*-tilstanden er definert som operativt mulig, det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning, men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021). Konsekvensene drøftes i kap 9.2.
 
 For å illustrere hva dette innebærer i praksis med c_eff = 2 (natt/helg):
 
@@ -182,7 +182,7 @@ Både RØD og GUL er bundet parallelt gjennom hele akuttfasen. Bindingstid per D
 
 $$d_{\text{D-pri1}} = (T_{\text{første ressurs fremme}} - T_{\text{anrop}}) + 3 \text{ min kvittering}$$
 
-For 4 499 D-pri1-hendelser i 2025 er median 14,1 min (P25 = 11,2, P90 = 27,3). De cirka 19 % av D-pri1 som mangler tidspunkt for første ressurs fremme (eller har avvisende verdi, se Antagelse A2) tildeles median. Statistisk usikkerhet i den observerte bindingstidsfordelingen og i imputeringen er kvantifisert via bootstrap i avsnitt 7.7.4.
+For 4 499 D-pri1-hendelser i 2025 er median 14,1 min (P25 = 11,2, P90 = 27,3). De cirka 19 % av D-pri1 som mangler tidspunkt for første ressurs fremme (eller har avvisende verdi, se Antagelse A2) tildeles median. Statistisk usikkerhet i den observerte bindingstidsfordelingen og i imputeringen er kvantifisert via bootstrap i avsnitt 8.3.4.
 
 **D-pri1 i sweep:** Hver D-pri1-hendelse genererer én op-binder-event med $q = 2$, $d = d_{\text{D-pri1}}$, ankomst $t$.
 
@@ -269,7 +269,7 @@ Modellen gir sannsynligvis et **konservativt anslag** på faktisk operativ belas
 2. **Imputering med median for D-pri1.** De cirka 19 % av D-pri1-hendelsene som mangler tidspunkt for første ressurs fremme er tildelt median bindingstid. Bootstrap-CI i 7.7.4 viser at dette ligger i konservativ retning (median-imputering gir lavere Svikt enn trekk fra full empirisk fordeling).
 3. **Kun akuttfasen er modellert for D-pri1.** Mange hendelser binder operatørkapasitet lenger gjennom oppfølging, samband og loggføring.
 4. **Sammenstilte anrop antas 1 minutt.** Faktisk varighet kan være lenger dersom innringer trenger mer avklaring.
-5. **D-aba Fase 2-sannsynlighet er underkant-estimert.** Sekvensgap-metoden fanger kun nødtelefoner med eget 110-ID. Nødtelefoner logget inni hovedoppdraget er usynlige. Hoved-scenario ($p = 0{,}50$) kompenserer delvis, men tung sensitivitet mot $p$ er undersøkt i avsnitt 7.7.3.
+5. **D-aba Fase 2-sannsynlighet er underkant-estimert.** Sekvensgap-metoden fanger kun nødtelefoner med eget 110-ID. Nødtelefoner logget inni hovedoppdraget er usynlige. Hoved-scenario ($p = 0{,}50$) kompenserer delvis, men tung sensitivitet mot $p$ er undersøkt i avsnitt 8.3.3.
 6. **Feilkategoriserte tilleggsanrop.** Under høyt press hender det at anrop som operativt tilhører en pågående hendelse lukkes som egne saker med ikke-beredskapsrelevant hendelsestype (service, feilringing, løst av 110). Estimatet på 18 901 sammenstilte anrop er derfor sannsynligvis underestimat.
 
 Begrensningene trekker i hovedsak i én retning: mot undervurdering. Resultatene bør leses som et minimumsanslag på brudd- og sviktrisiko, ikke som et maksimumsanslag.
@@ -307,7 +307,7 @@ Fordi mange av estimatene er antakelser snarere enn målinger, kjøres modellen 
 | F (Feilringing) | 15 sek | 30 sek | 1 min |
 | V (Viderevarsling) | 30 sek | 1 min | 2 min |
 
-**Antagelse A8:** Bindingstidsestimatene representerer gjennomsnittlig tid operatøren er opptatt med hendelsen, inkludert LEO-arbeid og etterarbeid. Konsekvens: estimatene er usikre, men sensitivitetsanalysen (avsnitt 7.7) viser at hovedfunnet er robust over hele spennet fra lav til høy.
+**Antagelse A8:** Bindingstidsestimatene representerer gjennomsnittlig tid operatøren er opptatt med hendelsen, inkludert LEO-arbeid og etterarbeid. Konsekvens: estimatene er usikre, men sensitivitetsanalysen (avsnitt 8.3) viser at hovedfunnet er robust over hele spennet fra lav til høy.
 
 ### 6.5.3 Algoritmisk identitet med primærmodellen
 
@@ -373,33 +373,33 @@ For sporbarhet og kritisk vurdering oppsummeres her de sentrale antagelsene som 
 | A4 | D-aba Fase 2 forekommer med $p = 0{,}50$ og $Y = 6$ min | hoved-scenario | Operativ samtale + sekvensgap; sensitivitetstestet | Forankret operativt estimat |
 | A5 | L-aba bindingstid = 4,5 min | hoved-verdi | LABA-dybdeanalyse n=100 Kilde=Alarm, mean 4,53, CI [3,74; 5,43] | **Empirisk kalibrert** |
 | A6 | Sammenstilte tilleggsanrop binder 1 min | per anrop | Operativ vurdering, ikke direkte målt | Forenklet antagelse |
-| A7 | Brudd-tilstand er operativt mulig, men med redusert kvalitetssikring | (kvalitativ) | Prosedyre + valideringssamtaler; drøftes i kap 8.2 | Antagelse, ikke empirisk verifisert |
+| A7 | Brudd-tilstand er operativt mulig, men med redusert kvalitetssikring | (kvalitativ) | Prosedyre + valideringssamtaler; drøftes i kap 9.2 | Antagelse, ikke empirisk verifisert |
 | A8 | Bindingstider for S, L-hendelse, L-ukjent, F, V (variant B) | tre sensitivitetsscenarioer | Operative estimater forelagt vaktleder | Operativt estimat med sensitivitetsspenn |
 
-Antagelsene er sortert etter sentralitet. A1 til A5 driver hovedfunnet og er empirisk eller prosedyrforankret (A5 oppgradert til empirisk kalibrert etter LABA n=100-runden 22.04.2026, jf. avsnitt 5.4). A6 (sammenstilte = 1 min) har størst restusikkerhet av de empiriske parametrene. A7 er en tolkningsmessig antagelse som drøftes i kap 8.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 7.7.
+Antagelsene er sortert etter sentralitet. A1 til A5 driver hovedfunnet og er empirisk eller prosedyrforankret (A5 oppgradert til empirisk kalibrert etter LABA n=100-runden 22.04.2026, jf. avsnitt 5.4). A6 (sammenstilte = 1 min) har størst restusikkerhet av de empiriske parametrene. A7 er en tolkningsmessig antagelse som drøftes i kap 9.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 8.3.
 
 ### Konsekvenser hvis antagelsene svikter
 
-For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene bygger på modellresultatene i kap 7 og sensitivitetsanalysen i avsnitt 7.7.
+For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene bygger på modellresultatene i kap 7 og sensitivitetsanalysen i avsnitt 8.3.
 
 **A1, VL-rollen.** Hvis VL faktisk besvarer en ikke-triviell andel nødanrop: Svikt-andelen overestimert. Effekt: trolig 2 til 5 pp lavere Svikt på natt/helg ved aktivere VL-rolle. Modellens retning (asymmetri dag/natt) er robust.
 
-**A2, D-pri1 makkerpar-binding ($q = 2$).** Hvis GUL-operatøren i praksis frigjøres tidligere enn antatt (f.eks. ved at vindusmelding kvitteres raskere enn +3 min): Svikt-andelen overestimert. Effekt: trolig 3 til 7 pp lavere på natt/helg under et scenario der GUL frigjøres etter 7 min i stedet for 14 min. Prosedyre og operatørintervju støtter likevel at makkerpar er reelt bundet gjennom hele akuttfasen, og endring av A2 ville krevd revurdering av prosedyrforståelsen, ikke bare parametere. Statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen og imputeringsusikkerhet for de cirka 19 % manglende verdiene er kvantifisert via ikke-parametrisk bootstrap (avsnitt 7.7.4): 95 % CI for Svikt natt/helg er [32,1; 33,2] %, dvs. ±0,5 pp rundt punktestimatet.
+**A2, D-pri1 makkerpar-binding ($q = 2$).** Hvis GUL-operatøren i praksis frigjøres tidligere enn antatt (f.eks. ved at vindusmelding kvitteres raskere enn +3 min): Svikt-andelen overestimert. Effekt: trolig 3 til 7 pp lavere på natt/helg under et scenario der GUL frigjøres etter 7 min i stedet for 14 min. Prosedyre og operatørintervju støtter likevel at makkerpar er reelt bundet gjennom hele akuttfasen, og endring av A2 ville krevd revurdering av prosedyrforståelsen, ikke bare parametere. Statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen og imputeringsusikkerhet for de cirka 19 % manglende verdiene er kvantifisert via ikke-parametrisk bootstrap (avsnitt 8.3.4): 95 % CI for Svikt natt/helg er [32,1; 33,2] %, dvs. ±0,5 pp rundt punktestimatet.
 
 **A3, D-aba Fase 1 ($q = 1$, $d = 3$ min).** Empirisk verifisert via BRIS-tidsstempler (median 74 sek call-out + registrering). Restusikkerheten er liten. Hvis faktisk varighet er 5 min i stedet for 3 min: marginal effekt på Svikt natt/helg (under 1 pp). A3 er ikke en kritisk antagelse for hovedfunnet.
 
-**A4, D-aba Fase 2 ($p = 0{,}50$, $Y = 6$ min).** Sensitivitetstestet eksplisitt (avsnitt 7.7, Tabell 7.10). Hele spennet $p \in [0{,}30; 0{,}70]$ og $Y \in [3; 10]$ min holder Svikt natt/helg innenfor 30 til 38 %. Asymmetrien dag/natt opprettholdes uansett. Hvis $p$ eller $Y$ ligger utenfor det testede spennet, må sensitivitetsanalysen utvides, men dette anses som usannsynlig basert på operativ vurdering.
+**A4, D-aba Fase 2 ($p = 0{,}50$, $Y = 6$ min).** Sensitivitetstestet eksplisitt (avsnitt 8.3, Tabell 8.5). Hele spennet $p \in [0{,}30; 0{,}70]$ og $Y \in [3; 10]$ min holder Svikt natt/helg innenfor 30 til 38 %. Asymmetrien dag/natt opprettholdes uansett. Hvis $p$ eller $Y$ ligger utenfor det testede spennet, må sensitivitetsanalysen utvides, men dette anses som usannsynlig basert på operativ vurdering.
 
 **A5, L-aba bindingstid = 4,5 min.** Empirisk kalibrert: 95 % CI [3,74; 5,43] (n = 100). Hovedverdien har strammere usikkerhet enn øvrige bindingstider. Sensitivitetsanalysen tester 3 og 7 min. Selv ved 7 min er endring i variant B-Svikt natt/helg under 1 pp fordi L-aba binder kun 1 op og inngår ikke i variant A. A5 er den best kalibrerte ikke-D-parameteren.
 
 **A6, sammenstilte anrop binder 1 min.** Største restusikkerhet av de antatte parametrene. Hvis reell bindingstid er 2 til 3 min (operatøren håndterer som korte nødtelefoner): Svikt-andelen underestimert. Effekt: potensielt 2 til 4 pp høyere Svikt på natt/helg. Antagelsen trekker dermed mot konservativt estimat for hovedfunnet, det vil si den «riktige» retningen for å unngå overestimering av kapasitetspresset.
 
-**A7, Brudd som operativt mulig.** Antagelsen påvirker ikke modellens tallverdier direkte (modellen klassifiserer Brudd uavhengig av om kvalitetstapet er kvantifisert). Hvis Brudd i praksis innebærer signifikant kvalitetsreduksjon, slik Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2019) dokumenterer, er den OPERATIVE konsekvensen av et 20 til 22 % Brudd-rate større enn modellen kommuniserer eksplisitt. Brudd og Svikt bør derfor leses sammen, ikke som adskilte kategorier. Drøftes i kap 8.2.
+**A7, Brudd som operativt mulig.** Antagelsen påvirker ikke modellens tallverdier direkte (modellen klassifiserer Brudd uavhengig av om kvalitetstapet er kvantifisert). Hvis Brudd i praksis innebærer signifikant kvalitetsreduksjon, slik Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2019) dokumenterer, er den OPERATIVE konsekvensen av et 20 til 22 % Brudd-rate større enn modellen kommuniserer eksplisitt. Brudd og Svikt bør derfor leses sammen, ikke som adskilte kategorier. Drøftes i kap 9.2.
 
-**A8, bindingstider for S, L-hendelse, L-ukjent, F, V.** Sensitivitetstestet i avsnitt 7.7. Hele spennet av rimelige antakelser gir Svikt natt/helg 30 til 38 % (variant B). Hovedfunnet er robust. A8 påvirker ikke variant A (beredskapsbelastning) som er studiens primære metrikk. På dag hverdag er sensitivitetsspennet bredere (15 til 34 % Svikt), noe som tilsier større usikkerhet for dagskonklusjonen, men ikke for natt/helg-funnet.
+**A8, bindingstider for S, L-hendelse, L-ukjent, F, V.** Sensitivitetstestet i avsnitt 8.3. Hele spennet av rimelige antakelser gir Svikt natt/helg 30 til 38 % (variant B). Hovedfunnet er robust. A8 påvirker ikke variant A (beredskapsbelastning) som er studiens primære metrikk. På dag hverdag er sensitivitetsspennet bredere (15 til 34 % Svikt), noe som tilsier større usikkerhet for dagskonklusjonen, men ikke for natt/helg-funnet.
 
-**Samlet vurdering av antagelsesrobusthet.** Hovedfunnet, at natt/helg Svikt-andelen ligger i intervallet 30 til 38 %, er robust over hele spennet av rimelige antagelser. Den mest kritiske antagelsen er A2 (D-pri1 makkerpar), fordi den definerer modellens behandling av pri-1-hendelser som tobindere. A2 er forankret i prosedyre og operatørintervju, og statistisk validert via bootstrap-CI [32,1; 33,2] % for Svikt natt/helg (avsnitt 7.7.4). A6 (sammenstilte = 1 min) har størst parametrisk restusikkerhet og trekker mot konservativt estimat. A4 og A8 er sensitivitetstestet eksplisitt. A3 og A5 er empirisk verifisert. A7 er tolkningsmessig og påvirker hvordan tallene leses, ikke tallene selv. A1 (VL) trekker også mot konservativt estimat.
+**Samlet vurdering av antagelsesrobusthet.** Hovedfunnet, at natt/helg Svikt-andelen ligger i intervallet 30 til 38 %, er robust over hele spennet av rimelige antagelser. Den mest kritiske antagelsen er A2 (D-pri1 makkerpar), fordi den definerer modellens behandling av pri-1-hendelser som tobindere. A2 er forankret i prosedyre og operatørintervju, og statistisk validert via bootstrap-CI [32,1; 33,2] % for Svikt natt/helg (avsnitt 8.3.4). A6 (sammenstilte = 1 min) har størst parametrisk restusikkerhet og trekker mot konservativt estimat. A4 og A8 er sensitivitetstestet eksplisitt. A3 og A5 er empirisk verifisert. A7 er tolkningsmessig og påvirker hvordan tallene leses, ikke tallene selv. A1 (VL) trekker også mot konservativt estimat.
 
 ---
 
-*Kap 6 | Versjon 3.5 | Sist oppdatert: 2026-05-15 (A2-status oppgradert til "Empirisk + statistisk validert"; D-pri1-imputasjon korrigert til 19 % og bootstrap-CI lenket fra Tabell 6.3 og A2-konsekvensvurdering)*
+*Kap 6 | Versjon 3.5 | Sist oppdatert: 2026-05-15 (A2-status oppgradert til "Empirisk + statistisk validert"; D-pri1-imputasjon korrigert til 19 % og bootstrap-CI lenket fra Tabell 6.3 og A2-konsekvensvurdering)*

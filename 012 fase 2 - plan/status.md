@@ -1,8 +1,30 @@
 # Prosjektstatus — LOG650 G20 Rune Grødem
 
-Statusdato: 2026-05-15 (v2.8)
+Statusdato: 2026-05-16 (v2.9)
 
-Denne statusen bygger på arbeidskopien per 2026-05-15, med prosjektstyringsplanen og WBS som referanse for avvik.
+Denne statusen bygger på arbeidskopien per 2026-05-16, med prosjektstyringsplanen og WBS som referanse for avvik.
+
+## Endringer fra v2.8 (2026-05-16)
+
+**Mal-konformitet: Rapporten omstrukturert i tråd med `000 templates/Mal prosjekt LOG650 v2.docx`.** Strukturen følger nå malen i 12 kapitler:
+
+- **Forside utvidet** med obligatorisk egenerklæring (6 punkter), personvern (NSD/Sikt og REK), publiseringsavtale (Brage), studiepoeng (15) og veileder (**Bård Inge Austigard Pettersen**)
+- **Sammendrag (norsk) og Abstract (engelsk)** som separate seksjoner — Abstract var manglende tidligere
+- **Kap 1.6 Antagelser** lagt til som eget avsnitt med peker til Tabell 6.3
+- **Kap 1.7 Rapportens struktur** oppdatert til 10 kapitler (tidligere 9)
+- **Kap 7 splittet i to:** Kap 7 «Analyse» (7.1-7.4: metodisk tilnærming, sekvensgap, arbeidsmetodikk, bindingstider) og Kap 8 «Resultat» (8.1-8.7: variant A, scenario +1, variant B, sensitivitet, bootstrap, ROS, nasjonal benchmarking, generaliserbarhet, hovedfunn)
+- **Kap 8 Diskusjon → Kap 9** (alle 8.X internt → 9.X)
+- **Kap 9 Konklusjon → Kap 10** (alle 9.X internt → 10.X)
+- **Referanser → Kap 11 Bibliografi**, **Vedlegg A-G → Kap 12 Vedlegg**
+- **Tabell/Figur-renummerering:** 7.6-7.14 → 8.1-8.10; figurer 7.2-7.4 → 8.1-8.3 (figur 7.1 D-pri1-fordeling forblir i kap 7 Analyse)
+- **Build-pipeline:** `verktoy/build_pdf.py` oppdatert med nye filnavn; Unicode-checkbox-glyphs (☒, ☐) håndtert i forbehandling for Segoe UI-kompatibilitet
+- **Samlet rapport-PDF:** 982 KB, 11 filer, ingen build-warnings
+
+Gjenstående forsideelementer som skal fylles ut ved innlevering:
+- Publiseringsavtale ja/nei
+- Sluttvurdering om båndlegging
+- Antall ord (oppdatert telling)
+- Sluttdato
 
 ## Endringer fra v2.7 (2026-05-15)
 

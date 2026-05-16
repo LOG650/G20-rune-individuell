@@ -50,7 +50,7 @@ To tilnærminger håndterer dette:
 
 2. **Dynamisk modellering:** Stolletz (2008) foreslår «stationary backlog-carryover» (SBC) for ikke-stasjonære M(t)/M(t)/c(t)-systemer. Jennings et al. (1996) utvikler lignende approksimeringer for tidsavhengig bemanning.
 
-For 110-kontekst er PSSA tilstrekkelig som grunnlinje fordi skiftperiodene er klart definerte og ankomstraten er rimelig stasjonær innenfor hver periode. Sterkere dynamisk modellering er et område for videre forskning (se kap 8.5).
+For 110-kontekst er PSSA tilstrekkelig som grunnlinje fordi skiftperiodene er klart definerte og ankomstraten er rimelig stasjonær innenfor hver periode. Sterkere dynamisk modellering er et område for videre forskning (se kap 9.5).
 
 ## 3.5 Poisson-forutsetningens gyldighet
 
@@ -93,7 +93,7 @@ Kim et al. (2008) modellerer flerserver-systemer med serversamarbeid. De viser a
 
 Jouini et al. (2008) analyserer team-baserte call-center-organisasjoner der to agenter samarbeider om oppgaver. De finner at team-organisering øker kapasitetsutnyttelsen ved moderat belastning, men skaper sårbarhet ved høy belastning. De viser også at *function differentiation* kan oppnå høyere effektivitet enn full pooling. I funksjonsdifferensierte systemer har agenter spesialiserte roller (typisk dispatcher vs. call taker). Motivasjon og spesialistkompetanse kompenserer for det statistiske tapet ved ikke å poole.
 
-Van Buuren et al. (2017) validerer dette gjennom diskret hendelsessimulering (DES) av nederlandske EMS-sentraler. De viser at funksjonsdifferensiering reduserer kapasitetskravet ved høy belastning uten å øke total bemanning. Funnet er direkte relevant for avsnitt 8.3 (dimensjoneringsalternativer).
+Van Buuren et al. (2017) validerer dette gjennom diskret hendelsessimulering (DES) av nederlandske EMS-sentraler. De viser at funksjonsdifferensiering reduserer kapasitetskravet ved høy belastning uten å øke total bemanning. Funnet er direkte relevant for avsnitt 9.3 (dimensjoneringsalternativer).
 
 ## 3.7 Op-binder-semantikk som formalt rammeverk
 
@@ -130,13 +130,13 @@ Dette rammeverket reduserer til klassisk M/M/c når alle $q_e = 1$ og $d_e$ er e
 
 ## 3.8 Kvalitetsreduksjon som skjult buffer
 
-Et siste teoretisk bidrag relevant for tolkning (kap 8.2) er litteratur om hvordan operatører tilpasser seg under press. Gustavsson (2018) dokumenterer ved SOS Alarm at agenter under press komprimerer servicetiden og reduserer kvaliteten: *«agents themselves are affected by their workload and duties, which inter alia affect their efficiency»*. Tilpasningen er rasjonell fra operatørens perspektiv. Det er bedre å svare fort med redusert kvalitet enn å la en innringer vente.
+Et siste teoretisk bidrag relevant for tolkning (kap 9.2) er litteratur om hvordan operatører tilpasser seg under press. Gustavsson (2018) dokumenterer ved SOS Alarm at agenter under press komprimerer servicetiden og reduserer kvaliteten: *«agents themselves are affected by their workload and duties, which inter alia affect their efficiency»*. Tilpasningen er rasjonell fra operatørens perspektiv. Det er bedre å svare fort med redusert kvalitet enn å la en innringer vente.
 
 Al-Sarhani et al. (2025) viser at simultane hendelser øker kognitiv belastning og feilrate signifikant. Leonardsen et al. (2021) rapporterer tilsvarende funn fra norske AMK-sentraler: manglende debriefing, ingen tilbakemelding, og en opplevelse av usynlighet under høyt press.
 
 Jamtli et al. (2024) beskriver hvordan arbeidspress påvirker beslutningstaking i slagtelefoner ved AMK Oslo, blant annet gjennom avveininger mellom protokoll og erfaringsbasert intuisjon.
 
-Felles for disse studiene er at de dokumenterer en **skjult buffer**. Systemet fungerer ofte «godt nok» fordi operatørene bærer belastningen individuelt gjennom kvalitetsreduksjon, selv når den formelle driftsstandarden er brutt. Dette er en sentral tolkningsramme for kap 8.2. Modellens prediksjon av svikt ved 32,6 % av beredskapsanropene på natt/helg (variant A) er ikke motargument mot at sentralen fungerer. Det er en kvantifisering av den operative kostnaden som bæres av operatørene.
+Felles for disse studiene er at de dokumenterer en **skjult buffer**. Systemet fungerer ofte «godt nok» fordi operatørene bærer belastningen individuelt gjennom kvalitetsreduksjon, selv når den formelle driftsstandarden er brutt. Dette er en sentral tolkningsramme for kap 9.2. Modellens prediksjon av svikt ved 32,6 % av beredskapsanropene på natt/helg (variant A) er ikke motargument mot at sentralen fungerer. Det er en kvantifisering av den operative kostnaden som bæres av operatørene.
 
 ## 3.9 Oppsummering
 
