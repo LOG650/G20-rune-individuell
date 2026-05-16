@@ -20,7 +20,7 @@ I alle tre tilfellene besvares anropet i praksis. Modellen sier ikke at tjeneste
 
 ### Metode
 
-For hvert beredskapsanrop måles hvor mange operatører som er bundet i pågående hendelser ved ankomsttidspunktet. Sweep-algoritmen akkumulerer *op-binder*, ikke bare antall aktive hendelser: D-pri1 bidrar med 2 op-binder gjennom bindingstiden, D-aba Fase 1 bidrar med 1 op-bind i 3 min, D-aba Fase 2 (med sannsynlighet p = 0,50) bidrar med 1 op-bind i 6 min, og skjulte anrop bidrar med 1 op-bind i 1 min. Kapasitetsnivå klassifiseres etter antall ledige operatører (avsnitt 6.4).
+For hvert beredskapsanrop måles hvor mange operatører som er bundet i pågående hendelser ved ankomsttidspunktet. Sweep-algoritmen akkumulerer *op-binder*, ikke bare antall aktive hendelser: D-pri1 bidrar med 2 op-binder gjennom bindingstiden, D-aba Fase 1 bidrar med 1 op-binder i 3 min, D-aba Fase 2 (med sannsynlighet p = 0,50) bidrar med 1 op-binder i 6 min, og skjulte anrop bidrar med 1 op-binder i 1 min. Kapasitetsnivå klassifiseres etter antall ledige operatører (avsnitt 6.4).
 
 Skjulte anrop plasseres i tid via sekvensgap-metoden. Dersom oppdrag B06-250101-4 og B06-250101-6 er synlige, tildeles det manglende sekvensnummeret -5 tidspunkt fra nærmeste synlige oppdrag. Analysen fanger dermed den strukturelle effekten selv om eksakt ankomsttid for hvert skjult anrop er estimert.
 
@@ -44,7 +44,7 @@ De sammenstilte tilleggsanropene er tildelt 1 minutts bindingstid, en konservati
 | **Natt/helg (c=2)** | 46,9 % | 20,5 % | **32,6 %** | 12 016 |
 | **Alle** | 59,6 % | 17,9 % | 22,5 % | 27 960 |
 
-Tallene er punktestimater under hovedscenario-antagelsene i Tabell 8.3. Scenariospennet (variant B lav/hoved/høy, jf. Tabell 8.5) viser at Svikt-andelen på natt/helg holder seg innenfor ca. 30 til 38 % over hele parameterspennet, slik at tallet 32,6 % skal leses som et midtestimat med scenariobånd, ikke som en punktmåling.
+Tallene er punktestimater under hovedscenario-antagelsene i Tabell 8.3. Variant B-scenariospennet (lav/hoved/høy, jf. Tabell 8.5) brukes her som *robusthetssjekk for antagelsesfølsomhet*, ikke som et statistisk konfidensintervall for variant A: båndet viser at Svikt-andelen på natt/helg holder seg innenfor ca. 30 til 38 % over hele parameterspennet, slik at tallet 32,6 % skal leses som et midtestimat under rimelige bindingstidsantagelser. Det statistiske konfidensintervallet for variant A natt/helg er kvantifisert separat via bootstrap i 8.3.4 (95 % CI [32,1; 33,2] %).
 
 Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3) er 69,2 % av beredskapsanrop i Normal og 14,9 % i Svikt. På natt/helg (c=2) er Normal-andelen under halvparten (46,9 %), og hvert tredje anrop ankommer i Svikt-tilstand (32,6 %, scenariobånd 30 til 38 %). Dette er en dobling av sviktraten fra dagskiftet, primært fordi c=2 gir null buffer når en pri-1-hendelse binder makkerparet.
 
@@ -52,7 +52,7 @@ Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3
 
 ### D-pri1 som primær svikt-driver
 
-Den sterkeste enkeltdriveren for svikt er D-pri1-hendelser. På c=2 binder én aktiv D-pri1 hele operatørkapasiteten, ved at begge ops er i makkerpar-rollen, og et nytt beredskapsanrop i samme tidsvindu ankommer direkte i Svikt. D-aba derimot binder bare én op i Fase 1, slik at en D-aba-hendelse på natt/helg *tillater* en ny beredskapsanrop i parallell drift (Brudd, ikke Svikt).
+Den sterkeste enkeltdriveren for svikt er D-pri1-hendelser. På c=2 binder én aktiv D-pri1 hele operatørkapasiteten, ved at begge ops er i makkerpar-rollen, og et nytt beredskapsanrop i samme tidsvindu ankommer direkte i Svikt. D-aba derimot binder bare én op i Fase 1, slik at en D-aba-hendelse på natt/helg *tillater* et nytt beredskapsanrop i parallell drift (Brudd, ikke Svikt).
 
 Dette forklarer hvorfor Brudd-andelen er relativt lav (20,5 % på natt/helg) mens Svikt-andelen er høy: modellen differensierer strukturelt mellom lette og tunge beredskapsoppgaver, og pri-1-hendelser går direkte til Svikt-terskelen når c=2.
 
@@ -109,6 +109,8 @@ Scenarioanalysen viser den strukturelle effekten av økt bufferkapasitet, men si
 ---
 
 ### Oppsummering av modellantagelser
+
+Før variant B og sensitivitetsanalysen presenteres, samles modellantagelsene som ligger bak resultatene i 8.1 og 8.2, og som inngår uendret i variant B (8.3). Tabellen gjelder hele kapitlet, ikke bare scenarioanalysen over.
 
 **Tabell 8.3: Modellantagelser og parametere**
 
@@ -215,7 +217,7 @@ Bootstrap-CI for Svikt natt/helg er **[32,1; 33,2] %** med bredde 1,1 pp. Punkte
 
 **Hva CI-en ikke fanger.** Bootstrap-CI kvantifiserer *parametrisk* usikkerhet i den observerte D-pri1-bindingstidsfordelingen, ikke *definisjonsmessig* usikkerhet i selve modellrammen. Den smale CI-bredden (1,1 pp) sier at *gitt* op-binder-semantikken, makkerpar-kravet og kategoriinndelingen i kap 6, så er Svikt-andelen statistisk presis. Den dominerende restusikkerheten gjelder valg av modellramme (Trussel 1 og 4 i kap 5.6.1) og er kvalitativt drøftet i kap 5.6.2 og 9.2.3, ikke kvantifisert her. Et smalere intervall enn ±0,5 pp må derfor ikke leses som total usikkerhet.
 
-**MAR-sjekk og imputeringsantagelse.** Bootstrap-en bruker pooled re-imputation, som forutsetter at manglende «første ressurs fremme»-tidsstempel er tilfeldig fordelt (MAR) på tvers av Oppdragstype. Empirisk varierer missingness fra 5,6 % («Brann i bygning») til 73,4 % («Avbrutt utrykning samtale»), med koeffisientvariasjon 0,98 på tvers av Oppdragstype (n ≥ 30). MAR-antagelsen er dermed *ikke* strengt oppfylt. Klyngingen er imidlertid systematisk og operativt forklarlig: hendelser uten registrert fremme-tidspunkt er typisk avbrutte utrykninger (ressurs returnerte før den nådde frem) som har *kortere* faktisk binding enn medianen for vellykkede utrykninger. Pooled imputering med observert median vil derfor systematisk *overestimere* binding for disse, noe som trekker Svikt-andelen oppover, ikke nedover. Bootstrap-CI rapportert over er dermed et øvre anslag på den statistiske usikkerheten; en stratifisert imputering ville gitt litt lavere Svikt-mean uten å endre konklusjonen om at intervallet er smalt og funnet stabilt. Detaljert MAR-rapport: `analyse/bootstrap_dpri1_mar_sjekk.csv`.
+**MAR-sjekk og imputeringsantagelse.** To imputeringsregimer brukes parallelt og bør holdes adskilt: (i) *punktestimatet* i Tabell 8.1 imputerer manglende fremme-tidsstempel med observert median (14,1 min), mens (ii) *bootstrap-CI-en* trekker fra hele den observerte empiriske fordelingen (ikke kun medianen) i hver iterasjon. Begge regimer forutsetter at manglende «første ressurs fremme»-tidsstempel er tilfeldig fordelt (MAR) på tvers av Oppdragstype. Empirisk varierer missingness fra 5,6 % («Brann i bygning») til 73,4 % («Avbrutt utrykning samtale»), med koeffisientvariasjon 0,98 på tvers av Oppdragstype (n ≥ 30). MAR-antagelsen er dermed *ikke* strengt oppfylt. Klyngingen er imidlertid systematisk og operativt forklarlig: hendelser uten registrert fremme-tidspunkt er typisk avbrutte utrykninger (ressurs returnerte før den nådde frem) som har *kortere* faktisk binding enn medianen for vellykkede utrykninger. Median-imputeringen i punktestimatet kan derfor overestimere binding for avbrutte utrykninger, og trekkene fra observert fordeling i bootstrap-en arver samme retning. Bootstrap-CI rapportert over gir et bredere usikkerhetsbilde enn punktestimatet alene, men fanger ikke en full stratifisert missingness-modell; en stratifisert imputering per Oppdragstype ville gitt litt lavere Svikt-mean uten å endre konklusjonen om at intervallet er smalt og funnet stabilt. Detaljert MAR-rapport: `analyse/bootstrap_dpri1_mar_sjekk.csv`.
 
 <div align="center">
   <img src="../analyse/figurer/bootstrap_dpri1_ci.png" alt="Bootstrap-CI for kapasitetsnivå" width="95%">
@@ -384,4 +386,4 @@ Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av fu
 
 *Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
 
-*Kap 8 | Versjon 1.1 | Sist oppdatert: 2026-05-16 (utskilt fra tidligere kap 7 i mal-konformitets-revisjon; sluttvask av kryssreferanser og kapittelnummer)*
+*Kap 8 | Versjon 1.2 | Sist oppdatert: 2026-05-16 (sluttvask kap 8: op-binder-konsistens, scenariobånd presisert som robusthetssjekk, bootstrap-/imputeringslogikk klargjort, brosetning før Tabell 8.3, grammatikkfiks i 8.1)*
