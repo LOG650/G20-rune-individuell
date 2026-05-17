@@ -37,7 +37,7 @@ Dette har tre konsekvenser for analysen:
 
 1. **Ankomstraten λ i Erlang-C er for lav.** En modell som bruker synlige oppdrag som grunnlag for λ vil systematisk undervurdere faktisk arbeidsbelastning. Selv en perfekt M/M/c-modell ville derfor vært basert på et ufullstendig inputgrunnlag.
 
-2. **Sammenstilte anrop er modellert som egne belastningsenheter, men modellen er fortsatt konservativ.** I den prosedyrbaserte ankomstkonfliktmodellen (kvantifisert i avsnitt 8.1, formell definisjon i kap 6.4.6) er de 18 901 estimerte sammenstilte anropene inkludert som egne op-binder-events med interpolert ankomsttidspunkt og bindingstid 1 minutt ($q = 1$, $d = 1$ min). De bidrar dermed til $n_{\text{aktive}}$ ved senere ankomster og kan utløse Brudd eller Svikt på samme måte som synlige oppdrag. Modellen er likevel konservativ av to grunner: (i) bindingstiden 1 min er et nedre estimat (faktisk varighet kan være lengre dersom innringer er stresset eller anropet håndteres som full hendelse), og (ii) sekvensgap-metoden fanger kun anrop som er sammenstilt med eksisterende oppdrag. Beredskapsrelaterte anrop som er feilkategorisert og lukket som egne saker (f.eks. som «service» eller «feilringing» under høyt press) er fortsatt usynlige. Det reelle antallet beredskapsrelaterte tilleggsanrop er derfor sannsynligvis høyere enn 18 901.
+2. **Sammenstilte anrop er modellert som egne belastningsenheter, men modellen er fortsatt konservativ.** I den prosedyrbaserte ankomstkonfliktmodellen (kvantifisert i avsnitt 8.1, formell definisjon i kap 6.4.6) er de 18 901 estimerte sammenstilte anropene inkludert som egne op-binder-events med interpolert ankomsttidspunkt og bindingstid 1 minutt (én operatør bundet i ett minutt). De bidrar dermed til antall aktive op-binder ved senere ankomster og kan utløse Brudd eller Svikt på samme måte som synlige oppdrag. Modellen er likevel konservativ av to grunner: (i) bindingstiden 1 min er et nedre estimat (faktisk varighet kan være lengre dersom innringer er stresset eller anropet håndteres som full hendelse), og (ii) sekvensgap-metoden fanger kun anrop som er sammenstilt med eksisterende oppdrag. Beredskapsrelaterte anrop som er feilkategorisert og lukket som egne saker (f.eks. som «service» eller «feilringing» under høyt press) er fortsatt usynlige. Det reelle antallet beredskapsrelaterte tilleggsanrop er derfor sannsynligvis høyere enn 18 901.
 
 3. **Skjult belastning påvirker dimensjonering direkte.** Sammenstilte tilleggsanrop påvirker ikke bare ankomstraten i køteoretisk forstand, men også den operative bindingen i den prosedyrbaserte modellen. Inkluderingen av skjulte anrop som egne op-binder-events (punkt 2) gjør at primærmodellen fanger denne effekten i variant A, men siden underestimatet av antall skjulte anrop fortsatt eksisterer, betyr det at modellens svikt- og brudd-andeler er nedre estimater. For dimensjonering tilsier dette at analyser basert utelukkende på oppdragsteller (uten skjult-anrop-korreksjon) systematisk vil undervurdere både arbeidsbelastning, samtidighetskonflikt og behovet for bufferkapasitet.
 
@@ -164,10 +164,3 @@ Analysen i 7.1-7.4 etablerer den metodiske rammen og parametergrunnlaget for kap
 
 ---
 
-*Skript for analyser: `analyse/scripts/bindingstid_analyse.py` (D-pri1-fordeling), `analyse/scripts/uttrekk_laba_sorvest.py` (LABA-dybdeanalyse).*
-
-*Metodedokumentasjon: `analyse/notat_V3_modellutvikling.md` (parameterkalibrering).*
-
-*Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
-
-*Kap 7 | Versjon 3.1 | Sist oppdatert: 2026-05-16 (mal-konformitet: avgrenset til analyse-delen 7.1-7.4; tidligere 7.5-7.11 flyttet til kap 8 Resultat; Erlang-C-tabell konsolidert til Tabell 6.1).*

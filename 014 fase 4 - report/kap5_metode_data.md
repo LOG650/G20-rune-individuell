@@ -37,13 +37,13 @@ Analysen bygger på fem datakilder med ulik rolle og tilgangsstatus:
 
 **Tabell 5.2: Oversikt over datakilder**
 
-| Kilde | Type | Periode | Rolle i analysen | Tilgang |
+| Kilde | Type | Periode | Rolle | Tilgang |
 |---|---|---|---|---|
-| LEO/BRIS hendelsesdata | Registerdata | 2025 | Primærdata: ankomsttidspunkt, bindingstid, hendelsesklassifisering | Intern tilgang |
-| DSB MOB-rapporter | Offentlig statistikk | 2022 til 2025 | Benchmarking: bemanning og volum alle 12 sentraler | Offentlig |
-| Prosedyre- og analysedokumenter | Internprosedyre | Gjeldende | Modellparametere: rollestruktur, overløpsregler, VL-funksjon | Intern tilgang |
-| Operative valideringssamtaler | Kvalitative data | Mars til april 2026 | Kalibrering og validering av modellforutsetninger | Egne samtaler |
-| SSB befolkningsdata | Offentlig statistikk | 2026 | Generaliseringsanalyse: innbyggertall per dekningsområde | Offentlig |
+| LEO/BRIS hendelsesdata | Registerdata | 2025 | Primærdata for ankomst og binding | Intern |
+| DSB MOB-rapporter | Offentlig statistikk | 2022–2025 | Benchmarking alle 12 sentraler | Offentlig |
+| Prosedyre- og analysedokumenter | Internprosedyre | Gjeldende | Modellparametere og roller | Intern |
+| Operative valideringssamtaler | Kvalitative data | Mars–april 2026 | Kalibrering og validering | Egne samtaler |
+| SSB befolkningsdata | Offentlig statistikk | 2026 | Innbyggertall per dekningsområde | Offentlig |
 
 Hovedanalysen er kvantitativ og registerbasert. De kvalitative kildene (prosedyredokumenter og valideringssamtaler) har en støttende funksjon: de brukes til å forankre modellantagelser i operativ virkelighet, ikke som selvstendig empirisk grunnlag for hovedfunnene.
 
@@ -430,7 +430,3 @@ Forfatterens operative tilknytning til 110 Sør-Vest er gjort eksplisitt og adre
 ---
 
 Samlet gir datagrunnlaget et godt grunnlag for å modellere den best observerbare og mest beredskapsdimensjonerende delen av operatørbindingen. Enkelte belastningselementer må estimeres eller empirisk kalibreres. På dette grunnlaget utvikles i neste kapittel modellrammeverket for kapasitetsanalysen.
-
----
-
-*Kap 5, Versjon 3.6 | Sist oppdatert: 2026-05-17 (begrepsskifte: «prosedyrkonformitet» → «prosedyreetterlevelse»)*

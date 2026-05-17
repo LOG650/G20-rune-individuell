@@ -114,7 +114,3 @@ Disse konsekvensene er ikke bare teoretiske. De representerer operative forhold 
 Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i sentralens risiko- og beredskapsanalyse (ROS) og tilhørende beredskapsanalyse. Disse dokumentene vurderer kvalitativt hvilke risikoer sentralen er eksponert for og hvilken bemanning som anses nødvendig. 110 Sør-Vest brukes i denne rapporten som primærcase for å utvikle og teste en kvantitativ analysemodell som prinsipielt kan anvendes på andre 110-sentraler. Resultatobservasjonen av disse analysene presenteres i kap 8.4, og en nærmere drøfting av deres metodiske grunnlag opp mot de kvantitative funnene inngår i diskusjonen (kapittel 9).
 
 Det er viktig å understreke at ROS-analysene er kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler. Prosjektets ambisjon er å supplere, ikke erstatte, disse analysene med et kvantitativt referansepunkt for operatørbemanning.
-
----
-
-*Kap 4, Versjon 1.5 | Sist oppdatert: 2026-05-17 (4.2.1 nyansert: dagvakter normalt på 4 personer, minimum = planlagt; konsistent med ny anbefaling i 10.4)*

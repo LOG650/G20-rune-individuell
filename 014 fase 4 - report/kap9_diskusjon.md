@@ -177,7 +177,3 @@ Tre retninger fremstår som mest lovende.
 **2. Tidsvariabel analyse.** Modellen behandler dag- og nattskift som homogene perioder. En mer finkornet analyse, per time eller per totime, ville identifisere spesifikke sårbare perioder (f.eks. skiftveksling kl. 19:00) og muliggjøre mer målrettet bemanningsplanlegging. Jennings et al. (1996) og Stolletz (2008) gir rammeverk for tidsvariabel bemanningsoptimering som kunne tilpasses 110-konteksten.
 
 **3. Simuleringsbasert modellering.** Dwars' (2013) DES-tilnærming og Penverne et al. (2024) digitale tvilling viser at diskret hendelsessimulering kan fange dynamikker som den deterministiske sweep-algoritmen ikke håndterer. Stokastisk variasjon i ankomsttidspunkt, variabel servicetid og overløpsarkitektur mellom sentraler er eksempler. En DES-modell kalibrert mot 110-data ville gi mer nyanserte kapasitetsestimater og mulighet for å teste organisatoriske endringer før implementering.
-
----
-
-*Kap 9 | Versjon 1.5 | Sist oppdatert: 2026-05-17 (9.3-innledning oppdatert: primær +1 natt/helg, sekundær +1 dag, komplementær funksjonsdifferensiering)*

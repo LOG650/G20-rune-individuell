@@ -130,7 +130,3 @@ Etter litteratursøket i denne studien er det ikke funnet publiserte, kvantitati
 ### Studiens posisjonering i forhold til de fem gapene
 
 Denne studien fyller særlig **Gap 1, 2 og 5**. Prosedyreetterlevelse ved ankomst (Gap 1) operasjonaliseres som målbar metrikk via op-binder-semantikk. Op-binder-semantikken adresserer Gap 2: D-pri1 med makkerpar-krav modelleres som direkte teoretisk parallell til multiserver-jobs. Modellen anvendes på norske 110-data for første gang (Gap 5). Studien adresserer også Gap 3 (kapasitetsbinding utover samtaletid via observerte tidsstempler for første ressurs fremme) og Gap 4 (helg/hverdag-asymmetri kvantifisert mot beredskapsbelastning, ikke bare totalvolum). Metodisk originalitet ligger i operasjonaliseringen av prosedyrekrav som målbar kapasitetsmetrikk, ikke i utvikling av ny køteori.
-
----
-
-*Kap 2 · Versjon 1.4 | Sist oppdatert: 2026-05-17 (begrepsskifte: «prosedyrkonformitet» → «prosedyreetterlevelse» (etablert norsk))*

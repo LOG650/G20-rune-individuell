@@ -147,9 +147,7 @@ Et eget strategidokument (`analyse/DSB_onskeliste_BRIS_datauttrekk.md`) spesifis
 
 ### Vedlegg D: Dokumentasjon av KI-bruk
 
-Fullstendig brukslogg, rapporttekst og administrativ erklæring finnes i det løpende dokumentet:
-
-**`KI_erklæring_LOG650_G20_Rune.md`** (prosjektrot)
+Fullstendig brukslogg, rapporttekst og administrativ erklæring finnes i det løpende dokumentet `KI_erklæring_LOG650_G20_Rune.md` i prosjektroten.
 
 Dokumentet inneholder:
 

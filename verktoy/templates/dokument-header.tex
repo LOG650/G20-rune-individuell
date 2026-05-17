@@ -43,7 +43,9 @@
 \AtBeginEnvironment{longtable}{\setlength{\arrayrulewidth}{0.4pt}}
 
 % --- Figurer alltid sentrert med tekst under ---
-\captionsetup{font=small,labelfont=bf,labelsep=period,justification=centering}
+% labelformat=empty: figurnummer skrives manuelt i caption-teksten (f.eks. "Figur 4.1: ..."),
+% slik at LaTeX ikke prefikser med eget "Figur N." og dobler nummereringen.
+\captionsetup{font=small,labelfont=bf,labelsep=none,labelformat=empty,justification=centering}
 \setkeys{Gin}{width=0.85\linewidth,keepaspectratio}
 
 % --- Lenker ---

@@ -319,7 +319,7 @@ Variant B bruker nøyaktig samme sweep-algoritme som variant A (avsnitt 6.4.7). 
 
 Begge modellene er implementert i Python. Erlang-C er beregnet med scipy.special og numpy. Ankomstkonfliktmodellen bruker en sweep-algoritme over sorterte op-binder-events som gir O(N) kompleksitet for sweep-en over N events (pluss O(N log N) for sortering).
 
-Hovedlogikken: hver hendelse ekspanderes til én eller flere op-binder-events. D-pri1 gir ett event med $q = 2$. D-aba gir Fase 1 alltid ($q = 1$, 3 min) pluss Fase 2 med sannsynlighet $p$ ($q = 1$, $Y$ min, offset 1,5 min). Øvrige hendelser gir ett event med $q = 1$. Sweep-en akkumulerer aktiv op-binder ved hver ankomst.
+Hovedlogikken: hver hendelse ekspanderes til én eller flere op-binder-events. D-pri1 gir ett event med to operatører bundet (q = 2). D-aba gir Fase 1 alltid (én operatør i 3 min) pluss Fase 2 med sannsynlighet p (én operatør i Y min, med 1,5 min offset). Øvrige hendelser gir ett event med én operatør bundet. Sweep-en akkumulerer aktiv op-binder ved hver ankomst.
 
 ```python
 def ekspander_events(hendelse, scenario):
@@ -399,7 +399,3 @@ For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene byg
 **A8, bindingstider for S, L-hendelse, L-ukjent, F, V.** Sensitivitetstestet i avsnitt 8.3. Hele spennet av rimelige antagelser gir Svikt natt/helg 30 til 38 % (variant B). Hovedfunnet er robust. A8 påvirker ikke variant A (beredskapsbelastning) som er studiens primære metrikk. På dag hverdag er sensitivitetsspennet bredere (15 til 34 % Svikt), noe som tilsier større usikkerhet for dagskonklusjonen, men ikke for natt/helg-funnet.
 
 **Samlet vurdering av antagelsesrobusthet.** Hovedfunnet, at natt/helg Svikt-andelen ligger i intervallet 30 til 38 %, er robust over hele spennet av rimelige antagelser. Den mest kritiske antagelsen er A2 (D-pri1 makkerpar), fordi den definerer modellens behandling av pri-1-hendelser som tobindere. A2 er forankret i prosedyre og operatørintervju, og statistisk validert via bootstrap-CI [32,1; 33,2] % for Svikt natt/helg (avsnitt 8.3.4). A6 (sammenstilte = 1 min) har størst parametrisk restusikkerhet og trekker mot konservativt estimat. A4 og A8 er sensitivitetstestet eksplisitt. A3 og A5 er empirisk verifisert. A7 er tolkningsmessig og påvirker hvordan tallene leses, ikke tallene selv. A1 (VL) trekker også mot konservativt estimat.
-
----
-
-*Kap 6 | Versjon 3.7 | Sist oppdatert: 2026-05-17 (begrepsskifte: «prosedyrkonformitetsmetrikk» → «metrikk for prosedyreetterlevelse»)*

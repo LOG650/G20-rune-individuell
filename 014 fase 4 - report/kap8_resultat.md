@@ -261,7 +261,7 @@ Tabellene i avsnitt 8.5 bruker det nasjonale DSB-uttrekket for sammenlignbarhet 
 
 **Tabell 8.8: Volum og operatørbelastning per sentral, DSB 2025**
 
-| Sentral | Totalvolum | Beredskap (D) | D-andel | c_eff dag (MOB) | Oppdrag/c_eff (MOB) | Arbeidsmengde (timer/dag) |
+| Sentral | Totalvolum | Beredskap (D) | D-andel | c_eff dag | Oppdrag/c_eff | Timer/dag |
 |---|---:|---:|---:|---:|---:|---:|
 | Oslo | 71 421 | 17 811 | 24,9 % | 4 | 17 855 | 19,4 |
 | Sør-Øst | 68 654 | 14 174 | 20,6 % | 5 | 13 731 | 16,4 |
@@ -273,18 +273,18 @@ Tabellene i avsnitt 8.5 bruker det nasjonale DSB-uttrekket for sammenlignbarhet 
 | Nordland | 29 577 | 2 749 | 9,3 % | 2 | 14 789 | 4,9 |
 | Møre og Romsdal | 29 384 | 3 492 | 11,9 % | 3 | 9 795 | 5,1 |
 | Agder | 26 238 | 6 409 | 24,4 % | 3 | 8 746 | 6,6 |
-| Tromsø | 19 327 | 3 927 | 20,3 % | 1 | 19 327 | 4,7 |
+| Troms | 19 327 | 3 927 | 20,3 % | 1 | 19 327 | 4,7 |
 | Finnmark | 7 402 | 1 281 | 17,3 % | 2 | 3 701 | 1,6 |
 
-*Kilde: `analyse/nasjonal_2025/storrelse_ranking.csv` og `benchmarkmatrise.csv`. c_eff dag (MOB) = rapportert c_total dag − 1 (VL-korreksjon). For andre sentraler enn Sør-Vest er dette en sammenligningsproxy, ikke lokalt validert faktisk bemanning. Arbeidsmengde = volum × kategori-spesifikk bindingstid summert over et år.*
+*Kilde: `analyse/nasjonal_2025/storrelse_ranking.csv` og `benchmarkmatrise.csv`. c_eff dag = rapportert c_total dag − 1 (VL-korreksjon) basert på MOB-data. For andre sentraler enn Sør-Vest er dette en sammenligningsproxy, ikke lokalt validert faktisk bemanning. Timer/dag = totalt arbeidsvolum (volum × kategori-spesifikk bindingstid) summert over et år, fordelt på 365 dager.*
 
-Totalvolumet varierer 9,6× mellom Finnmark (7 402) og Oslo (71 421). Basert på rapportert MOB-bemanning ligger Sør-Vest (20 645) høyt på oppdrag per effektiv operatør foran Tromsø (19 327) og Oslo (17 855), mens Finnmark (3 701) ligger lavest. Dette er et strukturelt benchmarksignal, ikke en konklusjon om faktisk vaktbelastning ved hver enkelt sentral. Arbeidsmengde per dag spenner fra 1,6 timer (Finnmark) til 19,4 timer (Oslo).
+Totalvolumet varierer 9,6× mellom Finnmark (7 402) og Oslo (71 421). Basert på rapportert MOB-bemanning ligger Sør-Vest (20 645) høyt på oppdrag per effektiv operatør foran Troms (19 327) og Oslo (17 855), mens Finnmark (3 701) ligger lavest. Dette er et strukturelt benchmarksignal, ikke en konklusjon om faktisk vaktbelastning ved hver enkelt sentral. Arbeidsmengde per dag spenner fra 1,6 timer (Finnmark) til 19,4 timer (Oslo).
 
 ### 8.5.2 Kategorifordeling og klassifiseringspraksis
 
 **Tabell 8.9: Andel av totalvolum per V3-kategori, DSB 2025**
 
-| Sentral | D-pri1 | D-aba | S | L-aba | L-hendelse | L-ukjent | F | V |
+| Sentral | D-pri1 | D-aba | S | L-aba | L-hend | L-ukj | F | V |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Agder | 10,3 % | 14,1 % | 30,9 % | 3,8 % | 7,6 % | 13,8 % | 18,5 % | 1,0 % |
 | Finnmark | 14,0 % | 3,3 % | 31,4 % | 5,3 % | 8,1 % | 28,1 % | 8,6 % | 1,2 % |
@@ -295,11 +295,11 @@ Totalvolumet varierer 9,6× mellom Finnmark (7 402) og Oslo (71 421). Basert på
 | Oslo | 24,9 % | 0,0 % | 9,3 % | 0,0 % | 9,3 % | 40,4 % | 14,5 % | 1,5 % |
 | Sør-Vest | 7,2 % | 4,9 % | 36,4 % | 5,5 % | 6,9 % | 27,1 % | 11,0 % | 0,9 % |
 | Sør-Øst | 20,6 % | 0,0 % | 22,9 % | 0,0 % | 10,2 % | 28,7 % | 15,8 % | 1,6 % |
-| Tromsø | 9,8 % | 10,5 % | 18,3 % | 6,1 % | 8,4 % | 35,9 % | 10,4 % | 0,6 % |
+| Troms | 9,8 % | 10,5 % | 18,3 % | 6,1 % | 8,4 % | 35,9 % | 10,4 % | 0,6 % |
 | Vest | 11,4 % | 4,4 % | 38,1 % | 0,6 % | 9,9 % | 20,6 % | 13,9 % | 1,1 % |
 | Øst | 11,8 % | 9,6 % | 13,5 % | 2,3 % | 5,8 % | 34,8 % | 20,6 % | 1,5 % |
 
-*Kilde: `analyse/nasjonal_2025/benchmarkmatrise.csv`. V3-klassifisering med Kilde=Alarm-krav for D-aba og L-aba.*
+*Kilde: `analyse/nasjonal_2025/benchmarkmatrise.csv`. V3-klassifisering med Kilde=Alarm-krav for D-aba og L-aba. Forkortelser: L-hend = L-hendelse (reell hendelse løst av 110), L-ukj = L-ukjent.*
 
 Tre observasjoner:
 
@@ -318,7 +318,7 @@ Tre observasjoner:
 | Finnmark | 7 402 | 13 780 | 21 182 | 65,1 % |
 | Agder | 26 238 | 31 339 | 57 577 | 54,4 % |
 | Øst | 58 138 | 47 577 | 105 715 | 45,0 % |
-| Tromsø | 19 327 | 13 447 | 32 774 | 41,0 % |
+| Troms | 19 327 | 13 447 | 32 774 | 41,0 % |
 | Innlandet | 44 001 | 28 761 | 72 762 | 39,5 % |
 | Sør-Øst | 68 652 | 35 323 | 103 975 | 34,0 % |
 | Nordland | 29 577 | 12 837 | 42 414 | 30,3 % |
@@ -371,7 +371,7 @@ Pri-1-hendelser binder makkerparet (RØD og GUL) parallelt i median 14,1 min. AB
 På natt/helg (c=2) er **32,6 % av beredskapsanropene i Svikt-tilstand** (variant A; scenariobånd variant B: 30 til 38 %; bootstrap-CI for parametrisk usikkerhet: [32,1; 33,2] %) og kun 46,9 % i Normal. Svikt-raten skyldes primært at én aktiv D-pri1-hendelse binder hele makkerparet. D-aba bidrar relativt mindre til Svikt fordi serial-håndteringen etterlater 1 op ledig. Hovedfunnet er robust over hele sensitivitetsspennet.
 
 **Funn 4: +1 operatør på natt/helg halverer sviktraten der; tilsvarende heving på dag gir mindre, men reell forbedring.**
-Én ekstra operatør på natt/helg (c_eff 2 → 3) øker Normal fra 46,9 % til 67,2 % (+20,3 pp) og reduserer Svikt fra 32,8 % til 16,7 %. På dag hverdag gir en tilsvarende heving (c_eff 3 → 4) en mindre, men reell forbedring: Normal øker fra 69,2 % til 85,1 % og Svikt fra 14,9 % til 8,5 %. Effekten er størst på natt/helg fordi c=2 i dag gir null buffer ved aktiv D-pri1. Effektene er modellprediksjoner, robuste mot parametervariasjon, men ikke validert mot historisk bemanningsendring.
+Én ekstra operatør på natt/helg (c_eff 2 → 3) øker Normal fra 46,9 % til 67,2 % (+20,3 pp) og reduserer Svikt fra ca. 33 % til 16,7 %. På dag hverdag gir en tilsvarende heving (c_eff 3 → 4) en mindre, men reell forbedring: Normal øker fra 69,2 % til 85,1 % og Svikt fra 14,9 % til 8,5 %. Effekten er størst på natt/helg fordi c=2 i dag gir null buffer ved aktiv D-pri1. Effektene er modellprediksjoner, robuste mot parametervariasjon, men ikke validert mot historisk bemanningsendring.
 
 **Funn 5: Total operativ belastning forverrer dagkapasiteten merkbart.**
 Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 59,5 % (−9,7 pp) og Svikt øker fra 14,9 % til 21,6 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes i mindre grad fordi bakgrunnsvolumet er lavere; Svikt øker fra 32,6 % til 33,2 %. Sensitivitetsanalysen viser at denne forverringen er robust.
@@ -380,10 +380,3 @@ Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av fu
 
 ---
 
-*Skript for analyser og figurer: `analyse/scripts/konflikt_total_belastning.py` (variant A og B), `analyse/scripts/scenario_pluss1.py` (scenario +1 op), `analyse/scripts/bindingstid_analyse.py`, `analyse/scripts/uttrekk_laba_sorvest.py` (LABA-dybdeanalyse), `analyse/scripts/bootstrap_dpri1.py` (bootstrap-CI + MAR-sjekk).*
-
-*Metodedokumentasjon: `analyse/notat_V3_modellutvikling.md` (parameterkalibrering, beslutningslogikk).*
-
-*Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
-
-*Kap 8 | Versjon 1.4 | Sist oppdatert: 2026-05-17 (Funn 4 reformulert: natt/helg som primær, dag som sekundær med eksplisitte tall; begrepsskifte «prosedyrkonformitetsmetrikk» → «metrikk for prosedyreetterlevelse»)*
