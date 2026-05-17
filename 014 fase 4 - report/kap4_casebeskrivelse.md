@@ -33,7 +33,7 @@ Bemanningsdimensjonering av 110-operatører reguleres av brann- og redningsvesen
 
 ### 4.2.1 Skiftstruktur og bemanning
 
-Sentralen opererer med tolv-timers skift og er organisert i seks vaktlag à fire personer (inkludert vaktleder). Planlagt normalbemanning er dermed fire personer på alle skift. Sentralen benytter årsturnus der alle vakter planlegges for hele året. Hvert vaktlag har overskuddstimer som må plasseres ut i turnusen for å fylle årsverket. I praksis fører dette til at dagtidsvakter på hverdag kan bemannes med fem eller seks personer.
+Sentralen opererer med tolv-timers skift og er organisert i seks vaktlag à fire personer (inkludert vaktleder). Planlagt normalbemanning er dermed fire personer på alle skift. Sentralen benytter årsturnus der alle vakter planlegges for hele året. Hvert vaktlag har overskuddstimer som plasseres i turnusen for å fylle årsverket. Disse går primært til fagdager, kompetanseheving og kjent fravær. Enkelte dagtidsvakter kan derfor være bemannet over minimum, men i praksis er også dagvaktene normalt på fire personer (minimumsbemanning på dag = planlagt bemanning på dag).
 
 Natt- og helgeskift er i turnusplanen bemannet med fire personer. Minimumsbemanningen er tre. Sykdom, avspasering og annet ikke-planlagt fravær blir derfor ikke erstattet. Resultatet er at natt og helg ofte bemannes med tre, det vil si minimumsbemanningen.
 
@@ -117,4 +117,4 @@ Det er viktig å understreke at ROS-analysene er kvalitative og vanskelige å et
 
 ---
 
-*Kap 4, Versjon 1.4 | Sist oppdatert: 2026-05-16 (kryssreferanser oppdatert til ny kapittelstruktur; Figur 4.1-caption normalisert)*
+*Kap 4, Versjon 1.5 | Sist oppdatert: 2026-05-17 (4.2.1 nyansert: dagvakter normalt på 4 personer, minimum = planlagt; konsistent med ny anbefaling i 10.4)*

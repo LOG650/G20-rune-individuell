@@ -370,8 +370,8 @@ Pri-1-hendelser binder makkerparet (RØD og GUL) parallelt i median 14,1 min. AB
 **Funn 3: Natt/helg er strukturelt sårbar, med Svikt ved hvert tredje beredskapsanrop.**
 På natt/helg (c=2) er **32,6 % av beredskapsanropene i Svikt-tilstand** (variant A; scenariobånd variant B: 30 til 38 %; bootstrap-CI for parametrisk usikkerhet: [32,1; 33,2] %) og kun 46,9 % i Normal. Svikt-raten skyldes primært at én aktiv D-pri1-hendelse binder hele makkerparet. D-aba bidrar relativt mindre til Svikt fordi serial-håndteringen etterlater 1 op ledig. Hovedfunnet er robust over hele sensitivitetsspennet.
 
-**Funn 4: +1 operatør per skift halverer sviktraten på natt/helg.**
-Én ekstra operatør (c_eff 2→3 natt/helg, 3→4 dag) øker Normal fra 46,9 % til 67,2 % på natt/helg (+20,3 pp) og reduserer Svikt fra 32,8 % til 16,7 %. På dag hverdag øker Normal fra 69,2 % til 85,1 %. Effekten er en modellprediksjon, robust mot parametervariasjon, men ikke validert mot historisk bemanningsendring.
+**Funn 4: +1 operatør på natt/helg halverer sviktraten der; tilsvarende heving på dag gir mindre, men reell forbedring.**
+Én ekstra operatør på natt/helg (c_eff 2 → 3) øker Normal fra 46,9 % til 67,2 % (+20,3 pp) og reduserer Svikt fra 32,8 % til 16,7 %. På dag hverdag gir en tilsvarende heving (c_eff 3 → 4) en mindre, men reell forbedring: Normal øker fra 69,2 % til 85,1 % og Svikt fra 14,9 % til 8,5 %. Effekten er størst på natt/helg fordi c=2 i dag gir null buffer ved aktiv D-pri1. Effektene er modellprediksjoner, robuste mot parametervariasjon, men ikke validert mot historisk bemanningsendring.
 
 **Funn 5: Total operativ belastning forverrer dagkapasiteten merkbart.**
 Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 59,5 % (−9,7 pp) og Svikt øker fra 14,9 % til 21,6 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes i mindre grad fordi bakgrunnsvolumet er lavere; Svikt øker fra 32,6 % til 33,2 %. Sensitivitetsanalysen viser at denne forverringen er robust.
@@ -386,4 +386,4 @@ Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av fu
 
 *Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
 
-*Kap 8 | Versjon 1.2 | Sist oppdatert: 2026-05-16 (sluttvask kap 8: op-binder-konsistens, scenariobånd presisert som robusthetssjekk, bootstrap-/imputeringslogikk klargjort, brosetning før Tabell 8.3, grammatikkfiks i 8.1)*
+*Kap 8 | Versjon 1.3 | Sist oppdatert: 2026-05-17 (Funn 4 reformulert: natt/helg som primær effekt, dag som sekundær med eksplisitte tall)*

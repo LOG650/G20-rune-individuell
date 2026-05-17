@@ -46,11 +46,13 @@ Rapporten bidrar på tre nivåer:
 
 **Empirisk bidrag.** Etter litteratursøket i denne studien fremstår arbeidet som en av de første kvantitative kapasitetsanalysene av en norsk 110-sentral basert på historiske hendelsesdata (jf. kap 2.6, Gap 5). Den dokumenterer strukturelt kapasitetsgap særlig på natt/helg, og kvantifiserer effekten av +1 operatør (svikt reduseres fra ca. 33 % til 16,7 % på natt/helg, jf. Tabell 8.2). LABA-dybdeanalysen etablerer empirisk grunnlag for L-aba-parameter og avdekker ca. 25 % feilklassifisering i eksisterende BRIS-kategorier.
 
-**Praktiske implikasjoner.** For 110 Sør-Vest spesifikt peker analysen på to dimensjoneringsalternativer:
+**Praktiske implikasjoner.** For 110 Sør-Vest spesifikt peker analysen på tre dimensjoneringsalternativer, rangert etter modellens dokumenterte marginalverdi:
 
-1. **Bemanningsøkning:** +1 operatør på natt/helg gir den klart største kapasitetsgevinsten (Svikt halveres). Den første ekstra operatøren på natt/helg har større marginalverdi enn én ekstra på dag hverdag, analog til square-root staffing-logikk i QED-regimet (kap 3.2).
+1. **Bemanningsøkning natt/helg (primær):** +1 operatør på natt/helg gir den klart største kapasitetsgevinsten (Svikt halveres fra ca. 33 % til 16,7 %). Den første ekstra operatøren på natt/helg har større marginalverdi enn én ekstra på dag hverdag, analog til square-root staffing-logikk i QED-regimet (kap 3.2).
 
-2. **Funksjonsdifferensiering:** Skille servicelast fra beredskapslast. Servicevolumet (22 542 overføringstester per år, konsentrert på dagtid) kan håndteres av dedikert personell utenfor beredskapsoperatørgruppen, som allerede praktisert ved Midt-Norge 110. Van Buuren et al. (2017) og Jouini et al. (2008) gir teoretisk belegg for at dette kan forbedre kapasitetsbildet uten å øke total bemanning.
+2. **Bemanningsøkning dag (sekundær):** +1 operatør på dag hverdag reduserer dagsvikten fra 14,9 % til 8,5 %. Gevinsten er mindre i absolutte tall enn natt/helg-tiltaket, men reell og dokumentert i Tabell 8.2.
+
+3. **Funksjonsdifferensiering (alternativ/komplementær):** Skille servicelast fra beredskapslast. Servicevolumet (22 542 overføringstester per år, konsentrert på dagtid) kan håndteres av dedikert personell utenfor beredskapsoperatørgruppen, som allerede praktisert ved Midt-Norge 110. Van Buuren et al. (2017) og Jouini et al. (2008) gir teoretisk belegg for at dette kan forbedre kapasitetsbildet uten å øke total bemanning. Den isolerte sviktreduksjonen av å fjerne kun service er ikke kvantifisert i denne rapporten.
 
 For den nasjonale dimensjoneringsdebatten er det viktigste bidraget å vise at **en kvantitativ standard er mulig**, forutsatt at klassifiseringspraksis harmoniseres mellom sentralene og at datafundamentet utvides utover én sentral og ett år. Brann- og redningsvesenforskriften (FOR-2021-09-15-2755) viser at kvantitative og etterprøvbare krav er praktisk gjennomførbare på brann- og redningssiden. En tilsvarende standard for 110-operatører bør ta utgangspunkt i prosedyrkonform håndtering av beredskapsanrop som målemetrikk, ikke bare svartidsstatistikk. Denne studien etablerer prinsippet og verktøyet, men ikke den nasjonale standarden i seg selv: det krever bredere validering (jf. kap 9.5).
 
@@ -60,21 +62,27 @@ Anbefalingene er strukturert i tre nivåer: konkrete dimensjoneringsbeslutninger
 
 **Dimensjoneringsbeslutninger (case 110 Sør-Vest):**
 
-1. **Vurder +1 operatør på natt/helg** som primær tiltak ved 110 Sør-Vest. Modellen viser at den første ekstra operatøren på natt/helg har størst marginalverdi i denne casen (Svikt reduseres fra ca. 33 % til 16,7 %, jf. Tabell 8.2). Alternativt eller i tillegg: skille servicelast (overføringstester) ut av beredskapsoperatørgruppen, slik Midt-Norge 110 har praksis for. Funksjonsdifferensiering kan forbedre kapasitetsbildet uten å øke total bemanning (van Buuren et al., 2017). Tiltaket er casebasert; tilsvarende vurdering for andre sentraler krever egne analyser.
+1. **Heve minimumsbemanningen med +1 operatør på natt/helg (primær anbefaling).** Modellen viser at den første ekstra operatøren på natt/helg har størst marginalverdi i denne casen — Svikt reduseres fra ca. 33 % til 16,7 % (Tabell 8.2). Dette er det tydeligste enkeltfunnet i analysen og adresserer det strukturelle gapet ved c=2 hvor én D-pri1 alene tømmer operatørkapasiteten.
+
+2. **Heve minimumsbemanningen med +1 operatør på dag hverdag (sekundær anbefaling).** Tabell 8.2 viser at tilsvarende heving reduserer dagsvikten fra 14,9 % til 8,5 %. Gevinsten er mindre i absolutte tall enn natt/helg-tiltaket, men reell og dokumentert. Hvordan en slik heving løses turnusmessig (overskuddstimer, ny tilsetting, eller andre interne grep) ligger utenfor denne studiens scope.
+
+3. **Funksjonsdifferensiering som alternativt eller komplementært tiltak.** Skille servicelast (overføringstester) ut av beredskapsoperatørgruppen, slik Midt-Norge 110 har praksis for. Funksjonsdifferensiering kan forbedre kapasitetsbildet uten å øke total bemanning (van Buuren et al., 2017). Den isolerte kvantitative effekten av kun å fjerne service er ikke modellert i denne rapporten, men forskjellen mellom variant A (14,9 % dag-svikt) og variant B (21,6 %) indikerer at all ikke-D-belastning samlet utgjør 6,7 pp av dag-svikten.
+
+Anbefalingene under punkt 1–3 er casebaserte; tilsvarende vurdering for andre sentraler krever egne analyser.
 
 **Forutsetninger for nasjonal implementering:**
 
-2. **Klassifiseringsharmonisering:** Normativ nasjonal sammenligning av L-aba, D-aba og kapasitetstilstand forutsetter at alle sentraler bruker felles klassifiseringsregler med Kilde=Alarm-krav. Den V3-regelen som er utviklet i denne studien kan danne grunnlag. Uten harmonisering er nasjonale sammenligninger fortsatt nyttige som deskriptiv datakvalitets- og strukturbenchmarking, men de bør ikke brukes til å rangere sentraler etter bemanningsriktighet.
+4. **Klassifiseringsharmonisering:** Normativ nasjonal sammenligning av L-aba, D-aba og kapasitetstilstand forutsetter at alle sentraler bruker felles klassifiseringsregler med Kilde=Alarm-krav. Den V3-regelen som er utviklet i denne studien kan danne grunnlag. Uten harmonisering er nasjonale sammenligninger fortsatt nyttige som deskriptiv datakvalitets- og strukturbenchmarking, men de bør ikke brukes til å rangere sentraler etter bemanningsriktighet.
 
-3. **Målrettet avklaring av vesentlige avvik:** Videre kontakt med andre sentraler bør avgrenses til avvik som kan endre tolkningen av benchmarkingen: MOB-bemanning/VL-inkludering, ABA- og servicepraksis, ekstrem DSB/MOB-differanse, skjult 110-ID-rate og kategoriavvik som flytter belastning mellom D, L-aba, L-hendelse og L-ukjent. Manglende svar på øvrige spørsmål bør håndteres som forbehold, ikke som svakhet ved hovedanalysen.
+5. **Målrettet avklaring av vesentlige avvik:** Videre kontakt med andre sentraler bør avgrenses til avvik som kan endre tolkningen av benchmarkingen: MOB-bemanning/VL-inkludering, ABA- og servicepraksis, ekstrem DSB/MOB-differanse, skjult 110-ID-rate og kategoriavvik som flytter belastning mellom D, L-aba, L-hendelse og L-ukjent. Manglende svar på øvrige spørsmål bør håndteres som forbehold, ikke som svakhet ved hovedanalysen.
 
-4. **Utvidet DSB-datauttrekk:** En utvidelse av BRIS-datauttrekket med 22 prioriterte felt (operatør-ID, samtalevarighet, ventetid m.m.) vil muliggjøre mer presis nasjonal benchmarking. Se `analyse/DSB_onskeliste_BRIS_datauttrekk.md`.
+6. **Utvidet DSB-datauttrekk:** En utvidelse av BRIS-datauttrekket med 22 prioriterte felt (operatør-ID, samtalevarighet, ventetid m.m.) vil muliggjøre mer presis nasjonal benchmarking. Se `analyse/DSB_onskeliste_BRIS_datauttrekk.md`.
 
-5. **Nasjonal dimensjoneringsstandard:** Utvikling av en kvantitativ dimensjoneringsstandard for 110-operatører analogt med brannvesenforskriften. Målemetrikken bør inkludere prosedyrkonformitet (makkerpar opprettholdt ved ankomst), ikke bare svartid. Punkt 5 forutsetter at punkt 2 til 4 er gjennomført.
+7. **Nasjonal dimensjoneringsstandard:** Utvikling av en kvantitativ dimensjoneringsstandard for 110-operatører analogt med brannvesenforskriften. Målemetrikken bør inkludere prosedyrkonformitet (makkerpar opprettholdt ved ankomst), ikke bare svartid. Punkt 7 forutsetter at punkt 4 til 6 er gjennomført.
 
 **Videre forskning:**
 
-6. **Validering og utvidelse:** Validering på tvers av sentraler, tidsvariabel DES-modellering, og dypere analyse av nødtelefonfase etter D-aba er prioriterte retninger (se avsnitt 9.5).
+8. **Validering og utvidelse:** Validering på tvers av sentraler, tidsvariabel DES-modellering, og dypere analyse av nødtelefonfase etter D-aba er prioriterte retninger (se avsnitt 9.5).
 
 ## 10.5 Avsluttende refleksjon
 
@@ -88,4 +96,4 @@ Studien er en case-analyse av 110 Sør-Vest. Hva resultatene betyr utover dette 
 
 ---
 
-*Kap 10 | Versjon 1.4 | Sist oppdatert: 2026-05-16 (skarp åpningssetning i 10.1 med direkte svar på problemstillingen + bootstrap-CI; kryssreferanser rettet etter ny kapittelstruktur)*
+*Kap 10 | Versjon 1.5 | Sist oppdatert: 2026-05-17 (anbefaling 10.4 splittet: +1 natt/helg som primær, +1 dag som sekundær, funksjonsdifferensiering som komplementær; konsistent prioritering i 10.3)*

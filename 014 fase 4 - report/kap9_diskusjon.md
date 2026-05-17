@@ -81,7 +81,7 @@ Disse funnene fra internasjonal og norsk forskning tyder på at kapasitetsproble
 
 ## 9.3 Implikasjoner for bemanningsdimensjonering
 
-Implikasjonene kan skilles i tre nivåer. For praksis peker funnene mot +1 operatør på natt/helg og mulig funksjonsdifferensiering av servicelast. For teori viser studien hvordan multiserver-job-rammeverket kan operasjonaliseres som op-binder-semantikk i en nødmeldesentral. For policy viser analysen at en nasjonal dimensjoneringsstandard først krever felles klassifiseringsregler og et datagrunnlag som fanger operativ binding, ikke bare registrerte oppdrag.
+Implikasjonene kan skilles i tre nivåer. For praksis peker funnene mot +1 operatør på natt/helg som primær tiltak, med +1 operatør på dag hverdag som sekundær tiltak og funksjonsdifferensiering av servicelast som alternativ eller komplementær. For teori viser studien hvordan multiserver-job-rammeverket kan operasjonaliseres som op-binder-semantikk i en nødmeldesentral. For policy viser analysen at en nasjonal dimensjoneringsstandard først krever felles klassifiseringsregler og et datagrunnlag som fanger operativ binding, ikke bare registrerte oppdrag.
 
 ### 9.3.1 Svar på problemstillingen
 
@@ -180,4 +180,4 @@ Tre retninger fremstår som mest lovende.
 
 ---
 
-*Kap 9 | Versjon 1.4 | Sist oppdatert: 2026-05-16 (kryssreferanser oppdatert til ny kapittelstruktur; D-pri1 14,1 min konsekvent brukt; språkvask)*
+*Kap 9 | Versjon 1.5 | Sist oppdatert: 2026-05-17 (9.3-innledning oppdatert: primær +1 natt/helg, sekundær +1 dag, komplementær funksjonsdifferensiering)*
