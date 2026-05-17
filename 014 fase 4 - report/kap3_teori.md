@@ -34,7 +34,7 @@ Garnett et al. (2002) og Zeltyn og Mandelbaum (2005) utvidet rammeverket til Erl
 
 ## 3.3 Det lav-belastede paradokset
 
-Et sentralt teoretisk resultat, som er relevant for tolkning av de empiriske funnene i kapittel 7, er at lav serverutnyttelse *ikke* impliserer overbemanning i små nødmeldesentraler. Dwars (2013) beskriver nødmeldesentraler som «intrinsically lightly-loaded systems». Lav utnyttelse er en strukturell konsekvens av stordriftsulempen ved små enheter, ikke et tegn på tilgjengelig kapasitet.
+Et sentralt teoretisk resultat, som er relevant for tolkning av de empiriske funnene i kapittel 8, er at lav serverutnyttelse *ikke* impliserer overbemanning i små nødmeldesentraler. Dwars (2013) beskriver nødmeldesentraler som «intrinsically lightly-loaded systems». Lav utnyttelse er en strukturell konsekvens av stordriftsulempen ved små enheter, ikke et tegn på tilgjengelig kapasitet.
 
 Gans et al. (2003) formaliserer mekanismen som «statistical economies of scale»: jo større servicesystemet er, desto høyere utnyttelse kan oppnås med samme servicenivå. For et system med $c = 2$ er stordriftsfordelene i praksis fraværende, og systemets ytelse er svært sårbart for varians i etterspørsel.
 
@@ -158,4 +158,4 @@ Sammen gir disse det teoretiske fundamentet for å formulere 110-kapasitetsprobl
 
 ---
 
-*Kap 3, Versjon 1.3 | Sist oppdatert: 2026-05-15 (intro-setning som rammer Erlang-C som spesialtilfelle, ikke konkurrerende modell)* 
+*Kap 3, Versjon 1.4 | Sist oppdatert: 2026-05-17 (kryssreferanse i 3.3 rettet: «empiriske funnene i kapittel 7» → «kapittel 8» etter mal-konformitet-splitt)* 
