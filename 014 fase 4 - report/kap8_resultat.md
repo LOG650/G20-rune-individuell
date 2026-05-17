@@ -6,7 +6,7 @@ Dette kapitlet presenterer resultatene av kapasitetsanalysen for 110 Sør-Vest 2
 
 ### Hva modellen måler i 8.1
 
-Før resultatene presenteres er det viktig å være presis på *hva modellen kvantifiserer*. Erlang-C i Tabell 6.1 målte sannsynligheten for at et nytt anrop må stå i kø, altså en *ventetidsmetrikk*. Kapasitetsmodellen i 8.1 til 8.3 måler noe annet: sannsynligheten for at et nytt beredskapsanrop ankommer i en tilstand der den operative driftsstandarden (makkerpar) ikke kan opprettholdes. Det er en *prosedyrkonformitetsmetrikk*.
+Før resultatene presenteres er det viktig å være presis på *hva modellen kvantifiserer*. Erlang-C i Tabell 6.1 målte sannsynligheten for at et nytt anrop må stå i kø, altså en *ventetidsmetrikk*. Kapasitetsmodellen i 8.1 til 8.3 måler noe annet: sannsynligheten for at et nytt beredskapsanrop ankommer i en tilstand der den operative driftsstandarden (makkerpar) ikke kan opprettholdes. Det er en *metrikk for prosedyreetterlevelse*.
 
 Forskjellen er substansiell. Erlang-C-ventetiden på 30 sek kan være 0 % selv når Svikt-andelen er 30 %, fordi anropet kan besvares momentant av VL eller en operatør som forlater makker-rollen, men i begge tilfellene er den prosedyrekrevde driftsstandarden brutt. Modellen kvantifiserer altså *brudd på driftsstandarden ved ankomst*, ikke *brudd på tjenesteleveransen*.
 
@@ -386,4 +386,4 @@ Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av fu
 
 *Data: BRIS 2025 fullrapport (61 964 synlige oppdrag, 7 555 beredskapsoppdrag fordelt på 4 499 D-pri1 og 3 056 D-aba). Prosedyreferanse: Rogaland brann og redning IKS (2024).*
 
-*Kap 8 | Versjon 1.3 | Sist oppdatert: 2026-05-17 (Funn 4 reformulert: natt/helg som primær effekt, dag som sekundær med eksplisitte tall)*
+*Kap 8 | Versjon 1.4 | Sist oppdatert: 2026-05-17 (Funn 4 reformulert: natt/helg som primær, dag som sekundær med eksplisitte tall; begrepsskifte «prosedyrkonformitetsmetrikk» → «metrikk for prosedyreetterlevelse»)*

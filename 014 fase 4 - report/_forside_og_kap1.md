@@ -188,7 +188,7 @@ Antagelsene drøftes systematisk i kap 6.7 med konsekvens hvis de svikter, og re
 
 Rapporten består av ti kapitler.
 
-**Kapittel 2** gjennomgår relevant litteratur strukturert etter fem tematiske områder: klassisk køteori, nødmeldesentraler, team-basert kapasitet og prosedyrkonformitet, nordisk nødmeldeforskning, og dimensjoneringsregulering.
+**Kapittel 2** gjennomgår relevant litteratur strukturert etter fem tematiske områder: klassisk køteori, nødmeldesentraler, team-basert kapasitet og prosedyreetterlevelse, nordisk nødmeldeforskning, og dimensjoneringsregulering.
 
 **Kapittel 3** etablerer det teoretiske rammeverket. Erlang-C presenteres som grunnlinje, QED-regimet som regimekarakteristikk, og multiserver-jobs som rammeverk for op-binder-semantikk.
 

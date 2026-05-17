@@ -123,7 +123,7 @@ Primærmodellen tar utgangspunkt i prosedyrens kapasitetslogikk og stiller et pr
 
 > *I hvilken andel av beredskapsanropene ankommer anropet i en tilstand der den operative driftsstandarden (makkerpar) kan opprettholdes?*
 
-Dette er en **prosedyrkonformitetsmetrikk**, ikke et ventetidsmål. Kapasitetsproblemet ved 110-sentraler er i de fleste tilfeller ikke at anrop venter i kø, men at de ankommer når operatørene allerede er bundet i aktive hendelser slik at makkerpar-prinsippet brytes.
+Dette er en **metrikk for prosedyreetterlevelse**, ikke et ventetidsmål. Kapasitetsproblemet ved 110-sentraler er i de fleste tilfeller ikke at anrop venter i kø, men at de ankommer når operatørene allerede er bundet i aktive hendelser slik at makkerpar-prinsippet brytes.
 
 ### 6.4.2 Op-binder-semantikk
 
@@ -402,4 +402,4 @@ For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene byg
 
 ---
 
-*Kap 6 | Versjon 3.6 | Sist oppdatert: 2026-05-16 (kryssreferanser oppdatert til ny kapittelstruktur; bootstrap-CI lenket til 8.3.4; A1-tekst rettet til "mer aktiv VL-rolle")*
+*Kap 6 | Versjon 3.7 | Sist oppdatert: 2026-05-17 (begrepsskifte: «prosedyrkonformitetsmetrikk» → «metrikk for prosedyreetterlevelse»)*

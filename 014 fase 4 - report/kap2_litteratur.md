@@ -2,7 +2,7 @@
 
 ## 2.1 Søkestrategi
 
-Litteratursøket er gjennomført i to runder. Første runde fulgte prosjektets opprinnelige problemstilling om Erlang-C-basert kapasitetsanalyse. Andre runde ble gjennomført etter at den metodiske tilnærmingen dreide mot prosedyrbasert ankomstkonfliktmodellering (se avsnitt 6.1), og rettet søket mot team-basert kapasitet, prosedyrkonformitet og degradert-modus-operasjoner i sikkerhets-kritiske systemer.
+Litteratursøket er gjennomført i to runder. Første runde fulgte prosjektets opprinnelige problemstilling om Erlang-C-basert kapasitetsanalyse. Andre runde ble gjennomført etter at den metodiske tilnærmingen dreide mot prosedyrbasert ankomstkonfliktmodellering (se avsnitt 6.1), og rettet søket mot team-basert kapasitet, prosedyreetterlevelse og degradert-modus-operasjoner i sikkerhets-kritiske systemer.
 
 **Databaser:** Google Scholar, Scopus, Web of Science, PubMed, INFORMS PubsOnline, ScienceDirect, ProjectEuclid. Grå litteratur hentet fra DSB, NENA, APCO, Vera Institute og Lund University-arkiv.
 
@@ -32,7 +32,7 @@ Litteratursøket er gjennomført i to runder. Første runde fulgte prosjektets o
 
 **Eksklusjonskriterier:** Rene simuleringsmodeller uten analytisk grunnlag; studier utelukkende om ressursdisponering i felt (ikke sentralnivå); bransjeblogger uten fagfellevurdering.
 
-Av samlet ~670 målrettede treff er 45 inkludert som primær- eller støttekilder. Hovedfunnet på tvers av materialet er at Erlang-C og varianter dominerer call-center-litteraturen, mens nødmeldesentraler er svakt dekket, særlig i nordisk og norsk kontekst. Multiserver-job-rammeverket og prosedyrkonformitet som kapasitetsmetrikk er etablert teoretisk, men ikke tidligere anvendt på 110-data. De tematiske avsnittene under (2.2 til 2.5) gjennomgår funnene; avsnitt 2.6 oppsummerer kunnskapsgapene som denne studien adresserer.
+Av samlet ~670 målrettede treff er 45 inkludert som primær- eller støttekilder. Hovedfunnet på tvers av materialet er at Erlang-C og varianter dominerer call-center-litteraturen, mens nødmeldesentraler er svakt dekket, særlig i nordisk og norsk kontekst. Multiserver-job-rammeverket og prosedyreetterlevelse som kapasitetsmetrikk er etablert teoretisk, men ikke tidligere anvendt på 110-data. De tematiske avsnittene under (2.2 til 2.5) gjennomgår funnene; avsnitt 2.6 oppsummerer kunnskapsgapene som denne studien adresserer.
 
 ---
 
@@ -74,11 +74,11 @@ Mukhopadhyay et al. (2022) gir en bred review av prediksjon, ressursallokering o
 
 Internasjonale standarder for nødsentralbemanning (NENA, 2003; NENA, 2020) opererer med eksplisitte service level-mål: 90 % av anrop besvart innen 15 sekunder, 95 % innen 20 sekunder. Disse er strengere enn norsk praksis og illustrerer bredden i hva som anses som akseptabel svartid internasjonalt. Vera Institute of Justice (2019) dokumenterer den fulle «call processing chain» fra mottak til ressursutsendelse og viser at Erlang-C kun adresserer den første lenken i kjeden.
 
-**Bro til metodevalg.** Litteraturen i 2.3 etablerer to ting som er direkte forutsetninger for studiens modell: (i) at nødmeldesentraler skiller seg fra kommersielle call-sentre på en måte som krever utvidet rammeverk, særlig makkerpar og kapasitetsbinding utover samtaletid, og (ii) at multi-enhets-dispatchlitteraturen gir det formelle apparatet for å modellere dette. Gap 1 (prosedyrkonformitet som metrikk) og Gap 2 (D-pri1 som makkerpar-bundet jobb) i avsnitt 2.6 følger direkte fra denne gjennomgangen. Modellutformingen i kap 3.7 (op-binder-semantikk) er en konkret operasjonalisering av Chelst & Barlach (1981) og Harchol-Balter (2022) i 110-kontekst.
+**Bro til metodevalg.** Litteraturen i 2.3 etablerer to ting som er direkte forutsetninger for studiens modell: (i) at nødmeldesentraler skiller seg fra kommersielle call-sentre på en måte som krever utvidet rammeverk, særlig makkerpar og kapasitetsbinding utover samtaletid, og (ii) at multi-enhets-dispatchlitteraturen gir det formelle apparatet for å modellere dette. Gap 1 (prosedyreetterlevelse som metrikk) og Gap 2 (D-pri1 som makkerpar-bundet jobb) i avsnitt 2.6 følger direkte fra denne gjennomgangen. Modellutformingen i kap 3.7 (op-binder-semantikk) er en konkret operasjonalisering av Chelst & Barlach (1981) og Harchol-Balter (2022) i 110-kontekst.
 
 ---
 
-## 2.4 Team-basert kapasitet, prosedyrkonformitet og kognitiv belastning
+## 2.4 Team-basert kapasitet, prosedyreetterlevelse og kognitiv belastning
 
 Jouini et al. (2008) analyserer team-baserte call-center-organisasjoner der to agenter samarbeider om oppgaver, og finner at teamorganisering øker kapasitetsutnyttelsen ved moderat belastning men skaper sårbarhet ved høy belastning. Resultatet speiler 110-sentralenes makkerpar-logikk: normal drift (RØD+GUL) er effektiv, men binder kapasitet ved simultane hendelser. *Begrensning for 110:* Jouini modellerer kommersielle kundetjenester der team-organisering er valgfri; for 110 er makkerpar et prosedyrekrav, ikke et organisatorisk valg.
 
@@ -112,8 +112,8 @@ Norsk regulering belyses gjennom brann- og redningsvesenforskriften (2021) og st
 
 Litteraturgjennomgangen identifiserer fem gap som dette prosjektet adresserer:
 
-**Gap 1: Prosedyrkonformitet som kapasitetsmetrikk.**
-Eksisterende litteratur måler kapasitet som sannsynlighet for kø eller ventetid (Erlang-C), eller som andel anrop besvart innen t sekunder. Ingen av de gjennomgåtte studiene bruker prosedyrkonformitet ved ankomst som primær kapasitetsmetrikk. Med dette menes sannsynligheten for at et anrop ankommer i en tilstand der driftsstandarden (makkerpar) kan opprettholdes.
+**Gap 1: Prosedyreetterlevelse som kapasitetsmetrikk.**
+Eksisterende litteratur måler kapasitet som sannsynlighet for kø eller ventetid (Erlang-C), eller som andel anrop besvart innen t sekunder. Ingen av de gjennomgåtte studiene bruker prosedyreetterlevelse ved ankomst som primær kapasitetsmetrikk. Med dette menes sannsynligheten for at et anrop ankommer i en tilstand der driftsstandarden (makkerpar) kan opprettholdes.
 
 **Gap 2: Makkerpar-bundet håndtering (D-pri1) som driftsstandard.**
 Standard M/M/c-modellen forutsetter én server per kunde. Kim et al. (2008) og Jouini et al. (2008) nærmer seg team-basert kapasitet, og Harchol-Balter (2022) formaliserer multiserver-jobs (MSJ) som teoretisk rammeverk. Etter litteratursøket i denne studien er det ikke funnet publiserte arbeider som modellerer et nødmeldesystem der pri-1-utrykninger (D-pri1) krever makkerpar mens ABA-utrykninger (D-aba) håndteres serielt, og der brudd på makkerpar-kravet er det operative kapasitetsproblemet som skal kvantifiseres. Den prosedyrbaserte modellen i denne studien fremstår dermed som en ny empirisk anvendelse av en op-binder-formalisering (jf. kap 3.7) på en nordisk 110-sentral.
@@ -129,8 +129,8 @@ Etter litteratursøket i denne studien er det ikke funnet publiserte, kvantitati
 
 ### Studiens posisjonering i forhold til de fem gapene
 
-Denne studien fyller særlig **Gap 1, 2 og 5**. Prosedyrkonformitet ved ankomst (Gap 1) operasjonaliseres som målbar metrikk via op-binder-semantikk. Op-binder-semantikken adresserer Gap 2: D-pri1 med makkerpar-krav modelleres som direkte teoretisk parallell til multiserver-jobs. Modellen anvendes på norske 110-data for første gang (Gap 5). Studien adresserer også Gap 3 (kapasitetsbinding utover samtaletid via observerte tidsstempler for første ressurs fremme) og Gap 4 (helg/hverdag-asymmetri kvantifisert mot beredskapsbelastning, ikke bare totalvolum). Metodisk originalitet ligger i operasjonaliseringen av prosedyrekrav som målbar kapasitetsmetrikk, ikke i utvikling av ny køteori.
+Denne studien fyller særlig **Gap 1, 2 og 5**. Prosedyreetterlevelse ved ankomst (Gap 1) operasjonaliseres som målbar metrikk via op-binder-semantikk. Op-binder-semantikken adresserer Gap 2: D-pri1 med makkerpar-krav modelleres som direkte teoretisk parallell til multiserver-jobs. Modellen anvendes på norske 110-data for første gang (Gap 5). Studien adresserer også Gap 3 (kapasitetsbinding utover samtaletid via observerte tidsstempler for første ressurs fremme) og Gap 4 (helg/hverdag-asymmetri kvantifisert mot beredskapsbelastning, ikke bare totalvolum). Metodisk originalitet ligger i operasjonaliseringen av prosedyrekrav som målbar kapasitetsmetrikk, ikke i utvikling av ny køteori.
 
 ---
 
-*Kap 2 · Versjon 1.3 | Sist oppdatert: 2026-05-13 (kritisk kildevurdering, bro til metodevalg, restaurering av 2.6)*
+*Kap 2 · Versjon 1.4 | Sist oppdatert: 2026-05-17 (begrepsskifte: «prosedyrkonformitet» → «prosedyreetterlevelse» (etablert norsk))*

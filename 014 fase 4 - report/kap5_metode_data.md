@@ -370,7 +370,7 @@ Steg 1 til 8 representerer databehandling og operasjonalisering. Steg 9 til 10 e
 
 Analysens sentrale metrikk er kapasitetsnivå ved ankomst. Den bygger på to ulike datakilder. D-pri1-hendelser identifiseres robust gjennom ressursvarsling. L-aba-bindingstider er empirisk kalibrert via LABA-dybdeanalyse (avsnitt 5.4). Validitetstruslene struktureres etter konstrukt-, intern- og ekstern validitet.
 
-**Trussel 1 [konstruktvaliditet]: målet er en prosedyrkonformitetsmetrikk, ikke et tjenestekvalitetsmål.** Modellen måler andel beredskapsanrop der makkerpar-kravet ikke kan opprettholdes ved ankomst. Det er ikke det samme som andel anrop der tjenesten leveres med redusert kvalitet, eller andel der innringer opplever forsinkelse. Konstruktvaliditeten begrenses derfor til det modellen eksplisitt måler. Diskusjonen i kap 9.2 og 9.2.3 problematiserer dette skillet eksplisitt.
+**Trussel 1 [konstruktvaliditet]: målet er en metrikk for prosedyreetterlevelse, ikke et tjenestekvalitetsmål.** Modellen måler andel beredskapsanrop der makkerpar-kravet ikke kan opprettholdes ved ankomst. Det er ikke det samme som andel anrop der tjenesten leveres med redusert kvalitet, eller andel der innringer opplever forsinkelse. Konstruktvaliditeten begrenses derfor til det modellen eksplisitt måler. Diskusjonen i kap 9.2 og 9.2.3 problematiserer dette skillet eksplisitt.
 
 **Trussel 2 [intern validitet]: målefeil i bindingstider.** Ikke alle bindingstider er empirisk målt:
 
@@ -433,4 +433,4 @@ Samlet gir datagrunnlaget et godt grunnlag for å modellere den best observerbar
 
 ---
 
-*Kap 5, Versjon 3.5 | Sist oppdatert: 2026-05-16 (kryssreferanser oppdatert til ny kapittelstruktur; D-pri1 missingness harmonisert til 19 % gjennomgående; språkvask: antagelse/Bygningsbrann/seks grep)*
+*Kap 5, Versjon 3.6 | Sist oppdatert: 2026-05-17 (begrepsskifte: «prosedyrkonformitet» → «prosedyreetterlevelse»)*
