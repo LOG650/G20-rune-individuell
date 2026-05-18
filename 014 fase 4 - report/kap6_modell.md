@@ -70,8 +70,8 @@ M/M/c-modellen (Erlang-C) er spesifisert med følgende parametere for 110 Sør-V
 
 | Symbol | Beskrivelse | Verdi / kilde |
 |---|---|---|
-| λ | Ankomstrate beredskapsanrop [anrop/time] | Estimert per skifttype fra LEO/BRIS 2025 |
-| μ | Servicerate [anrop/time] = 1 / E[samtaletid] | Vektet gjennomsnitt: 3,44 min⁻¹ (intervjudata) |
+| λ | Ankomstrate beredskapsanrop [anrop/time] | Kategori D (D-pri1 + D-aba), estimert per skifttype fra LEO/BRIS 2025 |
+| μ | Servicerate [anrop/time] = 1 / E[samtaletid] | E[samtaletid] = 3,44 min → μ ≈ 17,44 anrop/time (operative valideringssamtaler 110 Sør-Vest) |
 | c_eff | Effektive servere = c_total − 1 (VL-korreksjon) | Dag/hverdag: 3; øvrige skift: 2 |
 | ρ | Systemutnyttelse = λ / (c_eff · μ) | Se Tabell 6.1 |
 | T | Terskel for P(W > T) | 30 sek (automatisk overføring til Agder, bekreftet i beredskapsanalyse s. 25) |
@@ -103,7 +103,7 @@ $$P(W > T) = C(c, A) \cdot e^{-(c\mu - \lambda)T}$$
 
 *λ inkluderer kun beredskapsoppdrag (non-T1). P(W > 30s): automatisk overføring til Agder ved ubesvart anrop etter 30 sek (beredskapsanalyse s. 25), eller ved 10. anrop i kø.*
 
-Erlang-C konkluderer med svært lav kapasitetsutnyttelse og nær null sannsynlighet for ventetid over 30 sekunder i alle skifttyper. Formelt er dette korrekt, men det er metodisk utilstrekkelig for 110-konteksten av fire grunner:
+Erlang-C konkluderer med svært lav kapasitetsutnyttelse og nær null sannsynlighet for ventetid over 30 sekunder i alle skifttyper. Formelt er dette korrekt, men det er metodisk utilstrekkelig for 110-konteksten av fem grunner:
 
 1. **Makkerpar-prinsippet og samtidig binding:** Den operative prosedyren definerer to operatører (RØD + GUL) som standard for én hendelse. Både RØD og GUL bindes fra samme tidspunkt: så snart RØD-operatøren besvarer nødanropet, går GUL-operatøren i medlytt for å bygge situasjonsforståelse og avhjelpe med lokalisering før utalarmering. To operatører er dermed opptatt fra første sekund. Erlang-C modellerer én server per anrop og fanger ikke denne samtidige bindingen. Ved samtidskonflikter, det vil si når ingen dedikert makker er tilgjengelig, må én operatør fylle både RØD- og GUL-funksjonen alene.
 
@@ -112,6 +112,8 @@ Erlang-C konkluderer med svært lav kapasitetsutnyttelse og nær null sannsynlig
 3. **Uavhengige servere:** M/M/c forutsetter at servere er uavhengige. I 110-kontekst er operatørene dynamisk koblet gjennom prosedyrens rollestruktur, slik at RØD og GUL er komplementære, ikke parallelle. Rollene er ikke faste: ved neste hendelse roterer operatørene, og den som nettopp var GUL kan bli RØD på neste anrop.
 
 4. **Undervurdert ankomstrate:** Ankomstraten λ estimeres fra synlige oppdrag i BRIS/LEO. Som dokumentert i avsnitt 7.2 undervurderer dette faktisk innkommende anropsvolum med anslagsvis 23 %, fordi tilleggsanrop til eksisterende hendelser sammenstilles automatisk og ikke registreres som egne oppdrag. Dette innebærer at Erlang-C ikke bare undervurderer antall innkommende belastningsenheter, men også bygger på en datadefinisjon der én synlig sak kan skjule flere samtidige kapasitetsbindende anrop. Selv en perfekt M/M/c-modell ville derfor vært basert på et ufullstendig inputgrunnlag.
+
+5. **Homogen, eksponentielt fordelt service-tid:** M/M/c forutsetter at alle anrop trekkes fra én eksponentiell service-fordeling med kvadratisk variasjonskoeffisient $C^2 = 1$. Vår vektede serviceparameter (E[samtaletid] = 3,44 min) er et snitt over en multimodal fordeling: korte info- og feilringinger på 20 til 60 sek dominerer i antall, mens beredskapsanrop (D-pri1, D-aba, L-aba) har samtaletider på 3 til 5 min og bindingstider opp mot 14 min. Den faktiske $C^2$ er flerfold høyere enn 1. Køteoretiske resultater (Pollaczek-Khinchine for M/G/1, analoge resultater for c > 1) viser at forventet ventetid skalerer med $(1 + C^2)/2$: jo høyere varians i service-tid, desto lengre ventetid for samme snitt og λ. Erlang-C med en enkelt μ underestimerer derfor systematisk ventetid selv på sine egne premisser, før de strukturelle bruddene i (1) til (3) regnes inn.
 
 Konsekvensen er at Erlang-C gir et misvisende bilde av kapasitetstilstanden: en modell som sier «nesten ingen ventetid» er lite operasjonelt informativ i et system der det operative problemet ikke er kø i klassisk forstand, men mangel på ledig makker ved ankomst av ny hendelse.
 
