@@ -1,6 +1,6 @@
 # 3. Teori
 
-Dette kapitlet etablerer det køteoretiske grunnlaget for kapasitetsanalysen. Det forklarer også hvorfor klassisk M/M/c-teori ikke er tilstrekkelig for 110-konteksten. Progresjonen går i fire trinn: Erlang-C som grunnlinje, deretter QED-regimet og square-root staffing, så multiserver-jobs (MSJ), og til slutt op-binder-semantikken, som er det teoretiske rammeverket for prosedyrbasert ankomstkonfliktmodellering. Erlang-C presenteres først av pedagogiske grunner; det vises i 3.7 å være et spesialtilfelle av rammeverket som utvikles, ikke en konkurrerende modell som forkastes.
+Dette kapitlet etablerer det køteoretiske grunnlaget for kapasitetsanalysen. Det forklarer også hvorfor klassisk M/M/c-teori ikke er tilstrekkelig for 110-konteksten. Progresjonen går i fire trinn: Erlang-C som grunnlinje, deretter QED-regimet og square-root staffing, så multiserver-jobs (MSJ), og til slutt op-binder-semantikken, som er det teoretiske rammeverket for prosedyrebasert ankomstkonfliktmodellering. Erlang-C presenteres først av pedagogiske grunner; det vises i 3.7 å være et spesialtilfelle av rammeverket som utvikles, ikke en konkurrerende modell som forkastes.
 
 ## 3.1 Erlang-C (M/M/c) som referansemodell
 
@@ -58,7 +58,7 @@ Matteson et al. (2011) tester Poisson-forutsetningen på EMS-ankomster og viser 
 
 Gustavsson (2018) og L'Ecuyer et al. (2018) modellerer eksplisitt «bursts», altså korte, intense ankomsttopper utløst av enkelthendelser. Slike topper genereres typisk av trafikkulykker eller store branner som utløser mange samtidige innringer fra publikum. De foreslår en burst-modell der ankomstintensiteten etter en hendelse følger $A \cdot e^{-tB}$, det vil si eksponentielt avtagende over tid. Modellen bryter med Poisson-uavhengighet lokalt og gir klyngede ankomster.
 
-For den prosedyrbaserte modellen (kap 6.4) er konsekvensen at Erlang-C undervurderer kapasitetsbelastningen i burst-perioder. Den prosedyrbaserte modellen er mindre sårbar. Den bygger ikke på Poisson-forutsetningen, men måler faktisk observerte ankomsttidspunkter.
+For den prosedyrebaserte modellen (kap 6.4) er konsekvensen at Erlang-C undervurderer kapasitetsbelastningen i burst-perioder. Den prosedyrebaserte modellen er mindre sårbar. Den bygger ikke på Poisson-forutsetningen, men måler faktisk observerte ankomsttidspunkter.
 
 ## 3.6 Multiserver-jobs og op-binder-semantikk
 
@@ -85,7 +85,7 @@ Harchol-Balter (2022) generaliserer og formaliserer multiserver-job-rammeverket 
 - **Ankomstkonflikt:** Sannsynligheten for at en ankomst ikke kan starte behandling umiddelbart er ikke bare avhengig av $c$ og $A$, men av fordelingen av $\vec{k}$ blant aktive jobber.
 - **Ikke-stabile regimer:** Systemer med store $\vec{k}$-jobber kan bli effektivt mettet ved moderat $\rho$.
 
-For 110-sentraler med $c_{\text{eff}} = 2$ og en D-pri1 med $k = 2$: hele kapasiteten er bundet så lenge D-pri1 pågår. Dette svarer nøyaktig til Svikt-tilstanden i den prosedyrbaserte modellen (kap 6.4).
+For 110-sentraler med $c_{\text{eff}} = 2$ og en D-pri1 med $k = 2$: hele kapasiteten er bundet så lenge D-pri1 pågår. Dette svarer nøyaktig til Svikt-tilstanden i den prosedyrebaserte modellen (kap 6.4).
 
 ### 3.6.4 Team-basert kapasitet og function differentiation
 
@@ -97,7 +97,7 @@ Van Buuren et al. (2017) validerer dette gjennom diskret hendelsessimulering (DE
 
 ## 3.7 Op-binder-semantikk som formalt rammeverk
 
-Op-binder-semantikken er forfatterens syntese. Den oversetter multiserver-job-rammeverket fra Chelst og Barlach (1981) og Harchol-Balter (2022) til 110-konteksten. Oversettelsen består av tre grep: (i) heterogene job sizes per hendelseskategori, (ii) prosedyrekalibrerte varigheter $d$ snarere enn eksponentielt fordelte servicetider, og (iii) kapasitet operasjonalisert som *ankomstkonflikt-andel* snarere enn ventetid. Rammeverket er ikke en ny teoretisk konstruksjon. Det er en konkret formalisering tilpasset prosedyrbasert nødmeldedrift.
+Op-binder-semantikken er forfatterens syntese. Den oversetter multiserver-job-rammeverket fra Chelst og Barlach (1981) og Harchol-Balter (2022) til 110-konteksten. Oversettelsen består av tre grep: (i) heterogene job sizes per hendelseskategori, (ii) prosedyrekalibrerte varigheter $d$ snarere enn eksponentielt fordelte servicetider, og (iii) kapasitet operasjonalisert som *ankomstkonflikt-andel* snarere enn ventetid. Rammeverket er ikke en ny teoretisk konstruksjon. Det er en konkret formalisering tilpasset prosedyrebasert nødmeldedrift.
 
 Konkret for 110 Sør-Vest betyr dette:
 
@@ -132,7 +132,7 @@ Dette rammeverket reduserer til klassisk M/M/c når alle $q_e = 1$ og $d_e$ er e
 
 Et siste teoretisk bidrag relevant for tolkning (kap 9.2) er litteratur om hvordan operatører tilpasser seg under press. Gustavsson (2018) dokumenterer ved SOS Alarm at agenter under press komprimerer servicetiden og reduserer kvaliteten: *«agents themselves are affected by their workload and duties, which inter alia affect their efficiency»*. Tilpasningen er rasjonell fra operatørens perspektiv. Det er bedre å svare fort med redusert kvalitet enn å la en innringer vente.
 
-Al-Sarhani et al. (2025) viser at simultane hendelser øker kognitiv belastning og feilrate signifikant. Leonardsen et al. (2021) rapporterer tilsvarende funn fra norske AMK-sentraler: manglende debriefing, ingen tilbakemelding, og en opplevelse av usynlighet under høyt press.
+Alzayed og Alsardi (2025) viser at simultane hendelser øker kognitiv belastning og feilrate signifikant. Leonardsen et al. (2021) rapporterer tilsvarende funn fra norske AMK-sentraler: manglende debriefing, ingen tilbakemelding, og en opplevelse av usynlighet under høyt press.
 
 Jamtli et al. (2024) beskriver hvordan arbeidspress påvirker beslutningstaking i slagtelefoner ved AMK Oslo, blant annet gjennom avveininger mellom protokoll og erfaringsbasert intuisjon.
 

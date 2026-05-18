@@ -1,6 +1,6 @@
 ---
 title: "Kapasitetsstyring og bemanningsdimensjonering ved norske 110-sentraler"
-subtitle: "En analyse av operatørkapasitet med prosedyrbasert ankomstkonfliktmodell"
+subtitle: "En analyse av operatørkapasitet med prosedyrebasert ankomstkonfliktmodell"
 author: "Rune Grødem · G20 Individuell"
 date: "LOG650 Logistikk og kunstig intelligens · Høgskolen i Molde · Vår 2026 · Innlevert 31. mai 2026 · Veileder: Bård Inge Austigard Pettersen · Antall ord: ca. 30 400 (kap. 1 til 10, eksklusive tabeller, kode og litteraturliste; maskinell narrativtelling)"
 ---
@@ -45,7 +45,7 @@ Jeg erklærer at oppgaven ikke omfattes av Personopplysningsloven. ☒
 
 **Fullmakt til elektronisk publisering av oppgaven.** Forfatter har opphavsrett til oppgaven. Det betyr blant annet enerett til å gjøre verket tilgjengelig for allmennheten (Åndsverkloven § 2). Alle oppgaver som fyller kriteriene vil bli registrert og publisert i Brage HiM med forfatterens godkjennelse. Oppgaver som er unntatt offentlighet eller båndlagt vil ikke bli publisert.
 
-Jeg gir herved Høgskolen i Molde en vederlagsfri rett til å gjøre oppgaven tilgjengelig for elektronisk publisering: ☐ ja  ☐ nei  *(fylles ut ved innlevering)*
+Jeg gir herved Høgskolen i Molde en vederlagsfri rett til å gjøre oppgaven tilgjengelig for elektronisk publisering: ☐ ja  ☒ nei
 
 Er oppgaven båndlagt (konfidensiell)? ☐ ja  ☒ nei
 
@@ -59,13 +59,13 @@ Dato: 31. mai 2026
 
 Norske 110-sentraler mottar nødmeldinger og koordinerer brann- og redningsinnsats. Bemanningen fastsettes lokalt gjennom risiko- og beredskapsanalyser (ROS), og det finnes ingen nasjonal, kvantitativ standard for hvordan operatørbelastning oversettes til konkret bemanning utover et minimumskrav på to operatører per skift. Denne rapporten er en casestudie av 110 Sør-Vest, supplert med nasjonal benchmarking mot de øvrige elleve sentralene.
 
-Rapporten undersøker i hvilken grad faktisk bemanning ved 110 Sør-Vest samsvarer med kapasitetsbehovet beregnet fra historiske hendelsesdata. En klassisk køteoretisk analyse (Erlang-C) gir svært lav systemutnyttelse (under 6 %) for alle skift, og antyder at bemanningen er tilstrekkelig. Den fanger imidlertid ikke at sentralens prosedyre krever to operatører samtidig (makkerpar) for pri-1-hendelser som bygningsbrann og trafikkulykke. Rapporten utvikler derfor en prosedyrbasert kapasitetsmodell som måler hvor ofte et nytt beredskapsanrop ankommer i en tilstand der makkerpar-prinsippet ikke kan opprettholdes.
+Rapporten undersøker i hvilken grad faktisk bemanning ved 110 Sør-Vest samsvarer med kapasitetsbehovet beregnet fra historiske hendelsesdata. En klassisk køteoretisk analyse (Erlang-C) gir svært lav systemutnyttelse (under 6 %) for alle skift, og antyder at bemanningen er tilstrekkelig. Den fanger imidlertid ikke at sentralens prosedyre krever to operatører samtidig (makkerpar) for pri-1-hendelser som bygningsbrann og trafikkulykke. Rapporten utvikler derfor en prosedyrebasert kapasitetsmodell som måler hvor ofte et nytt beredskapsanrop ankommer i en tilstand der makkerpar-prinsippet ikke kan opprettholdes.
 
-Hovedfunnet for 110 Sør-Vest 2025 er at hvert tredje beredskapsanrop på natt og helg ankommer i en slik svikt-tilstand (32,6 %, med statistisk usikkerhet ±1 prosentpoeng). Årsaken er at minimumsbemanningen på natt/helg er to operatører — én pågående pri-1-hendelse binder dermed hele kapasiteten. På dag hverdag er sviktraten 14,9 %. En scenarioanalyse viser at å heve minimumsbemanningen med én operatør på natt/helg halverer sviktraten til 16,7 %, mens tilsvarende heving på dag reduserer dagsvikten fra 14,9 % til 8,5 %. Funnene er robuste mot variasjon i modellantagelser.
+Hovedfunnet for 110 Sør-Vest 2025 er at hvert tredje beredskapsanrop på natt og helg ankommer i en slik svikt-tilstand (32,6 %, med statistisk usikkerhet ±1 prosentpoeng). Årsaken er at minimumsbemanningen på natt/helg er to operatører — én pågående pri-1-hendelse binder dermed hele kapasiteten. På dag hverdag er sviktraten 14,9 %. En scenarioanalyse viser at å heve minimumsbemanningen med én operatør på natt/helg halverer sviktraten til 16,7 %, mens tilsvarende heving på dag reduserer sviktraten på dag fra 14,9 % til 8,5 %. Funnene er robuste mot variasjon i modellantagelser.
 
 Studien er en av de første kvantitative kapasitetsanalysene av en norsk 110-sentral basert på historiske hendelsesdata. Rammeverket er prinsipielt overførbart til de øvrige sentralene gitt felles klassifiseringsregler.
 
-**Nøkkelord:** 110-sentral · bemanningsdimensjonering · prosedyrbasert kapasitetsmodell · ankomstkonflikt · op-binder-semantikk · makkerpar · D-pri1 · D-aba · Erlang-C · køteori · LEO/BRIS · beredskap.
+**Nøkkelord:** 110-sentral · bemanningsdimensjonering · prosedyrebasert kapasitetsmodell · ankomstkonflikt · op-binder-semantikk · makkerpar · D-pri1 · D-aba · Erlang-C · køteori · LEO/BRIS · beredskap.
 
 ## Abstract
 
@@ -95,7 +95,7 @@ Problemstillingen er ikke at 110-sentraler generelt er over- eller underbemannet
 
 Klassisk køteori for telefonsystemer (Erlang, 1917; Gans et al., 2003) og kvalitetsdrevet bemanning (Halfin & Whitt, 1981; Garnett et al., 2002) er velprøvde rammeverk i kommersielle call-sentre. De er sjeldnere anvendt på nødmeldesentraler med makkerpar-prosedyre, aktivt hendelsebilde utover samtaletid og overløpsmekanismer.
 
-Internasjonal forskning som dekker disse særtrekkene finnes. Chelst og Barlach (1981) og Harchol-Balter (2022) gir flerserver-rammeverk der jobber krever flere servere samtidig. Gustavsson (2018), L'Ecuyer et al. (2018) og Dwars (2013) har anvendt stokastiske modeller på nordiske og europeiske nødmeldesentraler. Van Buuren et al. (2017) viser at funksjonsdifferensiering kan forbedre kapasitet uten bemanningsøkning. Forskning på kognitiv belastning (Al-Sarhani et al., 2025; Leonardsen et al., 2021) dokumenterer at operatørenes arbeidsmønster avviker vesentlig fra det klassiske kømodeller forutsetter.
+Internasjonal forskning som dekker disse særtrekkene finnes. Chelst og Barlach (1981) og Harchol-Balter (2022) gir flerserver-rammeverk der jobber krever flere servere samtidig. Gustavsson (2018), L'Ecuyer et al. (2018) og Dwars (2013) har anvendt stokastiske modeller på nordiske og europeiske nødmeldesentraler. Van Buuren et al. (2017) viser at funksjonsdifferensiering kan forbedre kapasitet uten bemanningsøkning. Forskning på kognitiv belastning (Alzayed & Alsardi, 2025; Leonardsen et al., 2021) dokumenterer at operatørenes arbeidsmønster avviker vesentlig fra det klassiske kømodeller forutsetter.
 
 Norsk forskning på 110-sentralenes kapasitet er derimot svært begrenset. Leonardsen et al. (2021) gir kvalitative funn fra AMK-sentraler. Samdal et al. (2021) analyserer dispatch-nøyaktighet for ambulanser. Etter litteratursøket i denne studien (kap 2) er det ikke funnet publiserte kvantitative kapasitetsanalyser av norske 110-sentraler basert på historiske hendelsesdata.
 
@@ -107,9 +107,9 @@ Kunnskapsgapet er dermed konkret: **det finnes ingen kjent kvantitativ, etterpr�
 
 Spørsmålet undersøkes fordi fraværet av en kvantitativ dimensjoneringsstandard gjør dagens lokale bemanningsvurderinger vanskelige å etterprøve på tvers av sentraler.
 
-Problemstillingen er todelt. Den krever (i) en operasjonalisering av begrepet *kapasitetsbehov* som er relevant for 110-driftens prosedyrekrav, og (ii) en empirisk vurdering av hvor godt faktisk bemanning matcher dette behovet. Erlang-C danner grunnlinjen, men viser seg utilstrekkelig i denne konteksten (jf. kap 6). Studien utvikler derfor en prosedyrbasert variant, den prosedyrbaserte ankomstkonfliktmodellen, som måler operativ kapasitet ved hvert beredskapsanrops ankomsttidspunkt.
+Problemstillingen er todelt. Den krever (i) en operasjonalisering av begrepet *kapasitetsbehov* som er relevant for 110-driftens prosedyrekrav, og (ii) en empirisk vurdering av hvor godt faktisk bemanning matcher dette behovet. Erlang-C danner grunnlinjen, men viser seg utilstrekkelig i denne konteksten (jf. kap 6). Studien utvikler derfor en prosedyrebasert variant, den prosedyrebaserte ankomstkonfliktmodellen, som måler operativ kapasitet ved hvert beredskapsanrops ankomsttidspunkt.
 
-Forskningsspørsmålene under operasjonaliserer problemstillingen. RQ1 og RQ2 etablerer det empiriske grunnlaget (ankomstrate og kapasitetsbinding). RQ3 måler kapasitetsgapet mot prosedyrstandarden. RQ4 sammenligner mot dagens kvalitative dimensjoneringsgrunnlag. RQ5 prøver overførbarheten til en nasjonal dimensjoneringslogikk.
+Forskningsspørsmålene under operasjonaliserer problemstillingen. RQ1 og RQ2 etablerer det empiriske grunnlaget (ankomstrate og kapasitetsbinding). RQ3 måler kapasitetsgapet mot prosedyrestandarden. RQ4 sammenligner mot dagens kvalitative dimensjoneringsgrunnlag. RQ5 prøver overførbarheten til en nasjonal dimensjoneringslogikk.
 
 - **RQ1:** Hva er ankomstraten (λ) til 110 Sør-Vest per skiftperiode, og hvilke belastningsmønstre fremgår av historiske LEO/BRIS-data?
 - **RQ2:** Hva er gjennomsnittlig håndteringstid (μ⁻¹) per hendelseskategori, og i hvilken grad binder aktivt hendelsebilde operatørkapasitet utover samtaletid?
@@ -169,7 +169,7 @@ Prosjektet avgrenses til følgende områder:
 
 - **Vaktromsbemanning ved 110-sentral.** Ressursdisponering i brannvesenet, taktisk hendelseshåndtering og organisatoriske beslutninger utover sentralen ligger utenfor scope.
 - **Retrospektiv og planleggingsrettet analyse.** Modellen er et beslutningsverktøy for kapasitetsvurdering, ikke et sanntidssystem for operativ styring.
-- **Primærcase 110 Sør-Vest 2025.** Hovedmodellen er kjørt på denne ene sentralen. Den nasjonale delen (kap 8.5 og 8.6) er benchmarking og kontekst, ikke full prosedyrbasert modellering for de øvrige 11 sentralene.
+- **Primærcase 110 Sør-Vest 2025.** Hovedmodellen er kjørt på denne ene sentralen. Den nasjonale delen (kap 8.5 og 8.6) er benchmarking og kontekst, ikke full prosedyrebasert modellering for de øvrige 11 sentralene.
 - **Ordinære driftsforhold.** Ekstraordinære hendelser som langvarige storbranner og katastrofescenarier holdes utenfor modellens gyldighetsområde. De drøftes i diskusjonskapittelet som grenser for modellens anvendbarhet.
 - **Ring-flom som kontekst.** Call surge belyses som operativ ekstrembelastning, men modelleres ikke som primærscenario.
 
@@ -190,7 +190,7 @@ Antagelsene drøftes systematisk i kap 6.7 med konsekvens hvis de svikter, og re
 
 ### 1.7 Rapportens struktur
 
-Rapporten består av ti kapitler.
+Rapporten består av ti fagkapitler, i tillegg til bibliografi og vedlegg.
 
 **Kapittel 2** gjennomgår relevant litteratur strukturert etter fem tematiske områder: klassisk køteori, nødmeldesentraler, team-basert kapasitet og prosedyreetterlevelse, nordisk nødmeldeforskning, og dimensjoneringsregulering.
 
@@ -200,11 +200,11 @@ Rapporten består av ti kapitler.
 
 **Kapittel 5** presenterer metode og data, inkludert V3-klassifiseringsregelen og LABA-dybdeanalysen.
 
-**Kapittel 6** utvikler kapasitetsmodellen gjennom tre faser: Erlang-C, simultanitetsanalyse og prosedyrbasert ankomstkonfliktmodell.
+**Kapittel 6** utvikler kapasitetsmodellen gjennom tre faser: Erlang-C, simultanitetsanalyse og prosedyrebasert ankomstkonfliktmodell.
 
 **Kapittel 7** presenterer analysen: metodisk tilnærming, datagrunnlag for synlige og sammenstilte anrop, operativ arbeidsmetodikk som kapasitetsramme, og bindingstidsestimater per kategori.
 
-**Kapittel 8** presenterer resultatene for 110 Sør-Vest 2025: Erlang-C-grunnlinje, prosedyrbasert ankomstkonfliktmodell (variant A), scenario +1 operatør, total operativ belastning (variant B) med sensitivitets- og bootstrap-analyse, ROS-grunnlaget (RQ4), og nasjonal benchmarking (RQ5).
+**Kapittel 8** presenterer resultatene for 110 Sør-Vest 2025: Erlang-C-grunnlinje, prosedyrebasert ankomstkonfliktmodell (variant A), scenario +1 operatør, total operativ belastning (variant B) med sensitivitets- og bootstrap-analyse, ROS-grunnlaget (RQ4), og nasjonal benchmarking (RQ5).
 
 **Kapittel 9** diskuterer funnene mot problemstilling, teori og begrensninger.
 

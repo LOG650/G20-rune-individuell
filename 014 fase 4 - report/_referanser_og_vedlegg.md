@@ -2,7 +2,7 @@
 
 ## 11. Bibliografi
 
-Al-Sarhani, M., m.fl. (2025). Dispatch under pressure: An investigation into the cognitive load of Kuwait's emergency responders. *Journal of Engineering Research*. https://doi.org/10.1016/j.jer.2025.06.004
+Alzayed, M. A., & Alsardi, N. (2025). Dispatch under pressure: An investigation into the cognitive load of Kuwait's emergency responders. *Journal of Engineering Research*. https://doi.org/10.1016/j.jer.2025.06.004
 
 APCO International. (2005). *Project RETAINS effective practices guide: Staffing and retention in public safety communication centers*. APCO International.
 

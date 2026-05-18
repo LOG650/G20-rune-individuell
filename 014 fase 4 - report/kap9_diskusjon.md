@@ -1,6 +1,6 @@
 # 9. Diskusjon
 
-Denne diskusjonen knytter analysens fem hovedfunn (avsnitt 8.7) til problemstillingen, relevant teori og praktiske implikasjoner. Diskusjonen er strukturert rundt fire tema: det metodiske argumentet for en prosedyrbasert modell fremfor klassisk køteori, forholdet mellom modellprediksjoner og opplevd virkelighet, implikasjoner for bemanningsdimensjonering, og begrensninger og videre forskning.
+Denne diskusjonen knytter analysens fem hovedfunn (avsnitt 8.7) til problemstillingen, relevant teori og praktiske implikasjoner. Diskusjonen er strukturert rundt fire tema: det metodiske argumentet for en prosedyrebasert modell fremfor klassisk køteori, forholdet mellom modellprediksjoner og opplevd virkelighet, implikasjoner for bemanningsdimensjonering, og begrensninger og videre forskning.
 
 > **Kort oversikt: diskusjonens svar på RQ1 til RQ5** (fulltekstsvar i kap 10.2):
 >
@@ -15,7 +15,7 @@ Et forventet funn var at Erlang-C undervurderer kapasitetsbehovet når makkerpar
 
 ## 9.1 Hvorfor Erlang-C er utilstrekkelig for 110-konteksten, og hvor den fortsatt fungerer
 
-Resultatene i 8.1 til 8.3 dokumenterer at en prosedyrbasert ankomstkonfliktmodell gir et mer nyttig dimensjoneringsbilde enn klassisk Erlang-C i 110-konteksten. Det er en konklusjon basert på ett case og bør ikke leses som en generell underkjenning av køteoretiske metoder. Erlang-C og dens etterfølgere forblir godt egnet for systemer der antagelsene de bygger på faktisk holder: store call centre med tilstrekkelig statistisk masse, én-til-én betjening uten makkerpar-krav, og et arbeidsvolum dominert av samtaletid. Kritikken nedenfor gjelder spesifikt 110-kontekstens kombinasjon av lav last, makkerpar-prosedyre og lang bindingstid utover samtaletid, ikke køteorien som sådan.
+Resultatene i 8.1 til 8.3 dokumenterer at en prosedyrebasert ankomstkonfliktmodell gir et mer nyttig dimensjoneringsbilde enn klassisk Erlang-C i 110-konteksten. Det er en konklusjon basert på ett case og bør ikke leses som en generell underkjenning av køteoretiske metoder. Erlang-C og dens etterfølgere forblir godt egnet for systemer der antagelsene de bygger på faktisk holder: store call centre med tilstrekkelig statistisk masse, én-til-én betjening uten makkerpar-krav, og et arbeidsvolum dominert av samtaletid. Kritikken nedenfor gjelder spesifikt 110-kontekstens kombinasjon av lav last, makkerpar-prosedyre og lang bindingstid utover samtaletid, ikke køteorien som sådan.
 
 ### 9.1.1 Det lav-belastede paradokset
 
@@ -81,15 +81,15 @@ Disse funnene fra internasjonal og norsk forskning tyder på at kapasitetsproble
 
 ## 9.3 Implikasjoner for bemanningsdimensjonering
 
-Implikasjonene kan skilles i tre nivåer. For praksis peker funnene mot +1 operatør på natt/helg som primær tiltak, med +1 operatør på dag hverdag som sekundær tiltak og funksjonsdifferensiering av servicelast som alternativ eller komplementær. For teori viser studien hvordan multiserver-job-rammeverket kan operasjonaliseres som op-binder-semantikk i en nødmeldesentral. For policy viser analysen at en nasjonal dimensjoneringsstandard først krever felles klassifiseringsregler og et datagrunnlag som fanger operativ binding, ikke bare registrerte oppdrag.
+Implikasjonene kan skilles i tre nivåer. For praksis peker funnene mot +1 operatør på natt/helg som primært tiltak, med +1 operatør på dag hverdag som sekundært tiltak og funksjonsdifferensiering av servicelast som alternativ eller komplementær. For teori viser studien hvordan multiserver-job-rammeverket kan operasjonaliseres som op-binder-semantikk i en nødmeldesentral. For policy viser analysen at en nasjonal dimensjoneringsstandard først krever felles klassifiseringsregler og et datagrunnlag som fanger operativ binding, ikke bare registrerte oppdrag.
 
 ### 9.3.1 Svar på problemstillingen
 
 Problemstillingen spør: *I hvilken grad samsvarer faktisk bemanning ved 110 Sør-Vest med kapasitetsbehovet beregnet fra historiske hendelsesdata og køteoretiske modeller, og hva indikerer funnene om overførbarhet til norske 110-sentraler?*
 
-Svaret er todelt. Erlang-C-analysen, som er den modelltypen nærmest gjeldende praksis for dimensjonering, gir inntrykk av at bemanningen er komfortabel (ρ < 6 %). Den prosedyrbaserte modellen viser at dette bildet er misvisende: med faktisk bemanning er 40,4 % av beredskapsanropene i brudd eller svikt (variant A), stigende til 45,6 % når total belastning inkluderes (variant B hoved). På natt/helg er over halvparten av beredskapsanropene i brudd eller svikt-tilstand (53,1 % variant A og 55,2 % variant B).
+Svaret er todelt. Erlang-C-analysen, som er den modelltypen nærmest gjeldende praksis for dimensjonering, gir inntrykk av at bemanningen er komfortabel (ρ < 6 %). Den prosedyrebaserte modellen viser at dette bildet er misvisende: med faktisk bemanning er 40,4 % av beredskapsanropene i brudd eller svikt (variant A), stigende til 45,6 % når total belastning inkluderes (variant B hoved). På natt/helg er over halvparten av beredskapsanropene i brudd eller svikt-tilstand (53,1 % variant A og 55,2 % variant B).
 
-Samsvaret mellom bemanning og kapasitetsbehov avhenger dermed av hvilken standard man måler mot. Mot en ren køteoretisk standard (ventetid < 30 sek) ser bemanningen tilstrekkelig ut. Mot en prosedyrbasert standard (makkerpar opprettholdt) er det et strukturelt gap, størst på natt/helg (c_eff = 2), der asymmetrien mellom kapasitet og makkerpar-kravet er mest akutt. Modellen avdekker også at kapasitetsgapet primært drives av pri-1-hendelser (D-pri1): én aktiv bygningsbrann eller trafikkulykke binder hele makkerparet på natt/helg, slik at neste beredskapsanrop i samme tidsvindu automatisk ankommer i svikt.
+Samsvaret mellom bemanning og kapasitetsbehov avhenger dermed av hvilken standard man måler mot. Mot en ren køteoretisk standard (ventetid < 30 sek) ser bemanningen tilstrekkelig ut. Mot en prosedyrebasert standard (makkerpar opprettholdt) er det et strukturelt gap, størst på natt/helg (c_eff = 2), der asymmetrien mellom kapasitet og makkerpar-kravet er mest akutt. Modellen avdekker også at kapasitetsgapet primært drives av pri-1-hendelser (D-pri1): én aktiv bygningsbrann eller trafikkulykke binder hele makkerparet på natt/helg, slik at neste beredskapsanrop i samme tidsvindu automatisk ankommer i svikt.
 
 ### 9.3.2 Asymmetrien mellom dag og natt
 
@@ -107,7 +107,7 @@ For 110-sentraler åpner dette for et organisatorisk alternativ til ren bemannin
 
 ### 9.3.4 Mot en kvantitativ dimensjoneringsstandard: et åpent forskningsspørsmål
 
-Den prosedyrbaserte modellen gir et rammeverk for å stille et dimensjoneringsspørsmål som i dag ikke stilles kvantitativt: *For et gitt bemanningsnivå c, hvilken andel av beredskapsanropene håndteres med makkerpar?* Spørsmålet i seg selv er modellens vesentligste praktiske bidrag, uavhengig av hvilke konkrete terskelverdier en eventuell standard skulle bygge på.
+Den prosedyrebaserte modellen gir et rammeverk for å stille et dimensjoneringsspørsmål som i dag ikke stilles kvantitativt: *For et gitt bemanningsnivå c, hvilken andel av beredskapsanropene håndteres med makkerpar?* Spørsmålet i seg selv er modellens vesentligste praktiske bidrag, uavhengig av hvilke konkrete terskelverdier en eventuell standard skulle bygge på.
 
 I dag fastsettes bemanning utover minimumskravet (to operatører per skift, jf. brann- og redningsvesenforskriften) gjennom lokale ROS-analyser. Disse er kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler. Meld. St. 16 (2023-2024) viderefører denne modellen uten å introdusere en nasjonal standard. Interdepartemental arbeidsgruppe (2009) foreslo servicenivåkrav (8 til 10 sekunders svartid), men bemerket selv at det «ikke finnes vitenskapelig grunnlag for de valgte terskelverdiene.» NENA (2020) erkjenner tilsvarende at den internasjonale standarden (90 % besvart innen 15 sekunder) mangler empirisk begrunnelse.
 

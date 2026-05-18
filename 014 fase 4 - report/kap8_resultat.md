@@ -1,6 +1,6 @@
 # 8. Resultat
 
-Dette kapitlet presenterer resultatene av kapasitetsanalysen for 110 Sør-Vest 2025 og den nasjonale benchmarkingen. Innholdet er strukturert etter forskningsspørsmålene: avsnitt 8.1 til 8.3 svarer på RQ3 (prosedyrbasert ankomstkonfliktmodell med variant A og B, scenarioanalyse, sensitivitets- og bootstrap-analyser); avsnitt 8.4 svarer på RQ4 (ROS-grunnlaget); avsnitt 8.5 svarer på RQ5 (nasjonal benchmarking). Avsnitt 8.6 vurderer prinsipiell overførbarhet, og 8.7 sammenstiller hovedfunnene. Vurderingen av funnene mot teori, problemstilling og praktiske implikasjoner gjøres i kap 9, og endelig svar på problemstillingen i kap 10.
+Dette kapitlet presenterer resultatene av kapasitetsanalysen for 110 Sør-Vest 2025 og den nasjonale benchmarkingen. Innholdet er strukturert etter forskningsspørsmålene: avsnitt 8.1 til 8.3 svarer på RQ3 (prosedyrebasert ankomstkonfliktmodell med variant A og B, scenarioanalyse, sensitivitets- og bootstrap-analyser); avsnitt 8.4 svarer på RQ4 (ROS-grunnlaget); avsnitt 8.5 svarer på RQ5 (nasjonal benchmarking). Avsnitt 8.6 vurderer prinsipiell overførbarhet, og 8.7 sammenstiller hovedfunnene. Vurderingen av funnene mot teori, problemstilling og praktiske implikasjoner gjøres i kap 9, og endelig svar på problemstillingen i kap 10.
 
 ## 8.1 Kapasitetsanalyse: variant A (beredskapsbelastning)
 

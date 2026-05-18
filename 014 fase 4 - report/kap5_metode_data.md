@@ -13,7 +13,7 @@ Forfatterens operative tilknytning til 110 Sør-Vest gir både privilegert tilga
 1. **Objektive registerdata som primærgrunnlag.** Hovedfunnene springer ut av tidsstempler, ressursvarslinger og kategoriklassifisering i LEO/BRIS. Disse registreringene er gjort uavhengig av prosjektet og er ikke gjenstand for forfatterens tolkning.
 2. **Skript-basert, deterministisk analyseflyt.** All bearbeiding er implementert i versjonskontrollerte Python-skript med fast random seed (`SEED_DABA = 20260419`). Analyseflyten er deterministisk gitt valgte parametre. Gjentas analysen med samme inngangsdata og samme parametre, gir den identisk resultat. Flere sentrale parametre bygger imidlertid på operativ kalibrering og delvis manuell validering (D-aba Fase 2-sannsynlighet, L-aba-bindingstid, ikke-D bindingstider). Disse er ikke fri for skjønn, jf. antagelsestabellen i kap 6.7. Sensitivitetsanalysen i avsnitt 8.3 viser at hovedfunnet er robust over rimelige variasjoner i disse parametrene.
 3. **Eksplisitt antagelsesdokumentasjon.** Alle modellantagelser er listet med kilde og status (kap 6.7, Tabell 6.3), og observasjonsstatus/analysegjennomføring er oppsummert i Tabell 5.5 og 5.6. Antagelser som hviler på operative samtaler er merket som sådanne, og er ikke fremstilt som direkte empiri.
-4. **Triangulering mellom kilder.** Hvor antagelser bygger på samtaler, kontrolleres de mot prosedyredokumentasjon (Rogaland brann og redning IKS, 2024) og BRIS-tidsstempler. D-aba Fase 1 er for eksempel både prosedyrforankret (cirka 90 sek call-out) og empirisk verifisert (median 74 sek).
+4. **Triangulering mellom kilder.** Hvor antagelser bygger på samtaler, kontrolleres de mot prosedyredokumentasjon (Rogaland brann og redning IKS, 2024) og BRIS-tidsstempler. D-aba Fase 1 er for eksempel både prosedyreforankret (cirka 90 sek call-out) og empirisk verifisert (median 74 sek).
 
 Den primære risikoen som disse grepene ikke fullt eliminerer, er valg av modellramme. Operasjonaliseringen av makkerpar som kapasitetsmetrikk reflekterer forfatterens forståelse av prosedyren. En utenforstående forsker kunne ha formulert metrikken annerledes. Denne begrensningen drøftes i kap 9.4.
 
@@ -23,7 +23,7 @@ Tre komplementære analysekomponenter benyttes:
 
 | Analysekomponent | Primærvariabel | Funksjon |
 |---|---|---|
-| **Prosedyrbasert ankomstkonfliktmodell** (primær), variant A: beredskap, variant B: total belastning | Antall aktive hendelser ved hvert anrops ankomsttidspunkt | Måle andel anrop der makkerpar-driftsstandarden ikke kan opprettholdes |
+| **Prosedyrebasert ankomstkonfliktmodell** (primær), variant A: beredskap, variant B: total belastning | Antall aktive hendelser ved hvert anrops ankomsttidspunkt | Måle andel anrop der makkerpar-driftsstandarden ikke kan opprettholdes |
 | Erlang-C (M/M/c) (grunnlinje) | λ, μ, c_eff | Tradisjonell køteoretisk referansemodell |
 | Benchmarking (alle 12 sentraler) | Bemanning, oppdragsvolum, innbyggertall | Kontekstualisere casefunn mot nasjonal struktur |
 
@@ -142,7 +142,7 @@ Følgende steg er gjennomført for å klargjøre primærdatasettet for analyse:
 6. **Håndtering av ekstreme verdier:** Bindingstider er kontrollert for negative verdier og urealistisk lange varigheter. Beregningene bygger på registrerte tidsstempler og er ikke manuelt justert.
 7. **Encoding:** CSV-filen er lest med `encoding='utf-8-sig'` for å håndtere BOM-markør. Sentralnavn med encoding-avvik er normalisert via en oppslagstabell.
 
-**Tilleggsbearbeiding for nasjonal benchmarking (kap 8.5):** Det nasjonale BRIS-datasettet for 2025 dekker alle 12 sentraler (508 228 registrerte oppdrag, proxy for henvendelser, med kjent undertelling pga. sammenstilling, jf. avsnitt 5.3.1 og 5.3.4). Datasettet er bearbeidet med samme V3-klassifiseringsregel som primærdatasettet (`Kilde = Alarm`-krav for L-aba og D-aba). Bearbeidingen er nødvendig av to grunner. Sentralnavn forekommer med ulike encoding-varianter (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`, `Sør-Vest 110`). I tillegg har `Opprinnelig oppdragstype` ulik dekningsgrad mellom sentraler. To konkrete grep er gjort: sentralnavn normaliseres via `SENTRALER_NORM`-oppslagstabellen i `analyse/scripts/benchmark_trend_analyse.py`. L-aba/D-aba-andelen rapporteres uten justering for ulik dekningsgrad. Variasjonen mellom sentraler (0,0 til 7,5 %) tolkes derfor eksplisitt som indikasjon på heterogen registreringspraksis (jf. kap 9.4.1), ikke som direkte sammenlignbare nivåer. Lokale svar brukes bare til å forklare avvik der de foreligger. Registertallene endres ikke uten dokumentert grunnlag. Den prosedyrbaserte ankomstkonfliktmodellen er per nå kjørt på 110 Sør-Vest alene. Nasjonal modellanvendelse forutsetter klassifiseringsharmonisering (kap 10.4).
+**Tilleggsbearbeiding for nasjonal benchmarking (kap 8.5):** Det nasjonale BRIS-datasettet for 2025 dekker alle 12 sentraler (508 228 registrerte oppdrag, proxy for henvendelser, med kjent undertelling pga. sammenstilling, jf. avsnitt 5.3.1 og 5.3.4). Datasettet er bearbeidet med samme V3-klassifiseringsregel som primærdatasettet (`Kilde = Alarm`-krav for L-aba og D-aba). Bearbeidingen er nødvendig av to grunner. Sentralnavn forekommer med ulike encoding-varianter (f.eks. `S?r-Vest 110`, `S\u00f8r-Vest 110`, `Sør-Vest 110`). I tillegg har `Opprinnelig oppdragstype` ulik dekningsgrad mellom sentraler. To konkrete grep er gjort: sentralnavn normaliseres via `SENTRALER_NORM`-oppslagstabellen i `analyse/scripts/benchmark_trend_analyse.py`. L-aba/D-aba-andelen rapporteres uten justering for ulik dekningsgrad. Variasjonen mellom sentraler (0,0 til 7,5 %) tolkes derfor eksplisitt som indikasjon på heterogen registreringspraksis (jf. kap 9.4.1), ikke som direkte sammenlignbare nivåer. Lokale svar brukes bare til å forklare avvik der de foreligger. Registertallene endres ikke uten dokumentert grunnlag. Den prosedyrebaserte ankomstkonfliktmodellen er per nå kjørt på 110 Sør-Vest alene. Nasjonal modellanvendelse forutsetter klassifiseringsharmonisering (kap 10.4).
 
 ---
 
@@ -334,7 +334,7 @@ Basert på n=100-resultatet velges mean **4,53 min ≈ 4,5 min** som hovedverdi.
 - **Tre ekstreme verdier (>15 min):** Av 100 hendelser har 3 bindingstid over 15 min. To har eksplisitt forklarende kommentar (én «feilrevidert», én «nødanrop ikke lagt til, baserer tid på første logglinje») og kunne potensielt utelates. Mean uten disse 3: ca. 4,1 min. Tallet 4,5 min beholdes som hovedparameter for konservatisme.
 - **Datakvalitetsobservasjon ikke reell feilmelding:** Analysen avdekket uventet variasjon i loggkvalitet. Enkelte hendelser har mangelfulle eller fraværende tidsstempler i LEO. Dette er rapportert tilbake til 110 Sør-Vest som empirisk datakvalitetsinput.
 
-Fullstendig metodebeskrivelse, resultattabeller og kommentarlogg er gitt i `analyse/notat_V3_modellutvikling.md` og det utfylte datasettet `analyse/uttrekk/Kopi av laba_sorvest_2025_dybdeanalyse_n100-ferdig utfylt.xlsx`.
+Fullstendig metodebeskrivelse, resultattabeller og kommentarlogg er gitt i `analyse/notat_V3_modellutvikling.md` og det utfylte datasettet for LABA-dybdeanalyse runde 2 (n = 100) ligger i `analyse/uttrekk/` (Excel-fil).
 
 ---
 

@@ -1,6 +1,6 @@
 # Rapport: masterfil
 
-**Tittel:** Kapasitetsstyring og bemanningsdimensjonering ved norske 110-sentraler. En analyse av operatørkapasitet med prosedyrbasert ankomstkonfliktmodell
+**Tittel:** Kapasitetsstyring og bemanningsdimensjonering ved norske 110-sentraler. En analyse av operatørkapasitet med prosedyrebasert ankomstkonfliktmodell
 
 **Emne:** LOG650 Logistikk og kunstig intelligens, Høgskolen i Molde, Vår 2026
 **Student:** Rune Grødem (G20 individuell)

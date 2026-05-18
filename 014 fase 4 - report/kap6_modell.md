@@ -2,13 +2,15 @@
 
 ## 6.1 Modellutvikling og metodisk begrunnelse
 
-Prosjektet gjennomgikk en metodisk utvikling i tre faser. Alle tre faser er dokumentert fordi utviklingen i seg selv er analytisk informativ: overgangen fra Erlang-C til prosedyrbasert modell er ikke et teknisk valg, men en konsekvens av at den operative virkeligheten ved 110-sentraler bryter med M/M/c-modellens kjerneforutsetning om uavhengige, parallelle servere.
+Prosjektet gjennomgikk en metodisk utvikling i tre faser. Alle tre faser er dokumentert fordi utviklingen i seg selv er analytisk informativ: overgangen fra Erlang-C til prosedyrebasert modell er ikke et teknisk valg, men en konsekvens av at den operative virkeligheten ved 110-sentraler bryter med M/M/c-modellens kjerneforutsetning om uavhengige, parallelle servere.
 
 | Fase | Modell | Målmetrikk | Konklusjon |
 |---|---|---|---|
 | 1 | Erlang-C (M/M/c) | P(W > t), ρ | ρ < 6 % for alle skifttyper; kapasiteten ser komfortabel ut |
 | 2 | Simultanitetsanalyse | P(≥ k aktive hendelser simultant) | Lav konfliktrate, men makkerpar-logikk ikke inkludert |
-| 3 | Prosedyrbasert ankomstkonfliktmodell | P(brudd på driftsstandard ved ankomst) | Strukturelt kapasitetsgap (**primærmodell**) |
+| 3 | Prosedyrebasert ankomstkonfliktmodell | P(brudd på driftsstandard ved ankomst) | Strukturelt kapasitetsgap (**primærmodell**) |
+
+Fase 2 var en mellomliggende simultanitetsanalyse mellom Erlang-C og den prosedyrebaserte ankomstkonfliktmodellen. Den ble brukt til å undersøke om antall *samtidig aktive hendelser* alene kunne forklare det operative kapasitetspresset. Resultatet viste lav konfliktrate på enkle samtidighetsmål, men metoden ble ikke videreført som hovedmodell fordi den ikke fanger makkerpar-bindingen tilstrekkelig presist: én pri-1-hendelse binder to operatører, ikke én, og det er denne strukturelle dobbelt-bindingen som driver kapasitetsgapet på natt/helg. Fase 3 (primærmodellen) er utviklet for nettopp å fange dette. Fase 2 dokumenteres her som metodisk mellomtrinn, ikke som selvstendig resultat.
 
 Overgangen fra Fase 1 til Fase 3 er ikke en forkasting av køteoretisk metode, men en utvidelse: modellen spesifiserer hva som faktisk er en «opptatt server» i 110-kontekst, og svarer på et mer presist spørsmål enn Erlang-C kan formulere.
 
@@ -115,7 +117,7 @@ Konsekvensen er at Erlang-C gir et misvisende bilde av kapasitetstilstanden: en 
 
 ---
 
-## 6.4 Fase 3: Prosedyrbasert ankomstkonfliktmodell som primærmodell
+## 6.4 Fase 3: Prosedyrebasert ankomstkonfliktmodell som primærmodell
 
 ### 6.4.1 Konseptuell ramme
 
@@ -155,7 +157,7 @@ Basert på antall ledige operatører klassifiseres hvert innkommende beredskapsa
 | **Brudd på driftsstandard** | Kun 1 ledig (solo-håndtering) | ledige = 1 | Operatøren klarer det, men uten makker. Økt kognitiv belastning, økt feilrisiko |
 | **Svikt** | Ingen ledig operatør | ledige ≤ 0 | VL må overta eller overløp til Agder |
 
-> **[Antagelse A7]** *Brudd*-tilstanden er definert som operativt mulig, det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning, men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2021). Konsekvensene drøftes i kap 9.2.
+> **[Antagelse A7]** *Brudd*-tilstanden er definert som operativt mulig, det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning, men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Alzayed og Alsardi (2025) og Leonardsen et al. (2021). Konsekvensene drøftes i kap 9.2.
 
 For å illustrere hva dette innebærer i praksis med c_eff = 2 (natt/helg):
 
@@ -259,7 +261,7 @@ Dette er ikke det samme som:
 - P(W > t) i Erlang-C-forstand: tradisjonell ventetid i kø
 - P(kapasitetskollaps): systemet kollapser sjelden totalt
 
-Det er en **operasjonell prosedyrmetrikk** som speiler 110-operatørenes erfarte kapasitetsproblem: ikke at anrop forblir ubesvarte, men at de besvares under betingelser der den operative standarden for korrekt og trygg hendelseshåndtering ikke er oppfylt.
+Det er en **operasjonell prosedyremetrikk** som speiler 110-operatørenes erfarte kapasitetsproblem: ikke at anrop forblir ubesvarte, men at de besvares under betingelser der den operative standarden for korrekt og trygg hendelseshåndtering ikke er oppfylt.
 
 ### 6.4.9 Modellens konservatisme
 
@@ -376,7 +378,7 @@ For sporbarhet og kritisk vurdering oppsummeres her de sentrale antagelsene som 
 | A7 | Brudd-tilstand er operativt mulig, men med redusert kvalitetssikring | (kvalitativ) | Prosedyre + valideringssamtaler; drøftes i kap 9.2 | Antagelse, ikke empirisk verifisert |
 | A8 | Bindingstider for S, L-hendelse, L-ukjent, F, V (variant B) | tre sensitivitetsscenarioer | Operative estimater forelagt vaktleder | Operativt estimat med sensitivitetsspenn |
 
-Antagelsene er sortert etter sentralitet. A1 til A5 driver hovedfunnet og er empirisk eller prosedyrforankret (A5 oppgradert til empirisk kalibrert etter LABA n=100-runden 22.04.2026, jf. avsnitt 5.4). A6 (sammenstilte = 1 min) har størst restusikkerhet av de empiriske parametrene. A7 er en tolkningsmessig antagelse som drøftes i kap 9.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 8.3.
+Antagelsene er sortert etter sentralitet. A1 til A5 driver hovedfunnet og er empirisk eller prosedyreforankret (A5 oppgradert til empirisk kalibrert etter LABA n=100-runden 22.04.2026, jf. avsnitt 5.4). A6 (sammenstilte = 1 min) har størst restusikkerhet av de empiriske parametrene. A7 er en tolkningsmessig antagelse som drøftes i kap 9.2 (modell vs. opplevd virkelighet). A8 inngår kun i variant B og er sensitivitetstestet i avsnitt 8.3.
 
 ### Konsekvenser hvis antagelsene svikter
 
@@ -384,7 +386,7 @@ For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene byg
 
 **A1, VL-rollen.** Hvis VL faktisk besvarer en ikke-triviell andel nødanrop: Svikt-andelen overestimert. Effekt: trolig 2 til 5 pp lavere Svikt på natt/helg ved mer aktiv VL-rolle. Modellens retning (asymmetri dag/natt) er robust.
 
-**A2, D-pri1 makkerpar-binding ($q = 2$).** Hvis GUL-operatøren i praksis frigjøres tidligere enn antatt (f.eks. ved at vindusmelding kvitteres raskere enn +3 min): Svikt-andelen overestimert. Effekt: trolig 3 til 7 pp lavere på natt/helg under et scenario der GUL frigjøres etter 7 min i stedet for 14 min. Prosedyre og operatørintervju støtter likevel at makkerpar er reelt bundet gjennom hele akuttfasen, og endring av A2 ville krevd revurdering av prosedyrforståelsen, ikke bare parametere. Statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen og imputeringsusikkerhet for de cirka 19 % manglende verdiene er kvantifisert via ikke-parametrisk bootstrap (avsnitt 8.3.4): 95 % CI for Svikt natt/helg er [32,1; 33,2] %, dvs. ±0,5 pp rundt punktestimatet.
+**A2, D-pri1 makkerpar-binding ($q = 2$).** Hvis GUL-operatøren i praksis frigjøres tidligere enn antatt (f.eks. ved at vindusmelding kvitteres raskere enn +3 min): Svikt-andelen overestimert. Effekt: trolig 3 til 7 pp lavere på natt/helg under et scenario der GUL frigjøres etter 7 min i stedet for 14 min. Prosedyre og operatørintervju støtter likevel at makkerpar er reelt bundet gjennom hele akuttfasen, og endring av A2 ville krevd revurdering av prosedyreforståelsen, ikke bare parametere. Statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen og imputeringsusikkerhet for de cirka 19 % manglende verdiene er kvantifisert via ikke-parametrisk bootstrap (avsnitt 8.3.4): 95 % CI for Svikt natt/helg er [32,1; 33,2] %, dvs. ±0,5 pp rundt punktestimatet.
 
 **A3, D-aba Fase 1 ($q = 1$, $d = 3$ min).** Empirisk verifisert via BRIS-tidsstempler (median 74 sek call-out + registrering). Restusikkerheten er liten. Hvis faktisk varighet er 5 min i stedet for 3 min: marginal effekt på Svikt natt/helg (under 1 pp). A3 er ikke en kritisk antagelse for hovedfunnet.
 
@@ -394,7 +396,7 @@ For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene byg
 
 **A6, sammenstilte anrop binder 1 min.** Største restusikkerhet av de antatte parametrene. Hvis reell bindingstid er 2 til 3 min (operatøren håndterer som korte nødtelefoner): Svikt-andelen underestimert. Effekt: potensielt 2 til 4 pp høyere Svikt på natt/helg. Antagelsen trekker dermed mot konservativt estimat for hovedfunnet, det vil si den «riktige» retningen for å unngå overestimering av kapasitetspresset.
 
-**A7, Brudd som operativt mulig.** Antagelsen påvirker ikke modellens tallverdier direkte (modellen klassifiserer Brudd uavhengig av om kvalitetstapet er kvantifisert). Hvis Brudd i praksis innebærer signifikant kvalitetsreduksjon, slik Gustavsson (2018), Al-Sarhani et al. (2025) og Leonardsen et al. (2019) dokumenterer, er den OPERATIVE konsekvensen av et 20 til 22 % Brudd-rate større enn modellen kommuniserer eksplisitt. Brudd og Svikt bør derfor leses sammen, ikke som adskilte kategorier. Drøftes i kap 9.2.
+**A7, Brudd som operativt mulig.** Antagelsen påvirker ikke modellens tallverdier direkte (modellen klassifiserer Brudd uavhengig av om kvalitetstapet er kvantifisert). Hvis Brudd i praksis innebærer signifikant kvalitetsreduksjon, slik Gustavsson (2018), Alzayed og Alsardi (2025) og Leonardsen et al. (2019) dokumenterer, er den OPERATIVE konsekvensen av et 20 til 22 % Brudd-rate større enn modellen kommuniserer eksplisitt. Brudd og Svikt bør derfor leses sammen, ikke som adskilte kategorier. Drøftes i kap 9.2.
 
 **A8, bindingstider for S, L-hendelse, L-ukjent, F, V.** Sensitivitetstestet i avsnitt 8.3. Hele spennet av rimelige antagelser gir Svikt natt/helg 30 til 38 % (variant B). Hovedfunnet er robust. A8 påvirker ikke variant A (beredskapsbelastning) som er studiens primære metrikk. På dag hverdag er sensitivitetsspennet bredere (15 til 34 % Svikt), noe som tilsier større usikkerhet for dagskonklusjonen, men ikke for natt/helg-funnet.
 
