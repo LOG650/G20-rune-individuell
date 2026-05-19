@@ -6,10 +6,6 @@ Alzayed, M. A., & Alsardi, N. (2025). Dispatch under pressure: An investigation 
 
 APCO International. (2005). *Project RETAINS effective practices guide: Staffing and retention in public safety communication centers*. APCO International.
 
-Beredskapsanalyse 110 Vest. (2022). *Beredskapsanalyse 110 Vest* [Intern rapport].
-
-Bergen brannvesen. (2023). *Risiko- og sårbarhetsanalyse 110 Vest* [Intern rapport].
-
 Brann- og redningsvesenforskriften. (2021). *Forskrift om organisering, bemanning og utrustning av brann- og redningsvesen og nødmeldesentralene* (FOR-2021-09-15-2755). Justis- og beredskapsdepartementet. https://lovdata.no/dokument/SF/forskrift/2021-09-15-2755
 
 Brill, P. H., & Green, L. (1984). Queues in which customers receive simultaneous service from a random number of servers. *Management Science, 30*(1), 51-68.
@@ -76,6 +72,10 @@ National Emergency Number Association (NENA). (2003). *PSAP staffing guidelines 
 
 National Emergency Number Association (NENA). (2020). *NENA standard for 9-1-1 call processing* (NENA-STA-020.1-2020). NENA. https://cdn.ymaws.com/www.nena.org/resource/resmgr/standards/nena-sta-020.1-2020_911_call.pdf
 
+Norconsult. (2023a). *Overordnet risiko- og sårbarhetsanalyse: ROS-analyse av 110 Sør-Vest sin organisatoriske, operative og tekniske funksjonsevne* (Dokument ROS, versjon J05, 2023-09-21) [Intern rapport]. Norconsult AS.
+
+Norconsult. (2023b). *Beredskapsanalyse: Organisering, kompetanse og bemanning – 110 Sør-Vest* (Dokument BER-01, versjon J03, 2023-09-21) [Intern rapport]. Norconsult AS.
+
 Normark, M. (2002). *Using technology for real-time coordination of work: A study of work and artifact use in the everyday activities at SOS Alarm* [Licentiatavhandling, KTH]. TRITA-NA-0144.
 
 Penverne, Y., Martinez, C., Cellier, N., Pehlivan, C., Jenvrin, J., Savary, D., Debierre, V., Deciron, F., Bichri, A., Lebastard, Q., Montassier, E., Leclere, B., & Fontanili, F. (2024). A simulation based digital twin approach to assessing the organization of response to emergency calls. *npj Digital Medicine, 7*, 385. https://doi.org/10.1038/s41746-024-01392-2
@@ -86,7 +86,7 @@ Samdal, M., Thorsen, K., Graesli, O., Sandberg, M., & Rehn, M. (2021). Dispatch 
 
 Shen, H., & Huang, J. Z. (2008). Interday forecasting and intraday updating of call center arrivals. *Manufacturing & Service Operations Management, 10*(3), 391-410.
 
-Statistisk sentralbyrå. (2026). *Folkemengde per 1. januar 2026* [Statistikkbanken]. SSB.
+Statistisk sentralbyrå. (2026). *Befolkning, etter region, statistikkvariabel og kvartal* (Tabell 01222) [Statistikkbanken]. SSB. https://www.ssb.no/statbank/table/01222
 
 St.meld. nr. 41. (2000-2001). *Brann- og eksplosjonsvern*. Kommunal- og regionaldepartementet.
 

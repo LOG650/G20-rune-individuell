@@ -228,7 +228,7 @@ Bootstrap-CI for Svikt natt/helg er **[32,1; 33,2] %** med bredde 1,1 pp. Punkte
 
 ## 8.4 ROS- og beredskapsanalyse som dimensjoneringsgrunnlag (RQ4)
 
-For å besvare RQ4 er beredskapsanalysen for 110 Sør-Vest (Beredskapsanalyse 110 Vest, 2022) og tilhørende ROS-dokument (Risiko- og sårbarhetsanalyse 110 Vest) gjennomgått systematisk. Analysen er rent observerende, og vurderingen mot funnene fra primærmodellen drøftes i kap 9.3.4.
+For å besvare RQ4 er beredskapsanalysen for 110 Sør-Vest (Norconsult, 2023b) og tilhørende overordnede risiko- og sårbarhetsanalyse (Norconsult, 2023a) gjennomgått systematisk. Begge dokumentene er utarbeidet av Norconsult AS i samarbeid med 110 Sør-Vest og datert 2023-09-21. Analysen er rent observerende, og vurderingen mot funnene fra primærmodellen drøftes i kap 9.3.4.
 
 **Tabell 8.7: Hva ROS-/beredskapsanalysen for 110 Sør-Vest dokumenterer kvantitativt**
 

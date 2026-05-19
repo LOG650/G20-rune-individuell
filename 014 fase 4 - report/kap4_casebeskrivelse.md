@@ -18,7 +18,7 @@ Tabell 4.1 lister sentralene og deres dekningsområder.
 | Trøndelag 110 | Trøndelag |
 | Møre og Romsdal 110 | Møre og Romsdal |
 | Vest 110 | Vestland |
-| Sør-Vest 110 | Rogaland og deler av Agder |
+| Sør-Vest 110 | Rogaland, fem kommuner i Vestland (Bømlo, Etne, Fitjar, Stord, Sveio) og Sirdal i Agder |
 | Agder 110 | Agder |
 | Sør-Øst 110 | Vestfold og Telemark |
 | Oslo 110 | Oslo |
@@ -29,7 +29,7 @@ Bemanningsdimensjonering av 110-operatører reguleres av brann- og redningsvesen
 
 ## 4.2 110 Sør-Vest: primærcase
 
-110 Sør-Vest dekker 29 kommuner i Rogaland og tilgrensende områder i Vestland og Agder, og betjente per 1. januar 2026 et samlet befolkningsgrunnlag på 555 758 innbyggere (SSB, 2026). Sentralen er organisert under Rogaland brann og redning IKS og koordinerer brann- og redningsinnsats for både heltids- og deltidsbrannvesen i dekningsområdet. Sentralen er lokalisert i Stavanger.
+110 Sør-Vest dekker 29 kommuner med et samlet befolkningsgrunnlag på 555 758 innbyggere per 1. januar 2026 (SSB tabell 01222, 4. kvartal 2025). Dekningsområdet omfatter hele Rogaland (23 kommuner, 508 922 innbyggere), fem kommuner i Vestland (Bømlo, Etne, Fitjar, Stord, Sveio, til sammen 44 925 innbyggere) og én kommune i Agder (Sirdal, 1 911 innbyggere). Sentralen er organisert som en avdeling i Rogaland brann og redning IKS (RBR) og koordinerer brann- og redningsinnsats for både heltids- og deltidsbrannvesen i dekningsområdet. Stavanger kommune er vertskommune etter kommuneloven, mens sentralen fysisk er lokalisert i Sandnes, der den i 2019 ble samlokalisert med tidligere Haugaland og Sunnhordaland 110-sentral (Norconsult, 2023, s. 27).
 
 ### 4.2.1 Skiftstruktur og bemanning
 
@@ -111,6 +111,8 @@ Disse konsekvensene er ikke bare teoretiske. De representerer operative forhold 
 
 ## 4.5 ROS- og beredskapsanalysegrunnlag
 
-Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i sentralens risiko- og beredskapsanalyse (ROS) og tilhørende beredskapsanalyse. Disse dokumentene vurderer kvalitativt hvilke risikoer sentralen er eksponert for og hvilken bemanning som anses nødvendig. 110 Sør-Vest brukes i denne rapporten som primærcase for å utvikle og teste en kvantitativ analysemodell som prinsipielt kan anvendes på andre 110-sentraler. Resultatobservasjonen av disse analysene presenteres i kap 8.4, og en nærmere drøfting av deres metodiske grunnlag opp mot de kvantitative funnene inngår i diskusjonen (kapittel 9).
+Bemanningsnivået ved 110 Sør-Vest er formelt begrunnet i to separate dokumenter utarbeidet av Norconsult i samarbeid med 110 Sør-Vest. Den overordnede **risiko- og sårbarhetsanalysen (ROS-analysen)** (Norconsult, 2023a) kartlegger uønskede hendelser som kan ramme sentralens funksjonsevne, og vurderer disse opp mot sannsynlighet og konsekvens. **Beredskapsanalysen** (Norconsult, 2023b) bygger videre på ROS-analysen og vurderer i hvilken grad sentralen er organisert, utrustet og bemannet til å håndtere de identifiserte risikoene. Det er beredskapsanalysen som inneholder de konkrete vurderingene og anbefalingene knyttet til bemanning, kompetanse og organisering. ROS-analysen utgjør det metodiske grunnlaget; beredskapsanalysen er det operative svaret.
 
-Det er viktig å understreke at ROS-analysene er kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler. Prosjektets ambisjon er å supplere, ikke erstatte, disse analysene med et kvantitativt referansepunkt for operatørbemanning.
+110 Sør-Vest brukes i denne rapporten som primærcase for å utvikle og teste en kvantitativ analysemodell som prinsipielt kan anvendes på andre 110-sentraler. Begge analysene presenteres nærmere i kap 8.4, og en nærmere drøfting av deres metodiske grunnlag opp mot de kvantitative funnene inngår i diskusjonen (kapittel 9).
+
+Det er viktig å understreke at både ROS- og beredskapsanalysen er kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler. Prosjektets ambisjon er å supplere, ikke erstatte, disse analysene med et kvantitativt referansepunkt for operatørbemanning.

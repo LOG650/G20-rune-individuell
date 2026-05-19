@@ -91,9 +91,9 @@ Tre interne dokumenter fra 110 Sør-Vest er sentrale for modellkonstruksjonen:
 
 1. **Prosedyre for arbeidsmetodikk, utalarmering og loggføring** (Rogaland brann og redning IKS, 2024, versjon 4). Definerer rollestrukturen (RØD/GUL/GRØNN), makkerpar-prinsippet, VL-rollen og operativ arbeidsmetodikk.
 
-2. **Beredskapsanalyse 110 Vest** (2022). Dokumenterer overløpsmekanismer, herunder 30-sekundersregelen for automatisk overføring til Agder og 10-anrops-køterskel.
+2. **Beredskapsanalyse for 110 Sør-Vest** (Norconsult, 2023b). Dokumenterer overløpsmekanismer, herunder 30-sekundersregelen for automatisk overføring til Agder og 10-anrops-køterskel (s. 25), samt dagens organisering og bemanning.
 
-3. **Risiko- og sårbarhetsanalyse (ROS) Bergen brannvesen** (2023). Dokumenterer det kvalitative grunnlaget for bemanningsdimensjonering.
+3. **Overordnet risiko- og sårbarhetsanalyse for 110 Sør-Vest** (Norconsult, 2023a). Dokumenterer det kvalitative grunnlaget for bemanningsdimensjonering, dekningsområde (29 kommuner, ca. 530 000 innbyggere per 2023) og identifiserte uønskede hendelser.
 
 Dokumentene er tilgjengelige gjennom forfatterens operative tilknytning til 110 Sør-Vest. Denne kilden brukes primært til å etablere modellparametere (c_eff, kapasitetsnivåer, overløpsregler). Denne kildens viktigste begrensning er at den beskriver prosedyrer og planer, ikke nødvendigvis faktisk etterlevelse i alle situasjoner.
 
