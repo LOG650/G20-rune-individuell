@@ -113,7 +113,7 @@ UNICODE_ERSTATNINGER = {
     # Logiske/matematiske symboler brukt i prosa (ikke inne i $...$)
     "\u2227": "OG",              # ∧ -> OG
     "\u2228": "ELLER",           # ∨ -> ELLER
-    "\u2260": "!=",              # ≠ -> !=
+    "\u2260": "ulik",              # ≠ -> ulik
     # NB: matematiske symboler (∈ ≤ ≥ ≈ ⊆) beholdes — de brukes inni $...$ og
     # rendres som LaTeX-matematikk. Pandoc-warnings for disse utenfor math-mode
     # er ikke-fatale og kan ignoreres.

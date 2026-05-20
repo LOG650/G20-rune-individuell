@@ -30,7 +30,7 @@ Klassifiseringen bruker tre felt fra BRIS i kombinasjon: `Oppdragstype` (sluttkl
 | **D-aba** (ABA-utløst utrykning) | `Ressurs varslet` ∧ `Opprinnelig` starter med «ABA» ∧ `Kilde = Alarm` | 3 056 | 4,9 % |
 | **S** (Service) | `Oppdragstype = "Service"` | 22 542 | 36,4 % |
 | **L-aba** (ABA løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig = "ABA"` ∧ `Kilde = Alarm` | 3 430 | 5,5 % |
-| **L-hendelse** (Reell hendelse løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` har verdi ∧ (≠ ABA ∨ `Kilde ≠ Alarm`) | 4 298 | 6,9 % |
+| **L-hendelse** (Reell hendelse løst av 110) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` har verdi ∧ (`Opprinnelig` ≠ "ABA" ∨ `Kilde` ≠ "Alarm") | 4 298 | 6,9 % |
 | **L-ukjent** (Løst av 110, uklassifisert) | `Oppdragstype = "Oppdrag løst av 110"` ∧ `Opprinnelig` er tom | 16 768 | 27,1 % |
 | **F** (Feilringing) | `Oppdragstype` $\in$ {Nødanrop feilring, Ikke reell nødmelding, ECall feil bruk, ECall teknisk/ukjent, ECall veihjelp} | 6 824 | 11,0 % |
 | **V** (Viderevarsling) | `Oppdragstype` inneholder «viderevarslet» eller «viderekoble» | 547 | 0,9 % |
