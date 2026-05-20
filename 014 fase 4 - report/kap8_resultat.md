@@ -376,7 +376,7 @@ På natt/helg (c=2) er **32,6 % av beredskapsanropene i Svikt-tilstand** (varian
 **Funn 5: Total operativ belastning forverrer dagkapasiteten merkbart.**
 Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 59,5 % (−9,7 pp) og Svikt øker fra 14,9 % til 21,6 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes i mindre grad fordi bakgrunnsvolumet er lavere; Svikt øker fra 32,6 % til 33,2 %. Sensitivitetsanalysen viser at denne forverringen er robust.
 
-Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av funnene mot dimensjoneringspraksis, parallellen til dimensjoneringsforskriften for brannvesen, og de praktiske implikasjonene drøftes i kap 9 (særlig 9.3) og kap 10.
+Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av funnene mot dimensjoneringspraksis, parallellen til brannvesenets dimensjoneringskrav i brann- og redningsvesenforskriften, og de praktiske implikasjonene drøftes i kap 9 (særlig 9.3) og kap 10.
 
 ---
 
