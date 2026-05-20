@@ -40,9 +40,9 @@ Analysen bygger på fem datakilder med ulik rolle og tilgangsstatus:
 | Kilde | Type | Periode | Rolle | Tilgang |
 |---|---|---|---|---|
 | LEO/BRIS hendelsesdata | Registerdata | 2025 | Primærdata for ankomst og binding | Intern |
-| DSB MOB-rapporter | Offentlig statistikk | 2022–2025 | Benchmarking alle 12 sentraler | Offentlig |
+| DSB MOB-rapporter | Offentlig statistikk | 2022 til 2025 | Benchmarking alle 12 sentraler | Offentlig |
 | Prosedyre- og analysedokumenter | Internprosedyre | Gjeldende | Modellparametere og roller | Intern |
-| Operative valideringssamtaler | Kvalitative data | Mars–april 2026 | Kalibrering og validering | Egne samtaler |
+| Operative valideringssamtaler | Kvalitative data | Mars til april 2026 | Kalibrering og validering | Egne samtaler |
 | SSB befolkningsdata | Offentlig statistikk | 2026 | Innbyggertall per dekningsområde | Offentlig |
 
 Hovedanalysen er kvantitativ og registerbasert. De kvalitative kildene (prosedyredokumenter og valideringssamtaler) har en støttende funksjon: de brukes til å forankre modellantagelser i operativ virkelighet, ikke som selvstendig empirisk grunnlag for hovedfunnene.
