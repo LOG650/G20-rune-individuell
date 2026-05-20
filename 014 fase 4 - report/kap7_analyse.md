@@ -68,11 +68,23 @@ Med utgangspunkt i prosedyrens rolledefinisjon etableres tre kapasitetsnivåer, 
 | **Brudd på driftsstandard** | Kun 1 ledig, solo-håndtering | ledige = 1 | n_aktive = 1 | n_aktive = 2 |
 | **Svikt** | Ingen ledig operatør | ledige ≤ 0 | n_aktive ≥ 2 | n_aktive ≥ 3 |
 
-*Ledige operatører = c_eff − n_aktive. Modellen speiler den operative virkeligheten: ved samtidskonflikter splittes makkerparet slik at operatørene fordeler seg. Med c_eff = 3 og 1 aktiv hendelse er det fortsatt 2 ledige (Normal), siden den tredje operatøren kan ta neste hendelse med makkerpar. Brudd oppstår først når det kun er 1 ledig, og svikt når ingen er ledig.*
+*Ledige operatører = c_eff − n_aktive. Variabelen n_aktive teller summen av **op-bindere** fra aktive hendelser, ikke antall hendelser: D-pri1 bidrar med 2 (makkerpar er prosedyrekrav), øvrige kategorier (D-aba, L-aba, L-hendelse, S, F, V) bidrar med 1. Én aktiv D-pri1 gir derfor n_aktive = 2, mens én aktiv D-aba gir n_aktive = 1 (jf. avsnitt 6.4 og Definisjon 3.2).*
 
-Tabellen bygger på en operativ tilpasningslogikk der makkerpar ikke nødvendigvis forblir fast låst til én hendelse gjennom hele akuttfasen. Ved c_eff = 3 og én aktiv hendelse er det fortsatt to tilgjengelige operatører, slik at neste hendelse i praksis kan tas med et nytt makkerpar. Brudd oppstår først når den neste hendelsen må håndteres med kun én ledig operatør, og svikt når ingen er ledige.
+**Eksempler ved c_eff = 3 (dag/hverdag):**
 
-Den kritiske asymmetrien mellom c_eff = 2 og c_eff = 3 er at med c_eff = 2 er det kun étt steg fra normal drift til svikt: allerede ved andre samtidige hendelse er begge operatørene opptatt. Med c_eff = 3 finnes en buffersone der operatørene kan jobbe solo før svikt inntreffer.
+- 1 aktiv D-aba (n_aktive = 1) → 2 ledige → **Normal**: neste hendelse kan tas med makkerpar
+- 1 aktiv D-pri1 (n_aktive = 2) → 1 ledig → **Brudd**: én operatør kan ta neste hendelse solo, men ikke med makkerpar. Hvis ny D-pri1 ankommer i denne tilstanden, må den håndteres solo (kvalitetsbrudd), ikke med makkerpar slik prosedyren krever
+- 1 D-pri1 + 1 D-aba aktiv (n_aktive = 3) → 0 ledige → **Svikt**
+- 2 D-pri1 samtidig (n_aktive = 4) → −1 → **Svikt**
+
+**Eksempler ved c_eff = 2 (dag/helg, natt):**
+
+- 1 aktiv D-aba (n_aktive = 1) → 1 ledig → **Brudd**
+- 1 aktiv D-pri1 (n_aktive = 2) → 0 ledige → **Svikt umiddelbart**. Én D-pri1 binder hele operatørkapasiteten, og neste beredskapsanrop ankommer automatisk i svikt uavhengig av type
+
+**Den kritiske asymmetrien** mellom c_eff = 2 og c_eff = 3 er at c_eff = 2 ikke har noen buffer mot D-pri1: én aktiv D-pri1 gir Svikt for *alle* påfølgende beredskapsanrop. Med c_eff = 3 finnes en buffersone (Brudd) der solo-håndtering er mulig før Svikt inntreffer, men også her vil en aktiv D-pri1 forhindre makkerpar for neste D-pri1-anrop.
+
+**Modellens konservative antakelse.** Op-binder-modellen forutsetter at D-pri1 binder begge operatørene gjennom hele akuttfasen (median 14 min). I praksis kan operatørene under press splitte makkerparet for å håndtere nye anrop. Modellen fanger ikke denne adaptive splittingen; den måler hvor ofte den formelle driftsstandarden (makkerpar opprettholdt) brytes. Operativ tilpasning gjennom kvalitetsreduksjon drøftes i kap 9.2.
 
 ---
 
