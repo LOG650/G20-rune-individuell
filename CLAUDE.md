@@ -27,12 +27,14 @@ beregnet fra historiske hendelsesdata og køteoretiske modeller?**
    for brannvesenet
 
 ## Bakgrunn og motivasjon
-Dimensjoneringsforskriften (FOR-2023-01-06-23) gir kvantitativ, etterprøvbar standard
-for brannstasjoner basert på innbyggertall og responstid. **Ingen tilsvarende nasjonal
-standard finnes for 110-operatører.** Bemanningsnivået fastsettes gjennom lokale
-ROS- og beredskapsanalyser som er kvalitative og vanskelige å etterprøve kvantitativt
-på tvers av sentraler. Prosjektets ambisjon er å bygge et kvantitativt referansepunkt
-for 110-operatører analogt med dimensjoneringsforskriftens rolle for brannvesenet.
+Brann- og redningsvesenforskriften (FOR-2021-09-15-2755), som fra 1. mars 2022
+erstattet den tidligere dimensjoneringsforskriften (FOR-2002-06-26-729), gir
+kvantitativ, etterprøvbar standard for brannstasjoner basert på innbyggertall
+og responstid. **Ingen tilsvarende nasjonal standard finnes for 110-operatører.**
+Bemanningsnivået fastsettes gjennom lokale ROS- og beredskapsanalyser som er
+kvalitative og vanskelige å etterprøve kvantitativt på tvers av sentraler.
+Prosjektets ambisjon er å bygge et kvantitativt referansepunkt for 110-operatører
+analogt med brannvesenforskriftens rolle for brannvesenet.
 
 ## Primærcase: 110 Sør-Vest
 - **Skift:** Dag 07:00–19:00, Natt 19:00–07:00
