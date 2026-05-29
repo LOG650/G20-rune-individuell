@@ -4,6 +4,7 @@
 **Rapport:** Kapasitetsstyring og bemanningsdimensjonering ved norske 110-sentraler (LOG650 G20, Rune Grødem)
 **Omfang:** Kilder/sitatintegritet, pensumsamsvar, kapittelkonsistens, fagfelle- og sensorvurdering, språk, figurer, git/struktur.
 **Metode:** Flertrinns verifikasjonsworkflow (84 delagenter) som åpnet hver brukte kilde-PDF, kryssjekket alle kapitler mot hverandre og mot kildedata (CSV/skript), med adversariell verifisering av hvert «må-rettes»-funn. Manuell kontroll av tallavvik mot `analyse/*.csv`.
+**Revisjon (2026-05-29):** Punktene 3A-4, 3A-12, 3B-2, 3B-4, 3B-6 og del 5 er korrigert etter en uavhengig kryss-sjekk (Codex) som kjørte skriptene skrivebeskyttet. Hovedkritikken står; korreksjonene gjelder årsaksforklaring (tie-break i sweepen, ikke imputering), nøyaktige prosenttall for nevneren, Leonardsen-anbefalingen (ikke automatisk årstallsbytte), og at primærresultatet allerede er visualisert i Figur 8.2.
 
 ---
 
@@ -74,11 +75,9 @@ kap9 §9.2.2: arbeidsgruppen «foreslo servicenivåkrav (8 til 10 sekunders svar
 kap2 §2.4 og kap3 §3.6.4: «der to servere er nødvendig per kunde, halveres reell kapasitet sammenlignet med M/M/c». Dette er **motsatt** av kildens konklusjon: Kim et al. modellerer *frivillig* serversamarbeid som **bedrer** utnyttelsen, og stabilitetsbetingelsen er ρ=λ/(Nμ)<1 (uendret fra M/M/c). Også tabellrad kap3 §3.9 «Team-basert kapasitet (Kim, Jouini) – Matematisk analog til makkerpar».
 → *Fjern* Kim-påstanden om halvert kapasitet og knytt makkerpar-mekanismen til **Brill & Green (1984)** og **Harchol-Balter (2022)**, som allerede er korrekt sitert for nettopp dette. Hvis Kim fjernes som kilde: fjern bibliografi-oppføringen (ellers «sitert-men-ikke-brukt» motsatt vei). Hvis Kim beholdes: rett initial «Lee, M.» → «Lee, M. H.».
 
-**3A-4. Leonardsen – tre artikler, feil PDF og feil omtale.**
-Det eksisterer tre distinkte Leonardsen-artikler. Bibliografien har to (2019 «Healthcare workers' experiences…» og 2021 «Work experiences of EMD…»), men den **nedlastede PDF-en** (tidl. `62-…`) er en *tredje* artikkel: Leonardsen et al. (2019) «Exploring individual and work organizational peculiarities…», BMC HSR 19:545. Den matcher ingen av de to oppføringene. I tillegg:
-- kap2 §2.5 beskriver 2019-studien feil (som «AMK-operatørers arbeidsforhold» – det er 2021-studiens tema; 2019 handler om eksterne helsearbeideres erfaringer *med* sentralen).
-- kap6 §6.7 (A7-konsekvens) siterer (2019), mens samme antagelse ellers (kap6 §6.4.3, kap3 §3.8, kap9 §9.2) siterer (2021).
-→ Avklar hvilke Leonardsen-artikler som faktisk skal siteres, last ned riktig PDF for hver, rett metadata, og bruk konsistent årstall per påstand. Rett kap2-omtalen og kap6 §6.7 (2019→2021).
+**3A-4. Leonardsen – bibliografi og PDF matcher ikke (avklaringsbehov, ikke automatisk bytte).** *(presisert)*
+Det eksisterer tre distinkte Leonardsen-artikler. Bibliografien har to (2019 «Healthcare workers' experiences…» og 2021 «Work experiences of EMD…»), men den **nedlastede PDF-en** (tidl. `62-…`) er en *tredje* artikkel: Leonardsen et al. (2019) «Exploring individual and work organizational peculiarities…» (om EMCC call-takeres arbeidsorganisering), BMC HSR 19:545. Denne PDF-en matcher ingen av de to bibliografioppføringene – men den **støtter faktisk kap2/kap6-bruken om operatørenes arbeidsforhold bedre** enn 2021-oppføringen gjør.
+→ Hovedtiltaket er derfor å **avklare hvilken Leonardsen-artikkel hver påstand faktisk skal hvile på**, deretter rette bibliografi-metadata og laste ned riktig PDF for hver. **Ikke** bytt automatisk (2019→2021): det kan godt være den lokale 2019-EMCC-artikkelen som er den riktige kilden for kap2 §2.5 og kap6 §6.7. Når kildevalget er avklart, sørg for konsistent årstall per påstand (kap6 §6.7 vs §6.4.3 bruker i dag ulikt år for samme A7-poeng).
 
 **3A-5. FIRE21 / McNamee m.fl. (2025) – feilsitering.**
 kap2 §2.5: rapporten «kartlegger … kapasitetsutfordringer» og «identifiserer dimensjonering og bemanning som sentrale problemstillinger». FIRE21 handler om **problemløsningskompetanse, problemløsningsnettverk og risikobilde** – ikke dimensjonering/bemanning. Også «fokus på utrykningsleddet (mannskap og kjøretøy)» treffer ikke kildens innhold.
@@ -108,9 +107,9 @@ kap3 §3.3: «statistical economies of scale» i anførselstegn. Kilden skriver 
 Nedlastet PDF var søster-artikkelen («Forecasting Time Series of Inhomogeneous Poisson Processes», Annals of Applied Statistics 2(2):601-623), ikke bibliografioppføringen («Interday forecasting…», M&SOM 10(3):391-410). kap2 §2.2-påstanden «testing av Poisson-forutsetningen» støttes heller ikke av Shen & Huang (de *antar* Poisson).
 → Last ned riktig PDF *eller* endre bibliografien til den faktisk brukte artikkelen, og juster Poisson-test-attribusjonen (hør trolig til Brown et al./Ibrahim).
 
-**3A-12. Kilder sitert uten nedlastet PDF (kunne ikke verifiseres).**
-APCO International (2005), Larson (1974), Leonardsen et al. (2019). (Erlang 1917, lovdata-forskrift, SSB, DSB-datasett og interne Norconsult/RogBR-dokumenter er forventet uten PDF og er greit.)
-→ Last ned og verifiser de tre, eller bekreft at sitatbruken er korrekt fra annen tilgang.
+**3A-12. Kilder sitert uten matchende nedlastet PDF (kunne ikke verifiseres).**
+APCO International (2005), Larson (1974), **Leonardsen et al. (2021)** (sitert i kap1 §1.2, kap3 §3.8, kap9 §9.2 m.fl. – ingen matchende 2021-PDF i `003 references`; PDF 62 er en annen artikkel, jf. 3A-4), og Leonardsen et al. (2019)-oppføringen (ingen PDF som matcher *den* oppføringen). (Erlang 1917, lovdata-forskrift, SSB, DSB-datasett og interne Norconsult/RogBR-dokumenter er forventet uten PDF og er greit.)
+→ Last ned og verifiser disse, eller bekreft at sitatbruken er korrekt fra annen tilgang.
 
 ### 3B. Tallkonsistens (interne motsigelser mot egne tabeller/kildedata)
 
@@ -118,21 +117,21 @@ APCO International (2005), Larson (1974), Leonardsen et al. (2019). (Erlang 1917
 Tabell 8.4 viser «Alle» variant B = 53,9 / 20,1 / 25,9. Kildedata `analyse/total_belastning_oppsummering.csv` gir **54,4 / 20,0 / 25,6**. Narrativtallet 45,6 % (kap9 §9.3.1, kap10 §10.1) = 20,0 + 25,6 er altså **korrekt**; det er tabellcellene som er utdaterte (øvrige rader i 8.4 matcher CSV).
 → **Oppdater Tabell 8.4 «Alle»-rad variant B til 54,4 / 20,0 / 25,6.** (Ikke endre 45,6 % i teksten.)
 
-**3B-2. Punktestimat 32,6 % vs 32,8 % (variant A natt/helg Svikt; Brudd 20,5 vs 20,3).**
-To skript gir to verdier: primærmodellen (median-imputering) → 32,6 / 20,5 (Tabell 8.1, brukt overalt); bootstrap-skriptet → 32,76 / 20,33 (Tabell 8.6 «Punktestimat»). Tabell 8.1 kaller 32,6 «punktestimat», mens Tabell 8.6 kaller 32,8 «Punktestimat» og 32,6 «bootstrap-mean» – direkte motstrid om hva «punktestimat» er. «Stokastisk støy»-forklaringen i §8.2 er dessuten upresis (det er imputeringsforskjell, ikke støy).
-→ Velg **ett** kanonisk hovedtall. Anbefaling: behold 32,6 / 20,5 (primærmodell, brukt i hele rapporten); omdøp/fotnoter Tabell 8.6-kolonnen til «Punktestimat (bootstrap-skript, full-fordeling-imputering)»; rett §8.2-forklaringen til å vise til imputeringsforskjellen (median vs trekk fra empirisk fordeling, jf. §8.3.4). *Beste løsning på sikt: kjør begge skript med samme imputeringsregime/seed (se del 6).*
+**3B-2. Punktestimat 32,6 % vs 32,8 % (variant A natt/helg Svikt; Brudd 20,5 vs 20,3).** *(årsak verifisert i kode)*
+To skript gir to verdier: `konflikt_total_belastning.py` (primærmodell) → 32,6 / 20,5 (Tabell 8.1, brukt overalt); `scenario_pluss1.py` baseline og bootstrap-skriptet → 32,8 / 20,3 (Tabell 8.2/8.6). **Årsaken er ikke imputeringsregime eller «stokastisk støy».** Begge skript bruker samme event-mengde, samme `SEED_DABA` og samme 27 960 events, men `kjor_sweep` sorterer kun på `events.sort_values("Dato_og_Tid")` – uten sekundær sorteringsnøkkel og med pandas' ustabile standard-quicksort. Events med **identisk tidsstempel** klassifiseres derfor i ulik rekkefølge mellom skriptene, noe som gir ~1 567 avvik i aktive-tellingen og dermed ulik Normal/Brudd/Svikt på vippetilfeller. Tabell 8.1 kaller 32,6 «punktestimat», mens Tabell 8.6 kaller 32,8 «Punktestimat» og 32,6 «bootstrap-mean» – direkte motstrid om hva «punktestimat» er. «Stokastisk støy»-forklaringen i §8.2 er feil.
+→ **Innfør en deterministisk tie-break/samtidighetsregel i sweepen** (sekundær sorteringsnøkkel, f.eks. kategori-prioritet, evt. `kind="mergesort"` for stabil sortering) slik at alle skript gir **ett** kanonisk tall. Behold 32,6 / 20,5 som offisielt hovedtall (primærmodell, brukt i hele rapporten); rett §8.2-forklaringen fra «stokastisk støy» til tie-break-/samtidighetsårsaken, og harmoniser Tabell 8.1/8.2/8.6 mot den kanoniske kjøringen.
 
 **3B-3. kap9 §9.2.2 blander to kjøringer.** «…ankommer i Svikt og ytterligere 20,3 % i Brudd» kombinerer Svikt 32,6 (Tabell 8.1) med Brudd 20,3 (Tabell 8.2/8.6). Samme tabell (8.1) gir Brudd = 20,5.
 → Endre 20,3 % → 20,5 % (gir sum 53,1 %, som matcher §9.3.1).
 
-**3B-4. Usikkerhet ±1 pp i Sammendrag/Abstract overdriver.** §Sammendrag og §Abstract: «±1 prosentpoeng». Bootstrap-CI [32,1; 33,2] gir ±0,5 pp (jf. §5.6.1 og §8.3.4).
-→ Endre til «±0,5 prosentpoeng» (evt. oppgi CI [32,1; 33,2]) i begge avsnitt.
+**3B-4. Usikkerhet ±1 pp i Sammendrag/Abstract overdriver.** §Sammendrag og §Abstract: «±1 prosentpoeng». Bootstrap-CI er [32,1; 33,2], dvs. asymmetrisk −0,5 / +0,6 pp rundt 32,6 (jf. §5.6.1 og §8.3.4).
+→ Mest presist: **oppgi selve intervallet [32,1; 33,2]** i begge avsnitt. Et symmetrisk «±0,5 prosentpoeng» er et akseptabelt alternativ, men intervallet er å foretrekke fordi CI-en ikke er helt symmetrisk.
 
-**3B-5. n = 27 960 «events» vs «anrop».** Tabell 8.1-kolonnen «anrop» (n=27 960) inkluderer ~1 528 D-aba Fase 2-events (oppfølgingsfase, ikke nytt innkommende anrop), og 27 960 brukes også som «events» i kap6 og i «27 960 av 80 865 anrop» (§8.3.1). To enheter blandes.
+**3B-5. n = 27 960 «events» vs «anrop».** Tabell 8.1-kolonnen «anrop» (n=27 960) inkluderer 1 504 D-aba Fase 2-events (oppfølgingsfase, ikke nytt innkommende anrop), og 27 960 brukes også som «events» i kap6 og i «27 960 av 80 865 anrop» (§8.3.1). To enheter blandes. (Verifisert sammensetning: 4 499 D-pri1 + 3 056 D-aba Fase 1 + 1 504 D-aba Fase 2 + 18 901 skjulte = 27 960.)
 → Avklar eksplisitt at nevneren er klassifiserte op-binder-events, *eller* ekskluder Fase 2 fra nevneren. Skill konsekvent «events» fra «beredskapsanrop».
 
-**3B-6. Transparens om estimert nevner ved hovedfunnet.** 32,6 % bygger på en nevner der ~71 % (18 901) er *interpolerte* skjulte anrop og ~27 % (7 555) er observerte. Dette oppgis aldri der hovedtallet presenteres (Funn 3/Tabell 8.1/sammendrag).
-→ Tilføy 1–2 setninger: 7 555 observerte beredskapsankomster + 18 901 estimerte skjulte anrop, og at bootstrap-CI ikke dekker usikkerhet i interpolerte ankomsttider. (Vurder å rapportere Svikt-andel også for kun observerte anrop.)
+**3B-6. Transparens om estimert nevner ved hovedfunnet.** *(prosent korrigert)* For hele variant A er de 18 901 interpolerte skjulte anropene **67,6 %** av nevneren (27 960 events), og de observerte ankomstene (7 555 = D-pri1 + D-aba Fase 1) er 27,0 % (resten er 1 504 avledede Fase 2-events). Isolert for natt/helg er skjult-andelen lavere, om lag 59 %. Dette oppgis aldri der hovedtallet presenteres (Funn 3/Tabell 8.1/sammendrag).
+→ Tilføy 1–2 setninger: 7 555 observerte beredskapsankomster vs 18 901 estimerte skjulte anrop, og at bootstrap-CI ikke dekker usikkerhet i interpolerte ankomsttider. (Vurder å rapportere Svikt-andel også for kun observerte anrop.)
 
 **3B-7. 61 964/61 934 og 18 901/18 930 (Sør-Vest).** Oppdrags-differansen er forklart i §8.5, men skjult-anrop-differansen (18 901 vs 18 930) er uforklart, og forklaringen står langt fra tabellene.
 → Fotnote ved Tabell 8.8 og 8.10 som dekker begge tallpar.
@@ -164,15 +163,16 @@ To skript gir to verdier: primærmodellen (median-imputering) → 32,6 / 20,5 (T
 
 ## 5. Figurer – krav 11
 
-**Mengden er akseptabel, men i nedre sjikt** (6 figurer på ~30 400 ord, sterkt konsentrert i kap 8). Du er ferdig, så kun det som virkelig løfter formidlingen er listet som «bør». To av fem hovedfunn formidles uten figur:
+**Mengden er akseptabel, men i nedre sjikt** (6 figurer på ~30 400 ord, sterkt konsentrert i kap 8). Du er ferdig, så kun det som virkelig løfter formidlingen er listet.
 
-**Bør (lav innsats – ferdige filer finnes):**
-1. **Primærresultatet** (Normal/Brudd/Svikt, variant A, dag vs natt/helg) – studiens viktigste funn finnes i dag kun som Tabell 8.1, mens alle avledninger (scenario, A/B, sensitivitet, bootstrap) har figur. Kandidat: `figurer/kap_fig1_nivaa_basis.png` eller `analyse/figurer/kapasitet_v4_med_skjulte.png`.
-2. **Erlang-C-paradokset** (ρ<6 % vs svikt ~33 %) – rapportens retoriske kjerne (sammendrag, §9.1.1, §10.5), vises aldri visuelt.
+> **Korreksjon (verifisert):** Primærresultatet er **allerede visualisert** i **Figur 8.2** (`total_belastning_A_vs_B.png`, kap8 §8.3 linje 152), som viser variant A vs B for begge skifttyper. Den opprinnelige anbefalingen om en egen «primærresultat»-figur var derfor delvis overflødig. De foreslåtte kandidatfilene `kap_fig1_nivaa_basis.png` og `kapasitet_v4_med_skjulte.png` er dessuten **utdaterte for dagens modell** (viser natt/helg-svikt rundt 23,5 % / eldre basisvariant, ikke 32,6 %) og må **ikke** brukes.
 
-**Kjekt å ha (ikke nødvendig):** én nasjonal benchmarking-figur i §8.5 (ferdige: `analyse/figurer/nasjonal_*`), Poisson-test-figur (`EDA_fig6_poisson.png`) i §5.6.3, døgnprofil λ (`EDA_fig2_lambda_vakttype.png`).
+**Eneste reelle «bør»:**
+1. **Erlang-C-paradokset** (ρ<6 % vs svikt ~33 %) – rapportens retoriske kjerne (sammendrag, §9.1.1, §10.5), vises aldri visuelt. Må eventuelt regenereres (ny enkel figur), ikke hentes fra eksisterende filer.
 
-Konklusjon: rapporten kan forsvares som den er på figursiden. Hvis du legger til noe, prioriter de to «bør»-figurene – begge kan i hovedsak hentes fra allerede genererte filer.
+**Kjekt å ha (ikke nødvendig):** én nasjonal benchmarking-figur i §8.5 (`analyse/figurer/nasjonal_*`), Poisson-test-figur (`EDA_fig6_poisson.png`) i §5.6.3, døgnprofil λ (`EDA_fig2_lambda_vakttype.png`).
+
+Konklusjon: rapporten er **forsvarlig som den er** på figursiden. Hvis du legger til én figur, lag en Erlang-C-paradoks-figur. **Enhver ny resultatfigur må regenereres fra `analyse/total_belastning_oppsummering.csv`** – ikke gjenbruk de gamle `kap_fig*`/`kapasitet_v4`-filene, som tilhører en tidligere modellversjon.
 
 ---
 
@@ -181,7 +181,7 @@ Konklusjon: rapporten kan forsvares som den er på figursiden. Hvis du legger ti
 **Påkrevd før innlevering (ingen ny data):** rett alle punkter i del 3A og 3B.
 
 **Anbefalt (styrker etterprøvbarhet og lukker tallspriket ved kilden):**
-1. **Kjør primærmodell + bootstrap med felles imputeringsregime/seed**, slik at 32,6/32,8-spriket (3B-2) forsvinner i datagrunnlaget i stedet for å forklares i fotnote. Regenerer Tabell 8.1/8.2/8.6 fra samme kjøring.
+1. **Innfør deterministisk tie-break/samtidighetsregel i `kjor_sweep`** (sekundær sorteringsnøkkel eller stabil sortering) i `konflikt_total_belastning.py` *og* `scenario_pluss1.py`/bootstrap-skriptet, slik at 32,6/32,8-spriket (3B-2) forsvinner i datagrunnlaget i stedet for å forklares i fotnote. Regenerer Tabell 8.1/8.2/8.6 fra den deterministiske kjøringen.
 2. **Regenerer Tabell 8.4 programmatisk fra `total_belastning_oppsummering.csv`** for å eliminere foreldede celler (3B-1) – og legg gjerne inn en enkel script-sjekk som feiler hvis tabell ≠ CSV.
 3. **Rapporter Svikt-andelen både for observerte anrop (D-pri1+D-aba) og full base** (3B-6), så estimert-andelens effekt på 32,6 % er synlig.
 4. **Formell Poisson-test** (KS/χ²) på mellomankomsttider for Erlang-C-grunnlinjen (pensum Steg 2; R2/R3 i risikoregisteret).
