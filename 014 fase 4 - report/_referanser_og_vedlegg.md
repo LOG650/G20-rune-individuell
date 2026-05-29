@@ -32,15 +32,15 @@ Garnett, O., Mandelbaum, A., & Reiman, M. (2002). Designing a call center with i
 
 Green, L. V., Kolesar, P. J., & Whitt, W. (2007). Coping with time-varying demand when setting staffing requirements for a service system. *Production and Operations Management, 16*(1), 13-39.
 
-Gustavsson, K. (2018). *Stochastic modeling and management of an emergency call center* [Doktoravhandling, Université de Montréal]. https://www.iro.umontreal.ca/~lecuyer/myftp/theses/thesis-gustavsson2018.pdf
+Gustavsson, K. (2018). *Stochastic modeling and management of an emergency call center* [Lisensiatavhandling, Mittuniversitetet]. https://www.iro.umontreal.ca/~lecuyer/myftp/theses/thesis-gustavsson2018.pdf
 
 Halfin, S., & Whitt, W. (1981). Heavy-traffic limits for queues with many exponential servers. *Operations Research, 29*(3), 567-588.
 
-Harchol-Balter, M. (2022). The multiserver-job queueing model. *Queueing Systems, 100*(3-4), 201-225.
+Harchol-Balter, M. (2022). The multiserver-job queueing model. *Queueing Systems, 100*(3-4), 201-203.
 
 Ibrahim, R., Ye, H., L'Ecuyer, P., & Shen, H. (2016). Modeling and forecasting call center arrivals: A literature survey and a case study. *International Journal of Forecasting, 32*(3), 865-874. https://doi.org/10.1016/j.ijforecast.2015.11.012
 
-Interdepartemental arbeidsgruppe. (2009). *Forslag til felles organisering av nødmeldetjenesten*. Justis- og politidepartementet.
+Interdepartemental arbeidsgruppe. (2009). *Forslag til fremtidig organisering av nødmeldetjenesten*. Justis- og politidepartementet.
 
 Jamtli, B., Svendsen, E. J., Jorgensen, T. M., Kramer-Johansen, J., Hov, M. R., & Hardeland, C. (2024). Factors affecting emergency medical dispatchers decision making in stroke calls: A qualitative study. *BMC Emergency Medicine, 24*, 214. https://doi.org/10.1186/s12873-024-01129-0
 
@@ -54,7 +54,7 @@ Koole, G., & Mandelbaum, A. (2002). Queueing models of call centers: An introduc
 
 Larson, R. C. (1974). A hypercube queueing model for facility location and redistricting in urban emergency services. *Computers & Operations Research, 1*(1), 67-95.
 
-L'Ecuyer, P., Gustavsson, K., & Olsson, L. (2018). Modeling bursts in the arrival process to an emergency call center. *Proceedings of the 2018 Winter Simulation Conference*, 3292-3303. https://www.informs-sim.org/wsc18papers/includes/files/043.pdf
+L'Ecuyer, P., Gustavsson, K., & Olsson, L. (2018). Modeling bursts in the arrival process to an emergency call center. *Proceedings of the 2018 Winter Simulation Conference*, 525-536. https://www.informs-sim.org/wsc18papers/includes/files/043.pdf
 
 Leonardsen, A.-C. L., Bjørnsen, A. C., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2019). Healthcare workers' experiences with the Norwegian emergency medical communication centre: A qualitative study. *BMC Health Services Research, 19*.
 
@@ -64,7 +64,7 @@ Matteson, D. S., McLean, M. W., Woodard, D. B., & Henderson, S. G. (2011). Forec
 
 McNamee, M. S., Johansson, N., Frykmer, T., Johnson, V., Vylund, A. L., Eriksson, K., Steen-Hansen, A., Gjøsund, G., Haavik, T. K., Grytten Almklov, P., Grothe-Hammer, M., Markert, F., Allerup, C., & Fristed Hansen, M. (2025). *FIRE21. Final report: Nordic fire and rescue services, problem-solving in the 21st century* (TVBB No. 3267). Lund University. https://lup.lub.lu.se/search/files/207496790/FIRE21_Final_report_FINAL.pdf
 
-Meld. St. 16. (2023-2024). *Felles verdier, felles ansvar*. Justis- og beredskapsdepartementet.
+Meld. St. 16. (2023-2024). *Brann- og redningsvesenet: Nærhet, lokalkunnskap og rask respons i hele landet*. Justis- og beredskapsdepartementet.
 
 Mukhopadhyay, A., Pettet, G., Vazirizade, S. M., Lu, D., Jaimes, A., Said, S. E., Baroud, H., Vorobeychik, Y., Kochenderfer, M., & Dubey, A. (2022). A review of incident prediction, resource allocation, and dispatch models for emergency management. *Accident Analysis & Prevention, 165*.
 
@@ -88,11 +88,11 @@ Shen, H., & Huang, J. Z. (2008). Interday forecasting and intraday updating of c
 
 Statistisk sentralbyrå. (2026). *Befolkning, etter region, statistikkvariabel og kvartal* (Tabell 01222) [Statistikkbanken]. SSB. https://www.ssb.no/statbank/table/01222
 
-St.meld. nr. 41. (2000-2001). *Brann- og eksplosjonsvern*. Kommunal- og regionaldepartementet.
+St.meld. nr. 41. (2000-2001). *Brann- og eksplosjonsvern*. Arbeids- og administrasjonsdepartementet.
 
 Stolletz, R. (2008). Approximation of the non-stationary M(t)/M(t)/c(t)-queue using stationary queueing models: The stationary backlog-carryover approach. *European Journal of Operational Research, 190*(2), 478-493.
 
-Storesund, K., Hox, K., Steen-Hansen, A., Sesseng, C., & Ishol, A. M. (2017). *Utredning i forbindelse med brannvesenets dimensjonering* (RISE Fire Research, Rapport A17 20323:2). SP Fire Research AS.
+Storesund, K., Hox, K., Steen-Hansen, A., Sesseng, C., & Ishol, H. M. (2017). *Utredning i forbindelse med brannvesenets dimensjonering* (RISE Fire Research, Rapport A17 20323:2). SP Fire Research AS.
 
 Van Buuren, M., Kommer, G. J., van der Mei, R., & Bhulai, S. (2017). EMS call center models with and without function differentiation: A comparison. *Operations Research for Health Care, 12*, 16-28.
 

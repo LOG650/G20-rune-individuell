@@ -101,7 +101,7 @@ Når operatørkapasiteten er utilstrekkelig for å opprettholde makkerpar-drift,
 
 **Økt kognitiv belastning.** En operatør som håndterer en hendelse alene (solo) må ivareta både RØD- og GUL-funksjonen samtidig. Dette øker risikoen for feil i kritiske faser som adressefangst, utalarmering og informasjonsformidling til mannskap.
 
-**Tap av kvalitetssikring.** Makkerpar-prinsippet eksisterer nettopp fordi to par øyne fanger feil som én operatør kan overse. Uten makker forsvinner denne innebyggede kontrollen.
+**Tap av kvalitetssikring.** Makkerpar-prinsippet eksisterer nettopp fordi to par øyne fanger feil som én operatør kan overse. Uten makker forsvinner denne innebygde kontrollen.
 
 **Forsinkelse i utalarmering.** Dersom operatøren må veksle mellom å snakke med innringer og utalarmere ressurser, kan det oppstå forsinkelser i utalarmering. Forskriften krever utalarmering innen 90 sekunder fra anrop mottas, et dispatchkrav som blir vanskeligere å overholde under solo-drift.
 

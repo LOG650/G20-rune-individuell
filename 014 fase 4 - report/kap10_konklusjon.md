@@ -62,13 +62,13 @@ Anbefalingene er strukturert i tre nivåer: konkrete dimensjoneringsbeslutninger
 
 **Dimensjoneringsbeslutninger (case 110 Sør-Vest):**
 
-1. **Heve minimumsbemanningen med +1 operatør på natt/helg (primær anbefaling).** Modellen viser at den første ekstra operatøren på natt/helg har størst marginalverdi i denne casen — Svikt reduseres fra ca. 33 % til 16,7 % (Tabell 8.2). Dette er det tydeligste enkeltfunnet i analysen og adresserer det strukturelle gapet ved c=2 hvor én D-pri1 alene tømmer operatørkapasiteten.
+1. **Heve minimumsbemanningen med +1 operatør på natt/helg (primær anbefaling).** Modellen viser at den første ekstra operatøren på natt/helg har størst marginalverdi i denne casen: Svikt reduseres fra ca. 33 % til 16,7 % (Tabell 8.2). Dette er det tydeligste enkeltfunnet i analysen og adresserer det strukturelle gapet ved c=2 hvor én D-pri1 alene tømmer operatørkapasiteten.
 
 2. **Heve minimumsbemanningen med +1 operatør på dag hverdag (sekundær anbefaling).** Tabell 8.2 viser at tilsvarende heving reduserer sviktraten på dag fra 14,9 % til 8,5 %. Gevinsten er mindre i absolutte tall enn natt/helg-tiltaket, men reell og dokumentert. Hvordan en slik heving løses turnusmessig (overskuddstimer, ny tilsetting, eller andre interne grep) ligger utenfor denne studiens scope.
 
 3. **Funksjonsdifferensiering som alternativt eller komplementært tiltak.** Skille servicelast (overføringstester) ut av beredskapsoperatørgruppen, slik Midt-Norge 110 har praksis for. Funksjonsdifferensiering kan forbedre kapasitetsbildet uten å øke total bemanning (van Buuren et al., 2017). Den isolerte kvantitative effekten av kun å fjerne service er ikke modellert i denne rapporten, men forskjellen mellom variant A (14,9 % dag-svikt) og variant B (21,6 %) indikerer at all ikke-D-belastning samlet utgjør 6,7 pp av dag-svikten.
 
-Anbefalingene under punkt 1–3 er casebaserte; tilsvarende vurdering for andre sentraler krever egne analyser.
+Anbefalingene under punkt 1 til 3 er casebaserte; tilsvarende vurdering for andre sentraler krever egne analyser.
 
 **Forutsetninger for nasjonal implementering:**
 

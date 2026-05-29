@@ -36,7 +36,7 @@ Garnett et al. (2002) og Zeltyn og Mandelbaum (2005) utvidet rammeverket til Erl
 
 Et sentralt teoretisk resultat, som er relevant for tolkning av de empiriske funnene i kapittel 8, er at lav serverutnyttelse *ikke* impliserer overbemanning i små nødmeldesentraler. Dwars (2013) beskriver nødmeldesentraler som «intrinsically lightly-loaded systems». Lav utnyttelse er en strukturell konsekvens av stordriftsulempen ved små enheter, ikke et tegn på tilgjengelig kapasitet.
 
-Gans et al. (2003) formaliserer mekanismen som «statistical economies of scale»: jo større servicesystemet er, desto høyere utnyttelse kan oppnås med samme servicenivå. For et system med $c = 2$ er stordriftsfordelene i praksis fraværende, og systemets ytelse er svært sårbart for varians i etterspørsel.
+Gans et al. (2003) formaliserer mekanismen som «statistical economies of scale»: jo større servicesystemet er, desto høyere utnyttelse kan oppnås med samme servicenivå. For et system med $c = 2$ er stordriftsfordelene i praksis fraværende, og systemets ytelse er svært sårbar for varians i etterspørsel.
 
 Dette gir en viktig teoretisk ramme for å tolke Erlang-C-resultater for 110 Sør-Vest: $\rho < 6$ % betyr *ikke* at sentralen er overbemannet med faktor 16. Det betyr at sentralen opererer i et regime der kvantitativ kømodellering må suppleres med strukturell kapasitetsanalyse.
 
@@ -56,7 +56,7 @@ For 110-kontekst er PSSA tilstrekkelig som grunnlinje fordi skiftperiodene er kl
 
 Matteson et al. (2011) tester Poisson-forutsetningen på EMS-ankomster og viser at den holder innen korte tidsvindu, men brytes av overdispersjon på tvers av dager, drevet av uke- og sesongvariasjoner. For 110-kontekst kommer en ytterligere utfordring: **ring-flom** (call surge).
 
-Gustavsson (2018) og L'Ecuyer et al. (2018) modellerer eksplisitt «bursts», altså korte, intense ankomsttopper utløst av enkelthendelser. Slike topper genereres typisk av trafikkulykker eller store branner som utløser mange samtidige innringer fra publikum. De foreslår en burst-modell der ankomstintensiteten etter en hendelse følger $A \cdot e^{-tB}$, det vil si eksponentielt avtagende over tid. Modellen bryter med Poisson-uavhengighet lokalt og gir klyngede ankomster.
+Gustavsson (2018) og L'Ecuyer et al. (2018) modellerer eksplisitt «bursts», altså korte, intense ankomsttopper utløst av enkelthendelser. Slike topper genereres typisk av trafikkulykker eller store branner som utløser mange samtidige innringere fra publikum. De foreslår en burst-modell der ankomstintensiteten etter en hendelse følger $A \cdot e^{-tB}$, det vil si eksponentielt avtagende over tid. Modellen bryter med Poisson-uavhengighet lokalt og gir klyngede ankomster.
 
 For den prosedyrebaserte modellen (kap 6.4) er konsekvensen at Erlang-C undervurderer kapasitetsbelastningen i burst-perioder. Den prosedyrebaserte modellen er mindre sårbar. Den bygger ikke på Poisson-forutsetningen, men måler faktisk observerte ankomsttidspunkter.
 
@@ -95,7 +95,7 @@ Jouini et al. (2008) analyserer team-baserte call-center-organisasjoner der to a
 
 Van Buuren et al. (2017) validerer dette gjennom diskret hendelsessimulering (DES) av nederlandske EMS-sentraler. De viser at funksjonsdifferensiering reduserer kapasitetskravet ved høy belastning uten å øke total bemanning. Funnet er direkte relevant for avsnitt 9.3 (dimensjoneringsalternativer).
 
-## 3.7 Op-binder-semantikk som formalt rammeverk
+## 3.7 Op-binder-semantikk som formelt rammeverk
 
 Op-binder-semantikken er forfatterens syntese. Den oversetter multiserver-job-rammeverket fra Chelst og Barlach (1981) og Harchol-Balter (2022) til 110-konteksten. Oversettelsen består av tre grep: (i) heterogene job sizes per hendelseskategori, (ii) prosedyrekalibrerte varigheter $d$ snarere enn eksponentielt fordelte servicetider, og (iii) kapasitet operasjonalisert som *ankomstkonflikt-andel* snarere enn ventetid. Rammeverket er ikke en ny teoretisk konstruksjon. Det er en konkret formalisering tilpasset prosedyrebasert nødmeldedrift.
 

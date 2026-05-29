@@ -81,7 +81,7 @@ Disse funnene fra internasjonal og norsk forskning tyder på at kapasitetsproble
 
 ## 9.3 Implikasjoner for bemanningsdimensjonering
 
-Implikasjonene kan skilles i tre nivåer. For praksis peker funnene mot +1 operatør på natt/helg som primært tiltak, med +1 operatør på dag hverdag som sekundært tiltak og funksjonsdifferensiering av servicelast som alternativ eller komplementær. For teori viser studien hvordan multiserver-job-rammeverket kan operasjonaliseres som op-binder-semantikk i en nødmeldesentral. For policy viser analysen at en nasjonal dimensjoneringsstandard først krever felles klassifiseringsregler og et datagrunnlag som fanger operativ binding, ikke bare registrerte oppdrag.
+Implikasjonene kan skilles i tre nivåer. For praksis peker funnene mot +1 operatør på natt/helg som primært tiltak, med +1 operatør på dag hverdag som sekundært tiltak og funksjonsdifferensiering av servicelast som alternativt eller komplementært tiltak. For teori viser studien hvordan multiserver-job-rammeverket kan operasjonaliseres som op-binder-semantikk i en nødmeldesentral. For policy viser analysen at en nasjonal dimensjoneringsstandard først krever felles klassifiseringsregler og et datagrunnlag som fanger operativ binding, ikke bare registrerte oppdrag.
 
 ### 9.3.1 Svar på problemstillingen
 
@@ -103,7 +103,7 @@ Funn 5 viser at når alle hendelseskategorier inkluderes (variant B), faller Nor
 
 Dette funnet har implikasjoner for organisering. Ved 110 Sør-Vest håndterer de samme operatørene som tar nødanrop også servicetester. Midt-Norge 110 har en annen modell der servicetesting er skilt ut til dedikert personell. Van Buuren et al. (2017) viser gjennom DES-simulering at funksjonsdifferensiering, der ulike oppgavetyper håndteres av spesialiserte roller, kan forbedre kapasitetsbildet uten å endre bemanningsnivå. Jouini et al. (2008) finner tilsvarende at team-organisering med spesialisering kan oppnå høyere agenteffektivitet enn full pooling, fordi motivasjon og spesialistkompetanse kan veie opp for det statistiske tapet ved å ikke poole.
 
-For 110-sentraler åpner dette for et organisatorisk alternativ til ren bemanningsøkning: skille servicelast fra beredskapslast. Dersom overføringstester håndteres av personell som ikke inngår i beredskapsoperatørgruppen, frigjøres kapasitet for beredskapsoppdrag uten å øke det totale antall ansatte i sentralen.
+For 110-sentraler åpner dette for et organisatorisk alternativ til ren bemanningsøkning: skille servicelast fra beredskapslast. Dersom overføringstester håndteres av personell som ikke inngår i beredskapsoperatørgruppen, frigjøres kapasitet for beredskapsoppdrag uten å øke det totale antallet ansatte i sentralen.
 
 ### 9.3.4 Mot en kvantitativ dimensjoneringsstandard: et åpent forskningsspørsmål
 
@@ -176,4 +176,4 @@ Tre retninger fremstår som mest lovende.
 
 **2. Tidsvariabel analyse.** Modellen behandler dag- og nattskift som homogene perioder. En mer finkornet analyse, per time eller per totime, ville identifisere spesifikke sårbare perioder (f.eks. skiftveksling kl. 19:00) og muliggjøre mer målrettet bemanningsplanlegging. Jennings et al. (1996) og Stolletz (2008) gir rammeverk for tidsvariabel bemanningsoptimering som kunne tilpasses 110-konteksten.
 
-**3. Simuleringsbasert modellering.** Dwars' (2013) DES-tilnærming og Penverne et al. (2024) digitale tvilling viser at diskret hendelsessimulering kan fange dynamikker som den deterministiske sweep-algoritmen ikke håndterer. Stokastisk variasjon i ankomsttidspunkt, variabel servicetid og overløpsarkitektur mellom sentraler er eksempler. En DES-modell kalibrert mot 110-data ville gi mer nyanserte kapasitetsestimater og mulighet for å teste organisatoriske endringer før implementering.
+**3. Simuleringsbasert modellering.** Dwars' (2013) DES-tilnærming og Penverne et al.s (2024) digitale tvilling viser at diskret hendelsessimulering kan fange dynamikker som den deterministiske sweep-algoritmen ikke håndterer. Stokastisk variasjon i ankomsttidspunkt, variabel servicetid og overløpsarkitektur mellom sentraler er eksempler. En DES-modell kalibrert mot 110-data ville gi mer nyanserte kapasitetsestimater og mulighet for å teste organisatoriske endringer før implementering.

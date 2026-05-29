@@ -72,10 +72,17 @@ _tmp_*.md
 *_LINUX_PREVIEW.pdf
 
 # ============================================================
-# KML-arbeid (utenfor LOG650-scope)
+# KML-arbeid (utenfor LOG650-scope) — skal ikke synces til git
 # ============================================================
 KML-kompendium-komplett.pdf
 kml_tmp/
+KML-kompendium-PDF-eksport/
+
+# ============================================================
+# LOG650Vault — kuratert litteraturbase (LLM-wiki), egen workflow
+# Skal ikke synces til dette repoet
+# ============================================================
+LOG650Vault/
 
 # ============================================================
 # Spørreskjemasvar fra eksterne sentraler (potensielt sensitive)

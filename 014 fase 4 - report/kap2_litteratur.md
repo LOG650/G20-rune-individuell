@@ -12,7 +12,7 @@ Litteratursøket er gjennomført i to runder. Første runde fulgte prosjektets o
 **Søkeord, nødmeldesentral og dispatch:**
 `emergency dispatch staffing`, `public safety answering point`, `PSAP capacity`, `emergency call center`, `fire dispatch`, `concurrent incidents`, `simultaneous incidents`
 
-**Søkeord, team og prosedyr:**
+**Søkeord, team og prosedyre:**
 `team-based call center`, `dual dispatch`, `paired dispatcher`, `cooperative servers`, `SOP compliance`, `degraded mode operations`, `cognitive load dispatcher`
 
 **Søkeord, norsk/nordisk:**
@@ -50,7 +50,7 @@ Tidsavhengig etterspørsel utfordrer stasjonæritetsforutsetningen i klassisk Er
 
 Koole og Mandelbaum (2002) gir en tilgjengelig introduksjon til modellvalg (Erlang-C, Erlang-A, nettverk av køer og simulering) og diskuterer under hvilke betingelser M/M/c er tilstrekkelig. De konkluderer med at Erlang-C er en god approksimering ved lav til moderat belastning, men systematisk undervurderer kapasitetsbehovet ved høy utnyttelsesgrad eller kompleks hendelsesstruktur.
 
-Shen og Huang (2008) og Ibrahim et al. (2016) adresserer prognose av ankomstrater fra historiske data, herunder testing av Poisson-forutsetningen. Matteson et al. (2011) anvender disse metodene spesifikt på nødmeldetjeneste (EMS), og viser at ankomster i nødmeldesentraler typisk er Poisson-approksimerte innen korte tidsvindu, men viser overdispersjon på tvers av dager, noe som skyldes ukes- og sesongvariasjoner.
+Shen og Huang (2008) og Ibrahim et al. (2016) adresserer prognose av ankomstrater fra historiske data, herunder testing av Poisson-forutsetningen. Matteson et al. (2011) anvender disse metodene spesifikt på nødmeldetjeneste (EMS), og viser at ankomster i nødmeldesentraler typisk er Poisson-approksimerte innen korte tidsvinduer, men viser overdispersjon på tvers av dager, noe som skyldes ukes- og sesongvariasjoner.
 
 **Hva Erlang-C-tradisjonen ikke fanger for 110-konteksten.** Litteraturen som er gjennomgått er sentral som metodisk referansepunkt, men har tre svakheter for makkerpar-prosedyre: (i) den behandler servere som uavhengige og likeverdige, ikke som rolledifferensierte par; (ii) den modellerer kapasitetsbinding som samtaletid, ikke som binding utover samtale; (iii) den forutsetter stasjonær Poisson, som brytes ved ring-flom. Av kildene over er **Halfin og Whitt (1981)** kanonisk for å forklare hvorfor små systemer opererer strukturelt med lav utnyttelse, et resultat som er sentralt for tolkningen av Erlang-C-paradokset i kap 9.1. Øvrige kilder gir bakgrunnsforståelse av rammeverket, men adresserer ikke makkerpar-problemet direkte. Det er behandlet i 2.3 og 2.4.
 
@@ -88,7 +88,7 @@ Wallace og Whitt (2005) utvikler bemanningsalgoritmer for kompetansebasert routi
 
 Normark (2002) gjennomfører en kvalitativ studie av koordineringsarbeid ved SOS Alarm (Sverige) og dokumenterer at operatørenes faktiske arbeidsmønster avviker vesentlig fra det Erlang-C-modellen forutsetter: teknologiartefakter, parallell oppmerksomhet og koordineringsprotokoller binder kapasitet på måter modellen ikke fanger. Studien er den eneste nordiske empiriske analysen av operativt arbeid i en nødsentralkontekst og gir kvalitativt belegg for at op-binder-semantikken fanger en reell dynamikk. *Begrensning:* Kvalitativt design. Gir ikke kvantitative parametre direkte overførbare til modellen.
 
-Alzayed og Alsardi (2025) studerer kognitiv belastning hos nødsentraloperatører og finner at simultane hendelser øker feilraten signifikant. Dette er relevant for diskusjonen av kapasitetsdegrasjon: «etter beste evne»-modus er ikke bare en teknisk kapasitetsbegrensning, men medfører økt kognitiv belastning og redusert beslutningskvalitet. *Begrensning:* Studien er fra Kuwait og bruker laboratoriebasert måling; overførbarhet til norsk operativ kontekst er ikke etablert.
+Alzayed og Alsardi (2025) studerer kognitiv belastning hos nødsentraloperatører og finner at simultane hendelser øker feilraten signifikant. Dette er relevant for diskusjonen av kapasitetsdegradasjon: «etter beste evne»-modus er ikke bare en teknisk kapasitetsbegrensning, men medfører økt kognitiv belastning og redusert beslutningskvalitet. *Begrensning:* Studien er fra Kuwait og bruker laboratoriebasert måling; overførbarhet til norsk operativ kontekst er ikke etablert.
 
 APCO International (2005) dokumenterer bemanningspraksis og rekrutteringsutfordringer i amerikanske PSAP-er gjennom Project RETAINS og gir empiriske benchmarks for turnover-rater og bemanningsnivåer. *Begrensning:* Amerikansk PSAP-organisering skiller seg fra norsk 110-modell (kombinerte police/fire/EMS-dispatch vs. separate sentraler), og benchmarks må kontekstualiseres før de brukes direkte.
 
