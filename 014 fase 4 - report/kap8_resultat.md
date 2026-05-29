@@ -44,6 +44,8 @@ De sammenstilte tilleggsanropene er tildelt 1 minutts bindingstid, en konservati
 | **Natt/helg (c=2)** | 46,9 % | 20,5 % | **32,6 %** | 12 016 |
 | **Alle** | 59,6 % | 17,9 % | 22,5 % | 27 960 |
 
+*Kolonnen «Natt/helg (c=2)» omfatter alle skift med $c_{\text{eff}} = 2$, det vil si natt på hverdag og helg samt dag i helg; «Dag hverdag (c=3)» er dagskift på hverdager (jf. skiftdefinisjonene i kap 5.3.3).*
+
 Tallene er punktestimater under hovedscenario-antagelsene i Tabell 8.3. Variant B-scenariospennet (lav/hoved/høy, jf. Tabell 8.5) brukes her som *robusthetssjekk for antagelsesfølsomhet*, ikke som et statistisk konfidensintervall for variant A: båndet viser at Svikt-andelen på natt/helg holder seg innenfor ca. 30 til 38 % over hele parameterspennet, slik at tallet 32,6 % skal leses som et midtestimat under rimelige bindingstidsantagelser. Det statistiske konfidensintervallet for variant A natt/helg er kvantifisert separat via bootstrap i 8.3.4 (95 % CI [32,1; 33,2] %).
 
 Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3) er 69,2 % av beredskapsanrop i Normal og 14,9 % i Svikt. På natt/helg (c=2) er Normal-andelen under halvparten (46,9 %), og hvert tredje anrop ankommer i Svikt-tilstand (32,6 %, scenariobånd 30 til 38 %). Dette er en dobling av sviktraten fra dagskiftet, primært fordi c=2 gir null buffer når en pri-1-hendelse binder makkerparet.
@@ -136,7 +138,7 @@ Før variant B og sensitivitetsanalysen presenteres, samles modellantagelsene so
 
 ### 8.3.1 Bakgrunn
 
-Primærmodellen (variant A) kvantifiserer kapasitetsnivå basert på beredskapsoppdrag (D-pri1, D-aba) og sammenstilte anrop. Dette gir et presist bilde av beredskapskapasiteten, men dekker kun 27 960 av estimert 80 865 anrop. Variant B utvider analysen til å inkludere alle hendelseskategorier (se avsnitt 6.5) for å kvantifisere den samlede operative belastningen.
+Primærmodellen (variant A) kvantifiserer kapasitetsnivå basert på beredskapsoppdrag (D-pri1, D-aba) og sammenstilte anrop. Dette gir et presist bilde av beredskapskapasiteten, men omfatter kun beredskapskategoriene (27 960 op-binder-events fra D-pri1, D-aba og sammenstilte anrop), ikke den samlede operative belastningen. Variant B utvider analysen til å inkludere alle hendelseskategorier (se avsnitt 6.5).
 
 ### 8.3.2 Resultater: beredskapsbelastning versus total belastning
 
@@ -328,7 +330,7 @@ Tre observasjoner:
 | Sør-Vest | 61 934 | 18 930 | 80 864 | 23,4 % |
 | Midt-Norge | 41 374 | 12 223 | 53 597 | 22,8 % |
 
-*Skjulte sekvensnumre dekker tre fenomener: (i) sammenstilte anrop til samme hendelse, (ii) overføringer til nabosentral via 10-kø-regelen eller 30-sekunders-regelen, og (iii) avbrutte anrop som aldri ble registrert som oppdrag. Validering i 7.2 indikerer at sammenstillinger dominerer for 110 Sør-Vest. Ved høyere skjult-rate (Finnmark 65 %, Agder 54 %) bør tolkningen kalibreres lokalt.*
+*Skjulte sekvensnumre dekker tre fenomener: (i) sammenstilte anrop til samme hendelse, (ii) overføringer til nabosentral via 10-kø-regelen eller 30-sekunders-regelen, og (iii) avbrutte anrop som aldri ble registrert som oppdrag. Validering i 7.2 indikerer at sammenstillinger dominerer for 110 Sør-Vest. Ved høyere skjult-rate (Finnmark 65 %, Agder 54 %) bør tolkningen kalibreres lokalt. For Sør-Vest bygger denne benchmarktabellen på det nasjonale DSB-uttrekket (61 934 oppdrag, 18 930 skjulte), mens primæranalysen (kap 7 og 8.1 til 8.3) bruker den lokale eksporten (61 964 oppdrag, 18 901 skjulte); differansen skyldes ulik eksportkilde (jf. 8.5) og de to tallgrunnlagene holdes adskilt.*
 
 **Tre observasjoner:**
 

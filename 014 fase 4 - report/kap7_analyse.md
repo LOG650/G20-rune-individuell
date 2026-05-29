@@ -60,7 +60,7 @@ Den normale driftsformen er dermed et **makkerpar**: én rød og én gul operat�
 
 Med utgangspunkt i prosedyrens rolledefinisjon etableres tre kapasitetsnivåer, som danner grunnlaget for den kvantitative analysen:
 
-**Tabell 7.2: Kapasitetsnivåer i operativ tilpasningsmodell**
+**Tabell 7.2: Kapasitetsnivåer i den prosedyrebaserte ankomstkonfliktmodellen**
 
 | Nivå | Definisjon | Betingelse | c_eff = 2 | c_eff = 3 |
 |---|---|---|---|---|

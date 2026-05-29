@@ -8,6 +8,23 @@
 
 ---
 
+## 0. Status per 2026-05-29 (implementeringsrunde)
+
+**Gjennomført og committet:**
+- **3A (kildeintegritet) — komplett.** Det fabrikkerte sitatet (Interdep. 2009, 5 steder), Kim, Mukhopadhyay, NENA, Samdal, FIRE21, Gans og Shen & Huang er rettet. Leonardsen er forankret på den verifiserbare 2019-EMCC-artikkelen (PDF 62); 2021-oppføringen er fjernet og (2021)→(2019) gjennomført konsistent.
+- **3B/3C uten avhengighet til hovedtallet — gjennomført:** A2-etikett «statistisk validert»→«forankret antagelse; bindingstidsfordeling bootstrap-kvantifisert» (3B-8, kap1/6), n=events vs anrop (3B-5), c=2-kolonnenote (3B-9), 18 901/18 930-fotnote (3B-7), RQ5-gjengivelse harmonisert kap1↔kap10 (3B-10), tabelltitler «operativ tilpasningsmodell»→«prosedyrebasert ankomstkonfliktmodell» (3C), 9,6× (3C), D-aba sekvensgap 17→8,7 % (3C).
+
+**KRITISK — utsatt til egen diskusjon (modell/hovedtall):**
+- Tie-break-fiksen (deterministisk samtidighetsregel) avdekket at natt/helg Svikt faller fra **32,6 % til 18,8 %** (og dag fra 14,9 % til 5,0 %) når interpolerte skjulte anrop ikke lenger binder hverandre på ett kollapset tidsstempel. **Hovedtallet er dermed i betydelig grad et artefakt** av at skjulte anrop mangler reelle tidsstempler og stables på nærmeste nabos tidspunkt (`est_tid = before.iloc[-1]` i interpolasjonen). Den «riktige» verdien ligger trolig mellom 18,8 % og 32,6 %.
+  - **Brukerens beslutning:** modellvalget tas i egen runde; det legges inn en eksplisitt begrensning om manglende tidsstempel på skjulte anrop. Modellskript/CSV/figurer er IKKE endret i denne runden (reversert til committet tilstand).
+  - Mulige veier til diskusjonen: (a) spre skjulte anrops tidsstempler jevnt over sekvensgapet, (b) deterministisk uten samtidig binding (≈18,8 %), (c) behold 32,6 % med eksplisitt begrensning.
+  - **Avhengige punkter UTSATT** (regenereres/avgjøres når modellvalget er tatt): 3B-1 (Tabell 8.4 variant B-celler), 3B-2 (32,6/32,8 kanonisk + «stokastisk støy»-forklaring), 3B-3 (kap9 20,3→20,5), 3B-4 (±1 pp→CI), 3B-6 (observert vs estimert nevner), samt robusthetspåstanden i sammendraget (3C).
+- **3A-12:** APCO (2005) og Larson (1974) mangler fortsatt nedlastet PDF — må skaffes eller bekreftes.
+
+**Ikke gjort (per instruks):** PDF er ikke bygget på nytt.
+
+---
+
 ## 1. Samlet vurdering
 
 **Rapporten er IKKE leveringsklar i nåværende form.** Selve modellen, dataene og argumentasjonsstrukturen står seg – ingen av funnene utfordrer den faglige substansen. Problemet er **sitatintegritet og intern tallkonsistens**: noen kildebruk kan ikke forsvares slik den står, og rapportens hovedtall spriker mot egne tabeller/kildedata noen steder. Ingen av rettelsene krever ny datainnsamling; de fleste er omformuleringer og metadatarettinger.

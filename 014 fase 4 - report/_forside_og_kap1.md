@@ -182,7 +182,7 @@ Modellen hviler på et lite sett eksplisitte antagelser som er listet, kategoris
 De viktigste antagelsene for hovedfunnet er:
 
 - **A1.** Effektiv operatørkapasitet $c_{\text{eff}} = c_{\text{total}} - 1$, fordi vaktleder normalt ikke besvarer nødanrop. Konsekvens hvis brutt: Svikt-andelen overestimert.
-- **A2.** D-pri1 binder makkerpar parallelt gjennom hele akuttfasen ($q = 2$). Empirisk grunnlag i BRIS-tidsstempler, statistisk validert via bootstrap-CI (avsnitt 8.3.4 i kap 8).
+- **A2.** D-pri1 binder makkerpar parallelt gjennom hele akuttfasen ($q = 2$). Empirisk grunnlag i BRIS-tidsstempler for bindingstiden; selve makkerpar-bindingen ($q = 2$) er prosedyreforankret, mens bindingstidsfordelingen er bootstrap-kvantifisert (avsnitt 8.3.4 i kap 8).
 - **A5.** L-aba bindingstid = 4,5 min (empirisk kalibrert via LABA-dybdeanalysen, n=100, mean 4,53, 95 % CI [3,74; 5,43]).
 - **A6.** Sammenstilte tilleggsanrop binder 1 min. Største restusikkerhet av de antatte parametrene. Trekker mot konservativt estimat.
 

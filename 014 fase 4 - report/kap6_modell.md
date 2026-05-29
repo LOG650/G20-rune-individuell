@@ -151,7 +151,7 @@ $$\text{ledige}(t_i) = c_{\text{eff}} - n_{\text{aktive}}(t_i)$$
 
 Basert på antall ledige operatører klassifiseres hvert innkommende beredskapsanrop til ett av tre nivåer:
 
-**Tabell 6.2: Kapasitetsnivåer i operativ tilpasningsmodell**
+**Tabell 6.2: Kapasitetsnivåer i den prosedyrebaserte ankomstkonfliktmodellen**
 
 | Nivå | Definisjon | Betingelse | Operativ konsekvens |
 |---|---|---|---|
@@ -372,7 +372,7 @@ For sporbarhet og kritisk vurdering oppsummeres her de sentrale antagelsene som 
 | # | Antagelse | Verdi | Kilde / status | Type |
 |---|---|---|---|---|
 | A1 | $c_{\text{eff}} = c_{\text{total}} - 1$ (VL svarer ikke nødanrop) | c=3 dag/hverdag, c=2 øvrige | Prosedyre + valideringssamtaler | Forankret antagelse |
-| A2 | D-pri1 binder makkerpar parallelt gjennom hele akuttfasen | $q = 2$, varighet databasert | Prosedyre + BRIS-tidsstempler; bootstrap-CI 8.3.4 | **Empirisk + statistisk validert** |
+| A2 | D-pri1 binder makkerpar parallelt gjennom hele akuttfasen | $q = 2$, varighet databasert | Prosedyre + BRIS-tidsstempler; bootstrap-CI 8.3.4 | **Forankret antagelse; bindingstidsfordeling bootstrap-kvantifisert** |
 | A3 | D-aba Fase 1 håndteres serielt av én operatør | $q = 1$, $d = 3$ min | Prosedyre + BRIS-verifisert | Forankret + verifisert |
 | A4 | D-aba Fase 2 forekommer med $p = 0{,}50$ og $Y = 6$ min | hoved-scenario | Operativ samtale + sekvensgap; sensitivitetstestet | Forankret operativt estimat |
 | A5 | L-aba bindingstid = 4,5 min | hoved-verdi | LABA-dybdeanalyse n=100 Kilde=Alarm, mean 4,53, CI [3,74; 5,43] | **Empirisk kalibrert** |
@@ -402,4 +402,4 @@ For hver antagelse vurderes hva som skjer hvis den ikke holder. Vurderingene byg
 
 **A8, bindingstider for S, L-hendelse, L-ukjent, F, V.** Sensitivitetstestet i avsnitt 8.3. Hele spennet av rimelige antagelser gir Svikt natt/helg 30 til 38 % (variant B). Hovedfunnet er robust. A8 påvirker ikke variant A (beredskapsbelastning) som er studiens primære metrikk. På dag hverdag er sensitivitetsspennet bredere (15 til 34 % Svikt), noe som tilsier større usikkerhet for dagskonklusjonen, men ikke for natt/helg-funnet.
 
-**Samlet vurdering av antagelsesrobusthet.** Hovedfunnet, at natt/helg Svikt-andelen ligger i intervallet 30 til 38 %, er robust over hele spennet av rimelige antagelser. Den mest kritiske antagelsen er A2 (D-pri1 makkerpar), fordi den definerer modellens behandling av pri-1-hendelser som tobindere. A2 er forankret i prosedyre og operatørintervju, og statistisk validert via bootstrap-CI [32,1; 33,2] % for Svikt natt/helg (avsnitt 8.3.4). A6 (sammenstilte = 1 min) har størst parametrisk restusikkerhet og trekker mot konservativt estimat. A4 og A8 er sensitivitetstestet eksplisitt. A3 og A5 er empirisk verifisert. A7 er tolkningsmessig og påvirker hvordan tallene leses, ikke tallene selv. A1 (VL) trekker også mot konservativt estimat.
+**Samlet vurdering av antagelsesrobusthet.** Hovedfunnet, at natt/helg Svikt-andelen ligger i intervallet 30 til 38 %, er robust over hele spennet av rimelige antagelser. Den mest kritiske antagelsen er A2 (D-pri1 makkerpar), fordi den definerer modellens behandling av pri-1-hendelser som tobindere. A2 er forankret i prosedyre og operatørintervju; selve makkerpar-bindingen ($q = 2$) er en prosedyreforankret antagelse, mens den observerte bindingstidsfordelingen er bootstrap-kvantifisert (avsnitt 8.3.4). Bootstrap validerer altså fordelingen gitt $q = 2$, ikke selve $q = 2$-antagelsen. A6 (sammenstilte = 1 min) har størst parametrisk restusikkerhet og trekker mot konservativt estimat. A4 og A8 er sensitivitetstestet eksplisitt. A3 og A5 er empirisk verifisert. A7 er tolkningsmessig og påvirker hvordan tallene leses, ikke tallene selv. A1 (VL) trekker også mot konservativt estimat.
