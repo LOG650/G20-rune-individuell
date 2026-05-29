@@ -48,7 +48,7 @@ Jennings, O. B., Mandelbaum, A., Massey, W. A., & Whitt, W. (1996). Server staff
 
 Jouini, O., Dallery, Y., & Nait-Abdallah, R. (2008). Analysis of the impact of team-based organizations in call center management. *Management Science, 54*(2), 400-414.
 
-Kim, C., Lee, M., Dudin, A., & Klimenok, V. (2008). Multi-server queueing systems with cooperation of the servers. *Annals of Operations Research, 162*(1), 57-68. https://doi.org/10.1007/s10479-008-0319-0
+Kim, C., Lee, M. H., Dudin, A., & Klimenok, V. (2008). Multi-server queueing systems with cooperation of the servers. *Annals of Operations Research, 162*(1), 57-68. https://doi.org/10.1007/s10479-008-0319-0
 
 Koole, G., & Mandelbaum, A. (2002). Queueing models of call centers: An introduction. *Annals of Operations Research, 113*(1-4), 41-59.
 
@@ -56,9 +56,7 @@ Larson, R. C. (1974). A hypercube queueing model for facility location and redis
 
 L'Ecuyer, P., Gustavsson, K., & Olsson, L. (2018). Modeling bursts in the arrival process to an emergency call center. *Proceedings of the 2018 Winter Simulation Conference*, 525-536. https://www.informs-sim.org/wsc18papers/includes/files/043.pdf
 
-Leonardsen, A.-C. L., Bjørnsen, A. C., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2019). Healthcare workers' experiences with the Norwegian emergency medical communication centre: A qualitative study. *BMC Health Services Research, 19*.
-
-Leonardsen, A.-C. L., Hardeland, C., Hellesø, R., & Grøndahl, V. A. (2021). Work experiences of emergency medical dispatchers in Norway: A qualitative study. *BMC Health Services Research, 21*.
+Leonardsen, A.-C., Ramsdal, H., Olasveengen, T. M., Steen-Hansen, J. E., Westmark, F., Hansen, A. E., & Hardeland, C. (2019). Exploring individual and work organizational peculiarities of working in emergency medical communication centers in Norway: A qualitative study. *BMC Health Services Research, 19*, Article 545. https://doi.org/10.1186/s12913-019-4370-0
 
 Matteson, D. S., McLean, M. W., Woodard, D. B., & Henderson, S. G. (2011). Forecasting emergency medical service call arrival rates. *The Annals of Applied Statistics, 5*(2B), 1379-1406.
 
@@ -84,7 +82,7 @@ Rogaland brann og redning IKS. (2024). *Prosedyre arbeidsmetodikk, utalarmering 
 
 Samdal, M., Thorsen, K., Graesli, O., Sandberg, M., & Rehn, M. (2021). Dispatch accuracy of physician-staffed emergency medical services in trauma care in South-East Norway. *Scandinavian Journal of Trauma, Resuscitation and Emergency Medicine, 29*, 169. https://doi.org/10.1186/s13049-021-00982-3
 
-Shen, H., & Huang, J. Z. (2008). Interday forecasting and intraday updating of call center arrivals. *Manufacturing & Service Operations Management, 10*(3), 391-410.
+Shen, H., & Huang, J. Z. (2008). Forecasting time series of inhomogeneous Poisson processes with application to call center workforce management. *The Annals of Applied Statistics, 2*(2), 601-623. https://doi.org/10.1214/08-AOAS164
 
 Statistisk sentralbyrå. (2026). *Befolkning, etter region, statistikkvariabel og kvartal* (Tabell 01222) [Statistikkbanken]. SSB. https://www.ssb.no/statbank/table/01222
 

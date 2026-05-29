@@ -36,7 +36,7 @@ Garnett et al. (2002) og Zeltyn og Mandelbaum (2005) utvidet rammeverket til Erl
 
 Et sentralt teoretisk resultat, som er relevant for tolkning av de empiriske funnene i kapittel 8, er at lav serverutnyttelse *ikke* impliserer overbemanning i små nødmeldesentraler. Dwars (2013) beskriver nødmeldesentraler som «intrinsically lightly-loaded systems». Lav utnyttelse er en strukturell konsekvens av stordriftsulempen ved små enheter, ikke et tegn på tilgjengelig kapasitet.
 
-Gans et al. (2003) formaliserer mekanismen som «statistical economies of scale»: jo større servicesystemet er, desto høyere utnyttelse kan oppnås med samme servicenivå. For et system med $c = 2$ er stordriftsfordelene i praksis fraværende, og systemets ytelse er svært sårbar for varians i etterspørsel.
+Gans et al. (2003) formaliserer mekanismen som «economies of scale»: jo større servicesystemet er, desto høyere utnyttelse kan oppnås med samme servicenivå. For et system med $c = 2$ er stordriftsfordelene i praksis fraværende, og systemets ytelse er svært sårbar for varians i etterspørsel.
 
 Dette gir en viktig teoretisk ramme for å tolke Erlang-C-resultater for 110 Sør-Vest: $\rho < 6$ % betyr *ikke* at sentralen er overbemannet med faktor 16. Det betyr at sentralen opererer i et regime der kvantitativ kømodellering må suppleres med strukturell kapasitetsanalyse.
 
@@ -89,7 +89,7 @@ For 110-sentraler med $c_{\text{eff}} = 2$ og en D-pri1 med $k = 2$: hele kapasi
 
 ### 3.6.4 Team-basert kapasitet og function differentiation
 
-Kim et al. (2008) modellerer flerserver-systemer med serversamarbeid. De viser at effektiv kapasitet avhenger av graden av parallell binding. Når to servere er nødvendig per kunde, halveres reell kapasitet sammenlignet med M/M/c med samme $c$. Dette er det nærmeste matematiske analogonet til makkerpar-prinsippet.
+Kim et al. (2008) modellerer flerserver-systemer der ledige servere frivillig samarbeider om samme kunde, og viser at slikt samarbeid kan bedre utnyttelsen. Mekanismen skiller seg fra makkerpar-binding, der to servere *bindes* per pri-1-hendelse: den matematiske parallellen til makkerpar ligger derfor primært i multiserver-job-rammeverket (Brill og Green, 1984; Harchol-Balter, 2022) omtalt over, mens Kim et al. belyser serversamarbeid som et beslektet fenomen.
 
 Jouini et al. (2008) analyserer team-baserte call-center-organisasjoner der to agenter samarbeider om oppgaver. De finner at team-organisering øker kapasitetsutnyttelsen ved moderat belastning, men skaper sårbarhet ved høy belastning. De viser også at *function differentiation* kan oppnå høyere effektivitet enn full pooling. I funksjonsdifferensierte systemer har agenter spesialiserte roller (typisk dispatcher vs. call taker). Motivasjon og spesialistkompetanse kompenserer for det statistiske tapet ved ikke å poole.
 
@@ -132,7 +132,7 @@ Dette rammeverket reduserer til klassisk M/M/c når alle $q_e = 1$ og $d_e$ er e
 
 Et siste teoretisk bidrag relevant for tolkning (kap 9.2) er litteratur om hvordan operatører tilpasser seg under press. Gustavsson (2018) dokumenterer ved SOS Alarm at agenter under press komprimerer servicetiden og reduserer kvaliteten: *«agents themselves are affected by their workload and duties, which inter alia affect their efficiency»*. Tilpasningen er rasjonell fra operatørens perspektiv. Det er bedre å svare fort med redusert kvalitet enn å la en innringer vente.
 
-Alzayed og Alsardi (2025) viser at simultane hendelser øker kognitiv belastning og feilrate signifikant. Leonardsen et al. (2021) rapporterer tilsvarende funn fra norske AMK-sentraler: manglende debriefing, ingen tilbakemelding, og en opplevelse av usynlighet under høyt press.
+Alzayed og Alsardi (2025) viser at simultane hendelser øker kognitiv belastning og feilrate signifikant. Leonardsen et al. (2019) rapporterer tilsvarende fra norske nødmeldesentraler (EMCC): manglende støtte og ressurser og en opplevelse av en «usynlig» tjeneste under høyt press.
 
 Jamtli et al. (2024) beskriver hvordan arbeidspress påvirker beslutningstaking i slagtelefoner ved AMK Oslo, blant annet gjennom avveininger mellom protokoll og erfaringsbasert intuisjon.
 
@@ -150,7 +150,7 @@ Det teoretiske grunnlaget kan sammenfattes slik:
 | Tidsvarierende M(t)/M(t)/c(t) | Motiverer skift-segmentert analyse |
 | Burst-modell (Gustavsson) | Identifiserer Poisson-brudd ved ring-flom |
 | Multiserver jobs (MSJ) | Teoretisk grunnlag for D-pri1 som Type 2-anrop |
-| Team-basert kapasitet (Kim, Jouini) | Matematisk analog til makkerpar-prinsippet |
+| Team-basert kapasitet / serversamarbeid (Kim, Jouini) | Organisatoriske alternativer og serversamspill, ikke makkerpar-binding |
 | Function differentiation | Støtter organisatoriske alternativer til bemanningsøkning |
 | Kvalitetsreduksjon (Gustavsson, Leonardsen) | Tolkningsramme for modell-vs-virkelighet-gapet |
 

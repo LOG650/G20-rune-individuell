@@ -159,7 +159,7 @@ Basert på antall ledige operatører klassifiseres hvert innkommende beredskapsa
 | **Brudd på driftsstandard** | Kun 1 ledig (solo-håndtering) | ledige = 1 | Operatøren klarer det, men uten makker. Økt kognitiv belastning, økt feilrisiko |
 | **Svikt** | Ingen ledig operatør | ledige ≤ 0 | VL må overta eller overløp til Agder |
 
-> **[Antagelse A7]** *Brudd*-tilstanden er definert som operativt mulig, det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning, men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Alzayed og Alsardi (2025) og Leonardsen et al. (2021). Konsekvensene drøftes i kap 9.2.
+> **[Antagelse A7]** *Brudd*-tilstanden er definert som operativt mulig, det vil si at sentralen kan fortsette å håndtere hendelsen med redusert bemanning, men *ikke* som operativt likeverdig med Normal-tilstanden. Solo-håndtering medfører ifølge prosedyre og operative samtaler (avsnitt 5.2.4) redusert kvalitetssikring (ingen makker-medlytt for feilfangst), økt kognitiv belastning og økt feilrisiko. Disse konsekvensene er ikke direkte empirisk målt i denne studien, men er konsistent med Gustavsson (2018), Alzayed og Alsardi (2025) og Leonardsen et al. (2019). Konsekvensene drøftes i kap 9.2.
 
 For å illustrere hva dette innebærer i praksis med c_eff = 2 (natt/helg):
 

@@ -32,7 +32,7 @@ For variant A (beredskapsbelastning) er svikt 14,9 % på dag hverdag og 32,6 % p
 
 **RQ4: I hvilken grad gir eksisterende ROS- og beredskapsanalyse for 110 Sør-Vest et tilstrekkelig metodisk grunnlag for å begrunne faktisk bemanning?**
 
-ROS-analysen og beredskapsanalysen er kvalitative og gir ikke et etterprøvbart, tallbasert grunnlag for dimensjonering på tvers av sentraler. Analysene dokumenterer overløpsmekanismer og operative særtrekk, men fastsetter ikke eksplisitte, kvantitative servicenivåmål som kan måles mot observerte hendelsesdata. Meld. St. 16 (2023-2024) bekrefter at denne kvalitative tilnærmingen er gjeldende norsk praksis, og at en kvantitativ nasjonal standard ikke foreligger. Interdepartemental arbeidsgruppe (2009) bemerket selv at det «ikke finnes vitenskapelig grunnlag for de valgte terskelverdiene» for svartid.
+ROS-analysen og beredskapsanalysen er kvalitative og gir ikke et etterprøvbart, tallbasert grunnlag for dimensjonering på tvers av sentraler. Analysene dokumenterer overløpsmekanismer og operative særtrekk, men fastsetter ikke eksplisitte, kvantitative servicenivåmål som kan måles mot observerte hendelsesdata. Meld. St. 16 (2023-2024) bekrefter at denne kvalitative tilnærmingen er gjeldende norsk praksis, og at en kvantitativ nasjonal standard ikke foreligger. Interdepartemental arbeidsgruppe (2009) påpekte selv at det ikke forelå systematisert tallmateriale eller forskning av tilstrekkelig kvalitet til å begrunne nasjonale terskelverdier for svartid (s. 52, 92).
 
 **RQ5: Kan strukturelle prediktorer (hendelsesvolum, innbyggertall, areal) danne grunnlag for en generaliserbar dimensjoneringsmodell på tvers av norske 110-sentraler?**
 
