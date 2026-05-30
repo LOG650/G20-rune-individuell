@@ -32,6 +32,8 @@ Feldman et al. (2008) uttrykker dette direkte: *«When the load is small, the ad
 
 Garnett et al. (2002) og Zeltyn og Mandelbaum (2005) utvidet rammeverket til Erlang-A (M/M/c+M). Her forlater kunder systemet etter en eksponentielt fordelt tålmodighetsterskel. For 110 er dette operativt relevant. Anrop som ikke besvares innen 30 sekunder overføres automatisk til Agder 110. Det er en tålmodighetsmekanisme som bryter med Erlang-C-forutsetningen om uendelig kø.
 
+Erlang-A ville dermed modellert 30-sekunders-overløpet og innringernes utålmodighet mer realistisk enn Erlang-C. Modellen løser likevel ikke kjerneproblemet i denne casen: at en D-pri1-hendelse binder to operatører parallelt gjennom makkerpar- og op-binder-semantikken (kap 6.4). Begge Erlang-variantene betjener hvert anrop med én server og fanger derfor ikke denne tobindingen. Erlang-C beholdes derfor som pedagogisk grunnlinje for det lav-belastede paradokset (avsnitt 3.3), mens den prosedyrebaserte ankomstkonfliktmodellen er nødvendig for å besvare problemstillingen.
+
 ## 3.3 Det lav-belastede paradokset
 
 Et sentralt teoretisk resultat, som er relevant for tolkning av de empiriske funnene i kapittel 8, er at lav serverutnyttelse *ikke* impliserer overbemanning i små nødmeldesentraler. Dwars (2013) beskriver nødmeldesentraler som «intrinsically lightly-loaded systems». Lav utnyttelse er en strukturell konsekvens av stordriftsulempen ved små enheter, ikke et tegn på tilgjengelig kapasitet.
