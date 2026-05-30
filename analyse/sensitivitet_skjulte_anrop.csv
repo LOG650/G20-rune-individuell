@@ -1,0 +1,10 @@
+Modus,Skifttype,n,Normal_pct,Brudd_pct,Svikt_pct
+Uten estimerte skjulte,Natt/helg,4905,67.8,15.4,16.8
+Uten estimerte skjulte,Dag hverdag,4154,81.6,13.0,5.4
+Uten estimerte skjulte,Alle,9059,74.1,14.3,11.6
+Uniform (hovedtall),Natt/helg,12017,69.2,9.8,21.0
+Uniform (hovedtall),Dag hverdag,15943,78.6,14.9,6.4
+Uniform (hovedtall),Alle,27960,74.6,12.8,12.7
+Burst front-load (B=4.0),Natt/helg,12015,61.4,12.2,26.4
+Burst front-load (B=4.0),Dag hverdag,15945,74.3,16.9,8.8
+Burst front-load (B=4.0),Alle,27960,68.8,14.9,16.3

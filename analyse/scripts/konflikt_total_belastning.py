@@ -197,32 +197,63 @@ print(f"  {'TOTAL':12s}: {len(df):>6}")
 df["dato_id"] = df["110_ID"].str.extract(r"B\d+-(\d{6})-")[0]
 df["seq_nr"] = df["110_ID"].str.extract(r"B\d+-\d{6}-(\d+)")[0].astype(float)
 
-hidden_rows = []
-for dato, group in df.groupby("dato_id"):
-    seqs = set(group["seq_nr"].dropna().astype(int))
-    if len(seqs) == 0:
-        continue
-    max_s = int(max(seqs))
-    missing = sorted(set(range(1, max_s + 1)) - seqs)
-    if not missing:
-        continue
-    sorted_df = group.sort_values("seq_nr")
-    for m in missing:
-        before = sorted_df[sorted_df["seq_nr"] < m]
-        after = sorted_df[sorted_df["seq_nr"] > m]
-        if len(before) > 0 and pd.notna(before.iloc[-1]["Dato_og_Tid"]):
-            est_tid = before.iloc[-1]["Dato_og_Tid"]
-        elif len(after) > 0 and pd.notna(after.iloc[0]["Dato_og_Tid"]):
-            est_tid = after.iloc[0]["Dato_og_Tid"]
-        else:
-            continue
-        hidden_rows.append({
-            "Dato_og_Tid": est_tid,
-            "v3_kat": "skjult",
-            "kilde": "skjult_sammenstilt",
-        })
+# VIKTIG: skjulte (sammenstilte) anrop har INGEN registrert ankomsttid. Sekvens-
+# gap-metoden gir hvor MANGE, ikke NAAR. Tidspunktet er derfor en modell-antagelse.
+# Vi tilbyr tre fordelinger av de manglende anropene innenfor sekvensgapet:
+#   collapse : alle paa naermeste forrige nabos tidsstempel (gammel modell; gir
+#              kunstig samtidig binding -> over-estimat, ikke brukt som hovedtall)
+#   uniform  : jevn/linear spredning mellom naboene (HOVEDTALL; maks-entropi,
+#              ingen klyngeantagelse)
+#   burst    : front-load med eksponentielt avtagende intensitet etter hendelsen
+#              (valgt konservativt scenario, jf. Gustavsson 2018 / L'Ecuyer 2018;
+#              parameter BURST_B), gir oevre sensitivitetskant
+BURST_B = 4.0  # decay-parameter for valgt burst-scenario (hoeyere = sterkere front-load)
 
-print(f"\nSkjulte/sammenstilte anrop: {len(hidden_rows)}")
+def build_hidden_rows(mode="uniform"):
+    """Estimer sammenstilte (skjulte) anrop fra sekvensgap. Antallet er identisk
+    for alle moduser; kun tidspunktet (innenfor gapet) varierer med 'mode'."""
+    rows = []
+    for dato, group in df.groupby("dato_id"):
+        seqs = set(group["seq_nr"].dropna().astype(int))
+        if len(seqs) == 0:
+            continue
+        max_s = int(max(seqs))
+        missing = sorted(set(range(1, max_s + 1)) - seqs)
+        if not missing:
+            continue
+        sorted_df = group.sort_values("seq_nr")
+        for m in missing:
+            before = sorted_df[(sorted_df["seq_nr"] < m) & sorted_df["Dato_og_Tid"].notna()]
+            after = sorted_df[(sorted_df["seq_nr"] > m) & sorted_df["Dato_og_Tid"].notna()]
+            hb, ha = len(before) > 0, len(after) > 0
+            if hb and ha:
+                s0 = before.iloc[-1]["seq_nr"]; t0 = before.iloc[-1]["Dato_og_Tid"]
+                s1 = after.iloc[0]["seq_nr"];  t1 = after.iloc[0]["Dato_og_Tid"]
+                if t1 > t0 and s1 > s0:
+                    u = (m - s0) / (s1 - s0)  # jevn posisjon mellom naboene
+                    if mode == "collapse":
+                        frac = 0.0
+                    elif mode == "burst":
+                        # invers CDF for eksponentielt avtagende intensitet
+                        frac = -np.log(1 - u * (1 - np.exp(-BURST_B))) / BURST_B
+                    else:  # uniform
+                        frac = u
+                    est_tid = t0 + (t1 - t0) * frac
+                else:
+                    est_tid = t0
+            elif hb:
+                est_tid = before.iloc[-1]["Dato_og_Tid"]
+            elif ha:
+                est_tid = after.iloc[0]["Dato_og_Tid"]
+            else:
+                continue
+            rows.append({"Dato_og_Tid": est_tid, "v3_kat": "skjult",
+                         "kilde": "skjult_sammenstilt"})
+    return rows
+
+# Hovedtall bruker uniform spredning
+hidden_rows = build_hidden_rows("uniform")
+print(f"\nSkjulte/sammenstilte anrop: {len(hidden_rows)} (hovedtall: uniform spredning)")
 
 # === 4. BEREGN BINDINGSTID FOR D-PRI1 (databasert) ===
 # D-pri1 binder makkerparet i full bindingstid (Dato_og_Tid -> Forste_ressurs_fremme + kvittering).
@@ -244,7 +275,7 @@ def kjor_sweep(events_df, label=""):
     """Ankomstkonflikt-sweep. Hver event har (bind_min, ops_bundet).
     n_aktive_ops akkumuleres ved hver ankomst som summen av ops_bundet
     for events med slutt_ts > t_i."""
-    events = events_df.sort_values("Dato_og_Tid").reset_index(drop=True)
+    events = events_df.sort_values("Dato_og_Tid", kind="mergesort").reset_index(drop=True)
     events["slutt_ts"] = events["Dato_og_Tid"] + pd.to_timedelta(events["bind_min"], unit="m")
 
     n = len(events)
@@ -253,13 +284,25 @@ def kjor_sweep(events_df, label=""):
     ops = events["ops_bundet"].values.astype(int)
     c_eff_arr = events["c_eff"].values
 
+    # Deterministisk samtidighetsregel: hendelser med identisk ankomsttidspunkt
+    # behandles samlet og binder ikke hverandre, slik at resultatet er uavhengig
+    # av rekkefoelgen mellom samtidige hendelser (fjerner tidligere tie-break-
+    # avhengighet av usortert rekkefoelge).
     n_aktive_ops = np.zeros(n, dtype=int)
     active_set = []  # liste av (slutt_ts, ops_bundet)
-    for i in range(n):
+    i = 0
+    while i < n:
         t_i = ankomst[i]
+        j = i
+        while j < n and ankomst[j] == t_i:
+            j += 1
         active_set = [(s, o) for s, o in active_set if s > t_i]
-        n_aktive_ops[i] = sum(o for _, o in active_set)
-        active_set.append((slutt[i], ops[i]))
+        base = sum(o for _, o in active_set)
+        for k in range(i, j):
+            n_aktive_ops[k] = base
+        for k in range(i, j):
+            active_set.append((slutt[k], ops[k]))
+        i = j
 
     events["n_aktive"] = n_aktive_ops  # beholder navn for bakoverkompat, men betyr nå op-binder
 
@@ -523,5 +566,45 @@ print(f"\nOppsummering: {PROJECT / 'analyse' / 'total_belastning_oppsummering.cs
 kat_export = df[["Oppdrag_ID", "110_ID", "Oppdragstype", "Opprinnelig_oppdragstype", "v3_kat"]].copy()
 kat_export.to_csv(PROJECT / "analyse" / "total_belastning_kategorisering.csv", index=False, encoding="utf-8")
 print(f"Kategorisering: {PROJECT / 'analyse' / 'total_belastning_kategorisering.csv'}")
+
+# === 9. SENSITIVITET: fordeling av skjulte anrops ankomsttid ===
+# Gulv (uten estimerte skjulte ankomsttidspunkt) / uniform (hovedtall) / burst.
+print("\n" + "=" * 70)
+print("SENSITIVITET: skjulte anrops ankomsttid (variant A, hoved-scenario)")
+print("=" * 70)
+
+def _fordeling_rad(label_mode, label_skift, d):
+    n = len(d)
+    return {
+        "Modus": label_mode, "Skifttype": label_skift, "n": n,
+        "Normal_pct": round((d["kapasitet"] == "Normal").mean() * 100, 1),
+        "Brudd_pct": round((d["kapasitet"] == "Brudd").mean() * 100, 1),
+        "Svikt_pct": round((d["kapasitet"] == "Svikt").mean() * 100, 1),
+    }
+
+sens_rows = []
+_orig_hidden = hidden_rows
+for _mode, _label in [("floor", "Uten estimerte skjulte"),
+                      ("uniform", "Uniform (hovedtall)"),
+                      ("burst", f"Burst front-load (B={BURST_B})")]:
+    if _mode == "floor":
+        ev_s = bygg_events("hoved", include_only=["D-pri1", "D-aba"])
+    elif _mode == "uniform":
+        ev_s = ev_a  # allerede bygget med uniform
+    else:
+        hidden_rows = build_hidden_rows("burst")
+        ev_s = bygg_events("hoved", include_only=["D-pri1", "D-aba", "skjult"])
+    res_s = result_a if _mode == "uniform" else kjor_sweep(ev_s)
+    for ce, lab in [(2, "Natt/helg"), (3, "Dag hverdag"), (None, "Alle")]:
+        d = res_s if ce is None else res_s[res_s["c_eff"] == ce]
+        sens_rows.append(_fordeling_rad(_label, lab, d))
+    nh = res_s[res_s["c_eff"] == 2]
+    print(f"  {_label:30s} Natt/helg: Svikt={ (nh['kapasitet']=='Svikt').mean()*100:.1f}% "
+          f"Brudd={(nh['kapasitet']=='Brudd').mean()*100:.1f}%")
+hidden_rows = _orig_hidden
+
+sens_out = pd.DataFrame(sens_rows)
+sens_out.to_csv(PROJECT / "analyse" / "sensitivitet_skjulte_anrop.csv", index=False, encoding="utf-8")
+print(f"\nSensitivitet: {PROJECT / 'analyse' / 'sensitivitet_skjulte_anrop.csv'}")
 
 print("\n=== FERDIG ===")

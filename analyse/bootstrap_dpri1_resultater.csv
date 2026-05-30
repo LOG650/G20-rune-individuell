@@ -1,10 +1,10 @@
 Skifttype,Niva,Punktestimat_pct,Bootstrap_mean_pct,CI_lav_pct,CI_hoy_pct,CI_bredde_pp,n_iterasjoner
-Alle,Normal,59.65,58.93,58.57,59.29,0.72,1000
-Alle,Brudd,17.81,18.23,18.01,18.44,0.44,1000
-Alle,Svikt,22.55,22.84,22.52,23.17,0.65,1000
-Dag hverdag,Normal,69.24,67.9,67.29,68.48,1.19,1000
-Dag hverdag,Brudd,15.91,16.64,16.31,16.98,0.67,1000
-Dag hverdag,Svikt,14.85,15.46,15.07,15.87,0.8,1000
-Natt/helg,Normal,46.91,47.03,46.66,47.4,0.74,1000
-Natt/helg,Brudd,20.33,20.33,20.11,20.55,0.43,1000
-Natt/helg,Svikt,32.76,32.64,32.09,33.16,1.07,1000
+Alle,Normal,74.56,73.79,73.33,74.23,0.9,1000
+Alle,Brudd,12.75,13.37,13.04,13.73,0.68,1000
+Alle,Svikt,12.69,12.84,12.5,13.18,0.68,1000
+Dag hverdag,Normal,78.62,77.09,76.35,77.76,1.41,1000
+Dag hverdag,Brudd,14.95,16.05,15.52,16.65,1.12,1000
+Dag hverdag,Svikt,6.44,6.86,6.52,7.21,0.68,1000
+Natt/helg,Normal,69.19,69.43,68.85,69.98,1.13,1000
+Natt/helg,Brudd,9.84,9.81,9.65,9.97,0.32,1000
+Natt/helg,Svikt,20.98,20.77,20.12,21.43,1.31,1000

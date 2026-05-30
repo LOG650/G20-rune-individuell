@@ -96,11 +96,18 @@ for dato, group in df.groupby("dato_id"):
         continue
     sorted_df = group.sort_values("seq_nr")
     for m in missing:
-        before = sorted_df[sorted_df["seq_nr"] < m]
-        after = sorted_df[sorted_df["seq_nr"] > m]
-        if len(before) > 0 and pd.notna(before.iloc[-1]["Dato_og_Tid"]):
+        # uniform spredning av skjulte anrop innenfor sekvensgapet (hovedtall,
+        # konsistent med konflikt_total_belastning.py)
+        before = sorted_df[(sorted_df["seq_nr"] < m) & sorted_df["Dato_og_Tid"].notna()]
+        after = sorted_df[(sorted_df["seq_nr"] > m) & sorted_df["Dato_og_Tid"].notna()]
+        hb, ha = len(before) > 0, len(after) > 0
+        if hb and ha:
+            s0 = before.iloc[-1]["seq_nr"]; t0 = before.iloc[-1]["Dato_og_Tid"]
+            s1 = after.iloc[0]["seq_nr"];  t1 = after.iloc[0]["Dato_og_Tid"]
+            est_tid = t0 + (t1 - t0) * ((m - s0) / (s1 - s0)) if (t1 > t0 and s1 > s0) else t0
+        elif hb:
             est_tid = before.iloc[-1]["Dato_og_Tid"]
-        elif len(after) > 0 and pd.notna(after.iloc[0]["Dato_og_Tid"]):
+        elif ha:
             est_tid = after.iloc[0]["Dato_og_Tid"]
         else:
             continue
@@ -165,11 +172,19 @@ ops = events["ops_bundet"].values.astype(int)
 
 n_aktive_ops = np.zeros(n, dtype=int)
 active_set = []
-for i in range(n):
+i = 0
+while i < n:
     t_i = ankomst[i]
+    j = i
+    while j < n and ankomst[j] == t_i:
+        j += 1
     active_set = [(s, o) for s, o in active_set if s > t_i]
-    n_aktive_ops[i] = sum(o for _, o in active_set)
-    active_set.append((slutt[i], ops[i]))
+    base = sum(o for _, o in active_set)
+    for k in range(i, j):
+        n_aktive_ops[k] = base
+    for k in range(i, j):
+        active_set.append((slutt[k], ops[k]))
+    i = j
 
 events["n_aktive_ops"] = n_aktive_ops
 dag_hverdag = ((events["Skift"] == "Dag") & (~events["Er_helg"])).values

@@ -1,13 +1,13 @@
 Variant,Scenario,Skifttype,n,Normal_pct,Brudd_pct,Svikt_pct
-A (beredskap),-,Alle,27960,59.6,17.9,22.5
-A (beredskap),-,Dag hverdag,15944,69.2,15.9,14.9
-A (beredskap),-,Natt/helg,12016,46.9,20.5,32.6
-B (total),lav,Alle,81774,62.7,17.3,19.9
-B (total),lav,Dag hverdag,53668,68.8,16.6,14.6
-B (total),lav,Natt/helg,28106,51.1,18.8,30.1
-B (total),hoved,Alle,82369,54.4,20.0,25.6
-B (total),hoved,Dag hverdag,53952,59.5,19.0,21.6
-B (total),hoved,Natt/helg,28417,44.8,22.0,33.2
-B (total),hoey,Alle,83012,43.3,22.0,34.7
-B (total),hoey,Dag hverdag,54253,45.9,20.9,33.2
-B (total),hoey,Natt/helg,28759,38.5,24.1,37.4
+A (beredskap),-,Alle,27960,74.6,12.8,12.7
+A (beredskap),-,Dag hverdag,15943,78.6,14.9,6.4
+A (beredskap),-,Natt/helg,12017,69.2,9.8,21.0
+B (total),lav,Alle,81774,72.9,13.7,13.4
+B (total),lav,Dag hverdag,53667,75.7,15.3,9.0
+B (total),lav,Natt/helg,28107,67.6,10.5,21.8
+B (total),hoved,Alle,82369,64.0,17.2,18.8
+B (total),hoved,Dag hverdag,53951,66.3,18.0,15.7
+B (total),hoved,Natt/helg,28418,59.6,15.7,24.6
+B (total),hoey,Alle,83012,51.8,20.5,27.7
+B (total),hoey,Dag hverdag,54252,52.3,20.4,27.3
+B (total),hoey,Natt/helg,28760,50.7,20.7,28.6
