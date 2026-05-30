@@ -23,7 +23,7 @@
   - **Avhengige punkter UTSATT** (regenereres/avgjøres når modellvalget er tatt): 3B-1 (Tabell 8.4 variant B-celler), 3B-2 (32,6/32,8 kanonisk + «stokastisk støy»-forklaring), 3B-3 (kap9 20,3→20,5), 3B-4 (±1 pp→CI), 3B-6 (observert vs estimert nevner), samt robusthetspåstanden i sammendraget (3C).
 - **3A-12:** LØST (2026-05-30). APCO/RETAINS (nå Taylor et al., 2005; fil `60-…`) og Larson (1974; fil `56-…`) er lastet ned, verifisert mot kilde, og oppdatert i referanselisten. Ingen siterte kilder mangler nå nedlastet PDF (utover klassikere/lovdata/SSB/DSB/interne dokumenter, som forventet er uten PDF).
 
-**Ikke gjort (per instruks):** PDF er ikke bygget på nytt.
+**PDF-status (oppdatert 2026-05-30):** Samlet PDF er bygget og verifisert etter alle rettinger (modelloppdatering, referanser, NENA-§6.4, samt final-review-rettingene). (Den opprinnelige «ikke bygget»-statusen gjaldt et tidligere mellomtrinn.)
 
 ---
 

@@ -48,7 +48,7 @@ De sammenstilte tilleggsanropene er tildelt 1 minutts bindingstid, en konservati
 
 Tallene er punktestimater under hovedscenario-antagelsene i Tabell 8.3. Variant B-scenariospennet (lav/hoved/høy, jf. Tabell 8.5) brukes her som *robusthetssjekk for antagelsesfølsomhet*, ikke som et statistisk konfidensintervall for variant A: båndet viser at Svikt-andelen på natt/helg holder seg innenfor ca. 22 til 29 % over hele parameterspennet, slik at tallet 21,0 % skal leses som et midtestimat under rimelige bindingstidsantagelser. Det statistiske konfidensintervallet for variant A natt/helg er kvantifisert separat via bootstrap i 8.3.4 (95 % CI [20,1; 21,4] %). En egen sensitivitet for hvordan skjulte anrop plasseres i tid (gulv/uniform/burst) presenteres i 8.3.5.
 
-Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3) er 78,6 % av beredskapsanrop i Normal og 6,4 % i Svikt. På natt/helg (c=2) er Normal-andelen 69,2 %, og om lag ett av fem anrop ankommer i Svikt-tilstand (21,0 %, scenariobånd 22 til 29 %). Dette er om lag en tredobling (3,3×) av sviktraten fra dagskiftet, primært fordi c=2 gir null buffer når en pri-1-hendelse binder makkerparet.
+Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3) er 78,6 % av beredskapsanrop i Normal og 6,4 % i Svikt. På natt/helg (c=2) er Normal-andelen 69,2 %, og om lag ett av fem anrop ankommer i Svikt-tilstand (21,0 %; bånd 16,8 til 26,4 % for fordeling av skjulte anrop, jf. 8.3.5). Dette er om lag en tredobling (3,3×) av sviktraten fra dagskiftet, primært fordi c=2 gir null buffer når en pri-1-hendelse binder makkerparet.
 
 **Hva tallet faktisk måler.** Svikt 21,0 % betyr at i 21,0 % av beredskapsanropene var det ingen ledig operatør for makkerpar-binding ved ankomsttidspunktet. Det betyr **ikke** at anropet ble ubesvart. Vaktleder (VL) kan tre inn, kvalitet reduseres ved solo-håndtering, eller anropet overføres til Agder etter 30-sek-regelen. Modellen måler brudd på driftsstandarden (makkerpar-tilgjengelighet), ikke brudd på tjenesteleveransen. Tolkningen av forskjellen mellom de to drøftes i kap 9.2.
 
@@ -191,7 +191,7 @@ Tre observasjoner:
 
 **3. Høyt scenario illustrerer bristepunktet.** Med bindingstider i øvre sjikt (Service 4 min, L-aba 9 min, D-aba Fase 2 p = 0,70 og Y = 10 min) faller Normal til om lag 52 % på dag, slik at nær halvparten av anropene møter Brudd eller Svikt. For natt/helg når Svikt 29 %. Dette representerer dager med tungt servicevolum, uerfarne operatører, eller stor andel ABA-hendelser med oppfølgende nødtelefon.
 
-**Konklusjon:** Hovedfunnet, at natt/helg har 22 til 29 % Svikt uavhengig av bindingstidsantagelser, er robust over hele spennet. Dimensjoneringsproblemet på natt/helg kan ikke forklares bort gjennom alternative parametervalg.
+**Konklusjon:** At natt/helg har 22 til 29 % Svikt i variant B uavhengig av bindingstidsantagelser, er robust over hele spennet og underbygger variant A-hovedtallet (21,0 %). Dimensjoneringsproblemet på natt/helg kan ikke forklares bort gjennom alternative parametervalg.
 
 ### 8.3.4 Bootstrap-konfidensintervall for D-pri1-bindingstidsfordelingen
 

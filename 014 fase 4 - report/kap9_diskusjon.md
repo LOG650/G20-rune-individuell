@@ -160,7 +160,7 @@ Ring-flom (call surge) fra flere innringere som melder samme hendelse er delvis 
 
 ### 9.4.3 Antakelser med konsekvenser
 
-Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba via LABA-dybdeanalyse, n=100, Kilde=Alarm-subset) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V, forelagt vaktleder). Sensitivitetsanalysen i avsnitt 8.3 viser at hovedfunnet er robust over hele spennet av rimelige antagelser: svikt på natt/helg er 22 til 29 % i alle scenarioer.
+Bindingstidsestimatene for ikke-D-kategorier (variant B) er delvis empirisk kalibrert (L-aba via LABA-dybdeanalyse, n=100, Kilde=Alarm-subset) og delvis operative estimater (S, L-hendelse, L-ukjent, F, V, forelagt vaktleder). Sensitivitetsanalysen i avsnitt 8.3 viser at funnet er robust over hele spennet av rimelige antagelser: svikt på natt/helg er 22 til 29 % i alle variant B-scenarioer, konsistent med variant A-hovedtallet på 21,0 %.
 
 LABA-hovedparameteren bygger på Kilde=Alarm-subsettet (n = 100) og har 95 % CI [3,74; 5,43] min for mean, substansielt strammere enn første runde (n = 30, CI [3,70; 8,56]). Median (3,27 min) og høy-scenario (7 min) er dekket i sensitivitetsanalysen. Endringen fra n=30 til n=100 reduserte hovedverdien fra 6 min til 4,5 min og senket variant B-Svikt på natt/helg marginalt (24,6 %).
 
