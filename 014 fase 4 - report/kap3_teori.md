@@ -109,9 +109,11 @@ De formelle definisjonene under generaliserer dette mønsteret:
 
 **Definisjon 3.1 (Op-binder-event).** Et op-binder-event $e = (t, d, q)$ er en tidsavgrenset binding av $q$ operatører, der $q \in \{1, 2\}$, startende ved $t$ og varende i $d$ minutter.
 
-**Definisjon 3.2 (Aktive op-binder).** Ved tidspunkt $\tau$ er antall aktive op-binder:
+**Definisjon 3.2 (Aktive op-binder).** For et nytt beredskapsanrop som ankommer ved $\tau$ teller modellen kun op-binder som er i gang, det vil si events som startet *strengt før* ankomsttidspunktet ($t_e < \tau$). Dette er en deterministisk samtidighetsregel: samtidige ankomster ($t_e = \tau$) binder ikke hverandre. Antall aktive op-binder er da:
 
-$$n_{\text{aktive}}(\tau) = \sum_{e \in \mathcal{E} : t_e \leq \tau < t_e + d_e} q_e$$
+$$n_{\text{aktive}}(\tau) = \sum_{e \in \mathcal{E} : t_e < \tau < t_e + d_e} q_e$$
+
+Estimerte skjulte (sammenstilte) anrop, som mangler registrert ankomsttid, fordeles uniformt (lineært) innenfor sekvensgapet før de inngår i $\mathcal{E}$ (jf. kap 6.4).
 
 **Definisjon 3.3 (Ekspansjon av hendelse).** Hver hendelse $h$ genererer én eller flere op-binder-events avhengig av type:
 - **D-pri1:** Én event med $q = 2$ (makkerpar).
@@ -136,7 +138,7 @@ Alzayed og Alsardi (2025) viser at simultane hendelser øker kognitiv belastning
 
 Jamtli et al. (2024) beskriver hvordan arbeidspress påvirker beslutningstaking i slagtelefoner ved AMK Oslo, blant annet gjennom avveininger mellom protokoll og erfaringsbasert intuisjon.
 
-Felles for disse studiene er at de dokumenterer en **skjult buffer**. Systemet fungerer ofte «godt nok» fordi operatørene bærer belastningen individuelt gjennom kvalitetsreduksjon, selv når den formelle driftsstandarden er brutt. Dette er en sentral tolkningsramme for kap 9.2. Modellens prediksjon av svikt ved 32,6 % av beredskapsanropene på natt/helg (variant A) er ikke motargument mot at sentralen fungerer. Det er en kvantifisering av den operative kostnaden som bæres av operatørene.
+Felles for disse studiene er at de dokumenterer en **skjult buffer**. Systemet fungerer ofte «godt nok» fordi operatørene bærer belastningen individuelt gjennom kvalitetsreduksjon, selv når den formelle driftsstandarden er brutt. Dette er en sentral tolkningsramme for kap 9.2. Modellens prediksjon av svikt ved 21,0 % av beredskapsanropene på natt/helg (variant A) er ikke motargument mot at sentralen fungerer. Det er en kvantifisering av den operative kostnaden som bæres av operatørene.
 
 ## 3.9 Oppsummering
 

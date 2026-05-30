@@ -16,18 +16,18 @@ De tre nivåene i Normal/Brudd/Svikt-klassifiseringen er definert i kap 6.4 og o
 - **Brudd på driftsstandard** (ledige = 1): Solo-håndtering er operativt mulig, men uten makker, med redusert kvalitetssikring (jf. Antagelse A7 i Tabell 6.3 og diskusjonen i kap 9.2).
 - **Svikt** (ledige ≤ 0): Ingen ledig operatør for makkerpar-binding. Anropet håndteres av VL, ved overflyt til Agder, eller ved at en operatør forlater pågående hendelse for å besvare det nye.
 
-I alle tre tilfellene besvares anropet i praksis. Modellen sier ikke at tjenesten kollapser ved 32,6 % Svikt; den sier at driftsstandarden ikke kan opprettholdes for hvert tredje beredskapsanrop på natt/helg. Den operative kostnaden av å bryte standarden bæres i dag av operatørene gjennom kvalitetsreduksjon (kap 3.8 og 9.2).
+I alle tre tilfellene besvares anropet i praksis. Modellen sier ikke at tjenesten kollapser ved 21,0 % Svikt; den sier at driftsstandarden ikke kan opprettholdes for om lag ett av fem beredskapsanrop på natt/helg. Den operative kostnaden av å bryte standarden bæres i dag av operatørene gjennom kvalitetsreduksjon (kap 3.8 og 9.2).
 
 ### Metode
 
 For hvert beredskapsanrop måles hvor mange operatører som er bundet i pågående hendelser ved ankomsttidspunktet. Sweep-algoritmen akkumulerer *op-binder*, ikke bare antall aktive hendelser: D-pri1 bidrar med 2 op-binder gjennom bindingstiden, D-aba Fase 1 bidrar med 1 op-binder i 3 min, D-aba Fase 2 (med sannsynlighet p = 0,50) bidrar med 1 op-binder i 6 min, og skjulte anrop bidrar med 1 op-binder i 1 min. Kapasitetsnivå klassifiseres etter antall ledige operatører (avsnitt 6.4).
 
-Skjulte anrop plasseres i tid via sekvensgap-metoden. Dersom oppdrag B06-250101-4 og B06-250101-6 er synlige, tildeles det manglende sekvensnummeret -5 tidspunkt fra nærmeste synlige oppdrag. Analysen fanger dermed den strukturelle effekten selv om eksakt ankomsttid for hvert skjult anrop er estimert.
+Skjulte anrop plasseres i tid via sekvensgap-metoden. Metoden gir hvor *mange* anrop som mangler, ikke *når* de ankom. De manglende anropene fordeles derfor uniformt (lineært) mellom tidsstemplene til de nærmeste synlige oppdragene (hovedantagelse). Eksakt ankomsttid for hvert skjult anrop er dermed en modellantagelse, ikke en observasjon; følsomheten for dette valget kvantifiseres eksplisitt i avsnitt 8.3.5 (gulv uten estimerte ankomsttidspunkt, uniform hovedtall, og et front-load-scenario).
 
 Variant A omfatter:
 - **D-pri1:** 4 499 oppdrag × 2 op-binder × median 14,1 min
 - **D-aba Fase 1:** 3 056 × 1 op × 3 min (alltid)
-- **D-aba Fase 2:** ~1 528 × 1 op × 6 min (sannsynlighet p = 0,50, offset + 1,5 min)
+- **D-aba Fase 2:** 1 504 × 1 op × 6 min (sannsynlighet p = 0,50, offset + 1,5 min)
 - **Skjulte anrop:** 18 901 × 1 op × 1 min
 
 Totalt inngår 27 960 op-binder-events i sweep-en.
@@ -40,23 +40,23 @@ De sammenstilte tilleggsanropene er tildelt 1 minutts bindingstid, en konservati
 
 | Skifttype | Normal | Brudd | Svikt | n |
 |---|---:|---:|---:|---:|
-| **Dag hverdag (c=3)** | 69,2 % | 15,9 % | 14,9 % | 15 944 |
-| **Natt/helg (c=2)** | 46,9 % | 20,5 % | **32,6 %** | 12 016 |
-| **Alle** | 59,6 % | 17,9 % | 22,5 % | 27 960 |
+| **Dag hverdag (c=3)** | 78,6 % | 14,9 % | 6,4 % | 15 943 |
+| **Natt/helg (c=2)** | 69,2 % | 9,8 % | **21,0 %** | 12 017 |
+| **Alle** | 74,6 % | 12,8 % | 12,7 % | 27 960 |
 
 *Kolonnen «Natt/helg (c=2)» omfatter alle skift med $c_{\text{eff}} = 2$, det vil si natt på hverdag og helg samt dag i helg; «Dag hverdag (c=3)» er dagskift på hverdager (jf. skiftdefinisjonene i kap 5.3.3).*
 
-Tallene er punktestimater under hovedscenario-antagelsene i Tabell 8.3. Variant B-scenariospennet (lav/hoved/høy, jf. Tabell 8.5) brukes her som *robusthetssjekk for antagelsesfølsomhet*, ikke som et statistisk konfidensintervall for variant A: båndet viser at Svikt-andelen på natt/helg holder seg innenfor ca. 30 til 38 % over hele parameterspennet, slik at tallet 32,6 % skal leses som et midtestimat under rimelige bindingstidsantagelser. Det statistiske konfidensintervallet for variant A natt/helg er kvantifisert separat via bootstrap i 8.3.4 (95 % CI [32,1; 33,2] %).
+Tallene er punktestimater under hovedscenario-antagelsene i Tabell 8.3. Variant B-scenariospennet (lav/hoved/høy, jf. Tabell 8.5) brukes her som *robusthetssjekk for antagelsesfølsomhet*, ikke som et statistisk konfidensintervall for variant A: båndet viser at Svikt-andelen på natt/helg holder seg innenfor ca. 22 til 29 % over hele parameterspennet, slik at tallet 21,0 % skal leses som et midtestimat under rimelige bindingstidsantagelser. Det statistiske konfidensintervallet for variant A natt/helg er kvantifisert separat via bootstrap i 8.3.4 (95 % CI [20,1; 21,4] %). En egen sensitivitet for hvordan skjulte anrop plasseres i tid (gulv/uniform/burst) presenteres i 8.3.5.
 
-Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3) er 69,2 % av beredskapsanrop i Normal og 14,9 % i Svikt. På natt/helg (c=2) er Normal-andelen under halvparten (46,9 %), og hvert tredje anrop ankommer i Svikt-tilstand (32,6 %, scenariobånd 30 til 38 %). Dette er en dobling av sviktraten fra dagskiftet, primært fordi c=2 gir null buffer når en pri-1-hendelse binder makkerparet.
+Modellen avslører en markant asymmetri mellom dag og natt. På dag hverdag (c=3) er 78,6 % av beredskapsanrop i Normal og 6,4 % i Svikt. På natt/helg (c=2) er Normal-andelen 69,2 %, og om lag ett av fem anrop ankommer i Svikt-tilstand (21,0 %, scenariobånd 22 til 29 %). Dette er om lag en tredobling (3,3×) av sviktraten fra dagskiftet, primært fordi c=2 gir null buffer når en pri-1-hendelse binder makkerparet.
 
-**Hva tallet faktisk måler.** Svikt 32,6 % betyr at i 32,6 % av beredskapsanropene var det ingen ledig operatør for makkerpar-binding ved ankomsttidspunktet. Det betyr **ikke** at anropet ble ubesvart. Vaktleder (VL) kan tre inn, kvalitet reduseres ved solo-håndtering, eller anropet overføres til Agder etter 30-sek-regelen. Modellen måler brudd på driftsstandarden (makkerpar-tilgjengelighet), ikke brudd på tjenesteleveransen. Tolkningen av forskjellen mellom de to drøftes i kap 9.2.
+**Hva tallet faktisk måler.** Svikt 21,0 % betyr at i 21,0 % av beredskapsanropene var det ingen ledig operatør for makkerpar-binding ved ankomsttidspunktet. Det betyr **ikke** at anropet ble ubesvart. Vaktleder (VL) kan tre inn, kvalitet reduseres ved solo-håndtering, eller anropet overføres til Agder etter 30-sek-regelen. Modellen måler brudd på driftsstandarden (makkerpar-tilgjengelighet), ikke brudd på tjenesteleveransen. Tolkningen av forskjellen mellom de to drøftes i kap 9.2.
 
 ### D-pri1 som primær svikt-driver
 
 Den sterkeste enkeltdriveren for svikt er D-pri1-hendelser. På c=2 binder én aktiv D-pri1 hele operatørkapasiteten, ved at begge ops er i makkerpar-rollen, og et nytt beredskapsanrop i samme tidsvindu ankommer direkte i Svikt. D-aba derimot binder bare én op i Fase 1, slik at en D-aba-hendelse på natt/helg *tillater* et nytt beredskapsanrop i parallell drift (Brudd, ikke Svikt).
 
-Dette forklarer hvorfor Brudd-andelen er relativt lav (20,5 % på natt/helg) mens Svikt-andelen er høy: modellen differensierer strukturelt mellom lette og tunge beredskapsoppgaver, og pri-1-hendelser går direkte til Svikt-terskelen når c=2.
+Dette forklarer hvorfor Brudd-andelen er relativt lav (9,8 % på natt/helg) mens Svikt-andelen er høyere: modellen differensierer strukturelt mellom lette og tunge beredskapsoppgaver, og pri-1-hendelser går direkte til Svikt-terskelen når c=2.
 
 ### Tolkning av svikt
 
@@ -85,26 +85,26 @@ Scenarioet med én ekstra operatør per skift er en strukturtest av robusthet: h
 | Skifttype | | Dagens bemanning | | +1 operatør | | |
 |---|---|---|---|---|---|---|
 | | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
-| **Dag hverdag** (3 → 4) | 69,2 % | 15,9 % | 14,9 % | **85,1 %** | **6,3 %** | **8,5 %** |
-| **Natt/helg** (2 → 3) | 46,9 % | 20,3 % | 32,8 % | **67,2 %** | **16,1 %** | **16,7 %** |
-| **Alle** | 59,6 % | 17,8 % | 22,5 % | **77,5 %** | **10,5 %** | **12,0 %** |
+| **Dag hverdag** (3 → 4) | 78,6 % | 14,9 % | 6,4 % | **93,6 %** | **2,9 %** | **3,5 %** |
+| **Natt/helg** (2 → 3) | 69,2 % | 9,8 % | 21,0 % | **79,0 %** | **15,4 %** | **5,6 %** |
+| **Alle** | 74,6 % | 12,8 % | 12,7 % | **87,3 %** | **8,3 %** | **4,4 %** |
 
-Figur 8.1 visualiserer skiftet i kapasitetsnivå når en ekstra operatør legges til på hvert skift. Hovedpoenget å se etter er **Normal-økningen på natt/helg** (søylen på venstre side går fra 47 % til 67 %) og den tilhørende reduksjonen i Svikt fra ca. 33 % til ca. 17 %. Effekten er strukturelt drevet av at c=3 endrer hva som skjer når én D-pri1 er aktiv (jf. neste tre punkter).
+Figur 8.1 visualiserer skiftet i kapasitetsnivå når en ekstra operatør legges til på hvert skift. Hovedpoenget å se etter er **Normal-økningen på natt/helg** (søylen på venstre side går fra 69 % til 79 %) og den tilhørende reduksjonen i Svikt fra 21,0 % til 5,6 %. Effekten er strukturelt drevet av at c=3 endrer hva som skjer når én D-pri1 er aktiv (jf. neste tre punkter).
 
 <div align="center">
   <img src="../analyse/figurer/scenario_pluss1_operator.png" alt="Scenario +1 operatør" width="95%">
   <p align="center"><small><i>Figur 8.1: Kapasitetsnivå ved dagens bemanning (3/2) vs +1 operatør (4/3). Solid søyle = dagens; halvgjennomsiktig med sort kant = +1 operatør.</i></small></p>
 </div>
 
-Tallene i Tabell 8.2 er punktestimater under hovedscenarioets antagelser, men retningen, at +1 op reduserer Svikt vesentlig, er robust gjennom hele parameterspennet i Tabell 8.5. Reduksjonens *størrelse* er derimot mer usikker enn punkttallet antyder: med D-aba Fase 2 trukket fra en annen stokastisk realisasjon enn primærmodellen er baseline for scenarioet 32,8 % (mot primærmodellens 32,6 %; differansen er innenfor stokastisk støy).
+Tallene i Tabell 8.2 er punktestimater under hovedscenarioets antagelser, men retningen, at +1 op reduserer Svikt vesentlig, er robust gjennom hele parameterspennet i Tabell 8.5. Baseline for scenarioet (21,0 % Svikt natt/helg) er identisk med primærmodellen: den deterministiske samtidighetsregelen (avsnitt 6.4) gjør at de to skriptene gir samme tall, slik at scenarioeffekten er direkte sammenlignbar med Tabell 8.1.
 
 Tre observasjoner:
 
-**1. Natt/helg: sviktraten halveres under hovedantagelsene.** Med +1 operatør øker Normal fra 46,9 % til 67,2 % (+20,3 pp), og Svikt reduseres fra ca. 33 % til 16,7 % (begge under hovedscenario). Den ekstra operatøren gir den buffersonen som c=2 mangler: med c=3 kan én D-pri1 håndteres samtidig som det fortsatt gir én ledig op, slik at pri-1-hendelser ikke lenger automatisk medfører Svikt. Halveringen er en modellprediksjon, ikke en validert effekt av faktisk bemanningsendring.
+**1. Natt/helg: sviktraten mer enn halveres under hovedantagelsene.** Med +1 operatør øker Normal fra 69,2 % til 79,0 % (+9,8 pp), og Svikt reduseres fra 21,0 % til 5,6 % (begge under hovedscenario). Den ekstra operatøren gir den buffersonen som c=2 mangler: med c=3 kan én D-pri1 håndteres samtidig som det fortsatt gir én ledig op, slik at pri-1-hendelser ikke lenger automatisk medfører Svikt. Reduksjonen er en modellprediksjon, ikke en validert effekt av faktisk bemanningsendring.
 
-**2. Dag hverdag: Normal opp til 85 %.** Normal øker fra 69,2 % til 85,1 %. Svikt halveres fra 14,9 % til 8,5 %. Effekten er mindre markant enn på natt/helg fordi c=3 allerede gir buffer, men en fjerde operatør fjerner nesten all Svikt-risiko fra kombinasjonen av samtidig D-pri1 og lett bakgrunnsbelastning.
+**2. Dag hverdag: Normal opp til 94 %.** Normal øker fra 78,6 % til 93,6 %. Svikt nær halveres fra 6,4 % til 3,5 %. Effekten er mindre markant enn på natt/helg fordi c=3 allerede gir buffer, men en fjerde operatør fjerner nesten all Svikt-risiko fra kombinasjonen av samtidig D-pri1 og lett bakgrunnsbelastning.
 
-**3. Selv med +1 er sviktraten ikke null.** 12 % samlet svikt viser at kapasitetsproblemer ikke elimineres med én ekstra operatør, men reduseres vesentlig. Residualen skyldes perioder med to samtidige D-pri1-hendelser eller kombinasjoner av D-pri1 med mange bakgrunnshenvendelser.
+**3. Selv med +1 er sviktraten ikke null.** 4,4 % samlet svikt viser at kapasitetsproblemer ikke elimineres med én ekstra operatør, men reduseres vesentlig. Residualen skyldes perioder med to samtidige D-pri1-hendelser eller kombinasjoner av D-pri1 med mange bakgrunnshenvendelser.
 
 Scenarioanalysen viser den strukturelle effekten av økt bufferkapasitet, men sier ikke alene hvordan en eventuell bemanningsøkning bør organiseres i praksis. Det er for eksempel ikke gitt at alle timer trenger samme økning, eller at effekten er lik med ulik kompetansesammensetning. Modellen sammenlignes heller ikke direkte mot en historisk bemanningsendring som kunne validert effekten empirisk. Resultatene bør derfor forstås som et analytisk beslutningsgrunnlag, en hypotetisk strukturtest under modellens antagelser, og ikke som en ferdig ressurs- eller turnusløsning.
 
@@ -147,18 +147,18 @@ Primærmodellen (variant A) kvantifiserer kapasitetsnivå basert på beredskapso
 | Skifttype | | Variant A (beredskap) | | | Variant B (total) | |
 |---|---|---|---|---|---|---|
 | | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
-| **Dag hverdag** (c=3) | 69,2 % | 15,9 % | 14,9 % | **59,5 %** | **19,0 %** | **21,6 %** |
-| **Natt/helg** (c=2) | 46,9 % | 20,5 % | 32,6 % | **44,8 %** | **22,0 %** | **33,2 %** |
-| **Alle** | 59,6 % | 17,9 % | 22,5 % | **53,9 %** | **20,1 %** | **25,9 %** |
+| **Dag hverdag** (c=3) | 78,6 % | 14,9 % | 6,4 % | **66,3 %** | **18,0 %** | **15,7 %** |
+| **Natt/helg** (c=2) | 69,2 % | 9,8 % | 21,0 % | **59,6 %** | **15,7 %** | **24,6 %** |
+| **Alle** | 74,6 % | 12,8 % | 12,7 % | **64,0 %** | **17,2 %** | **18,8 %** |
 
-Figur 8.2 sammenligner variant A (kun beredskap) med variant B (total belastning) for begge skifttyper. Det mest informative er **dag-søylene**, der utvidelsen til variant B trekker Normal-andelen ned fra 69 % til 59 % og dobler Svikt. Natt/helg-søylene endres lite, fordi bakgrunnsvolumet er begrenset om natten. Tolkningen er at dag- og natt-kapasiteten har ulik karakter: dagsproblemet er drevet av bakgrunnsbelastning, natt-problemet av beredskap alene.
+Figur 8.2 sammenligner variant A (kun beredskap) med variant B (total belastning) for begge skifttyper. Det mest informative er **dag-søylene**, der utvidelsen til variant B trekker Normal-andelen ned fra 79 % til 66 % og mer enn dobler Svikt. Natt/helg-søylene endres mindre i Svikt, fordi bakgrunnsvolumet er begrenset om natten. Tolkningen er at dag- og natt-kapasiteten har ulik karakter: dagsproblemet er drevet av bakgrunnsbelastning, natt-problemet av beredskap alene.
 
 <div align="center">
   <img src="../analyse/figurer/total_belastning_A_vs_B.png" alt="Variant A vs B" width="95%">
   <p align="center"><small><i>Figur 8.2: Variant A (beredskapsbelastning) vs Variant B (total operativ belastning), hovedscenario.</i></small></p>
 </div>
 
-Bakgrunnsbelastningen slår hardest på **dagtid**: Normal-andelen faller knapt 10 prosentpoeng (fra 69,2 % til 59,5 %) og svikt øker fra 14,9 % til 21,6 %. Dette er konsistent med at servicevolumet (22 542 overføringstester per år) er konsentrert på dagtid når servicevirksomhet pågår. Natt/helg påvirkes i mindre grad (Normal faller 2,1 pp, Svikt stiger 0,6 pp) fordi bakgrunnsvolumet er lavere, men utgangspunktet er allerede kritisk: Svikt-andelen på natt/helg er 33,2 % i variant B (scenariobånd 30 til 38 %), mot 32,6 % i variant A.
+Bakgrunnsbelastningen slår hardest på **dagtid**: Normal-andelen faller drøyt 12 prosentpoeng (fra 78,6 % til 66,3 %) og svikt øker fra 6,4 % til 15,7 %. Dette er konsistent med at servicevolumet (22 542 overføringstester per år) er konsentrert på dagtid når servicevirksomhet pågår. Natt/helg påvirkes også, men mindre i Svikt (Normal faller 9,6 pp, Svikt stiger 3,6 pp) fordi bakgrunnsvolumet er lavere, men utgangspunktet er allerede mer presset: Svikt-andelen på natt/helg er 24,6 % i variant B (scenariobånd 22 til 29 %), mot 21,0 % i variant A.
 
 Funnet understreker at operatørene på dagtid ikke bare håndterer beredskap; de håndterer en kontinuerlig strøm av servicetester, avklaringer og feilringinger som binder kapasitet mellom beredskapsoppdragene. Med gjennomsnittlig ~10 bakgrunnshenvendelser per time på dagskift er operatørene sjelden reelt ledige selv i perioder uten beredskapsoppdrag.
 
@@ -171,12 +171,12 @@ Bindingstidene for ikke-D-kategorier og D-aba Fase 2-parametrene er operative es
 | Scenario | Dag hverdag (c=3) | | | Natt/helg (c=2) | | |
 |---|---|---|---|---|---|---|
 | | Normal | Brudd | Svikt | Normal | Brudd | Svikt |
-| **A (beredskap)** | 69,2 % | 15,9 % | 14,9 % | 46,9 % | 20,5 % | 32,6 % |
-| **B lav** | 68,8 % | 16,6 % | 14,6 % | 51,1 % | 18,8 % | 30,1 % |
-| **B hoved** | 59,5 % | 19,0 % | 21,6 % | 44,8 % | 22,0 % | 33,2 % |
-| **B høy** | 45,3 % | 21,0 % | 33,7 % | 38,1 % | 24,2 % | 37,7 % |
+| **A (beredskap)** | 78,6 % | 14,9 % | 6,4 % | 69,2 % | 9,8 % | 21,0 % |
+| **B lav** | 75,7 % | 15,3 % | 9,0 % | 67,6 % | 10,5 % | 21,8 % |
+| **B hoved** | 66,3 % | 18,0 % | 15,7 % | 59,6 % | 15,7 % | 24,6 % |
+| **B høy** | 52,3 % | 20,4 % | 27,3 % | 50,7 % | 20,7 % | 28,6 % |
 
-Figur 8.3 viser hvordan kapasitetsnivåene endrer seg når bindingstidsparametrene varieres fra lav til høy. Det avgjørende poenget er at natt/helg-søylen for Svikt **forblir over 30 % i alle tre scenarioer**, fra lav (30 %) til høy (38 %). Hovedfunnet om strukturell natt/helg-sårbarhet er dermed robust mot alle rimelige parameterantagelser. På dag hverdag er båndet bredere (15 til 34 %), noe som tilsier større usikkerhet for dagskonklusjonen.
+Figur 8.3 viser hvordan kapasitetsnivåene endrer seg når bindingstidsparametrene varieres fra lav til høy. Det avgjørende poenget er at natt/helg-søylen for Svikt **forblir over 20 % i alle tre scenarioer**, fra lav (22 %) til høy (29 %). Hovedfunnet om strukturell natt/helg-sårbarhet er dermed robust mot alle rimelige parameterantagelser. På dag hverdag er båndet bredere (9 til 27 %), noe som tilsier større usikkerhet for dagskonklusjonen.
 
 <div align="center">
   <img src="../analyse/figurer/total_belastning_sensitivitet.png" alt="Sensitivitetsanalyse" width="90%">
@@ -185,13 +185,13 @@ Figur 8.3 viser hvordan kapasitetsnivåene endrer seg når bindingstidsparametre
 
 Tre observasjoner:
 
-**1. Selv lavt scenario viser merkbar bakgrunnseffekt.** Med minimale bindingstider (Service 1 min, L-aba 3 min, feilringing 15 sek, D-aba Fase 2 kun for 30 % med Y = 3 min) er dag-hverdag-resultatet nesten uendret fra variant A (Normal 68,8 vs 69,2 %). På natt/helg gir lav-scenarioet faktisk litt bedre Normal (51 %) enn variant A (47 %), fordi D-aba Fase 2 slås mindre til når p = 0,30. Dette bekrefter at variant A-resultatet ikke er avhengig av optimistiske antagelser.
+**1. Selv lavt scenario viser merkbar bakgrunnseffekt.** Med minimale bindingstider (Service 1 min, L-aba 3 min, feilringing 15 sek, D-aba Fase 2 kun for 30 % med Y = 3 min) er dag-hverdag-resultatet nesten uendret fra variant A (Normal 75,7 vs 78,6 %). På natt/helg ligger lav-scenarioet nær variant A (Normal 67,6 mot 69,2 %), fordi bakgrunnsvolumet om natten er lavt. Dette bekrefter at variant A-resultatet ikke er avhengig av optimistiske antagelser.
 
-**2. Hovedscenario gir vesentlig kapasitetsforverring på dagtid.** Normal faller til 59,5 % og svikt øker til 21,6 %. Dagskiftet, som i variant A framstår som komfortabelt (69 % Normal), blir klart mer presset når hele arbeidsvolumet inkluderes.
+**2. Hovedscenario gir vesentlig kapasitetsforverring på dagtid.** Normal faller til 66,3 % og svikt øker til 15,7 %. Dagskiftet, som i variant A framstår som komfortabelt (79 % Normal), blir klart mer presset når hele arbeidsvolumet inkluderes.
 
-**3. Høyt scenario illustrerer bristepunktet.** Med bindingstider i øvre sjikt (Service 4 min, L-aba 9 min, D-aba Fase 2 p = 0,70 og Y = 10 min) faller Normal under 50 % på dag, slik at operatørene er oftere i Brudd eller Svikt enn i normal drift. For natt/helg når Svikt 38 %. Dette representerer dager med tungt servicevolum, uerfarne operatører, eller stor andel ABA-hendelser med oppfølgende nødtelefon.
+**3. Høyt scenario illustrerer bristepunktet.** Med bindingstider i øvre sjikt (Service 4 min, L-aba 9 min, D-aba Fase 2 p = 0,70 og Y = 10 min) faller Normal til om lag 52 % på dag, slik at nær halvparten av anropene møter Brudd eller Svikt. For natt/helg når Svikt 29 %. Dette representerer dager med tungt servicevolum, uerfarne operatører, eller stor andel ABA-hendelser med oppfølgende nødtelefon.
 
-**Konklusjon:** Hovedfunnet, at natt/helg har 30 til 38 % Svikt uavhengig av bindingstidsantagelser, er robust over hele spennet. Dimensjoneringsproblemet på natt/helg kan ikke forklares bort gjennom alternative parametervalg.
+**Konklusjon:** Hovedfunnet, at natt/helg har 22 til 29 % Svikt uavhengig av bindingstidsantagelser, er robust over hele spennet. Dimensjoneringsproblemet på natt/helg kan ikke forklares bort gjennom alternative parametervalg.
 
 ### 8.3.4 Bootstrap-konfidensintervall for D-pri1-bindingstidsfordelingen
 
@@ -203,21 +203,21 @@ I hver iterasjon trekkes 4 499 bindingstider med erstatning fra de 3 645 observe
 
 | Skifttype | Nivå | Punktestimat | Bootstrap-mean | 95 % CI | Bredde |
 |---|---|---:|---:|---|---:|
-| **Dag hverdag (c=3)** | Normal | 69,2 % | 67,9 % | [67,3; 68,5] | 1,2 pp |
-| | Brudd | 15,9 % | 16,6 % | [16,3; 17,0] | 0,7 pp |
-| | Svikt | 14,9 % | 15,5 % | [15,1; 15,9] | 0,8 pp |
-| **Natt/helg (c=2)** | Normal | 46,9 % | 47,0 % | [46,7; 47,4] | 0,7 pp |
-| | Brudd | 20,3 % | 20,3 % | [20,1; 20,6] | 0,4 pp |
-| | **Svikt** | **32,8 %** | **32,6 %** | **[32,1; 33,2]** | **1,1 pp** |
-| **Alle** | Normal | 59,6 % | 58,9 % | [58,6; 59,3] | 0,7 pp |
-| | Brudd | 17,8 % | 18,2 % | [18,0; 18,4] | 0,4 pp |
-| | Svikt | 22,5 % | 22,8 % | [22,5; 23,2] | 0,7 pp |
+| **Dag hverdag (c=3)** | Normal | 78,6 % | 77,1 % | [76,4; 77,8] | 1,4 pp |
+| | Brudd | 15,0 % | 16,1 % | [15,5; 16,7] | 1,1 pp |
+| | Svikt | 6,4 % | 6,9 % | [6,5; 7,2] | 0,7 pp |
+| **Natt/helg (c=2)** | Normal | 69,2 % | 69,4 % | [68,9; 70,0] | 1,1 pp |
+| | Brudd | 9,8 % | 9,8 % | [9,7; 10,0] | 0,3 pp |
+| | **Svikt** | **21,0 %** | **20,8 %** | **[20,1; 21,4]** | **1,3 pp** |
+| **Alle** | Normal | 74,6 % | 73,8 % | [73,3; 74,2] | 0,9 pp |
+| | Brudd | 12,8 % | 13,4 % | [13,0; 13,7] | 0,7 pp |
+| | Svikt | 12,7 % | 12,8 % | [12,5; 13,2] | 0,7 pp |
 
 *Punktestimat = median-imputering for manglende, som i hovedscript. Bootstrap-mean = gjennomsnitt over 1 000 iterasjoner der manglende imputeres ved trekk fra observert empirisk fordeling. Resultater: `analyse/bootstrap_dpri1_resultater.csv`. Implementasjon: `analyse/scripts/bootstrap_dpri1.py`.*
 
-Bootstrap-CI for Svikt natt/helg er **[32,1; 33,2] %** med bredde 1,1 pp. Punktestimatet (32,8 %) ligger sentralt i CI-en, og bootstrap-mean (32,6 %) er nær identisk. Hovedfunnet er dermed stabilt også når statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen propageres gjennom modellen. På dag hverdag er punktestimatet (14,9 %) marginalt lavere enn bootstrap-CI nedre grense (15,1 %); differansen reflekterer at median-imputering for høyreskjeve fordelinger gir lavere estimat enn trekk fra full empirisk fordeling, og er en ytterligere indikasjon på at hovedmodellen er en konservativ estimator.
+Bootstrap-CI for Svikt natt/helg er **[20,1; 21,4] %** med bredde 1,3 pp. Punktestimatet (21,0 %) ligger sentralt i CI-en, og bootstrap-mean (20,8 %) er nær identisk. Hovedfunnet er dermed stabilt også når statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen propageres gjennom modellen. På dag hverdag er punktestimatet (6,4 %) marginalt lavere enn bootstrap-CI nedre grense (6,5 %); differansen reflekterer at median-imputering for høyreskjeve fordelinger gir lavere estimat enn trekk fra full empirisk fordeling, og er en ytterligere indikasjon på at hovedmodellen er en konservativ estimator.
 
-**Hva CI-en ikke fanger.** Bootstrap-CI kvantifiserer *parametrisk* usikkerhet i den observerte D-pri1-bindingstidsfordelingen, ikke *definisjonsmessig* usikkerhet i selve modellrammen. Den smale CI-bredden (1,1 pp) sier at *gitt* op-binder-semantikken, makkerpar-kravet og kategoriinndelingen i kap 6, så er Svikt-andelen statistisk presis. Den dominerende restusikkerheten gjelder valg av modellramme (Trussel 1 og 4 i kap 5.6.1) og er kvalitativt drøftet i kap 5.6.2 og 9.2.3, ikke kvantifisert her. Et smalere intervall enn ±0,5 pp må derfor ikke leses som total usikkerhet.
+**Hva CI-en ikke fanger.** Bootstrap-CI kvantifiserer *parametrisk* usikkerhet i den observerte D-pri1-bindingstidsfordelingen, ikke *definisjonsmessig* usikkerhet i selve modellrammen. Den smale CI-bredden (1,1 pp) sier at *gitt* op-binder-semantikken, makkerpar-kravet og kategoriinndelingen i kap 6, så er Svikt-andelen statistisk presis. Den dominerende restusikkerheten gjelder valg av modellramme (Trussel 1 og 4 i kap 5.6.1), inkludert hvordan skjulte anrop plasseres i tid (avsnitt 8.3.5), og er kvalitativt drøftet i kap 5.6.2 og 9.2.3. Den smale bootstrap-CI-en må derfor ikke leses som total usikkerhet.
 
 **MAR-sjekk og imputeringsantagelse.** To imputeringsregimer brukes parallelt og bør holdes adskilt: (i) *punktestimatet* i Tabell 8.1 imputerer manglende fremme-tidsstempel med observert median (14,1 min), mens (ii) *bootstrap-CI-en* trekker fra hele den observerte empiriske fordelingen (ikke kun medianen) i hver iterasjon. Begge regimer forutsetter at manglende «første ressurs fremme»-tidsstempel er tilfeldig fordelt (MAR) på tvers av Oppdragstype. Empirisk varierer missingness fra 5,6 % («Brann i bygning») til 73,4 % («Avbrutt utrykning samtale»), med koeffisientvariasjon 0,98 på tvers av Oppdragstype (n ≥ 30). MAR-antagelsen er dermed *ikke* strengt oppfylt. Klyngingen er imidlertid systematisk og operativt forklarlig: hendelser uten registrert fremme-tidspunkt er typisk avbrutte utrykninger (ressurs returnerte før den nådde frem) som har *kortere* faktisk binding enn medianen for vellykkede utrykninger. Median-imputeringen i punktestimatet kan derfor overestimere binding for avbrutte utrykninger, og trekkene fra observert fordeling i bootstrap-en arver samme retning. Bootstrap-CI rapportert over gir et bredere usikkerhetsbilde enn punktestimatet alene, men fanger ikke en full stratifisert missingness-modell; en stratifisert imputering per Oppdragstype ville gitt litt lavere Svikt-mean uten å endre konklusjonen om at intervallet er smalt og funnet stabilt. Detaljert MAR-rapport: `analyse/bootstrap_dpri1_mar_sjekk.csv`.
 
@@ -225,6 +225,30 @@ Bootstrap-CI for Svikt natt/helg er **[32,1; 33,2] %** med bredde 1,1 pp. Punkte
   <img src="../analyse/figurer/bootstrap_dpri1_ci.png" alt="Bootstrap-CI for kapasitetsnivå" width="95%">
   <p align="center"><small><i>Figur 8.4: Bootstrap-fordeling av kapasitetsnivå (B = 1 000). Stiplet linje: punktestimat (median-imputert). Punktert linje: 95 % CI-grenser.</i></small></p>
 </div>
+
+### 8.3.5 Sensitivitet: fordeling av skjulte anrops ankomsttid
+
+De sammenstilte (skjulte) anropene utgjør 18 901 av de 27 960 op-binder-eventene i variant A, men de mangler registrert ankomsttid: sekvensgap-metoden gir hvor *mange* anrop som er sammenstilt, ikke *når* de ankom. Hovedtallene over bruker en **uniform (lineær)** fordeling av de skjulte anropene innenfor sekvensgapet. Fordi dette valget er en modellantagelse og ikke en observasjon, kvantifiseres følsomheten med tre fordelinger:
+
+- **Gulv** — kun observerte beredskapshendelser (D-pri1 + D-aba), uten estimerte skjulte ankomsttidspunkt. Et konservativt minimum som ikke avhenger av noen tidsantagelse for de skjulte anropene.
+- **Uniform (hovedtall)** — skjulte anrop spredt jevnt i sekvensgapet (maksimal entropi, ingen klyngeantagelse).
+- **Burst (front-load)** — et valgt konservativt scenario der skjulte anrop klynger tidlig etter den utløsende hendelsen (eksponentielt avtagende intensitet, parameter $B = 4$), i tråd med burst-dynamikken i Gustavsson (2018) og L'Ecuyer et al. (2018). Dette er en *valgt* øvre sensitivitet, ikke en kalibrert maksimumsgrense.
+
+**Tabell 8.6b: Sensitivitet for fordeling av skjulte anrops ankomsttid (variant A, hoved-scenario)**
+
+| Fordeling | Natt/helg Svikt | Natt/helg Brudd | Dag Svikt | Dag Brudd |
+|---|---:|---:|---:|---:|
+| Gulv (uten estimerte skjulte ankomsttidspunkt) | 16,8 % | 15,4 % | 5,4 % | 13,0 % |
+| **Uniform (hovedtall)** | **21,0 %** | 9,8 % | 6,4 % | 14,9 % |
+| Burst front-load ($B = 4$, valgt scenario) | 26,4 % | 12,2 % | 8,8 % | 16,9 % |
+
+Hovedtallet for natt/helg Svikt (21,0 %) ligger altså i et bånd fra 16,8 % (gulv) til 26,4 % (burst). Tre forhold er verdt å merke:
+
+1. **Den strukturelle natt/dag-asymmetrien er robust mot fordelingsvalget.** Natt/helg Svikt er om lag tre ganger dag-Svikt i alle tre fordelingene (16,8/5,4 = 3,1×; 21,0/6,4 = 3,3×; 26,4/8,8 = 3,0×). Selve nivået flytter seg, men retningen og størrelsesordenen på asymmetrien gjør ikke det.
+2. **Gulvet er et reelt minimum.** Selv uten å tildele de skjulte anropene noe tidspunkt, altså med kun observerte beredskapshendelser, ankommer 16,8 % av natt/helg-anropene i Svikt. De estimerte sammenstilte anropene løfter dette til hovedtallet 21,0 % (uniform) eller opptil 26,4 % (burst).
+3. **Supplerende prosedyrebrudd-mål.** Tar man Brudd og Svikt sammen (anrop som ankommer i en tilstand der makkerpar-driftsstandarden er svekket eller fraværende), er natt/helg-andelen 30,8 % under hovedtallet (9,8 % Brudd + 21,0 % Svikt). Om lag tre av ti beredskapsanrop på natt/helg møter altså redusert eller fraværende makkerpar-kvalitetssikring.
+
+Den manglende ankomsttiden for skjulte anrop er også flagget som begrensning i kap 5.6. Kilde: `analyse/sensitivitet_skjulte_anrop.csv`.
 
 ---
 
@@ -369,14 +393,14 @@ Den tradisjonelle køteoretiske modellen gir svært lav systemutnyttelse (høyes
 **Funn 2: D-pri1 og D-aba har fundamentalt ulik operativ dynamikk.**
 Pri-1-hendelser binder makkerparet (RØD og GUL) parallelt i median 14,1 min. ABA-utrykninger håndteres serielt av én operatør i 3 min for oppdragsopprettelse og call-out, med valgfri oppfølgingsfase. For 110 Sør-Vest 2025 utgjør D-pri1 59 % (4 499) og D-aba 41 % (3 056) av utrykningshendelsene. Differensieringen er avgjørende for korrekt kapasitetsmodellering.
 
-**Funn 3: Natt/helg er strukturelt sårbar, med Svikt ved hvert tredje beredskapsanrop.**
-På natt/helg (c=2) er **32,6 % av beredskapsanropene i Svikt-tilstand** (variant A; scenariobånd variant B: 30 til 38 %; bootstrap-CI for parametrisk usikkerhet: [32,1; 33,2] %) og kun 46,9 % i Normal. Svikt-raten skyldes primært at én aktiv D-pri1-hendelse binder hele makkerparet. D-aba bidrar relativt mindre til Svikt fordi serial-håndteringen etterlater 1 op ledig. Hovedfunnet er robust over hele sensitivitetsspennet.
+**Funn 3: Natt/helg er strukturelt sårbar, med Svikt ved om lag ett av fem beredskapsanrop.**
+På natt/helg (c=2) er **21,0 % av beredskapsanropene i Svikt-tilstand** (variant A hovedtall; bånd for fordeling av skjulte anrops ankomsttid 16,8 til 26,4 %, jf. 8.3.5; scenariobånd variant B: 22 til 29 %; bootstrap-CI for parametrisk usikkerhet: [20,1; 21,4] %) og 69,2 % i Normal. Tar man Brudd og Svikt sammen (svekket eller fraværende makkerpar), gjelder det 30,8 % av natt/helg-anropene, om lag tre av ti. Svikt-raten skyldes primært at én aktiv D-pri1-hendelse binder hele makkerparet. D-aba bidrar relativt mindre til Svikt fordi serial-håndteringen etterlater 1 op ledig. Den strukturelle natt/dag-asymmetrien (Svikt om lag 3,3× høyere på natt/helg) er robust over hele sensitivitetsspennet; det presise nivået avhenger av antatt fordeling av skjulte anrop.
 
-**Funn 4: +1 operatør på natt/helg halverer sviktraten der; tilsvarende heving på dag gir mindre, men reell forbedring.**
-Én ekstra operatør på natt/helg (c_eff 2 → 3) øker Normal fra 46,9 % til 67,2 % (+20,3 pp) og reduserer Svikt fra ca. 33 % til 16,7 %. På dag hverdag gir en tilsvarende heving (c_eff 3 → 4) en mindre, men reell forbedring: Normal øker fra 69,2 % til 85,1 % og Svikt fra 14,9 % til 8,5 %. Effekten er størst på natt/helg fordi c=2 i dag gir null buffer ved aktiv D-pri1. Effektene er modellprediksjoner, robuste mot parametervariasjon, men ikke validert mot historisk bemanningsendring.
+**Funn 4: +1 operatør på natt/helg mer enn halverer sviktraten der; tilsvarende heving på dag gir mindre, men reell forbedring.**
+Én ekstra operatør på natt/helg (c_eff 2 → 3) øker Normal fra 69,2 % til 79,0 % (+9,8 pp) og reduserer Svikt fra 21,0 % til 5,6 %. På dag hverdag gir en tilsvarende heving (c_eff 3 → 4) en mindre, men reell forbedring: Normal øker fra 78,6 % til 93,6 % og Svikt fra 6,4 % til 3,5 %. Effekten er størst på natt/helg fordi c=2 i dag gir null buffer ved aktiv D-pri1. Effektene er modellprediksjoner, robuste mot parametervariasjon, men ikke validert mot historisk bemanningsendring.
 
 **Funn 5: Total operativ belastning forverrer dagkapasiteten merkbart.**
-Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 69,2 % til 59,5 % (−9,7 pp) og Svikt øker fra 14,9 % til 21,6 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes i mindre grad fordi bakgrunnsvolumet er lavere; Svikt øker fra 32,6 % til 33,2 %. Sensitivitetsanalysen viser at denne forverringen er robust.
+Når alle hendelseskategorier inkluderes (variant B), faller Normal-andelen på dag hverdag fra 78,6 % til 66,3 % (−12,3 pp) og Svikt øker fra 6,4 % til 15,7 %. Effekten skyldes primært servicevolumet (22 542 overføringstester) konsentrert på dagtid. Natt/helg påvirkes også, men mindre i Svikt fordi bakgrunnsvolumet er lavere; Svikt øker fra 21,0 % til 24,6 %. Sensitivitetsanalysen viser at denne forverringen er robust.
 
 Sammenstillingen presenterer fem hovedfunn som rene resultater. Tolkningen av funnene mot dimensjoneringspraksis, parallellen til brannvesenets dimensjoneringskrav i brann- og redningsvesenforskriften, og de praktiske implikasjonene drøftes i kap 9 (særlig 9.3) og kap 10.
 

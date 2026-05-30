@@ -48,9 +48,9 @@ Output legges i `005 report/Rapport_LOG650_G20_Rune_110_samlet.pdf`. Pipelinen f
 
 ## Hovedfunn (110 Sør-Vest 2025)
 
-- 32,6 % av beredskapsanropene på natt/helg ankommer i svikt-tilstand (variant A); 33,2 % ved total operativ belastning (variant B)
+- 21,0 % av beredskapsanropene på natt/helg ankommer i svikt-tilstand (variant A hovedtall, uniform spredning av skjulte anrop; sensitivitetsbånd 16,8 til 26,4 %; bootstrap-CI [20,1; 21,4] %); 24,6 % ved total operativ belastning (variant B). Brudd+Svikt natt/helg 30,8 %. Strukturell natt/dag-asymmetri i svikt om lag 3,3× (robust)
 - Erlang-C-grunnlinjen gir ρ ≤ 5,9 % for alle skifttyper, formelt korrekt, men metodisk utilstrekkelig
-- Scenario «+1 operatør natt/helg» halverer sviktraten (ca. 33 % til 16,7 %)
+- Scenario «+1 operatør natt/helg» mer enn halverer sviktraten (21,0 % til 5,6 %)
 - L-aba-bindingstid empirisk kalibrert til 4,53 min (n=100, 95 % CI [3,74; 5,43])
 
 ## Tilstøtende dokumenter
