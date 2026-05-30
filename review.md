@@ -112,7 +112,7 @@ kap1 §1.2 og kap2 §2.5: «disponeringsvalg er systematisk påvirket av kapasit
 
 **3A-8. NENA 2003 vs 2020 – tall tilskrevet feil kilde.**
 kap2 §2.3 co-siterer «(NENA, 2003; NENA, 2020)» for «90 % innen 15 sek, 95 % innen 20 sek». Disse tallene tilhører **kun NENA-STA-020.1-2020**; 2003-rapporten bruker P.01 Grade of Service.
-→ Attribuer 15/20-sekunders-tallene kun til NENA (2020). **Verifiser også** påstanden i kap9 §9.2.2 om at «NENA (2020) erkjenner … mangler empirisk begrunnelse» – denne ble ikke verifisert i kjøringen og har samme risikoprofil som 3A-1.
+→ Attribuer 15/20-sekunders-tallene kun til NENA (2020). ✅ **VERIFISERT (2026-05-30):** NENA-STA-020.1-2020 §6.4 sier ordrett at arbeidsgruppen «could find no evidence that there was any scientific basis for the selection of these metrics by either NENA or NFPA», og anbefaler en egen studie. Selv-erkjennelsen er dermed reell og direkte siterbar. kap9 §9.3.4 er oppdatert med ordrett sitat + presis sitering (NENA, 2020, §6.4). 3A-8 lukket.
 
 **3A-9. Penverne et al. (2024) – kausalpåstand + tall.**
 kap9: (a) «regionalkunnskap tapes ved virtualisering» er forfatterens syntese (bro til Dwars/Gustavsson), ikke Penvernes funn (kilden forklarer forskjellen med kø-nettverksstruktur). (b) Tallet «17 til 32 %» bør være **«11 til 32 %»** (per sentral) eller **«21 %»** (snitt).
@@ -206,7 +206,7 @@ Konklusjon: rapporten er **forsvarlig som den er** på figursiden. Hvis du legge
 2. **Regenerer Tabell 8.4 programmatisk fra `total_belastning_oppsummering.csv`** for å eliminere foreldede celler (3B-1) – og legg gjerne inn en enkel script-sjekk som feiler hvis tabell ≠ CSV.
 3. **Rapporter Svikt-andelen både for observerte anrop (D-pri1+D-aba) og full base** (3B-6), så estimert-andelens effekt på 32,6 % er synlig.
 4. **Formell Poisson-test** (KS/χ²) på mellomankomsttider for Erlang-C-grunnlinjen (pensum Steg 2; R2/R3 i risikoregisteret).
-5. **Verifiser NENA (2020)-selverkjennelsen** (3A-8). (3A-12: manglende PDF-er er nå lastet ned og verifisert, se 3A-12.)
+5. ✅ **NENA (2020)-selverkjennelsen verifisert** (3A-8, lukket): §6.4 bekrefter «no … scientific basis», kap9 oppdatert. (3A-12: manglende PDF-er er lastet ned og verifisert.) **Ingen åpne restansepunkter igjen.**
 
 **Valgfritt (videre arbeid, ikke for denne innleveringen):** DES-validering av primærmodellen; Littles lov-sanity-sjekk; kostnad-vs-service-dimensjonering.
 
