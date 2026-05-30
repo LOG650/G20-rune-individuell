@@ -21,7 +21,7 @@
   - **Brukerens beslutning:** modellvalget tas i egen runde; det legges inn en eksplisitt begrensning om manglende tidsstempel på skjulte anrop. Modellskript/CSV/figurer er IKKE endret i denne runden (reversert til committet tilstand).
   - Mulige veier til diskusjonen: (a) spre skjulte anrops tidsstempler jevnt over sekvensgapet, (b) deterministisk uten samtidig binding (≈18,8 %), (c) behold 32,6 % med eksplisitt begrensning.
   - **Avhengige punkter UTSATT** (regenereres/avgjøres når modellvalget er tatt): 3B-1 (Tabell 8.4 variant B-celler), 3B-2 (32,6/32,8 kanonisk + «stokastisk støy»-forklaring), 3B-3 (kap9 20,3→20,5), 3B-4 (±1 pp→CI), 3B-6 (observert vs estimert nevner), samt robusthetspåstanden i sammendraget (3C).
-- **3A-12:** APCO (2005) og Larson (1974) mangler fortsatt nedlastet PDF — må skaffes eller bekreftes.
+- **3A-12:** LØST (2026-05-30). APCO/RETAINS (nå Taylor et al., 2005; fil `60-…`) og Larson (1974; fil `56-…`) er lastet ned, verifisert mot kilde, og oppdatert i referanselisten. Ingen siterte kilder mangler nå nedlastet PDF (utover klassikere/lovdata/SSB/DSB/interne dokumenter, som forventet er uten PDF).
 
 **Ikke gjort (per instruks):** PDF er ikke bygget på nytt.
 
@@ -126,9 +126,11 @@ kap3 §3.3: «statistical economies of scale» i anførselstegn. Kilden skriver 
 Nedlastet PDF var søster-artikkelen («Forecasting Time Series of Inhomogeneous Poisson Processes», Annals of Applied Statistics 2(2):601-623), ikke bibliografioppføringen («Interday forecasting…», M&SOM 10(3):391-410). kap2 §2.2-påstanden «testing av Poisson-forutsetningen» støttes heller ikke av Shen & Huang (de *antar* Poisson).
 → Last ned riktig PDF *eller* endre bibliografien til den faktisk brukte artikkelen, og juster Poisson-test-attribusjonen (hør trolig til Brown et al./Ibrahim).
 
-**3A-12. Kilder sitert uten matchende nedlastet PDF (kunne ikke verifiseres).**
-APCO International (2005), Larson (1974), **Leonardsen et al. (2021)** (sitert i kap1 §1.2, kap3 §3.8, kap9 §9.2 m.fl. – ingen matchende 2021-PDF i `003 references`; PDF 62 er en annen artikkel, jf. 3A-4), og Leonardsen et al. (2019)-oppføringen (ingen PDF som matcher *den* oppføringen). (Erlang 1917, lovdata-forskrift, SSB, DSB-datasett og interne Norconsult/RogBR-dokumenter er forventet uten PDF og er greit.)
-→ Last ned og verifiser disse, eller bekreft at sitatbruken er korrekt fra annen tilgang.
+**3A-12. Kilder sitert uten matchende nedlastet PDF.** ✅ LØST (2026-05-30).
+- **APCO/RETAINS (2005):** PDF lastet ned (fil `60-…`), verifisert. Endret til personforfattere: Taylor, M. J., Gardner, V., Clark, P., & McCombs, B. (2005), og in-tekst-sitering i kap2 §2.4 oppdatert tilsvarende.
+- **Larson (1974):** journalartikkel-PDF lastet ned (fil `56-…`), verifisert. Bibliografi rettet: «queueing» → «queuing», DOI 10.1016/0305-0548(74)90076-8 lagt til.
+- **Leonardsen** ble løst tidligere ved å forankre på den verifiserbare 2019-EMCC-artikkelen (PDF 62), jf. 3A-4.
+(Erlang 1917, lovdata-forskrift, SSB, DSB-datasett og interne Norconsult/RogBR-dokumenter er forventet uten PDF og er greit.)
 
 ### 3B. Tallkonsistens (interne motsigelser mot egne tabeller/kildedata)
 
@@ -204,7 +206,7 @@ Konklusjon: rapporten er **forsvarlig som den er** på figursiden. Hvis du legge
 2. **Regenerer Tabell 8.4 programmatisk fra `total_belastning_oppsummering.csv`** for å eliminere foreldede celler (3B-1) – og legg gjerne inn en enkel script-sjekk som feiler hvis tabell ≠ CSV.
 3. **Rapporter Svikt-andelen både for observerte anrop (D-pri1+D-aba) og full base** (3B-6), så estimert-andelens effekt på 32,6 % er synlig.
 4. **Formell Poisson-test** (KS/χ²) på mellomankomsttider for Erlang-C-grunnlinjen (pensum Steg 2; R2/R3 i risikoregisteret).
-5. **Verifiser NENA (2020)-selverkjennelsen** (3A-8) og last ned/verifiser de tre manglende PDF-ene (3A-12).
+5. **Verifiser NENA (2020)-selverkjennelsen** (3A-8). (3A-12: manglende PDF-er er nå lastet ned og verifisert, se 3A-12.)
 
 **Valgfritt (videre arbeid, ikke for denne innleveringen):** DES-validering av primærmodellen; Littles lov-sanity-sjekk; kostnad-vs-service-dimensjonering.
 

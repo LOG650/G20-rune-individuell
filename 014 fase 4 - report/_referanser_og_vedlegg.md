@@ -4,8 +4,6 @@
 
 Alzayed, M. A., & Alsardi, N. (2025). Dispatch under pressure: An investigation into the cognitive load of Kuwait's emergency responders. *Journal of Engineering Research*. https://doi.org/10.1016/j.jer.2025.06.004
 
-APCO International. (2005). *Project RETAINS effective practices guide: Staffing and retention in public safety communication centers*. APCO International.
-
 Brann- og redningsvesenforskriften. (2021). *Forskrift om organisering, bemanning og utrustning av brann- og redningsvesen og nødmeldesentralene* (FOR-2021-09-15-2755). Justis- og beredskapsdepartementet. https://lovdata.no/dokument/SF/forskrift/2021-09-15-2755
 
 Brill, P. H., & Green, L. (1984). Queues in which customers receive simultaneous service from a random number of servers. *Management Science, 30*(1), 51-68.
@@ -52,7 +50,7 @@ Kim, C., Lee, M. H., Dudin, A., & Klimenok, V. (2008). Multi-server queueing sys
 
 Koole, G., & Mandelbaum, A. (2002). Queueing models of call centers: An introduction. *Annals of Operations Research, 113*(1-4), 41-59.
 
-Larson, R. C. (1974). A hypercube queueing model for facility location and redistricting in urban emergency services. *Computers & Operations Research, 1*(1), 67-95.
+Larson, R. C. (1974). A hypercube queuing model for facility location and redistricting in urban emergency services. *Computers & Operations Research, 1*(1), 67-95. https://doi.org/10.1016/0305-0548(74)90076-8
 
 L'Ecuyer, P., Gustavsson, K., & Olsson, L. (2018). Modeling bursts in the arrival process to an emergency call center. *Proceedings of the 2018 Winter Simulation Conference*, 525-536. https://www.informs-sim.org/wsc18papers/includes/files/043.pdf
 
@@ -91,6 +89,8 @@ St.meld. nr. 41. (2000-2001). *Brann- og eksplosjonsvern*. Arbeids- og administr
 Stolletz, R. (2008). Approximation of the non-stationary M(t)/M(t)/c(t)-queue using stationary queueing models: The stationary backlog-carryover approach. *European Journal of Operational Research, 190*(2), 478-493.
 
 Storesund, K., Hox, K., Steen-Hansen, A., Sesseng, C., & Ishol, H. M. (2017). *Utredning i forbindelse med brannvesenets dimensjonering* (RISE Fire Research, Rapport A17 20323:2). SP Fire Research AS.
+
+Taylor, M. J., Gardner, V., Clark, P., & McCombs, B. (2005). *Staffing and retention in public safety communication centers: Effective practices guide and staffing workbook*. APCO Project RETAINS.
 
 Van Buuren, M., Kommer, G. J., van der Mei, R., & Bhulai, S. (2017). EMS call center models with and without function differentiation: A comparison. *Operations Research for Health Care, 12*, 16-28.
 

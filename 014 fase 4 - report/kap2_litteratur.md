@@ -90,7 +90,7 @@ Normark (2002) gjennomfører en kvalitativ studie av koordineringsarbeid ved SOS
 
 Alzayed og Alsardi (2025) studerer kognitiv belastning hos nødsentraloperatører og finner at simultane hendelser øker feilraten signifikant. Dette er relevant for diskusjonen av kapasitetsdegradasjon: «etter beste evne»-modus er ikke bare en teknisk kapasitetsbegrensning, men medfører økt kognitiv belastning og redusert beslutningskvalitet. *Begrensning:* Studien er fra Kuwait og bruker laboratoriebasert måling; overførbarhet til norsk operativ kontekst er ikke etablert.
 
-APCO International (2005) dokumenterer bemanningspraksis og rekrutteringsutfordringer i amerikanske PSAP-er gjennom Project RETAINS og gir empiriske benchmarks for turnover-rater og bemanningsnivåer. *Begrensning:* Amerikansk PSAP-organisering skiller seg fra norsk 110-modell (kombinerte police/fire/EMS-dispatch vs. separate sentraler), og benchmarks må kontekstualiseres før de brukes direkte.
+Taylor et al. (2005) dokumenterer gjennom APCO Project RETAINS bemanningspraksis og rekrutteringsutfordringer i amerikanske PSAP-er og gir empiriske benchmarks for turnover-rater og bemanningsnivåer. *Begrensning:* Amerikansk PSAP-organisering skiller seg fra norsk 110-modell (kombinerte police/fire/EMS-dispatch vs. separate sentraler), og benchmarks må kontekstualiseres før de brukes direkte.
 
 ---
 
