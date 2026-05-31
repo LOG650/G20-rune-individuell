@@ -27,9 +27,9 @@ For 2025 viser datasettet 61 964 synlige oppdrag, mens sekvensnummerlogikken i L
 | Synlige oppdrag (BRIS/LEO) | 61 964 |
 | Estimert faktisk anropsvolum | 80 865 |
 | Skjulte/sammenstilte anrop | 18 901 |
-| Korreksjonsfaktor | 1,305x |
+| Korreksjonsfaktor | 1,305× |
 
-Differansen på 18 901 anrop, tilsvarende 23,4 %, representerer ikke valgbare eller trivielle henvendelser, men faktiske innkommende anrop som beslaglegger operatørkapasitet. Korreksjonsfaktoren på 1,305x gjelder forholdet mellom synlige oppdrag og estimert totalt anropsvolum (ikke forholdet mellom kategori D og totale belastningsenheter i modellen). Faktoren varierer mellom måneder (størst i januar: 1,438x) og er generelt høyest ved dagtid på hverdager, nettopp der kapasitetspresset allerede er høyest.
+Differansen på 18 901 anrop, tilsvarende 23,4 %, representerer ikke valgbare eller trivielle henvendelser, men faktiske innkommende anrop som beslaglegger operatørkapasitet. Korreksjonsfaktoren på 1,305× gjelder forholdet mellom synlige oppdrag og estimert totalt anropsvolum (ikke forholdet mellom kategori D og totale belastningsenheter i modellen). Faktoren varierer mellom måneder (størst i januar: 1,438×) og er generelt høyest ved dagtid på hverdager, nettopp der kapasitetspresset allerede er høyest.
 
 Et ytterligere forbehold er at ikke alle tilleggsanrop faktisk blir sammenstilt med den aktive hendelsen de tilhører. Under høyt press og med flere operatører involvert hender det at anrop som operativt tilhører en pågående hendelse likevel lukkes som egne saker uten initiell hendelsestype, med sluttklassifisering (`Oppdragstype`) satt til «service», «feilringing» eller «Oppdrag løst av 110», i stedet for å bli tillagt det eksisterende oppdraget. Disse kategoriene ligger i `Oppdragstype`-feltet, ikke i `Opprinnelig oppdragstype` (som er tomt for slike lukkinger). Tilfeldig stikkprøvekontroll viser at anrop som kom inn som nødanrop kan bli lukket med slike kategorier. Anropene er i realiteten kritiske telefoner som må besvares, til forskjell fra faktiske servicehenvendelser som kan nedprioriteres. Konsekvensen er at estimatet på 18 901 sammenstilte anrop sannsynligvis er et underestimat av det faktiske antallet beredskapsrelaterte tilleggsanrop, noe som ytterligere forsterker modellens konservative karakter.
 
@@ -84,7 +84,7 @@ Med utgangspunkt i prosedyrens rolledefinisjon etableres tre kapasitetsnivåer, 
 
 **Den kritiske asymmetrien** mellom c_eff = 2 og c_eff = 3 er at c_eff = 2 ikke har noen buffer mot D-pri1: én aktiv D-pri1 gir Svikt for *alle* påfølgende beredskapsanrop. Med c_eff = 3 finnes en buffersone (Brudd) der solo-håndtering er mulig før Svikt inntreffer, men også her vil en aktiv D-pri1 forhindre makkerpar for neste D-pri1-anrop.
 
-**Modellens konservative antakelse.** Op-binder-modellen forutsetter at D-pri1 binder begge operatørene gjennom hele akuttfasen (median 14 min). I praksis kan operatørene under press splitte makkerparet for å håndtere nye anrop. Modellen fanger ikke denne adaptive splittingen; den måler hvor ofte den formelle driftsstandarden (makkerpar opprettholdt) brytes. Operativ tilpasning gjennom kvalitetsreduksjon drøftes i kap 9.2.
+**Modellens konservative antagelse.** Op-binder-modellen forutsetter at D-pri1 binder begge operatørene gjennom hele akuttfasen (median 14 min). I praksis kan operatørene under press splitte makkerparet for å håndtere nye anrop. Modellen fanger ikke denne adaptive splittingen; den måler hvor ofte den formelle driftsstandarden (makkerpar opprettholdt) brytes. Operativ tilpasning gjennom kvalitetsreduksjon drøftes i kap 9.2.
 
 ---
 
@@ -152,7 +152,7 @@ Hovedscenario: **L-aba = 4,5 min × 1 operatør**. Sensitivitetsscenarioer: 3 mi
 |---|---:|---:|---:|---|
 | **D-pri1** | 4 499 | 2 | Median 14,1 (databasert) | BRIS |
 | **D-aba Fase 1** | 3 056 | 1 | 3 (alltid) | Operativ prosedyre + BRIS |
-| **D-aba Fase 2** | ~1 528 | 1 | 6 (p = 0,50) | Operatørinformert, LABA-dybdeanalyse |
+| **D-aba Fase 2** | ~1 504 | 1 | 6 (p = 0,50) | Operatørinformert, LABA-dybdeanalyse |
 | **S** (service) | 22 542 | 1 | 2 | Operativ estimat |
 | **L-aba** | 3 430 | 1 | 4,5 | LABA-dybdeanalyse n=100 (mean 4,53) |
 | **L-hendelse** | 4 298 | 1 | 5 | Operativ estimat |
@@ -161,11 +161,11 @@ Hovedscenario: **L-aba = 4,5 min × 1 operatør**. Sensitivitetsscenarioer: 3 mi
 | **V** (viderevarsling) | 547 | 1 | 1 | Operativ estimat |
 | **Skjulte** | 18 901 | 1 | 1 | Sekvensgap-metode |
 
-Figur 7.1 viser fordelingen av D-pri1-bindingstid og illustrerer det høyreskjeve mønsteret som ligger til grunn for valget av median (14,1 min) som hovedparameter for D-pri1 i primærmodellen. Den lange halen (P90 = 27,3 min) er det som driver Svikt-tilstander når en pri-1-hendelse strekker seg utover normaltid.
+Figur 7.1 viser fordelingen av operatørbindingstid for alle beredskapsoppdrag (n = 7 555, det vil si D-pri1 og D-aba Fase 1) og illustrerer det høyreskjeve mønsteret i bindingstidene. For D-pri1 spesifikt er median 14,1 min valgt som hovedparameter i primærmodellen, og den lange halen (P90 = 27,3 min for D-pri1) driver Svikt-tilstander når en pri-1-hendelse strekker seg utover normaltid.
 
 <div align="center">
-  <img src="../analyse/figurer/bindingstid_beredskap_fordeling_v2.png" alt="Figur 7.1 Bindingstidsfordeling D-pri1" width="80%">
-  <p align="center"><small><i>Figur 7.1: Fordeling av bindingstid per D-pri1-oppdrag (makkerpar-bundet). Median 14,1 min, høyreskjev fordeling.</i></small></p>
+  <img src="../analyse/figurer/bindingstid_beredskap_fordeling_v2.png" alt="Figur 7.1 Bindingstidsfordeling beredskapsoppdrag" width="80%">
+  <p align="center"><small><i>Figur 7.1: Fordeling av operatørbindingstid per beredskapsoppdrag (n = 7 555, D-pri1 og D-aba Fase 1, inkl. 3 min kvitteringsvindu). Høyreskjev fordeling.</i></small></p>
 </div>
 
 Dag- og nattskift viser tilnærmet lik D-pri1-bindingstid, noe som indikerer at bindingstiden primært drives av hendelsestype og geografi, ikke tidspunkt på døgnet.

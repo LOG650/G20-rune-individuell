@@ -204,7 +204,7 @@ I hver iterasjon trekkes 4 499 bindingstider med erstatning fra de 3 645 observe
 | Skifttype | Nivå | Punktestimat | Bootstrap-mean | 95 % CI | Bredde |
 |---|---|---:|---:|---|---:|
 | **Dag hverdag (c=3)** | Normal | 78,6 % | 77,1 % | [76,4; 77,8] | 1,4 pp |
-| | Brudd | 15,0 % | 16,1 % | [15,5; 16,7] | 1,1 pp |
+| | Brudd | 14,9 % | 16,1 % | [15,5; 16,7] | 1,1 pp |
 | | Svikt | 6,4 % | 6,9 % | [6,5; 7,2] | 0,7 pp |
 | **Natt/helg (c=2)** | Normal | 69,2 % | 69,4 % | [68,9; 70,0] | 1,1 pp |
 | | Brudd | 9,8 % | 9,8 % | [9,7; 10,0] | 0,3 pp |
@@ -217,7 +217,7 @@ I hver iterasjon trekkes 4 499 bindingstider med erstatning fra de 3 645 observe
 
 Bootstrap-CI for Svikt natt/helg er **[20,1; 21,4] %** med bredde 1,3 pp. Punktestimatet (21,0 %) ligger sentralt i CI-en, og bootstrap-mean (20,8 %) er nær identisk. Hovedfunnet er dermed stabilt også når statistisk usikkerhet i den observerte D-pri1-bindingstidsfordelingen propageres gjennom modellen. På dag hverdag er punktestimatet (6,4 %) marginalt lavere enn bootstrap-CI nedre grense (6,5 %); differansen reflekterer at median-imputering for høyreskjeve fordelinger gir lavere estimat enn trekk fra full empirisk fordeling, og er en ytterligere indikasjon på at hovedmodellen er en konservativ estimator.
 
-**Hva CI-en ikke fanger.** Bootstrap-CI kvantifiserer *parametrisk* usikkerhet i den observerte D-pri1-bindingstidsfordelingen, ikke *definisjonsmessig* usikkerhet i selve modellrammen. Den smale CI-bredden (1,1 pp) sier at *gitt* op-binder-semantikken, makkerpar-kravet og kategoriinndelingen i kap 6, så er Svikt-andelen statistisk presis. Den dominerende restusikkerheten gjelder valg av modellramme (Trussel 1 og 4 i kap 5.6.1), inkludert hvordan skjulte anrop plasseres i tid (avsnitt 8.3.5), og er kvalitativt drøftet i kap 5.6.2 og 9.2.3. Den smale bootstrap-CI-en må derfor ikke leses som total usikkerhet.
+**Hva CI-en ikke fanger.** Bootstrap-CI kvantifiserer *parametrisk* usikkerhet i den observerte D-pri1-bindingstidsfordelingen, ikke *definisjonsmessig* usikkerhet i selve modellrammen. Den smale CI-bredden (1,3 pp) sier at *gitt* op-binder-semantikken, makkerpar-kravet og kategoriinndelingen i kap 6, så er Svikt-andelen statistisk presis. Den dominerende restusikkerheten gjelder valg av modellramme (Trussel 1 og 4 i kap 5.6.1), inkludert hvordan skjulte anrop plasseres i tid (avsnitt 8.3.5), og er kvalitativt drøftet i kap 5.6.2 og 9.2.3. Den smale bootstrap-CI-en må derfor ikke leses som total usikkerhet.
 
 **MAR-sjekk og imputeringsantagelse.** To imputeringsregimer brukes parallelt og bør holdes adskilt: (i) *punktestimatet* i Tabell 8.1 imputerer manglende fremme-tidsstempel med observert median (14,1 min), mens (ii) *bootstrap-CI-en* trekker fra hele den observerte empiriske fordelingen (ikke kun medianen) i hver iterasjon. Begge regimer forutsetter at manglende «første ressurs fremme»-tidsstempel er tilfeldig fordelt (MAR) på tvers av Oppdragstype. Empirisk varierer missingness fra 5,6 % («Brann i bygning») til 73,4 % («Avbrutt utrykning samtale»), med koeffisientvariasjon 0,98 på tvers av Oppdragstype (n ≥ 30). MAR-antagelsen er dermed *ikke* strengt oppfylt. Klyngingen er imidlertid systematisk og operativt forklarlig: hendelser uten registrert fremme-tidspunkt er typisk avbrutte utrykninger (ressurs returnerte før den nådde frem) som har *kortere* faktisk binding enn medianen for vellykkede utrykninger. Median-imputeringen i punktestimatet kan derfor overestimere binding for avbrutte utrykninger, og trekkene fra observert fordeling i bootstrap-en arver samme retning. Bootstrap-CI rapportert over gir et bredere usikkerhetsbilde enn punktestimatet alene, men fanger ikke en full stratifisert missingness-modell; en stratifisert imputering per Oppdragstype ville gitt litt lavere Svikt-mean uten å endre konklusjonen om at intervallet er smalt og funnet stabilt. Detaljert MAR-rapport: `analyse/bootstrap_dpri1_mar_sjekk.csv`.
 
@@ -230,9 +230,9 @@ Bootstrap-CI for Svikt natt/helg er **[20,1; 21,4] %** med bredde 1,3 pp. Punkte
 
 De sammenstilte (skjulte) anropene utgjør 18 901 av de 27 960 op-binder-eventene i variant A, men de mangler registrert ankomsttid: sekvensgap-metoden gir hvor *mange* anrop som er sammenstilt, ikke *når* de ankom. Hovedtallene over bruker en **uniform (lineær)** fordeling av de skjulte anropene innenfor sekvensgapet. Fordi dette valget er en modellantagelse og ikke en observasjon, kvantifiseres følsomheten med tre fordelinger:
 
-- **Gulv** — kun observerte beredskapshendelser (D-pri1 + D-aba), uten estimerte skjulte ankomsttidspunkt. Et konservativt minimum som ikke avhenger av noen tidsantagelse for de skjulte anropene.
-- **Uniform (hovedtall)** — skjulte anrop spredt jevnt i sekvensgapet (maksimal entropi, ingen klyngeantagelse).
-- **Burst (front-load)** — et valgt konservativt scenario der skjulte anrop klynger tidlig etter den utløsende hendelsen (eksponentielt avtagende intensitet, parameter $B = 4$), i tråd med burst-dynamikken i Gustavsson (2018) og L'Ecuyer et al. (2018). Dette er en *valgt* øvre sensitivitet, ikke en kalibrert maksimumsgrense.
+- **Gulv:** kun observerte beredskapshendelser (D-pri1 + D-aba), uten estimerte skjulte ankomsttidspunkt. Et konservativt minimum som ikke avhenger av noen tidsantagelse for de skjulte anropene.
+- **Uniform (hovedtall):** skjulte anrop spredt jevnt i sekvensgapet (maksimal entropi, ingen klyngeantagelse).
+- **Burst (front-load):** et valgt konservativt scenario der skjulte anrop klynger tidlig etter den utløsende hendelsen (eksponentielt avtagende intensitet, parameter $B = 4$), i tråd med burst-dynamikken i Gustavsson (2018) og L'Ecuyer et al. (2018). Dette er en *valgt* øvre sensitivitet, ikke en kalibrert maksimumsgrense.
 
 **Tabell 8.6b: Sensitivitet for fordeling av skjulte anrops ankomsttid (variant A, hoved-scenario)**
 

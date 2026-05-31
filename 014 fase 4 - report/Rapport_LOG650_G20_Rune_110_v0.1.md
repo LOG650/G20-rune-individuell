@@ -24,11 +24,11 @@ Bruk denne filen til å finne riktig kapittel raskt, og til å se hvilken versjo
 | 4 | Casebeskrivelse: 110 Sør-Vest | [`kap4_casebeskrivelse.md`](kap4_casebeskrivelse.md) | v1.x |
 | 5 | Metode og data | [`kap5_metode_data.md`](kap5_metode_data.md) | v3.x (LABA n=100) |
 | 6 | Modell | [`kap6_modell.md`](kap6_modell.md) | v3.x (op-binder) |
-| 7 | Analyse | [`kap7_analyse.md`](kap7_analyse.md) | v3.x (analyserammen 7.1–7.4) |
+| 7 | Analyse | [`kap7_analyse.md`](kap7_analyse.md) | v3.x (analyserammen 7.1 til 7.4) |
 | 8 | Resultat | [`kap8_resultat.md`](kap8_resultat.md) | v1.x (variant A/B, scenario +1, bootstrap) |
 | 9 | Diskusjon | [`kap9_diskusjon.md`](kap9_diskusjon.md) | v1.x |
 | 10 | Konklusjon | [`kap10_konklusjon.md`](kap10_konklusjon.md) | v1.x |
-| 11–12 | Referanser og vedlegg | [`_referanser_og_vedlegg.md`](_referanser_og_vedlegg.md) | Peer review-utkast |
+| 11 til 12 | Referanser og vedlegg | [`_referanser_og_vedlegg.md`](_referanser_og_vedlegg.md) | Peer review-utkast |
 
 ## Bygging av samlet PDF
 

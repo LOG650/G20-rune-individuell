@@ -70,7 +70,7 @@ National Emergency Number Association (NENA). (2020). *NENA standard for 9-1-1 c
 
 Norconsult. (2023a). *Overordnet risiko- og sårbarhetsanalyse: ROS-analyse av 110 Sør-Vest sin organisatoriske, operative og tekniske funksjonsevne* (Dokument ROS, versjon J05, 2023-09-21) [Intern rapport]. Norconsult AS.
 
-Norconsult. (2023b). *Beredskapsanalyse: Organisering, kompetanse og bemanning – 110 Sør-Vest* (Dokument BER-01, versjon J03, 2023-09-21) [Intern rapport]. Norconsult AS.
+Norconsult. (2023b). *Beredskapsanalyse: Organisering, kompetanse og bemanning, 110 Sør-Vest* (Dokument BER-01, versjon J03, 2023-09-21) [Intern rapport]. Norconsult AS.
 
 Normark, M. (2002). *Using technology for real-time coordination of work: A study of work and artifact use in the everyday activities at SOS Alarm* [Licentiatavhandling, KTH]. TRITA-NA-0144.
 

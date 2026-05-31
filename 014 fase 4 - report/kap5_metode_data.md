@@ -217,7 +217,7 @@ Når flere innringere melder om samme hendelse, sammenstilles tilleggsanropene m
 - Manglende sekvensnumre i rekken (i dette tilfellet -5) tolkes som anrop som ble sammenstilt med et eksisterende oppdrag.
 - Metoden gir kun *antall* sammenstilte anrop, ikke deres registrerte ankomsttidspunkt. De skjulte anropene mangler registrert ankomsttid i datasettet. For å plassere dem på tidsaksen fordeles de etter en modellantagelse: hovedmodellen sprer dem uniformt (lineært) innenfor sekvensgapet mellom de tilstøtende synlige oppdragene. Tidspunktet er dermed en modellantagelse, ikke en observasjon (jf. sensitivitetsbåndet i avsnitt 5.6.1, Trussel 3, og avsnitt 8.3).
 
-Metoden forutsetter at LEO tildeler sekvensnumre kronologisk. Gap kan i prinsippet også reflektere overflyt til nabosentral eller avbrutte anrop, ikke bare sammenstilte anrop. For Sør-Vest er sekvensgapene validert operativt som overveiende sammenstillinger (jf. avsnitt 7.2). For 2025 er det estimert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305x). Metoden identifiserer at et anrop mangler som synlig oppdrag, men ikke hvilket oppdrag det ble knyttet til.
+Metoden forutsetter at LEO tildeler sekvensnumre kronologisk. Gap kan i prinsippet også reflektere overflyt til nabosentral eller avbrutte anrop, ikke bare sammenstilte anrop. For Sør-Vest er sekvensgapene validert operativt som overveiende sammenstillinger (jf. avsnitt 7.2). For 2025 er det estimert 18 901 sammenstilte anrop (korreksjonsfaktor 1,305×). Metoden identifiserer at et anrop mangler som synlig oppdrag, men ikke hvilket oppdrag det ble knyttet til.
 
 **Retning og størrelsesorden på skjevheten.** Sekvensgap-metoden kan i prinsippet feilklassifisere tre typer hendelser som sammenstilte anrop, og disse drar i hver sin retning.
 
