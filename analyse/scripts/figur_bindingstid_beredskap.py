@@ -1,14 +1,23 @@
 """
-Figur 7.1: Fordeling av operatorbindingstid per beredskapsoppdrag
-=================================================================
-Reproduserer 'bindingstid_beredskap_fordeling_v2.png' med stoerre,
-lesbar tekst (utskriftsvennlig). Datametoden er identisk med
-konflikt_total_belastning.py sin D-pri1/D-aba-klassifisering:
+Figur 7.1: Fordeling av operatorbindingstid per D-pri1-oppdrag
+=============================================================
+Genererer 'bindingstid_beredskap_fordeling_v2.png' med stoerre, lesbar
+tekst (utskriftsvennlig).
 
-  Beredskapsoppdrag (D) = D-pri1 (ikke-ABA utrykning) + D-aba (ABA-utrykning,
-  Kilde=Alarm). Bindingstid = (Forste_ressurs_fremme - Dato_og_Tid), klippet
-  til [0, 180] min, manglende imputert med global median over D, pluss 3 min
-  kvitteringsvindu. n = 7 555.
+VIKTIG avgrensning: figuren viser KUN D-pri1. Det er D-pri1 som binder
+makkerparet (2 operatorer) gjennom hele bindingstiden, slik at
+(Forste_ressurs_fremme - Dato_og_Tid) + kvittering faktisk ER
+operatorbindingstid. D-aba holdes utenfor: en ABA-utrykning binder
+1 operator i en kort, fast fase (3 min Fase 1, evt. 6 min Fase 2) og IKKE
+gjennom hele framkjoringstiden - deres fremme-tid er bilens framkjoring,
+ikke operatorens binding (jf. op-binder-semantikk i konflikt_total_belastning.py).
+
+Datametode (identisk klassifisering som hovedmodellen):
+  bindingstid = (Forste_ressurs_fremme - Dato_og_Tid), klippet til [0, 180] min,
+  pluss 3 min kvitteringsvindu. Figuren viser de 3 645 observerte av 4 499
+  D-pri1-oppdrag (de 854 (19 %) uten fremme-tidsstempel median-imputeres i
+  modellen, men utelates her for aa vise den empiriske fordelingen medianen
+  faktisk beregnes fra).
 
 Skriver bare figuren; ingen CSV/tallgrunnlag roeres.
 """
@@ -66,12 +75,14 @@ def last_data():
 
 
 def beregn_bindingstid(df):
-    D = df[df["v3_kat"].isin(["D-pri1", "D-aba"])].copy()
-    raw = (D["Forste_ressurs_fremme"] - D["Dato_og_Tid"]).dt.total_seconds() / 60
+    # KUN D-pri1: disse binder makkerparet gjennom hele bindingstiden.
+    # D-aba holdes utenfor (jf. docstring). Viser bare observerte verdier;
+    # de manglende imputeres med median i modellen, men utelates her.
+    dp = df[df["v3_kat"] == "D-pri1"].copy()
+    raw = (dp["Forste_ressurs_fremme"] - dp["Dato_og_Tid"]).dt.total_seconds() / 60
     raw = raw.where((raw >= 0) & (raw <= 180), np.nan)   # klipp avvisende verdier
-    raw = raw.fillna(raw.median())                        # median-imputering over D
-    D["bind"] = raw + KVITTERING_MIN
-    return D
+    dp["bind"] = raw + KVITTERING_MIN
+    return dp.dropna(subset=["bind"])                     # kun observerte (3 645 av 4 499)
 
 
 # === FIGUR ===
@@ -105,13 +116,13 @@ def lag_figur(D):
     ax.set_xticks(x)
     ax.set_xticklabels(LABELS, fontsize=13)
     ax.set_xlabel("Bindingstid (minutter), inkludert 3 min kvitteringsvindu", fontsize=15, labelpad=10)
-    ax.set_ylabel("Antall beredskapsoppdrag", fontsize=15, labelpad=10)
+    ax.set_ylabel("Antall D-pri1-oppdrag", fontsize=15, labelpad=10)
     ax.tick_params(axis="y", labelsize=12.5)
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{int(v):,}".replace(",", " ")))
 
     ax.set_title(
-        "Fordeling av operatørbindingstid per beredskapsoppdrag\n"
-        f"110 Sør-Vest 2025 (n = {n:,}".replace(",", " ") + ", D-pri1 og D-aba)",
+        "Fordeling av operatørbindingstid per D-pri1-oppdrag (makkerpar)\n"
+        f"110 Sør-Vest 2025 (n = {n:,}".replace(",", " ") + " observerte av 4 499)",
         fontsize=17, fontweight="bold", pad=16,
     )
 
@@ -126,15 +137,8 @@ if __name__ == "__main__":
     df = last_data()
     D = beregn_bindingstid(df)
     n, antall, pct, ut = lag_figur(D)
-    # D-pri1-statistikk rapporteres paa D-pri1s EGNE observerte verdier
-    # (ikke global imputering), slik at tallene samsvarer med rapportens
-    # D-pri1-parameter (median ca. 14 min inkl. kvittering).
-    dp = df[df["v3_kat"] == "D-pri1"]
-    dp_raw = (dp["Forste_ressurs_fremme"] - dp["Dato_og_Tid"]).dt.total_seconds() / 60
-    dp_obs = dp_raw.where((dp_raw >= 0) & (dp_raw <= 180), np.nan).dropna()
-    print(f"n (D-pri1 + D-aba) = {n}")
-    print(f"D-pri1 (observert, n={len(dp_obs)}): median bind (+3 min) = {dp_obs.median() + KVITTERING_MIN:.1f}, "
-          f"P90 = {dp_obs.quantile(0.9) + KVITTERING_MIN:.1f}")
+    print(f"n (D-pri1 observerte) = {n}")
+    print(f"D-pri1: median bind (+3 min) = {D['bind'].median():.1f}, P90 = {D['bind'].quantile(0.9):.1f}")
     print("Bin / antall / pct:")
     for l in LABELS:
         print(f"  {l:7s} {int(antall[l]):5d}  {pct[l]:5.1f} %")

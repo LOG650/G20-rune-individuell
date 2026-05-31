@@ -161,11 +161,11 @@ Hovedscenario: **L-aba = 4,5 min × 1 operatør**. Sensitivitetsscenarioer: 3 mi
 | **V** (viderevarsling) | 547 | 1 | 1 | Operativ estimat |
 | **Skjulte** | 18 901 | 1 | 1 | Sekvensgap-metode |
 
-Figur 7.1 viser fordelingen av operatørbindingstid for alle beredskapsoppdrag (n = 7 555, det vil si D-pri1 og D-aba Fase 1) og illustrerer det høyreskjeve mønsteret i bindingstidene. For D-pri1 spesifikt er median 14,1 min valgt som hovedparameter i primærmodellen, og den lange halen (P90 = 27,3 min for D-pri1) driver Svikt-tilstander når en pri-1-hendelse strekker seg utover normaltid.
+Figur 7.1 viser fordelingen av operatørbindingstid for D-pri1-oppdragene, basert på de 3 645 av 4 499 oppdragene som har registrert fremme-tidsstempel. Figuren omfatter bevisst kun D-pri1: det er disse som binder makkerparet (to operatører) gjennom hele bindingstiden, slik at differansen mellom anrop og første ressurs fremme faktisk uttrykker operatørbindingstid. D-aba-utrykninger holdes utenfor, fordi en ABA-utrykning binder én operatør i en kort, fast fase (3 minutter, eventuelt 6 minutter til) og ikke gjennom hele framkjøringen. Framkjøringstiden for D-aba er bilens kjøretid til stedet, ikke operatørens bindingstid (jf. op-binder-semantikken i kap 6.4). Den høyreskjeve fordelingen ligger til grunn for valget av median 14,1 min som D-pri1-parameter i primærmodellen, og den lange halen (P90 = 27,3 min) driver Svikt-tilstander når en pri-1-hendelse strekker seg utover normaltid.
 
 <div align="center">
-  <img src="../analyse/figurer/bindingstid_beredskap_fordeling_v2.png" alt="Figur 7.1 Bindingstidsfordeling beredskapsoppdrag" width="80%">
-  <p align="center"><small><i>Figur 7.1: Fordeling av operatørbindingstid per beredskapsoppdrag (n = 7 555, D-pri1 og D-aba Fase 1, inkl. 3 min kvitteringsvindu). Høyreskjev fordeling.</i></small></p>
+  <img src="../analyse/figurer/bindingstid_beredskap_fordeling_v2.png" alt="Figur 7.1 Bindingstidsfordeling D-pri1" width="80%">
+  <p align="center"><small><i>Figur 7.1: Fordeling av operatørbindingstid per D-pri1-oppdrag (makkerpar-bundet, inkl. 3 min kvitteringsvindu). Viser de 3 645 observerte av 4 499 D-pri1-oppdrag; de resterende 854 mangler fremme-tidsstempel og median-imputeres i modellen. Høyreskjev fordeling.</i></small></p>
 </div>
 
 Dag- og nattskift viser tilnærmet lik D-pri1-bindingstid, noe som indikerer at bindingstiden primært drives av hendelsestype og geografi, ikke tidspunkt på døgnet.
