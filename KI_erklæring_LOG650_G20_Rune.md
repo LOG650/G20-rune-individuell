@@ -4,7 +4,7 @@
 **Emne:** LOG650 – Logistikk og kunstig intelligens, Høgskolen i Molde, Vår 2026
 **Oppgavetittel:** Kapasitetsstyring og bemanningsdimensjonering ved norske 110-sentraler
 **Dokument:** Løpende KI-erklæring og brukslogg
-**Sist oppdatert:** 2026-05-12
+**Sist oppdatert:** 2026-05-31
 
 > **Bruk:** Dette dokumentet tjener to formål:
 > 1. Grunnlag for seksjonen «Bruk av kunstig intelligens» i rapporten (seksjon 3.4 / 5.4 og Vedlegg D)
@@ -20,17 +20,19 @@
 
 ### KI-verktøy benyttet i prosjektet
 
-I dette prosjektet er følgende KI-verktøy benyttet som støtteverktøy i ulike faser av arbeidsprosessen:
+I dette prosjektet er KI-verktøy benyttet aktivt og i betydelig omfang gjennom hele arbeidsprosessen, inkludert til å utforme store deler av rapportteksten. Dette er bevisst og i tråd med føringene for emnet LOG650 «Logistikk og kunstig intelligens», der veileder har instruert at KI skal benyttes til tekstutforming. Følgende verktøy er brukt:
 
-| Verktøy | Versjon/plattform | Primær bruksområde |
+| Verktøy | Versjon/plattform | Primært bruksområde |
 |---|---|---|
-| Claude Code (Anthropic) | claude-sonnet-4-6, VSCode-extension og terminal | Prosjektplanlegging, koding, rapportstruktur, litteraturverifisering |
+| Claude Code (Anthropic) | Sonnet 4.6 og senere Opus 4.8, VSCode-extension og terminal | Utkast til rapporttekst, koding og dataanalyse, figurgenerering, rapportstruktur, litteraturverifisering, konsistens- og kvalitetssikring |
+| Codex (OpenAI) | Skrivebeskyttet, terminal | Uavhengig kryss-sjekk av analysekoden og at rapportens tall stemmer med kildedata, kjørt uavhengig av Claude Code |
 | ChatGPT (OpenAI) | GPT-4, chat.openai.com | Litteratursøk, metodiske innspill, Gantt-tilbakemeldinger |
 
 ### Formål og bruksbeskrivelse
 
-**Claude Code** er benyttet som en interaktiv kode- og planleggingsassistent gjennom hele prosjektet. Konkrete bruksområder:
+**Claude Code** er benyttet som en interaktiv skrive-, kode- og analyseassistent gjennom hele prosjektet. Konkrete bruksområder:
 
+- **Rapporttekst:** Store deler av brødteksten i rapportkapitlene er utkast-generert av Claude Code på mine detaljerte instruksjoner, og deretter gjennomgått, korrigert, omarbeidet og godkjent av meg. Faglig innhold, struktur og argumentasjon er styrt av meg; KI har formulert utkast som jeg har kvalitetssikret og står faglig ansvarlig for.
 - **Prosjektstrukturering:** Utforming og revisjon av prosjektstyringsplanen (v1.0–v1.5), inkludert WBS, kritisk sti og Gantt-diagram (MS Project XML). Alle strukturelle beslutninger — hvilke leveranser som inkluderes, rekkefølge og tidsestimater — er tatt av undertegnede.
 - **Koding og automatisering:** Generering av Python-scripts for filmanipulering (oppretting av Excel-litteraturliste, oppdatering av markdown-filer, konvertering til XML). All kode er gjennomgått og testet. Tolkninger av resultater og analytiske beslutninger er mine egne.
 - **Litteratursøk og kildeverifisering:** Etter at ChatGPT foreslo referanser, ble disse manuelt verifisert av Claude Code via websøk. Dette avdekket bl.a. feil årstall (Ibrahim et al. 2016, ikke 2015) og manglende undertittel (Vera Institute 2019). Endelig kildeutvalg er mitt eget.
@@ -43,18 +45,21 @@ I dette prosjektet er følgende KI-verktøy benyttet som støtteverktøy i ulike
 - **Metodiske innspill:** Forslag til forbedringer av Gantt-plan (to runder) og metodisk rammeverk for prosjektet. Forslagene er kritisk vurdert — noen akseptert, andre avvist — og alle endringer er undertegnedes eget valg.
 - **Modellgjennomgang:** Presentasjon av utvidede modeller utover Erlang-C (Erlang-A, multi-skill queueing, robust optimering). Gjennomgangen er vurdert for scope-relevans, og kun et begrenset utvalg er tatt inn i teorikapittelet og litteraturlisten.
 
-### Hvordan KI-genererte bidrag er bearbeidet
+### Hvordan arbeidet er fordelt mellom KI og forfatter
 
-KI-verktøy er brukt som sparringspartner og teknisk assistent, ikke som primærforfatter. Konkret:
+For å være transparent om den faktiske arbeidsmåten:
 
-- Ingen KI-generert tekst er kopiert direkte inn i rapporten uten vesentlig bearbeiding
-- Alle analytiske funn, tolkninger og konklusjoner er undertegnedes egne
-- Alle referanseforslag fra KI er verifisert mot originalkilder
-- Kode generert av KI er gjennomgått, testet og tilpasset
+- **Store deler av rapportteksten og all analysekode er utkast-generert av KI** (primært Claude Code) på mine detaljerte instruksjoner. Jeg har deretter lest gjennom, korrigert, omarbeidet, verifisert og godkjent alt innhold. Ingenting er tatt inn i rapporten uten denne gjennomgangen.
+- **Det faglige grunnlaget og alle beslutninger er mine:** problemstilling, forskningsspørsmål, operativ domenekunnskap fra eget arbeid ved 110 Sør-Vest (makkerpar-drift, vaktleder-rolle, solo-drift, overløpsregler), datatilgang, modellvalg, klassifiseringsregler og tolkning av funn. KI har formalisert, implementert og formulert; jeg har styrt, vurdert og avgjort. Det er mitt kunnskapsnivå og min faglige retning som har formet sluttproduktet.
+- **Modellresultatene er ikke KI-genererte.** Alle tall i rapporten produseres av deterministiske Python-skript kjørt på registerdata med faste seed, og er reproduserbare uavhengig av KI.
+- **Codex er brukt til uavhengig kontroll:** analysekoden ble kjørt skrivebeskyttet for å bekrefte at rapportens tall stemmer med kildedata, uavhengig av Claude Code.
+- **Kildeintegritet:** alle referanser er verifisert mot originalkildene, og KI-foreslåtte kilder er aldri tatt inn uten slik verifisering. KI er ikke ført opp som kilde i referanselisten.
+
+Denne bruken er mer omfattende enn den generiske HiMolde-malen for KI-erklæring forutsetter. Det er bevisst og avklart: LOG650 «Logistikk og kunstig intelligens» er et emne der veileder eksplisitt har instruert at KI skal benyttes til å utforme tekst. Jeg står likevel fullt faglig ansvarlig for alt innhold i rapporten, og innholdet gjenspeiler min egen kunnskap, mine vurderinger og mine beslutninger.
 
 ### Refleksjon — hvordan KI påvirket arbeidsprosessen
 
-Bruken av Claude Code som iterativ assistent har effektivisert administrative og tekniske oppgaver (filhåndtering, versjonskontroll, Gantt-formatering) og frigjort tid til faglig fordypning. Verktøyet har fungert som en «rødflagg»-mekanisme som identifiserte feil (f.eks. feil årstall i referanser, inkonsistente avhengigheter i Gantt) som ellers kunne passert uoppdaget.
+Bruken av Claude Code som iterativ assistent har vært gjennomgripende. Verktøyet har generert utkast til både rapporttekst og analysekode, effektivisert tekniske oppgaver (filhåndtering, versjonskontroll, figurgenerering) og fungert som en «rødflagg»-mekanisme som fanget feil og inkonsistenser (f.eks. feil årstall i referanser, inkonsistente avhengigheter i Gantt, tallavvik mellom kapitler) som ellers kunne passert uoppdaget. Det har frigjort tid til faglig vurdering, men ikke erstattet den: hver formulering, hvert tall og hver tolkning er prøvd mot min egen domenekunnskap før den er beholdt.
 
 ChatGPT har vært nyttig for å få oversikt over et bredt metodisk landskap raskt, men krevde kritisk filtrering — særlig av referanseforslag og metodiske anbefalinger som lå utenfor prosjektets scope.
 
@@ -99,4 +104,10 @@ Alle vesentlige faglige beslutninger — problemstilling, modellvalg, analytisk 
 | 2026-04-19 | Fase 4 | Skriving av kap 1, 3, 9 — innledning, teori, konklusjon (v1.0) | Markdown-utkast | Alle faglige formuleringer, valg av kanoniske kilder, struktur |
 | 2026-04-19 | Fase 4 | Oppdatering av kap 2, 4, 5, 6, 7, 8 til V3-semantikk | Konsistent V3-terminologi gjennom hele rapporten | Faglig verifisering av alle endringer |
 | 2026-04-19 | Fase 4 | Sammenstilling av modellutvikling-notat (V1–V3) | `analyse/notat_V3_modellutvikling.md` | Beslutningsrasjonale, sporbarhet |
-| 2026-04-20 | Fase 3 | LABA 
+| 2026-04-20 | Fase 3 | LABA-dybdeanalyse, videre klassifiseringsarbeid | Re-klassifisering og bindingstidsuttrekk | Tolkning, regeldesign og godkjenning |
+
+> **Merknad om loggen:** Den detaljerte radvise loggen ble ikke ført kontinuerlig etter 2026-04-20. Hovedmilepælene i sluttfasen er dokumentert i prosjektets git-historikk (committer datert mai 2026) og oppsummeres her:
+>
+> - **Slutten av april til mai 2026 (Fase 4):** Skriving og ferdigstilling av alle rapportkapitler (kap 1 til 10, referanser og vedlegg) med Claude Code, gjennomgått, korrigert og godkjent av meg.
+> - **Mai 2026:** Nasjonal benchmarking, sensitivitetsanalyser (fordeling av skjulte anrop, bootstrap-konfidensintervall) og scenarioanalyse (+1 operatør).
+> - **29. til 31. mai 2026:** Flertrinns kvalitets- og kildeverifikasjon, inkludert uavhengig Codex-kryss-sjekk av tallene mot kildedata, typografi- og konsistensretting, regenerering av figurer (blant annet Figur 7.1), og skjerping av DSB-ønskelisten. Rapporten satt som final 31. mai 2026.

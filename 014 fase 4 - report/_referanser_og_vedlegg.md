@@ -143,18 +143,19 @@ Interaktiv PDF-versjon (AcroForm) genereres via `verktoy/build_pdf.py --alle-skj
 
 Et eget strategidokument (`analyse/DSB_onskeliste_BRIS_datauttrekk.md`) spesifiserer 15 prioriterte datapunkter, hvorav fem utgjør et minimumsuttrekk (MVP), som ville muliggjøre utvidet kvantitativ kapasitetsanalyse på nasjonalt nivå. Det høyest prioriterte tiltaket er å eksportere de sammenstilte (skjulte) anropene som egne, tidsstemplede rader med ankomsttid på sekundnivå og varighet; disse dataene finnes allerede i LEO, men tas ikke med i dagens uttrekk, og de utgjør 67,6 % av nevneren i kapasitetsmodellen (jf. avsnitt 8.3.5). Dokumentet er strukturert etter høy/medium/lav prioritet og avgrenser eksplisitt mot tilstøtende systemer (Alarmmottak, Transwire, Frequentis ICCS).
 
-### Vedlegg D: Dokumentasjon av KI-bruk
+### Vedlegg D: Bruk av kunstig intelligens (erklæring)
 
-Fullstendig brukslogg, rapporttekst og administrativ erklæring finnes i det løpende dokumentet `KI_erklæring_LOG650_G20_Rune.md` i prosjektroten.
+Dette vedlegget gjør rede for bruken av kunstig intelligens i prosjektet, jf. HiMoldes retningslinjer for KI på hjemmeeksamen. En løpende brukslogg med dato, verktøy og formål finnes i `KI_erklæring_LOG650_G20_Rune.md` i prosjektroten. Det offisielle, signerte HiMolde-skjemaet «Erklæring om bruk av kunstig intelligens» leveres som separat administrativt vedlegg.
 
-Dokumentet inneholder:
+**KI-verktøy benyttet:**
 
-- Del 1: «Bruk av kunstig intelligens», rapporttekst
-- Del 2: Løpende brukslogg med dato, verktøy, formål og hva som ble tatt inn
-- Del 3: Administrativ erklæring (signeres ved innlevering)
-- Del 4: Personvern og konfidensialitet
+| Verktøy | Bruksområde |
+|---|---|
+| Claude Code (Anthropic, Sonnet 4.6 og Opus 4.8) | Utkast til rapporttekst, koding og dataanalyse, figurgenerering, struktur, konsistens- og kvalitetssikring |
+| Codex (OpenAI) | Uavhengig, skrivebeskyttet kryss-sjekk av analysekoden og tallene mot kildedata |
+| ChatGPT (OpenAI) | Litteratursøk og metodiske innspill |
 
-Det offisielle HiMolde-skjemaet «Erklæring om bruk av kunstig intelligens» leveres som separat administrativt vedlegg ved innlevering av sluttrapport.
+**Fordeling mellom KI og forfatter:** Bruken er bevisst omfattende og i tråd med veileders føringer for emnet, der KI skal benyttes til tekstutforming. Store deler av rapportteksten og all analysekode er utkast-generert av KI på forfatterens detaljerte instruksjoner, og deretter gjennomgått, korrigert, omarbeidet, verifisert og godkjent av forfatteren. Det faglige grunnlaget og alle beslutninger (problemstilling, forskningsspørsmål, domenekunnskap fra eget arbeid ved 110 Sør-Vest, modellvalg, klassifiseringsregler og tolkning) er forfatterens egne. Modellresultatene er ikke KI-genererte, men produsert av deterministiske Python-skript med faste seed, reproduserbare uavhengig av KI. KI er ikke ført opp som kilde, og alle KI-foreslåtte referanser er verifisert mot originalkildene. Forfatteren står fullt faglig ansvarlig for alt innhold.
 
 ### Vedlegg E: LABA-dybdeanalyse (detaljert metode)
 
