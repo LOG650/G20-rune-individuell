@@ -1,5 +1,5 @@
 """
-Bindingstid-analyse: 110 Sor-Vest testdatasett
+Bindingstid-analyse: 110 Sør-Vest testdatasett
 ================================================
 Estimerer hvor lenge operatorer er bundet per oppdrag,
 basert pa tidsregistreringer i BRIS-data.
@@ -165,7 +165,7 @@ for ax, (col, title, color) in zip(axes, plot_specs):
     ax.legend(fontsize=8)
     ax.set_xlim(0, xlim)
 
-fig.suptitle("Bindingstid per fase - 110 Sor-Vest 2025 (oppdrag med utrykningsressurser)",
+fig.suptitle("Bindingstid per fase - 110 Sør-Vest 2025 (oppdrag med utrykningsressurser)",
              fontsize=12, fontweight="bold", y=1.02)
 plt.tight_layout()
 plt.savefig(FIG_DIR / "bindingstid_histogram.png", bbox_inches="tight")
@@ -188,7 +188,7 @@ for ax, (col, title) in zip(axes, box_specs):
     ax.set_ylabel("Minutter")
     ax.set_xlabel("")
 
-fig.suptitle("Bindingstid dag vs. natt - 110 Sor-Vest 2025",
+fig.suptitle("Bindingstid dag vs. natt - 110 Sør-Vest 2025",
              fontsize=12, fontweight="bold", y=1.02)
 plt.tight_layout()
 plt.savefig(FIG_DIR / "bindingstid_dag_natt.png", bbox_inches="tight")
@@ -209,7 +209,7 @@ order = ["Brann", "Ulykke", "Andre", "T1 (uten brannvesen)"]
 order = [o for o in order if o in data_plot["Type_kort"].values]
 sns.boxplot(data=data_plot, x="Type_kort", y="Total_bind_min", order=order,
             ax=ax, palette="Set2")
-ax.set_title("Total bindingstid per oppdragstype - 110 Sor-Vest 2025",
+ax.set_title("Total bindingstid per oppdragstype - 110 Sør-Vest 2025",
              fontsize=12, fontweight="bold")
 ax.set_ylabel("Minutter (anrop til forste ressurs fremme)")
 ax.set_xlabel("")
@@ -230,7 +230,7 @@ ax.axvspan(7, 18.99, alpha=0.08, color="orange", label="Dagskift")
 ax.set_xlabel("Time pa dognet")
 ax.set_ylabel("Bindingstid (minutter)")
 ax2.set_ylabel("Antall oppdrag", color="gray")
-ax.set_title("Bindingstid og volum per time - 110 Sor-Vest 2025",
+ax.set_title("Bindingstid og volum per time - 110 Sør-Vest 2025",
              fontsize=12, fontweight="bold")
 ax.legend(loc="upper left", fontsize=8)
 ax2.legend(loc="upper right", fontsize=8)

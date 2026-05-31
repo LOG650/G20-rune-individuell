@@ -484,7 +484,7 @@ for ax, (ce, label) in zip(axes, [(None, "Alle"), (3, "Dag hverdag (c=3)"), (2, 
 
 fig.suptitle(
     "Variant A (beredskapsbelastning) vs Variant B (total operativ belastning)\n"
-    "110 Sor-Vest 2025 — hovedscenario",
+    "110 Sør-Vest 2025, hovedscenario",
     fontsize=12, fontweight="bold",
 )
 plt.tight_layout()
@@ -526,7 +526,7 @@ for ax, (ce, label) in zip(axes, [(3, "Dag hverdag (c=3)"), (2, "Natt/helg (c=2)
 
 fig.suptitle(
     "Sensitivitetsanalyse: effekt av bindingstidsantakelser\n"
-    "110 Sor-Vest 2025",
+    "110 Sør-Vest 2025",
     fontsize=12, fontweight="bold",
 )
 plt.tight_layout()
