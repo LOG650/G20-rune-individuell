@@ -76,7 +76,7 @@ Anbefalingene under punkt 1 til 3 er casebaserte; tilsvarende vurdering for andr
 
 5. **Målrettet avklaring av vesentlige avvik:** Videre kontakt med andre sentraler bør avgrenses til avvik som kan endre tolkningen av benchmarkingen: MOB-bemanning/VL-inkludering, ABA- og servicepraksis, ekstrem DSB/MOB-differanse, skjult 110-ID-rate og kategoriavvik som flytter belastning mellom D, L-aba, L-hendelse og L-ukjent. Manglende svar på øvrige spørsmål bør håndteres som forbehold, ikke som svakhet ved hovedanalysen.
 
-6. **Utvidet DSB-datauttrekk:** En utvidelse av BRIS-datauttrekket med 22 prioriterte felt (operatør-ID, samtalevarighet, ventetid m.m.) vil muliggjøre mer presis nasjonal benchmarking. Se `analyse/DSB_onskeliste_BRIS_datauttrekk.md`.
+6. **Utvidet DSB-datauttrekk:** En utvidelse av BRIS-datauttrekket med 15 prioriterte felt vil muliggjøre mer presis nasjonal benchmarking. Det viktigste enkelttiltaket er å eksportere de sammenstilte (skjulte) anropene som egne, tidsstemplede rader, ettersom deres ankomsttid og varighet finnes i LEO men i dag mangler i uttrekket; dette er prosjektets største enkeltusikkerhet (avsnitt 8.3.5). Se `analyse/DSB_onskeliste_BRIS_datauttrekk.md`.
 
 7. **Nasjonal dimensjoneringsstandard:** Utvikling av en kvantitativ dimensjoneringsstandard for 110-operatører analogt med brannvesenforskriften. Målemetrikken bør inkludere prosedyreetterlevelse (makkerpar opprettholdt ved ankomst), ikke bare svartid. Punkt 7 forutsetter at punkt 4 til 6 er gjennomført.
 

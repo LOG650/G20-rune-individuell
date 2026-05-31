@@ -141,7 +141,7 @@ Interaktiv PDF-versjon (AcroForm) genereres via `verktoy/build_pdf.py --alle-skj
 
 ### Vedlegg C: DSB-ønskeliste for BRIS-datauttrekk
 
-Et eget strategidokument (`analyse/DSB_onskeliste_BRIS_datauttrekk.md`) spesifiserer 22 prioriterte datapunkter som ville muliggjøre utvidet kvantitativ kapasitetsanalyse på nasjonalt nivå. Dokumentet er strukturert etter høy/medium/lav prioritet og avgrenser eksplisitt mot tilstøtende systemer (Alarmmottak, Transwire, Frequentis ICCS).
+Et eget strategidokument (`analyse/DSB_onskeliste_BRIS_datauttrekk.md`) spesifiserer 15 prioriterte datapunkter, hvorav fem utgjør et minimumsuttrekk (MVP), som ville muliggjøre utvidet kvantitativ kapasitetsanalyse på nasjonalt nivå. Det høyest prioriterte tiltaket er å eksportere de sammenstilte (skjulte) anropene som egne, tidsstemplede rader med ankomsttid på sekundnivå og varighet; disse dataene finnes allerede i LEO, men tas ikke med i dagens uttrekk, og de utgjør 67,6 % av nevneren i kapasitetsmodellen (jf. avsnitt 8.3.5). Dokumentet er strukturert etter høy/medium/lav prioritet og avgrenser eksplisitt mot tilstøtende systemer (Alarmmottak, Transwire, Frequentis ICCS).
 
 ### Vedlegg D: Dokumentasjon av KI-bruk
 
