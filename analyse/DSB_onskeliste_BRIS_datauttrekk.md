@@ -30,6 +30,7 @@ For å gjøre dokumentet leselig uten å kreve kjennskap til den underliggende r
 | **V3** | Versjon 3 av klassifiseringsregelen utviklet i forskningsprosjektet, der ABA-kategoriene (D-aba, L-aba) krever Kilde=Alarm for å skille reelle alarmsignaler fra publikumsmeldinger feilklassifisert som ABA. |
 | **MOB** | DSBs årlige selvrapporteringsskjema fra 110-sentralene (planlagt bemanning, anropsvolum, oppdragstall). |
 | **BRIS** | DSBs hendelsesdatabase med fullrapport-eksport per oppdrag (44 kolonner per rad). |
+| **Sammenstilt anrop** | Et anrop som gjelder en allerede pågående hendelse og trekkes inn i det eksisterende oppdraget, slik at det ikke får en egen synlig rad i BRIS-uttrekket. Binder operatørkapasitet, men er i dag «skjult». Tidsstempel og varighet finnes i LEO. |
 
 ---
 
@@ -62,7 +63,7 @@ Gjennomgangen av DSB-datasettet for 2025 (508 228 oppdrag, alle 12 sentraler) vi
 | Samtalevarighet | ❌ Ingen data | T1-anrop (88 % av volum) har ingen tidsregistrering |
 | Operatør-belastning | ❌ Ingen data | Operatør-ID har 0 % dekning i dagens BRIS-uttrekk |
 | Makkerpar-samhandling | ❌ Ingen data | Umulig å måle uten operatør-ID |
-| Samtidighet og kø | ⚠️ Inferert | Sammenstilte anrop utledes via gap-analyse i 110 ID-sekvens; overførte anrop kan ikke skilles fra sammenstilte |
+| Samtidighet og kø | ⚠️ Inferert | Sammenstilte anrop utgjør 67,6 % av nevneren i kapasitetsmodellen, men eksporteres ikke som egne rader. De må derfor utledes via gap-analyse i 110 ID-sekvensen og plasseres på tidsaksen ved en modellantagelse, noe som alene gir et usikkerhetsbånd på 16,8 til 26,4 % rundt hovedtallet. Tidsstempel og varighet finnes i LEO, men tas ikke med i uttrekket |
 | Faktisk vs planlagt bemanning | ❌ Ingen data | MOB-selvrapportering er årsaggregert planlagt bemanning |
 | Realiseringsgrad av varslinger | ✅ Delvis | «Rykket ut»-timestamp er tilgjengelig, men ikke avlysningsgrunn |
 
@@ -70,20 +71,19 @@ Gjennomgangen av DSB-datasettet for 2025 (508 228 oppdrag, alle 12 sentraler) vi
 
 ---
 
-## 4. Minimum viable datauttrekk (MVP): hvis bare seks felt kan etableres
+## 4. Minimum viable datauttrekk (MVP): hvis bare fem felt kan etableres
 
-Hvis tilgjengeliggjøring må fases over flere år, gir følgende seks datapunkter den klart største analyseverdien per krone og minst personvern- og forvaltningsbelastning. Listen er sortert slik at de første feltene gir konkret styringsnytte for DSB *uavhengig* av om de senere feltene realiseres.
+Hvis tilgjengeliggjøring må fases over flere år, gir følgende fem datapunkter den klart største analyseverdien per krone og minst personvern- og forvaltningsbelastning. Listen er sortert slik at de første feltene gir konkret styringsnytte for DSB *uavhengig* av om de senere feltene realiseres.
 
 | # | Datapunkt | Hva det låser opp |
 |---|---|---|
-| **MVP-1** | **Faktisk bemannet kapasitet per sentral, time og rolle** | Kobler bemanning til belastning på samme tidsoppløsning. Erstatter MOB-årsaggregert planlagt bemanning. Rent styringsdata, ingen individdata |
-| **MVP-2** | **Unik samtale-ID og oppdrag-ID** med eksplisitt kobling samtale ↔ oppdrag | Muliggjør sammenstilte/overførte/avbrutte anrop som egne målbare enheter, ikke kun synlige oppdrag |
-| **MVP-3** | **Tidsstempler:** ankomst, besvart, avsluttet, eventuell overføring/kø-status | Grunnlag for direkte Erlang-A/C-modellering uten å estimere ventetider |
-| **MVP-4** | **Eksplisitt kategori etter harmonisert regel:** D-pri1, D-aba, L-aba, L-hendelse, L-ukjent, S, F, V (med Kilde=Alarm-krav for ABA-kategoriene) | Eliminerer dagens fuzzy-matching-logikk. Harmonisering, ikke ny registreringsbyrde, operatørene registrerer kategori uansett |
-| **MVP-5** | **Samtalevarighet for alle samtaler** (ikke kun utrykninger) | Lukker prosjektets største datagap: 88 % av volumet (T1) mangler tidsregistrering |
-| **MVP-6** | **Pseudonymisert operativ rolle-ID** (RØD/GUL/VL/trainee/vikar, som rolle på vakten, ikke individbasert ID), **kun i tilgangsstyrt forskningsuttrekk** | Muliggjør makkerpar- og handover-analyse uten å eksponere enkeltoperatører. Individbasert pseudonymisert ID kan vurderes som separat, forskningsregulert uttrekk |
+| **MVP-1** | **Sammenstilte anrop synliggjort i uttrekket** med eksisterende LEO-tidsstempel (sekundnivå) og varighet, som egne rader på moderoppdraget (løpenummer) | Løser prosjektets største enkeltusikkerhet: sammenstilte anrop er 67,6 % av nevneren i kapasitetsmodellen og mangler i dag tidsstempel i uttrekket. Ren uttrekksendring, krever ingenting nytt av operatøren |
+| **MVP-2** | **Faktisk bemannet kapasitet per sentral, time og rolle** | Kobler bemanning til belastning på samme tidsoppløsning. Erstatter MOB-årsaggregert planlagt bemanning. Rent styringsdata, ingen individdata |
+| **MVP-3** | **Eksplisitt kategori etter harmonisert regel:** D-pri1, D-aba, L-aba, L-hendelse, L-ukjent, S, F, V (med Kilde=Alarm-krav for ABA-kategoriene) | Eliminerer dagens fuzzy-matching-logikk. Harmonisering, ikke ny registreringsbyrde, operatørene registrerer kategori uansett |
+| **MVP-4** | **Samtalevarighet for alle samtaler** (ikke kun utrykninger) | Lukker det nest største datagapet: 88 % av volumet (T1) mangler tidsregistrering |
+| **MVP-5** | **Pseudonymisert operativ rolle-ID** (RØD/GUL/VL/trainee/vikar, som rolle på vakten, ikke individbasert ID), **kun i tilgangsstyrt forskningsuttrekk** | Muliggjør makkerpar- og handover-analyse uten å eksponere enkeltoperatører |
 
-**Hvorfor denne rekkefølgen?** MVP-1 til MVP-4 er rent strukturelle felt uten personvernimplikasjoner. De alene løser ca. 70 % av analysebehovet for nasjonal benchmarking. MVP-5 og MVP-6 utvider til operativ rolle-analyse og krever tydeligere tilgangsstyring, men kan etableres separat.
+**Hvorfor denne rekkefølgen?** MVP-1 er en ren uttrekksendring av data som alt finnes i LEO, og løser den største enkeltusikkerheten alene. MVP-1 til MVP-3 er strukturelle felt uten personvernimplikasjoner og løser sammen ca. 70 % av analysebehovet for nasjonal benchmarking. MVP-4 og MVP-5 utvider til service- og rolle-analyse og krever tydeligere tilgangsstyring, men kan etableres separat.
 
 ---
 
@@ -97,11 +97,11 @@ Prioriteringen er basert på hvilke analyser dataene låser opp. **Høy** = dire
 
 | # | Data | Begrunnelse (hvilken analyse) |
 |---|---|---|
-| 1 | **Faktisk bemannet kapasitet** per sentral, time/skift og rolle (operatør / vaktleder / trainee / vikar) | Kobler faktisk bemanning til faktisk belastning på samme tidsoppløsning. I dag er MOB-selvrapportering årsaggregert planlagt bemanning, ikke realisert. Rent styringsdata på sentralnivå |
-| 2 | **Eksplisitt kategori-felt** satt av operatør (D-pri1/D-aba/S/L-aba/L-hendelse/L-ukjent/F/V), inkludert eksplisitt skille mellom pri-1-utrykning (makkerpar) og ABA-utrykning (serielt), og krav om Kilde=Alarm for ABA-kategoriene | Eliminerer klassifiseringslogikk som i dag må utledes via fuzzy-matching av Oppdragstype × Opprinnelig oppdragstype × Kilde × Ressurs varslet. Avdekker også vesentlig variasjon mellom sentraler i registreringspraksis (L-aba-andel varierer 0,0 til 7,5 % mellom sentraler i 2025). Harmonisering, ikke ny registreringsbyrde |
-| 3 | **Eksplisitt samtale↔oppdrag-tilknytning** (alle innkommende samtaler lenkes til riktig oppdrag-ID, ikke bare den første) | Muliggjør direkte måling av sammenstilte anrop og operatørtid per hendelse. I dag må sammenstilte utledes via sekvensgap-analyse. Lar oss også måle etterfølgende nødtelefoner (D-aba Fase 2, sannsynlighet $p$ og varighet $Y$ for nødtelefon fra stedet etter ABA-utrykning), som i dag bare kan estimeres som underkant fra sekvensgap fordi mange Fase 2-anrop logges *innenfor* hovedoppdragets ID og er usynlige som egne hendelser |
-| 4 | **Samtalevarighet for alle samtaler** (ikke kun D) | Eliminerer prosjektets største datagap. I dag har 88 % av volumet (T1-henvendelser) ingen tidsregistrering, så bindingstid må estimeres skjønnsmessig |
-| 5 | **Ventetid før besvarelse** + antall samtaler på vent ved ankomst | Grunnlag for direkte Erlang-A/Erlang-C-modellering. I dag er ventetider helt fraværende, vi kan ikke validere modellantakelser |
+| 1 | **Sammenstilte anrop som egne, tidsstemplede rader i uttrekket** (løpenummer på moderoppdraget). Hvert anrop som trekkes inn i et eksisterende oppdrag eksporteres som egen rad knyttet til oppdrags-ID, med **ankomsttidspunkt på sekundnivå** (når samtalen kom, ikke når den ble knyttet til oppdraget) og **samtalevarighet** der den finnes. Sammenstilt, overført og avbrutt skilles med et statusflagg på raden | **Dette er ikke ny registrering, men eksport av data som alt ligger i LEO.** Sammenstilte anrop er 67,6 % av nevneren i kapasitetsmodellen, og fordi de mangler tidsstempel i dagens uttrekk må de plasseres på tidsaksen ved en modellantagelse, noe som alene gir et usikkerhetsbånd på 16,8 til 26,4 % rundt hovedtallet. Med faktiske sekund-tidsstempler måles ankomstkonflikten direkte, og faktisk varighet erstatter dagens konservative 1-minutts-antagelse. Statusflagget skiller samtidig sammenstilt fra overført (30-sek-regel) og avbrutt, uten gap-gjetting. Fanger også etterfølgende nødtelefoner etter ABA-utrykning (D-aba Fase 2), som i dag er usynlige fordi de logges *innenfor* hovedoppdragets ID |
+| 2 | **Faktisk bemannet kapasitet** per sentral, time/skift og rolle (operatør / vaktleder / trainee / vikar) | Kobler faktisk bemanning til faktisk belastning på samme tidsoppløsning. I dag er MOB-selvrapportering årsaggregert planlagt bemanning, ikke realisert. Rent styringsdata på sentralnivå |
+| 3 | **Eksplisitt kategori-felt** satt av operatør (D-pri1/D-aba/S/L-aba/L-hendelse/L-ukjent/F/V), inkludert eksplisitt skille mellom pri-1-utrykning (makkerpar) og ABA-utrykning (serielt), og krav om Kilde=Alarm for ABA-kategoriene | Eliminerer klassifiseringslogikk som i dag må utledes via fuzzy-matching av Oppdragstype × Opprinnelig oppdragstype × Kilde × Ressurs varslet. Avdekker også vesentlig variasjon mellom sentraler i registreringspraksis (L-aba-andel varierer 0,0 til 7,5 % mellom sentraler i 2025). Harmonisering, ikke ny registreringsbyrde |
+| 4 | **Samtalevarighet for alle samtaler** (ikke kun D) | Eliminerer det nest største datagapet. I dag har 88 % av volumet (T1-henvendelser) ingen tidsregistrering, så bindingstid må estimeres skjønnsmessig |
+| 5 | **Ventetid før besvarelse** + antall samtaler på vent ved ankomst | Grunnlag for direkte Erlang-A/Erlang-C-modellering. I dag er ventetider helt fraværende, vi kan ikke validere modellantagelser |
 | 6 | **Pseudonymisert operativ rolle-ID** per anrop og oppdrag (RØD/GUL/VL/operatør på vakten), **i tilgangsstyrt forskningsuttrekk** | Forutsetning for makkerpar-, handover- og etterarbeidsanalyse. Rollebasert ID gir analytisk verdi uten å eksponere enkeltoperatører. Individbasert pseudonymisert ID kan vurderes som separat, forskningsregulert uttrekk underlagt egen tilgangsstyring |
 
 ### 5.2 Medium prioritet: dypere kø- og samhandlingsanalyser
@@ -110,23 +110,20 @@ Prioriteringen er basert på hvilke analyser dataene låser opp. **Høy** = dire
 |---|---|---|
 | 7 | **Ringt-til-nummer** (nødnummer 110 / servicenummer / pri1-linje / trippelvarsling) | Skiller innkommende linjetype, avdekker hvor mye av volumet som er samtale vs overføring/trippelvarsling |
 | 8 | **Innringer-kategori** (publikum / objekteier / servicetekniker / nabosentral / AMK / politi) | Kontekst for kategorisering; forklarer f.eks. hvorfor noen sentraler har høyere S-andel |
-| 9 | **Overføring-flagg** + destinasjon (ut/inn) | Skiller sammenstilte anrop fra overførte anrop (30-sek-regel). Dette er sentralt for korrekt tolkning av «skjulte 110 ID-sekvenser» som i dag varierer fra 23 % (Sør-Vest) til 65 % (Finnmark) |
-| 10 | **Avbrutt-status og grunn** (innringer la på / operatør avsluttet / system-drop) | Tredje komponent som forklarer skjulte sekvenser |
-| 11 | **Avlysningsgrunn** når ressurs varslet men ikke rykket ut | Kvantifiserer «tidlig varsling, avbryt hvis unødig»-praksisen. Våre data viser at 75 til 99 % av varslede faktisk rykker ut, men avlysningsgrunn er i dag fraværende |
-| 12 | **Etterarbeidstid per oppdrag** (tid fra ressurs ledig til oppdrag lukket) | Ikke fanget i dag. Relevant for å måle faktisk operativ binding utover den aktive fasen |
-| 13 | **Ressurs-kategori varslet** (mannskapsbil/tankbil/stigebil/drone/farlig gods) | Kapasitetsbelastning varierer med type utalarmering, ikke alle D er like belastende |
-| 14 | **Trippelvarsling-flagg** + deltakende etater + samhandlingsvarighet | Kvantifiserer samhandling med AMK/politi, en stor del av den skjulte operative belastningen i dag |
-| 15 | **Rolle-handover-logg** (oppdrag byttet mellom roller på vakten, med tidspunkt, rolleflagg, ikke person) | Fanger makkerpar-overlevering og vaktskift-overføringer; i dag umulig å spore |
+| 9 | **Avlysningsgrunn** når ressurs varslet men ikke rykket ut | Kvantifiserer «tidlig varsling, avbryt hvis unødig»-praksisen. Våre data viser at 75 til 99 % av varslede faktisk rykker ut, men avlysningsgrunn er i dag fraværende |
+| 10 | **Etterarbeidstid per oppdrag** (tid fra ressurs ledig til oppdrag lukket) | Ikke fanget i dag. Relevant for å måle faktisk operativ binding utover den aktive fasen |
+| 11 | **Ressurs-kategori varslet** (mannskapsbil/tankbil/stigebil/drone/farlig gods) | Kapasitetsbelastning varierer med type utalarmering, ikke alle D er like belastende |
+| 12 | **Trippelvarsling-flagg** + deltakende etater + samhandlingsvarighet | Kvantifiserer samhandling med AMK/politi, en stor del av den skjulte operative belastningen i dag |
+| 13 | **Rolle-handover-logg** (oppdrag byttet mellom roller på vakten, med tidspunkt, rolleflagg, ikke person) | Fanger makkerpar-overlevering og vaktskift-overføringer; i dag umulig å spore |
 
 ### 5.3 Lav prioritet: kvalitetssikring og dypere statistikk
 
 | # | Data | Begrunnelse |
 |---|---|---|
-| 16 | **Anonymisert lenke til samtaleopptak** for tilgangsstyrt forskningsbruk | Stikkprøve-verifisering av datakvalitet og kategorisering i forskningssammenheng. Bør ligge under egen avtale; ikke del av standardeksport |
-| 17 | **Mikrosekund-presise ankomsttidspunkter** (utover sekund-presisjon) | Gir grunnlag for rigorøs Poisson-test og burst-deteksjon på ankomstprosessen |
-| 18 | **Stillingstype-fordeling per skift** (aggregert: andel fast/vikar/ekstrahjelp/trainee, uten kobling til individ) | Kobler spørreskjema-spørsmål om vikarbruk direkte til operativ kapasitet, uten individeksponering |
-| 19 | **Omklassifiserings-/korreksjons-logg** (hvis oppdrag endrer type etter lukking) | Synliggjør datakvalitetsarbeid og kan bidra til bedre kategorisering over tid |
-| 20 | **Geokoordinater** (supplement til adresse) | Mer presis analyse av responstid, geografisk spredning og hendelsesklynger |
+| 14 | **Anonymisert lenke til samtaleopptak** for tilgangsstyrt forskningsbruk | Stikkprøve-verifisering av datakvalitet og kategorisering. Bør ligge under egen avtale, ikke del av standardeksport |
+| 15 | **Geokoordinater** (supplement til adresse) | Mer presis analyse av responstid, geografisk spredning og hendelsesklynger |
+
+Ytterligere kvalitetsdata, som mikrosekund-presise ankomsttidspunkter for rigorøs Poisson- og burst-testing, aggregert stillingstype-fordeling per skift (andel fast/vikar/ekstrahjelp/trainee, uten individkobling) og en omklassifiserings-/korreksjonslogg, kan vurderes på et senere tidspunkt, men er ikke nødvendige for kapasitetsanalysen.
 
 ---
 
@@ -136,7 +133,7 @@ Prioriteringen er basert på hvilke analyser dataene låser opp. **Høy** = dire
 
 - **Direkte kø-modellering** uten å måtte estimere ventetider og service-tider
 - **Faktisk vs planlagt bemanning**, synliggjør reell belastning utover det MOB-rapporteringen fanger
-- **Dekomponering av skjulte 110 ID-sekvenser** i sammenstilte/overførte/avbrutte, gjør sentralene direkte sammenlignbare
+- **Direkte måling av sammenstilte anrop** med faktisk tidspunkt og varighet (i stedet for inferert via gap-analyse), som skiller sammenstilt fra overført og avbrutt og gjør sentralene direkte sammenlignbare
 - **Burst-deteksjon** (ring-flom) basert på faktiske ankomsttidspunkter
 - **Sesongvariasjon og tidsbasert belastning** med tilstrekkelig oppløsning
 - **Dimensjoneringsstandard-underlag**, hvilken bemanning kreves for at X % av beredskapshendelser håndteres med makkerpar
@@ -172,10 +169,10 @@ Prioriteringen er basert på hvilke analyser dataene låser opp. **Høy** = dire
 
 Dersom tilgjengeliggjøring må fases, er følgende rekkefølge anbefalt basert på hvor raskt de låser opp nye analysemuligheter, og samtidig minimerer personvernrisiko i tidlige trinn:
 
-**Trinn 1 (MVP, umiddelbart mest verdifullt, rene styringsdata):**
-- Faktisk bemannet kapasitet per sentral/time/rolle (#1)
-- Harmonisert kategori-felt (#2)
-- Samtale↔oppdrag-tilknytning (#3)
+**Trinn 1 (MVP, umiddelbart mest verdifullt, rene uttrekks- og styringsdata):**
+- Sammenstilte anrop som tidsstemplede rader med varighet (#1)
+- Faktisk bemannet kapasitet per sentral/time/rolle (#2)
+- Harmonisert kategori-felt (#3)
 
 **Trinn 2 (utvidet kø- og service-data):**
 - Samtalevarighet for alle samtaler (#4)
@@ -185,14 +182,13 @@ Dersom tilgjengeliggjøring må fases, er følgende rekkefølge anbefalt basert 
 - Pseudonymisert operativ rolle-ID (#6)
 
 **Trinn 4 (integrasjon med nye systemer):**
-- Linje/innringer-data (#7, #8): koordineres med Frequentis ICCS
-- Overføring- og avbrutt-data (#9, #10): koordineres med ICCS
-- ABA-kobling (Transwire-objekt-ID): koordineres med Transwire
+- Linje- og innringer-data (#7, #8): koordineres med Frequentis ICCS
+- ABA-objektkobling (Transwire-objekt-ID): koordineres med Transwire
 
 **Trinn 5 (dypere analyse):**
-- Etterarbeidstid, ressurs-kategori, trippelvarsling-data (#11 til #14)
-- Rolle-handover-logg (#15)
-- Lav-prioritet kvalitetsdata (#16 til #20)
+- Avlysningsgrunn, etterarbeidstid, ressurs-kategori, trippelvarsling (#9 til #12)
+- Rolle-handover-logg (#13)
+- Lav-prioritet kvalitetsdata (#14, #15)
 
 ---
 
