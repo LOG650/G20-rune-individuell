@@ -89,3 +89,8 @@ LOG650Vault/
 # Holdes utenfor git inntil eksplisitt godkjent for publisering
 # ============================================================
 analyse/sporreskjema/svar/
+
+# ============================================================
+# Sensor- og styrepresentasjoner — skal ikke pushes til git
+# ============================================================
+Sensor_og_styrepresentasjon/
