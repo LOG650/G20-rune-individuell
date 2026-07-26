@@ -94,3 +94,13 @@ analyse/sporreskjema/svar/
 # Sensor- og styrepresentasjoner — skal ikke pushes til git
 # ============================================================
 Sensor_og_styrepresentasjon/
+
+# ============================================================
+# Muntlig eksamen — personlig forberedelsesmateriale, ikke leveranse
+# ============================================================
+eksamensforberedelse/
+
+# ============================================================
+# Diverse analyser — lokale arbeidsfiler, ikke leveranse
+# ============================================================
+diverse analyser/
